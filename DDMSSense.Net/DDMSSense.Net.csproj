@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4754A927-98C9-4208-8F68-6B384D691685}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DDMSSense</RootNamespace>
+    <AssemblyName>DDMSSense.Net</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\HashMapGetHelperClass.cs" />
+    <Compile Include="Properties.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AbstractAccessEntity.cs" />
+    <Compile Include="AbstractAttributeGroup.cs" />
+    <Compile Include="AbstractBaseComponent.cs" />
+    <Compile Include="AbstractNtkString.cs" />
+    <Compile Include="AbstractProducerRole.cs" />
+    <Compile Include="AbstractQualifierValue.cs" />
+    <Compile Include="AbstractRoleEntity.cs" />
+    <Compile Include="AbstractSimpleString.cs" />
+    <Compile Include="AbstractTaskingRole.cs" />
+    <Compile Include="DDMS\ApproximableDate.cs" />
+    <Compile Include="DDMS\Extensible\ExtensibleAttributes.cs" />
+    <Compile Include="DDMS\Extensible\ExtensibleElement.cs" />
+    <Compile Include="DDMS\FormatElements\Extent.cs" />
+    <Compile Include="DDMS\FormatElements\Format.cs" />
+    <Compile Include="DDMS\IBuilder.cs" />
+    <Compile Include="DDMS\IDDMSComponent.cs" />
+    <Compile Include="DDMS\InvalidDDMSException.cs" />
+    <Compile Include="DDMS\IRoleEntity.cs" />
+    <Compile Include="DDMS\Metacard\MetacardInfo.cs" />
+    <Compile Include="DDMS\Resource.cs" />
+    <Compile Include="DDMS\ResourceElements\Addressee.cs" />
+    <Compile Include="DDMS\ResourceElements\ApplicationSoftware.cs" />
+    <Compile Include="DDMS\ResourceElements\Contributor.cs" />
+    <Compile Include="DDMS\ResourceElements\Creator.cs" />
+    <Compile Include="DDMS\ResourceElements\Dates.cs" />
+    <Compile Include="DDMS\ResourceElements\Details.cs" />
+    <Compile Include="DDMS\ResourceElements\Identifier.cs" />
+    <Compile Include="DDMS\ResourceElements\Language.cs" />
+    <Compile Include="DDMS\ResourceElements\Organization.cs" />
+    <Compile Include="DDMS\ResourceElements\Person.cs" />
+    <Compile Include="DDMS\ResourceElements\PointOfContact.cs" />
+    <Compile Include="DDMS\ResourceElements\ProcessingInfo.cs" />
+    <Compile Include="DDMS\ResourceElements\Publisher.cs" />
+    <Compile Include="DDMS\ResourceElements\RecordKeeper.cs" />
+    <Compile Include="DDMS\ResourceElements\RecordsManagementInfo.cs" />
+    <Compile Include="DDMS\ResourceElements\RequesterInfo.cs" />
+    <Compile Include="DDMS\ResourceElements\ResourceManagement.cs" />
+    <Compile Include="DDMS\ResourceElements\RevisionRecall.cs" />
+    <Compile Include="DDMS\ResourceElements\Rights.cs" />
+    <Compile Include="DDMS\ResourceElements\Service.cs" />
+    <Compile Include="DDMS\ResourceElements\Source.cs" />
+    <Compile Include="DDMS\ResourceElements\SubOrganization.cs" />
+    <Compile Include="DDMS\ResourceElements\Subtitle.cs" />
+    <Compile Include="DDMS\ResourceElements\TaskID.cs" />
+    <Compile Include="DDMS\ResourceElements\TaskingInfo.cs" />
+    <Compile Include="DDMS\ResourceElements\Title.cs" />
+    <Compile Include="DDMS\ResourceElements\Type.cs" />
+    <Compile Include="DDMS\ResourceElements\Unknown.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\ISMVocabulary.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\Notice.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\NoticeAttributes.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\NoticeText.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\SecurityAttributes.cs" />
+    <Compile Include="DDMS\SecurityElements\NoticeList.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\Access.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\Group.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\GroupValue.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\Individual.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\IndividualValue.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\Profile.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\ProfileList.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\ProfileValue.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\SystemName.cs" />
+    <Compile Include="DDMS\SecurityElements\Security.cs" />
+    <Compile Include="DDMS\Summary\BoundingBox.cs" />
+    <Compile Include="DDMS\Summary\BoundingGeometry.cs" />
+    <Compile Include="DDMS\Summary\Category.cs" />
+    <Compile Include="DDMS\Summary\CountryCode.cs" />
+    <Compile Include="DDMS\Summary\Description.cs" />
+    <Compile Include="DDMS\Summary\FacilityIdentifier.cs" />
+    <Compile Include="DDMS\Summary\GeographicIdentifier.cs" />
+    <Compile Include="DDMS\Summary\GeospatialCoverage.cs" />
+    <Compile Include="DDMS\Summary\Gml\Point.cs" />
+    <Compile Include="DDMS\Summary\Gml\Polygon.cs" />
+    <Compile Include="DDMS\Summary\Gml\Position.cs" />
+    <Compile Include="DDMS\Summary\Gml\SRSAttributes.cs" />
+    <Compile Include="DDMS\Summary\Keyword.cs" />
+    <Compile Include="DDMS\Summary\Link.cs" />
+    <Compile Include="DDMS\Summary\NonStateActor.cs" />
+    <Compile Include="DDMS\Summary\PostalAddress.cs" />
+    <Compile Include="DDMS\Summary\ProductionMetric.cs" />
+    <Compile Include="DDMS\Summary\RelatedResource.cs" />
+    <Compile Include="DDMS\Summary\SubDivisionCode.cs" />
+    <Compile Include="DDMS\Summary\SubjectCoverage.cs" />
+    <Compile Include="DDMS\Summary\TemporalCoverage.cs" />
+    <Compile Include="DDMS\Summary\VerticalExtent.cs" />
+    <Compile Include="DDMS\Summary\VirtualCoverage.cs" />
+    <Compile Include="DDMS\Summary\Xlink\XLinkAttributes.cs" />
+    <Compile Include="DDMS\UnsupportedVersionException.cs" />
+    <Compile Include="DDMS\ValidationMessage.cs" />
+    <Compile Include="Util\DDMSReader.cs" />
+    <Compile Include="Util\DDMSVersion.cs" />
+    <Compile Include="Util\PropertyReader.cs" />
+    <Compile Include="Util\Util.cs" />
+    <Compile Include="Extensions\StringHelperClass.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
