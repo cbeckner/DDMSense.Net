@@ -659,7 +659,7 @@ namespace DDMSSense.DDMS {
 		/// <exception cref="IOException"> if there are problems reading or parsing the Schematron file </exception>
 
 
-		public List<ValidationMessage> ValidateWithSchematron(File schematronFile) {
+		public List<ValidationMessage> ValidateWithSchematron(FileStream schematronFile) {
 			List<ValidationMessage> messages = new List<ValidationMessage>();
 			XSLTransform schematronTransform = Util.BuildSchematronTransform(schematronFile);
 			Node nodes = schematronTransform.Transform(new Document(XOMElementCopy));
@@ -884,8 +884,8 @@ namespace DDMSSense.DDMS {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			if (ResourceElement != null) {
 				result = 7 * result + ResourceElement.GetHashCode();
 			}
@@ -899,8 +899,8 @@ namespace DDMSSense.DDMS {
 			if (NtkDESVersion != null) {
 				result = 7 * result + NtkDESVersion.GetHashCode();
 			}
-			result = 7 * result + NoticeAttributes.HashCode();
-			result = 7 * result + ExtensibleAttributes.HashCode();
+			result = 7 * result + NoticeAttributes.GetHashCode();
+			result = 7 * result + ExtensibleAttributes.GetHashCode();
 			return (result);
 		}
 
@@ -1392,7 +1392,8 @@ namespace DDMSSense.DDMS {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual Resource Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

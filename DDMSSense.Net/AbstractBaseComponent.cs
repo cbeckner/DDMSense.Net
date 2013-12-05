@@ -123,6 +123,7 @@ namespace DDMSSense {
 			get {
 				return (null);
 			}
+            set { value = null; }
 		}
 
 		/// <seealso cref= IDDMSComponent#getValidationWarnings() </seealso>
@@ -415,7 +416,7 @@ namespace DDMSSense {
 		/// <para>This automatically includes any nested components or security attributes.</para>
 		/// </summary>
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
+		public override int GetHashCode() {
 			int result = Name.GetHashCode();
 			result = 7 * result + Namespace.GetHashCode();
 			foreach (IDDMSComponent nested in NestedComponents) {
@@ -425,7 +426,7 @@ namespace DDMSSense {
 				result = 7 * result + nested.GetHashCode();
 			}
 			if (SecurityAttributes != null) {
-				result = 7 * result + SecurityAttributes.HashCode();
+				result = 7 * result + SecurityAttributes.GetHashCode();
 			}
 			return (result);
 		}

@@ -128,8 +128,8 @@ namespace DDMSSense {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Value.GetHashCode();
 			return (result);
 		}

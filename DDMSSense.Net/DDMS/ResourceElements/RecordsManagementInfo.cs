@@ -166,8 +166,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + VitalRecordIndicator.GetHashCode();
 			return (result);
 		}
@@ -254,7 +254,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual RecordsManagementInfo Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				return (Empty ? null : new RecordsManagementInfo(RecordKeeper.Commit(), ApplicationSoftware.Commit(), VitalRecordIndicator));
 			}
 

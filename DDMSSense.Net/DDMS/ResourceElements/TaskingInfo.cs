@@ -315,7 +315,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual TaskingInfo Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

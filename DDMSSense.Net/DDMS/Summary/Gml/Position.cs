@@ -163,9 +163,9 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
-			result = 7 * result + SRSAttributes.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
+			result = 7 * result + SRSAttributes.GetHashCode();
 			result = 7 * result + CoordinatesAsXsList.GetHashCode();
 			return (result);
 		}
@@ -238,7 +238,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual Position Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

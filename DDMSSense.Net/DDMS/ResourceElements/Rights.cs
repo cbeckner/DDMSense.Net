@@ -108,8 +108,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Util.BooleanHashCode(PrivacyAct);
 			result = 7 * result + Util.BooleanHashCode(IntellectualProperty);
 			result = 7 * result + Util.BooleanHashCode(Copyright);
@@ -193,7 +193,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual Rights Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

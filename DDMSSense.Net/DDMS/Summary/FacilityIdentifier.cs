@@ -119,8 +119,8 @@ namespace DDMSSense.DDMS.Summary {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + BeNumber.GetHashCode();
 			result = 7 * result + Osuffix.GetHashCode();
 			return (result);
@@ -189,7 +189,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual FacilityIdentifier Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				return (Empty ? null : new FacilityIdentifier(BeNumber, Osuffix));
 			}
 

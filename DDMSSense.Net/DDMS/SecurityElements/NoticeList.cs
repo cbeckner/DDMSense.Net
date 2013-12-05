@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -66,9 +66,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 				SetXOMElement(element, false);
 				_notices = new List<Notice>();
 				IEnumerable<Element> notices = element.Elements(XName.Get(Notice.GetName(DDMSVersion), DDMSVersion.IsmNamespace));
-				for (int i = 0; i < notices.Count; i++) {
-					_notices.Add(new Notice(notices.get(i)));
-				}
+				notices.ToList().ForEach(p=> _notices.Add(new Notice(p)));
+				
 				_securityAttributes = new SecurityAttributes(element);
 				Validate();
 			} catch (InvalidDDMSException e) {
@@ -224,7 +223,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual NoticeList Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

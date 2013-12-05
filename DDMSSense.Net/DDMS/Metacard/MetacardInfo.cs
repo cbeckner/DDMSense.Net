@@ -582,7 +582,8 @@ namespace DDMSSense.DDMS.Metacard {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual MetacardInfo Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

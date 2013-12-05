@@ -162,8 +162,8 @@ namespace DDMSSense.DDMS.Summary {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Order.GetHashCode();
 			result = 7 * result + Qualifier.GetHashCode();
 			return (result);
@@ -232,7 +232,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override NonStateActor Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new NonStateActor(Value, Order, Qualifier, SecurityAttributes.Commit()));
 			}
 

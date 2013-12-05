@@ -329,8 +329,8 @@ namespace DDMSSense.DDMS.Summary {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Precedence.GetHashCode();
 			if (Order != null) {
 				result = 7 * result + Order.GetHashCode();
@@ -511,7 +511,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual GeospatialCoverage Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				return (Empty ? null : new GeospatialCoverage(GeographicIdentifier.Commit(), BoundingBox.Commit(), BoundingGeometry.Commit(), PostalAddress.Commit(), VerticalExtent.Commit(), Precedence, Order, SecurityAttributes.Commit()));
 			}
 

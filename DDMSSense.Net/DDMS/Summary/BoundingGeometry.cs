@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -33,6 +33,7 @@ namespace DDMSSense.DDMS.Summary {
 	using Util = DDMSSense.Util.Util;
     using System.Xml;
     using DDMSSense.DDMS;
+    using System.Xml.Linq;
 
 	/// <summary>
 	/// An immutable implementation of ddms:boundingGeometry.
@@ -69,13 +70,9 @@ namespace DDMSSense.DDMS.Summary {
 				_polygons = new List<Polygon>();
 				_points = new List<Point>();
 				IEnumerable<Element> polygons = element.Elements(XName.Get(Polygon.GetName(DDMSVersion), gmlNamespace));
-				for (int i = 0; i < polygons.Count; i++) {
-					_polygons.Add(new Polygon(polygons.Item(i)));
-				}
+				polygons.ToList().ForEach(p=>_polygons.Add(new Polygon(p)));
 				IEnumerable<Element> points = element.Elements(XName.Get(Point.GetName(DDMSVersion), gmlNamespace));
-				for (int i = 0; i < points.Count; i++) {
-                    _points.Add(new Point(points.Item(i)));
-				}
+				points.ToList().ForEach(p=> _points.Add(new Point(p)));
 				Validate();
 			} catch (InvalidDDMSException e) {
 				e.Locator = QualifiedName;
@@ -223,7 +220,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual BoundingGeometry Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -29,6 +29,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 	
 	using Util = DDMSSense.Util.Util;
     using System.Xml;
+    using System.Xml.Linq;
 
 	/// <summary>
 	/// An immutable implementation of ntk:AccessProfile.
@@ -62,9 +63,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			try {
 				IEnumerable<Element> values = element.Elements(XName.Get(ProfileValue.GetName(DDMSVersion), Namespace));
 				_profileValues = new List<ProfileValue>();
-				for (int i = 0; i < values.Count; i++) {
-					_profileValues.Add(new ProfileValue(values.Item(i)));
-				}
+                values.ToList().ForEach(p=> _profileValues.Add(new ProfileValue(p)));
 				Validate();
 			} catch (InvalidDDMSException e) {
 				e.Locator = QualifiedName;
@@ -194,7 +193,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Profile Commit() {
+            public override IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

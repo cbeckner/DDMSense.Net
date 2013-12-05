@@ -147,7 +147,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override CountryCode Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new CountryCode(Qualifier, Value));
 			}
 		}

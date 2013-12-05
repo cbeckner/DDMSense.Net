@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -187,12 +187,12 @@ namespace DDMSSense {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Names.GetHashCode();
 			result = 7 * result + Phones.GetHashCode();
 			result = 7 * result + Emails.GetHashCode();
-			result = 7 * result + ExtensibleAttributes.HashCode();
+			result = 7 * result + ExtensibleAttributes.GetHashCode();
 			return (result);
 		}
 

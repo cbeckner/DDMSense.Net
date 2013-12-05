@@ -373,7 +373,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual Access Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

@@ -149,8 +149,8 @@ namespace DDMSSense.DDMS.Summary {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + WestBL.GetHashCode();
 			result = 7 * result + EastBL.GetHashCode();
 			result = 7 * result + SouthBL.GetHashCode();
@@ -285,7 +285,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual BoundingBox Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

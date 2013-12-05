@@ -309,7 +309,7 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
+		public override int GetHashCode() {
 			int result = 0;
 			result = 7 * result + Type.GetHashCode();
 			result = 7 * result + Href.GetHashCode();

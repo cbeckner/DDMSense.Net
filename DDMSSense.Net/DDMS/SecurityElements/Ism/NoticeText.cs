@@ -158,8 +158,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + PocTypes.GetHashCode();
 			return (result);
 		}
@@ -212,7 +212,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override NoticeText Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty && PocTypes.Count == 0 ? null : new NoticeText(Value, PocTypes, SecurityAttributes.Commit()));
 			}
 

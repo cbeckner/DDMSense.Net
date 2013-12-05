@@ -236,7 +236,7 @@ namespace DDMSSense.DDMS.Extensible {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
+		public override int GetHashCode() {
 			int result = 0;
 			// XOM Attribute has no logical equality. Must calculate by hand.		
 			foreach (Attribute attribute in Attributes) {

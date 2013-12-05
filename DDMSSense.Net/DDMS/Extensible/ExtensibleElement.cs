@@ -26,8 +26,6 @@ namespace DDMSSense.DDMS.Extensible {
 	using Element = System.Xml.Linq.XElement;
     
 	using XMLReader = System.Xml.XmlReader;
-	using XMLReaderFactory = org.xml.sax.helpers.XMLReaderFactory;
-
 	using DDMSVersion = DDMSSense.Util.DDMSVersion;
 	using PropertyReader = DDMSSense.Util.PropertyReader;
 	using Util = DDMSSense.Util.Util;
@@ -109,8 +107,8 @@ namespace DDMSSense.DDMS.Extensible {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
             result = 7 * result + Element.ToString().GetHashCode();
 			return (result);
 		}
@@ -142,14 +140,12 @@ namespace DDMSSense.DDMS.Extensible {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual ExtensibleElement Commit() {
+			public virtual IDDMSComponent Commit() {
 				if (Empty) {
 					return (null);
 				}
 				try {
-					XMLReader reader = XMLReaderFactory.createXMLReader(PropertyReader.GetProperty("xml.reader.class"));
-					nu.xom.Builder builder = new nu.xom.Builder(reader, false);
-					Document doc = builder.build(new StringReader(Xml));
+                    Document doc = Document.Parse(Xml);
 					return (new ExtensibleElement(doc.Root));
 				} catch (Exception e) {
 					throw new InvalidDDMSException("Could not create a valid element from XML string: " + e.Message);

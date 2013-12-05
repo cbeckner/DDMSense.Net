@@ -229,8 +229,8 @@ namespace DDMSSense.DDMS.Summary {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Names.GetHashCode();
 			result = 7 * result + Regions.GetHashCode();
 			return (result);
@@ -355,7 +355,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual GeographicIdentifier Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

@@ -124,7 +124,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Addressee Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Addressee(CommitSelectedEntity(), SecurityAttributes.Commit()));
 			}
 		}

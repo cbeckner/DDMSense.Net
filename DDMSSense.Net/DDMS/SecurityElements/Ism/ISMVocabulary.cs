@@ -31,6 +31,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 	using Util = DDMSSense.Util.Util;
     using System.Xml;
     using System.Xml.Linq;
+    using System.IO;
 
 	/// <summary>
 	/// Representation of the Controlled Vocabulary enumerations used by ISM attributes.
@@ -218,16 +219,14 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 						try {
 							LOCATION_TO_ENUM_TOKENS[LastEnumLocation] = new Dictionary<string,List<string>>();
 							LOCATION_TO_ENUM_PATTERNS[LastEnumLocation] = new Dictionary<string,List<string>>();
-							XMLReader reader = XMLReaderFactory.createXMLReader(PropertyReader.GetProperty("xml.reader.class"));
-							Builder builder = new Builder(reader, false);
 							foreach (string cve in ALL_ENUMS) {
 								try {
-									LoadEnumeration(enumLocation, builder, cve);
+									LoadEnumeration(enumLocation, cve);
 								} catch (Exception) {
 									continue;
 								}
 							}
-						} catch (SAXException e) {
+						} catch (Exception e) {
 							throw new Exception("Could not load controlled vocabularies: " + e.Message);
 						}
 					}
@@ -244,9 +243,9 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="enumerationKey"> the key for the enumeration, which doubles as the filename. </param>
 
 
-		private static void LoadEnumeration(string enumLocation, Builder builder, string enumerationKey) {
-			InputStream stream = (new ISMVocabulary()).GetType().getResourceAsStream(enumLocation + enumerationKey);
-			Document doc = builder.build(stream);
+		private static void LoadEnumeration(string enumLocation, string enumerationKey) {
+			Stream stream = (new ISMVocabulary()).GetType().Assembly.GetManifestResourceStream(enumLocation + enumerationKey);
+			Document doc = Document.Load(stream);
 			List<string> tokens = new List<string>();
 			List<string> patterns = new List<string>();
 			string cveNamespace = PropertyReader.GetProperty(DDMSVersion.Version + ".ism.cve.xmlNamespace");

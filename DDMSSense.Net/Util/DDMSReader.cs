@@ -138,7 +138,7 @@ namespace DDMSSense.Util {
 		/// <returns> a XOM element representing the root node in the document </returns>
 
 
-		public virtual Element GetElement(File file) {
+		public virtual Element GetElement(FileStream file) {
 			Util.RequireValue("file", file);
 			return (GetElement(new FileReader(file)));
 		}
@@ -157,20 +157,7 @@ namespace DDMSSense.Util {
 			return (GetElement(new StringReader(xml)));
 		}
 
-		/// <summary>
-		/// Creates a XOM element representing the root XML element in an input stream.
-		/// 
-		/// <para>The implementation of this method delegates to the Reader-based overloaded method.</para>
-		/// </summary>
-		/// <param name="inputStream"> a stream mapping to an XML document </param>
-		/// <returns> a XOM element representing the root node in the document  </returns>
-
-
-		public virtual Element GetElement(Stream inputStream) {
-			Util.RequireValue("input stream", inputStream);
-			return (GetElement(new StreamReader(inputStream)));
-		}
-
+		
 		/// <summary>
 		/// Creates a XOM element representing the root XML element in a reader.
 		/// </summary>
@@ -198,7 +185,7 @@ namespace DDMSSense.Util {
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
 
 
-		public virtual Resource GetDDMSResource(File file) {
+		public virtual Resource GetDDMSResource(FileStream file) {
 			return (BuildResource(GetElement(file)));
 		}
 

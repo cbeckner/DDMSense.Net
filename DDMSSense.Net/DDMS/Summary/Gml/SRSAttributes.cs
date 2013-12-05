@@ -208,7 +208,7 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
+		public override int GetHashCode() {
 			int result = 0;
 			result = 7 * result + SrsName.GetHashCode();
 			if (SrsDimension != null) {

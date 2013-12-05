@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -31,6 +31,7 @@ namespace DDMSSense.DDMS.Summary {
 	using Util = DDMSSense.Util.Util;
     using System.Xml;
     using DDMSSense.DDMS.Summary;
+    using System.Xml.Linq;
 
 	/// <summary>
 	/// An immutable implementation of ddms:subjectCoverage.
@@ -93,21 +94,17 @@ namespace DDMSSense.DDMS.Summary {
 				_nonStateActors = new List<NonStateActor>();
 				if (subjectElement != null) {
 					IEnumerable<Element> keywords = subjectElement.Elements(XName.Get(Keyword.GetName(DDMSVersion), Namespace));
-					for (int i = 0; i < keywords.Count; i++) {
-                        _keywords.Add(new Keyword(keywords.Item(i)));
-					}
+					keywords.ToList().ForEach(k=>_keywords.Add(new Keyword(k)));
+					
 					IEnumerable<Element> categories = subjectElement.Elements(XName.Get(Category.GetName(DDMSVersion), Namespace));
-					for (int i = 0; i < categories.Count; i++) {
-                        _categories.Add(new Category(categories.Item(i)));
-					}
+					categories.ToList().ForEach(c=>    _categories.Add(new Category(c)));
+					
 					IEnumerable<Element> metrics = subjectElement.Elements(XName.Get(ProductionMetric.GetName(DDMSVersion), Namespace));
-					for (int i = 0; i < metrics.Count; i++) {
-                        _productionMetrics.Add(new ProductionMetric(metrics.Item(i)));
-					}
+					metrics.ToList().ForEach(m=>   _productionMetrics.Add(new ProductionMetric(m)));
+					
 					IEnumerable<Element> actors = subjectElement.Elements(XName.Get(NonStateActor.GetName(DDMSVersion), Namespace));
-					for (int i = 0; i < actors.Count; i++) {
-                        _nonStateActors.Add(new NonStateActor(actors.Item(i)));
-					}
+					actors.ToList().ForEach(a=>    _nonStateActors.Add(new NonStateActor(a)));
+					
 				}
 				_securityAttributes = new SecurityAttributes(element);
 				Validate();
@@ -386,7 +383,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual SubjectCoverage Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

@@ -175,8 +175,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Description.GetHashCode();
 			return (result);
 		}
@@ -244,7 +244,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Type Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Type(Description, Qualifier, Value, SecurityAttributes.Commit()));
 			}
 

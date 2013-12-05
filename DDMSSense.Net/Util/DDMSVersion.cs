@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using DDMSSense.Extensions;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -140,7 +140,7 @@ namespace DDMSSense.Util {
 		/// <returns> List of string version numbers </returns>
 		public static List<string> SupportedVersions {
 			get {
-				return Collections.unmodifiableList(SupportedVersionsProperty);
+				return SupportedVersionsProperty;
 			}
 		}
 

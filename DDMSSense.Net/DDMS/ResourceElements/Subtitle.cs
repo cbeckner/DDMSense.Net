@@ -148,7 +148,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Subtitle Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Subtitle(Value, SecurityAttributes.Commit()));
 			}
 		}

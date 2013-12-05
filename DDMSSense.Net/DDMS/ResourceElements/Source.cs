@@ -160,8 +160,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + SchemaQualifier.GetHashCode();
 			result = 7 * result + SchemaHref.GetHashCode();
 			return (result);
@@ -243,7 +243,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Source Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Source(Qualifier, Value, SchemaQualifier, SchemaHref, SecurityAttributes.Commit()));
 			}
 

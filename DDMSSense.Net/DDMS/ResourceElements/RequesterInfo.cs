@@ -121,7 +121,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override RequesterInfo Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new RequesterInfo(CommitSelectedEntity(), SecurityAttributes.Commit()));
 			}
 		}

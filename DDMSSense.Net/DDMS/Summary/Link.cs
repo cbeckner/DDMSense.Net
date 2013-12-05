@@ -167,9 +167,9 @@ namespace DDMSSense.DDMS.Summary {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
-			result = 7 * result + XLinkAttributes.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
+			result = 7 * result + XLinkAttributes.GetHashCode();
 			return (result);
 		}
 
@@ -236,7 +236,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual Link Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Link(XLinkAttributes.Commit(), SecurityAttributes.Commit()));
 			}
 

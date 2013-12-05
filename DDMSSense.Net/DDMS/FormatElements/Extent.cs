@@ -166,7 +166,8 @@ namespace DDMSSense.DDMS.FormatElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Extent Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Extent(Qualifier, Value));
 			}
 

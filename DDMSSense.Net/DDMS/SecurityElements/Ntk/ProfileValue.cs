@@ -148,8 +148,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Vocabulary.GetHashCode();
 			return (result);
 		}
@@ -192,7 +192,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override ProfileValue Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new ProfileValue(Value, Vocabulary, ID, IDReference, Qualifier, SecurityAttributes.Commit()));
 			}
 

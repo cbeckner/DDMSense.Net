@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -69,9 +69,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 				SetXOMElement(element, false);
 				IEnumerable<Element> values = element.Elements(XName.Get(Profile.GetName(DDMSVersion), Namespace));
 				_profiles = new List<Profile>();
-				for (int i = 0; i < values.Count; i++) {
-					_profiles.Add(new Profile(values.get(i)));
-				}
+                values.ToList().ForEach(p => _profiles.Add(new Profile(p)));
+				
 				_securityAttributes = new SecurityAttributes(element);
 				Validate();
 			} catch (InvalidDDMSException e) {
@@ -226,7 +225,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual ProfileList Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

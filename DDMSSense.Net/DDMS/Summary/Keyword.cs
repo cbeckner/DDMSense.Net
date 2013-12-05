@@ -158,10 +158,10 @@ namespace DDMSSense.DDMS.Summary {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Value.GetHashCode();
-			result = 7 * result + ExtensibleAttributes.HashCode();
+			result = 7 * result + ExtensibleAttributes.GetHashCode();
 			return (result);
 		}
 
@@ -242,7 +242,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual Keyword Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Keyword(Value, SecurityAttributes.Commit(), ExtensibleAttributes.Commit()));
 			}
 

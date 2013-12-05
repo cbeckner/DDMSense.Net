@@ -147,7 +147,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Service Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Service(Names, Phones, Emails, ExtensibleAttributes.Commit()));
 			}
 		}

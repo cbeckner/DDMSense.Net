@@ -122,7 +122,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Publisher Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Publisher(CommitSelectedEntity(), PocTypes, SecurityAttributes.Commit()));
 			}
 		}

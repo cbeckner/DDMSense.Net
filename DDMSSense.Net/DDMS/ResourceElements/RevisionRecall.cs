@@ -318,14 +318,14 @@ namespace DDMSSense.DDMS.ResourceElements {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Value.GetHashCode();
 			result = 7 * result + RevisionID.GetHashCode();
 			result = 7 * result + RevisionType.GetHashCode();
 			result = 7 * result + Network.GetHashCode();
 			result = 7 * result + OtherNetwork.GetHashCode();
-			result = 7 * result + XLinkAttributes.HashCode();
+			result = 7 * result + XLinkAttributes.GetHashCode();
 			return (result);
 		}
 
@@ -481,7 +481,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual RevisionRecall Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

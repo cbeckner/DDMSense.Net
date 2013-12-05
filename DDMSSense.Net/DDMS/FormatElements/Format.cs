@@ -219,8 +219,8 @@ namespace DDMSSense.DDMS.FormatElements {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + MimeType.GetHashCode();
 			result = 7 * result + Medium.GetHashCode();
 			return (result);
@@ -335,7 +335,8 @@ namespace DDMSSense.DDMS.FormatElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual Format Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				return (Empty ? null : new Format(MimeType, Extent.Commit(), Medium));
 			}
 

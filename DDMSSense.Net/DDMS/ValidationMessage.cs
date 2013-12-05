@@ -117,7 +117,7 @@ namespace DDMSSense.DDMS {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
+		public override int GetHashCode() {
 			int result = Type.GetHashCode();
 			result = 7 * result + Text.GetHashCode();
 			result = 7 * result + Locator.GetHashCode();

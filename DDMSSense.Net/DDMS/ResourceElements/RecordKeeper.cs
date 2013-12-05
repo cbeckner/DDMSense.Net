@@ -140,8 +140,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + RecordKeeperID.GetHashCode();
 			return (result);
 		}
@@ -224,7 +224,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual RecordKeeper Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				return (Empty ? null : new RecordKeeper(RecordKeeperID, Organization.Commit()));
 			}
 

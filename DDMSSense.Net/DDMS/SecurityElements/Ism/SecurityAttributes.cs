@@ -582,7 +582,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
+		public override int GetHashCode() {
 			int result = 0;
 			result = 7 * result + AtomicEnergyMarkings.GetHashCode();
 			result = 7 * result + Classification.GetHashCode();

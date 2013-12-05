@@ -141,7 +141,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override SubOrganization Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new SubOrganization(Value, SecurityAttributes.Commit()));
 			}
 		}

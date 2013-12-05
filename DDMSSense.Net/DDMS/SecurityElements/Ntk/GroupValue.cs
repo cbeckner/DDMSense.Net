@@ -155,7 +155,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override GroupValue Commit() {
+            public override IDDMSComponent Commit()
+            {
 				return (Empty ? null : new GroupValue(Value, ID, IDReference, Qualifier, SecurityAttributes.Commit()));
 			}
 		}

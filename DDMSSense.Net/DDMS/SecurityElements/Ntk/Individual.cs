@@ -195,7 +195,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Individual Commit() {
+            public override IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

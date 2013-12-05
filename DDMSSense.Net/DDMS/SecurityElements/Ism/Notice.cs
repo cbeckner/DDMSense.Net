@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -31,6 +31,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 	using Util = DDMSSense.Util.Util;
     using System.Xml;
     using DDMSSense.DDMS;
+    using System.Xml.Linq;
 
 	/// <summary>
 	/// An immutable implementation of ISM:Notice.
@@ -65,9 +66,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 				SetXOMElement(element, false);
 				_noticeTexts = new List<NoticeText>();
 				IEnumerable<Element> noticeTexts = element.Elements(XName.Get(NoticeText.GetName(DDMSVersion), DDMSVersion.IsmNamespace));
-				for (int i = 0; i < noticeTexts.Count; i++) {
-					_noticeTexts.Add(new NoticeText(noticeTexts.Item(i)));
-				}
+				values.ToList().ForEach(n=>	_noticeTexts.Add(new NoticeText(n)));
 				_noticeAttributes = new NoticeAttributes(element);
 				_securityAttributes = new SecurityAttributes(element);
 				Validate();
@@ -179,9 +178,9 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
-			result = 7 * result + NoticeAttributes.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
+			result = 7 * result + NoticeAttributes.GetHashCode();
 			return (result);
 		}
 
@@ -261,7 +260,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual Notice Commit() {
+            public virtual IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}

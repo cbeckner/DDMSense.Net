@@ -250,8 +250,8 @@ namespace DDMSSense.DDMS {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Description.GetHashCode();
 			result = 7 * result + ApproximableDateString.GetHashCode();
 			result = 7 * result + Approximation.GetHashCode();
@@ -365,7 +365,7 @@ namespace DDMSSense.DDMS {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public virtual ApproximableDate Commit() {
+			public virtual IDDMSComponent Commit() {
 				return (Empty ? null : new ApproximableDate(Name, Description, ApproximableDate, Approximation, SearchableStart, SearchableEnd));
 			}
 

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -84,9 +84,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 				string @namespace = element.Name.NamespaceName;
 				IEnumerable<Element> components = element.Elements(XName.Get(SubOrganization.GetName(DDMSVersion), @namespace));
 				_subOrganizations = new List<SubOrganization>();
-				for (int i = 0; i < components.Count; i++) {
-					_subOrganizations.Add(new SubOrganization(components.Item(i)));
-				}
+				components.ToList().ForEach(p=>_subOrganizations.Add(new SubOrganization(c)));
+				
 				Validate();
 			} catch (InvalidDDMSException e) {
 				e.Locator = QualifiedName;
@@ -205,8 +204,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
-		public override int HashCode() {
-			int result = base.HashCode();
+		public override int GetHashCode() {
+			int result = base.GetHashCode();
 			result = 7 * result + Acronym.GetHashCode();
 			return (result);
 		}
@@ -272,7 +271,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// <seealso cref= IBuilder#commit() </seealso>
 
 
-			public override Organization Commit() {
+            public override IDDMSComponent Commit()
+            {
 				if (Empty) {
 					return (null);
 				}
