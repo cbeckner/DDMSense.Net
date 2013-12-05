@@ -59,8 +59,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RecordsManagementInfo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RecordsManagementInfo(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -86,8 +86,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="applicationSoftware"> the software (optional) </param>
 		/// <param name="vitalRecordIndicator"> whether this is a vital record (optional, defaults to false) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RecordsManagementInfo(RecordKeeper recordKeeper, ApplicationSoftware applicationSoftware, Boolean vitalRecordIndicator) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RecordsManagementInfo(RecordKeeper recordKeeper, ApplicationSoftware applicationSoftware, bool? vitalRecordIndicator) {
 			try {
 				Element element = Util.BuildDDMSElement(RecordsManagementInfo.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -119,8 +119,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, RecordsManagementInfo.GetName(DDMSVersion));
 			Util.RequireBoundedChildCount(Element, RecordKeeper.GetName(DDMSVersion), 0, 1);
@@ -252,8 +252,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RecordsManagementInfo commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual RecordsManagementInfo Commit() {
 				return (Empty ? null : new RecordsManagementInfo(RecordKeeper.Commit(), ApplicationSoftware.Commit(), VitalRecordIndicator));
 			}

@@ -64,8 +64,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Service(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Service(Element element) : base(element, true) {
 		}
 
@@ -75,8 +75,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="names"> an ordered list of names </param>
 		/// <param name="phones"> an ordered list of phone numbers </param>
 		/// <param name="emails"> an ordered list of email addresses </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Service(java.util.List<String> names, java.util.List<String> phones, java.util.List<String> emails) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Service(List<string> names, List<string> phones, List<string> emails) : this(names, phones, emails, null) {
 		}
 
@@ -87,8 +87,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="phones"> an ordered list of phone numbers </param>
 		/// <param name="emails"> an ordered list of email addresses </param>
 		/// <param name="extensions"> extensible attributes (optional) </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Service(java.util.List<String> names, java.util.List<String> phones, java.util.List<String> emails, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensions) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Service(List<string> names, List<string> phones, List<string> emails, ExtensibleAttributes extensions) : base(Service.GetName(DDMSVersion.GetCurrentVersion()), names, phones, emails, extensions, true) {
 		}
 
@@ -101,8 +101,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractRoleEntity#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Service.GetName(DDMSVersion));
 			base.Validate();
@@ -145,8 +145,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Service commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Service Commit() {
 				return (Empty ? null : new Service(Names, Phones, Emails, ExtensibleAttributes.Commit()));
 			}

@@ -49,8 +49,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Rights(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Rights(Element element) : base(element) {
 		}
 
@@ -61,8 +61,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="intellectualProperty"> the value for the intellectualProperty attribute </param>
 		/// <param name="copyright"> the value for the copyright attribute </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Rights(boolean privacyAct, boolean intellectualProperty, boolean copyright) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Rights(bool privacyAct, bool intellectualProperty, bool copyright) {
 			Element element = Util.BuildDDMSElement(Rights.GetName(DDMSVersion.GetCurrentVersion()), null);
 			Util.AddDDMSAttribute(element, PRIVACY_ACT_NAME, Convert.ToString(privacyAct));
@@ -81,8 +81,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Rights.GetName(DDMSVersion));
 			base.Validate();
@@ -191,8 +191,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Rights commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Rights Commit() {
 				if (Empty) {
 					return (null);

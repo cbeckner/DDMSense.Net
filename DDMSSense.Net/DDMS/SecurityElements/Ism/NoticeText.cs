@@ -60,8 +60,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeText(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NoticeText(Element element) : base(element, false) {
 			try {
 				string pocTypes = element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace)).Value;
@@ -80,8 +80,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="pocTypes"> the value of the pocType attribute (optional) </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeText(String value, java.util.List<String> pocTypes, SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NoticeText(string value, List<string> pocTypes, SecurityAttributes securityAttributes) : base(PropertyReader.GetPrefix("ism"), DDMSVersion.GetCurrentVersion().IsmNamespace, NoticeText.GetName(DDMSVersion.GetCurrentVersion()), value, securityAttributes, false) {
 			try {
 				if (pocTypes == null) {
@@ -108,8 +108,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, DDMSVersion.IsmNamespace, NoticeText.GetName(DDMSVersion));
 
@@ -210,8 +210,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeText commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override NoticeText Commit() {
 				return (Empty && PocTypes.Count == 0 ? null : new NoticeText(Value, PocTypes, SecurityAttributes.Commit()));
 			}

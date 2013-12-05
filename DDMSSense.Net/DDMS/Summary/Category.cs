@@ -66,8 +66,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Category(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Category(Element element) {
 			try {
 				_securityAttributes = new SecurityAttributes(element);
@@ -87,8 +87,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="label"> the label (required) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Category(String qualifier, String code, String label, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Category(string qualifier, string code, string label, SecurityAttributes securityAttributes) : this(qualifier, code, label, securityAttributes, null) {
 		}
 
@@ -104,8 +104,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <param name="extensibleAttributes"> extensible attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Category(String qualifier, String code, String label, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensibleAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Category(string qualifier, string code, string label, SecurityAttributes securityAttributes, ExtensibleAttributes extensibleAttributes) {
 			try {
 				Element element = Util.BuildDDMSElement(Category.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -135,8 +135,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Category.GetName(DDMSVersion));
 			Util.RequireDDMSValue("label attribute", Label);
@@ -288,8 +288,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Category commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Category Commit() {
 				return (Empty ? null : new Category(Qualifier, Code, Label, SecurityAttributes.Commit(), ExtensibleAttributes.Commit()));
 			}

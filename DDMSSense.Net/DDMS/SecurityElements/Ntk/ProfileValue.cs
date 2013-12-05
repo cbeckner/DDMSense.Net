@@ -58,8 +58,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProfileValue(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ProfileValue(Element element) : base(false, element) {
 		}
 
@@ -72,8 +72,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// <param name="idReference"> a reference to an NTK ID (optional) </param>
 		/// <param name="qualifier"> an NTK qualifier (optional) </param>
 		/// <param name="securityAttributes"> the security attributes </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProfileValue(String value, String vocabulary, String id, String idReference, String qualifier, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ProfileValue(string value, string vocabulary, string id, string idReference, string qualifier, SecurityAttributes securityAttributes) : base(false, ProfileValue.GetName(DDMSVersion.GetCurrentVersion()), value, id, idReference, qualifier, securityAttributes, false) {
 			try {
 				Util.AddAttribute(Element, PropertyReader.GetPrefix("ntk"), VOCABULARY_NAME, DDMSVersion.GetCurrentVersion().NtkNamespace, vocabulary);
@@ -93,8 +93,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, ProfileValue.GetName(DDMSVersion));
 			Util.RequireValidNMToken(Vocabulary);
@@ -190,8 +190,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProfileValue commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override ProfileValue Commit() {
 				return (Empty ? null : new ProfileValue(Value, Vocabulary, ID, IDReference, Qualifier, SecurityAttributes.Commit()));
 			}

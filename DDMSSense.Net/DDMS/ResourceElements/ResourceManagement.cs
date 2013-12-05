@@ -67,8 +67,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ResourceManagement(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ResourceManagement(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -107,8 +107,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="processingInfos"> list of processing info (optional) </param>
 		/// <param name="securityAttributes"> security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ResourceManagement(RecordsManagementInfo recordsManagementInfo, RevisionRecall revisionRecall, java.util.List<TaskingInfo> taskingInfos, java.util.List<ProcessingInfo> processingInfos, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ResourceManagement(RecordsManagementInfo recordsManagementInfo, RevisionRecall revisionRecall, List<TaskingInfo> taskingInfos, List<ProcessingInfo> processingInfos, SecurityAttributes securityAttributes) {
 			try {
 				if (taskingInfos == null) {
@@ -157,8 +157,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, ResourceManagement.GetName(DDMSVersion));
 			Util.RequireBoundedChildCount(Element, RecordsManagementInfo.GetName(DDMSVersion), 0, 1);
@@ -311,8 +311,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ResourceManagement commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual ResourceManagement Commit() {
 				if (Empty) {
 					return (null);

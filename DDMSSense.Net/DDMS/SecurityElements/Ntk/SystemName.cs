@@ -47,8 +47,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SystemName(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public SystemName(Element element) : base(true, element) {
 		}
 
@@ -60,8 +60,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// <param name="idReference"> a reference to an NTK ID (optional) </param>
 		/// <param name="qualifier"> an NTK qualifier (optional) </param>
 		/// <param name="securityAttributes"> the security attributes </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SystemName(String value, String id, String idReference, String qualifier, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public SystemName(string value, string id, string idReference, string qualifier, SecurityAttributes securityAttributes) : base(true, SystemName.GetName(DDMSVersion.GetCurrentVersion()), value, id, idReference, qualifier, securityAttributes, true) {
 		}
 
@@ -73,8 +73,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, SystemName.GetName(DDMSVersion));
 			base.Validate();
@@ -132,8 +132,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SystemName commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override SystemName Commit() {
 				return (Empty ? null : new SystemName(Value, ID, IDReference, Qualifier, SecurityAttributes.Commit()));
 			}

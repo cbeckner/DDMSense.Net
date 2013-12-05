@@ -73,8 +73,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public GeographicIdentifier(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public GeographicIdentifier(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -109,8 +109,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="countryCode"> the country code (optional) </param>
 		/// <param name="subDivisionCode"> the subdivision code (optional, starting in DDMS 4.0.1) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public GeographicIdentifier(java.util.List<String> names, java.util.List<String> regions, CountryCode countryCode, SubDivisionCode subDivisionCode) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public GeographicIdentifier(List<string> names, List<string> regions, CountryCode countryCode, SubDivisionCode subDivisionCode) {
 			try {
 				if (names == null) {
@@ -148,8 +148,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="facilityIdentifier"> the facility identifier (required in this constructor) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public GeographicIdentifier(FacilityIdentifier facilityIdentifier) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public GeographicIdentifier(FacilityIdentifier facilityIdentifier) {
 			Element element = Util.BuildDDMSElement(GeographicIdentifier.GetName(DDMSVersion.GetCurrentVersion()), null);
 			if (facilityIdentifier != null) {
@@ -172,8 +172,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, GeographicIdentifier.GetName(DDMSVersion));
 			if (Names.Count == 0 && Regions.Count == 0 && CountryCode == null && SubDivisionCode == null && FacilityIdentifier == null) {
@@ -353,8 +353,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public GeographicIdentifier commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual GeographicIdentifier Commit() {
 				if (Empty) {
 					return (null);

@@ -50,8 +50,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Title(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Title(Element element) : base(element, true) {
 		}
 
@@ -61,8 +61,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="title"> the value of the title child text </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Title(String title, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Title(string title, SecurityAttributes securityAttributes) : base(Title.GetName(DDMSVersion.GetCurrentVersion()), title, securityAttributes, true) {
 		}
 
@@ -77,8 +77,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Title.GetName(DDMSVersion));
 			Util.RequireDDMSValue("title value", Value);
@@ -134,8 +134,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Title commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Title Commit() {
 				return (Empty ? null : new Title(Value, SecurityAttributes.Commit()));
 			}

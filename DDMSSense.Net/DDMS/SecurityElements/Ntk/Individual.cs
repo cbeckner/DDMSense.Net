@@ -57,8 +57,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Individual(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Individual(Element element) : base(element) {
 			try {
 				IEnumerable<Element> values = element.Elements(XName.Get(IndividualValue.GetName(DDMSVersion), Namespace));
@@ -80,8 +80,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// <param name="individualValues"> the list of values (at least 1 required) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Individual(SystemName systemName, java.util.List<IndividualValue> individualValues, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Individual(SystemName systemName, List<IndividualValue> individualValues, SecurityAttributes securityAttributes) : base(Individual.GetName(DDMSVersion.GetCurrentVersion()), systemName, securityAttributes) {
 			try {
 				if (individualValues == null) {
@@ -108,8 +108,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, Individual.GetName(DDMSVersion));
 			if (IndividualValues.Count == 0) {
@@ -193,8 +193,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Individual commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Individual Commit() {
 				if (Empty) {
 					return (null);

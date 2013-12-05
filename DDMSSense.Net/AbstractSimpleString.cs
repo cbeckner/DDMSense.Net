@@ -54,8 +54,8 @@ namespace DDMSSense {
 		/// </summary>
 		/// <param name="element"> the XOM element </param>
 		/// <param name="validateNow"> true if the component should be validated here </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractSimpleString(nu.xom.Element element, boolean validateNow) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractSimpleString(Element element, bool validateNow) {
 			try {
 				_securityAttributes = new SecurityAttributes(element);
@@ -73,8 +73,8 @@ namespace DDMSSense {
 		/// <param name="value"> the value of the element's child text </param>
 		/// <param name="attributes"> the security attributes </param>
 		/// <param name="validateNow"> true if the component should be validated here </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractSimpleString(String name, String value, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes attributes, boolean validateNow) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractSimpleString(string name, string value, SecurityAttributes attributes, bool validateNow) : this(PropertyReader.GetPrefix("ddms"), DDMSVersion.GetCurrentVersion().Namespace, name, value, attributes, validateNow) {
 		}
 
@@ -87,8 +87,8 @@ namespace DDMSSense {
 		/// <param name="value"> the value of the element's child text </param>
 		/// <param name="attributes"> the security attributes </param>
 		/// <param name="validateNow"> true if the component should be validated here </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractSimpleString(String prefix, String namespace, String name, String value, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes attributes, boolean validateNow) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractSimpleString(string prefix, string @namespace, string name, string value, SecurityAttributes attributes, bool validateNow) {
 			try {
 				Element element = Util.BuildElement(prefix, name, @namespace, value);
@@ -110,8 +110,8 @@ namespace DDMSSense {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSValue("security attributes", SecurityAttributes);
 			SecurityAttributes.RequireClassification();

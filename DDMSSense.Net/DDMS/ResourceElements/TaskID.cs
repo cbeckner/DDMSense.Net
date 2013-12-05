@@ -73,8 +73,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TaskID(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TaskID(Element element) {
 			try {
 				_xlinkAttributes = new XLinkAttributes(element);
@@ -94,8 +94,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="otherNetwork"> another network (optional) </param>
 		/// <param name="xlinkAttributes"> simple xlink attributes </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TaskID(String value, String taskingSystem, String network, String otherNetwork, DDMSSense.DDMS.Summary.Xlink.XLinkAttributes xlinkAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TaskID(string value, string taskingSystem, string network, string otherNetwork, XLinkAttributes xlinkAttributes) {
 			try {
 				Element element = Util.BuildDDMSElement(TaskID.GetName(DDMSVersion.GetCurrentVersion()), value);
@@ -123,8 +123,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, TaskID.GetName(DDMSVersion));
 			Util.RequireDDMSValue("value", Value);
@@ -286,8 +286,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TaskID commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual TaskID Commit() {
 				return (Empty ? null : new TaskID(Value, TaskingSystem, Network, OtherNetwork, XLinkAttributes.Commit()));
 			}

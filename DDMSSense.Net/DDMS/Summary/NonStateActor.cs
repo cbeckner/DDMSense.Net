@@ -52,8 +52,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NonStateActor(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NonStateActor(Element element) : base(element, true) {
 		}
 
@@ -67,8 +67,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="order"> the order of this actor </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NonStateActor(String value, Integer order, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NonStateActor(string value, int? order, SecurityAttributes securityAttributes) : this(value, order, null, securityAttributes) {
 		}
 
@@ -80,8 +80,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="qualifier"> the qualifier (optional) </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NonStateActor(String value, Integer order, String qualifier, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NonStateActor(string value, int? order, string qualifier, SecurityAttributes securityAttributes) : base(NonStateActor.GetName(DDMSVersion.GetCurrentVersion()), value, securityAttributes, false) {
 			try {
 				if (order != null) {
@@ -108,8 +108,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			// Do not call super.validate(), because securityAttributes are optional.
 			Util.RequireDDMSQName(Element, NonStateActor.GetName(DDMSVersion));
@@ -230,8 +230,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NonStateActor commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override NonStateActor Commit() {
 				return (Empty ? null : new NonStateActor(Value, Order, Qualifier, SecurityAttributes.Commit()));
 			}

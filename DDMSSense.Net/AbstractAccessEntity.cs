@@ -62,8 +62,8 @@ namespace DDMSSense {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public AbstractAccessEntity(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public AbstractAccessEntity(Element element) {
 			SetXOMElement(element, false);
 			Element systemElement = element.Element(XName.Get(SystemName.GetName(DDMSVersion), Namespace));
@@ -79,8 +79,8 @@ namespace DDMSSense {
 		/// <param name="systemName"> the system name (required) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public AbstractAccessEntity(String name, DDMSSense.DDMS.SecurityElements.Ntk.SystemName systemName, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public AbstractAccessEntity(string name, SystemName systemName, SecurityAttributes securityAttributes) {
 			DDMSVersion version = DDMSVersion.GetCurrentVersion();
 			Element element = DDMSSense.Util.Util.BuildElement(PropertyReader.GetPrefix("ntk"), name, version.NtkNamespace, null);
@@ -106,8 +106,8 @@ namespace DDMSSense {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			DDMSSense.Util.Util.RequireDDMSValue("systemName", SystemName);
             DDMSSense.Util.Util.RequireBoundedChildCount(Element, SystemName.GetName(DDMSVersion), 1, 1);

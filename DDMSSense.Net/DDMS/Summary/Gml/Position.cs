@@ -59,8 +59,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Position(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Position(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -83,8 +83,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// <param name="srsAttributes"> the attribute group containing srsName, srsDimension, axisLabels, and uomLabels
 		/// </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Position(java.util.List<Double> coordinates, SRSAttributes srsAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Position(List<double?> coordinates, SRSAttributes srsAttributes) {
 			try {
 				if (coordinates == null) {
@@ -116,8 +116,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, Position.GetName(DDMSVersion));
 			foreach (double? coordinate in Coordinates) {
@@ -236,8 +236,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Position commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Position Commit() {
 				if (Empty) {
 					return (null);
@@ -321,8 +321,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Double commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual double? Commit() {
 				return (Empty ? null : Value);
 			}

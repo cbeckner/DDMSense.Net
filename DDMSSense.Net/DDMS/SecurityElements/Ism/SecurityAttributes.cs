@@ -227,8 +227,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="securityAttributes"> the attributes to return by default </param>
 		/// <returns> a non-null attributes instance </returns>
 		/// <exception cref="InvalidDDMSException"> if there are problems creating the empty attributes instance </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static SecurityAttributes getNonNullInstance(SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static SecurityAttributes GetNonNullInstance(SecurityAttributes securityAttributes) {
 			return (securityAttributes == null ? new SecurityAttributes(null, null, null) : securityAttributes);
 		}
@@ -237,8 +237,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// Base constructor
 		/// </summary>
 		/// <param name="element"> the XOM element which is decorated with these attributes. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SecurityAttributes(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public SecurityAttributes(Element element) : base(element.Name.NamespaceName) {
 			string icNamespace = DDMSVersion.IsmNamespace;
 			_atomicEnergyMarkings = Util.GetXsListAsList(element.Attribute(XName.Get(ATOMIC_ENERGY_MARKINGS_NAME, icNamespace)).Value);
@@ -292,8 +292,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="otherAttributes"> a name/value mapping of other ISM attributes. The value will be a String value, as it
 		/// appears in XML. </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SecurityAttributes(String classification, java.util.List<String> ownerProducers, java.util.Map<String, String> otherAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public SecurityAttributes(string classification, List<string> ownerProducers, IDictionary<string, string> otherAttributes) : base(DDMSVersion.GetCurrentVersion().Namespace) {
 			if (ownerProducers == null) {
 				ownerProducers = new List<string>();
@@ -349,8 +349,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// Convenience method to add these attributes onto an existing XOM Element
 		/// </summary>
 		/// <param name="element"> the element to decorate </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void addTo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public void AddTo(Element element) {
 			DDMSVersion elementVersion = DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName);
 			ValidateSameVersion(elementVersion);
@@ -429,8 +429,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// </td></tr></table>
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			// Should be reviewed as additional versions of DDMS are supported.
 			DDMSVersion version = DDMSVersion;
@@ -527,8 +527,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// Standalone validation method for components which require a classification and ownerProducer.
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if there is no classification. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void requireClassification() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public void RequireClassification() {
 			Util.RequireDDMSValue(CLASSIFICATION_NAME, Classification);
 			if (OwnerProducers.Count == 0) {
@@ -960,8 +960,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 			/// one.
 			/// </summary>
 			/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SecurityAttributes commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual SecurityAttributes Commit() {
 				IDictionary<string, string> otherAttributes = new Dictionary<string, string>();
 				otherAttributes[ATOMIC_ENERGY_MARKINGS_NAME] = Util.GetXsList(AtomicEnergyMarkings);

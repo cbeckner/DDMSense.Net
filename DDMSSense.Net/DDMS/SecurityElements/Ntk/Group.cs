@@ -56,8 +56,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Group(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Group(Element element) : base(element) {
 			try {
 				IEnumerable<Element> values = element.Elements(XName.Get(GroupValue.GetName(DDMSVersion), Namespace));
@@ -79,8 +79,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// <param name="groupValues"> the list of values (at least 1 required) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Group(SystemName systemName, java.util.List<GroupValue> groupValues, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Group(SystemName systemName, List<GroupValue> groupValues, SecurityAttributes securityAttributes) : base(Group.GetName(DDMSVersion.GetCurrentVersion()), systemName, securityAttributes) {
 			try {
 				if (groupValues == null) {
@@ -107,8 +107,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, Group.GetName(DDMSVersion));
 			if (GroupValues.Count == 0) {
@@ -192,8 +192,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Group commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Group Commit() {
 				if (Empty) {
 					return (null);

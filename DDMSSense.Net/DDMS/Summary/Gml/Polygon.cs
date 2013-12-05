@@ -75,8 +75,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Polygon(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Polygon(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -106,8 +106,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// <param name="id"> the id value (required)
 		/// </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Polygon(java.util.List<Position> positions, SRSAttributes srsAttributes, String id) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Polygon(List<Position> positions, SRSAttributes srsAttributes, string id) {
 			try {
 				if (positions == null) {
@@ -149,8 +149,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, Polygon.GetName(DDMSVersion));
 			Util.RequireDDMSValue("srsAttributes", SRSAttributes);
@@ -306,8 +306,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Polygon commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Polygon Commit() {
 				if (Empty) {
 					return (null);

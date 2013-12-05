@@ -92,8 +92,8 @@ namespace DDMSSense.DDMS.Metacard {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public MetacardInfo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public MetacardInfo(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -171,8 +171,8 @@ namespace DDMSSense.DDMS.Metacard {
 		/// <param name="childComponents"> any components that belong in this MetacardInfo (required) </param>
 		/// <param name="securityAttributes"> security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public MetacardInfo(java.util.List<DDMSSense.DDMS.IDDMSComponent> childComponents, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public MetacardInfo(List<IDDMSComponent> childComponents, SecurityAttributes securityAttributes) {
 			try {
 				if (childComponents == null) {
@@ -271,8 +271,8 @@ namespace DDMSSense.DDMS.Metacard {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, MetacardInfo.GetName(DDMSVersion));
 			if (Identifiers.Count == 0) {
@@ -580,8 +580,8 @@ namespace DDMSSense.DDMS.Metacard {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public MetacardInfo commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual MetacardInfo Commit() {
 				if (Empty) {
 					return (null);

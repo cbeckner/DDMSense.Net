@@ -61,8 +61,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RecordKeeper(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RecordKeeper(Element element) {
 			try {
 				Util.RequireDDMSValue("element", element);
@@ -84,8 +84,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="recordKeeperID"> a unique ID for the organization (required) </param>
 		/// <param name="organization"> the organization acting as record keeper (required) </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RecordKeeper(String recordKeeperID, Organization organization) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RecordKeeper(string recordKeeperID, Organization organization) {
 			try {
 				Element element = Util.BuildDDMSElement(RecordKeeper.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -116,8 +116,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractProducerRole#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, RecordKeeper.GetName(DDMSVersion));
 			Util.RequireDDMSValue("record keeper ID", RecordKeeperID);
@@ -222,8 +222,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RecordKeeper commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual RecordKeeper Commit() {
 				return (Empty ? null : new RecordKeeper(RecordKeeperID, Organization.Commit()));
 			}

@@ -102,8 +102,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RevisionRecall(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RevisionRecall(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -146,8 +146,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RevisionRecall(java.util.List<DDMSSense.DDMS.Summary.Link> links, java.util.List<Details> details, Integer revisionID, String revisionType, String network, String otherNetwork, DDMSSense.DDMS.Summary.Xlink.XLinkAttributes xlinkAttributes, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RevisionRecall(List<Link> links, List<Details> details, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes) : this(null, links, details, revisionID, revisionType, network, otherNetwork, xlinkAttributes, securityAttributes) {
 		}
 
@@ -162,8 +162,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RevisionRecall(String value, Integer revisionID, String revisionType, String network, String otherNetwork, DDMSSense.DDMS.Summary.Xlink.XLinkAttributes xlinkAttributes, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RevisionRecall(string value, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes) : this(value, null, null, revisionID, revisionType, network, otherNetwork, xlinkAttributes, securityAttributes) {
 		}
 
@@ -180,8 +180,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private RevisionRecall(String value, java.util.List<DDMSSense.DDMS.Summary.Link> links, java.util.List<Details> details, Integer revisionID, String revisionType, String network, String otherNetwork, DDMSSense.DDMS.Summary.Xlink.XLinkAttributes xlinkAttributes, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		private RevisionRecall(string value, List<Link> links, List<Details> details, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes) {
 			try {
 				if (links == null) {
@@ -232,8 +232,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, RevisionRecall.GetName(DDMSVersion));
 
@@ -479,8 +479,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RevisionRecall commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual RevisionRecall Commit() {
 				if (Empty) {
 					return (null);

@@ -124,8 +124,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		/// <param name="xlinkAttributes"> the attributes to return by default </param>
 		/// <returns> a non-null attributes instance </returns>
 		/// <exception cref="InvalidDDMSException"> if there are problems creating the empty attributes instance </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static XLinkAttributes getNonNullInstance(XLinkAttributes xlinkAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static XLinkAttributes GetNonNullInstance(XLinkAttributes xlinkAttributes) {
 			return (xlinkAttributes == null ? new XLinkAttributes() : xlinkAttributes);
 		}
@@ -134,8 +134,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		/// Base constructor
 		/// </summary>
 		/// <param name="element"> the XOM element which is decorated with these attributes. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public XLinkAttributes(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public XLinkAttributes(Element element) : base(element.Name.NamespaceName) {
 			string xlinkNamespace = DDMSVersion.XlinkNamespace;
 			_type = element.Attribute(XName.Get(TYPE_NAME, xlinkNamespace)).Value;
@@ -153,8 +153,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		/// Constructor which builds from raw data for an unknown type.
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public XLinkAttributes() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public XLinkAttributes() : base(DDMSVersion.GetCurrentVersion().Namespace) {
 			Validate();
 		}
@@ -166,8 +166,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		/// <param name="title"> the link title (optional) </param>
 		/// <param name="label"> the name of the link (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public XLinkAttributes(String role, String title, String label) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public XLinkAttributes(string role, string title, string label) : base(DDMSVersion.GetCurrentVersion().Namespace) {
 			_type = TYPE_RESOURCE;
 			_role = role;
@@ -184,8 +184,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		/// <param name="title"> the link title (optional) </param>
 		/// <param name="label"> the name of the link (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public XLinkAttributes(String href, String role, String title, String label) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public XLinkAttributes(string href, string role, string title, string label) : base(DDMSVersion.GetCurrentVersion().Namespace) {
 			_type = TYPE_LOCATOR;
 			_href = href;
@@ -205,8 +205,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		/// <param name="show"> the show token (optional) </param>
 		/// <param name="actuate"> the actuate token (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public XLinkAttributes(String href, String role, String title, String arcrole, String show, String actuate) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public XLinkAttributes(string href, string role, string title, string arcrole, string show, string actuate) : base(DDMSVersion.GetCurrentVersion().Namespace) {
 			_type = TYPE_SIMPLE;
 			_href = href;
@@ -223,8 +223,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		/// </summary>
 		/// <param name="element"> the element to decorate </param>
 		/// <exception cref="InvalidDDMSException"> if the DDMS version of the element is different </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void addTo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public void AddTo(Element element) {
 			DDMSVersion elementVersion = DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName);
 			ValidateSameVersion(elementVersion);
@@ -256,8 +256,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 		/// </td></tr></table>
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			if (!String.IsNullOrEmpty(Href)) {
 				Util.RequireDDMSValidURI(Href);
@@ -467,8 +467,8 @@ namespace DDMSSense.DDMS.Summary.Xlink {
 			/// one.
 			/// </summary>
 			/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public XLinkAttributes commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual XLinkAttributes Commit() {
 				if (TYPE_LOCATOR.Equals(Type)) {
 					return (new XLinkAttributes(Href, Role, Title, Label));

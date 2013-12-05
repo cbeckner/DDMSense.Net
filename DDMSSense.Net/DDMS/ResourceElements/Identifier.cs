@@ -51,8 +51,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Identifier(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Identifier(Element element) : base(element) {
 		}
 
@@ -62,8 +62,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="qualifier">	the value of the qualifier attribute </param>
 		/// <param name="value">	the value of the value attribute </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Identifier(String qualifier, String value) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Identifier(string qualifier, string value) : base(Identifier.GetName(DDMSVersion.GetCurrentVersion()), qualifier, value, true) {
 		}
 
@@ -80,8 +80,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Identifier.GetName(DDMSVersion));
 			Util.RequireDDMSValue("qualifier attribute", Qualifier);
@@ -136,8 +136,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Identifier commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Identifier Commit() {
 				return (Empty ? null : new Identifier(Qualifier, Value));
 			}

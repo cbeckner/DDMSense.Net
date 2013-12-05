@@ -102,8 +102,8 @@ namespace DDMSSense.DDMS {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ApproximableDate(nu.xom.Element element) throws InvalidDDMSException
+
+
 		public ApproximableDate(Element element) {
 			base.SetXOMElement(element, true);
 		}
@@ -118,8 +118,8 @@ namespace DDMSSense.DDMS {
 		/// <param name="searchableStartDate"> the lower bound for this approximable date (optional) </param>
 		/// <param name="searchableEndDate"> the upper bound for this approximable date (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ApproximableDate(String name, String description, String approximableDate, String approximation, String searchableStartDate, String searchableEndDate) throws InvalidDDMSException
+
+
 		public ApproximableDate(string name, string description, string approximableDate, string approximation, string searchableStartDate, string searchableEndDate) {
 			try {
 				Element element = Util.BuildDDMSElement(name, null);
@@ -151,8 +151,8 @@ namespace DDMSSense.DDMS {
 		/// </summary>
 		/// <param name="approximation"> the value to test </param>
 		/// <exception cref="InvalidDDMSException"> if the value is null, empty or invalid. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void validateApproximation(String approximation) throws InvalidDDMSException
+
+
 		public static void ValidateApproximation(string approximation) {
 			Util.RequireDDMSValue("approximation", approximation);
 			if (!APPROXIMATION_TYPES.Contains(approximation)) {
@@ -165,8 +165,8 @@ namespace DDMSSense.DDMS {
 		/// </summary>
 		/// <param name="name"> the value to test </param>
 		/// <exception cref="InvalidDDMSException"> if the value is null, empty or invalid. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void validateElementName(String name) throws InvalidDDMSException
+
+
 		public static void ValidateElementName(string name) {
 			Util.RequireDDMSValue("name", name);
 			if (!NAME_TYPES.Contains(name)) {
@@ -187,8 +187,8 @@ namespace DDMSSense.DDMS {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			ValidateElementName(Name);
 			if (!String.IsNullOrEmpty(ApproximableDateString)) {
@@ -363,8 +363,8 @@ namespace DDMSSense.DDMS {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ApproximableDate commit() throws InvalidDDMSException
+
+
 			public virtual ApproximableDate Commit() {
 				return (Empty ? null : new ApproximableDate(Name, Description, ApproximableDate, Approximation, SearchableStart, SearchableEnd));
 			}

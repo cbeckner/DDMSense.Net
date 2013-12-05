@@ -173,8 +173,6 @@ namespace DDMSSense.Util {
 		/// <param name="description">	a descriptive name of the value </param>
 		/// <param name="value">			the value to check </param>
 		/// <exception cref="InvalidDDMSException"> if the value is null or empty </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireDDMSValue(String description, Object value) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireDDMSValue(string description, object value) {
 			if (value == null || (value is string && String.IsNullOrEmpty((string) value))) {
 				throw new InvalidDDMSException(description + " is required.");
@@ -187,8 +185,6 @@ namespace DDMSSense.Util {
 		/// <param name="date"> the date in its raw XML format </param>
 		/// <param name="ddmsNamespace"> the DDMS namespace of this date (DDM 4.0.1 and earlier only support 4 types). </param>
 		/// <exception cref="InvalidDDMSException"> if the value is invalid. Does nothing if value is null. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireDDMSDateFormat(String date, String ddmsNamespace) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireDDMSDateFormat(string date, string ddmsNamespace) {
 			DDMSVersion version = DDMSVersion.GetVersionForNamespace(ddmsNamespace);
 
@@ -219,8 +215,6 @@ namespace DDMSSense.Util {
 		/// <param name="element"> the element to check </param>
 		/// <param name="localName"> the local name to compare to </param>
 		/// <exception cref="InvalidDDMSException"> if the name is incorrect </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireDDMSQName(nu.xom.Element element, String localName) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireDDMSQName(Element element, string localName) {
 			Util.RequireValue("element", element);
 			Util.RequireValue("local name", localName);
@@ -236,8 +230,6 @@ namespace DDMSSense.Util {
 		/// <param name="namespaceURI"> the namespace to check </param>
 		/// <param name="localName"> the local name to compare to </param>
 		/// <exception cref="IllegalArgumentException"> if the name is incorrect </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireQName(nu.xom.Element element, String namespaceURI, String localName) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireQualifiedName(Element element, string namespaceURI, string localName) {
 			Util.RequireValue("element", element);
 			Util.RequireValue("local name", localName);
@@ -269,8 +261,6 @@ namespace DDMSSense.Util {
 		/// <param name="lowBound">		the lowest value the number can be </param>
 		/// <param name="highBound">		the highest value the number can be </param>
 		/// <exception cref="InvalidDDMSException"> if the number is out of bounds </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireBoundedChildCount(nu.xom.Element parent, String childName, int lowBound, int highBound) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireBoundedChildCount(Element parent, string childName, int lowBound, int highBound) {
 			Util.RequireValue("parent element", parent);
 			Util.RequireValue("child name", childName);
@@ -302,8 +292,6 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="names"> a list of names to check </param>
 		/// <exception cref="InvalidDDMSException"> if any name is not an NCName. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireValidNCNames(java.util.List<String> names) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireValidNCNames(List<string> names) {
 			if (names == null) {
 				names = new List<string>();
@@ -319,8 +307,6 @@ namespace DDMSSense.Util {
 		/// <param name="parent"> the parent component </param>
 		/// <param name="child"> the child component </param>
 		/// <exception cref="InvalidDDMSException"> if  </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireCompatibleVersion(DDMSSense.DDMS.IDDMSComponent parent, DDMSSense.DDMS.IDDMSComponent child) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireCompatibleVersion(IDDMSComponent parent, IDDMSComponent child) {
 			Util.RequireValue("parent", parent);
 			Util.RequireValue("child", child);
@@ -347,8 +333,6 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="name"> the name to check </param>
 		/// <exception cref="InvalidDDMSException"> if the name is not an NCName. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireValidNCName(String name) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireValidNCName(string name) {
 			if (!((new Name10Checker()).isValidNCName(GetNonNullString(name)))) {
 				throw new InvalidDDMSException("\"" + name + "\" is not a valid NCName.");
@@ -361,8 +345,6 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="name"> the name to check </param>
 		/// <exception cref="InvalidDDMSException"> if the name is not an NMTOKEN. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireValidNMToken(String name) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireValidNMToken(string name) {
 			if (!((new Name10Checker()).isValidNmtoken(GetNonNullString(name)))) {
 				throw new InvalidDDMSException("\"" + name + "\" is not a valid NMTOKEN.");
@@ -374,8 +356,6 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="uri">	the string to test </param>
 		/// <exception cref="InvalidDDMSException"> if the string cannot be built into a URI </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireDDMSValidURI(String uri) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireDDMSValidURI(string uri) {
 			Util.RequireValue("uri", uri);
 			try {
@@ -390,8 +370,6 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="value"> the value to test </param>
 		/// <exception cref="InvalidDDMSException"> </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireValidLongitude(Double value) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireValidLongitude(double? value) {
 			if (value == null || (-180L).CompareTo(value) > 0 || (180L).CompareTo(value) < 0) {
 				throw new InvalidDDMSException("A longitude value must be between -180 and 180 degrees: " + value);
@@ -403,8 +381,6 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="value"> the value to test </param>
 		/// <exception cref="InvalidDDMSException"> </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireValidLatitude(Double value) throws DDMSSense.DDMS.InvalidDDMSException
 		public static void RequireValidLatitude(double? value) {
 			if (value == null || (-90L).CompareTo(value) > 0 || (90L).CompareTo(value) < 0) {
 				throw new InvalidDDMSException("A latitude value must be between -90 and 90 degrees: " + value);
@@ -594,12 +570,10 @@ namespace DDMSSense.Util {
 		/// <param name="inputStream"> the input stream containing the XML document </param>
 		/// <returns> a XOM Document </returns>
 		/// <exception cref="IOException"> if there are problems loading or parsing the input stream </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static nu.xom.Document buildXmlDocument(java.io.InputStream inputStream) throws java.io.IOException
-		public static Document BuildXmlDocument(InputStream inputStream) {
+		public static Document BuildXmlDocument(Stream inputStream) {
 			Util.RequireValue("input stream", inputStream);
 			try {
-				return ((new Builder()).build(inputStream));
+                return XDocument.Load(inputStream);
 			} catch (ParsingException e) {
 				throw new IOException(e.Message);
 			}
@@ -611,8 +585,6 @@ namespace DDMSSense.Util {
 		/// <param name="schDocument"> the Schematron file as an XML Document </param>
 		/// <returns> the value of the queryBinding attribute, or "xslt" if undefined. </returns>
 		/// <exception cref="IOException"> if there are file-related problems with looking up the attribute </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static String getSchematronQueryBinding(nu.xom.Document schDocument) throws java.io.IOException
 		public static string GetSchematronQueryBinding(Document schDocument) {
 			Attribute attr = schDocument.Root.Attribute("queryBinding");
 			return (attr == null ? "xslt" : attr.Value);
@@ -634,10 +606,8 @@ namespace DDMSSense.Util {
 		/// <returns> the XSLTransform instance </returns>
 		/// <exception cref="IOException"> if there are file-related problems with preparing the stylesheets </exception>
 		/// <exception cref="XSLException"> if stylesheet transformation fails </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static nu.xom.xslt.XSLTransform buildSchematronTransform(java.io.File schematronFile) throws java.io.IOException, nu.xom.xslt.XSLException
-		public static XSLTransform BuildSchematronTransform(File schematronFile) {
-			Document schDocument = Util.BuildXmlDocument(new FileInputStream(schematronFile));
+		public static XSLTransform BuildSchematronTransform(string schematronFile) {
+			Document schDocument = Util.BuildXmlDocument(File.OpenRead(schematronFile));
 			string queryBinding = GetSchematronQueryBinding(schDocument);
 
 	//		long time = new Date().getTime();
@@ -678,13 +648,11 @@ namespace DDMSSense.Util {
 		/// Lazy instantiation / cached accessor for the first step of Schematron validation.
 		/// </summary>
 		/// <returns> the phase one transform </returns>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private synchronized static nu.xom.xslt.XSLTransform getSchematronIncludeTransform() throws java.io.IOException, nu.xom.xslt.XSLException
 		private static XSLTransform SchematronIncludeTransform {
 			get {
 				lock (typeof(Util)) {
 					if (_schematronIncludeTransform == null) {
-						InputStream includeStylesheet = Loader.getResourceAsStream("schematron/iso_dsdl_include.xsl");
+                        Stream includeStylesheet = System.Reflection.Assembly.GetCallingAssembly().GetManifestResourceStream("schematron/iso_dsdl_include.xsl");
 						_schematronIncludeTransform = new XSLTransform(Util.BuildXmlDocument(includeStylesheet));
 					}
 					return (_schematronIncludeTransform);
@@ -696,13 +664,11 @@ namespace DDMSSense.Util {
 		/// Lazy instantiation / cached accessor for the second step of Schematron validation.
 		/// </summary>
 		/// <returns> the phase two transform </returns>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private synchronized static nu.xom.xslt.XSLTransform getSchematronAbstractTransform() throws java.io.IOException, nu.xom.xslt.XSLException
 		private static XSLTransform SchematronAbstractTransform {
 			get {
 				lock (typeof(Util)) {
 					if (_schematronAbstractTransform == null) {
-						InputStream abstractStylesheet = Loader.getResourceAsStream("schematron/iso_abstract_expand.xsl");
+                        Stream abstractStylesheet = System.Reflection.Assembly.GetCallingAssembly().GetManifestResourceStream("schematron/iso_abstract_expand.xsl");
 						_schematronAbstractTransform = new XSLTransform(Util.BuildXmlDocument(abstractStylesheet));
 					}
 					return (_schematronAbstractTransform);
@@ -716,8 +682,6 @@ namespace DDMSSense.Util {
 		/// <param name="queryBinding"> the queryBinding value of the Schematron file. Currently "xslt" or "xslt2" are supported. </param>
 		/// <returns> the phase three transform </returns>
 		/// <exception cref="IllegalArgumentException"> if the queryBinding is unsupported </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private synchronized static nu.xom.xslt.XSLTransform getSchematronSvrlTransform(String queryBinding) throws java.io.IOException, nu.xom.xslt.XSLException
 		private static XSLTransform GetSchematronSvrlTransform(string queryBinding) {
 			lock (typeof(Util)) {
 				string resourceName;
@@ -730,11 +694,11 @@ namespace DDMSSense.Util {
 				}
 				if (_schematronSvrlTransforms.GetValueOrNull(resourceName) == null) {
 					try {
-						InputStream schematronStylesheet = Loader.getResourceAsStream(resourceName);
+						Stream schematronStylesheet = System.Reflection.Assembly.GetCallingAssembly().GetManifestResourceStream(resourceName);
 						Document svrlStylesheet = Util.BuildXmlDocument(schematronStylesheet);
         
 						// XOM passes the Base URI to Xalan as the SystemId, which cannot be empty.
-						Uri svrlUri = Loader.getResource(resourceName).toURI();
+						Uri svrlUri = System.Reflection.Assembly.GetCallingAssembly().GetManifestResourceInfo(resourceName).ResourceLocation.toURI();
 						svrlStylesheet.BaseUri = svrlUri.ToString();
         
 						_schematronSvrlTransforms[resourceName] = new XSLTransform(svrlStylesheet);

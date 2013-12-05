@@ -211,8 +211,8 @@ namespace DDMSSense.DDMS {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Resource(nu.xom.Element element) throws InvalidDDMSException
+
+
 		public Resource(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -369,8 +369,8 @@ namespace DDMSSense.DDMS {
 		/// must be mediated into a separate RelatedResource instance.
 		/// </summary>
 		/// <param name="resource"> the top-level element </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private void loadRelatedResource(nu.xom.Element resource) throws InvalidDDMSException
+
+
 		private void LoadRelatedResource(Element resource) {
 			IEnumerable<Element> children = resource.Elements(XName.Get(RelatedResource.OLD_INNER_NAME, Namespace));
 			if (children.Count() <= 1) {
@@ -393,8 +393,8 @@ namespace DDMSSense.DDMS {
 		/// </summary>
 		/// <param name="topLevelComponents"> a list of top level components </param>
 		/// <param name="extensibleAttributes"> any extensible attributes (optional) </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Resource(java.util.List<IDDMSComponent> topLevelComponents, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensibleAttributes) throws InvalidDDMSException
+
+
 		public Resource(List<IDDMSComponent> topLevelComponents, ExtensibleAttributes extensibleAttributes) : this(topLevelComponents, null, null, null, null, null, null, null, extensibleAttributes) {
 		}
 
@@ -413,8 +413,8 @@ namespace DDMSSense.DDMS {
 		/// <param name="extensibleAttributes"> any extensible attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed, or if one of the components
 		/// does not belong at the top-level of the Resource. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Resource(java.util.List<IDDMSComponent> topLevelComponents, Boolean resourceElement, String createDate, Integer ismDESVersion, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensibleAttributes) throws InvalidDDMSException
+
+
 		public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, int? ismDESVersion, SecurityAttributes securityAttributes, ExtensibleAttributes extensibleAttributes) : this(topLevelComponents, resourceElement, createDate, null, ismDESVersion, null, securityAttributes, null, extensibleAttributes) {
 		}
 
@@ -434,8 +434,8 @@ namespace DDMSSense.DDMS {
 		/// <param name="extensibleAttributes"> any extensible attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed, or if one of the components
 		/// does not belong at the top-level of the Resource. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Resource(java.util.List<IDDMSComponent> topLevelComponents, Boolean resourceElement, String createDate, java.util.List<String> compliesWiths, Integer ismDESVersion, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensibleAttributes) throws InvalidDDMSException
+
+
 		public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, List<string> compliesWiths, int? ismDESVersion, SecurityAttributes securityAttributes, ExtensibleAttributes extensibleAttributes) : this(topLevelComponents, resourceElement, createDate, compliesWiths, ismDESVersion, null, securityAttributes, null, extensibleAttributes) {
 		}
 
@@ -468,8 +468,8 @@ namespace DDMSSense.DDMS {
 		/// <param name="extensibleAttributes"> any extensible attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed, or if one of the components
 		/// does not belong at the top-level of the Resource. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Resource(java.util.List<IDDMSComponent> topLevelComponents, Boolean resourceElement, String createDate, java.util.List<String> compliesWiths, Integer ismDESVersion, Integer ntkDESVersion, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes, DDMSSense.DDMS.SecurityElements.Ism.NoticeAttributes noticeAttributes, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensibleAttributes) throws InvalidDDMSException
+
+
 		public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, List<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion, SecurityAttributes securityAttributes, NoticeAttributes noticeAttributes, ExtensibleAttributes extensibleAttributes) {
 			try {
 				if (topLevelComponents == null) {
@@ -657,8 +657,8 @@ namespace DDMSSense.DDMS {
 		/// <returns> a list of ValidationMessages </returns>
 		/// <exception cref="XSLException"> if there are XSL problems transforming with stylesheets </exception>
 		/// <exception cref="IOException"> if there are problems reading or parsing the Schematron file </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public java.util.List<ValidationMessage> validateWithSchematron(java.io.File schematronFile) throws nu.xom.xslt.XSLException, java.io.IOException
+
+
 		public List<ValidationMessage> ValidateWithSchematron(File schematronFile) {
 			List<ValidationMessage> messages = new List<ValidationMessage>();
 			XSLTransform schematronTransform = Util.BuildSchematronTransform(schematronFile);
@@ -704,8 +704,8 @@ namespace DDMSSense.DDMS {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Resource.GetName(DDMSVersion));
 
@@ -765,8 +765,8 @@ namespace DDMSSense.DDMS {
 		/// in the document which specify the order attribute should be interpreted as entries in a single, ordered list.
 		/// Values must be sequential, starting at 1, and may not contain duplicates. </summary>
 		/// <exception cref="InvalidDDMSException"> if the orders do not make a unique consecutive list starting at 1. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private void validateOrderAttributes() throws InvalidDDMSException
+
+
 		private void ValidateOrderAttributes() {
 			List<int?> orders = new List<int?>();
 			foreach (GeospatialCoverage coverage in GeospatialCoverages) {
@@ -1390,8 +1390,8 @@ namespace DDMSSense.DDMS {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Resource commit() throws InvalidDDMSException
+
+
 			public virtual Resource Commit() {
 				if (Empty) {
 					return (null);

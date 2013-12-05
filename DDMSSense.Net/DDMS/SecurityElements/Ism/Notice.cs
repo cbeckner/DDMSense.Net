@@ -58,8 +58,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Notice(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Notice(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -84,8 +84,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are optional) </param>
 		/// <param name="noticeAttributes"> any notice attributes </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Notice(java.util.List<NoticeText> noticeTexts, SecurityAttributes securityAttributes, NoticeAttributes noticeAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Notice(List<NoticeText> noticeTexts, SecurityAttributes securityAttributes, NoticeAttributes noticeAttributes) {
 			try {
 				if (noticeTexts == null) {
@@ -118,8 +118,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, DDMSVersion.IsmNamespace, Notice.GetName(DDMSVersion));
 			if (NoticeTexts.Count == 0) {
@@ -259,8 +259,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Notice commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Notice Commit() {
 				if (Empty) {
 					return (null);

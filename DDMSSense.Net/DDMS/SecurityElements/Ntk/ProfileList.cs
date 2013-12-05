@@ -62,8 +62,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProfileList(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ProfileList(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -86,8 +86,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// <param name="profiles"> the list of profiles (at least 1 required) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProfileList(java.util.List<Profile> profiles, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ProfileList(List<Profile> profiles, SecurityAttributes securityAttributes) {
 			try {
 				DDMSVersion version = DDMSVersion.GetCurrentVersion();
@@ -122,8 +122,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, ProfileList.GetName(DDMSVersion));
 			if (Profiles.Count == 0) {
@@ -224,8 +224,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProfileList commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual ProfileList Commit() {
 				if (Empty) {
 					return (null);

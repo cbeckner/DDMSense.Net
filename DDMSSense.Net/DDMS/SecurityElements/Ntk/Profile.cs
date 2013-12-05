@@ -56,8 +56,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Profile(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Profile(Element element) : base(element) {
 			try {
 				IEnumerable<Element> values = element.Elements(XName.Get(ProfileValue.GetName(DDMSVersion), Namespace));
@@ -79,8 +79,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// <param name="profileValues"> the list of values (at least 1 required) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Profile(SystemName systemName, java.util.List<ProfileValue> profileValues, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Profile(SystemName systemName, List<ProfileValue> profileValues, SecurityAttributes securityAttributes) : base(Profile.GetName(DDMSVersion.GetCurrentVersion()), systemName, securityAttributes) {
 			try {
 				if (profileValues == null) {
@@ -107,8 +107,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, Profile.GetName(DDMSVersion));
 			if (ProfileValues.Count == 0) {
@@ -192,8 +192,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Profile commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Profile Commit() {
 				if (Empty) {
 					return (null);

@@ -76,8 +76,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Dates(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Dates(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -106,8 +106,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="approvedOn"> the approved on date (optional, starting in DDMS 3.1) </param>
 		/// <param name="receivedOn"> the received on date (optional, starting in DDMS 4.0.1) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Dates(String created, String posted, String validTil, String infoCutOff, String approvedOn, String receivedOn) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Dates(string created, string posted, string validTil, string infoCutOff, string approvedOn, string receivedOn) : this(null, created, posted, validTil, infoCutOff, approvedOn, receivedOn) {
 		}
 
@@ -123,8 +123,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="receivedOn"> the received on date (optional, starting in DDMS 4.0.1)
 		/// </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Dates(java.util.List<DDMSSense.DDMS.ApproximableDate> acquiredOns, String created, String posted, String validTil, String infoCutOff, String approvedOn, String receivedOn) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Dates(List<ApproximableDate> acquiredOns, string created, string posted, string validTil, string infoCutOff, string approvedOn, string receivedOn) {
 			try {
 				Element element = Util.BuildDDMSElement(Dates.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -161,8 +161,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Dates.GetName(DDMSVersion));
 			if (!String.IsNullOrEmpty(CreatedString)) {
@@ -475,8 +475,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Dates commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Dates Commit() {
 				if (Empty) {
 					return (null);

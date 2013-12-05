@@ -78,8 +78,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Access(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Access(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -121,8 +121,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// <param name="profileList"> the profile list </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Access(java.util.List<Individual> individuals, java.util.List<Group> groups, ProfileList profileList, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Access(List<Individual> individuals, List<Group> groups, ProfileList profileList, SecurityAttributes securityAttributes) : this(individuals, groups, profileList, null, securityAttributes) {
 		}
 
@@ -135,8 +135,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// <param name="externalReference"> a boolean attribute (optional) </param>
 		/// <param name="securityAttributes"> security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Access(java.util.List<Individual> individuals, java.util.List<Group> groups, ProfileList profileList, Boolean externalReference, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Access(List<Individual> individuals, List<Group> groups, ProfileList profileList, bool? externalReference, SecurityAttributes securityAttributes) {
 			try {
 				DDMSVersion version = DDMSVersion.GetCurrentVersion();
@@ -197,8 +197,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, Access.GetName(DDMSVersion));
 			Util.RequireDDMSValue("security attributes", SecurityAttributes);
@@ -371,8 +371,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Access commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Access Commit() {
 				if (Empty) {
 					return (null);

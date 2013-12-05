@@ -242,8 +242,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="enumLocation"> the classpath resource location for the enumeration files </param>
 		/// <param name="builder"> the XOM Builder to read the file with </param>
 		/// <param name="enumerationKey"> the key for the enumeration, which doubles as the filename. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private static void loadEnumeration(String enumLocation, nu.xom.Builder builder, String enumerationKey) throws nu.xom.ParsingException, java.io.IOException
+
+
 		private static void LoadEnumeration(string enumLocation, Builder builder, string enumerationKey) {
 			InputStream stream = (new ISMVocabulary()).GetType().getResourceAsStream(enumLocation + enumerationKey);
 			Document doc = builder.build(stream);
@@ -307,8 +307,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="enumerationKey"> the key of the enumeration </param>
 		/// <param name="value"> the test value </param>
 		/// <exception cref="InvalidDDMSException"> if the value is not and validation should result in errors </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void validateEnumeration(String enumerationKey, String value) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static void ValidateEnumeration(string enumerationKey, string value) {
 			DDMSVersion = DDMSVersion;
 			if (!EnumContains(enumerationKey, value)) {
@@ -365,8 +365,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// </summary>
 		/// <param name="network"> the network token to test </param>
 		/// <exception cref="InvalidDDMSException"> if the network is not a valid token </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void requireValidNetwork(String network) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static void RequireValidNetwork(string network) {
 			if (!COMMON_NETWORK_TYPES.Contains(network)) {
 				throw new InvalidDDMSException("The network attribute must be one of " + COMMON_NETWORK_TYPES);

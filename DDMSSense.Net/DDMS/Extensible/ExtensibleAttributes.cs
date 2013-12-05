@@ -88,8 +88,8 @@ namespace DDMSSense.DDMS.Extensible {
 		/// <param name="extensibleAttributes"> the attributes to return by default </param>
 		/// <returns> a non-null attributes instance </returns>
 		/// <exception cref="InvalidDDMSException"> if there are problems creating the empty attributes instance </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static ExtensibleAttributes getNonNullInstance(ExtensibleAttributes extensibleAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static ExtensibleAttributes GetNonNullInstance(ExtensibleAttributes extensibleAttributes) {
 			return (extensibleAttributes == null ? new ExtensibleAttributes((List<Attribute>) null) : extensibleAttributes);
 		}
@@ -101,8 +101,8 @@ namespace DDMSSense.DDMS.Extensible {
 		/// and will also skip any Resource attributes that are reserved.</para>
 		/// </summary>
 		/// <param name="element"> the XOM element which is decorated with these attributes. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ExtensibleAttributes(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ExtensibleAttributes(Element element) : base(element.Name.NamespaceName) {
 			BuildReservedNames(element.Name.NamespaceName);
 
@@ -132,8 +132,8 @@ namespace DDMSSense.DDMS.Extensible {
 		/// </summary>
 		/// <param name="attributes"> a list of extensible attributes </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ExtensibleAttributes(java.util.List<nu.xom.Attribute> attributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ExtensibleAttributes(List<Attribute> attributes) : base(DDMSVersion.GetCurrentVersion().Namespace) {
 			if (attributes == null) {
 				attributes = new List<Attribute>();
@@ -173,8 +173,8 @@ namespace DDMSSense.DDMS.Extensible {
 		/// </summary>
 		/// <param name="element"> the element to decorate </param>
 		/// <exception cref="InvalidDDMSException"> if the attribute already exists </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void addTo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public void AddTo(Element element) {
 			foreach (Attribute attribute in Attributes) {
                 if (element.Attribute(XName.Get(attribute.Name.LocalName, attribute.Name.NamespaceName)).Value != null)
@@ -199,8 +199,8 @@ namespace DDMSSense.DDMS.Extensible {
 		/// Currently, no further validation is performed.
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			base.Validate();
 		}
@@ -296,8 +296,8 @@ namespace DDMSSense.DDMS.Extensible {
 			/// a null one.
 			/// </summary>
 			/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ExtensibleAttributes commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual ExtensibleAttributes Commit() {
 				List<Attribute> attributes = new List<Attribute>();
 				foreach (ExtensibleAttributes.AttributeBuilder builder in Attributes) {
@@ -367,8 +367,8 @@ namespace DDMSSense.DDMS.Extensible {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public nu.xom.Attribute commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Attribute Commit() {                
 				return (Empty ? null : new Attribute(XName.Get(Name, Uri), Value));
 			}

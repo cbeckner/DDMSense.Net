@@ -96,8 +96,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="noticeAttributes"> the attributes to return by default </param>
 		/// <returns> a non-null attributes instance </returns>
 		/// <exception cref="InvalidDDMSException"> if there are problems creating the empty attributes instance </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static NoticeAttributes getNonNullInstance(NoticeAttributes noticeAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static NoticeAttributes GetNonNullInstance(NoticeAttributes noticeAttributes) {
 			return (noticeAttributes == null ? new NoticeAttributes(null, null, null, null) : noticeAttributes);
 		}
@@ -106,8 +106,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// Base constructor
 		/// </summary>
 		/// <param name="element"> the XOM element which is decorated with these attributes. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeAttributes(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NoticeAttributes(Element element) : base(element.Name.NamespaceName) {
 			string icNamespace = DDMSVersion.IsmNamespace;
 
@@ -136,8 +136,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="noticeDate"> the date associated with a notice </param>
 		/// <param name="unregisteredNoticeType"> a notice type not in the CVE </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeAttributes(String noticeType, String noticeReason, String noticeDate, String unregisteredNoticeType) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NoticeAttributes(string noticeType, string noticeReason, string noticeDate, string unregisteredNoticeType) : this(noticeType, noticeReason, noticeDate, unregisteredNoticeType, null) {
 		}
 
@@ -150,8 +150,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// <param name="unregisteredNoticeType"> a notice type not in the CVE </param>
 		/// <param name="externalNotice"> true if this notice is for an external resource </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeAttributes(String noticeType, String noticeReason, String noticeDate, String unregisteredNoticeType, Boolean externalNotice) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NoticeAttributes(string noticeType, string noticeReason, string noticeDate, string unregisteredNoticeType, bool? externalNotice) : base(DDMSVersion.GetCurrentVersion().Namespace) {
 			_noticeType = noticeType;
 			_noticeReason = noticeReason;
@@ -171,8 +171,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// Convenience method to add these attributes onto an existing XOM Element
 		/// </summary>
 		/// <param name="element"> the element to decorate </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void addTo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public void AddTo(Element element) {
 			DDMSVersion elementVersion = DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName);
 			ValidateSameVersion(elementVersion);
@@ -214,8 +214,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 		/// </td></tr></table>
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			// Should be reviewed as additional versions of DDMS are supported.
 			DDMSVersion version = DDMSVersion;
@@ -379,8 +379,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism {
 			/// a null one.
 			/// </summary>
 			/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeAttributes commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual NoticeAttributes Commit() {
 				return (new NoticeAttributes(NoticeType, NoticeReason, NoticeDate, UnregisteredNoticeType, ExternalNotice));
 			}

@@ -58,8 +58,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProductionMetric(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ProductionMetric(Element element) {
 			try {
 				_securityAttributes = new SecurityAttributes(element);
@@ -78,8 +78,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="coverage"> a method of categorizing the coverage of a document in a fashion understandable by DDNI-A
 		/// (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProductionMetric(String subject, String coverage, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ProductionMetric(string subject, string coverage, SecurityAttributes securityAttributes) {
 			try {
 				Element element = Util.BuildDDMSElement(ProductionMetric.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -105,8 +105,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, ProductionMetric.GetName(DDMSVersion));
 			Util.RequireDDMSValue("subject attribute", Subject);
@@ -220,8 +220,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProductionMetric commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual ProductionMetric Commit() {
 				return (Empty ? null : new ProductionMetric(Subject, Coverage, SecurityAttributes.Commit()));
 			}

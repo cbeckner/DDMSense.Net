@@ -67,8 +67,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Point(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Point(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -92,8 +92,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// required) </param>
 		/// <param name="id"> the id value (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Point(Position position, SRSAttributes srsAttributes, String id) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Point(Position position, SRSAttributes srsAttributes, string id) {
 			try {
 				DDMSVersion version = DDMSVersion.GetCurrentVersion();
@@ -125,8 +125,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireQualifiedName(Element, Namespace, Point.GetName(DDMSVersion));
 			Util.RequireDDMSValue("srsAttributes", SRSAttributes);
@@ -259,8 +259,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Point commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Point Commit() {
 				return (Empty ? null : new Point(Position.Commit(), SrsAttributes.Commit(), Id));
 			}

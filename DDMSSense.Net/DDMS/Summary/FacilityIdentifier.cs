@@ -55,8 +55,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public FacilityIdentifier(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public FacilityIdentifier(Element element) : base(element) {
 		}
 
@@ -66,8 +66,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="beNumber"> the beNumber (required) </param>
 		/// <param name="osuffix"> the Osuffix (required, because beNumber is required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public FacilityIdentifier(String beNumber, String osuffix) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public FacilityIdentifier(string beNumber, string osuffix) {
 			try {
 				Element element = Util.BuildDDMSElement(FacilityIdentifier.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -91,8 +91,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, FacilityIdentifier.GetName(DDMSVersion));
 			Util.RequireDDMSValue(BE_NUMBER_NAME, BeNumber);
@@ -187,8 +187,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public FacilityIdentifier commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual FacilityIdentifier Commit() {
 				return (Empty ? null : new FacilityIdentifier(BeNumber, Osuffix));
 			}

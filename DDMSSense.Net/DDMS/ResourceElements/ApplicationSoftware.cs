@@ -50,8 +50,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ApplicationSoftware(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ApplicationSoftware(Element element) : base(element, true) {
 		}
 
@@ -61,8 +61,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="value"> the value of the child text </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ApplicationSoftware(String value, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ApplicationSoftware(string value, SecurityAttributes securityAttributes) : base(ApplicationSoftware.GetName(DDMSVersion.GetCurrentVersion()), value, securityAttributes, true) {
 		}
 
@@ -77,8 +77,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, ApplicationSoftware.GetName(DDMSVersion));
 
@@ -151,8 +151,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ApplicationSoftware commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override ApplicationSoftware Commit() {
 				return (Empty ? null : new ApplicationSoftware(Value, SecurityAttributes.Commit()));
 			}

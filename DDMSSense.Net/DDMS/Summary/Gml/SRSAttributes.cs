@@ -79,8 +79,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// <param name="srsAttributes"> the attributes to return by default </param>
 		/// <returns> a non-null attributes instance </returns>
 		/// <exception cref="InvalidDDMSException"> if there are problems creating the empty attributes instance </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static SRSAttributes getNonNullInstance(SRSAttributes srsAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static SRSAttributes GetNonNullInstance(SRSAttributes srsAttributes) {
 			return (srsAttributes == null ? new SRSAttributes(null, null, null, null) : srsAttributes);
 		}
@@ -89,8 +89,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// Base constructor
 		/// </summary>
 		/// <param name="element"> the XOM element which is decorated with these attributes. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SRSAttributes(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public SRSAttributes(Element element) : base(element.Name.NamespaceName) {
 			_srsName = element.Attribute(XName.Get(SRS_NAME_NAME, NO_NAMESPACE)).Value;
 			string srsDimension = element.Attribute(XName.Get(SRS_DIMENSION_NAME, NO_NAMESPACE)).Value;
@@ -118,8 +118,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// <param name="axisLabels"> the axis labels (optional, but should be omitted if no srsName is set) </param>
 		/// <param name="uomLabels"> the labels for UOM (required when axisLabels is set) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SRSAttributes(String srsName, Integer srsDimension, java.util.List<String> axisLabels, java.util.List<String> uomLabels) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public SRSAttributes(string srsName, int? srsDimension, List<string> axisLabels, List<string> uomLabels) : base(DDMSVersion.GetCurrentVersion().GmlNamespace) {
 			if (axisLabels == null) {
 				axisLabels = new List<string>();
@@ -139,8 +139,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// </summary>
 		/// <param name="element"> the element to decorate </param>
 		/// <exception cref="InvalidDDMSException"> if the DDMS version of the element is different </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void addTo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal void AddTo(Element element) {
 			DDMSVersion elementVersion = DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName);
 			ValidateSameVersion(elementVersion);
@@ -165,8 +165,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 		/// </td></tr></table>
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			if (!String.IsNullOrEmpty(SrsName)) {
 				Util.RequireDDMSValidURI(SrsName);
@@ -326,8 +326,8 @@ namespace DDMSSense.DDMS.Summary.Gml {
 			/// a null one.
 			/// </summary>
 			/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SRSAttributes commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual SRSAttributes Commit() {
 				return (new SRSAttributes(SrsName, SrsDimension, AxisLabels, UomLabels));
 			}

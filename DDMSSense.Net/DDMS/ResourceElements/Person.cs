@@ -75,8 +75,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Person(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Person(Element element) : base(element, true) {
 		}
 
@@ -88,8 +88,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="emails"> an ordered list of email addresses </param>
 		/// <param name="userID"> optional unique identifier within an organization </param>
 		/// <param name="affiliation"> organizational affiliation of the person </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Person(java.util.List<String> names, String surname, java.util.List<String> phones, java.util.List<String> emails, String userID, String affiliation) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Person(List<string> names, string surname, List<string> phones, List<string> emails, string userID, string affiliation) : this(names, surname, phones, emails, userID, affiliation, null) {
 		}
 
@@ -102,8 +102,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="userID"> optional unique identifier within an organization </param>
 		/// <param name="affiliation"> organizational affiliation of the person </param>
 		/// <param name="extensions"> extensible attributes (optional) </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Person(java.util.List<String> names, String surname, java.util.List<String> phones, java.util.List<String> emails, String userID, String affiliation, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensions) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Person(List<string> names, string surname, List<string> phones, List<string> emails, string userID, string affiliation, ExtensibleAttributes extensions) : base(Person.GetName(DDMSVersion.GetCurrentVersion()), names, phones, emails, extensions, false) {
 			try {
 				int insertIndex = (names == null ? 0 : names.Count);
@@ -124,8 +124,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="userID"> optional unique identifier within an organization </param>
 		/// <param name="affiliation"> organizational affiliation of the person </param>
 		/// <exception cref="InvalidDDMSException"> if the result is an invalid component </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private void addExtraElements(int insertIndex, String surname, String userID, String affiliation) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		private void AddExtraElements(int insertIndex, string surname, string userID, string affiliation) {
 			Element element = Element;
 			if (DDMSVersion.IsAtLeast("4.0.1")) {
@@ -160,8 +160,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractRoleEntity#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Person.GetName(DDMSVersion));
 			Util.RequireDDMSValue(SURNAME_NAME, Surname);
@@ -291,8 +291,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Person commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Person Commit() {
 				return (Empty ? null : new Person(Names, Surname, Phones, Emails, UserID, Affliation, ExtensibleAttributes.Commit()));
 			}

@@ -90,8 +90,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public VerticalExtent(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public VerticalExtent(Element element) {
 			try {
 				Util.RequireDDMSValue("verticalExtent element", element);
@@ -113,8 +113,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="unitOfMeasure"> the unit of measure (required) </param>
 		/// <param name="datum"> the datum (required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public VerticalExtent(double minVerticalExtent, double maxVerticalExtent, String unitOfMeasure, String datum) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public VerticalExtent(double minVerticalExtent, double maxVerticalExtent, string unitOfMeasure, string datum) {
 			try {
 				Element element = Util.BuildDDMSElement(VerticalExtent.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -137,8 +137,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="datumType"> the type to test </param>
 		/// <exception cref="InvalidDDMSException"> if the value is null, empty or invalid. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void validateVerticalDatumType(String datumType) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static void ValidateVerticalDatumType(string datumType) {
 			Util.RequireDDMSValue("vertical datum type", datumType);
 			if (!VERTICAL_DATUM_TYPES.Contains(datumType)) {
@@ -151,8 +151,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="lengthType"> the type to test </param>
 		/// <exception cref="InvalidDDMSException"> if the value is null, empty or invalid. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void validateLengthMeasureType(String lengthType) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static void ValidateLengthMeasureType(string lengthType) {
 			Util.RequireDDMSValue("length measure type", lengthType);
 			if (!LENGTH_MEASURE_TYPES.Contains(lengthType)) {
@@ -175,8 +175,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, VerticalExtent.GetName(DDMSVersion));
 			Util.RequireDDMSValue(MinVerticalExtentName, MinVerticalExtent);
@@ -199,8 +199,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="extentElement"> </param>
 		/// <exception cref="InvalidDDMSException"> </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private void validateInheritedAttributes(nu.xom.Element extentElement) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		private void ValidateInheritedAttributes(Element extentElement) {
 			string unitOfMeasure = extentElement.Attribute(XName.Get(UOM_NAME, extentElement.Name.NamespaceName)).Value;
 			string datum = extentElement.Attribute(XName.Get(DATUM_NAME, extentElement.Name.NamespaceName)).Value;
@@ -341,8 +341,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public VerticalExtent commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual VerticalExtent Commit() {
 				if (Empty) {
 					return (null);

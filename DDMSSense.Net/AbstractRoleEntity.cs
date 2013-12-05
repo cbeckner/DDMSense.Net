@@ -64,8 +64,8 @@ namespace DDMSSense {
 		/// <param name="element"> the XOM element representing this component </param>
 		/// <param name="validateNow"> true to validate the component immediately. Because Person and Organization entities have
 		/// additional fields they should not be validated in the superconstructor. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractRoleEntity(nu.xom.Element element, boolean validateNow) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractRoleEntity(Element element, bool validateNow) {
 			try {
 				_names = Util.GetDDMSChildValues(element, NAME_NAME);
@@ -89,8 +89,8 @@ namespace DDMSSense {
 		/// <param name="extensibleAttributes"> extensible attributes (optional) </param>
 		/// <param name="validateNow"> true to validate the component immediately. Because Person and Organization entities have
 		/// additional fields they should not be validated in the superconstructor. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractRoleEntity(String entityName, java.util.List<String> names, java.util.List<String> phones, java.util.List<String> emails, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensibleAttributes, boolean validateNow) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractRoleEntity(string entityName, List<string> names, List<string> phones, List<string> emails, ExtensibleAttributes extensibleAttributes, bool validateNow) {
 			try {
 				Util.RequireDDMSValue("entityName", entityName);
@@ -136,8 +136,8 @@ namespace DDMSSense {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
             if (Element.GetElementsByTagName(NAME_NAME, Namespace).Count == 0)
             {

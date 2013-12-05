@@ -97,8 +97,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public GeospatialCoverage(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public GeospatialCoverage(Element element) {
 			try {
 				Util.RequireDDMSValue("geographicIdentifier element", element);
@@ -147,8 +147,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="order"> the order attribute (optional, starting in DDMS 4.0.1) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public GeospatialCoverage(GeographicIdentifier geographicIdentifier, BoundingBox boundingBox, BoundingGeometry boundingGeometry, PostalAddress postalAddress, VerticalExtent verticalExtent, String precedence, Integer order, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public GeospatialCoverage(GeographicIdentifier geographicIdentifier, BoundingBox boundingBox, BoundingGeometry boundingGeometry, PostalAddress postalAddress, VerticalExtent verticalExtent, string precedence, int? order, SecurityAttributes securityAttributes) {
 			try {
 				Element coverageElement = Util.BuildDDMSElement(GeospatialCoverage.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -211,8 +211,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, GeospatialCoverage.GetName(DDMSVersion));
 			Element extElement = ExtentElement;
@@ -509,8 +509,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public GeospatialCoverage commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual GeospatialCoverage Commit() {
 				return (Empty ? null : new GeospatialCoverage(GeographicIdentifier.Commit(), BoundingBox.Commit(), BoundingGeometry.Commit(), PostalAddress.Commit(), VerticalExtent.Commit(), Precedence, Order, SecurityAttributes.Commit()));
 			}

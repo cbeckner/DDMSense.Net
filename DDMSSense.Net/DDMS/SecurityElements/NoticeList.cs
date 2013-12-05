@@ -59,8 +59,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeList(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NoticeList(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -83,8 +83,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 		/// <param name="notices"> the notices (at least 1 required) </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeList(java.util.List<DDMSSense.DDMS.SecurityElements.Ism.Notice> notices, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public NoticeList(List<Notice> notices, SecurityAttributes securityAttributes) {
 			try {
 				if (notices == null) {
@@ -119,8 +119,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, NoticeList.GetName(DDMSVersion));
 
@@ -222,8 +222,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public NoticeList commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual NoticeList Commit() {
 				if (Empty) {
 					return (null);

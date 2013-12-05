@@ -80,8 +80,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SubjectCoverage(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public SubjectCoverage(Element element) {
 			try {
 				Util.RequireDDMSValue("subjectCoverage element", element);
@@ -126,8 +126,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="nonStateActors"> list of actors </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SubjectCoverage(java.util.List<Keyword> keywords, java.util.List<Category> categories, java.util.List<ProductionMetric> productionMetrics, java.util.List<NonStateActor> nonStateActors, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public SubjectCoverage(List<Keyword> keywords, List<Category> categories, List<ProductionMetric> productionMetrics, List<NonStateActor> nonStateActors, SecurityAttributes securityAttributes) {
 			try {
 				if (keywords == null) {
@@ -185,8 +185,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, SubjectCoverage.GetName(DDMSVersion));
 			Element subjectElement = SubjectElement;
@@ -384,8 +384,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public SubjectCoverage commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual SubjectCoverage Commit() {
 				if (Empty) {
 					return (null);

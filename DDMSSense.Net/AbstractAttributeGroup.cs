@@ -65,8 +65,8 @@ namespace DDMSSense {
 		/// </td></tr></table>
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal virtual void Validate() {
 		}
 
@@ -75,8 +75,8 @@ namespace DDMSSense {
 		/// </summary>
 		/// <param name="version"> the version to test </param>
 		/// <exception cref="InvalidDDMSException"> if the versions do not match </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validateSameVersion(DDMSSense.util.DDMSVersion version) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal virtual void ValidateSameVersion(DDMSVersion version) {
 			if (!DDMSVersion.Equals(version)) {
 				throw new InvalidDDMSException("These attributes cannot decorate a component with a different DDMS version.");

@@ -64,8 +64,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public VirtualCoverage(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public VirtualCoverage(Element element) {
 			try {
 				_securityAttributes = new SecurityAttributes(element);
@@ -83,8 +83,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="protocol"> the network protocol (optional, should be used if address is provided) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public VirtualCoverage(String address, String protocol, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public VirtualCoverage(string address, string protocol, SecurityAttributes securityAttributes) {
 			try {
 				Element element = Util.BuildDDMSElement(VirtualCoverage.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -109,8 +109,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, VirtualCoverage.GetName(DDMSVersion));
 			if (!String.IsNullOrEmpty(Address)) {
@@ -240,8 +240,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public VirtualCoverage commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual VirtualCoverage Commit() {
 				return (Empty ? null : new VirtualCoverage(Address, Protocol, SecurityAttributes.Commit()));
 			}

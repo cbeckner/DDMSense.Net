@@ -66,8 +66,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Type(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Type(Element element) {
 			try {
 				_securityAttributes = new SecurityAttributes(element);
@@ -87,8 +87,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="value"> the value of the value attribute </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Type(String description, String qualifier, String value, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Type(string description, string qualifier, string value, SecurityAttributes securityAttributes) : base(Type.GetName(DDMSVersion.GetCurrentVersion()), qualifier, value, false) {
 			try {
 				Element element = Element;
@@ -117,8 +117,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Type.GetName(DDMSVersion));
 			if (!String.IsNullOrEmpty(Value)) {
@@ -242,8 +242,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Type commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Type Commit() {
 				return (Empty ? null : new Type(Description, Qualifier, Value, SecurityAttributes.Commit()));
 			}

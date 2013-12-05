@@ -62,8 +62,8 @@ namespace DDMSSense {
 		/// </summary>
 		/// <param name="tokenBased"> true if the child text is an NMTOKEN, false if it's just a string </param>
 		/// <param name="element"> the XOM element </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractNtkString(boolean tokenBased, nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractNtkString(bool tokenBased, Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -87,8 +87,8 @@ namespace DDMSSense {
 		/// <param name="qualifier"> an NTK qualifier (optional) </param>
 		/// <param name="securityAttributes"> the security attributes </param>
 		/// <param name="validateNow"> whether to validate immediately </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractNtkString(boolean tokenBased, String name, String value, String id, String idReference, String qualifier, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes, boolean validateNow) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractNtkString(bool tokenBased, string name, string value, string id, string idReference, string qualifier, SecurityAttributes securityAttributes, bool validateNow) {
 			try {
 				string ntkPrefix = PropertyReader.GetPrefix("ntk");
@@ -118,8 +118,8 @@ namespace DDMSSense {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			if (TokenBased) {
 				Util.RequireValidNMToken(Value);

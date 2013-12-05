@@ -77,8 +77,8 @@ namespace DDMSSense.DDMS.FormatElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Format(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Format(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -111,8 +111,8 @@ namespace DDMSSense.DDMS.FormatElements {
 		/// <param name="extent"> the extent element (may be null) </param>
 		/// <param name="medium"> the medium element (may be null) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Format(String mimeType, Extent extent, String medium) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Format(string mimeType, Extent extent, string medium) {
 			try {
 				Element element = Util.BuildDDMSElement(Format.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -148,8 +148,8 @@ namespace DDMSSense.DDMS.FormatElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Format.GetName(DDMSVersion));
 			Element mediaElement = MediaElement;
@@ -333,8 +333,8 @@ namespace DDMSSense.DDMS.FormatElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Format commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Format Commit() {
 				return (Empty ? null : new Format(MimeType, Extent.Commit(), Medium));
 			}

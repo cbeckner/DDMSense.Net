@@ -61,8 +61,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Source(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Source(Element element) {
 			try {
 				_securityAttributes = new SecurityAttributes(element);
@@ -82,8 +82,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="schemaHref"> the value of the schemaHref attribute </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Source(String qualifier, String value, String schemaQualifier, String schemaHref, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Source(string qualifier, string value, string schemaQualifier, string schemaHref, SecurityAttributes securityAttributes) : base(Source.GetName(DDMSVersion.GetCurrentVersion()), qualifier, value, false) {
 			try {
 				Element element = Element;
@@ -109,8 +109,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Source.GetName(DDMSVersion));
 			if (!String.IsNullOrEmpty(SchemaHref)) {
@@ -241,8 +241,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Source commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Source Commit() {
 				return (Empty ? null : new Source(Qualifier, Value, SchemaQualifier, SchemaHref, SecurityAttributes.Commit()));
 			}

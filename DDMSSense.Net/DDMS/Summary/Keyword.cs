@@ -60,8 +60,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Keyword(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Keyword(Element element) {
 			try {
 				_securityAttributes = new SecurityAttributes(element);
@@ -79,8 +79,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="value"> the value attribute (required) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Keyword(String value, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Keyword(string value, SecurityAttributes securityAttributes) : this(value, securityAttributes, null) {
 		}
 
@@ -94,8 +94,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <param name="extensibleAttributes"> extensible attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Keyword(String value, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensibleAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Keyword(string value, SecurityAttributes securityAttributes, ExtensibleAttributes extensibleAttributes) {
 			try {
 				Element element = Util.BuildDDMSElement(Keyword.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -122,8 +122,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Keyword.GetName(DDMSVersion));
 			Util.RequireDDMSValue("value attribute", Value);
@@ -240,8 +240,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Keyword commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Keyword Commit() {
 				return (Empty ? null : new Keyword(Value, SecurityAttributes.Commit(), ExtensibleAttributes.Commit()));
 			}

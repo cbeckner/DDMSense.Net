@@ -41,8 +41,8 @@ namespace DDMSSense.DDMS {
 		/// returned instead of a possibly invalid one or an empty one.
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public IDDMSComponent commit() throws InvalidDDMSException;
+
+
 		IDDMSComponent Commit();
 
 		/// <summary>

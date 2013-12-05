@@ -44,8 +44,8 @@ namespace DDMSSense {
 		/// <summary>
 		/// This implicit superconstructor does nothing.
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractQualifierValue() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractQualifierValue() {
 		}
 
@@ -53,8 +53,8 @@ namespace DDMSSense {
 		/// Base constructor
 		/// </summary>
 		/// <param name="element"> the XOM element representing this component </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractQualifierValue(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractQualifierValue(Element element) : base(element) {
 		}
 
@@ -66,8 +66,8 @@ namespace DDMSSense {
 		/// <param name="value"> the value of the value attribute </param>
 		/// <param name="validateNow"> true to validate the component immediately. Because Source entities have additional fields
 		/// they should not be validated in the superconstructor. </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractQualifierValue(String name, String qualifier, String value, boolean validateNow) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractQualifierValue(string name, string qualifier, string value, bool validateNow) {
 			try {
 				Element element = Util.BuildDDMSElement(name, null);

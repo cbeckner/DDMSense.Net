@@ -48,8 +48,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Addressee(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Addressee(Element element) : base(element) {
 		}
 
@@ -58,8 +58,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="entity"> the actual entity who is the addressee (required) </param>
 		/// <param name="securityAttributes"> any security attributes (required) </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Addressee(DDMSSense.DDMS.IRoleEntity entity, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Addressee(IRoleEntity entity, SecurityAttributes securityAttributes) : base(Addressee.GetName(DDMSVersion.GetCurrentVersion()), entity, securityAttributes) {
 		}
 
@@ -73,8 +73,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractTaskingRole#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Addressee.GetName(DDMSVersion));
 			Util.RequireBoundedChildCount(Element, Organization.GetName(DDMSVersion), 0, 1);
@@ -122,8 +122,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Addressee commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Addressee Commit() {
 				return (Empty ? null : new Addressee(CommitSelectedEntity(), SecurityAttributes.Commit()));
 			}

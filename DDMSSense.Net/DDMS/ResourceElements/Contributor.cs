@@ -51,8 +51,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Contributor(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Contributor(Element element) : base(element) {
 		}
 
@@ -62,8 +62,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="entity"> the actual entity fulfilling this role </param>
 		/// <param name="pocTypes"> the ISM pocType for this producer (optional, starting in DDMS 4.0.1) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Contributor(DDMSSense.DDMS.IRoleEntity entity, java.util.List<String> pocTypes, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Contributor(IRoleEntity entity, List<string> pocTypes, SecurityAttributes securityAttributes) : base(Contributor.GetName(DDMSVersion.GetCurrentVersion()), entity, pocTypes, securityAttributes) {
 		}
 
@@ -76,8 +76,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractProducerRole#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Contributor.GetName(DDMSVersion));
 			base.Validate();
@@ -120,8 +120,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Contributor commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Contributor Commit() {
 				return (Empty ? null : new Contributor(CommitSelectedEntity(), PocTypes, SecurityAttributes.Commit()));
 			}

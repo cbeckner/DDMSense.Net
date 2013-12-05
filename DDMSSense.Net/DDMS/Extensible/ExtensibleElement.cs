@@ -71,8 +71,8 @@ namespace DDMSSense.DDMS.Extensible {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ExtensibleElement(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ExtensibleElement(Element element) : base(element) {
 		}
 
@@ -85,8 +85,8 @@ namespace DDMSSense.DDMS.Extensible {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			if (DDMSVersion.IsSupportedDDMSNamespace(Namespace)) {
 				throw new InvalidDDMSException("Extensible elements cannot be defined in the DDMS namespace.");
@@ -140,8 +140,8 @@ namespace DDMSSense.DDMS.Extensible {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ExtensibleElement commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual ExtensibleElement Commit() {
 				if (Empty) {
 					return (null);

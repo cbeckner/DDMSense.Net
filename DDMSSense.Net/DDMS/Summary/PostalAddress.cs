@@ -74,8 +74,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public PostalAddress(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public PostalAddress(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -118,8 +118,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="hasState"> true if the stateOrProvince is a state, false if it is a province (only 1 of state or province 
 		/// can exist in a postalAddress) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public PostalAddress(java.util.List<String> streets, String city, String stateOrProvince, String postalCode, CountryCode countryCode, boolean hasState) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public PostalAddress(List<string> streets, string city, string stateOrProvince, string postalCode, CountryCode countryCode, bool hasState) {
 			try {
 				if (streets == null) {
@@ -163,8 +163,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, PostalAddress.GetName(DDMSVersion));
 			if (!String.IsNullOrEmpty(State) && !String.IsNullOrEmpty(Province)) {
@@ -357,8 +357,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public PostalAddress commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual PostalAddress Commit() {
 				if (Empty) {
 					return (null);

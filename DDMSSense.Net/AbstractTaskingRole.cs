@@ -67,8 +67,8 @@ namespace DDMSSense {
 		/// Base constructor
 		/// </summary>
 		/// <param name="element"> the XOM element representing this component </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractTaskingRole(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractTaskingRole(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -96,8 +96,8 @@ namespace DDMSSense {
 		/// <param name="roleType"> the type of producer this producer entity is fulfilling (i.e. creator or contributor) </param>
 		/// <param name="entity"> the actual entity fulfilling this role </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractTaskingRole(String roleType, DDMSSense.DDMS.IRoleEntity entity, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractTaskingRole(string roleType, IRoleEntity entity, SecurityAttributes securityAttributes) {
 			try {
                 DDMSSense.Util.Util.RequireDDMSValue("entity", entity);
@@ -124,8 +124,8 @@ namespace DDMSSense {
 		/// </td></tr></table>
 		/// </summary>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
             DDMSSense.Util.Util.RequireDDMSValue("entity", Entity);
 			if (!(Entity is Organization) && !(Entity is Person)) {
@@ -233,8 +233,8 @@ namespace DDMSSense {
 			/// <summary>
 			/// Commits the entity which is active in this builder, based on the entityType. </summary>
 			/// <returns> the entity </returns>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected DDMSSense.DDMS.IRoleEntity CommitSelectedEntity() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			protected internal virtual IRoleEntity CommitSelectedEntity() {
 				DDMSVersion version = DDMSVersion.GetCurrentVersion();
                 if (DDMS.ResourceElements.Organization.GetName(version).Equals(EntityType))

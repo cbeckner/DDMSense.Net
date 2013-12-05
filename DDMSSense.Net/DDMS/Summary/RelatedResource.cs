@@ -115,8 +115,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RelatedResource(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RelatedResource(Element element) {
 			try {
 				Util.RequireDDMSValue("element", element);
@@ -146,8 +146,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="value"> the value of the value attribute </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RelatedResource(java.util.List<Link> links, String relationship, String direction, String qualifier, String value, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public RelatedResource(List<Link> links, string relationship, string direction, string qualifier, string value, SecurityAttributes securityAttributes) {
 			try {
 				if (links == null) {
@@ -182,8 +182,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="direction">	the string to check </param>
 		/// <exception cref="InvalidDDMSException"> if the value is null, empty or invalid. </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void validateRelationshipDirection(String direction) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static void ValidateRelationshipDirection(string direction) {
 			Util.RequireDDMSValue("relationship direction", direction);
 			if (!RELATIONSHIP_DIRECTIONS.Contains(direction)) {
@@ -209,8 +209,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException">  if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, RelatedResource.GetName(DDMSVersion));
 			Util.RequireDDMSValue("relationship attribute", Relationship);
@@ -408,8 +408,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public RelatedResource commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override RelatedResource Commit() {
 				if (Empty) {
 					return (null);

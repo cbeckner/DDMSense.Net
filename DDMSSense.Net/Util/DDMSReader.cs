@@ -56,8 +56,8 @@ namespace DDMSSense.Util {
 		/// 
 		/// Creates a DDMSReader which can process various versions of DDMS and GML
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public DDMSReader() throws org.xml.sax.SAXException
+
+
 		public DDMSReader() {
 			_reader = XMLReaderFactory.createXMLReader(PropertyReader.GetProperty("xml.reader.class"));
 			StringBuilder schemas = new StringBuilder();
@@ -117,8 +117,8 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="resourceXML"> the XML of the resource to check </param>
 		/// <exception cref="InvalidDDMSException"> if the resource is invalid </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public static void validateWithSchema(String resourceXML) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public static void ValidateWithSchema(string resourceXML) {
 			try {
 				(new DDMSReader()).GetElement(resourceXML);
@@ -136,8 +136,8 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="file"> the file containing the XML document </param>
 		/// <returns> a XOM element representing the root node in the document </returns>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public nu.xom.Element getElement(java.io.File file) throws java.io.IOException, DDMSSense.DDMS.InvalidDDMSException
+
+
 		public virtual Element GetElement(File file) {
 			Util.RequireValue("file", file);
 			return (GetElement(new FileReader(file)));
@@ -150,8 +150,8 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="xml"> a string containing the XML document </param>
 		/// <returns> a XOM element representing the root node in the document  </returns>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public nu.xom.Element getElement(String xml) throws java.io.IOException, DDMSSense.DDMS.InvalidDDMSException
+
+
 		public virtual Element GetElement(string xml) {
 			Util.RequireValue("XML string", xml);
 			return (GetElement(new StringReader(xml)));
@@ -164,11 +164,11 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="inputStream"> a stream mapping to an XML document </param>
 		/// <returns> a XOM element representing the root node in the document  </returns>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public nu.xom.Element getElement(java.io.InputStream inputStream) throws java.io.IOException, DDMSSense.DDMS.InvalidDDMSException
-		public virtual Element GetElement(InputStream inputStream) {
+
+
+		public virtual Element GetElement(Stream inputStream) {
 			Util.RequireValue("input stream", inputStream);
-			return (GetElement(new InputStreamReader(inputStream)));
+			return (GetElement(new StreamReader(inputStream)));
 		}
 
 		/// <summary>
@@ -176,9 +176,9 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="reader"> a reader mapping to an XML document </param>
 		/// <returns> a XOM element representing the root node in the document </returns>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public nu.xom.Element getElement(java.io.Reader reader) throws java.io.IOException, DDMSSense.DDMS.InvalidDDMSException
-		public virtual Element GetElement(Reader reader) {
+
+
+		public virtual Element GetElement(Stream reader) {
 			Util.RequireValue("reader", reader);
 			try {
 				Builder builder = new Builder(Reader, true);
@@ -196,8 +196,8 @@ namespace DDMSSense.Util {
 		/// <param name="file"> the file containing the DDMS Resource. </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public DDMSSense.DDMS.Resource getDDMSResource(java.io.File file) throws java.io.IOException, DDMSSense.DDMS.InvalidDDMSException
+
+
 		public virtual Resource GetDDMSResource(File file) {
 			return (BuildResource(GetElement(file)));
 		}
@@ -209,8 +209,8 @@ namespace DDMSSense.Util {
 		/// <param name="xml"> the string representation of the XML DDMS Resource </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public DDMSSense.DDMS.Resource getDDMSResource(String xml) throws java.io.IOException, DDMSSense.DDMS.InvalidDDMSException
+
+
 		public virtual Resource GetDDMSResource(string xml) {
 			return (BuildResource(GetElement(xml)));
 		}
@@ -222,9 +222,9 @@ namespace DDMSSense.Util {
 		/// <param name="inputStream"> the input stream wrapped around an XML DDMS Resource </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public DDMSSense.DDMS.Resource getDDMSResource(java.io.InputStream inputStream) throws java.io.IOException, DDMSSense.DDMS.InvalidDDMSException
-		public virtual Resource GetDDMSResource(InputStream inputStream) {
+
+
+		public virtual Resource GetDDMSResource(Stream inputStream) {
 			return (BuildResource(GetElement(inputStream)));
 		}
 
@@ -235,9 +235,9 @@ namespace DDMSSense.Util {
 		/// <param name="reader"> the reader wrapped around an XML DDMS Resource </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public DDMSSense.DDMS.Resource getDDMSResource(java.io.Reader reader) throws java.io.IOException, DDMSSense.DDMS.InvalidDDMSException
-		public virtual Resource GetDDMSResource(Reader reader) {
+
+
+		public virtual Resource GetDDMSResource(StreamReader reader) {
 			return (BuildResource(GetElement(reader)));
 		}
 
@@ -247,10 +247,10 @@ namespace DDMSSense.Util {
 		/// <param name="xomElement"> </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected DDMSSense.DDMS.Resource buildResource(nu.xom.Element xomElement) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal virtual Resource BuildResource(Element xomElement) {
-            DDMSVersion.SetCurrentVersion(DDMSVersion.GetVersionForNamespace(XOMElement.Name.NamespaceName).Version);
+            DDMSVersion.SetCurrentVersion(DDMSVersion.GetVersionForNamespace(xomElement.Name.NamespaceName).Version);
 			return (new Resource(xomElement));
 		}
 

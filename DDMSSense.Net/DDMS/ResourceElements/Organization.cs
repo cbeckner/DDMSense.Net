@@ -77,8 +77,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Organization(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Organization(Element element) : base(element, false) {
 			try {
 				string @namespace = element.Name.NamespaceName;
@@ -102,8 +102,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="emails"> an ordered list of email addresses </param>
 		/// <param name="subOrganizations"> an ordered list of suborganizations </param>
 		/// <param name="acronym"> the organization's acronym </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Organization(java.util.List<String> names, java.util.List<String> phones, java.util.List<String> emails, java.util.List<SubOrganization> subOrganizations, String acronym) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Organization(List<string> names, List<string> phones, List<string> emails, List<SubOrganization> subOrganizations, string acronym) : this(names, phones, emails, subOrganizations, acronym, null) {
 		}
 
@@ -116,8 +116,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="subOrganizations"> an ordered list of suborganizations </param>
 		/// <param name="acronym"> the organization's acronym </param>
 		/// <param name="extensions"> extensible attributes (optional) </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Organization(java.util.List<String> names, java.util.List<String> phones, java.util.List<String> emails, java.util.List<SubOrganization> subOrganizations, String acronym, DDMSSense.DDMS.Extensible.ExtensibleAttributes extensions) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Organization(List<string> names, List<string> phones, List<string> emails, List<SubOrganization> subOrganizations, string acronym, ExtensibleAttributes extensions) : base(Organization.GetName(DDMSVersion.GetCurrentVersion()), names, phones, emails, extensions, false) {
 			try {
 				if (subOrganizations == null) {
@@ -145,8 +145,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractRoleEntity#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Organization.GetName(DDMSVersion));
 
@@ -270,8 +270,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Organization commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Organization Commit() {
 				if (Empty) {
 					return (null);

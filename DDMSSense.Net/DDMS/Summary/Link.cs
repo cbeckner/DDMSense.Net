@@ -63,8 +63,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Link(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Link(Element element) {
 			try {
 				_xlinkAttributes = new XLinkAttributes(element);
@@ -81,8 +81,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="xlinkAttributes"> the xlink attributes </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Link(DDMSSense.DDMS.Summary.Xlink.XLinkAttributes xlinkAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Link(XLinkAttributes xlinkAttributes) : this(xlinkAttributes, null) {
 		}
 
@@ -92,8 +92,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="xlinkAttributes"> the xlink attributes </param>
 		/// <param name="securityAttributes"> attributes, which are only allowed on links within a ddms:revisionRecall </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Link(DDMSSense.DDMS.Summary.Xlink.XLinkAttributes xlinkAttributes, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Link(XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes) {
 			try {
 				Element element = Util.BuildDDMSElement(Link.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -120,8 +120,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Link.GetName(DDMSVersion));
 			Util.RequireDDMSValue("type attribute", XLinkAttributes.Type);
@@ -234,8 +234,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Link commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Link Commit() {
 				return (Empty ? null : new Link(XLinkAttributes.Commit(), SecurityAttributes.Commit()));
 			}

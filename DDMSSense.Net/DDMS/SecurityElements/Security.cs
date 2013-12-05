@@ -68,8 +68,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Security(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Security(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -97,8 +97,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 		/// <param name="access"> NTK access information (optional) </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Security(NoticeList noticeList, DDMSSense.DDMS.SecurityElements.Ntk.Access access, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Security(NoticeList noticeList, Access access, SecurityAttributes securityAttributes) {
 			try {
 				DDMSVersion version = DDMSVersion.GetCurrentVersion();
@@ -138,8 +138,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Security.GetName(DDMSVersion));
 			Util.RequireBoundedChildCount(Element, NoticeList.GetName(DDMSVersion), 0, 1);
@@ -294,8 +294,8 @@ namespace DDMSSense.DDMS.SecurityElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Security commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual Security Commit() {
 				return (Empty ? null : new Security(NoticeList.Commit(), Access.Commit(), SecurityAttributes.Commit()));
 			}

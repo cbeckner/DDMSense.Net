@@ -55,8 +55,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProcessingInfo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ProcessingInfo(Element element) : base(element, true) {
 		}
 
@@ -67,8 +67,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="dateProcessed"> the processing date (required) </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProcessingInfo(String value, String dateProcessed, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public ProcessingInfo(string value, string dateProcessed, SecurityAttributes securityAttributes) : base(ProcessingInfo.GetName(DDMSVersion.GetCurrentVersion()), value, securityAttributes, false) {
 			try {
 				Util.AddDDMSAttribute(Element, DATE_PROCESSED_NAME, dateProcessed);
@@ -91,8 +91,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, ProcessingInfo.GetName(DDMSVersion));
 			Util.RequireDDMSValue(DATE_PROCESSED_NAME, DateProcessedString);
@@ -198,8 +198,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ProcessingInfo commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override ProcessingInfo Commit() {
 				return (Empty ? null : new ProcessingInfo(Value, DateProcessed, SecurityAttributes.Commit()));
 			}

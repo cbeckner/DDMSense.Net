@@ -65,8 +65,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TaskingInfo(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TaskingInfo(Element element) {
 			try {
 				Util.RequireDDMSValue("element", element);
@@ -107,8 +107,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// <param name="taskID"> taskID for tasking (required) </param>
 		/// <param name="securityAttributes"> any security attributes (required) </param>
 		/// <exception cref="InvalidDDMSException"> </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TaskingInfo(java.util.List<RequesterInfo> requesterInfos, java.util.List<Addressee> addressees, DDMSSense.DDMS.Summary.Description description, TaskID taskID, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TaskingInfo(List<RequesterInfo> requesterInfos, List<Addressee> addressees, Description description, TaskID taskID, SecurityAttributes securityAttributes) {
 			try {
 				if (requesterInfos == null) {
@@ -160,8 +160,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, TaskingInfo.GetName(DDMSVersion));
 			Util.RequireDDMSValue("taskID", TaskID);
@@ -313,8 +313,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TaskingInfo commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual TaskingInfo Commit() {
 				if (Empty) {
 					return (null);

@@ -50,8 +50,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Description(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Description(Element element) : base(element, true) {
 		}
 
@@ -61,8 +61,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="description"> the value of the description child text </param>
 		/// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Description(String description, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Description(string description, SecurityAttributes securityAttributes) : base(Description.GetName(DDMSVersion.GetCurrentVersion()), description, securityAttributes, true) {
 		}
 
@@ -74,8 +74,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Description.GetName(DDMSVersion));
 			base.Validate();
@@ -144,8 +144,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Description commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Description Commit() {
 				return (Empty ? null : new Description(Value, SecurityAttributes.Commit()));
 			}

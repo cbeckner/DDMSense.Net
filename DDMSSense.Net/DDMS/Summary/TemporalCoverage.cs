@@ -108,8 +108,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TemporalCoverage(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TemporalCoverage(Element element) {
 			try {
 				SetXOMElement(element, false);
@@ -145,8 +145,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="endString"> a string representation of the end date (required) (if empty, defaults to Unknown) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TemporalCoverage(String timePeriodName, String startString, String endString, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TemporalCoverage(string timePeriodName, string startString, string endString, SecurityAttributes securityAttributes) : this(timePeriodName, startString, null, endString, null, securityAttributes) {
 		}
 
@@ -159,8 +159,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="approximableEnd"> the end date, as an approximable date (required) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TemporalCoverage(String timePeriodName, String startString, DDMSSense.DDMS.ApproximableDate approximableEnd, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TemporalCoverage(string timePeriodName, string startString, ApproximableDate approximableEnd, SecurityAttributes securityAttributes) : this(timePeriodName, startString, null, null, approximableEnd, securityAttributes) {
 		}
 
@@ -173,8 +173,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="endString"> a string representation of the end date (required) (if empty, defaults to Unknown) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TemporalCoverage(String timePeriodName, DDMSSense.DDMS.ApproximableDate approximableStart, String endString, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TemporalCoverage(string timePeriodName, ApproximableDate approximableStart, string endString, SecurityAttributes securityAttributes) : this(timePeriodName, null, approximableStart, endString, null, securityAttributes) {
 		}
 
@@ -186,8 +186,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="approximableEnd"> the end date, as an approximable date (required) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TemporalCoverage(String timePeriodName, DDMSSense.DDMS.ApproximableDate approximableStart, DDMSSense.DDMS.ApproximableDate approximableEnd, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public TemporalCoverage(string timePeriodName, ApproximableDate approximableStart, ApproximableDate approximableEnd, SecurityAttributes securityAttributes) : this(timePeriodName, null, approximableStart, null, approximableEnd, securityAttributes) {
 		}
 
@@ -202,8 +202,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="approximableEnd"> the end date, as an approximable date (optional) </param>
 		/// <param name="securityAttributes"> any security attributes (optional) </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private TemporalCoverage(String timePeriodName, String startString, DDMSSense.DDMS.ApproximableDate approximableStart, String endString, DDMSSense.DDMS.ApproximableDate approximableEnd, DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes securityAttributes) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		private TemporalCoverage(string timePeriodName, string startString, ApproximableDate approximableStart, string endString, ApproximableDate approximableEnd, SecurityAttributes securityAttributes) {
 			try {
 				Element element = Util.BuildDDMSElement(TemporalCoverage.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -255,8 +255,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException">  if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, TemporalCoverage.GetName(DDMSVersion));
 			Element periodElement = TimePeriodElement;
@@ -543,8 +543,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public TemporalCoverage commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual TemporalCoverage Commit() {
 				if (Empty) {
 					return (null);

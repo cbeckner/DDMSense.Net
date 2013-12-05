@@ -57,8 +57,8 @@ namespace DDMSSense.DDMS.FormatElements {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Extent(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Extent(Element element) : base(element) {
 		}
 
@@ -68,8 +68,8 @@ namespace DDMSSense.DDMS.FormatElements {
 		/// <param name="qualifier"> the value of the qualifier attribute </param>
 		/// <param name="value"> the value of the value attribute </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Extent(String qualifier, String value) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public Extent(string qualifier, string value) : base(Extent.GetName(DDMSVersion.GetCurrentVersion()), qualifier, value, true) {
 		}
 
@@ -85,8 +85,8 @@ namespace DDMSSense.DDMS.FormatElements {
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, Extent.GetName(DDMSVersion));
 			if (!String.IsNullOrEmpty(Value)) {
@@ -164,8 +164,8 @@ namespace DDMSSense.DDMS.FormatElements {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public Extent commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public override Extent Commit() {
 				return (Empty ? null : new Extent(Qualifier, Value));
 			}

@@ -53,8 +53,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public BoundingBox(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public BoundingBox(Element element) {
 			try {
 				Util.RequireDDMSValue("boundingBox element", element);
@@ -78,8 +78,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="southBL"> the southbound latitude </param>
 		/// <param name="northBL"> the northbound latitude </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public BoundingBox(double westBL, double eastBL, double southBL, double northBL) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public BoundingBox(double westBL, double eastBL, double southBL, double northBL) {
 			try {
 				Element element = Util.BuildDDMSElement(BoundingBox.GetName(DDMSVersion.GetCurrentVersion()), null);
@@ -113,8 +113,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, BoundingBox.GetName(DDMSVersion));
 			Util.RequireDDMSValue("westbound longitude", WestBL);
@@ -283,8 +283,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public BoundingBox commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual BoundingBox Commit() {
 				if (Empty) {
 					return (null);

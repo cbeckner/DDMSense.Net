@@ -59,8 +59,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </summary>
 		/// <param name="element"> the XOM element representing this </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public BoundingGeometry(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public BoundingGeometry(Element element) {
 			try {
 				Util.RequireDDMSValue("boundingGeometry element", element);
@@ -89,8 +89,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// <param name="polygons"> an ordered list of the polygons used in this geometry </param>
 		/// <param name="points"> an ordered list of the points used in this geometry </param>
 		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public BoundingGeometry(java.util.List<DDMSSense.DDMS.Summary.Gml.Polygon> polygons, java.util.List<DDMSSense.DDMS.Summary.Gml.Point> points) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		public BoundingGeometry(List<Polygon> polygons, List<Point> points) {
 			try {
 				if (polygons == null) {
@@ -124,8 +124,8 @@ namespace DDMSSense.DDMS.Summary {
 		/// </td></tr></table>
 		/// </summary>
 		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal override void Validate() {
 			Util.RequireDDMSQName(Element, BoundingGeometry.GetName(DDMSVersion));
 			if (Polygons.Count + Points.Count == 0) {
@@ -221,8 +221,8 @@ namespace DDMSSense.DDMS.Summary {
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public BoundingGeometry commit() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 			public virtual BoundingGeometry Commit() {
 				if (Empty) {
 					return (null);

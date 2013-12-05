@@ -55,8 +55,8 @@ namespace DDMSSense {
 		/// <summary>
 		/// Empty constructor
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractBaseComponent() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractBaseComponent() {
 		}
 
@@ -64,8 +64,8 @@ namespace DDMSSense {
 		/// Base constructor
 		/// </summary>
 		/// <param name="element"> the XOM element representing this component </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected AbstractBaseComponent(nu.xom.Element element) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal AbstractBaseComponent(Element element) {
 			try {
 				SetXOMElement(element, true);
@@ -139,8 +139,8 @@ namespace DDMSSense {
 		/// <table class="info"><tr class="infoHeader"><th>Rules</th></tr><tr><td class="infoBody"> <li>A name exists and is
 		/// not empty.</li> <li>All child components use the same version of DDMS as this component.</li> </td></tr></table>
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void validate() throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal virtual void Validate() {
 			DDMSSense.Util.Util.RequireDDMSValue("name", Name);
 			foreach (IDDMSComponent nested in NestedComponents) {
@@ -369,8 +369,8 @@ namespace DDMSSense {
 		/// </summary>
 		/// <param name="version"> the threshold version </param>
 		/// <exception cref="InvalidDDMSException"> if the version is not high enough </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void requireVersion(String version) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal virtual void RequireVersion(string version) {
 			if (!DDMSVersion.IsAtLeast(version)) {
 				throw new InvalidDDMSException("The " + Name + " element cannot be used until DDMS " + version + " or later.");
@@ -518,8 +518,8 @@ namespace DDMSSense {
 		/// </summary>
 		/// <param name="element"> the XOM element to use </param>
 		/// <param name="validateNow"> whether to validate the component immediately after setting </param>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void setXOMElement(nu.xom.Element element, boolean validateNow) throws DDMSSense.DDMS.InvalidDDMSException
+
+
 		protected internal virtual void SetXOMElement(Element element, bool validateNow) {
             DDMSSense.Util.Util.RequireDDMSValue("XOM Element", element);
 			_element = element;
