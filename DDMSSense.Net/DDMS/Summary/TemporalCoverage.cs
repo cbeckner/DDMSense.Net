@@ -556,7 +556,7 @@ namespace DDMSSense.DDMS.Summary {
 				if (!ApproximableEnd.Empty && !String.IsNullOrEmpty(EndString)) {
 					throw new InvalidDDMSException("Only 1 of end or approximableEnd can be used.");
 				}
-				return (new TemporalCoverage(TimePeriodName, StartString, (ApproximableStart)ApproximableStart.Commit(), EndString, ApproximableEnd.Commit(), SecurityAttributes.Commit()));
+				return (new TemporalCoverage(TimePeriodName, StartString, (ApproximableDate)ApproximableStart.Commit(), EndString, ApproximableEnd.Commit(), SecurityAttributes.Commit()));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

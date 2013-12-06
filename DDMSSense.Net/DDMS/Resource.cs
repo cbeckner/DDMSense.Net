@@ -32,7 +32,7 @@ namespace DDMSSense.DDMS {
     using Node = System.Xml.Linq.XNode;
     using XPathContext = System.Xml.XPath.XPathDocument;
     using XSLException = System.Xml.Xsl.XsltException;
-    using XSLTransform = System.Xml.Xsl.XslTransform;
+    using XSLTransform = System.Xml.Xsl.XslCompiledTransform;
 	using ExtensibleAttributes = DDMSSense.DDMS.Extensible.ExtensibleAttributes;
 	using ExtensibleElement = DDMSSense.DDMS.Extensible.ExtensibleElement;
 	using Format = DDMSSense.DDMS.FormatElements.Format;

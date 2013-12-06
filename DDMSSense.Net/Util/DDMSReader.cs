@@ -30,6 +30,7 @@ namespace DDMSSense.Util {
     using System.IO;
     using System;
     using System.Xml;
+    using System.Xml.Linq;
 
 	/// <summary>
 	/// Reader class which loads an XML file containing DDMS information and converts it into XOM elements.
@@ -56,8 +57,6 @@ namespace DDMSSense.Util {
 		/// 
 		/// Creates a DDMSReader which can process various versions of DDMS and GML
 		/// </summary>
-
-
 		public DDMSReader() {
 			_reader = XMLReaderFactory.createXMLReader(PropertyReader.GetProperty("xml.reader.class"));
 			StringBuilder schemas = new StringBuilder();
@@ -105,7 +104,7 @@ namespace DDMSSense.Util {
 			if (xsd == null) {
 				throw new System.ArgumentException("Unable to load a local copy of the schema for validation.");
 			}
-			string fullPath = xsd.toExternalForm().replaceAll(" ", "%20");
+			string fullPath = xsd.AbsoluteUri.Replace(" ", "%20");
 			return (fullPath);
 		}
 
@@ -117,16 +116,16 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="resourceXML"> the XML of the resource to check </param>
 		/// <exception cref="InvalidDDMSException"> if the resource is invalid </exception>
-
-
 		public static void ValidateWithSchema(string resourceXML) {
 			try {
 				(new DDMSReader()).GetElement(resourceXML);
-			} catch (SAXException e) {
-				throw new InvalidDDMSException(e);
 			} catch (IOException e) {
 				throw new InvalidDDMSException(e);
-			}
+            }
+            catch (Exception e)
+            {
+                throw new InvalidDDMSException(e);
+            }
 		}
 
 		/// <summary>
@@ -136,8 +135,6 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="file"> the file containing the XML document </param>
 		/// <returns> a XOM element representing the root node in the document </returns>
-
-
 		public virtual Element GetElement(FileStream file) {
 			Util.RequireValue("file", file);
 			return (GetElement(new FileReader(file)));
@@ -150,26 +147,20 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="xml"> a string containing the XML document </param>
 		/// <returns> a XOM element representing the root node in the document  </returns>
-
-
 		public virtual Element GetElement(string xml) {
 			Util.RequireValue("XML string", xml);
 			return (GetElement(new StringReader(xml)));
 		}
-
 		
 		/// <summary>
 		/// Creates a XOM element representing the root XML element in a reader.
 		/// </summary>
 		/// <param name="reader"> a reader mapping to an XML document </param>
 		/// <returns> a XOM element representing the root node in the document </returns>
-
-
 		public virtual Element GetElement(Stream reader) {
 			Util.RequireValue("reader", reader);
 			try {
-				Builder builder = new Builder(Reader, true);
-				Document doc = builder.build(reader);
+                Document doc = XDocument.Load(reader);
 				return (doc.Root);
 			} catch (ParsingException e) {
 				throw new InvalidDDMSException(e);
@@ -183,8 +174,6 @@ namespace DDMSSense.Util {
 		/// <param name="file"> the file containing the DDMS Resource. </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-
-
 		public virtual Resource GetDDMSResource(FileStream file) {
 			return (BuildResource(GetElement(file)));
 		}
@@ -196,8 +185,6 @@ namespace DDMSSense.Util {
 		/// <param name="xml"> the string representation of the XML DDMS Resource </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-
-
 		public virtual Resource GetDDMSResource(string xml) {
 			return (BuildResource(GetElement(xml)));
 		}
@@ -209,8 +196,6 @@ namespace DDMSSense.Util {
 		/// <param name="inputStream"> the input stream wrapped around an XML DDMS Resource </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-
-
 		public virtual Resource GetDDMSResource(Stream inputStream) {
 			return (BuildResource(GetElement(inputStream)));
 		}
@@ -222,10 +207,8 @@ namespace DDMSSense.Util {
 		/// <param name="reader"> the reader wrapped around an XML DDMS Resource </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-
-
-		public virtual Resource GetDDMSResource(StreamReader reader) {
-			return (BuildResource(GetElement(reader)));
+		public virtual Resource GetDDMSResource(FileStream file) {
+			return (BuildResource(GetElement(file)));
 		}
 
 		/// <summary>
@@ -234,8 +217,6 @@ namespace DDMSSense.Util {
 		/// <param name="xomElement"> </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-
-
 		protected internal virtual Resource BuildResource(Element xomElement) {
             DDMSVersion.SetCurrentVersion(DDMSVersion.GetVersionForNamespace(xomElement.Name.NamespaceName).Version);
 			return (new Resource(xomElement));
@@ -249,8 +230,8 @@ namespace DDMSSense.Util {
 		public virtual string ExternalSchemaLocations {
 			get {
 				try {
-					return ((string) Reader.getProperty(PROP_XERCES_EXTERNAL_LOCATION));
-				} catch (SAXException) {
+                    return ((string)Reader.GetAttribute(PROP_XERCES_EXTERNAL_LOCATION));
+				} catch (Exception) {
 					throw new XmlException(PROP_XERCES_EXTERNAL_LOCATION + " is not supported or recognized for this XMLReader.");
 				}
 			}
