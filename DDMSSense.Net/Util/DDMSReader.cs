@@ -58,7 +58,7 @@ namespace DDMSSense.Util {
 		/// Creates a DDMSReader which can process various versions of DDMS and GML
 		/// </summary>
 		public DDMSReader() {
-			_reader = XMLReaderFactory.createXMLReader(PropertyReader.GetProperty("xml.reader.class"));
+            _reader = new XmlReader();
 			StringBuilder schemas = new StringBuilder();
 			List<string> versions = new List<string>(DDMSVersion.SupportedVersions);
 			versions.Reverse();
@@ -135,9 +135,15 @@ namespace DDMSSense.Util {
 		/// </summary>
 		/// <param name="file"> the file containing the XML document </param>
 		/// <returns> a XOM element representing the root node in the document </returns>
-		public virtual Element GetElement(FileStream file) {
-			Util.RequireValue("file", file);
-			return (GetElement(new FileReader(file)));
+		public virtual Element GetElementFromFile(string path) {
+			Util.RequireValue("path", path);
+            try
+            {
+                Document doc = XDocument.Load(path);
+                return doc.Root;
+            } catch (ParsingException e) {
+				throw new InvalidDDMSException(e);
+			}
 		}
 
 		/// <summary>
@@ -149,7 +155,7 @@ namespace DDMSSense.Util {
 		/// <returns> a XOM element representing the root node in the document  </returns>
 		public virtual Element GetElement(string xml) {
 			Util.RequireValue("XML string", xml);
-			return (GetElement(new StringReader(xml)));
+			return (GetElement(xml));
 		}
 		
 		/// <summary>
@@ -174,8 +180,8 @@ namespace DDMSSense.Util {
 		/// <param name="file"> the file containing the DDMS Resource. </param>
 		/// <returns> a DDMS Resource </returns>
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-		public virtual Resource GetDDMSResource(FileStream file) {
-			return (BuildResource(GetElement(file)));
+		public virtual Resource GetDDMSResourceFromFile(string path) {
+			return (BuildResource(GetElementFromFile(path)));
 		}
 
 		/// <summary>
@@ -198,17 +204,6 @@ namespace DDMSSense.Util {
 		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
 		public virtual Resource GetDDMSResource(Stream inputStream) {
 			return (BuildResource(GetElement(inputStream)));
-		}
-
-		/// <summary>
-		/// Creates a DDMS resource based on the contents of a reader, and also sets the DDMSVersion based on the namespace
-		/// URIs in the document.
-		/// </summary>
-		/// <param name="reader"> the reader wrapped around an XML DDMS Resource </param>
-		/// <returns> a DDMS Resource </returns>
-		/// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-		public virtual Resource GetDDMSResource(FileStream file) {
-			return (BuildResource(GetElement(file)));
 		}
 
 		/// <summary>

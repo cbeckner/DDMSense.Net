@@ -30,7 +30,7 @@ namespace DDMSSense.Util
     using Node = System.Xml.Linq.XNode;
     using ParsingException = System.Xml.XmlException;
     using XSLException = System.Xml.Xsl.XsltException;
-    using XSLTransform = System.Xml.Xsl.XslTransform;
+    using XSLTransform = System.Xml.Xsl.XslCompiledTransform;
     using IDDMSComponent = DDMSSense.DDMS.IDDMSComponent;
     using InvalidDDMSException = DDMSSense.DDMS.InvalidDDMSException;
     using Notice = DDMSSense.DDMS.SecurityElements.Ism.Notice;

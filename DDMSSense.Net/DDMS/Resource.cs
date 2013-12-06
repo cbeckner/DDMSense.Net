@@ -659,7 +659,7 @@ namespace DDMSSense.DDMS {
 		/// <exception cref="IOException"> if there are problems reading or parsing the Schematron file </exception>
 
 
-		public List<ValidationMessage> ValidateWithSchematron(FileStream schematronFile) {
+		public List<ValidationMessage> ValidateWithSchematron(string schematronFile) {
 			List<ValidationMessage> messages = new List<ValidationMessage>();
 			XSLTransform schematronTransform = Util.BuildSchematronTransform(schematronFile);
 			Node nodes = schematronTransform.Transform(new Document(XOMElementCopy));
