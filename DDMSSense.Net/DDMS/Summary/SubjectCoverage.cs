@@ -189,7 +189,7 @@ namespace DDMSSense.DDMS.Summary {
 			Element subjectElement = SubjectElement;
 			Util.RequireDDMSValue("Subject element", subjectElement);
 			string @namespace = subjectElement.Name.NamespaceName;
-			int count = subjectElement.GetElementsByTagName(Keyword.GetName(DDMSVersion), @namespace).Count + subjectElement.GetElementsByTagName(Category.GetName(DDMSVersion), @namespace).Count;
+			int count = subjectElement.Elements(XName.Get(Keyword.GetName(DDMSVersion), @namespace)).Count() + subjectElement.Elements(XName.Get(Category.GetName(DDMSVersion), @namespace)).Count();
 			if (count < 1) {
 				throw new InvalidDDMSException("At least 1 keyword or category must exist.");
 			}
@@ -390,28 +390,28 @@ namespace DDMSSense.DDMS.Summary {
 				}
 				List<Category> categories = new List<Category>();
 				foreach (Category.Builder builder in Categories) {
-					Category category = builder.Commit();
+					Category category = (Category)builder.Commit();
 					if (category != null) {
 						categories.Add(category);
 					}
 				}
 				List<Keyword> keywords = new List<Keyword>();
 				foreach (Keyword.Builder builder in Keywords) {
-					Keyword keyword = builder.Commit();
+					Keyword keyword = (Keyword)builder.Commit();
 					if (keyword != null) {
 						keywords.Add(keyword);
 					}
 				}
 				List<ProductionMetric> metrics = new List<ProductionMetric>();
 				foreach (ProductionMetric.Builder builder in ProductionMetrics) {
-					ProductionMetric metric = builder.Commit();
+					ProductionMetric metric = (ProductionMetric)builder.Commit();
 					if (metric != null) {
 						metrics.Add(metric);
 					}
 				}
 				List<NonStateActor> actors = new List<NonStateActor>();
 				foreach (NonStateActor.Builder builder in NonStateActors) {
-					NonStateActor actor = builder.Commit();
+					NonStateActor actor = (NonStateActor)builder.Commit();
 					if (actor != null) {
 						actors.Add(actor);
 					}

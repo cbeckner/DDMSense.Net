@@ -320,19 +320,19 @@ namespace DDMSSense.DDMS.ResourceElements {
 				}
 				List<TaskingInfo> taskingInfos = new List<TaskingInfo>();
 				foreach (TaskingInfo.Builder builder in TaskingInfos) {
-					TaskingInfo info = builder.Commit();
+					TaskingInfo info = (TaskingInfo)builder.Commit();
 					if (info != null) {
 						taskingInfos.Add(info);
 					}
 				}
 				List<ProcessingInfo> processingInfos = new List<ProcessingInfo>();
 				foreach (ProcessingInfo.Builder builder in ProcessingInfos) {
-					ProcessingInfo point = builder.Commit();
+					ProcessingInfo point = (ProcessingInfo)builder.Commit();
 					if (point != null) {
 						processingInfos.Add(point);
 					}
 				}
-				return (new ResourceManagement(RecordsManagementInfo.Commit(), RevisionRecall.Commit(), taskingInfos, processingInfos, SecurityAttributes.Commit()));
+				return (new ResourceManagement((RecordsManagementInfo)RecordsManagementInfo.Commit(), (RevisionRecall)RevisionRecall.Commit(), taskingInfos, processingInfos, SecurityAttributes.Commit()));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

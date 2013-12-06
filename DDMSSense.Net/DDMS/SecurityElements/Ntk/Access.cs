@@ -393,7 +393,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 					}
 				}
 
-				return (new Access(individuals, groups, ProfileList.Commit(), ExternalReference, SecurityAttributes.Commit()));
+				return (new Access(individuals, groups, (ProfileList)ProfileList.Commit(), ExternalReference, SecurityAttributes.Commit()));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

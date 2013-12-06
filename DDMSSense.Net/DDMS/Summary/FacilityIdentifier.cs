@@ -143,9 +143,6 @@ namespace DDMSSense.DDMS.Summary {
 			get {
 				return (GetAttributeValue(BE_NUMBER_NAME));
 			}
-			set {
-					_beNumber = value;
-			}
 		}
 
 		/// <summary>
@@ -154,9 +151,6 @@ namespace DDMSSense.DDMS.Summary {
 		public string Osuffix {
 			get {
 				return (GetAttributeValue(OSUFFIX_NAME));
-			}
-			set {
-					_osuffix = value;
 			}
 		}
 
@@ -182,8 +176,8 @@ namespace DDMSSense.DDMS.Summary {
 			/// Constructor which starts from an existing component.
 			/// </summary>
 			public Builder(FacilityIdentifier facilityIdentifier) {
-				BeNumber = facilityIdentifier.BeNumber;
-				Osuffix = facilityIdentifier.Osuffix;
+				_beNumber = facilityIdentifier.BeNumber;
+				_osuffix = facilityIdentifier.Osuffix;
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>

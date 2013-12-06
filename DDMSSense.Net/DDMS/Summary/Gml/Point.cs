@@ -263,7 +263,7 @@ namespace DDMSSense.DDMS.Summary.Gml {
 
             public virtual IDDMSComponent Commit()
             {
-				return (Empty ? null : new Point(Position.Commit(), SrsAttributes.Commit(), Id));
+				return (Empty ? null : new Point((Position)Position.Commit(), SrsAttributes.Commit(), Id));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

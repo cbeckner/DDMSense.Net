@@ -308,17 +308,17 @@ namespace DDMSSense {
 				DDMSVersion version = DDMSVersion.GetCurrentVersion();
                 if (DDMSSense.DDMS.ResourceElements.Organization.GetName(version).Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
                 {
-					return (Organization.Commit());
+					return ((Organization)Organization.Commit());
 				}
                 if (DDMSSense.DDMS.ResourceElements.Person.GetName(version).Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
                 {
-					return (Person.Commit());
+					return ((Person)Person.Commit());
 				}
                 if (DDMSSense.DDMS.ResourceElements.Service.GetName(version).Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
                 {
-					return (Service.Commit());
+					return ((Service)Service.Commit());
 				}
-				return (Unknown.Commit());
+				return ((Unknown)Unknown.Commit());
 			}
 
 			/// <summary>

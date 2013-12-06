@@ -200,7 +200,7 @@ namespace DDMSSense.DDMS.ResourceElements {
                 return (Element.Value);
 			}
 			set {
-					_description = value;
+                Element.Value = value;
 			}
 		}
 

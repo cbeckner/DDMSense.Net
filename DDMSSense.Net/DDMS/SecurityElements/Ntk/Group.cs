@@ -205,7 +205,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 						values.Add(component);
 					}
 				}
-				return (new Group(SystemName.Commit(), values, SecurityAttributes.Commit()));
+				return (new Group((SystemName)SystemName.Commit(), values, SecurityAttributes.Commit()));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

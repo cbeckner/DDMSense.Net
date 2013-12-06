@@ -360,11 +360,11 @@ namespace DDMSSense.DDMS.Summary {
 				if (Empty) {
 					return (null);
 				}
-				FacilityIdentifier identifier = FacilityIdentifier.Commit();
+				FacilityIdentifier identifier = (FacilityIdentifier)FacilityIdentifier.Commit();
 				if (identifier != null) {
 					return (new GeographicIdentifier(identifier));
 				}
-				return (new GeographicIdentifier(Names, Regions, CountryCode.Commit(), SubDivisionCode.Commit()));
+				return (new GeographicIdentifier(Names, Regions, (CountryCode)CountryCode.Commit(), (SubDivisionCode)SubDivisionCode.Commit()));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

@@ -133,9 +133,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 			get {
 				return (Convert.ToBoolean(GetAttributeValue(PRIVACY_ACT_NAME)));
 			}
-			set {
-					_privacyAct = value;
-			}
 		}
 
 		/// <summary>
@@ -145,9 +142,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 			get {
 				return (Convert.ToBoolean(GetAttributeValue(INTELLECTUAL_PROPERY_NAME)));
 			}
-			set {
-					_intellectualProperty = value;
-			}
 		}
 
 		/// <summary>
@@ -156,9 +150,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 		public bool Copyright {
 			get {
 				return (Convert.ToBoolean(GetAttributeValue(COPYRIGHT_NAME)));
-			}
-			set {
-					_copyright = value;
 			}
 		}
 
@@ -185,9 +176,9 @@ namespace DDMSSense.DDMS.ResourceElements {
 			/// Constructor which starts from an existing component.
 			/// </summary>
 			public Builder(Rights rights) {
-				PrivacyAct = Convert.ToBoolean(rights.PrivacyAct);
-				IntellectualProperty = Convert.ToBoolean(rights.IntellectualProperty);
-				Copyright = Convert.ToBoolean(rights.Copyright);
+				_privacyAct = Convert.ToBoolean(rights.PrivacyAct);
+				_intellectualProperty = Convert.ToBoolean(rights.IntellectualProperty);
+				_copyright = Convert.ToBoolean(rights.Copyright);
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>

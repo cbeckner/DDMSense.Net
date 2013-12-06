@@ -70,9 +70,9 @@ namespace DDMSSense {
 
 		protected internal AbstractQualifierValue(string name, string qualifier, string value, bool validateNow) {
 			try {
-				Element element = Util.BuildDDMSElement(name, null);
-				Util.AddDDMSAttribute(element, QUALIFIER_NAME, qualifier);
-				Util.AddDDMSAttribute(element, VALUE_NAME, value);
+                Element element = DDMSSense.Util.Util.BuildDDMSElement(name, null);
+                DDMSSense.Util.Util.AddDDMSAttribute(element, QUALIFIER_NAME, qualifier);
+                DDMSSense.Util.Util.AddDDMSAttribute(element, VALUE_NAME, value);
 				SetXOMElement(element, validateNow);
 			} catch (InvalidDDMSException e) {
 				e.Locator = QualifiedName;
@@ -103,9 +103,6 @@ namespace DDMSSense {
 		public virtual string Qualifier {
 			get {
 				return (GetAttributeValue(QUALIFIER_NAME));
-			}
-			set {
-					_qualifier = value;
 			}
 		}
 

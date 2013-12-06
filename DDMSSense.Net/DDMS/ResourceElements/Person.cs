@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -26,6 +26,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 	using ExtensibleAttributes = DDMSSense.DDMS.Extensible.ExtensibleAttributes;
 	using DDMSVersion = DDMSSense.Util.DDMSVersion;
 	using Util = DDMSSense.Util.Util;
+    using System;
+    using System.Xml.Linq;
 
 	/// <summary>
 	/// An immutable implementation of ddms:person.
@@ -129,7 +131,7 @@ namespace DDMSSense.DDMS.ResourceElements {
 		private void AddExtraElements(int insertIndex, string surname, string userID, string affiliation) {
 			Element element = Element;
 			if (DDMSVersion.IsAtLeast("4.0.1")) {
-				element.insertChild(Util.BuildDDMSElement(SURNAME_NAME, surname), insertIndex);
+                element.AddFirst(Util.BuildDDMSElement(SURNAME_NAME, surname), insertIndex);
 				if (!String.IsNullOrEmpty(userID)) {
 					element.Add(Util.BuildDDMSElement(USERID_NAME, userID));
 				}
@@ -140,12 +142,12 @@ namespace DDMSSense.DDMS.ResourceElements {
 				// 	Inserting in reverse order allow the same index to be reused. Later inserts will "push" the early ones
 				// 	forward.
 				if (!String.IsNullOrEmpty(affiliation)) {
-                    element.InsertAfter(Util.BuildDDMSElement(AFFILIATION_NAME, affiliation), element.ChildNodes.Item(insertIndex));
-				}
+                    element.AddAfterSelf(Util.BuildDDMSElement(AFFILIATION_NAME, affiliation), element.Nodes().ToList()[insertIndex]);
+                }
 				if (!String.IsNullOrEmpty(userID)) {
-					element.InsertAfter(Util.BuildDDMSElement(USERID_NAME, userID), element.ChildNodes.Item(insertIndex));
+                    element.AddAfterSelf(Util.BuildDDMSElement(USERID_NAME, userID), element.Nodes().ToList()[insertIndex]);
 				}
-                element.InsertAfter(Util.BuildDDMSElement(SURNAME_NAME, surname), element.ChildNodes.Item(insertIndex));
+                element.AddAfterSelf(Util.BuildDDMSElement(SURNAME_NAME, surname), element.Nodes().ToList()[insertIndex]);
 			}
 		}
 
@@ -181,11 +183,11 @@ namespace DDMSSense.DDMS.ResourceElements {
 		/// </td></tr></table>
 		/// </summary>
 		protected internal override void ValidateWarnings() {
-            if (String.IsNullOrEmpty(UserID) && Element.GetElementsByTagName(USERID_NAME, Namespace).Count == 1)
+            if (String.IsNullOrEmpty(UserID) && Element.Elements(XName.Get(USERID_NAME, Namespace)).Count() == 1)
             {
 				AddWarning("A ddms:userID element was found with no value.");
 			}
-            if (String.IsNullOrEmpty(Affiliation) && Element.GetElementsByTagName(AFFILIATION_NAME, Namespace).Count == 1)
+            if (String.IsNullOrEmpty(Affiliation) && Element.Elements(XName.Get(AFFILIATION_NAME, Namespace)).Count() == 1)
             {
 				AddWarning("A ddms:affiliation element was found with no value.");
 			}
@@ -237,9 +239,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 			get {
 				return (Util.GetFirstDDMSChildValue(Element, SURNAME_NAME));
 			}
-			set {
-					_surname = value;
-			}
 		}
 
 		/// <summary>
@@ -248,9 +247,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 		public string UserID {
 			get {
 				return (Util.GetFirstDDMSChildValue(Element, USERID_NAME));
-			}
-			set {
-					_userID = value;
 			}
 		}
 

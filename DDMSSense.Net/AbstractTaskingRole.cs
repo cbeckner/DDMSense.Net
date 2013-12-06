@@ -239,9 +239,9 @@ namespace DDMSSense {
 				DDMSVersion version = DDMSVersion.GetCurrentVersion();
                 if (DDMS.ResourceElements.Organization.GetName(version).Equals(EntityType))
                 {
-					return (Organization.Commit());
+					return ((Organization)Organization.Commit());
 				}
-				return (Person.Commit());
+				return ((Person)Person.Commit());
 			}
 
 			/// <summary>

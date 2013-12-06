@@ -162,9 +162,6 @@ namespace DDMSSense.DDMS.Summary {
 			get {
 				return (GetAttributeValue(SUBJECT_NAME));
 			}
-			set {
-					_subject = value;
-			}
 		}
 
 		/// <summary>
@@ -173,9 +170,6 @@ namespace DDMSSense.DDMS.Summary {
 		public string Coverage {
 			get {
 				return (GetAttributeValue(COVERAGE_NAME));
-			}
-			set {
-					_coverage = value;
 			}
 		}
 
@@ -214,9 +208,9 @@ namespace DDMSSense.DDMS.Summary {
 			/// Constructor which starts from an existing component.
 			/// </summary>
 			public Builder(ProductionMetric metric) {
-				Subject = metric.Subject;
-				Coverage = metric.Coverage;
-				SecurityAttributes = new SecurityAttributes.Builder(metric.SecurityAttributes);
+				_subject = metric.Subject;
+				_coverage = metric.Coverage;
+				_securityAttributes = new SecurityAttributes.Builder(metric.SecurityAttributes);
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>

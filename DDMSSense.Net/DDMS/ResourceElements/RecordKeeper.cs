@@ -226,7 +226,7 @@ namespace DDMSSense.DDMS.ResourceElements {
 
             public virtual IDDMSComponent Commit()
             {
-				return (Empty ? null : new RecordKeeper(RecordKeeperID, Organization.Commit()));
+				return (Empty ? null : new RecordKeeper(RecordKeeperID, (Organization)Organization.Commit()));
 			}
 
 			/// <summary>

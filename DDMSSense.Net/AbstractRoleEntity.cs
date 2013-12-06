@@ -33,6 +33,7 @@ namespace DDMSSense {
 	using Util = DDMSSense.Util.Util;
     using DDMSSense.DDMS;
     using System.Xml;
+    using System.Xml.Linq;
 
 	/// <summary>
 	/// Base class for entities which fulfill some role, such as ddms:person and ddms:organization.
@@ -68,9 +69,9 @@ namespace DDMSSense {
 
 		protected internal AbstractRoleEntity(Element element, bool validateNow) {
 			try {
-				_names = Util.GetDDMSChildValues(element, NAME_NAME);
-				_phones = Util.GetDDMSChildValues(element, PHONE_NAME);
-				_emails = Util.GetDDMSChildValues(element, EMAIL_NAME);
+                _names = DDMSSense.Util.Util.GetDDMSChildValues(element, NAME_NAME);
+                _phones = DDMSSense.Util.Util.GetDDMSChildValues(element, PHONE_NAME);
+                _emails = DDMSSense.Util.Util.GetDDMSChildValues(element, EMAIL_NAME);
 				_extensibleAttributes = new ExtensibleAttributes(element);
 				SetXOMElement(element, validateNow);
 			} catch (InvalidDDMSException e) {
@@ -93,7 +94,7 @@ namespace DDMSSense {
 
 		protected internal AbstractRoleEntity(string entityName, List<string> names, List<string> phones, List<string> emails, ExtensibleAttributes extensibleAttributes, bool validateNow) {
 			try {
-				Util.RequireDDMSValue("entityName", entityName);
+                DDMSSense.Util.Util.RequireDDMSValue("entityName", entityName);
 				if (names == null) {
 					names = new List<string>();
 				}
@@ -104,15 +105,15 @@ namespace DDMSSense {
 					emails = new List<string>();
 				}
 
-				Element element = Util.BuildDDMSElement(entityName, null);
+                Element element = DDMSSense.Util.Util.BuildDDMSElement(entityName, null);
 				foreach (string name in names) {
-					element.Add(Util.BuildDDMSElement(NAME_NAME, name));
+                    element.Add(DDMSSense.Util.Util.BuildDDMSElement(NAME_NAME, name));
 				}
 				foreach (string phone in phones) {
-					element.Add(Util.BuildDDMSElement(PHONE_NAME, phone));
+                    element.Add(DDMSSense.Util.Util.BuildDDMSElement(PHONE_NAME, phone));
 				}
 				foreach (string email in emails) {
-					element.Add(Util.BuildDDMSElement(EMAIL_NAME, email));
+                    element.Add(DDMSSense.Util.Util.BuildDDMSElement(EMAIL_NAME, email));
 				}
 
 				_names = names;
@@ -139,12 +140,13 @@ namespace DDMSSense {
 
 
 		protected internal override void Validate() {
-            if (Element.GetElementsByTagName(NAME_NAME, Namespace).Count == 0)
+            if (Element.Elements(XName.Get(NAME_NAME, Namespace)).Count() == 0)
             {
 				throw new InvalidDDMSException("At least 1 name element must exist.");
 			}
 
-			if (Util.ContainsOnlyEmptyValues(Names)) {
+            if (DDMSSense.Util.Util.ContainsOnlyEmptyValues(Names))
+            {
 				throw new InvalidDDMSException("At least 1 name element must have a non-empty value.");
 			}
 
@@ -161,15 +163,15 @@ namespace DDMSSense {
 		/// </summary>
 		protected internal override void ValidateWarnings() {
             IEnumerable<Element> phoneElements = Element.Elements(XName.Get(PHONE_NAME, Namespace));
-			for (int i = 0; i < phoneElements.Count; i++) {
-				if (String.IsNullOrEmpty(phoneElements.Item(i).Value)) {
+			for (int i = 0; i < phoneElements.Count(); i++) {
+				if (String.IsNullOrEmpty(phoneElements.ToList()[i].Value)) {
 					AddWarning("A ddms:phone element was found with no value.");
 					break;
 				}
 			}
             IEnumerable<Element> emailElements = Element.Elements(XName.Get(EMAIL_NAME, Namespace));
-			for (int i = 0; i < emailElements.Count; i++) {
-				if (String.IsNullOrEmpty(emailElements.Item(i).Value)) {
+			for (int i = 0; i < emailElements.Count(); i++) {
+				if (String.IsNullOrEmpty(emailElements.ToList()[i].Value)) {
 					AddWarning("A ddms:email element was found with no value.");
 					break;
 				}
@@ -183,7 +185,7 @@ namespace DDMSSense {
 				return (false);
 			}
 			AbstractRoleEntity test = (AbstractRoleEntity) obj;
-			return (Util.ListEquals(Names, test.Names) && Util.ListEquals(Phones, test.Phones) && Util.ListEquals(Emails, test.Emails) && ExtensibleAttributes.Equals(test.ExtensibleAttributes));
+            return (DDMSSense.Util.Util.ListEquals(Names, test.Names) && DDMSSense.Util.Util.ListEquals(Phones, test.Phones) && DDMSSense.Util.Util.ListEquals(Emails, test.Emails) && ExtensibleAttributes.Equals(test.ExtensibleAttributes));
 		}
 
 		/// <seealso cref= Object#hashCode() </seealso>
@@ -299,7 +301,7 @@ namespace DDMSSense {
 			/// <returns> true if all values are empty </returns>
 			public virtual bool Empty {
 				get {
-					return (Util.ContainsOnlyEmptyValues(Names) && Util.ContainsOnlyEmptyValues(Phones) && Util.ContainsOnlyEmptyValues(Emails) && ExtensibleAttributes.Empty);
+                    return (DDMSSense.Util.Util.ContainsOnlyEmptyValues(Names) && DDMSSense.Util.Util.ContainsOnlyEmptyValues(Phones) && DDMSSense.Util.Util.ContainsOnlyEmptyValues(Emails) && ExtensibleAttributes.Empty);
 				}
 			}
 

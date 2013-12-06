@@ -227,14 +227,14 @@ namespace DDMSSense.DDMS.Summary {
 				}
 				List<Polygon> polygons = new List<Polygon>();
 				foreach (Polygon.Builder builder in Polygons) {
-					Polygon polygon = builder.Commit();
+					Polygon polygon = (Polygon)builder.Commit();
 					if (polygon != null) {
 						polygons.Add(polygon);
 					}
 				}
 				List<Point> points = new List<Point>();
 				foreach (Point.Builder builder in Points) {
-					Point point = builder.Commit();
+					Point point = (Point)builder.Commit();
 					if (point != null) {
 						points.Add(point);
 					}

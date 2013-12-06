@@ -256,7 +256,7 @@ namespace DDMSSense.DDMS.ResourceElements {
 
             public virtual IDDMSComponent Commit()
             {
-				return (Empty ? null : new RecordsManagementInfo(RecordKeeper.Commit(), ApplicationSoftware.Commit(), VitalRecordIndicator));
+				return (Empty ? (IDDMSComponent)null : (IDDMSComponent)(new RecordsManagementInfo((RecordKeeper)RecordKeeper.Commit(), (ApplicationSoftware)ApplicationSoftware.Commit(), VitalRecordIndicator)));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

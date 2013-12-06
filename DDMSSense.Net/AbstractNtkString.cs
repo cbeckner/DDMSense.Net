@@ -93,10 +93,10 @@ namespace DDMSSense {
 			try {
 				string ntkPrefix = PropertyReader.GetPrefix("ntk");
 				string ntkNamespace = DDMSVersion.GetCurrentVersion().NtkNamespace;
-				Element element = Util.BuildElement(ntkPrefix, name, ntkNamespace, value);
-				Util.AddAttribute(element, ntkPrefix, ID_NAME, ntkNamespace, id);
-				Util.AddAttribute(element, ntkPrefix, ID_REFERENCE_NAME, ntkNamespace, idReference);
-				Util.AddAttribute(element, ntkPrefix, QUALIFIER_NAME, ntkNamespace, qualifier);
+				Element element = DDMSSense.Util.Util.BuildElement(ntkPrefix, name, ntkNamespace, value);
+                DDMSSense.Util.Util.AddAttribute(element, ntkPrefix, ID_NAME, ntkNamespace, id);
+                DDMSSense.Util.Util.AddAttribute(element, ntkPrefix, ID_REFERENCE_NAME, ntkNamespace, idReference);
+                DDMSSense.Util.Util.AddAttribute(element, ntkPrefix, QUALIFIER_NAME, ntkNamespace, qualifier);
 				_tokenBased = tokenBased;
 				_securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
 				_securityAttributes.AddTo(element);
@@ -122,9 +122,9 @@ namespace DDMSSense {
 
 		protected internal override void Validate() {
 			if (TokenBased) {
-				Util.RequireValidNMToken(Value);
+                DDMSSense.Util.Util.RequireValidNMToken(Value);
 			}
-			Util.RequireDDMSValue("security attributes", SecurityAttributes);
+            DDMSSense.Util.Util.RequireDDMSValue("security attributes", SecurityAttributes);
 			SecurityAttributes.RequireClassification();
 
 			// Should be reviewed as additional versions of DDMS are supported.
@@ -172,9 +172,6 @@ namespace DDMSSense {
 			get {
 				return (GetAttributeValue(ID_NAME, DDMSVersion.NtkNamespace));
 			}
-			set {
-					_id = value;
-			}
 		}
 
 		/// <summary>
@@ -184,9 +181,6 @@ namespace DDMSSense {
 			get {
 				return (GetAttributeValue(ID_REFERENCE_NAME, DDMSVersion.NtkNamespace));
 			}
-			set {
-					_idReference = value;
-			}
 		}
 
 		/// <summary>
@@ -195,9 +189,6 @@ namespace DDMSSense {
 		public virtual string Qualifier {
 			get {
 				return (GetAttributeValue(QUALIFIER_NAME, DDMSVersion.NtkNamespace));
-			}
-			set {
-					_qualifier = value;
 			}
 		}
 

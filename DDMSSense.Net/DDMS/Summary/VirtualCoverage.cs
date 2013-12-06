@@ -182,9 +182,6 @@ namespace DDMSSense.DDMS.Summary {
 			get {
 				return (GetAttributeValue(ADDRESS_NAME));
 			}
-			set {
-					_address = value;
-			}
 		}
 
 		/// <summary>
@@ -193,9 +190,6 @@ namespace DDMSSense.DDMS.Summary {
 		public string Protocol {
 			get {
 				return (GetAttributeValue(PROTOCOL_NAME));
-			}
-			set {
-					_protocol = value;
 			}
 		}
 
@@ -234,9 +228,9 @@ namespace DDMSSense.DDMS.Summary {
 			/// Constructor which starts from an existing component.
 			/// </summary>
 			public Builder(VirtualCoverage coverage) {
-				Address = coverage.Address;
-				Protocol = coverage.Protocol;
-				SecurityAttributes = new SecurityAttributes.Builder(coverage.SecurityAttributes);
+				_address = coverage.Address;
+				_protocol = coverage.Protocol;
+				_securityAttributes = new SecurityAttributes.Builder(coverage.SecurityAttributes);
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>

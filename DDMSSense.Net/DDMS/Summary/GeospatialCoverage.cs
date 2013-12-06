@@ -513,7 +513,7 @@ namespace DDMSSense.DDMS.Summary {
 
             public virtual IDDMSComponent Commit()
             {
-				return (Empty ? null : new GeospatialCoverage(GeographicIdentifier.Commit(), BoundingBox.Commit(), BoundingGeometry.Commit(), PostalAddress.Commit(), VerticalExtent.Commit(), Precedence, Order, SecurityAttributes.Commit()));
+				return (Empty ? null : new GeospatialCoverage((GeographicIdentifier)GeographicIdentifier.Commit(), (BoundingBox)BoundingBox.Commit(), (BoundingGeometry)BoundingGeometry.Commit(), (PostalAddress)PostalAddress.Commit(), (VerticalExtent)VerticalExtent.Commit(), Precedence, Order, SecurityAttributes.Commit()));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

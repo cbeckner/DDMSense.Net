@@ -91,7 +91,7 @@ namespace DDMSSense {
 
 		protected internal AbstractSimpleString(string prefix, string @namespace, string name, string value, SecurityAttributes attributes, bool validateNow) {
 			try {
-				Element element = Util.BuildElement(prefix, name, @namespace, value);
+                Element element = DDMSSense.Util.Util.BuildElement(prefix, name, @namespace, value);
 				_securityAttributes = SecurityAttributes.GetNonNullInstance(attributes);
 				_securityAttributes.AddTo(element);
 				SetXOMElement(element, validateNow);
@@ -113,7 +113,7 @@ namespace DDMSSense {
 
 
 		protected internal override void Validate() {
-			Util.RequireDDMSValue("security attributes", SecurityAttributes);
+            DDMSSense.Util.Util.RequireDDMSValue("security attributes", SecurityAttributes);
 			SecurityAttributes.RequireClassification();
 			base.Validate();
 		}

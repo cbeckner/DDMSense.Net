@@ -202,9 +202,6 @@ namespace DDMSSense.DDMS.Summary {
 			get {
 				return (GetAttributeValue(QUALIFIER_NAME));
 			}
-			set {
-					_qualifier = value;
-			}
 		}
 
 		/// <summary>
@@ -214,9 +211,6 @@ namespace DDMSSense.DDMS.Summary {
 			get {
 				return (GetAttributeValue(CODE_NAME));
 			}
-			set {
-					_code = value;
-			}
 		}
 
 		/// <summary>
@@ -225,9 +219,6 @@ namespace DDMSSense.DDMS.Summary {
 		public string Label {
 			get {
 				return (GetAttributeValue(LABEL_NAME));
-			}
-			set {
-					_label = value;
 			}
 		}
 
@@ -280,11 +271,11 @@ namespace DDMSSense.DDMS.Summary {
 			/// Constructor which starts from an existing component.
 			/// </summary>
 			public Builder(Category category) {
-				Qualifier = category.Qualifier;
-				Code = category.Code;
-				Label = category.Label;
-				SecurityAttributes = new SecurityAttributes.Builder(category.SecurityAttributes);
-				ExtensibleAttributes = new ExtensibleAttributes.Builder(category.ExtensibleAttributes);
+				_qualifier = category.Qualifier;
+				_code = category.Code;
+				_label = category.Label;
+				_securityAttributes = new SecurityAttributes.Builder(category.SecurityAttributes);
+				_extensibleAttributes = new ExtensibleAttributes.Builder(category.ExtensibleAttributes);
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>

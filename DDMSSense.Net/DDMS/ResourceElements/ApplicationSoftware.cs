@@ -25,6 +25,7 @@ namespace DDMSSense.DDMS.ResourceElements {
 	using SecurityAttributes = DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes;
 	using DDMSVersion = DDMSSense.Util.DDMSVersion;
 	using Util = DDMSSense.Util.Util;
+    using System;
 
 	/// <summary>
 	/// An immutable implementation of ddms:applicationSoftware.

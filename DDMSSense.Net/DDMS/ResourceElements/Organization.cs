@@ -30,6 +30,8 @@ namespace DDMSSense.DDMS.ResourceElements {
 	
 	using Util = DDMSSense.Util.Util;
     using System.Xml;
+    using System.Xml.Linq;
+    using System;
 
 	/// <summary>
 	/// An immutable implementation of ddms:organization.
@@ -84,7 +86,7 @@ namespace DDMSSense.DDMS.ResourceElements {
 				string @namespace = element.Name.NamespaceName;
 				IEnumerable<Element> components = element.Elements(XName.Get(SubOrganization.GetName(DDMSVersion), @namespace));
 				_subOrganizations = new List<SubOrganization>();
-				components.ToList().ForEach(p=>_subOrganizations.Add(new SubOrganization(c)));
+				components.ToList().ForEach(c=>_subOrganizations.Add(new SubOrganization(c)));
 				
 				Validate();
 			} catch (InvalidDDMSException e) {
@@ -235,9 +237,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 		public string Acronym {
 			get {
 				return (GetAttributeValue(ACRONYM_NAME));
-			}
-			set {                
-					_acronym = value;
 			}
 		}
 

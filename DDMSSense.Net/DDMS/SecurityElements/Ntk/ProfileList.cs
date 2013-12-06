@@ -32,6 +32,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 	using Util = DDMSSense.Util.Util;
     using System.Xml;
     using DDMSSense.DDMS;
+    using System.Xml.Linq;
 
 	/// <summary>
 	/// An immutable implementation of ntk:AccessProfileList.

@@ -298,7 +298,7 @@ namespace DDMSSense.DDMS.SecurityElements {
 
             public virtual IDDMSComponent Commit()
             {
-				return (Empty ? null : new Security(NoticeList.Commit(), Access.Commit(), SecurityAttributes.Commit()));
+				return (Empty ? null : new Security((NoticeList)NoticeList.Commit(), (Access)Access.Commit(), SecurityAttributes.Commit()));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

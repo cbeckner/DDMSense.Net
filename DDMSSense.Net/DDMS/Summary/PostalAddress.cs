@@ -370,7 +370,7 @@ namespace DDMSSense.DDMS.Summary {
 				}
 				bool hasState = !String.IsNullOrEmpty(State);
 				string stateOrProvince = hasState ? State : Province;
-				return (new PostalAddress(Streets, City, stateOrProvince, PostalCode, CountryCode.Commit(), hasState));
+				return (new PostalAddress(Streets, City, stateOrProvince, PostalCode, (CountryCode)CountryCode.Commit(), hasState));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

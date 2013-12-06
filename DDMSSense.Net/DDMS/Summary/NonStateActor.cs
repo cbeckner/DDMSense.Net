@@ -185,10 +185,7 @@ namespace DDMSSense.DDMS.Summary {
 		public int? Order {
 			get {
 				string order = GetAttributeValue(ORDER_NAME);
-				return (String.IsNullOrEmpty(order) ? null : Convert.ToInt32(order));
-			}
-			set {
-					_order = value;
+				return (String.IsNullOrEmpty(order) ? null : new Nullable<int>(Convert.ToInt32(order)));
 			}
 		}
 
@@ -198,9 +195,6 @@ namespace DDMSSense.DDMS.Summary {
 		public string Qualifier {
 			get {
 				return (GetAttributeValue(QUALIFIER_NAME));
-			}
-			set {
-					_qualifier = value;
 			}
 		}
 

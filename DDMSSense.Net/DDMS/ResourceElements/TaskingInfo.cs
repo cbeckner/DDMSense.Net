@@ -334,7 +334,7 @@ namespace DDMSSense.DDMS.ResourceElements {
 						addressees.Add(component);
 					}
 				}
-				return (new TaskingInfo(requesterInfos, addressees, Description.Commit(), TaskID.Commit(), SecurityAttributes.Commit()));
+				return (new TaskingInfo(requesterInfos, addressees, (Description)Description.Commit(), (TaskID)TaskID.Commit(), SecurityAttributes.Commit()));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

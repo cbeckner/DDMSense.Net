@@ -24,6 +24,7 @@ namespace DDMSSense.DDMS.ResourceElements {
 	using Element = System.Xml.Linq.XElement;
 	using DDMSVersion = DDMSSense.Util.DDMSVersion;
 	using Util = DDMSSense.Util.Util;
+    using System;
 
 	/// <summary>
 	/// An immutable implementation of ddms:language.

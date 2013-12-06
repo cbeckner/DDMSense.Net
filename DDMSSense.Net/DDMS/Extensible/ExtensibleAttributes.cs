@@ -164,7 +164,7 @@ namespace DDMSSense.DDMS.Extensible {
 				foreach (string reservedName in NoticeAttributes.NON_EXTENSIBLE_NAMES) {
                     RESERVED_RESOURCE_NAMES.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
 				}
-                RESERVED_RESOURCE_NAMES.Add(new XmlQualifiedName(version.NtkNamespace, Resource.DES_VERSION_NAME[ntkPrefix]));
+                RESERVED_RESOURCE_NAMES.Add(new XmlQualifiedName(version.NtkNamespace, Resource.DES_VERSION_NAME,ntkPrefix));
 			}
 		}
 

@@ -276,10 +276,10 @@ namespace DDMSSense.DDMS.Summary {
 			/// Constructor which starts from an existing component.
 			/// </summary>
 			public Builder(BoundingBox box) {
-				WestBL = box.WestBL;
-				EastBL = box.EastBL;
-				SouthBL = box.SouthBL;
-				NorthBL = box.NorthBL;
+				_westBL = box.WestBL;
+				_eastBL = box.EastBL;
+				_southBL = box.SouthBL;
+				_northBL = box.NorthBL;
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>

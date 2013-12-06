@@ -182,9 +182,6 @@ namespace DDMSSense.DDMS.Summary {
 			get {
 				return (GetAttributeValue(VALUE_NAME));
 			}
-			set {
-					_value = value;
-			}
 		}
 
 		/// <summary>
@@ -234,9 +231,9 @@ namespace DDMSSense.DDMS.Summary {
 			/// Constructor which starts from an existing component.
 			/// </summary>
 			public Builder(Keyword keyword) {
-				Value = keyword.Value;
-				SecurityAttributes = new SecurityAttributes.Builder(keyword.SecurityAttributes);
-				ExtensibleAttributes = new ExtensibleAttributes.Builder(keyword.ExtensibleAttributes);
+				_value = keyword.Value;
+				_securityAttributes = new SecurityAttributes.Builder(keyword.SecurityAttributes);
+				_extensibleAttributes = new ExtensibleAttributes.Builder(keyword.ExtensibleAttributes);
 			}
 
 			/// <seealso cref= IBuilder#commit() </seealso>

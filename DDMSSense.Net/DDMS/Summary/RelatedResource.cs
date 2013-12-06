@@ -417,7 +417,7 @@ namespace DDMSSense.DDMS.Summary {
 				}
 				List<Link> links = new List<Link>();
 				foreach (Link.Builder builder in Links) {
-					Link link = builder.Commit();
+					Link link = (Link)builder.Commit();
 					if (link != null) {
 						links.Add(link);
 					}

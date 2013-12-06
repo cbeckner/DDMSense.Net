@@ -212,9 +212,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 			get {
 				return (GetAttributeValue(TASKING_SYSTEM_NAME));
 			}
-			set {
-					_taskingSystem = value;
-			}
 		}
 
 		/// <summary>
@@ -224,9 +221,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 			get {
 				return (GetAttributeValue(NETWORK_NAME, NO_NAMESPACE));
 			}
-			set {
-					_network = value;
-			}
 		}
 
 		/// <summary>
@@ -235,9 +229,6 @@ namespace DDMSSense.DDMS.ResourceElements {
 		public string OtherNetwork {
 			get {
 				return (GetAttributeValue(OTHER_NETWORK_NAME, NO_NAMESPACE));
-			}
-			set {
-					_otherNetwork = value;
 			}
 		}
 

@@ -337,7 +337,7 @@ namespace DDMSSense.DDMS.FormatElements {
 
             public virtual IDDMSComponent Commit()
             {
-				return (Empty ? null : new Format(MimeType, Extent.Commit(), Medium));
+				return (Empty ? null : new Format(MimeType, (Extent)Extent.Commit(), Medium));
 			}
 
 			/// <seealso cref= IBuilder#isEmpty() </seealso>

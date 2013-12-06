@@ -26,6 +26,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 	using DDMSVersion = DDMSSense.Util.DDMSVersion;
 	using PropertyReader = DDMSSense.Util.PropertyReader;
 	using Util = DDMSSense.Util.Util;
+    using System;
 
 	/// <summary>
 	/// An immutable implementation of ntk:AccessProfileValue.
@@ -160,9 +161,6 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk {
 		public string Vocabulary {
 			get {
 				return (GetAttributeValue(VOCABULARY_NAME, DDMSVersion.NtkNamespace));
-			}
-			set {                   
-					_vocabulary = value;
 			}
 		}
 

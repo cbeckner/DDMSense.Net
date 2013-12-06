@@ -315,7 +315,7 @@ namespace DDMSSense.DDMS.Summary.Gml {
 				}
 				List<Position> positions = new List<Position>();
 				foreach (Position.Builder builder in Positions) {
-					Position position = builder.Commit();
+					Position position = (Position)builder.Commit();
 					if (position != null) {
 						positions.Add(position);
 					}
