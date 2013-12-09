@@ -1,8 +1,14 @@
+#region usings
+
+using System.Collections.Generic;
+
+#endregion
+
 namespace DDMSSense.Extensions
 {
     internal static class HashMapGetHelperClass
     {
-        internal static TValue GetValueOrNull<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary, TKey key)
+        internal static TValue GetValueOrNull<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
             TValue ret;
             dictionary.TryGetValue(key, out ret);

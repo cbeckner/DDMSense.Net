@@ -1,4 +1,8 @@
+#region usings
+
 using System;
+
+#endregion
 
 /* Copyright 2010 - 2013 by Brian Uri!
    
@@ -19,21 +23,21 @@ using System;
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
 */
-namespace DDMSSense.DDMS {
 
-	/// <summary>
-	/// Exception class for attempts to use a version of DDMS which is not supported by this library.
-	/// 
-	/// @author Brian Uri!
-	/// @since 0.9.b
-	/// </summary>
-	public class UnsupportedVersionException : Exception {
+namespace DDMSSense.DDMS
+{
+    /// <summary>
+    ///     Exception class for attempts to use a version of DDMS which is not supported by this library.
+    ///     @author Brian Uri!
+    ///     @since 0.9.b
+    /// </summary>
+    public class UnsupportedVersionException : Exception
+    {
+        private const long SerialVersionUID = -183915550465140589L;
 
-		private const long SerialVersionUID = -183915550465140589L;
-
-		/// <seealso cref= Exception#Exception(String) </seealso>
-		public UnsupportedVersionException(string version) : base("DDMS Version " + version + " is not yet supported.") {
-		}
-	}
-
+        /// <see cref="Exception#Exception(String)"></see>
+        public UnsupportedVersionException(string version) : base("DDMS Version " + version + " is not yet supported.")
+        {
+        }
+    }
 }

@@ -1,7 +1,15 @@
+#region usings
+
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
+using System.Xml.Linq;
+using DDMSSense.DDMS.SecurityElements.Ism;
+using DDMSSense.Util;
+
+#endregion
+
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -21,262 +29,301 @@ using System.Linq;
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
 */
-namespace DDMSSense.DDMS.SecurityElements.Ntk {
 
+namespace DDMSSense.DDMS.SecurityElements.Ntk
+{
+    #region usings
 
-	using Element = System.Xml.Linq.XElement;
-	using SecurityAttributes = DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes;
-	using DDMSVersion = DDMSSense.Util.DDMSVersion;
-	
-	using PropertyReader = DDMSSense.Util.PropertyReader;
-	using Util = DDMSSense.Util.Util;
-    using System.Xml;
-    using DDMSSense.DDMS;
-    using System.Xml.Linq;
+    using Element = XElement;
 
-	/// <summary>
-	/// An immutable implementation of ntk:AccessProfileList.
-	/// 
-	/// <para>Unlike ntk:AccessIndividualList and ntk:AccessGroupList, this element is implemented in DDMSence because it has 
-	/// security attributes.
-	/// 
-	/// <table class="info"><tr class="infoHeader"><th>Nested Elements</th></tr><tr><td class="infoBody">
-	/// <u>ntk:AccessProfile</u>: A system access record matching a profile (1-to-many required), implemented as a 
-	/// <seealso cref="Profile"/><br />
-	/// </td></tr></table>
-	/// 
-	/// <table class="info"><tr class="infoHeader"><th>Attributes</th></tr><tr><td class="infoBody">
-	/// <u><seealso cref="SecurityAttributes"/></u>:  The classification and ownerProducer attributes are required.
-	/// </td></tr></table>
-	///  
-	/// @author Brian Uri!
-	/// @since 2.0.0
-	/// </para>
-	/// </summary>
-	public sealed class ProfileList : AbstractBaseComponent {
+    #endregion
 
-		private List<Profile> _profiles = null;
-		private SecurityAttributes _securityAttributes = null;
+    /// <summary>
+    ///     An immutable implementation of ntk:AccessProfileList.
+    ///     <para>
+    ///         Unlike ntk:AccessIndividualList and ntk:AccessGroupList, this element is implemented in DDMSence because it has
+    ///         security attributes.
+    ///         <table class="info">
+    ///             <tr class="infoHeader">
+    ///                 <th>Nested Elements</th>
+    ///             </tr>
+    ///             <tr>
+    ///                 <td class="infoBody">
+    ///                     <u>ntk:AccessProfile</u>: A system access record matching a profile (1-to-many required),
+    ///                     implemented as a
+    ///                     <see cref="Profile" /><br />
+    ///                 </td>
+    ///             </tr>
+    ///         </table>
+    ///         <table class="info">
+    ///             <tr class="infoHeader">
+    ///                 <th>Attributes</th>
+    ///             </tr>
+    ///             <tr>
+    ///                 <td class="infoBody">
+    ///                     <u>
+    ///                         <see cref="SecurityAttributes" />
+    ///                     </u>
+    ///                     :  The classification and ownerProducer attributes are required.
+    ///                 </td>
+    ///             </tr>
+    ///         </table>
+    ///         @author Brian Uri!
+    ///         @since 2.0.0
+    ///     </para>
+    /// </summary>
+    public sealed class ProfileList : AbstractBaseComponent
+    {
+        private readonly List<Profile> _profiles;
+        private SecurityAttributes _securityAttributes;
 
-		/// <summary>
-		/// Constructor for creating a component from a XOM Element
-		/// </summary>
-		/// <param name="element"> the XOM element representing this </param>
-		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-
-
-		public ProfileList(Element element) {
-			try {
-				SetXOMElement(element, false);
-				IEnumerable<Element> values = element.Elements(XName.Get(Profile.GetName(DDMSVersion), Namespace));
-				_profiles = new List<Profile>();
+        /// <summary>
+        ///     Constructor for creating a component from a XOM Element
+        /// </summary>
+        /// <param name="element"> the XOM element representing this </param>
+        /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        public ProfileList(Element element)
+        {
+            try
+            {
+                SetXOMElement(element, false);
+                IEnumerable<Element> values = element.Elements(XName.Get(Profile.GetName(DDMSVersion), Namespace));
+                _profiles = new List<Profile>();
                 values.ToList().ForEach(p => _profiles.Add(new Profile(p)));
-				
-				_securityAttributes = new SecurityAttributes(element);
-				Validate();
-			} catch (InvalidDDMSException e) {
-				e.Locator = QualifiedName;
-				throw (e);
-			}
-		}
 
-		/// <summary>
-		/// Constructor for creating a component from raw data
-		/// </summary>
-		/// <param name="profiles"> the list of profiles (at least 1 required) </param>
-		/// <param name="securityAttributes"> security attributes (required) </param>
-		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+                _securityAttributes = new SecurityAttributes(element);
+                Validate();
+            }
+            catch (InvalidDDMSException e)
+            {
+                e.Locator = QualifiedName;
+                throw (e);
+            }
+        }
 
-
-		public ProfileList(List<Profile> profiles, SecurityAttributes securityAttributes) {
-			try {
-				DDMSVersion version = DDMSVersion.GetCurrentVersion();
-				Element element = Util.BuildElement(PropertyReader.GetPrefix("ntk"), ProfileList.GetName(version), version.NtkNamespace, null);
-				SetXOMElement(element, false);
-				if (profiles == null) {
-					profiles = new List<Profile>();
-				}
-				foreach (Profile profile in profiles) {
+        /// <summary>
+        ///     Constructor for creating a component from raw data
+        /// </summary>
+        /// <param name="profiles"> the list of profiles (at least 1 required) </param>
+        /// <param name="securityAttributes"> security attributes (required) </param>
+        /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        public ProfileList(List<Profile> profiles, SecurityAttributes securityAttributes)
+        {
+            try
+            {
+                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("ntk"), GetName(version),
+                    version.NtkNamespace, null);
+                SetXOMElement(element, false);
+                if (profiles == null)
+                {
+                    profiles = new List<Profile>();
+                }
+                foreach (var profile in profiles)
+                {
                     Element.Add(profile.XOMElementCopy);
-				}
-				_profiles = profiles;
-				_securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-				_securityAttributes.AddTo(element);
-				Validate();
-			} catch (InvalidDDMSException e) {
-				e.Locator = QualifiedName;
-				throw (e);
-			}
-		}
+                }
+                _profiles = profiles;
+                _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+                _securityAttributes.AddTo(element);
+                Validate();
+            }
+            catch (InvalidDDMSException e)
+            {
+                e.Locator = QualifiedName;
+                throw (e);
+            }
+        }
 
-		/// <summary>
-		/// Validates the component.
-		/// 
-		/// <table class="info"><tr class="infoHeader"><th>Rules</th></tr><tr><td class="infoBody">
-		/// <li>The qualified name of the element is correct.</li>
-		/// <li>At least 1 profile is required.</li>
-		/// <li>A classification is required.</li>
-		/// <li>At least 1 ownerProducer exists and is non-empty.</li>
-		/// <li>This component cannot exist until DDMS 4.0.1 or later.</li>
-		/// </td></tr></table>
-		/// </summary>
-		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        /// <see cref="AbstractBaseComponent#getNestedComponents()"></see>
+        protected internal override List<IDDMSComponent> NestedComponents
+        {
+            get
+            {
+                var list = new List<IDDMSComponent>();
+                list.AddRange(Profiles);
+                return (list);
+            }
+        }
 
+        /// <summary>
+        ///     Accessor for the list of profile values (1-many)
+        /// </summary>
+        public List<Profile> Profiles
+        {
+            get { return _profiles; }
+        }
 
-		protected internal override void Validate() {
-			Util.RequireQualifiedName(Element, Namespace, ProfileList.GetName(DDMSVersion));
-			if (Profiles.Count == 0) {
-				throw new InvalidDDMSException("At least one profile is required.");
-			}
-			Util.RequireDDMSValue("security attributes", SecurityAttributes);
-			SecurityAttributes.RequireClassification();
+        /// <summary>
+        ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
+        /// </summary>
+        public override SecurityAttributes SecurityAttributes
+        {
+            get { return (_securityAttributes); }
+            set { _securityAttributes = value; }
+        }
 
-			// Should be reviewed as additional versions of DDMS are supported.
-			RequireVersion("4.0.1");
+        /// <summary>
+        ///     Validates the component.
+        ///     <table class="info">
+        ///         <tr class="infoHeader">
+        ///             <th>Rules</th>
+        ///         </tr>
+        ///         <tr>
+        ///             <td class="infoBody">
+        ///                 <li>The qualified name of the element is correct.</li>
+        ///                 <li>At least 1 profile is required.</li>
+        ///                 <li>A classification is required.</li>
+        ///                 <li>At least 1 ownerProducer exists and is non-empty.</li>
+        ///                 <li>This component cannot exist until DDMS 4.0.1 or later.</li>
+        ///             </td>
+        ///         </tr>
+        ///     </table>
+        /// </summary>
+        /// <see cref="AbstractBaseComponent#validate()"></see>
+        /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        protected internal override void Validate()
+        {
+            Util.Util.RequireQualifiedName(Element, Namespace, GetName(DDMSVersion));
+            if (Profiles.Count == 0)
+            {
+                throw new InvalidDDMSException("At least one profile is required.");
+            }
+            Util.Util.RequireDDMSValue("security attributes", SecurityAttributes);
+            SecurityAttributes.RequireClassification();
 
-			base.Validate();
-		}
+            // Should be reviewed as additional versions of DDMS are supported.
+            RequireVersion("4.0.1");
 
-		/// <seealso cref= AbstractBaseComponent#getOutput(boolean, String, String) </seealso>
-		public override string GetOutput(bool isHTML, string prefix, string suffix) {
-			string localPrefix = BuildPrefix(prefix, "profileList", suffix) + ".";
-			StringBuilder text = new StringBuilder();
-			text.Append(BuildOutput(isHTML, localPrefix, Profiles));
-			text.Append(SecurityAttributes.GetOutput(isHTML, localPrefix));
-			return (text.ToString());
-		}
+            base.Validate();
+        }
 
-		/// <seealso cref= AbstractBaseComponent#getNestedComponents() </seealso>
-		protected internal override List<IDDMSComponent> NestedComponents {
-			get {
-				List<IDDMSComponent> list = new List<IDDMSComponent>();
-				list.AddRange(Profiles);
-				return (list);
-			}
-		}
+        /// <see cref="AbstractBaseComponent#getOutput(boolean, String, String)"></see>
+        public override string GetOutput(bool isHtml, string prefix, string suffix)
+        {
+            string localPrefix = BuildPrefix(prefix, "profileList", suffix) + ".";
+            var text = new StringBuilder();
+            text.Append(BuildOutput(isHtml, localPrefix, Profiles));
+            text.Append(SecurityAttributes.GetOutput(isHtml, localPrefix));
+            return (text.ToString());
+        }
 
-		/// <seealso cref= Object#equals(Object) </seealso>
-		public override bool Equals(object obj) {
-			if (!base.Equals(obj) || !(obj is ProfileList)) {
-				return (false);
-			}
-			return (true);
-		}
+        /// <see cref="object#equals(Object)"></see>
+        public override bool Equals(object obj)
+        {
+            if (!base.Equals(obj) || !(obj is ProfileList))
+            {
+                return (false);
+            }
+            return (true);
+        }
 
-		/// <summary>
-		/// Accessor for the element name of this component, based on the version of DDMS used
-		/// </summary>
-		/// <param name="version"> the DDMSVersion </param>
-		/// <returns> an element name </returns>
-		public static string GetName(DDMSVersion version) {
-			Util.RequireValue("version", version);
-			return ("AccessProfileList");
-		}
+        /// <summary>
+        ///     Accessor for the element name of this component, based on the version of DDMS used
+        /// </summary>
+        /// <param name="version"> the DDMSVersion </param>
+        /// <returns> an element name </returns>
+        public static string GetName(DDMSVersion version)
+        {
+            Util.Util.RequireValue("version", version);
+            return ("AccessProfileList");
+        }
 
-		/// <summary>
-		/// Accessor for the list of profile values (1-many)
-		/// </summary>
-		public List<Profile> Profiles {
-			get {
-				return _profiles;
-			}
-		}
+        /// <summary>
+        ///     Builder for this DDMS component.
+        /// </summary>
+        /// <see cref="IBuilder
+        /// @author Brian Uri!
+        /// @since 2.0.0"></see>
+        [Serializable]
+        public class Builder : IBuilder
+        {
+            internal const long SerialVersionUID = 7851044806424206976L;
+            internal List<Profile.Builder> _profiles;
+            internal SecurityAttributes.Builder _securityAttributes;
 
-		/// <summary>
-		/// Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
-		/// </summary>
-		public override SecurityAttributes SecurityAttributes {
-			get {
-				return (_securityAttributes);
-			}
-			set {
-					_securityAttributes = value;
-			}
-		}
+            /// <summary>
+            ///     Empty constructor
+            /// </summary>
+            public Builder()
+            {
+            }
 
-		/// <summary>
-		/// Builder for this DDMS component.
-		/// </summary>
-		/// <seealso cref= IBuilder
-		/// @author Brian Uri!
-		/// @since 2.0.0 </seealso>
-		[Serializable]
-		public class Builder : IBuilder {
-			internal const long SerialVersionUID = 7851044806424206976L;
-			internal List<Profile.Builder> _profiles;
-			internal SecurityAttributes.Builder _securityAttributes;
+            /// <summary>
+            ///     Constructor which starts from an existing component.
+            /// </summary>
+            public Builder(ProfileList profileList)
+            {
+                foreach (var value in profileList.Profiles)
+                {
+                    Profiles.Add(new Profile.Builder(value));
+                }
+                SecurityAttributes = new SecurityAttributes.Builder(profileList.SecurityAttributes);
+            }
 
-			/// <summary>
-			/// Empty constructor
-			/// </summary>
-			public Builder() {
-			}
+            /// <summary>
+            ///     Builder accessor for the values
+            /// </summary>
+            public virtual List<Profile.Builder> Profiles
+            {
+                get
+                {
+                    if (_profiles == null)
+                    {
+                        _profiles = new List<Profile.Builder>();
+                    }
+                    return _profiles;
+                }
+            }
 
-			/// <summary>
-			/// Constructor which starts from an existing component.
-			/// </summary>
-			public Builder(ProfileList profileList) {
-				foreach (Profile value in profileList.Profiles) {
-					Profiles.Add(new Profile.Builder(value));
-				}
-				SecurityAttributes = new SecurityAttributes.Builder(profileList.SecurityAttributes);
-			}
+            /// <summary>
+            ///     Builder accessor for the securityAttributes
+            /// </summary>
+            public virtual SecurityAttributes.Builder SecurityAttributes
+            {
+                get
+                {
+                    if (_securityAttributes == null)
+                    {
+                        _securityAttributes = new SecurityAttributes.Builder();
+                    }
+                    return _securityAttributes;
+                }
+                set { _securityAttributes = value; }
+            }
 
-			/// <seealso cref= IBuilder#commit() </seealso>
-
-
+            /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
-				if (Empty) {
-					return (null);
-				}
-				List<Profile> values = new List<Profile>();
-				foreach (IBuilder builder in Profiles) {
-					Profile component = (Profile) builder.Commit();
-					if (component != null) {
-						values.Add(component);
-					}
-				}
-				return (new ProfileList(values, SecurityAttributes.Commit()));
-			}
+                if (Empty)
+                {
+                    return (null);
+                }
+                var values = new List<Profile>();
+                foreach (IBuilder builder in Profiles)
+                {
+                    var component = (Profile) builder.Commit();
+                    if (component != null)
+                    {
+                        values.Add(component);
+                    }
+                }
+                return (new ProfileList(values, SecurityAttributes.Commit()));
+            }
 
-			/// <seealso cref= IBuilder#isEmpty() </seealso>
-			public virtual bool Empty {
-				get {
-					bool hasValueInList = false;
-					foreach (IBuilder builder in Profiles) {
-						hasValueInList = hasValueInList || !builder.Empty;
-					}
-					return (!hasValueInList && SecurityAttributes.Empty);
-				}
-			}
-
-			/// <summary>
-			/// Builder accessor for the values
-			/// </summary>
-			public virtual List<Profile.Builder> Profiles {
-				get {
-					if (_profiles == null) {
-						_profiles = new List<Profile.Builder>();
-					}
-					return _profiles;
-				}
-			}
-
-			/// <summary>
-			/// Builder accessor for the securityAttributes
-			/// </summary>
-			public virtual SecurityAttributes.Builder SecurityAttributes {
-				get {
-					if (_securityAttributes == null) {
-						_securityAttributes = new SecurityAttributes.Builder();
-					}
-					return _securityAttributes;
-				}
-                set { _securityAttributes = value; }
-			}
-
-		}
-	}
+            /// <see cref="IBuilder#isEmpty()"></see>
+            public virtual bool Empty
+            {
+                get
+                {
+                    bool hasValueInList = false;
+                    foreach (IBuilder builder in Profiles)
+                    {
+                        hasValueInList = hasValueInList || !builder.Empty;
+                    }
+                    return (!hasValueInList && SecurityAttributes.Empty);
+                }
+            }
+        }
+    }
 }

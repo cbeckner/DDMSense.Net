@@ -1,5 +1,14 @@
+#region usings
+
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using DDMSSense.DDMS;
+using DDMSSense.DDMS.SecurityElements.Ism;
+using DDMSSense.DDMS.SecurityElements.Ntk;
+using DDMSSense.Util;
+
+#endregion
 
 /* Copyright 2010 - 2013 by Brian Uri!
    
@@ -20,210 +29,233 @@ using System.Collections.Generic;
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
 */
-namespace DDMSSense {
 
+namespace DDMSSense
+{
+    #region usings
 
-	using Element = System.Xml.Linq.XElement;
-	using IBuilder = DDMSSense.DDMS.IBuilder;
-	using IDDMSComponent = DDMSSense.DDMS.IDDMSComponent;
-	using InvalidDDMSException = DDMSSense.DDMS.InvalidDDMSException;
-	using SecurityAttributes = DDMSSense.DDMS.SecurityElements.Ism.SecurityAttributes;
-	using SystemName = DDMSSense.DDMS.SecurityElements.Ntk.SystemName;
-	using DDMSVersion = DDMSSense.Util.DDMSVersion;
-	using PropertyReader = DDMSSense.Util.PropertyReader;
-    using System.Xml;
-    using System.Xml.Linq;
+    using Element = XElement;
 
-	/// <summary>
-	/// Base class for NTK elements which describe system access rules for an individual, group, or profile.
-	/// 
-	/// <para> Extensions of this class are generally expected to be immutable, and the underlying XOM element MUST be set
-	/// before the component is used. </para>
-	/// 
-	/// <table class="info"><tr class="infoHeader"><th>Nested Elements</th></tr><tr><td class="infoBody">
-	/// <u>ntk:AccessSystemName</u>: The system described by this access record (exactly 1 required), implemented as a 
-	/// <seealso cref="SystemName"/><br />
-	/// </td></tr></table>
-	/// 
-	/// <table class="info"><tr class="infoHeader"><th>Attributes</th></tr><tr><td class="infoBody">
-	/// <u><seealso cref="SecurityAttributes"/></u>:  The classification and ownerProducer attributes are required.
-	/// </td></tr></table>
-	/// 
-	/// @author Brian Uri!
-	/// @since 2.0.0
-	/// </summary>
-	public abstract class AbstractAccessEntity : AbstractBaseComponent {
+    #endregion
 
-		private SystemName _systemName = null;
-		private SecurityAttributes _securityAttributes = null;
+    /// <summary>
+    ///     Base class for NTK elements which describe system access rules for an individual, group, or profile.
+    ///     <para>
+    ///         Extensions of this class are generally expected to be immutable, and the underlying XOM element MUST be set
+    ///         before the component is used.
+    ///     </para>
+    ///     <table class="info">
+    ///         <tr class="infoHeader">
+    ///             <th>Nested Elements</th>
+    ///         </tr>
+    ///         <tr>
+    ///             <td class="infoBody">
+    ///                 <u>ntk:AccessSystemName</u>: The system described by this access record (exactly 1 required),
+    ///                 implemented as a
+    ///                 <see cref="SystemName" /><br />
+    ///             </td>
+    ///         </tr>
+    ///     </table>
+    ///     <table class="info">
+    ///         <tr class="infoHeader">
+    ///             <th>Attributes</th>
+    ///         </tr>
+    ///         <tr>
+    ///             <td class="infoBody">
+    ///                 <u>
+    ///                     <see cref="SecurityAttributes" />
+    ///                 </u>
+    ///                 :  The classification and ownerProducer attributes are required.
+    ///             </td>
+    ///         </tr>
+    ///     </table>
+    ///     @author Brian Uri!
+    ///     @since 2.0.0
+    /// </summary>
+    public abstract class AbstractAccessEntity : AbstractBaseComponent
+    {
+        private SecurityAttributes _securityAttributes;
+        private SystemName _systemName;
 
-		/// <summary>
-		/// Constructor for creating a component from a XOM Element. Does not validate.
-		/// </summary>
-		/// <param name="element"> the XOM element representing this </param>
-		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        /// <summary>
+        ///     Constructor for creating a component from a XOM Element. Does not validate.
+        /// </summary>
+        /// <param name="element"> the XOM element representing this </param>
+        /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        public AbstractAccessEntity(Element element)
+        {
+            SetXOMElement(element, false);
+            Element systemElement = element.Element(XName.Get(SystemName.GetName(DDMSVersion), Namespace));
+            if (systemElement != null)
+            {
+                _systemName = new SystemName(systemElement);
+            }
+            _securityAttributes = new SecurityAttributes(element);
+        }
 
+        /// <summary>
+        ///     Constructor for creating a component from raw data. Does not validate.
+        /// </summary>
+        /// <param name="systemName"> the system name (required) </param>
+        /// <param name="securityAttributes"> security attributes (required) </param>
+        /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        public AbstractAccessEntity(string name, SystemName systemName, SecurityAttributes securityAttributes)
+        {
+            DDMSVersion version = DDMSVersion.GetCurrentVersion();
+            Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("ntk"), name, version.NtkNamespace, null);
+            SetXOMElement(element, false);
+            if (systemName != null)
+            {
+                element.Add(systemName.XOMElementCopy);
+            }
+            _systemName = systemName;
+            _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+            _securityAttributes.AddTo(element);
+        }
 
-		public AbstractAccessEntity(Element element) {
-			SetXOMElement(element, false);
-			Element systemElement = element.Element(XName.Get(SystemName.GetName(DDMSVersion), Namespace));
-			if (systemElement != null) {
-				_systemName = new SystemName(systemElement);
-			}
-			_securityAttributes = new SecurityAttributes(element);
-		}
+        /// <see cref="AbstractBaseComponent#getNestedComponents()"></see>
+        protected internal override List<IDDMSComponent> NestedComponents
+        {
+            get
+            {
+                var list = new List<IDDMSComponent>();
+                list.Add(SystemName);
+                return (list);
+            }
+        }
 
-		/// <summary>
-		/// Constructor for creating a component from raw data. Does not validate.
-		/// </summary>
-		/// <param name="systemName"> the system name (required) </param>
-		/// <param name="securityAttributes"> security attributes (required) </param>
-		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        /// <summary>
+        ///     Accessor for the system name
+        /// </summary>
+        public virtual SystemName SystemName
+        {
+            get { return _systemName; }
+            set { _systemName = value; }
+        }
 
+        /// <summary>
+        ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
+        /// </summary>
+        public override SecurityAttributes SecurityAttributes
+        {
+            get { return (_securityAttributes); }
+            set { _securityAttributes = value; }
+        }
 
-		public AbstractAccessEntity(string name, SystemName systemName, SecurityAttributes securityAttributes) {
-			DDMSVersion version = DDMSVersion.GetCurrentVersion();
-			Element element = DDMSSense.Util.Util.BuildElement(PropertyReader.GetPrefix("ntk"), name, version.NtkNamespace, null);
-			SetXOMElement(element, false);
-			if (systemName != null) {
-				element.Add(systemName.XOMElementCopy);
-			}
-			_systemName = systemName;
-			_securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-			_securityAttributes.AddTo(element);
-		}
+        /// <summary>
+        ///     Validates the component.
+        ///     <table class="info">
+        ///         <tr class="infoHeader">
+        ///             <th>Rules</th>
+        ///         </tr>
+        ///         <tr>
+        ///             <td class="infoBody">
+        ///                 <li>A systemName is required.</li>
+        ///                 <li>Exactly 1 systemName exists.</li>
+        ///                 <li>A classification is required.</li>
+        ///                 <li>At least 1 ownerProducer exists and is non-empty.</li>
+        ///                 <li>This component cannot exist until DDMS 4.0.1 or later.</li>
+        ///             </td>
+        ///         </tr>
+        ///     </table>
+        /// </summary>
+        /// <see cref="AbstractBaseComponent#validate()"></see>
+        /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+        protected internal override void Validate()
+        {
+            Util.Util.RequireDDMSValue("systemName", SystemName);
+            Util.Util.RequireBoundedChildCount(Element, SystemName.GetName(DDMSVersion), 1, 1);
+            Util.Util.RequireDDMSValue("security attributes", SecurityAttributes);
+            SecurityAttributes.RequireClassification();
 
-		/// <summary>
-		/// Validates the component.
-		/// 
-		/// <table class="info"><tr class="infoHeader"><th>Rules</th></tr><tr><td class="infoBody">
-		/// <li>A systemName is required.</li>
-		/// <li>Exactly 1 systemName exists.</li>
-		/// <li>A classification is required.</li>
-		/// <li>At least 1 ownerProducer exists and is non-empty.</li>
-		/// <li>This component cannot exist until DDMS 4.0.1 or later.</li>
-		/// </td></tr></table>
-		/// </summary>
-		/// <seealso cref= AbstractBaseComponent#validate() </seealso>
-		/// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
+            // Should be reviewed as additional versions of DDMS are supported.
+            RequireVersion("4.0.1");
 
+            base.Validate();
+        }
 
-		protected internal override void Validate() {
-			DDMSSense.Util.Util.RequireDDMSValue("systemName", SystemName);
-            DDMSSense.Util.Util.RequireBoundedChildCount(Element, SystemName.GetName(DDMSVersion), 1, 1);
-            DDMSSense.Util.Util.RequireDDMSValue("security attributes", SecurityAttributes);
-			SecurityAttributes.RequireClassification();
+        /// <see cref="object#equals(Object)"></see>
+        public override bool Equals(object obj)
+        {
+            if (!base.Equals(obj) || !(obj is AbstractAccessEntity))
+            {
+                return (false);
+            }
+            return (true);
+        }
 
-			// Should be reviewed as additional versions of DDMS are supported.
-			RequireVersion("4.0.1");
+        /// <summary>
+        ///     Builder for this DDMS component.
+        /// </summary>
+        /// <see cref="IBuilder
+        /// @author Brian Uri!
+        /// @since 2.0.0"></see>
+        [Serializable]
+        public abstract class Builder : IBuilder
+        {
+            internal const long SerialVersionUID = 7851044806424206976L;
+            internal SecurityAttributes.Builder _securityAttributes;
+            internal SystemName.Builder _systemName;
 
-			base.Validate();
-		}
+            /// <summary>
+            ///     Empty constructor
+            /// </summary>
+            public Builder()
+            {
+            }
 
-		/// <seealso cref= AbstractBaseComponent#getNestedComponents() </seealso>
-		protected internal override List<IDDMSComponent> NestedComponents {
-			get {
-				List<IDDMSComponent> list = new List<IDDMSComponent>();
-				list.Add(SystemName);
-				return (list);
-			}
-		}
+            /// <summary>
+            ///     Constructor which starts from an existing component.
+            /// </summary>
+            public Builder(AbstractAccessEntity group)
+            {
+                if (group.SystemName != null)
+                {
+                    SystemName = new SystemName.Builder(group.SystemName);
+                }
+                SecurityAttributes = new SecurityAttributes.Builder(group.SecurityAttributes);
+            }
 
-		/// <seealso cref= Object#equals(Object) </seealso>
-		public override bool Equals(object obj) {
-			if (!base.Equals(obj) || !(obj is AbstractAccessEntity)) {
-				return (false);
-			}
-			return (true);
-		}
-
-		/// <summary>
-		/// Accessor for the system name
-		/// </summary>
-		public virtual SystemName SystemName {
-			get {
-				return _systemName;
-			}
-			set {
-					_systemName = value;
-			}
-		}
-
-		/// <summary>
-		/// Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
-		/// </summary>
-		public override SecurityAttributes SecurityAttributes {
-			get {
-				return (_securityAttributes);
-			}
-			set {
-					_securityAttributes = value;
-			}
-		}
-
-		/// <summary>
-		/// Builder for this DDMS component.
-		/// </summary>
-		/// <seealso cref= IBuilder
-		/// @author Brian Uri!
-		/// @since 2.0.0 </seealso>
-		[Serializable]
-		public abstract class Builder : IBuilder {
-			public abstract IDDMSComponent Commit();
-			internal const long SerialVersionUID = 7851044806424206976L;
-			internal SystemName.Builder _systemName;
-			internal SecurityAttributes.Builder _securityAttributes;
-
-			/// <summary>
-			/// Empty constructor
-			/// </summary>
-			public Builder() {
-			}
-
-			/// <summary>
-			/// Constructor which starts from an existing component.
-			/// </summary>
-			public Builder(AbstractAccessEntity group) {
-				if (group.SystemName != null) {
-					SystemName = new SystemName.Builder(group.SystemName);
-				}
-				SecurityAttributes = new SecurityAttributes.Builder(group.SecurityAttributes);
-			}
-
-			/// <seealso cref= IBuilder#isEmpty() </seealso>
-			public virtual bool Empty {
-				get {
-					return (SystemName.Empty && SecurityAttributes.Empty);
-				}
-			}
-
-			/// <summary>
-			/// Builder accessor for the systemName
-			/// </summary>
-			public virtual SystemName.Builder SystemName {
-				get {
-					if (_systemName == null) {
-						_systemName = new SystemName.Builder();
-					}
-					return _systemName;
-				}
+            /// <summary>
+            ///     Builder accessor for the systemName
+            /// </summary>
+            public virtual SystemName.Builder SystemName
+            {
+                get
+                {
+                    if (_systemName == null)
+                    {
+                        _systemName = new SystemName.Builder();
+                    }
+                    return _systemName;
+                }
                 set { _systemName = value; }
-			}
+            }
 
 
-			/// <summary>
-			/// Builder accessor for the securityAttributes
-			/// </summary>
-			public virtual SecurityAttributes.Builder SecurityAttributes {
-				get {
-					if (_securityAttributes == null) {
-						_securityAttributes = new SecurityAttributes.Builder();
-					}
-					return _securityAttributes;
-				}
+            /// <summary>
+            ///     Builder accessor for the securityAttributes
+            /// </summary>
+            public virtual SecurityAttributes.Builder SecurityAttributes
+            {
+                get
+                {
+                    if (_securityAttributes == null)
+                    {
+                        _securityAttributes = new SecurityAttributes.Builder();
+                    }
+                    return _securityAttributes;
+                }
                 set { _securityAttributes = value; }
-			}
+            }
 
-		}
-	}
+            public abstract IDDMSComponent Commit();
+
+            /// <see cref="IBuilder#isEmpty()"></see>
+            public virtual bool Empty
+            {
+                get { return (SystemName.Empty && SecurityAttributes.Empty); }
+            }
+        }
+    }
 }

@@ -1,3 +1,11 @@
+#region usings
+
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
+
+#endregion
+
 namespace DDMSSense.Extensions
 {
     internal static class StringHelperClass
@@ -15,7 +23,7 @@ namespace DDMSSense.Extensions
         //------------------------------------------------------------------------------
         internal static string[] Split(this string self, string regexDelimiter, bool trimTrailingEmptyStrings)
         {
-            string[] splitArray = System.Text.RegularExpressions.Regex.Split(self, regexDelimiter);
+            string[] splitArray = Regex.Split(self, regexDelimiter);
 
             if (trimTrailingEmptyStrings)
             {
@@ -26,7 +34,7 @@ namespace DDMSSense.Extensions
                         if (splitArray[i - 1].Length > 0)
                         {
                             if (i < splitArray.Length)
-                                System.Array.Resize(ref splitArray, i);
+                                Array.Resize(ref splitArray, i);
 
                             break;
                         }
@@ -44,17 +52,20 @@ namespace DDMSSense.Extensions
         {
             return NewString(bytes, 0, bytes.Length);
         }
+
         internal static string NewString(sbyte[] bytes, int index, int count)
         {
-            return System.Text.Encoding.UTF8.GetString((byte[])(object)bytes, index, count);
+            return Encoding.UTF8.GetString((byte[]) (object) bytes, index, count);
         }
+
         internal static string NewString(sbyte[] bytes, string encoding)
         {
             return NewString(bytes, 0, bytes.Length, encoding);
         }
+
         internal static string NewString(sbyte[] bytes, int index, int count, string encoding)
         {
-            return System.Text.Encoding.GetEncoding(encoding).GetString((byte[])(object)bytes, index, count);
+            return Encoding.GetEncoding(encoding).GetString((byte[]) (object) bytes, index, count);
         }
 
         //--------------------------------------------------------------------------------
@@ -62,16 +73,18 @@ namespace DDMSSense.Extensions
         //--------------------------------------------------------------------------------
         internal static sbyte[] GetBytes(this string self)
         {
-            return GetSBytesForEncoding(System.Text.Encoding.UTF8, self);
+            return GetSBytesForEncoding(Encoding.UTF8, self);
         }
+
         internal static sbyte[] GetBytes(this string self, string encoding)
         {
-            return GetSBytesForEncoding(System.Text.Encoding.GetEncoding(encoding), self);
+            return GetSBytesForEncoding(Encoding.GetEncoding(encoding), self);
         }
-        private static sbyte[] GetSBytesForEncoding(System.Text.Encoding encoding, string s)
+
+        private static sbyte[] GetSBytesForEncoding(Encoding encoding, string s)
         {
-            sbyte[] sbytes = new sbyte[encoding.GetByteCount(s)];
-            encoding.GetBytes(s, 0, s.Length, (byte[])(object)sbytes, 0);
+            var sbytes = new sbyte[encoding.GetByteCount(s)];
+            encoding.GetBytes(s, 0, s.Length, (byte[]) (object) sbytes, 0);
             return sbytes;
         }
     }
