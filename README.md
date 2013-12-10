@@ -1,3 +1,5 @@
+DDMSence.Net
+============
 DDMSence.Net (pronounced "dee-dee-em-Essence") is an .Net conversion of the open 
 source Java API which supports the DoD Discovery Metadata Specification (DDMS).
 
