@@ -107,7 +107,7 @@ namespace DDMSSense.DDMS.Metacard
             Dates = null;
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 DDMSVersion version = DDMSVersion;
                 _identifiers = new List<Identifier>();
                 IEnumerable<Element> components = element.Elements(XName.Get(Identifier.GetName(version), Namespace));
@@ -202,7 +202,7 @@ namespace DDMSSense.DDMS.Metacard
                 }
 
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
 
                 foreach (var component in childComponents)
                 {
@@ -268,7 +268,7 @@ namespace DDMSSense.DDMS.Metacard
                 PopulatedOrderedList();
                 foreach (var component in NestedComponents)
                 {
-                    element.Add(component.XOMElementCopy);
+                    element.Add(component.ElementCopy);
                 }
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);

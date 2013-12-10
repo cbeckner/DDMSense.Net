@@ -87,7 +87,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 _securityAttributes = new SecurityAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -117,7 +117,7 @@ namespace DDMSSense.DDMS.Summary
                 Util.Util.AddDDMSAttribute(element, COVERAGE_NAME, coverage);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

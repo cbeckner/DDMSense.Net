@@ -8,34 +8,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     Base class for DDMS elements which consist of simple child text, possibly decorated with attributes, such as
     ///     ddms:description, ddms:title, and ddms:subtitle.
@@ -43,22 +17,6 @@ namespace DDMSSense
     ///         Extensions of this class are generally expected to be immutable, and the underlying XOM element MUST be set
     ///         before the component is used.
     ///     </para>
-    ///     <table class="info">
-    ///         <tr class="infoHeader">
-    ///             <th>Attributes</th>
-    ///         </tr>
-    ///         <tr>
-    ///             <td class="infoBody">
-    ///                 <u>
-    ///                     <see cref="SecurityAttributes" />
-    ///                 </u>
-    ///                 :  The classification and
-    ///                 ownerProducer attributes are required.
-    ///             </td>
-    ///         </tr>
-    ///     </table>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
     /// </summary>
     public abstract class AbstractSimpleString : AbstractBaseComponent
     {
@@ -69,12 +27,12 @@ namespace DDMSSense
         /// </summary>
         /// <param name="element"> the XOM element </param>
         /// <param name="validateNow"> true if the component should be validated here </param>
-        protected internal AbstractSimpleString(Element element, bool validateNow)
+        protected internal AbstractSimpleString(XElement element, bool validateNow)
         {
             try
             {
                 _securityAttributes = new SecurityAttributes(element);
-                SetXOMElement(element, validateNow);
+                SetElement(element, validateNow);
             }
             catch (InvalidDDMSException e)
             {
@@ -90,11 +48,8 @@ namespace DDMSSense
         /// <param name="value"> the value of the element's child text </param>
         /// <param name="attributes"> the security attributes </param>
         /// <param name="validateNow"> true if the component should be validated here </param>
-        protected internal AbstractSimpleString(string name, string value, SecurityAttributes attributes,
-            bool validateNow)
-            : this(
-                PropertyReader.GetPrefix("ddms"), DDMSVersion.GetCurrentVersion().Namespace, name, value, attributes,
-                validateNow)
+        protected internal AbstractSimpleString(string name, string value, SecurityAttributes attributes, bool validateNow)
+            : this(PropertyReader.GetPrefix("ddms"), DDMSVersion.GetCurrentVersion().Namespace, name, value, attributes, validateNow)
         {
         }
 
@@ -107,15 +62,14 @@ namespace DDMSSense
         /// <param name="value"> the value of the element's child text </param>
         /// <param name="attributes"> the security attributes </param>
         /// <param name="validateNow"> true if the component should be validated here </param>
-        protected internal AbstractSimpleString(string prefix, string @namespace, string name, string value,
-            SecurityAttributes attributes, bool validateNow)
+        protected internal AbstractSimpleString(string prefix, string @namespace, string name, string value, SecurityAttributes attributes, bool validateNow)
         {
             try
             {
-                Element element = Util.Util.BuildElement(prefix, name, @namespace, value);
+                XElement element = Util.Util.BuildElement(prefix, name, @namespace, value);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(attributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, validateNow);
+                SetElement(element, validateNow);
             }
             catch (InvalidDDMSException e)
             {
@@ -145,18 +99,12 @@ namespace DDMSSense
 
         /// <summary>
         ///     Validates the component.
-        ///     <table class="info">
-        ///         <tr class="infoHeader">
-        ///             <th>Rules</th>
-        ///         </tr>
-        ///         <tr>
-        ///             <td class="infoBody">
-        ///                 <li>A classification is required.</li>
-        ///                 <li>At least 1 ownerProducer exists and is non-empty.</li>
-        ///             </td>
-        ///         </tr>
-        ///     </table>
         /// </summary>
+        /// <remarks>
+        /// A classification is required.
+        /// At least 1 ownerProducer exists and is non-empty.
+        /// </remarks>
+
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
@@ -165,14 +113,12 @@ namespace DDMSSense
             base.Validate();
         }
 
-        /// <see cref="object#equals(Object)"></see>
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is AbstractSimpleString))
-            {
                 return (false);
-            }
-            var test = (AbstractSimpleString) obj;
+            
+            var test = (AbstractSimpleString)obj;
             return (Value.Equals(test.Value));
         }
 
@@ -180,7 +126,7 @@ namespace DDMSSense
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + Value.GetHashCode();
+            result = 7 * result + Value.GetHashCode();
             return (result);
         }
 
@@ -191,15 +137,12 @@ namespace DDMSSense
         ///         appropriate concrete object type.
         ///     </para>
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public abstract class Builder : IBuilder
         {
             internal const long SerialVersionUID = 7824644958681123708L;
             internal SecurityAttributes.Builder _securityAttributes;
-            internal string _value;
 
             /// <summary>
             ///     Empty constructor
@@ -220,11 +163,7 @@ namespace DDMSSense
             /// <summary>
             ///     Builder accessor for the child text.
             /// </summary>
-            public virtual string Value
-            {
-                get { return _value; }
-                set { _value = value; }
-            }
+            public virtual string Value { get; set; }
 
 
             /// <summary>
@@ -235,9 +174,8 @@ namespace DDMSSense
                 get
                 {
                     if (_securityAttributes == null)
-                    {
                         _securityAttributes = new SecurityAttributes.Builder();
-                    }
+                    
                     return _securityAttributes;
                 }
                 set { _securityAttributes = value; }

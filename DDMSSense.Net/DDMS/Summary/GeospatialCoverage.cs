@@ -140,7 +140,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 Util.Util.RequireDDMSValue("geographicIdentifier element", element);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element extElement = ExtentElement;
                 if (extElement != null)
                 {
@@ -213,23 +213,23 @@ namespace DDMSSense.DDMS.Summary
                     : Util.Util.BuildDDMSElement(GEOSPATIAL_EXTENT_NAME, null);
                 if (geographicIdentifier != null)
                 {
-                    element.Add(geographicIdentifier.XOMElementCopy);
+                    element.Add(geographicIdentifier.ElementCopy);
                 }
                 if (boundingBox != null)
                 {
-                    element.Add(boundingBox.XOMElementCopy);
+                    element.Add(boundingBox.ElementCopy);
                 }
                 if (boundingGeometry != null)
                 {
-                    element.Add(boundingGeometry.XOMElementCopy);
+                    element.Add(boundingGeometry.ElementCopy);
                 }
                 if (postalAddress != null)
                 {
-                    element.Add(postalAddress.XOMElementCopy);
+                    element.Add(postalAddress.ElementCopy);
                 }
                 if (verticalExtent != null)
                 {
-                    element.Add(verticalExtent.XOMElementCopy);
+                    element.Add(verticalExtent.ElementCopy);
                 }
                 Util.Util.AddDDMSAttribute(coverageElement, PRECEDENCE_NAME, precedence);
                 if (order != null)
@@ -249,7 +249,7 @@ namespace DDMSSense.DDMS.Summary
                 _verticalExtent = verticalExtent;
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(coverageElement);
-                SetXOMElement(coverageElement, true);
+                SetElement(coverageElement, true);
             }
             catch (InvalidDDMSException e)
             {

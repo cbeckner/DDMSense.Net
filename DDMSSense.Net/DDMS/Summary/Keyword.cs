@@ -91,7 +91,7 @@ namespace DDMSSense.DDMS.Summary
             {
                 _securityAttributes = new SecurityAttributes(element);
                 _extensibleAttributes = new ExtensibleAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -131,7 +131,7 @@ namespace DDMSSense.DDMS.Summary
                 _securityAttributes.AddTo(element);
                 _extensibleAttributes = ExtensibleAttributes.GetNonNullInstance(extensibleAttributes);
                 _extensibleAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

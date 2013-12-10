@@ -110,7 +110,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
             ProfileList = null;
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 _individuals = new List<Individual>();
                 Element individualList = element.Element(XName.Get(INDIVIDUAL_LIST_NAME, Namespace));
                 if (individualList != null)
@@ -179,7 +179,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
                 string ntkNamespace = version.NtkNamespace;
 
                 Element element = Util.Util.BuildElement(ntkPrefix, GetName(version), ntkNamespace, null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
 
                 if (individuals == null)
                 {
@@ -191,7 +191,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
                     element.Add(individualList);
                     foreach (var individual in individuals)
                     {
-                        individualList.Add(individual.XOMElementCopy);
+                        individualList.Add(individual.ElementCopy);
                     }
                 }
                 if (groups == null)
@@ -204,12 +204,12 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
                     element.Add(groupList);
                     foreach (var group in groups)
                     {
-                        groupList.Add(group.XOMElementCopy);
+                        groupList.Add(group.ElementCopy);
                     }
                 }
                 if (profileList != null)
                 {
-                    element.Add(profileList.XOMElementCopy);
+                    element.Add(profileList.ElementCopy);
                 }
                 if (externalReference != null)
                 {

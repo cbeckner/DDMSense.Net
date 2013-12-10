@@ -101,7 +101,7 @@ namespace DDMSSense.DDMS.ResourceElements
             try
             {
                 _xlinkAttributes = new XLinkAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -131,7 +131,7 @@ namespace DDMSSense.DDMS.ResourceElements
 
                 _xlinkAttributes = XLinkAttributes.GetNonNullInstance(xlinkAttributes);
                 _xlinkAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

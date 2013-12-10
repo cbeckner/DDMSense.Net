@@ -91,7 +91,7 @@ namespace DDMSSense.DDMS.ResourceElements
                         _organization = new Organization(organizationElement);
                     }
                 }
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -116,10 +116,10 @@ namespace DDMSSense.DDMS.ResourceElements
                 }
                 if (organization != null)
                 {
-                    element.Add(organization.XOMElementCopy);
+                    element.Add(organization.ElementCopy);
                 }
                 _organization = organization;
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

@@ -10,26 +10,6 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense
 {
     #region usings
@@ -74,9 +54,6 @@ namespace DDMSSense
     /// </summary>
     public abstract class AbstractAccessEntity : AbstractBaseComponent
     {
-        private SecurityAttributes _securityAttributes;
-        private SystemName _systemName;
-
         /// <summary>
         ///     Constructor for creating a component from a XOM Element. Does not validate.
         /// </summary>
@@ -84,13 +61,12 @@ namespace DDMSSense
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public AbstractAccessEntity(Element element)
         {
-            SetXOMElement(element, false);
+            SetElement(element, false);
             Element systemElement = element.Element(XName.Get(SystemName.GetName(DDMSVersion), Namespace));
             if (systemElement != null)
-            {
-                _systemName = new SystemName(systemElement);
-            }
-            _securityAttributes = new SecurityAttributes(element);
+                SystemName = new SystemName(systemElement);
+            
+            SecurityAttributes = new SecurityAttributes(element);
         }
 
         /// <summary>
@@ -103,14 +79,13 @@ namespace DDMSSense
         {
             DDMSVersion version = DDMSVersion.GetCurrentVersion();
             Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("ntk"), name, version.NtkNamespace, null);
-            SetXOMElement(element, false);
+            SetElement(element, false);
             if (systemName != null)
-            {
-                element.Add(systemName.XOMElementCopy);
-            }
-            _systemName = systemName;
-            _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-            _securityAttributes.AddTo(element);
+                element.Add(systemName.ElementCopy);
+            
+            SystemName = systemName;
+            SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+            SecurityAttributes.AddTo(element);
         }
 
         /// <see cref="AbstractBaseComponent#getNestedComponents()"></see>
@@ -127,20 +102,12 @@ namespace DDMSSense
         /// <summary>
         ///     Accessor for the system name
         /// </summary>
-        public virtual SystemName SystemName
-        {
-            get { return _systemName; }
-            set { _systemName = value; }
-        }
-
+        public virtual SystemName SystemName {get;set;}
+        
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
-        public override SecurityAttributes SecurityAttributes
-        {
-            get { return (_securityAttributes); }
-            set { _securityAttributes = value; }
-        }
+        public override SecurityAttributes SecurityAttributes { get; set; }
 
         /// <summary>
         ///     Validates the component.
@@ -178,30 +145,27 @@ namespace DDMSSense
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is AbstractAccessEntity))
-            {
                 return (false);
-            }
+            
             return (true);
         }
 
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 2.0.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public abstract class Builder : IBuilder
         {
             internal const long SerialVersionUID = 7851044806424206976L;
-            internal SecurityAttributes.Builder _securityAttributes;
-            internal SystemName.Builder _systemName;
 
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                SecurityAttributes = new SecurityAttributes.Builder();
+                SystemName = new SystemName.Builder();
             }
 
             /// <summary>
@@ -210,44 +174,20 @@ namespace DDMSSense
             public Builder(AbstractAccessEntity group)
             {
                 if (group.SystemName != null)
-                {
                     SystemName = new SystemName.Builder(group.SystemName);
-                }
+                
                 SecurityAttributes = new SecurityAttributes.Builder(group.SecurityAttributes);
             }
 
             /// <summary>
             ///     Builder accessor for the systemName
             /// </summary>
-            public virtual SystemName.Builder SystemName
-            {
-                get
-                {
-                    if (_systemName == null)
-                    {
-                        _systemName = new SystemName.Builder();
-                    }
-                    return _systemName;
-                }
-                set { _systemName = value; }
-            }
-
+            public virtual SystemName.Builder SystemName {get;set;}
 
             /// <summary>
             ///     Builder accessor for the securityAttributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
+            public virtual SecurityAttributes.Builder SecurityAttributes {get;set;}
 
             public abstract IDDMSComponent Commit();
 

@@ -8,34 +8,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     Base class for NTK elements which consist of simple child text decorated with NTK attributes, and security
     ///     attributes.
@@ -71,21 +45,19 @@ namespace DDMSSense
         private const string ID_NAME = "id";
         private const string ID_REFERENCE_NAME = "IDReference";
         private const string QUALIFIER_NAME = "qualifier";
-        private readonly bool _tokenBased;
-        private SecurityAttributes _securityAttributes;
 
         /// <summary>
         ///     Base constructor which works from a XOM element.
         /// </summary>
         /// <param name="tokenBased"> true if the child text is an NMTOKEN, false if it's just a string </param>
         /// <param name="element"> the XOM element </param>
-        protected internal AbstractNtkString(bool tokenBased, Element element)
+        protected internal AbstractNtkString(bool tokenBased, XElement element)
         {
             try
             {
-                SetXOMElement(element, false);
-                _tokenBased = tokenBased;
-                _securityAttributes = new SecurityAttributes(element);
+                SetElement(element, false);
+                TokenBased = tokenBased;
+                SecurityAttributes = new SecurityAttributes(element);
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -113,14 +85,14 @@ namespace DDMSSense
             {
                 string ntkPrefix = PropertyReader.GetPrefix("ntk");
                 string ntkNamespace = DDMSVersion.GetCurrentVersion().NtkNamespace;
-                Element element = Util.Util.BuildElement(ntkPrefix, name, ntkNamespace, value);
+                XElement element = Util.Util.BuildElement(ntkPrefix, name, ntkNamespace, value);
                 Util.Util.AddAttribute(element, ntkPrefix, ID_NAME, ntkNamespace, id);
                 Util.Util.AddAttribute(element, ntkPrefix, ID_REFERENCE_NAME, ntkNamespace, idReference);
                 Util.Util.AddAttribute(element, ntkPrefix, QUALIFIER_NAME, ntkNamespace, qualifier);
-                _tokenBased = tokenBased;
-                _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-                _securityAttributes.AddTo(element);
-                SetXOMElement(element, validateNow);
+                TokenBased = tokenBased;
+                SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+                SecurityAttributes.AddTo(element);
+                SetElement(element, validateNow);
             }
             catch (InvalidDDMSException e)
             {
@@ -166,19 +138,12 @@ namespace DDMSSense
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
-        public override SecurityAttributes SecurityAttributes
-        {
-            get { return (_securityAttributes); }
-            set { _securityAttributes = value; }
-        }
+        public override SecurityAttributes SecurityAttributes { get; set; }
 
         /// <summary>
         ///     Accessor for whether this is an NMTOKEN-based string
         /// </summary>
-        private bool TokenBased
-        {
-            get { return (_tokenBased); }
-        }
+        private bool TokenBased { get; private set; }
 
         /// <summary>
         ///     Validates the component.
@@ -200,9 +165,8 @@ namespace DDMSSense
         protected internal override void Validate()
         {
             if (TokenBased)
-            {
                 Util.Util.RequireValidNMToken(Value);
-            }
+
             Util.Util.RequireDDMSValue("security attributes", SecurityAttributes);
             SecurityAttributes.RequireClassification();
 
@@ -212,26 +176,23 @@ namespace DDMSSense
             base.Validate();
         }
 
-        /// <see cref="object#equals(Object)"></see>
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj))
-            {
                 return (false);
-            }
-            var test = (AbstractNtkString) obj;
+
+            var test = (AbstractNtkString)obj;
             return (Value.Equals(test.Value) && ID.Equals(test.ID) && IDReference.Equals(test.IDReference) &&
                     Qualifier.Equals(test.Qualifier));
         }
 
-        /// <see cref="object#hashCode()"></see>
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + Value.GetHashCode();
-            result = 7*result + ID.GetHashCode();
-            result = 7*result + IDReference.GetHashCode();
-            result = 7*result + Qualifier.GetHashCode();
+            result = 7 * result + Value.GetHashCode();
+            result = 7 * result + ID.GetHashCode();
+            result = 7 * result + IDReference.GetHashCode();
+            result = 7 * result + Qualifier.GetHashCode();
             return (result);
         }
 
@@ -242,18 +203,11 @@ namespace DDMSSense
         ///         appropriate concrete object type.
         ///     </para>
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 2.0.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public abstract class Builder : IBuilder
         {
             internal const long SerialVersionUID = 7824644958681123708L;
-            internal string _id;
-            internal string _idReference;
-            internal string _qualifier;
-            internal SecurityAttributes.Builder _securityAttributes;
-            internal string _value;
 
 
             /// <summary>
@@ -261,6 +215,7 @@ namespace DDMSSense
             /// </summary>
             protected internal Builder()
             {
+                SecurityAttributes = new SecurityAttributes.Builder();
             }
 
             /// <summary>
@@ -278,58 +233,27 @@ namespace DDMSSense
             /// <summary>
             ///     Builder accessor for the child text.
             /// </summary>
-            public virtual string Value
-            {
-                get { return _value; }
-                set { _value = value; }
-            }
-
+            public virtual string Value { get; set; }
 
             /// <summary>
             ///     Builder accessor for the id
             /// </summary>
-            public virtual string ID
-            {
-                get { return _id; }
-                set { _id = value; }
-            }
-
+            public virtual string ID { get; set; }
 
             /// <summary>
             ///     Builder accessor for the idReference
             /// </summary>
-            public virtual string IDReference
-            {
-                get { return _idReference; }
-                set { _idReference = value; }
-            }
-
+            public virtual string IDReference { get; set; }
 
             /// <summary>
             ///     Builder accessor for the qualifier
             /// </summary>
-            public virtual string Qualifier
-            {
-                get { return _qualifier; }
-                set { _qualifier = value; }
-            }
-
+            public virtual string Qualifier { get; set; }
 
             /// <summary>
             ///     Builder accessor for the Security Attributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
 
             public abstract IDDMSComponent Commit();
 
@@ -341,8 +265,7 @@ namespace DDMSSense
             {
                 get
                 {
-                    return (String.IsNullOrEmpty(Value) && String.IsNullOrEmpty(ID) && String.IsNullOrEmpty(IDReference) &&
-                            String.IsNullOrEmpty(Qualifier) && SecurityAttributes.Empty);
+                    return (String.IsNullOrEmpty(Value) && String.IsNullOrEmpty(ID) && String.IsNullOrEmpty(IDReference) && String.IsNullOrEmpty(Qualifier) && SecurityAttributes.Empty);
                 }
             }
         }

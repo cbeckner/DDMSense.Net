@@ -116,7 +116,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
                 }
                 foreach (var value in individualValues)
                 {
-                    Element.Add(value.XOMElementCopy);
+                    Element.Add(value.ElementCopy);
                 }
                 _individualValues = individualValues;
                 Validate();

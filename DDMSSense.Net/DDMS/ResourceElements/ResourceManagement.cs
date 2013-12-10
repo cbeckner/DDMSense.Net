@@ -93,7 +93,7 @@ namespace DDMSSense.DDMS.ResourceElements
             RecordsManagementInfo = null;
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element recordsManagementInfo =
                     element.Element(XName.Get(RecordsManagementInfo.GetName(DDMSVersion), Namespace));
                 if (recordsManagementInfo != null)
@@ -153,22 +153,22 @@ namespace DDMSSense.DDMS.ResourceElements
                 }
 
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 if (recordsManagementInfo != null)
                 {
-                    element.Add(recordsManagementInfo.XOMElementCopy);
+                    element.Add(recordsManagementInfo.ElementCopy);
                 }
                 if (revisionRecall != null)
                 {
-                    element.Add(revisionRecall.XOMElementCopy);
+                    element.Add(revisionRecall.ElementCopy);
                 }
                 foreach (var info in taskingInfos)
                 {
-                    element.Add(info.XOMElementCopy);
+                    element.Add(info.ElementCopy);
                 }
                 foreach (var info in processingInfos)
                 {
-                    element.Add(info.XOMElementCopy);
+                    element.Add(info.ElementCopy);
                 }
 
                 RecordsManagementInfo = recordsManagementInfo;

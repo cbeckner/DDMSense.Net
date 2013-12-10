@@ -83,7 +83,7 @@ namespace DDMSSense.DDMS.ResourceElements
             RecordKeeper = null;
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element recordKeeper = element.Element(XName.Get(RecordKeeper.GetName(DDMSVersion), Namespace));
                 if (recordKeeper != null)
                 {
@@ -119,14 +119,14 @@ namespace DDMSSense.DDMS.ResourceElements
             try
             {
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 if (recordKeeper != null)
                 {
-                    element.Add(recordKeeper.XOMElementCopy);
+                    element.Add(recordKeeper.ElementCopy);
                 }
                 if (applicationSoftware != null)
                 {
-                    element.Add(applicationSoftware.XOMElementCopy);
+                    element.Add(applicationSoftware.ElementCopy);
                 }
                 Util.Util.AddDDMSAttribute(element, VITAL_RECORD_INDICATOR_NAME, Convert.ToString(vitalRecordIndicator));
                 RecordKeeper = recordKeeper;

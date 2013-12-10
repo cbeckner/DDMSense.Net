@@ -96,7 +96,7 @@ namespace DDMSSense.DDMS.FormatElements
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element mediaElement = MediaElement;
                 if (mediaElement != null)
                 {
@@ -143,7 +143,7 @@ namespace DDMSSense.DDMS.FormatElements
                 Util.Util.AddDDMSChildElement(mediaElement, MIME_TYPE_NAME, mimeType);
                 if (extent != null)
                 {
-                    mediaElement.Add(extent.XOMElementCopy);
+                    mediaElement.Add(extent.ElementCopy);
                 }
                 Util.Util.AddDDMSChildElement(mediaElement, MEDIUM_NAME, medium);
 
@@ -155,7 +155,7 @@ namespace DDMSSense.DDMS.FormatElements
                 _mimeType = mimeType;
                 _extent = extent;
                 _medium = medium;
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

@@ -93,7 +93,7 @@ namespace DDMSSense.DDMS.Summary
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
                 Util.Util.AddDDMSAttribute(element, BE_NUMBER_NAME, beNumber);
                 Util.Util.AddDDMSAttribute(element, OSUFFIX_NAME, osuffix);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

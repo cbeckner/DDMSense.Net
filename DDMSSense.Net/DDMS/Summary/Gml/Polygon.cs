@@ -103,7 +103,7 @@ namespace DDMSSense.DDMS.Summary.Gml
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 _positions = new List<Position>();
                 Element extElement = element.Element(XName.Get(EXTERIOR_NAME, Namespace));
                 if (extElement != null)
@@ -118,7 +118,7 @@ namespace DDMSSense.DDMS.Summary.Gml
                     }
                 }
                 _srsAttributes = new SRSAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -153,7 +153,7 @@ namespace DDMSSense.DDMS.Summary.Gml
                 Element ringElement = Util.Util.BuildElement(gmlPrefix, LINEAR_RING_NAME, gmlNamespace, null);
                 foreach (var pos in positions)
                 {
-                    ringElement.Add(pos.XOMElementCopy);
+                    ringElement.Add(pos.ElementCopy);
                 }
                 Element extElement = Util.Util.BuildElement(gmlPrefix, EXTERIOR_NAME, gmlNamespace, null);
                 extElement.Add(ringElement);
@@ -164,7 +164,7 @@ namespace DDMSSense.DDMS.Summary.Gml
                 _positions = positions;
                 _srsAttributes = SRSAttributes.GetNonNullInstance(srsAttributes);
                 _srsAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

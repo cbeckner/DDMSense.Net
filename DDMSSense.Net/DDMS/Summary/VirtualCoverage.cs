@@ -94,7 +94,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 _securityAttributes = new SecurityAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -119,7 +119,7 @@ namespace DDMSSense.DDMS.Summary
                 Util.Util.AddDDMSAttribute(element, PROTOCOL_NAME, protocol);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

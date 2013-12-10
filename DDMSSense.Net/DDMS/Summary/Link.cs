@@ -93,7 +93,7 @@ namespace DDMSSense.DDMS.Summary
             {
                 _xlinkAttributes = new XLinkAttributes(element);
                 _securityAttributes = new SecurityAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -126,7 +126,7 @@ namespace DDMSSense.DDMS.Summary
                 _xlinkAttributes.AddTo(element);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

@@ -138,7 +138,7 @@ namespace DDMSSense.DDMS.Summary
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element periodElement = TimePeriodElement;
                 if (periodElement != null)
                 {
@@ -259,7 +259,7 @@ namespace DDMSSense.DDMS.Summary
 
                 if (approximableStart != null)
                 {
-                    element.Add(approximableStart.XOMElementCopy);
+                    element.Add(approximableStart.ElementCopy);
                     _approximableStart = approximableStart;
                 }
                 else
@@ -270,7 +270,7 @@ namespace DDMSSense.DDMS.Summary
 
                 if (approximableEnd != null)
                 {
-                    element.Add(approximableEnd.XOMElementCopy);
+                    element.Add(approximableEnd.ElementCopy);
                     _approximableEnd = approximableEnd;
                 }
                 else
@@ -281,7 +281,7 @@ namespace DDMSSense.DDMS.Summary
 
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

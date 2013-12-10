@@ -84,7 +84,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 _noticeTexts = new List<NoticeText>();
                 IEnumerable<Element> noticeTexts =
                     element.Elements(XName.Get(NoticeText.GetName(DDMSVersion), DDMSVersion.IsmNamespace));
@@ -121,14 +121,14 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
                     version.IsmNamespace, null);
                 foreach (var noticeText in noticeTexts)
                 {
-                    element.Add(noticeText.XOMElementCopy);
+                    element.Add(noticeText.ElementCopy);
                 }
                 _noticeTexts = noticeTexts;
                 _noticeAttributes = NoticeAttributes.GetNonNullInstance(noticeAttributes);
                 _noticeAttributes.AddTo(element);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

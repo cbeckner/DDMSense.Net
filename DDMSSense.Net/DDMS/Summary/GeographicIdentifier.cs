@@ -102,7 +102,7 @@ namespace DDMSSense.DDMS.Summary
             Names = null;
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 DDMSVersion version = DDMSVersion;
                 Names = Util.Util.GetDDMSChildValues(element, NAME_NAME);
                 Regions = Util.Util.GetDDMSChildValues(element, REGION_NAME);
@@ -166,17 +166,17 @@ namespace DDMSSense.DDMS.Summary
                 }
                 if (countryCode != null)
                 {
-                    element.Add(countryCode.XOMElementCopy);
+                    element.Add(countryCode.ElementCopy);
                 }
                 if (subDivisionCode != null)
                 {
-                    element.Add(subDivisionCode.XOMElementCopy);
+                    element.Add(subDivisionCode.ElementCopy);
                 }
                 Names = names;
                 Regions = regions;
                 _countryCode = countryCode;
                 _subDivisionCode = subDivisionCode;
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -195,12 +195,12 @@ namespace DDMSSense.DDMS.Summary
             Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
             if (facilityIdentifier != null)
             {
-                element.Add(facilityIdentifier.XOMElementCopy);
+                element.Add(facilityIdentifier.ElementCopy);
             }
             Names = new List<string>();
             Regions = new List<string>();
             _facilityIdentifier = facilityIdentifier;
-            SetXOMElement(element, true);
+            SetElement(element, true);
         }
 
         /// <see cref="AbstractBaseComponent#getNestedComponents()"></see>

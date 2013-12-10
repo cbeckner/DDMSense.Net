@@ -92,14 +92,14 @@ namespace DDMSSense.DDMS.Summary.Gml
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element posElement = element.Element(XName.Get(Position.GetName(DDMSVersion), Namespace));
                 if (posElement != null)
                 {
                     _position = new Position(posElement);
                 }
                 _srsAttributes = new SRSAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -127,7 +127,7 @@ namespace DDMSSense.DDMS.Summary.Gml
                     version.GmlNamespace, null);
                 if (position != null)
                 {
-                    element.Add(position.XOMElementCopy);
+                    element.Add(position.ElementCopy);
                 }
                 Util.Util.AddAttribute(element, PropertyReader.GetPrefix("gml"), ID_NAME,
                     DDMSVersion.GetCurrentVersion().GmlNamespace, id);
@@ -135,7 +135,7 @@ namespace DDMSSense.DDMS.Summary.Gml
                 _position = position;
                 _srsAttributes = SRSAttributes.GetNonNullInstance(srsAttributes);
                 _srsAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

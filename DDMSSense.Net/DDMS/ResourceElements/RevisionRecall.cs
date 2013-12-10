@@ -139,7 +139,7 @@ namespace DDMSSense.DDMS.ResourceElements
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 _links = new List<Link>();
                 IEnumerable<Element> links = element.Elements(XName.Get(Link.GetName(DDMSVersion), Namespace));
                 foreach (var link in links)
@@ -244,11 +244,11 @@ namespace DDMSSense.DDMS.ResourceElements
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), value);
                 foreach (var link in links)
                 {
-                    element.Add(link.XOMElementCopy);
+                    element.Add(link.ElementCopy);
                 }
                 foreach (var detail in details)
                 {
-                    element.Add(detail.XOMElementCopy);
+                    element.Add(detail.ElementCopy);
                 }
                 if (revisionID != null)
                 {
@@ -264,7 +264,7 @@ namespace DDMSSense.DDMS.ResourceElements
                 _xlinkAttributes.AddTo(element);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

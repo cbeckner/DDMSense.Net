@@ -86,7 +86,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 IEnumerable<Element> values = element.Elements(XName.Get(Profile.GetName(DDMSVersion), Namespace));
                 _profiles = new List<Profile>();
                 values.ToList().ForEach(p => _profiles.Add(new Profile(p)));
@@ -114,14 +114,14 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
                 DDMSVersion version = DDMSVersion.GetCurrentVersion();
                 Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("ntk"), GetName(version),
                     version.NtkNamespace, null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 if (profiles == null)
                 {
                     profiles = new List<Profile>();
                 }
                 foreach (var profile in profiles)
                 {
-                    Element.Add(profile.XOMElementCopy);
+                    Element.Add(profile.ElementCopy);
                 }
                 _profiles = profiles;
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);

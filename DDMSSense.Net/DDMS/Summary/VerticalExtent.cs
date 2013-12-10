@@ -122,7 +122,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 Util.Util.RequireDDMSValue("verticalExtent element", element);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 _min = GetChildTextAsDouble(element, MinVerticalExtentName);
                 _max = GetChildTextAsDouble(element, MaxVerticalExtentName);
                 Validate();
@@ -147,7 +147,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Util.Util.AddDDMSAttribute(element, UOM_NAME, unitOfMeasure);
                 Util.Util.AddDDMSAttribute(element, DATUM_NAME, datum);
                 element.Add(Util.Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(minVerticalExtent)));

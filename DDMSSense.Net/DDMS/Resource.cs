@@ -239,7 +239,7 @@ namespace DDMSSense.DDMS
             Dates = null;
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 string @namespace = element.Name.NamespaceName;
                 string ismNamespace = DDMSVersion.IsmNamespace;
 
@@ -693,9 +693,9 @@ namespace DDMSSense.DDMS
                 PopulatedOrderedList();
                 foreach (var component in TopLevelComponents)
                 {
-                    element.Add(component.XOMElementCopy);
+                    element.Add(component.ElementCopy);
                 }
-                SetXOMElement(element, true);
+                SetElement(element, true);
                 DDMSReader.ValidateWithSchema(ToXML());
             }
             catch (InvalidDDMSException e)

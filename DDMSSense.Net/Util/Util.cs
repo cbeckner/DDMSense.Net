@@ -18,41 +18,10 @@ using DDMSSense.Extensions;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-
-   This file is part of DDMSence.
-
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public
-   License as published by the Free Software Foundation.
-
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-   GNU Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.Util
 {
-    #region usings
-
-    using Attribute = XAttribute;
-    using Document = XDocument;
-    using Element = XElement;
-    using Node = XNode;
-
-    #endregion
-
     /// <summary>
     ///     A collection of static utility methods.
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
     /// </summary>
     public class Util
     {
@@ -142,7 +111,7 @@ namespace DDMSSense.Util
         /// <param name="attributeName"> the name of the attribute </param>
         /// <param name="namespaceURI"> the namespace this attribute is in </param>
         /// <param name="attributeValue"> the value of the attribute </param>
-        public static void AddAttribute(Element element, string prefix, string attributeName, string namespaceURI,
+        public static void AddAttribute(XElement element, string prefix, string attributeName, string namespaceURI,
             string attributeValue)
         {
             if (!String.IsNullOrEmpty(attributeValue))
@@ -158,7 +127,7 @@ namespace DDMSSense.Util
         /// <param name="element"> the element to decorate </param>
         /// <param name="attributeName"> the name of the attribute (will be within the DDMS namespace) </param>
         /// <param name="attributeValue"> the value of the attribute </param>
-        public static void AddDDMSAttribute(Element element, string attributeName, string attributeValue)
+        public static void AddDDMSAttribute(XElement element, string attributeName, string attributeValue)
         {
             AddAttribute(element, PropertyReader.GetPrefix("ddms"), attributeName,
                 DDMSVersion.GetCurrentVersion().Namespace, attributeValue);
@@ -171,7 +140,7 @@ namespace DDMSSense.Util
         /// <param name="element"> the element to decorate </param>
         /// <param name="childName"> the name of the child (will be within the DDMS namespace) </param>
         /// <param name="childValue"> the value of the attribute </param>
-        public static void AddDDMSChildElement(Element element, string childName, string childValue)
+        public static void AddDDMSChildElement(XElement element, string childName, string childValue)
         {
             if (!String.IsNullOrEmpty(childValue))
             {
@@ -196,7 +165,7 @@ namespace DDMSSense.Util
         /// <param name="name"> the local name of the attribute </param>
         /// <param name="namespaceURI"> the namespace this attribute is in </param>
         /// <param name="value"> the value of the attribute </param>
-        public static Attribute BuildAttribute(string prefix, string name, string namespaceURI, string value)
+        public static XAttribute BuildAttribute(string prefix, string name, string namespaceURI, string value)
         {
             RequireValue("name", name);
             RequireValue("value", value);
@@ -205,7 +174,7 @@ namespace DDMSSense.Util
             {
                 namespaceURI = "";
             }
-            return (new Attribute(XName.Get(prefix + name, namespaceURI), value));
+            return (new XAttribute(XName.Get(prefix + name, namespaceURI), value));
         }
 
         /// <summary>
@@ -214,7 +183,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="name"> the local name of the attribute </param>
         /// <param name="value"> the value of the attribute </param>
-        public static Attribute BuildDDMSAttribute(string name, string value)
+        public static XAttribute BuildDDMSAttribute(string name, string value)
         {
             return
                 (BuildAttribute(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace, value));
@@ -226,7 +195,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="name"> the local name of the element </param>
         /// <param name="childText"> the text of the element (optional) </param>
-        public static Element BuildDDMSElement(string name, string childText)
+        public static XElement BuildDDMSElement(string name, string childText)
         {
             return
                 (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace,
@@ -241,11 +210,11 @@ namespace DDMSSense.Util
         /// <param name="name"> the local name of the element </param>
         /// <param name="namespaceURI"> the namespace this element is in </param>
         /// <param name="childText"> the text of the element (optional) </param>
-        public static Element BuildElement(string prefix, string name, string namespaceURI, string childText)
+        public static XElement BuildElement(string prefix, string name, string namespaceURI, string childText)
         {
             RequireValue("name", name);
             prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix + ":");
-            var element = new Element(prefix + name, namespaceURI);
+            var element = new XElement(prefix + name, namespaceURI);
             if (!String.IsNullOrEmpty(childText))
             {
                 element.Add(childText);
@@ -271,7 +240,7 @@ namespace DDMSSense.Util
         /// <exception cref="XSLException"> if stylesheet transformation fails </exception>
         public static XslCompiledTransform BuildSchematronTransform(string schematronFile)
         {
-            Document schDocument = BuildXmlDocument(File.OpenRead(schematronFile));
+            XDocument schDocument = BuildXmlDocument(File.OpenRead(schematronFile));
             string queryBinding = GetSchematronQueryBinding(schDocument);
 
             //		long time = new Date().getTime();
@@ -307,7 +276,7 @@ namespace DDMSSense.Util
         /// <param name="inputStream"> the input stream containing the XML document </param>
         /// <returns> a XOM Document </returns>
         /// <exception cref="IOException"> if there are problems loading or parsing the input stream </exception>
-        public static Document BuildXmlDocument(Stream inputStream)
+        public static XDocument BuildXmlDocument(Stream inputStream)
         {
             RequireValue("input stream", inputStream);
             try
@@ -354,7 +323,7 @@ namespace DDMSSense.Util
         /// <param name="parent"> the parent element </param>
         /// <param name="name"> the name of the child element </param>
         /// <returns> a List of strings, where each string is child text of matching elements </returns>
-        public static List<string> GetDDMSChildValues(Element parent, string name)
+        public static List<string> GetDDMSChildValues(XElement parent, string name)
         {
             RequireValue("parent element", parent);
             RequireValue("child name", name);
@@ -363,7 +332,7 @@ namespace DDMSSense.Util
                 throw new ArgumentException("This method should only be called on an element in the DDMS namespace.");
             }
             var childTexts = new List<string>();
-            IEnumerable<Element> childElements = parent.Elements(XName.Get(name, parent.Name.NamespaceName));
+            IEnumerable<XElement> childElements = parent.Elements(XName.Get(name, parent.Name.NamespaceName));
             foreach (var el in childElements)
             {
                 childTexts.Add(el.Value);
@@ -377,7 +346,7 @@ namespace DDMSSense.Util
         /// <param name="parent"> the parent element </param>
         /// <param name="name"> the name of the child element </param>
         /// <returns> the child text of the first discovered child element </returns>
-        public static string GetFirstDDMSChildValue(Element parent, string name)
+        public static string GetFirstDDMSChildValue(XElement parent, string name)
         {
             RequireValue("parent element", parent);
             RequireValue("child name", name);
@@ -385,7 +354,7 @@ namespace DDMSSense.Util
             {
                 throw new ArgumentException("This method should only be called on an element in the DDMS namespace.");
             }
-            Element child = parent.Element(XName.Get(name, parent.Name.NamespaceName));
+            XElement child = parent.Element(XName.Get(name, parent.Name.NamespaceName));
             return (child == null ? "" : child.Value);
         }
 
@@ -405,9 +374,9 @@ namespace DDMSSense.Util
         /// <param name="schDocument"> the Schematron file as an XML Document </param>
         /// <returns> the value of the queryBinding attribute, or "xslt" if undefined. </returns>
         /// <exception cref="IOException"> if there are file-related problems with looking up the attribute </exception>
-        public static string GetSchematronQueryBinding(Document schDocument)
+        public static string GetSchematronQueryBinding(XDocument schDocument)
         {
-            Attribute attr = schDocument.Root.Attribute("queryBinding");
+            XAttribute attr = schDocument.Root.Attribute("queryBinding");
             return (attr == null ? "xslt" : attr.Value);
         }
 
@@ -515,7 +484,7 @@ namespace DDMSSense.Util
         /// <param name="lowBound">		the lowest value the number can be </param>
         /// <param name="highBound">		the highest value the number can be </param>
         /// <exception cref="InvalidDDMSException"> if the number is out of bounds </exception>
-        public static void RequireBoundedChildCount(Element parent, string childName, int lowBound, int highBound)
+        public static void RequireBoundedChildCount(XElement parent, string childName, int lowBound, int highBound)
         {
             RequireValue("parent element", parent);
             RequireValue("child name", childName);
@@ -631,7 +600,7 @@ namespace DDMSSense.Util
         /// <param name="element"> the element to check </param>
         /// <param name="localName"> the local name to compare to </param>
         /// <exception cref="InvalidDDMSException"> if the name is incorrect </exception>
-        public static void RequireDDMSQName(Element element, string localName)
+        public static void RequireDDMSQName(XElement element, string localName)
         {
             RequireValue("element", element);
             RequireValue("local name", localName);
@@ -681,7 +650,7 @@ namespace DDMSSense.Util
         /// <param name="namespaceURI"> the namespace to check </param>
         /// <param name="localName"> the local name to compare to </param>
         /// <exception cref="IllegalArgumentException"> if the name is incorrect </exception>
-        public static void RequireQualifiedName(Element element, string namespaceURI, string localName)
+        public static void RequireQualifiedName(XElement element, string namespaceURI, string localName)
         {
             RequireValue("element", element);
             RequireValue("local name", localName);
@@ -844,7 +813,7 @@ namespace DDMSSense.Util
                     {
                         Stream schematronStylesheet =
                             Assembly.GetCallingAssembly().GetManifestResourceStream(resourceName);
-                        Document svrlStylesheet = BuildXmlDocument(schematronStylesheet);
+                        XDocument svrlStylesheet = BuildXmlDocument(schematronStylesheet);
 
                         // XOM passes the Base URI to Xalan as the SystemId, which cannot be empty.
                         //TODO: Find alternative for loading XSLT from resource location into a compiled transform

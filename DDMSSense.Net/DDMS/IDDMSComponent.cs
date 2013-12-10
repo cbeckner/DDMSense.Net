@@ -116,7 +116,7 @@ namespace DDMSSense.DDMS
         ///     Accessor for a copy of the underlying XOM element. This allows a XOM tree to be built from DDMS data when
         ///     traversing a list of IDDMSComponents.
         /// </summary>
-        Element XOMElementCopy { get; }
+        Element ElementCopy { get; }
 
         /// <summary>
         ///     Renders this component as HTML.

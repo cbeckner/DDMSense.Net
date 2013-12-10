@@ -100,7 +100,7 @@ namespace DDMSSense.DDMS.ResourceElements
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 _acquiredOns = new List<ApproximableDate>();
                 IEnumerable<Element> acquiredOns = element.Elements(XName.Get(ACQUIRED_ON_NAME, Namespace));
                 foreach (var el in acquiredOns)
@@ -158,7 +158,7 @@ namespace DDMSSense.DDMS.ResourceElements
                 _acquiredOns = acquiredOns;
                 foreach (var acquiredOn in acquiredOns)
                 {
-                    element.Add(acquiredOn.XOMElementCopy);
+                    element.Add(acquiredOn.ElementCopy);
                 }
 
                 Util.Util.AddDDMSAttribute(element, CREATED_NAME, created);
@@ -167,7 +167,7 @@ namespace DDMSSense.DDMS.ResourceElements
                 Util.Util.AddDDMSAttribute(element, INFO_CUT_OFF_NAME, infoCutOff);
                 Util.Util.AddDDMSAttribute(element, APPROVED_ON_NAME, approvedOn);
                 Util.Util.AddDDMSAttribute(element, RECEIVED_ON_NAME, receivedOn);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

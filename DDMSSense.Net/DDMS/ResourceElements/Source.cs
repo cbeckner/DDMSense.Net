@@ -90,7 +90,7 @@ namespace DDMSSense.DDMS.ResourceElements
             try
             {
                 _securityAttributes = new SecurityAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -119,7 +119,7 @@ namespace DDMSSense.DDMS.ResourceElements
                 Util.Util.AddDDMSAttribute(element, SCHEMA_HREF_NAME, schemaHref);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

@@ -113,7 +113,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 Util.Util.RequireDDMSValue("subjectCoverage element", element);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element subjectElement = SubjectElement;
                 _keywords = new List<Keyword>();
                 _categories = new List<Category>();
@@ -185,19 +185,19 @@ namespace DDMSSense.DDMS.Summary
                     : Util.Util.BuildDDMSElement(SUBJECT_NAME, null);
                 foreach (var keyword in keywords)
                 {
-                    subjectElement.Add(keyword.XOMElementCopy);
+                    subjectElement.Add(keyword.ElementCopy);
                 }
                 foreach (var category in categories)
                 {
-                    subjectElement.Add(category.XOMElementCopy);
+                    subjectElement.Add(category.ElementCopy);
                 }
                 foreach (var metric in productionMetrics)
                 {
-                    subjectElement.Add(metric.XOMElementCopy);
+                    subjectElement.Add(metric.ElementCopy);
                 }
                 foreach (var actor in nonStateActors)
                 {
-                    subjectElement.Add(actor.XOMElementCopy);
+                    subjectElement.Add(actor.ElementCopy);
                 }
 
                 if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1"))
@@ -211,7 +211,7 @@ namespace DDMSSense.DDMS.Summary
                 _nonStateActors = nonStateActors;
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

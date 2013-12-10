@@ -113,7 +113,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
                 }
                 foreach (var value in groupValues)
                 {
-                    Element.Add(value.XOMElementCopy);
+                    Element.Add(value.ElementCopy);
                 }
                 _groupValues = groupValues;
                 Validate();

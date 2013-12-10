@@ -81,7 +81,7 @@ namespace DDMSSense.DDMS.ResourceElements
             Util.Util.AddDDMSAttribute(element, PRIVACY_ACT_NAME, Convert.ToString(privacyAct));
             Util.Util.AddDDMSAttribute(element, INTELLECTUAL_PROPERY_NAME, Convert.ToString(intellectualProperty));
             Util.Util.AddDDMSAttribute(element, COPYRIGHT_NAME, Convert.ToString(copyright));
-            SetXOMElement(element, true);
+            SetElement(element, true);
             // This cannot actually throw an exception, so locator information is not inserted in a catch statement.
         }
 

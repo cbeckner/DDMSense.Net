@@ -156,7 +156,7 @@ namespace DDMSSense.DDMS.ResourceElements
                 Util.Util.AddDDMSAttribute(Element, ACRONYM_NAME, acronym);
                 foreach (var subOrganization in subOrganizations)
                 {
-                    Element.Add(subOrganization.XOMElementCopy);
+                    Element.Add(subOrganization.ElementCopy);
                 }
                 _subOrganizations = subOrganizations;
                 Validate();

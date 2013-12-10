@@ -157,7 +157,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 Util.Util.RequireDDMSValue("element", element);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element innerElement = InnerElement;
                 if (innerElement != null)
                 {
@@ -206,7 +206,7 @@ namespace DDMSSense.DDMS.Summary
                 Util.Util.AddDDMSAttribute(innerElement, VALUE_NAME, value);
                 foreach (var link in links)
                 {
-                    innerElement.Add(link.XOMElementCopy);
+                    innerElement.Add(link.ElementCopy);
                 }
 
                 if (!version.IsAtLeast("4.0.1"))
@@ -216,7 +216,7 @@ namespace DDMSSense.DDMS.Summary
                 _links = links;
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

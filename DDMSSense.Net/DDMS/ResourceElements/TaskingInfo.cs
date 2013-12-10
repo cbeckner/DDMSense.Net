@@ -93,7 +93,7 @@ namespace DDMSSense.DDMS.ResourceElements
             try
             {
                 Util.Util.RequireDDMSValue("element", element);
-                SetXOMElement(element, false);
+                SetElement(element, false);
 
                 _requesterInfos = new List<RequesterInfo>();
                 IEnumerable<Element> infos = element.Elements(XName.Get(RequesterInfo.GetName(DDMSVersion), Namespace));
@@ -151,22 +151,22 @@ namespace DDMSSense.DDMS.ResourceElements
                 }
 
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 foreach (var info in requesterInfos)
                 {
-                    element.Add(info.XOMElementCopy);
+                    element.Add(info.ElementCopy);
                 }
                 foreach (var addressee in addressees)
                 {
-                    element.Add(addressee.XOMElementCopy);
+                    element.Add(addressee.ElementCopy);
                 }
                 if (description != null)
                 {
-                    element.Add(description.XOMElementCopy);
+                    element.Add(description.ElementCopy);
                 }
                 if (taskID != null)
                 {
-                    element.Add(taskID.XOMElementCopy);
+                    element.Add(taskID.ElementCopy);
                 }
 
                 _requesterInfos = requesterInfos;

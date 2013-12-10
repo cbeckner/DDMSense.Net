@@ -12,34 +12,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     Base class for DDMS producer elements, such as ddms:creator and ddms:contributor.
     ///     <para>
@@ -77,49 +51,39 @@ namespace DDMSSense
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
-    ///     @since 2.0.0
     /// </summary>
     public abstract class AbstractProducerRole : AbstractBaseComponent
     {
         private const string POC_TYPE_NAME = "pocType";
-        private readonly IRoleEntity _entity;
-        private List<string> _pocTypes;
-        private SecurityAttributes _securityAttributes;
 
         /// <summary>
         ///     Base constructor
         /// </summary>
         /// <param name="element"> the XOM element representing this component </param>
-        protected internal AbstractProducerRole(Element element)
+        protected internal AbstractProducerRole(XElement element)
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 if (element.Elements().Count() > 0)
                 {
-                    var entityElement = (XElement) element.FirstNode;
+                    var entityElement = (XElement)element.FirstNode;
                     string entityType = entityElement.Name.LocalName;
                     if (Organization.GetName(DDMSVersion).Equals(entityType))
-                    {
-                        _entity = new Organization(entityElement);
-                    }
+                        Entity = new Organization(entityElement);
+
                     if (Person.GetName(DDMSVersion).Equals(entityType))
-                    {
-                        _entity = new Person(entityElement);
-                    }
+                        Entity = new Person(entityElement);
+
                     if (Service.GetName(DDMSVersion).Equals(entityType))
-                    {
-                        _entity = new Service(entityElement);
-                    }
+                        Entity = new Service(entityElement);
+
                     if (Unknown.GetName(DDMSVersion).Equals(entityType))
-                    {
-                        _entity = new Unknown(entityElement);
-                    }
+                        Entity = new Unknown(entityElement);
                 }
                 string pocTypes = element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace)).Value;
-                _pocTypes = Util.Util.GetXsListAsList(pocTypes);
-                _securityAttributes = new SecurityAttributes(element);
+                PocTypes = Util.Util.GetXsListAsList(pocTypes);
+                SecurityAttributes = new SecurityAttributes(element);
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -142,23 +106,21 @@ namespace DDMSSense
             try
             {
                 if (pocTypes == null)
-                {
                     pocTypes = new List<string>();
-                }
+
                 Util.Util.RequireDDMSValue("producer type", producerType);
                 Util.Util.RequireDDMSValue("entity", entity);
-                Element element = Util.Util.BuildDDMSElement(producerType, null);
-                element.Add(entity.XOMElementCopy);
-                _entity = entity;
+                XElement element = Util.Util.BuildDDMSElement(producerType, null);
+                element.Add(entity.ElementCopy);
+                Entity = entity;
+
                 if (pocTypes.Count > 0)
-                {
-                    Util.Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME,
-                        DDMSVersion.GetCurrentVersion().IsmNamespace, Util.Util.GetXsList(pocTypes));
-                }
-                _pocTypes = pocTypes;
-                _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-                _securityAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                    Util.Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME, DDMSVersion.GetCurrentVersion().IsmNamespace, Util.Util.GetXsList(pocTypes));
+
+                PocTypes = pocTypes;
+                SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+                SecurityAttributes.AddTo(element);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -167,7 +129,6 @@ namespace DDMSSense
             }
         }
 
-        /// <see cref="AbstractBaseComponent#getNestedComponents()"></see>
         protected internal override List<IDDMSComponent> NestedComponents
         {
             get
@@ -181,28 +142,17 @@ namespace DDMSSense
         /// <summary>
         ///     Accessor for the entity fulfilling this producer role
         /// </summary>
-        public virtual IRoleEntity Entity
-        {
-            get { return _entity; }
-        }
+        public virtual IRoleEntity Entity { get; private set; }
 
         /// <summary>
         ///     Accessor for the pocType attribute.
         /// </summary>
-        public virtual List<string> PocTypes
-        {
-            get { return (_pocTypes); }
-            set { _pocTypes = value; }
-        }
+        public virtual List<string> PocTypes { get; set; }
 
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
-        public override SecurityAttributes SecurityAttributes
-        {
-            get { return (_securityAttributes); }
-            set { _securityAttributes = value; }
-        }
+        public override SecurityAttributes SecurityAttributes { get; set; }
 
         /// <summary>
         ///     Validates the component.
@@ -246,31 +196,27 @@ namespace DDMSSense
             base.Validate();
         }
 
-        /// <see cref="object#equals(Object)"></see>
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is AbstractProducerRole))
-            {
                 return (false);
-            }
-            var test = (AbstractProducerRole) obj;
+
+            var test = (AbstractProducerRole)obj;
             return (Util.Util.ListEquals(PocTypes, test.PocTypes));
         }
 
-        /// <see cref="object#hashCode()"></see>
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + PocTypes.GetHashCode();
+            result = 7 * result + PocTypes.GetHashCode();
             return (result);
         }
 
-        /// <see cref="AbstractBaseComponent#getOutput(boolean, String, String)"></see>
         public override string GetOutput(bool isHtml, string prefix, string suffix)
         {
             string localPrefix = BuildPrefix(prefix, Name, suffix + ".");
             var text = new StringBuilder();
-            text.Append(((AbstractBaseComponent) Entity).GetOutput(isHtml, localPrefix, ""));
+            text.Append(((AbstractBaseComponent)Entity).GetOutput(isHtml, localPrefix, ""));
             text.Append(BuildOutput(isHtml, localPrefix + POC_TYPE_NAME, Util.Util.GetXsList(PocTypes)));
             text.Append(SecurityAttributes.GetOutput(isHtml, localPrefix));
             return (text.ToString());
@@ -284,27 +230,23 @@ namespace DDMSSense
         ///         concrete object type.
         ///     </para>
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 2.0.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public abstract class Builder : IBuilder
         {
             internal const long SerialVersionUID = -1694935853087559491L;
-
-            internal string _entityType;
-            internal Organization.Builder _organization;
-            internal Person.Builder _person;
-            internal List<string> _pocTypes;
-            internal SecurityAttributes.Builder _securityAttributes;
-            internal Service.Builder _service;
-            internal Unknown.Builder _unknown;
 
             /// <summary>
             ///     Base constructor
             /// </summary>
             protected internal Builder()
             {
+                Organization = new Organization.Builder();
+                SecurityAttributes = new SecurityAttributes.Builder();
+                Person = new Person.Builder();
+                Service = new Service.Builder();
+                Unknown = new Unknown.Builder();
+                PocTypes = new List<string>();
             }
 
             /// <summary>
@@ -315,21 +257,17 @@ namespace DDMSSense
                 EntityType = producer.Entity.Name;
                 DDMSVersion version = producer.DDMSVersion;
                 if (DDMS.ResourceElements.Organization.GetName(version).Equals(EntityType))
-                {
-                    Organization = new Organization.Builder((Organization) producer.Entity);
-                }
+                    Organization = new Organization.Builder((Organization)producer.Entity);
+
                 if (DDMS.ResourceElements.Person.GetName(version).Equals(EntityType))
-                {
-                    Person = new Person.Builder((Person) producer.Entity);
-                }
+                    Person = new Person.Builder((Person)producer.Entity);
+
                 if (DDMS.ResourceElements.Service.GetName(version).Equals(EntityType))
-                {
-                    Service = new Service.Builder((Service) producer.Entity);
-                }
+                    Service = new Service.Builder((Service)producer.Entity);
+
                 if (DDMS.ResourceElements.Unknown.GetName(version).Equals(EntityType))
-                {
-                    Unknown = new Unknown.Builder((Unknown) producer.Entity);
-                }
+                    Unknown = new Unknown.Builder((Unknown)producer.Entity);
+
                 PocTypes = producer.PocTypes;
                 SecurityAttributes = new SecurityAttributes.Builder(producer.SecurityAttributes);
             }
@@ -337,114 +275,38 @@ namespace DDMSSense
             /// <summary>
             ///     Builder accessor for the Security Attributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
-
-
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
+            
             /// <summary>
             ///     Builder accessor for the entityType, which determines which of the 4 entity builders are used.
             /// </summary>
-            public virtual string EntityType
-            {
-                get { return _entityType; }
-                set { _entityType = value; }
-            }
-
-
+            public virtual string EntityType { get; set; }
+            
             /// <summary>
             ///     Builder accessor for the organization builder
             /// </summary>
-            public virtual Organization.Builder Organization
-            {
-                get
-                {
-                    if (_organization == null)
-                    {
-                        _organization = new Organization.Builder();
-                    }
-                    return _organization;
-                }
-                set { _organization = value; }
-            }
-
-
+            public virtual Organization.Builder Organization{ get; set; }
+           
             /// <summary>
             ///     Builder accessor for the person builder
             /// </summary>
-            public virtual Person.Builder Person
-            {
-                get
-                {
-                    if (_person == null)
-                    {
-                        _person = new Person.Builder();
-                    }
-                    return _person;
-                }
-                set { _person = value; }
-            }
-
-
+            public virtual Person.Builder Person{ get; set; }
+            
             /// <summary>
             ///     Builder accessor for the service builder
             /// </summary>
-            public virtual Service.Builder Service
-            {
-                get
-                {
-                    if (_service == null)
-                    {
-                        _service = new Service.Builder();
-                    }
-                    return _service;
-                }
-                set { _service = value; }
-            }
-
-
+            public virtual Service.Builder Service{ get; set; }
+            
             /// <summary>
             ///     Builder accessor for the unknown builder
             /// </summary>
-            public virtual Unknown.Builder Unknown
-            {
-                get
-                {
-                    if (_unknown == null)
-                    {
-                        _unknown = new Unknown.Builder();
-                    }
-                    return _unknown;
-                }
-                set { _unknown = value; }
-            }
-
-
+            public virtual Unknown.Builder Unknown{ get; set; }
+            
             /// <summary>
             ///     Builder accessor for the pocTypes
             /// </summary>
-            public virtual List<string> PocTypes
-            {
-                get
-                {
-                    if (_pocTypes == null)
-                    {
-                        _pocTypes = new List<string>();
-                    }
-                    return _pocTypes;
-                }
-                set { _pocTypes = value; }
-            }
-
+            public virtual List<string> PocTypes{ get; set; }
+            
             public abstract IDDMSComponent Commit();
 
             /// <summary>
@@ -467,22 +329,16 @@ namespace DDMSSense
             protected internal virtual IRoleEntity CommitSelectedEntity()
             {
                 DDMSVersion version = DDMSVersion.GetCurrentVersion();
-                if (DDMS.ResourceElements.Organization.GetName(version)
-                    .Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return ((Organization) Organization.Commit());
-                }
-                if (DDMS.ResourceElements.Person.GetName(version)
-                    .Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return ((Person) Person.Commit());
-                }
-                if (DDMS.ResourceElements.Service.GetName(version)
-                    .Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return ((Service) Service.Commit());
-                }
-                return ((Unknown) Unknown.Commit());
+                if (DDMS.ResourceElements.Organization.GetName(version).Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
+                    return ((Organization)Organization.Commit());
+
+                if (DDMS.ResourceElements.Person.GetName(version).Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
+                    return ((Person)Person.Commit());
+
+                if (DDMS.ResourceElements.Service.GetName(version).Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
+                    return ((Service)Service.Commit());
+
+                return ((Unknown)Unknown.Commit());
             }
         }
     }

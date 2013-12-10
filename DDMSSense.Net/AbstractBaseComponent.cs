@@ -12,34 +12,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
- */
-
 namespace DDMSSense
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     Top-level base class for all DDMS elements and attributes modeled as Java objects.
     ///     <para>
@@ -54,7 +28,7 @@ namespace DDMSSense
     /// </summary>
     public abstract class AbstractBaseComponent : IDDMSComponent
     {
-        private Element _element;
+        private XElement _element;
         private List<ValidationMessage> _warnings;
 
         /// <summary>
@@ -68,11 +42,11 @@ namespace DDMSSense
         ///     Base constructor
         /// </summary>
         /// <param name="element"> the XOM element representing this component </param>
-        protected internal AbstractBaseComponent(Element element)
+        protected internal AbstractBaseComponent(XElement element)
         {
             try
             {
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -129,9 +103,8 @@ namespace DDMSSense
             get
             {
                 if (_warnings == null)
-                {
                     _warnings = new List<ValidationMessage>();
-                }
+
                 return (_warnings);
             }
         }
@@ -139,7 +112,7 @@ namespace DDMSSense
         /// <summary>
         ///     Accessor for the XOM element representing this component
         /// </summary>
-        protected internal virtual Element Element
+        protected internal virtual XElement Element
         {
             get { return _element; }
         }
@@ -220,9 +193,9 @@ namespace DDMSSense
         /// <summary>
         ///     Accessor for a copy of the underlying XOM element
         /// </summary>
-        public virtual Element XOMElementCopy
+        public virtual XElement ElementCopy
         {
-            get { return (new Element(_element)); }
+            get { return (new XElement(_element)); }
         }
 
         /// <summary>
@@ -249,9 +222,8 @@ namespace DDMSSense
             foreach (var nested in NestedComponents)
             {
                 if (nested is ExtensibleElement || nested == null)
-                {
                     continue;
-                }
+
                 Util.Util.RequireCompatibleVersion(this, nested);
             }
             ValidateWarnings();
@@ -280,15 +252,11 @@ namespace DDMSSense
             foreach (var nested in NestedComponents)
             {
                 if (nested == null)
-                {
                     continue;
-                }
                 AddWarnings(nested.ValidationWarnings, false);
             }
             if (SecurityAttributes != null)
-            {
                 AddWarnings(SecurityAttributes.ValidationWarnings, true);
-            }
         }
 
         /// <summary>
@@ -329,9 +297,8 @@ namespace DDMSSense
         public static string BuildOutput(bool isHTML, string name, string content)
         {
             if (String.IsNullOrEmpty(content))
-            {
                 return ("");
-            }
+
             var tag = new StringBuilder();
             tag.Append(isHTML ? "<meta name=\"" : "");
             tag.Append(isHTML ? Util.Util.XmlEscape(name) : name);
@@ -356,18 +323,11 @@ namespace DDMSSense
             {
                 object @object = contents[i];
                 if (@object is AbstractBaseComponent)
-                {
-                    values.Append(((AbstractBaseComponent) @object).GetOutput(isHTML, prefix,
-                        BuildIndex(i, contents.Count)));
-                }
+                    values.Append(((AbstractBaseComponent)@object).GetOutput(isHTML, prefix, BuildIndex(i, contents.Count)));
                 else if (@object is string)
-                {
-                    values.Append(BuildOutput(isHTML, prefix + BuildIndex(i, contents.Count), (string) @object));
-                }
+                    values.Append(BuildOutput(isHTML, prefix + BuildIndex(i, contents.Count), (string)@object));
                 else
-                {
                     values.Append(BuildOutput(isHTML, prefix + BuildIndex(i, contents.Count), Convert.ToString(@object)));
-                }
             }
             return (values.ToString());
         }
@@ -381,8 +341,7 @@ namespace DDMSSense
         /// <returns> a String containing the concatenated values </returns>
         protected internal virtual string BuildPrefix(string prefix, string token, string suffix)
         {
-            return (Util.Util.GetNonNullString(prefix) + Util.Util.GetNonNullString(token) +
-                    Util.Util.GetNonNullString(suffix));
+            return (Util.Util.GetNonNullString(prefix) + Util.Util.GetNonNullString(token) + Util.Util.GetNonNullString(suffix));
         }
 
         /// <summary>
@@ -397,23 +356,18 @@ namespace DDMSSense
         protected internal virtual string BuildIndex(int index, int total)
         {
             if (total < 1)
-            {
                 throw new ArgumentException("The total must be at least 1.");
-            }
+
             if (index < 0 || index >= total)
-            {
                 throw new ArgumentException("The index is not properly bounded between 0 and " + (total - 1));
-            }
 
             string indexLevel = PropertyReader.GetProperty("output.indexLevel");
             if ("2".Equals(indexLevel))
-            {
                 return ("[" + (index + 1) + "]");
-            }
+
             if ("1".Equals(indexLevel) && (total > 1))
-            {
                 return ("[" + (index + 1) + "]");
-            }
+
             return ("");
         }
 
@@ -445,7 +399,7 @@ namespace DDMSSense
         /// </summary>
         /// <param name="name"> the local name to search for </param>
         /// <returns> the element, or null if it does not exist </returns>
-        protected internal virtual Element GetChild(string name)
+        protected internal virtual XElement GetChild(string name)
         {
             Util.Util.RequireValue("name", name);
             return (Element.Element(XName.Get(name, Namespace)));
@@ -458,15 +412,14 @@ namespace DDMSSense
         /// <param name="element"> the parent element </param>
         /// <param name="name"> the local name of the child </param>
         /// <returns> a Double, or null if it cannot be created </returns>
-        protected internal static double? GetChildTextAsDouble(Element element, string name)
+        protected internal static double? GetChildTextAsDouble(XElement element, string name)
         {
             Util.Util.RequireValue("element", element);
             Util.Util.RequireValue("name", name);
-            Element childElement = element.Element(XName.Get(name, element.Name.NamespaceName));
+            XElement childElement = element.Element(XName.Get(name, element.Name.NamespaceName));
             if (childElement == null)
-            {
                 return (null);
-            }
+
             return (GetStringAsDouble(childElement.Value));
         }
 
@@ -495,10 +448,7 @@ namespace DDMSSense
         protected internal virtual void RequireVersion(string version)
         {
             if (!DDMSVersion.IsAtLeast(version))
-            {
-                throw new InvalidDDMSException("The " + Name + " element cannot be used until DDMS " + version +
-                                               " or later.");
-            }
+                throw new InvalidDDMSException("The " + Name + " element cannot be used until DDMS " + version + " or later.");
         }
 
         /// <summary>
@@ -513,15 +463,14 @@ namespace DDMSSense
         public override bool Equals(object obj)
         {
             if (obj == this)
-            {
                 return (true);
-            }
+            
             if (!(obj is AbstractBaseComponent) || !(GetType().Equals(obj.GetType())))
-            {
                 return (false);
-            }
-            var test = (AbstractBaseComponent) obj;
-            return (Name.Equals(test.Name) && Namespace.Equals(test.Namespace) &&
+            
+            var test = (AbstractBaseComponent)obj;
+            return (Name.Equals(test.Name) && 
+                    Namespace.Equals(test.Namespace) &&
                     Util.Util.ListEquals(NestedComponents, test.NestedComponents) &&
                     Util.Util.NullEquals(SecurityAttributes, test.SecurityAttributes));
         }
@@ -534,19 +483,18 @@ namespace DDMSSense
         public override int GetHashCode()
         {
             int result = Name.GetHashCode();
-            result = 7*result + Namespace.GetHashCode();
+            result = 7 * result + Namespace.GetHashCode();
             foreach (var nested in NestedComponents)
             {
                 if (nested == null)
-                {
                     continue;
-                }
-                result = 7*result + nested.GetHashCode();
+                
+                result = 7 * result + nested.GetHashCode();
             }
+            
             if (SecurityAttributes != null)
-            {
-                result = 7*result + SecurityAttributes.GetHashCode();
-            }
+                result = 7 * result + SecurityAttributes.GetHashCode();
+            
             return (result);
         }
 
@@ -596,14 +544,12 @@ namespace DDMSSense
         /// </summary>
         /// <param name="element"> the XOM element to use </param>
         /// <param name="validateNow"> whether to validate the component immediately after setting </param>
-        protected internal virtual void SetXOMElement(Element element, bool validateNow)
+        protected internal virtual void SetElement(XElement element, bool validateNow)
         {
             Util.Util.RequireDDMSValue("XOM Element", element);
             _element = element;
             if (validateNow)
-            {
                 Validate();
-            }
         }
     }
 }

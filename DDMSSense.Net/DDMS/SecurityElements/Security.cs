@@ -93,7 +93,7 @@ namespace DDMSSense.DDMS.SecurityElements
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Element noticeListElement = element.Element(XName.Get(NoticeList.GetName(DDMSVersion), Namespace));
                 if (noticeListElement != null)
                 {
@@ -131,11 +131,11 @@ namespace DDMSSense.DDMS.SecurityElements
                 Element element = Util.Util.BuildDDMSElement(GetName(version), null);
                 if (noticeList != null)
                 {
-                    element.Add(noticeList.XOMElementCopy);
+                    element.Add(noticeList.ElementCopy);
                 }
                 if (access != null)
                 {
-                    element.Add(access.XOMElementCopy);
+                    element.Add(access.ElementCopy);
                 }
                 if (DDMSVersion.GetCurrentVersion().IsAtLeast("3.0"))
                 {
@@ -149,7 +149,7 @@ namespace DDMSSense.DDMS.SecurityElements
                 {
                     securityAttributes.AddTo(element);
                 }
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

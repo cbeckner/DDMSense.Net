@@ -76,7 +76,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 Util.Util.RequireDDMSValue("boundingGeometry element", element);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 string gmlNamespace = DDMSVersion.GmlNamespace;
                 _polygons = new List<Polygon>();
                 _points = new List<Point>();
@@ -114,15 +114,15 @@ namespace DDMSSense.DDMS.Summary
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
                 foreach (var polygon in polygons)
                 {
-                    element.Add(polygon.XOMElementCopy);
+                    element.Add(polygon.ElementCopy);
                 }
                 foreach (var point in points)
                 {
-                    element.Add(point.XOMElementCopy);
+                    element.Add(point.ElementCopy);
                 }
                 _polygons = polygons;
                 _points = points;
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

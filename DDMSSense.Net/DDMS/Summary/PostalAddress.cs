@@ -92,7 +92,7 @@ namespace DDMSSense.DDMS.Summary
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 Streets = Util.Util.GetDDMSChildValues(element, StreetName);
                 Element cityElement = element.Element(XName.Get(CityName, Namespace));
                 if (cityElement != null)
@@ -167,7 +167,7 @@ namespace DDMSSense.DDMS.Summary
                 Util.Util.AddDDMSChildElement(element, PostalCodeName, postalCode);
                 if (countryCode != null)
                 {
-                    element.Add(countryCode.XOMElementCopy);
+                    element.Add(countryCode.ElementCopy);
                 }
                 Streets = streets;
                 _city = city;
@@ -175,7 +175,7 @@ namespace DDMSSense.DDMS.Summary
                 _province = hasState ? "" : stateOrProvince;
                 _postalCode = postalCode;
                 _countryCode = countryCode;
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

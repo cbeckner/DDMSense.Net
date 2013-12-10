@@ -135,7 +135,7 @@ namespace DDMSSense.DDMS
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public ApproximableDate(Element element)
         {
-            base.SetXOMElement(element, true);
+            base.SetElement(element, true);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace DDMSSense.DDMS
             try
             {
                 Element element = Util.Util.BuildDDMSElement(name, null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
 
                 if (!String.IsNullOrEmpty(description))
                 {

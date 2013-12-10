@@ -83,7 +83,7 @@ namespace DDMSSense.DDMS.Summary.Gml
         {
             try
             {
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 List<string> tuple = Util.Util.GetXsListAsList(CoordinatesAsXsList);
                 _coordinates = new List<double?>();
                 foreach (var coordinate in tuple)
@@ -91,7 +91,7 @@ namespace DDMSSense.DDMS.Summary.Gml
                     _coordinates.Add(GetStringAsDouble(coordinate));
                 }
                 _srsAttributes = new SRSAttributes(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {
@@ -123,7 +123,7 @@ namespace DDMSSense.DDMS.Summary.Gml
                 _coordinates = coordinates;
                 _srsAttributes = SRSAttributes.GetNonNullInstance(srsAttributes);
                 _srsAttributes.AddTo(element);
-                SetXOMElement(element, true);
+                SetElement(element, true);
             }
             catch (InvalidDDMSException e)
             {

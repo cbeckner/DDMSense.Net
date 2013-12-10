@@ -73,7 +73,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 Util.Util.RequireDDMSValue("boundingBox element", element);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 _westBL = GetChildTextAsDouble(element, WestBLName);
                 _eastBL = GetChildTextAsDouble(element, EastBLName);
                 _southBL = GetChildTextAsDouble(element, SouthBLName);
@@ -100,7 +100,7 @@ namespace DDMSSense.DDMS.Summary
             try
             {
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
-                SetXOMElement(element, false);
+                SetElement(element, false);
                 element.Add(Util.Util.BuildDDMSElement(WestBLName, Convert.ToString(westBL)));
                 element.Add(Util.Util.BuildDDMSElement(EastBLName, Convert.ToString(eastBL)));
                 element.Add(Util.Util.BuildDDMSElement(SouthBLName, Convert.ToString(southBL)));
