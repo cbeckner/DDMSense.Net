@@ -70,7 +70,7 @@ namespace DDMSSense.DDMS.Extensible
     ///         Details about the XOM Element class can be found at:
     ///         <i>http://www.xom.nu/apidocs/index.html?nu/xom/Element.html</i>
     ///     </para>
-    ///     @author Brian Uri!
+    
     ///     @since 1.1.0
     /// </summary>
     public sealed class ExtensibleElement : AbstractBaseComponent

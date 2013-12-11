@@ -67,8 +67,8 @@ namespace DDMSSense.DDMS.Summary.Gml
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    
+    
     /// </summary>
     public sealed class SRSAttributes : AbstractAttributeGroup
     {

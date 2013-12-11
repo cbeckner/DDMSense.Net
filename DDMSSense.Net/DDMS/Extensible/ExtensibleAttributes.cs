@@ -88,7 +88,7 @@ namespace DDMSSense.DDMS.Extensible
     ///         Details about the XOM Attribute class can be found at:
     ///         <i>http://www.xom.nu/apidocs/index.html?nu/xom/Attribute.html</i>
     ///     </para>
-    ///     @author Brian Uri!
+    
     ///     @since 1.1.0
     /// </summary>
     public sealed class ExtensibleAttributes : AbstractAttributeGroup

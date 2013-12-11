@@ -14,7 +14,7 @@ namespace DDMSSense.DDMS
     ///         calling
     ///         commit() on a Builder without setting any values would just return null.
     ///     </para>
-    ///     @author Brian Uri!
+    
     ///     @since 1.8.0
     /// </summary>
     public interface IBuilder

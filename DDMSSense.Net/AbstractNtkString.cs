@@ -37,7 +37,7 @@ namespace DDMSSense
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
+    
     ///     @since 2.0.0
     /// </summary>
     public abstract class AbstractNtkString : AbstractBaseComponent

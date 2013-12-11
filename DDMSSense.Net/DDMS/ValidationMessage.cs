@@ -4,26 +4,6 @@ using System.Text;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS
 {
     /// <summary>
@@ -66,8 +46,6 @@ namespace DDMSSense.DDMS
         /// </summary>
         public const string ELEMENT_PREFIX = "/";
 
-        private readonly string _text;
-        private readonly string _type;
         private string _locator;
 
         /// <summary>
@@ -82,26 +60,20 @@ namespace DDMSSense.DDMS
         private ValidationMessage(string type, string text, string locator)
         {
             Util.Util.RequireValue("text", text);
-            _type = type;
-            _text = text;
+            Type = type;
+            Text = text;
             Locator = locator;
         }
 
         /// <summary>
         ///     Accessor for the type
         /// </summary>
-        public virtual string Type
-        {
-            get { return _type; }
-        }
+        public virtual string Type {get; private set;}
 
         /// <summary>
         ///     Accessor for the text
         /// </summary>
-        public virtual string Text
-        {
-            get { return _text; }
-        }
+        public virtual string Text { get; private set; }
 
         /// <summary>
         ///     Accessor for the locator
@@ -140,7 +112,6 @@ namespace DDMSSense.DDMS
             return (new ValidationMessage(ERROR_TYPE, text, locator));
         }
 
-        /// <see cref="object#toString()"></see>
         public override string ToString()
         {
             var text = new StringBuilder();
@@ -148,22 +119,18 @@ namespace DDMSSense.DDMS
             return (text.ToString());
         }
 
-        /// <see cref="object#equals(Object)"></see>
         public override bool Equals(object obj)
         {
             if (obj == this)
-            {
                 return (true);
-            }
+            
             if (!(obj is ValidationMessage))
-            {
                 return (false);
-            }
+            
             var test = (ValidationMessage) obj;
             return (Type.Equals(test.Type) && Text.Equals(test.Text) && Locator.Equals(test.Locator));
         }
 
-        /// <see cref="object#hashCode()"></see>
         public override int GetHashCode()
         {
             int result = Type.GetHashCode();

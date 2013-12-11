@@ -79,7 +79,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
     ///         </li>
     ///     </ul>
     ///     <para>Some of these vocabularies include regular expression patterns.</para>
-    ///     @author Brian Uri!
+    
     ///     @since 0.9.d
     /// </summary>
     public class ISMVocabulary

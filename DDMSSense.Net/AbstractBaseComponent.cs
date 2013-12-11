@@ -23,8 +23,8 @@ namespace DDMSSense
     ///         will be
     ///         well-formed and valid.
     ///     </para>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    
+    
     /// </summary>
     public abstract class AbstractBaseComponent : IDDMSComponent
     {

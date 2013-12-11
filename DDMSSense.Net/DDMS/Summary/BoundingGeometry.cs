@@ -58,8 +58,8 @@ namespace DDMSSense.DDMS.Summary
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    
+    
     /// </summary>
     public sealed class BoundingGeometry : AbstractBaseComponent
     {

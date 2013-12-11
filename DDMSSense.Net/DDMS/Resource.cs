@@ -20,26 +20,6 @@ using Type = DDMSSense.DDMS.ResourceElements.Type;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
- */
-
 namespace DDMSSense.DDMS
 {
     #region usings
@@ -153,9 +133,7 @@ namespace DDMSSense.DDMS
     ///                 Please see the "Power Tips" on the Extensible Layer (on the DDMSence home page) for details.
     ///             </td>
     ///         </tr>
-    ///     </table>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    ///     </table>       
     /// </summary>
     public sealed class Resource : AbstractBaseComponent
     {
@@ -187,35 +165,8 @@ namespace DDMSSense.DDMS
         public static readonly List<string> NON_EXTENSIBLE_NAMES = ALL_IC_ATTRIBUTES;
 
         private readonly List<GeospatialCoverage> GeospatialCoverages_Renamed = new List<GeospatialCoverage>();
-        private readonly List<Contributor> _contributors = new List<Contributor>();
-        private readonly List<Creator> _creators = new List<Creator>();
-        private readonly List<ExtensibleElement> _extensibleElements = new List<ExtensibleElement>();
-
-        private readonly List<Identifier> _identifiers = new List<Identifier>();
-        private readonly List<Language> _languages = new List<Language>();
-        private readonly List<IDDMSComponent> _orderedList = new List<IDDMSComponent>();
-        private readonly List<PointOfContact> _pointOfContacts = new List<PointOfContact>();
-        private readonly List<Publisher> _publishers = new List<Publisher>();
-        private readonly List<RelatedResource> _relatedResources = new List<RelatedResource>();
-        private readonly List<Source> _sources = new List<Source>();
-        private readonly List<SubjectCoverage> _subjectCoverages = new List<SubjectCoverage>();
-        private readonly List<Subtitle> _subtitles = new List<Subtitle>();
-        private readonly List<TemporalCoverage> _temporalCoverages = new List<TemporalCoverage>();
-        private readonly List<Title> _titles = new List<Title>();
-        private readonly List<Type> _types = new List<Type>();
-        private readonly List<VirtualCoverage> _virtualCoverages = new List<VirtualCoverage>();
-        internal List<string> _compliesWiths = null;
         private DateTime? _createDate;
-        private Description _description;
-        private ExtensibleAttributes _extensibleAttributes;
-        private Format _format;
-        private int? _ismDESVersion;
-        private MetacardInfo _metacardInfo;
-        private NoticeAttributes _noticeAttributes;
-        private int? _ntkDESVersion;
-        private ResourceManagement _resourceManagement;
-        private Security _security;
-        private SecurityAttributes _securityAttributes;
+        internal List<IDDMSComponent> _orderedList = new List<IDDMSComponent>();
 
         static Resource()
         {
@@ -237,6 +188,23 @@ namespace DDMSSense.DDMS
         {
             Rights = null;
             Dates = null;
+            Identifiers = new List<Identifier>();
+            Titles = new List<Title>();
+            Subtitles = new List<Subtitle>();
+            Languages = new List<Language>();
+            Sources = new List<Source>();
+            Types = new List<Type>();
+            Creators = new List<Creator>();
+            Publishers = new List<Publisher>();
+            Contributors = new List<Contributor>();
+            PointOfContacts = new List<PointOfContact>();
+            SubjectCoverages = new List<SubjectCoverage>();
+            VirtualCoverages = new List<VirtualCoverage>();
+            TemporalCoverages = new List<TemporalCoverage>();
+            RelatedResources = new List<RelatedResource>();
+            ExtensibleElements = new List<ExtensibleElement>();
+            CompliesWiths = null;
+
             try
             {
                 SetElement(element, false);
@@ -245,16 +213,15 @@ namespace DDMSSense.DDMS
 
                 string createDate = GetAttributeValue(CREATE_DATE_NAME, ismNamespace);
                 if (!String.IsNullOrEmpty(createDate))
-                {
                     _createDate = DateTime.Parse(createDate);
-                }
-                _compliesWiths = Util.Util.GetXsListAsList(GetAttributeValue(COMPLIES_WITH_NAME, ismNamespace));
+
+                CompliesWiths = Util.Util.GetXsListAsList(GetAttributeValue(COMPLIES_WITH_NAME, ismNamespace));
                 string ismDESVersion = element.Attribute(XName.Get(DES_VERSION_NAME, ismNamespace)).Value;
                 if (!String.IsNullOrEmpty(ismDESVersion))
                 {
                     try
                     {
-                        _ismDESVersion = Convert.ToInt32(ismDESVersion);
+                        IsmDESVersion = Convert.ToInt32(ismDESVersion);
                     }
                     catch (FormatException)
                     {
@@ -269,7 +236,7 @@ namespace DDMSSense.DDMS
                     {
                         try
                         {
-                            _ntkDESVersion = Convert.ToInt32(ntkDESVersion);
+                            NtkDESVersion = Convert.ToInt32(ntkDESVersion);
                         }
                         catch (FormatException)
                         {
@@ -277,93 +244,87 @@ namespace DDMSSense.DDMS
                         }
                     }
                 }
-                _noticeAttributes = new NoticeAttributes(element);
-                _securityAttributes = new SecurityAttributes(element);
-                _extensibleAttributes = new ExtensibleAttributes(element);
+                NoticeAttributes = new NoticeAttributes(element);
+                SecurityAttributes = new SecurityAttributes(element);
+                ExtensibleAttributes = new ExtensibleAttributes(element);
 
                 DDMSVersion version = DDMSVersion;
 
                 // Metacard Set
                 Element component = GetChild(MetacardInfo.GetName(version));
                 if (component != null)
-                {
-                    _metacardInfo = new MetacardInfo(component);
-                }
+                    MetacardInfo = new MetacardInfo(component);
+
                 // Resource Set
                 IEnumerable<Element> components = element.Elements(XName.Get(Identifier.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _identifiers.Add(new Identifier(component));
+                    Identifiers.Add(new Identifier(component));
 
                 components = element.Elements(XName.Get(Title.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _titles.Add(new Title(component));
+                    Titles.Add(new Title(component));
 
                 components = element.Elements(XName.Get(Subtitle.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _subtitles.Add(new Subtitle(component));
+                    Subtitles.Add(new Subtitle(component));
 
                 component = GetChild(Description.GetName(version));
                 if (component != null)
-                {
-                    _description = new Description(component);
-                }
+                    Description = new Description(component);
+
                 components = element.Elements(XName.Get(Language.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _languages.Add(new Language(component));
+                    Languages.Add(new Language(component));
 
                 component = GetChild(Dates.GetName(version));
                 if (component != null)
-                {
                     Dates = new Dates(component);
-                }
+
                 component = GetChild(Rights.GetName(version));
                 if (component != null)
-                {
                     Rights = new Rights(component);
-                }
+
                 components = element.Elements(XName.Get(Source.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _sources.Add(new Source(component));
+                    Sources.Add(new Source(component));
 
                 components = element.Elements(XName.Get(Type.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _types.Add(new Type(component));
+                    Types.Add(new Type(component));
 
                 components = element.Elements(XName.Get(Creator.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _creators.Add(new Creator(component));
+                    Creators.Add(new Creator(component));
 
                 components = element.Elements(XName.Get(Publisher.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _publishers.Add(new Publisher(component));
+                    Publishers.Add(new Publisher(component));
 
                 components = element.Elements(XName.Get(Contributor.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _contributors.Add(new Contributor(component));
+                    Contributors.Add(new Contributor(component));
 
                 components = element.Elements(XName.Get(PointOfContact.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _pointOfContacts.Add(new PointOfContact(component));
+                    PointOfContacts.Add(new PointOfContact(component));
 
                 // Format Set
                 component = GetChild(Format.GetName(version));
                 if (component != null)
-                {
-                    _format = new Format(component);
-                }
+                    Format = new Format(component);
 
                 // Summary Set
                 components = element.Elements(XName.Get(SubjectCoverage.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _subjectCoverages.Add(new SubjectCoverage(component));
+                    SubjectCoverages.Add(new SubjectCoverage(component));
 
                 components = element.Elements(XName.Get(VirtualCoverage.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _virtualCoverages.Add(new VirtualCoverage(component));
+                    VirtualCoverages.Add(new VirtualCoverage(component));
 
                 components = element.Elements(XName.Get(TemporalCoverage.GetName(version), @namespace));
                 foreach (var comp in components)
-                    _temporalCoverages.Add(new TemporalCoverage(component));
+                    TemporalCoverages.Add(new TemporalCoverage(component));
 
                 components = element.Elements(XName.Get(GeospatialCoverage.GetName(version), @namespace));
                 foreach (var comp in components)
@@ -376,24 +337,21 @@ namespace DDMSSense.DDMS
                 // Resource Set again
                 component = GetChild(ResourceManagement.GetName(version));
                 if (component != null)
-                {
-                    _resourceManagement = new ResourceManagement(component);
-                }
+                    ResourceManagement = new ResourceManagement(component);
 
                 // Security Set
                 component = GetChild(Security.GetName(version));
                 if (component != null)
                 {
-                    _security = new Security(component);
+                    Security = new Security(component);
 
                     // Extensible Layer
 
                     // We use the security component to locate the extensible layer. If it is null, this resource is going
                     // to fail validation anyhow, so we skip the extensible layer.
-                    int index = 0;
                     IEnumerable<Element> allElements = element.Elements();
                     foreach (var el in allElements)
-                        _extensibleElements.Add(new ExtensibleElement(el));
+                        ExtensibleElements.Add(new ExtensibleElement(el));
                 }
                 PopulatedOrderedList();
                 Validate();
@@ -439,11 +397,8 @@ namespace DDMSSense.DDMS
         ///     if any required information is missing or malformed, or if one of the components
         ///     does not belong at the top-level of the Resource.
         /// </exception>
-        public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate,
-            int? ismDESVersion, SecurityAttributes securityAttributes, ExtensibleAttributes extensibleAttributes)
-            : this(
-                topLevelComponents, resourceElement, createDate, null, ismDESVersion, null, securityAttributes, null,
-                extensibleAttributes)
+        public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, int? ismDESVersion, SecurityAttributes securityAttributes, ExtensibleAttributes extensibleAttributes)
+            : this(topLevelComponents, resourceElement, createDate, null, ismDESVersion, null, securityAttributes, null, extensibleAttributes)
         {
         }
 
@@ -468,12 +423,8 @@ namespace DDMSSense.DDMS
         ///     if any required information is missing or malformed, or if one of the components
         ///     does not belong at the top-level of the Resource.
         /// </exception>
-        public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate,
-            List<string> compliesWiths, int? ismDESVersion, SecurityAttributes securityAttributes,
-            ExtensibleAttributes extensibleAttributes)
-            : this(
-                topLevelComponents, resourceElement, createDate, compliesWiths, ismDESVersion, null, securityAttributes,
-                null, extensibleAttributes)
+        public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, List<string> compliesWiths, int? ismDESVersion, SecurityAttributes securityAttributes, ExtensibleAttributes extensibleAttributes)
+            : this(topLevelComponents, resourceElement, createDate, compliesWiths, ismDESVersion, null, securityAttributes, null, extensibleAttributes)
         {
         }
 
@@ -512,22 +463,33 @@ namespace DDMSSense.DDMS
         ///     if any required information is missing or malformed, or if one of the components
         ///     does not belong at the top-level of the Resource.
         /// </exception>
-        public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate,
-            List<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion, SecurityAttributes securityAttributes,
-            NoticeAttributes noticeAttributes, ExtensibleAttributes extensibleAttributes)
+        public Resource(List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, List<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion, SecurityAttributes securityAttributes, NoticeAttributes noticeAttributes, ExtensibleAttributes extensibleAttributes)
         {
             Rights = null;
             Dates = null;
+            Identifiers = new List<Identifier>();
+            Titles = new List<Title>();
+            Subtitles = new List<Subtitle>();
+            Languages = new List<Language>();
+            Sources = new List<Source>();
+            Types = new List<Type>();
+            Creators = new List<Creator>();
+            Publishers = new List<Publisher>();
+            Contributors = new List<Contributor>();
+            PointOfContacts = new List<PointOfContact>();
+            SubjectCoverages = new List<SubjectCoverage>();
+            VirtualCoverages = new List<VirtualCoverage>();
+            TemporalCoverages = new List<TemporalCoverage>();
+            RelatedResources = new List<RelatedResource>();
+            ExtensibleElements = new List<ExtensibleElement>();
+            CompliesWiths = null;
             try
             {
                 if (topLevelComponents == null)
-                {
                     topLevelComponents = new List<IDDMSComponent>();
-                }
+
                 if (compliesWiths == null)
-                {
                     compliesWiths = new List<string>();
-                }
 
                 DDMSVersion version = DDMSVersion.GetCurrentVersion();
                 string ismPrefix = PropertyReader.GetPrefix("ism");
@@ -537,27 +499,25 @@ namespace DDMSSense.DDMS
                 Element element = Util.Util.BuildDDMSElement(GetName(version), null);
 
                 // Attributes
-                _compliesWiths = compliesWiths;
+                CompliesWiths = compliesWiths;
                 if (compliesWiths.Count > 0)
-                {
-                    Util.Util.AddAttribute(element, ismPrefix, COMPLIES_WITH_NAME, ismNamespace,
-                        Util.Util.GetXsList(compliesWiths));
-                }
+                    Util.Util.AddAttribute(element, ismPrefix, COMPLIES_WITH_NAME, ismNamespace, Util.Util.GetXsList(compliesWiths));
+
                 if (ntkDESVersion != null)
                 {
-                    _ntkDESVersion = ntkDESVersion;
+                    NtkDESVersion = ntkDESVersion;
                     Util.Util.AddAttribute(element, ntkPrefix, DES_VERSION_NAME, ntkNamespace, ntkDESVersion.ToString());
                 }
+
                 if (resourceElement != null)
-                {
-                    Util.Util.AddAttribute(element, ismPrefix, RESOURCE_ELEMENT_NAME, ismNamespace,
-                        Convert.ToString(resourceElement));
-                }
+                    Util.Util.AddAttribute(element, ismPrefix, RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(resourceElement));
+
                 if (ismDESVersion != null)
                 {
-                    _ismDESVersion = ismDESVersion;
+                    IsmDESVersion = ismDESVersion;
                     Util.Util.AddAttribute(element, ismPrefix, DES_VERSION_NAME, ismNamespace, ismDESVersion.ToString());
                 }
+
                 if (!String.IsNullOrEmpty(createDate))
                 {
                     try
@@ -571,130 +531,77 @@ namespace DDMSSense.DDMS
                     Util.Util.AddAttribute(element, ismPrefix, CREATE_DATE_NAME, version.IsmNamespace,
                         CreateDate.ToString("o"));
                 }
-                _noticeAttributes = NoticeAttributes.GetNonNullInstance(noticeAttributes);
-                _noticeAttributes.AddTo(element);
-                _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-                _securityAttributes.AddTo(element);
-                _extensibleAttributes = ExtensibleAttributes.GetNonNullInstance(extensibleAttributes);
-                _extensibleAttributes.AddTo(element);
+                NoticeAttributes = NoticeAttributes.GetNonNullInstance(noticeAttributes);
+                NoticeAttributes.AddTo(element);
+                SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+                SecurityAttributes.AddTo(element);
+                ExtensibleAttributes = ExtensibleAttributes.GetNonNullInstance(extensibleAttributes);
+                ExtensibleAttributes.AddTo(element);
 
                 foreach (var component in topLevelComponents)
                 {
                     if (component == null)
-                    {
                         continue;
-                    }
 
                     // Metacard Set
                     if (component is MetacardInfo)
-                    {
-                        _metacardInfo = (MetacardInfo) component;
-                    }
-                        // Resource Set
+                        MetacardInfo = (MetacardInfo)component;
+                    // Resource Set
                     else if (component is Identifier)
-                    {
-                        _identifiers.Add((Identifier) component);
-                    }
+                        Identifiers.Add((Identifier)component);
                     else if (component is Title)
-                    {
-                        _titles.Add((Title) component);
-                    }
+                        Titles.Add((Title)component);
                     else if (component is Subtitle)
-                    {
-                        _subtitles.Add((Subtitle) component);
-                    }
+                        Subtitles.Add((Subtitle)component);
                     else if (component is Description)
-                    {
-                        _description = (Description) component;
-                    }
+                        Description = (Description)component;
                     else if (component is Language)
-                    {
-                        _languages.Add((Language) component);
-                    }
+                        Languages.Add((Language)component);
                     else if (component is Dates)
-                    {
-                        Dates = (Dates) component;
-                    }
+                        Dates = (Dates)component;
                     else if (component is Rights)
-                    {
-                        Rights = (Rights) component;
-                    }
+                        Rights = (Rights)component;
                     else if (component is Source)
-                    {
-                        _sources.Add((Source) component);
-                    }
+                        Sources.Add((Source)component);
                     else if (component is Type)
-                    {
-                        _types.Add((Type) component);
-                    }
+                        Types.Add((Type)component);
                     else if (component is Creator)
-                    {
-                        _creators.Add((Creator) component);
-                    }
+                        Creators.Add((Creator)component);
                     else if (component is Publisher)
-                    {
-                        _publishers.Add((Publisher) component);
-                    }
+                        Publishers.Add((Publisher)component);
                     else if (component is Contributor)
-                    {
-                        _contributors.Add((Contributor) component);
-                    }
+                        Contributors.Add((Contributor)component);
                     else if (component is PointOfContact)
-                    {
-                        _pointOfContacts.Add((PointOfContact) component);
-                    }
-                        // Format Set
+                        PointOfContacts.Add((PointOfContact)component);
+                    // Format Set
                     else if (component is Format)
-                    {
-                        _format = (Format) component;
-                    }
-                        // Summary Set
+                        Format = (Format)component;
+                    // Summary Set
                     else if (component is SubjectCoverage)
-                    {
-                        _subjectCoverages.Add((SubjectCoverage) component);
-                    }
+                        SubjectCoverages.Add((SubjectCoverage)component);
                     else if (component is VirtualCoverage)
-                    {
-                        _virtualCoverages.Add((VirtualCoverage) component);
-                    }
+                        VirtualCoverages.Add((VirtualCoverage)component);
                     else if (component is TemporalCoverage)
-                    {
-                        _temporalCoverages.Add((TemporalCoverage) component);
-                    }
+                        TemporalCoverages.Add((TemporalCoverage)component);
                     else if (component is GeospatialCoverage)
-                    {
-                        GeospatialCoverages_Renamed.Add((GeospatialCoverage) component);
-                    }
+                        GeospatialCoverages_Renamed.Add((GeospatialCoverage)component);
                     else if (component is RelatedResource)
-                    {
-                        _relatedResources.Add((RelatedResource) component);
-                    }
-                        // Resource Set again
+                        RelatedResources.Add((RelatedResource)component);
+                    // Resource Set again
                     else if (component is ResourceManagement)
-                    {
-                        _resourceManagement = (ResourceManagement) component;
-                    }
-                        // Security Set
+                        ResourceManagement = (ResourceManagement)component;
+                    // Security Set
                     else if (component is Security)
-                    {
-                        _security = (Security) component;
-                    }
-                        // Extensible Layer
+                        Security = (Security)component;
+                    // Extensible Layer
                     else if (component is ExtensibleElement)
-                    {
-                        _extensibleElements.Add((ExtensibleElement) component);
-                    }
+                        ExtensibleElements.Add((ExtensibleElement)component);
                     else
-                    {
-                        throw new InvalidDDMSException(component.Name +
-                                                       " is not a valid top-level component in a resource.");
-                    }
+                        throw new InvalidDDMSException(component.Name + " is not a valid top-level component in a resource.");
                 }
                 PopulatedOrderedList();
                 foreach (var component in TopLevelComponents)
-                {
                     element.Add(component.ElementCopy);
-                }
                 SetElement(element, true);
                 DDMSReader.ValidateWithSchema(ToXML());
             }
@@ -708,52 +615,32 @@ namespace DDMSSense.DDMS
         /// <summary>
         ///     Accessor for the MetacardInfo component (exactly 1)
         /// </summary>
-        public MetacardInfo MetacardInfo
-        {
-            get { return (_metacardInfo); }
-            set { _metacardInfo = value; }
-        }
+        public MetacardInfo MetacardInfo { get; set; }
 
         /// <summary>
         ///     Accessor for the identifier components. There will always be at least one.
         /// </summary>
-        public List<Identifier> Identifiers
-        {
-            get { return _identifiers; }
-        }
+        public List<Identifier> Identifiers { get; private set; }
 
         /// <summary>
         ///     Accessor for the title components. There will always be at least one.
         /// </summary>
-        public List<Title> Titles
-        {
-            get { return _titles; }
-        }
+        public List<Title> Titles { get; private set; }
 
         /// <summary>
         ///     Accessor for the subtitle components (0-many)
         /// </summary>
-        public List<Subtitle> Subtitles
-        {
-            get { return _subtitles; }
-        }
+        public List<Subtitle> Subtitles { get; private set; }
 
         /// <summary>
         ///     Accessor for the description component (0-1)
         /// </summary>
-        public Description Description
-        {
-            get { return (_description); }
-            set { _description = value; }
-        }
+        public Description Description { get; set; }
 
         /// <summary>
         ///     Accessor for the language components (0-many)
         /// </summary>
-        public List<Language> Languages
-        {
-            get { return _languages; }
-        }
+        public List<Language> Languages { get; private set; }
 
         /// <summary>
         ///     Accessor for the dates component (0-1). May return null.
@@ -768,83 +655,52 @@ namespace DDMSSense.DDMS
         /// <summary>
         ///     Accessor for the source components (0-many)
         /// </summary>
-        public List<Source> Sources
-        {
-            get { return _sources; }
-        }
+        public List<Source> Sources { get; private set; }
 
         /// <summary>
         ///     Accessor for the type components (0-many)
         /// </summary>
-        public List<Type> Types
-        {
-            get { return _types; }
-        }
+        public List<Type> Types { get; private set; }
 
         /// <summary>
         ///     Accessor for a list of all Creator entities (0-many)
         /// </summary>
-        public List<Creator> Creators
-        {
-            get { return _creators; }
-        }
+        public List<Creator> Creators { get; private set; }
 
         /// <summary>
         ///     Accessor for a list of all Publisher entities (0-many)
         /// </summary>
-        public List<Publisher> Publishers
-        {
-            get { return _publishers; }
-        }
+        public List<Publisher> Publishers { get; private set; }
 
         /// <summary>
         ///     Accessor for a list of all Contributor entities (0-many)
         /// </summary>
-        public List<Contributor> Contributors
-        {
-            get { return _contributors; }
-        }
+        public List<Contributor> Contributors { get; private set; }
 
         /// <summary>
         ///     Accessor for a list of all PointOfContact entities (0-many)
         /// </summary>
-        public List<PointOfContact> PointOfContacts
-        {
-            get { return _pointOfContacts; }
-        }
+        public List<PointOfContact> PointOfContacts { get; private set; }
 
         /// <summary>
         ///     Accessor for the Format component (0-1). May return null.
         /// </summary>
-        public Format Format
-        {
-            get { return (_format); }
-            set { _format = value; }
-        }
+        public Format Format { get; set; }
 
         /// <summary>
         ///     Accessor for the subjectCoverage component (1-many)
         /// </summary>
-        public List<SubjectCoverage> SubjectCoverages
-        {
-            get { return _subjectCoverages; }
-        }
+        public List<SubjectCoverage> SubjectCoverages { get; private set; }
 
         /// <summary>
         ///     Accessor for the virtualCoverage components (0-many)
         /// </summary>
-        public List<VirtualCoverage> VirtualCoverages
-        {
-            get { return _virtualCoverages; }
-        }
+        public List<VirtualCoverage> VirtualCoverages { get; private set; }
 
         /// <summary>
         ///     Accessor for the temporalCoverage components (0-many)
         /// </summary>
-        public List<TemporalCoverage> TemporalCoverages
-        {
-            get { return _temporalCoverages; }
-        }
+        public List<TemporalCoverage> TemporalCoverages { get; private set; }
 
         /// <summary>
         ///     Accessor for the geospatialCoverage components (0-many)
@@ -857,36 +713,22 @@ namespace DDMSSense.DDMS
         /// <summary>
         ///     Accessor for the RelatedResource components (0-many)
         /// </summary>
-        public List<RelatedResource> RelatedResources
-        {
-            get { return _relatedResources; }
-        }
+        public List<RelatedResource> RelatedResources { get; private set; }
 
         /// <summary>
         ///     Accessor for the ResourceManagement component (0-1). May return null.
         /// </summary>
-        public ResourceManagement ResourceManagement
-        {
-            get { return (_resourceManagement); }
-            set { _resourceManagement = value; }
-        }
+        public ResourceManagement ResourceManagement { get; set; }
 
         /// <summary>
         ///     Accessor for the security component (exactly 1). May return null but this cannot happen after instantiation.
         /// </summary>
-        public Security Security
-        {
-            get { return (_security); }
-            set { _security = value; }
-        }
+        public Security Security { get; set; }
 
         /// <summary>
         ///     Accessor for the extensible layer elements (0-many in 3.0, 0-1 in 2.0).
         /// </summary>
-        public List<ExtensibleElement> ExtensibleElements
-        {
-            get { return _extensibleElements; }
-        }
+        public List<ExtensibleElement> ExtensibleElements { get; private set; }
 
         /// <summary>
         ///     Accessor for the resourceElement attribute. This may be null for v2.0 Resource components.
@@ -920,43 +762,24 @@ namespace DDMSSense.DDMS
         /// <summary>
         ///     Accessor for the ISM compliesWith attribute.
         /// </summary>
-        public List<string> CompliesWiths
-        {
-            get { return _compliesWiths; }
-            set
-            {
-                _compliesWiths = value;
-                ;
-            }
-        }
+        public List<string> CompliesWiths { get; set; }
 
         /// <summary>
         ///     Accessor for the ISM DESVersion attribute. Because this attribute does not exist before DDMS 3.0, the accessor
         ///     will return null for v2.0 Resource elements.
         /// </summary>
-        public int? IsmDESVersion
-        {
-            get { return (_ismDESVersion); }
-            set { _ismDESVersion = value; }
-        }
+        public int? IsmDESVersion { get; set; }
 
         /// <summary>
         ///     Accessor for the NTK DESVersion attribute.
         /// </summary>
-        public int? NtkDESVersion
-        {
-            get { return (_ntkDESVersion); }
-            set { _ntkDESVersion = value; }
-        }
+        public int? NtkDESVersion { get; set; }
 
         /// <summary>
         ///     Accessor for an ordered list of the components in this Resource. Components which are missing are not represented
         ///     in this list (no null entries).
         /// </summary>
-        public List<IDDMSComponent> TopLevelComponents
-        {
-            get { return _orderedList; }
-        }
+        public List<IDDMSComponent> TopLevelComponents { get; private set; }
 
         /// <see cref="AbstractBaseComponent#getNestedComponents()"></see>
         protected internal override List<IDDMSComponent> NestedComponents
@@ -967,29 +790,17 @@ namespace DDMSSense.DDMS
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
-        public override SecurityAttributes SecurityAttributes
-        {
-            get { return (_securityAttributes); }
-            set { _securityAttributes = value; }
-        }
+        public override SecurityAttributes SecurityAttributes { get; set; }
 
         /// <summary>
         ///     Accessor for the Notice Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
-        public NoticeAttributes NoticeAttributes
-        {
-            get { return (_noticeAttributes); }
-            set { _noticeAttributes = value; }
-        }
+        public NoticeAttributes NoticeAttributes { get; set; }
 
         /// <summary>
         ///     Accessor for the extensible attributes. Will always be non-null, even if not set.
         /// </summary>
-        public ExtensibleAttributes ExtensibleAttributes
-        {
-            get { return (_extensibleAttributes); }
-            set { _extensibleAttributes = value; }
-        }
+        public ExtensibleAttributes ExtensibleAttributes { get; set; }
 
         /// <summary>
         ///     Helper method to convert element-based related resources into components. In DDMS 4.0.1, there is a
@@ -1003,7 +814,7 @@ namespace DDMSSense.DDMS
             IEnumerable<Element> children = resource.Elements(XName.Get(RelatedResource.OLD_INNER_NAME, Namespace));
             if (children.Count() <= 1)
             {
-                _relatedResources.Add(new RelatedResource(resource));
+                RelatedResources.Add(new RelatedResource(resource));
             }
             else
             {
@@ -1012,7 +823,7 @@ namespace DDMSSense.DDMS
                     var copy = new Element(resource);
                     copy.RemoveAll();
                     copy.Add(new Element(child));
-                    _relatedResources.Add(new RelatedResource(copy));
+                    RelatedResources.Add(new RelatedResource(copy));
                 }
             }
         }
@@ -1023,48 +834,44 @@ namespace DDMSSense.DDMS
         private void PopulatedOrderedList()
         {
             if (MetacardInfo != null)
-            {
                 _orderedList.Add(MetacardInfo);
-            }
+
             _orderedList.AddRange(Identifiers);
             _orderedList.AddRange(Titles);
             _orderedList.AddRange(Subtitles);
+
             if (Description != null)
-            {
                 _orderedList.Add(Description);
-            }
+
             _orderedList.AddRange(Languages);
+
             if (Dates != null)
-            {
                 _orderedList.Add(Dates);
-            }
+
             if (Rights != null)
-            {
                 _orderedList.Add(Rights);
-            }
+
             _orderedList.AddRange(Sources);
             _orderedList.AddRange(Types);
             _orderedList.AddRange(Creators);
             _orderedList.AddRange(Publishers);
             _orderedList.AddRange(Contributors);
             _orderedList.AddRange(PointOfContacts);
+
             if (Format != null)
-            {
                 _orderedList.Add(Format);
-            }
+
             _orderedList.AddRange(SubjectCoverages);
             _orderedList.AddRange(VirtualCoverages);
             _orderedList.AddRange(TemporalCoverages);
             _orderedList.AddRange(GeospatialCoverages);
             _orderedList.AddRange(RelatedResources);
+
             if (ResourceManagement != null)
-            {
                 _orderedList.Add(ResourceManagement);
-            }
+
             if (Security != null)
-            {
                 _orderedList.Add(Security);
-            }
             _orderedList.AddRange(ExtensibleElements);
         }
 
@@ -1158,18 +965,14 @@ namespace DDMSSense.DDMS
             Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
 
             if (Identifiers.Count < 1)
-            {
                 throw new InvalidDDMSException("At least 1 identifier is required.");
-            }
+
             if (Titles.Count < 1)
-            {
                 throw new InvalidDDMSException("At least 1 title is required.");
-            }
+
             if (Creators.Count + Contributors.Count + Publishers.Count + PointOfContacts.Count == 0)
-            {
-                throw new InvalidDDMSException(
-                    "At least 1 producer (creator, contributor, publisher, or pointOfContact) is required.");
-            }
+                throw new InvalidDDMSException("At least 1 producer (creator, contributor, publisher, or pointOfContact) is required.");
+
             Util.Util.RequireBoundedChildCount(Element, Description.GetName(DDMSVersion), 0, 1);
             Util.Util.RequireBoundedChildCount(Element, Dates.GetName(DDMSVersion), 0, 1);
             Util.Util.RequireBoundedChildCount(Element, Rights.GetName(DDMSVersion), 0, 1);
@@ -1178,9 +981,7 @@ namespace DDMSSense.DDMS
             if (DDMSVersion.IsAtLeast("4.0.1"))
             {
                 if (SubjectCoverages.Count < 1)
-                {
                     throw new InvalidDDMSException("At least 1 subjectCoverage is required.");
-                }
             }
             else
             {
@@ -1195,21 +996,17 @@ namespace DDMSSense.DDMS
                 Util.Util.RequireDDMSValue("ntk:" + DES_VERSION_NAME, NtkDESVersion);
             }
             if (!DDMSVersion.IsAtLeast("3.1") && CompliesWiths.Count > 0)
-            {
                 throw new InvalidDDMSException("The compliesWith attribute cannot be used until DDMS 3.1 or later.");
-            }
+
             foreach (var with in CompliesWiths)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_COMPLIES_WITH, with);
-            }
+
             if (!DDMSVersion.IsAtLeast("3.0") && ExtensibleElements.Count > 1)
-            {
                 throw new InvalidDDMSException("Only 1 extensible element is allowed in DDMS 2.0.");
-            }
+
             if (DDMSVersion.IsAtLeast("4.0.1"))
-            {
                 Util.Util.RequireBoundedChildCount(Element, MetacardInfo.GetName(DDMSVersion), 1, 1);
-            }
+
             if (DDMSVersion.IsAtLeast("3.0"))
             {
                 Util.Util.RequireDDMSValue(RESOURCE_ELEMENT_NAME, ResourceElement);
@@ -1234,18 +1031,14 @@ namespace DDMSSense.DDMS
             foreach (var coverage in GeospatialCoverages)
             {
                 if (coverage.Order != null)
-                {
                     orders.Add(coverage.Order);
-                }
             }
             foreach (var coverage in SubjectCoverages)
             {
                 foreach (var actor in coverage.NonStateActors)
                 {
                     if (actor.Order != null)
-                    {
                         orders.Add(actor.Order);
-                    }
                 }
             }
             orders.Sort();
@@ -1253,10 +1046,7 @@ namespace DDMSSense.DDMS
             {
                 int? expectedValue = Convert.ToInt32(i + 1);
                 if (!expectedValue.Equals(orders[i]))
-                {
-                    throw new InvalidDDMSException("The ddms:order attributes throughout this resource must form " +
-                                                   "a single, ordered list starting from 1.");
-                }
+                    throw new InvalidDDMSException("The ddms:order attributes throughout this resource must form " + "a single, ordered list starting from 1.");
             }
         }
 
@@ -1280,9 +1070,7 @@ namespace DDMSSense.DDMS
             {
                 AddWarnings(NoticeAttributes.ValidationWarnings, true);
                 if (NoticeAttributes.ExternalReference != null)
-                {
                     AddDdms40Warning("ISM:externalNotice attribute");
-                }
             }
             base.ValidateWarnings();
         }
@@ -1293,47 +1081,39 @@ namespace DDMSSense.DDMS
             string localPrefix = BuildPrefix(prefix, Name, suffix + ".");
             var text = new StringBuilder();
             if (ResourceElement != null)
-            {
                 text.Append(BuildOutput(isHtml, localPrefix + RESOURCE_ELEMENT_NAME, Convert.ToString(ResourceElement)));
-            }
+
             if (CreateDate != null)
-            {
                 text.Append(BuildOutput(isHtml, localPrefix + CREATE_DATE_NAME, CreateDate.ToString("o")));
-            }
+
             text.Append(BuildOutput(isHtml, localPrefix + COMPLIES_WITH_NAME, Util.Util.GetXsList(CompliesWiths)));
             if (IsmDESVersion != null)
-            {
                 text.Append(BuildOutput(isHtml, localPrefix + "ism." + DES_VERSION_NAME, Convert.ToString(IsmDESVersion)));
-            }
+
             if (NtkDESVersion != null)
-            {
                 text.Append(BuildOutput(isHtml, localPrefix + "ntk." + DES_VERSION_NAME, Convert.ToString(NtkDESVersion)));
-            }
+
             text.Append(SecurityAttributes.GetOutput(isHtml, localPrefix));
             text.Append(NoticeAttributes.GetOutput(isHtml, localPrefix));
             text.Append(ExtensibleAttributes.GetOutput(isHtml, localPrefix));
 
             // Traverse top-level components, suppressing the resource prefix
             if (MetacardInfo != null)
-            {
                 text.Append(MetacardInfo.GetOutput(isHtml, "", ""));
-            }
+
             text.Append(BuildOutput(isHtml, "", Identifiers));
             text.Append(BuildOutput(isHtml, "", Titles));
             text.Append(BuildOutput(isHtml, "", Subtitles));
             if (Description != null)
-            {
                 text.Append(Description.GetOutput(isHtml, "", ""));
-            }
+
             text.Append(BuildOutput(isHtml, "", Languages));
             if (Dates != null)
-            {
                 text.Append(Dates.GetOutput(isHtml, "", ""));
-            }
+
             if (Rights != null)
-            {
                 text.Append(Rights.GetOutput(isHtml, "", ""));
-            }
+
             text.Append(BuildOutput(isHtml, "", Sources));
             text.Append(BuildOutput(isHtml, "", Types));
             text.Append(BuildOutput(isHtml, "", Creators));
@@ -1341,22 +1121,19 @@ namespace DDMSSense.DDMS
             text.Append(BuildOutput(isHtml, "", Contributors));
             text.Append(BuildOutput(isHtml, "", PointOfContacts));
             if (Format != null)
-            {
                 text.Append(Format.GetOutput(isHtml, "", ""));
-            }
+
             text.Append(BuildOutput(isHtml, "", SubjectCoverages));
             text.Append(BuildOutput(isHtml, "", VirtualCoverages));
             text.Append(BuildOutput(isHtml, "", TemporalCoverages));
             text.Append(BuildOutput(isHtml, "", GeospatialCoverages));
             text.Append(BuildOutput(isHtml, "", RelatedResources));
             if (ResourceManagement != null)
-            {
                 text.Append(ResourceManagement.GetOutput(isHtml, "", ""));
-            }
+
             if (Security != null)
-            {
                 text.Append(Security.GetOutput(isHtml, "", ""));
-            }
+
             text.Append(BuildOutput(isHtml, "", ExtensibleElements));
 
             text.Append(BuildOutput(isHtml, "extensible.layer", Convert.ToString(ExtensibleElements.Count > 0)));
@@ -1369,10 +1146,9 @@ namespace DDMSSense.DDMS
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is Resource))
-            {
                 return (false);
-            }
-            var test = (Resource) obj;
+
+            var test = (Resource)obj;
             return (Util.Util.NullEquals(ResourceElement, test.ResourceElement) &&
                     Util.Util.NullEquals(CreateDate, test.CreateDate) &&
                     Util.Util.ListEquals(CompliesWiths, test.CompliesWiths) &&
@@ -1387,24 +1163,20 @@ namespace DDMSSense.DDMS
         {
             int result = base.GetHashCode();
             if (ResourceElement != null)
-            {
-                result = 7*result + ResourceElement.GetHashCode();
-            }
+                result = 7 * result + ResourceElement.GetHashCode();
+
             if (CreateDate != null)
-            {
-                result = 7*result + CreateDate.GetHashCode();
-            }
-            result = 7*result + CompliesWiths.GetHashCode();
+                result = 7 * result + CreateDate.GetHashCode();
+
+            result = 7 * result + CompliesWiths.GetHashCode();
             if (IsmDESVersion != null)
-            {
-                result = 7*result + IsmDESVersion.GetHashCode();
-            }
+                result = 7 * result + IsmDESVersion.GetHashCode();
+
             if (NtkDESVersion != null)
-            {
-                result = 7*result + NtkDESVersion.GetHashCode();
-            }
-            result = 7*result + NoticeAttributes.GetHashCode();
-            result = 7*result + ExtensibleAttributes.GetHashCode();
+                result = 7 * result + NtkDESVersion.GetHashCode();
+
+            result = 7 * result + NoticeAttributes.GetHashCode();
+            result = 7 * result + ExtensibleAttributes.GetHashCode();
             return (result);
         }
 
@@ -1422,165 +1194,111 @@ namespace DDMSSense.DDMS
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder : IBuilder
         {
             internal const long SerialVersionUID = -8581492714895157280L;
-            internal List<string> _compliesWiths;
-            internal List<Contributor.Builder> _contributors;
-            internal string _createDate;
-            internal List<Creator.Builder> _creators;
-            internal Dates.Builder _dates;
-            internal Description.Builder _description;
-            internal ExtensibleAttributes.Builder _extensibleAttributes;
-            internal List<ExtensibleElement.Builder> _extensibleElements;
-            internal Format.Builder _format;
-            internal List<GeospatialCoverage.Builder> _geospatialCoverages;
-            internal List<Identifier.Builder> _identifiers;
-            internal int? _ismDESVersion;
-            internal List<Language.Builder> _languages;
-            internal MetacardInfo.Builder _metacardInfo;
-            internal NoticeAttributes.Builder _noticeAttributes;
-            internal int? _ntkDESVersion;
-            internal List<PointOfContact.Builder> _pointOfContacts;
-            internal List<Publisher.Builder> _publishers;
-            internal List<RelatedResource.Builder> _relatedResources;
-            internal bool? _resourceElement;
-            internal ResourceManagement.Builder _resourceManagement;
-            internal Rights.Builder _rights;
-            internal Security.Builder _security;
-            internal SecurityAttributes.Builder _securityAttributes;
-            internal List<Source.Builder> _sources;
-            internal List<SubjectCoverage.Builder> _subjectCoverages;
-            internal List<Subtitle.Builder> _subtitles;
-            internal List<TemporalCoverage.Builder> _temporalCoverages;
-            internal List<Title.Builder> _titles;
-            internal List<Type.Builder> _types;
-            internal List<VirtualCoverage.Builder> _virtualCoverages;
 
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                CompliesWiths = new List<string>();
+                Contributors = new List<Contributor.Builder>();
+                Creators = new List<Creator.Builder>();
+                Dates = new Dates.Builder();
+                Description = new Description.Builder();
+                ExtensibleAttributes = new ExtensibleAttributes.Builder();
+                ExtensibleElements = new List<ExtensibleElement.Builder>();
+                Format = new Format.Builder();
+                GeospatialCoverages = new List<GeospatialCoverage.Builder>();
+                Identifiers = new List<Identifier.Builder>();
+                Languages = new List<Language.Builder>();
+                MetacardInfo = new MetacardInfo.Builder();
+                NoticeAttributes = new NoticeAttributes.Builder();
+                PointOfContacts = new List<PointOfContact.Builder>();
+                Publishers = new List<Publisher.Builder>();
+                RelatedResources = new List<RelatedResource.Builder>();
+                ResourceManagement = new ResourceManagement.Builder();
+                Rights = new Rights.Builder();
+                Security = new Security.Builder();
+                SecurityAttributes = new SecurityAttributes.Builder();
+                Sources = new List<Source.Builder>();
+                SubjectCoverages = new List<SubjectCoverage.Builder>();
+                Subtitles = new List<Subtitle.Builder>();
+                TemporalCoverages = new List<TemporalCoverage.Builder>();
+                Titles = new List<Title.Builder>();
+                Types = new List<Type.Builder>();
+                VirtualCoverages = new List<VirtualCoverage.Builder>();
             }
 
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
             public Builder(Resource resource)
+                : this()
             {
                 foreach (var component in resource.TopLevelComponents)
                 {
                     // Metacard Set
                     if (component is MetacardInfo)
-                    {
-                        MetacardInfo = new MetacardInfo.Builder((MetacardInfo) component);
-                    }
-                        // Resource Set
+                        MetacardInfo = new MetacardInfo.Builder((MetacardInfo)component);
+                    // Resource Set
                     else if (component is Identifier)
-                    {
-                        Identifiers.Add(new Identifier.Builder((Identifier) component));
-                    }
+                        Identifiers.Add(new Identifier.Builder((Identifier)component));
                     else if (component is Title)
-                    {
-                        Titles.Add(new Title.Builder((Title) component));
-                    }
+                        Titles.Add(new Title.Builder((Title)component));
                     else if (component is Subtitle)
-                    {
-                        Subtitles.Add(new Subtitle.Builder((Subtitle) component));
-                    }
+                        Subtitles.Add(new Subtitle.Builder((Subtitle)component));
                     else if (component is Description)
-                    {
-                        Description = new Description.Builder((Description) component);
-                    }
+                        Description = new Description.Builder((Description)component);
                     else if (component is Language)
-                    {
-                        Languages.Add(new Language.Builder((Language) component));
-                    }
+                        Languages.Add(new Language.Builder((Language)component));
                     else if (component is Dates)
-                    {
-                        Dates = new Dates.Builder((Dates) component);
-                    }
+                        Dates = new Dates.Builder((Dates)component);
                     else if (component is Rights)
-                    {
-                        Rights = new Rights.Builder((Rights) component);
-                    }
+                        Rights = new Rights.Builder((Rights)component);
                     else if (component is Source)
-                    {
-                        Sources.Add(new Source.Builder((Source) component));
-                    }
+                        Sources.Add(new Source.Builder((Source)component));
                     else if (component is Type)
-                    {
-                        Types.Add(new Type.Builder((Type) component));
-                    }
+                        Types.Add(new Type.Builder((Type)component));
                     else if (component is Creator)
-                    {
-                        Creators.Add(new Creator.Builder((Creator) component));
-                    }
+                        Creators.Add(new Creator.Builder((Creator)component));
                     else if (component is Contributor)
-                    {
-                        Contributors.Add(new Contributor.Builder((Contributor) component));
-                    }
+                        Contributors.Add(new Contributor.Builder((Contributor)component));
                     else if (component is Publisher)
-                    {
-                        Publishers.Add(new Publisher.Builder((Publisher) component));
-                    }
+                        Publishers.Add(new Publisher.Builder((Publisher)component));
                     else if (component is PointOfContact)
-                    {
-                        PointOfContacts.Add(new PointOfContact.Builder((PointOfContact) component));
-                    }
-
-                        // Format Set
+                        PointOfContacts.Add(new PointOfContact.Builder((PointOfContact)component));
+                    // Format Set
                     else if (component is Format)
-                    {
-                        Format = new Format.Builder((Format) component);
-                    }
-                        // Summary Set
+                        Format = new Format.Builder((Format)component);
+                    // Summary Set
                     else if (component is SubjectCoverage)
-                    {
-                        SubjectCoverages.Add(new SubjectCoverage.Builder((SubjectCoverage) component));
-                    }
+                        SubjectCoverages.Add(new SubjectCoverage.Builder((SubjectCoverage)component));
                     else if (component is VirtualCoverage)
-                    {
-                        VirtualCoverages.Add(new VirtualCoverage.Builder((VirtualCoverage) component));
-                    }
+                        VirtualCoverages.Add(new VirtualCoverage.Builder((VirtualCoverage)component));
                     else if (component is TemporalCoverage)
-                    {
-                        TemporalCoverages.Add(new TemporalCoverage.Builder((TemporalCoverage) component));
-                    }
+                        TemporalCoverages.Add(new TemporalCoverage.Builder((TemporalCoverage)component));
                     else if (component is GeospatialCoverage)
-                    {
-                        GeospatialCoverages.Add(new GeospatialCoverage.Builder((GeospatialCoverage) component));
-                    }
+                        GeospatialCoverages.Add(new GeospatialCoverage.Builder((GeospatialCoverage)component));
                     else if (component is RelatedResource)
-                    {
-                        RelatedResources.Add(new RelatedResource.Builder((RelatedResource) component));
-                    }
-                        // Resource Set again
+                        RelatedResources.Add(new RelatedResource.Builder((RelatedResource)component));
+                    // Resource Set again
                     else if (component is ResourceManagement)
-                    {
-                        ResourceManagement = new ResourceManagement.Builder((ResourceManagement) component);
-                    }
-
-                        // Security Set
+                        ResourceManagement = new ResourceManagement.Builder((ResourceManagement)component);
+                    // Security Set
                     else if (component is Security)
-                    {
-                        Security = new Security.Builder((Security) component);
-                    }
-                        // Extensible Layer
+                        Security = new Security.Builder((Security)component);
+                    // Extensible Layer
                     else if (component is ExtensibleElement)
-                    {
-                        ExtensibleElements.Add(new ExtensibleElement.Builder((ExtensibleElement) component));
-                    }
+                        ExtensibleElements.Add(new ExtensibleElement.Builder((ExtensibleElement)component));
                 }
                 if (resource.CreateDate != null)
-                {
                     CreateDate = resource.CreateDate.ToString("o");
-                }
+
                 ResourceElement = resource.ResourceElement;
                 CompliesWiths = resource.CompliesWiths;
                 IsmDESVersion = resource.IsmDESVersion;
@@ -1629,160 +1347,52 @@ namespace DDMSSense.DDMS
             /// <summary>
             ///     Builder accessor for the metacardInfo
             /// </summary>
-            public virtual MetacardInfo.Builder MetacardInfo
-            {
-                get
-                {
-                    if (_metacardInfo == null)
-                    {
-                        _metacardInfo = new MetacardInfo.Builder();
-                    }
-                    return _metacardInfo;
-                }
-                set { _metacardInfo = value; }
-            }
-
+            public virtual MetacardInfo.Builder MetacardInfo { get; set; }
 
             /// <summary>
             ///     Builder accessor for the identifiers
             /// </summary>
-            public virtual List<Identifier.Builder> Identifiers
-            {
-                get
-                {
-                    if (_identifiers == null)
-                    {
-                        _identifiers = new List<Identifier.Builder>();
-                    }
-                    return _identifiers;
-                }
-            }
+            public virtual List<Identifier.Builder> Identifiers { get; set; }
 
             /// <summary>
             ///     Builder accessor for the titles
             /// </summary>
-            public virtual List<Title.Builder> Titles
-            {
-                get
-                {
-                    if (_titles == null)
-                    {
-                        _titles = new List<Title.Builder>();
-                    }
-                    return _titles;
-                }
-            }
+            public virtual List<Title.Builder> Titles { get; set; }
 
             /// <summary>
             ///     Builder accessor for the subtitles
             /// </summary>
-            public virtual List<Subtitle.Builder> Subtitles
-            {
-                get
-                {
-                    if (_subtitles == null)
-                    {
-                        _subtitles = new List<Subtitle.Builder>();
-                    }
-                    return _subtitles;
-                }
-            }
+            public virtual List<Subtitle.Builder> Subtitles { get; set; }
 
             /// <summary>
             ///     Builder accessor for the description
             /// </summary>
-            public virtual Description.Builder Description
-            {
-                get
-                {
-                    if (_description == null)
-                    {
-                        _description = new Description.Builder();
-                    }
-                    return _description;
-                }
-                set { _description = value; }
-            }
-
+            public virtual Description.Builder Description { get; set; }
 
             /// <summary>
             ///     Builder accessor for the languages
             /// </summary>
-            public virtual List<Language.Builder> Languages
-            {
-                get
-                {
-                    if (_languages == null)
-                    {
-                        _languages = new List<Language.Builder>();
-                    }
-                    return _languages;
-                }
-            }
+            public virtual List<Language.Builder> Languages { get; set; }
 
             /// <summary>
             ///     Builder accessor for the dates
             /// </summary>
-            public virtual Dates.Builder Dates
-            {
-                get
-                {
-                    if (_dates == null)
-                    {
-                        _dates = new Dates.Builder();
-                    }
-                    return _dates;
-                }
-                set { _dates = value; }
-            }
-
+            public virtual Dates.Builder Dates { get; set; }
 
             /// <summary>
             ///     Builder accessor for the rights
             /// </summary>
-            public virtual Rights.Builder Rights
-            {
-                get
-                {
-                    if (_rights == null)
-                    {
-                        _rights = new Rights.Builder();
-                    }
-                    return _rights;
-                }
-                set { _rights = value; }
-            }
-
+            public virtual Rights.Builder Rights { get; set; }
 
             /// <summary>
             ///     Builder accessor for the sources
             /// </summary>
-            public virtual List<Source.Builder> Sources
-            {
-                get
-                {
-                    if (_sources == null)
-                    {
-                        _sources = new List<Source.Builder>();
-                    }
-                    return _sources;
-                }
-            }
+            public virtual List<Source.Builder> Sources { get; set; }
 
             /// <summary>
             ///     Builder accessor for the types
             /// </summary>
-            public virtual List<Type.Builder> Types
-            {
-                get
-                {
-                    if (_types == null)
-                    {
-                        _types = new List<Type.Builder>();
-                    }
-                    return _types;
-                }
-            }
+            public virtual List<Type.Builder> Types { get; set; }
 
             /// <summary>
             ///     Convenience accessor for all of the producers. This list does not grow dynamically.
@@ -1803,326 +1413,120 @@ namespace DDMSSense.DDMS
             /// <summary>
             ///     Builder accessor for creators
             /// </summary>
-            public virtual List<Creator.Builder> Creators
-            {
-                get
-                {
-                    if (_creators == null)
-                    {
-                        _creators = new List<Creator.Builder>();
-                    }
-                    return _creators;
-                }
-            }
+            public virtual List<Creator.Builder> Creators { get; set; }
 
             /// <summary>
             ///     Builder accessor for contributors
             /// </summary>
-            public virtual List<Contributor.Builder> Contributors
-            {
-                get
-                {
-                    if (_contributors == null)
-                    {
-                        _contributors = new List<Contributor.Builder>();
-                    }
-                    return _contributors;
-                }
-            }
+            public virtual List<Contributor.Builder> Contributors { get; set; }
 
             /// <summary>
             ///     Builder accessor for publishers
             /// </summary>
-            public virtual List<Publisher.Builder> Publishers
-            {
-                get
-                {
-                    if (_publishers == null)
-                    {
-                        _publishers = new List<Publisher.Builder>();
-                    }
-                    return _publishers;
-                }
-            }
+            public virtual List<Publisher.Builder> Publishers { get; set; }
 
             /// <summary>
             ///     Builder accessor for points of contact
             /// </summary>
-            public virtual List<PointOfContact.Builder> PointOfContacts
-            {
-                get
-                {
-                    if (_pointOfContacts == null)
-                    {
-                        _pointOfContacts = new List<PointOfContact.Builder>();
-                    }
-                    return _pointOfContacts;
-                }
-            }
+            public virtual List<PointOfContact.Builder> PointOfContacts { get; set; }
 
             /// <summary>
             ///     Builder accessor for the format
             /// </summary>
-            public virtual Format.Builder Format
-            {
-                get
-                {
-                    if (_format == null)
-                    {
-                        _format = new Format.Builder();
-                    }
-                    return _format;
-                }
-                set { _format = value; }
-            }
-
+            public virtual Format.Builder Format { get; set; }
 
             /// <summary>
             ///     Builder accessor for the subjectCoverages
             /// </summary>
-            public virtual List<SubjectCoverage.Builder> SubjectCoverages
-            {
-                get
-                {
-                    if (_subjectCoverages == null)
-                    {
-                        _subjectCoverages = new List<SubjectCoverage.Builder>();
-                    }
-                    return _subjectCoverages;
-                }
-            }
+            public virtual List<SubjectCoverage.Builder> SubjectCoverages { get; set; }
 
             /// <summary>
             ///     Builder accessor for the virtualCoverages
             /// </summary>
-            public virtual List<VirtualCoverage.Builder> VirtualCoverages
-            {
-                get
-                {
-                    if (_virtualCoverages == null)
-                    {
-                        _virtualCoverages = new List<VirtualCoverage.Builder>();
-                    }
-                    return _virtualCoverages;
-                }
-            }
+            public virtual List<VirtualCoverage.Builder> VirtualCoverages { get; set; }
 
             /// <summary>
             ///     Builder accessor for the temporalCoverages
             /// </summary>
-            public virtual List<TemporalCoverage.Builder> TemporalCoverages
-            {
-                get
-                {
-                    if (_temporalCoverages == null)
-                    {
-                        _temporalCoverages = new List<TemporalCoverage.Builder>();
-                    }
-                    return _temporalCoverages;
-                }
-            }
+            public virtual List<TemporalCoverage.Builder> TemporalCoverages { get; set; }
 
             /// <summary>
             ///     Builder accessor for the geospatialCoverages
             /// </summary>
-            public virtual List<GeospatialCoverage.Builder> GeospatialCoverages
-            {
-                get
-                {
-                    if (_geospatialCoverages == null)
-                    {
-                        _geospatialCoverages = new List<GeospatialCoverage.Builder>();
-                    }
-                    return _geospatialCoverages;
-                }
-            }
+            public virtual List<GeospatialCoverage.Builder> GeospatialCoverages { get; set; }
 
             /// <summary>
             ///     Builder accessor for the relatedResources
             /// </summary>
-            public virtual List<RelatedResource.Builder> RelatedResources
-            {
-                get
-                {
-                    if (_relatedResources == null)
-                    {
-                        _relatedResources = new List<RelatedResource.Builder>();
-                    }
-                    return _relatedResources;
-                }
-            }
+            public virtual List<RelatedResource.Builder> RelatedResources { get; set; }
 
             /// <summary>
             ///     Builder accessor for the resourceManagement
             /// </summary>
-            public virtual ResourceManagement.Builder ResourceManagement
-            {
-                get
-                {
-                    if (_resourceManagement == null)
-                    {
-                        _resourceManagement = new ResourceManagement.Builder();
-                    }
-                    return _resourceManagement;
-                }
-                set { _resourceManagement = value; }
-            }
-
+            public virtual ResourceManagement.Builder ResourceManagement { get; set; }
 
             /// <summary>
             ///     Builder accessor for the security
             /// </summary>
-            public virtual Security.Builder Security
-            {
-                get
-                {
-                    if (_security == null)
-                    {
-                        _security = new Security.Builder();
-                    }
-                    return _security;
-                }
-                set { _security = value; }
-            }
-
+            public virtual Security.Builder Security { get; set; }
 
             /// <summary>
             ///     Builder accessor for the extensibleElements
             /// </summary>
-            public virtual List<ExtensibleElement.Builder> ExtensibleElements
-            {
-                get
-                {
-                    if (_extensibleElements == null)
-                    {
-                        _extensibleElements = new List<ExtensibleElement.Builder>();
-                    }
-                    return _extensibleElements;
-                }
-            }
+            public virtual List<ExtensibleElement.Builder> ExtensibleElements { get; set; }
 
             /// <summary>
             ///     Builder accessor for the createDate attribute
             /// </summary>
-            public virtual string CreateDate
-            {
-                get { return _createDate; }
-                set { _createDate = value; }
-            }
-
+            public virtual string CreateDate { get; set; }
 
             /// <summary>
             ///     Accessor for the resourceElement attribute
             /// </summary>
-            public virtual bool? ResourceElement
-            {
-                get { return _resourceElement; }
-                set { _resourceElement = value; }
-            }
-
+            public virtual bool? ResourceElement { get; set; }
 
             /// <summary>
             ///     Builder accessor for the compliesWith attribute
             /// </summary>
-            public virtual List<string> CompliesWiths
-            {
-                get
-                {
-                    if (_compliesWiths == null)
-                    {
-                        _compliesWiths = new List<string>();
-                    }
-                    return _compliesWiths;
-                }
-                set { _compliesWiths = value; }
-            }
-
+            public virtual List<string> CompliesWiths { get; set; }
 
             /// <summary>
             ///     Builder accessor for the NTK DESVersion
             /// </summary>
-            public virtual int? NtkDESVersion
-            {
-                get { return _ntkDESVersion; }
-                set { _ntkDESVersion = value; }
-            }
-
+            public virtual int? NtkDESVersion { get; set; }
 
             /// <summary>
             ///     Builder accessor for the ISM DESVersion
             /// </summary>
-            public virtual int? IsmDESVersion
-            {
-                get { return _ismDESVersion; }
-                set { _ismDESVersion = value; }
-            }
-
+            public virtual int? IsmDESVersion { get; set; }
 
             /// <summary>
             ///     Builder accessor for the securityAttributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
-
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
 
             /// <summary>
             ///     Builder accessor for the noticeAttributes
             /// </summary>
-            public virtual NoticeAttributes.Builder NoticeAttributes
-            {
-                get
-                {
-                    if (_noticeAttributes == null)
-                    {
-                        _noticeAttributes = new NoticeAttributes.Builder();
-                    }
-                    return _noticeAttributes;
-                }
-                set { _noticeAttributes = value; }
-            }
-
+            public virtual NoticeAttributes.Builder NoticeAttributes { get; set; }
 
             /// <summary>
             ///     Builder accessor for the extensibleAttributes
             /// </summary>
-            public virtual ExtensibleAttributes.Builder ExtensibleAttributes
-            {
-                get
-                {
-                    if (_extensibleAttributes == null)
-                    {
-                        _extensibleAttributes = new ExtensibleAttributes.Builder();
-                    }
-                    return _extensibleAttributes;
-                }
-                set { _extensibleAttributes = value; }
-            }
+            public virtual ExtensibleAttributes.Builder ExtensibleAttributes { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
+
                 var topLevelComponents = new List<IDDMSComponent>();
                 foreach (var builder in ChildBuilders)
                 {
                     IDDMSComponent component = builder.Commit();
                     if (component != null)
-                    {
                         topLevelComponents.Add(component);
-                    }
                 }
                 return
                     (new Resource(topLevelComponents, ResourceElement, CreateDate, CompliesWiths, IsmDESVersion,
@@ -2136,10 +1540,10 @@ namespace DDMSSense.DDMS
                 get
                 {
                     bool hasValueInList = false;
+
                     foreach (var builder in ChildBuilders)
-                    {
                         hasValueInList = hasValueInList || !builder.Empty;
-                    }
+
                     return (!hasValueInList && String.IsNullOrEmpty(CreateDate) && ResourceElement == null &&
                             CompliesWiths.Count == 0 && IsmDESVersion == null && NtkDESVersion == null &&
                             SecurityAttributes.Empty && NoticeAttributes.Empty && ExtensibleAttributes.Empty);

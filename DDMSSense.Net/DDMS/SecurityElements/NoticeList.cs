@@ -64,7 +64,7 @@ namespace DDMSSense.DDMS.SecurityElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
+    
     ///     @since 2.0.0
     /// </summary>
     public sealed class NoticeList : AbstractBaseComponent

@@ -7,26 +7,6 @@ using DDMSSense.Extensions;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.Util
 {
     /// <summary>
@@ -76,33 +56,20 @@ namespace DDMSSense.Util
     ///     <para>
     ///         This class is intended for use in a single-threaded environment.
     ///     </para>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    
+    
     /// </summary>
     public class DDMSVersion
     {
         private static DDMSVersion _currentVersion;
 
-        private static readonly IDictionary<string, DDMSVersion> VERSIONS_TO_DETAILS =
-            new SortedDictionary<string, DDMSVersion>();
-
-        private readonly string _gmlNamespace;
-        private readonly string _gmlSchema;
-        private readonly string _ismCveLocation;
-        private readonly string _ismNamespace;
-        private readonly string _namespace;
-        private readonly string _ntkNamespace;
-        private readonly string _ntkSchema;
-        private readonly string _schema;
-        private readonly string _version;
-        private readonly string _xlinkNamespace;
+        private static readonly IDictionary<string, DDMSVersion> VERSIONS_TO_DETAILS = new SortedDictionary<string, DDMSVersion>();
 
         static DDMSVersion()
         {
             foreach (var version in PropertyReader.GetListProperty("ddms.supportedVersions"))
-            {
                 VERSIONS_TO_DETAILS[version] = new DDMSVersion(version);
-            }
+            
             _currentVersion = GetVersionFor(PropertyReader.GetProperty("ddms.defaultVersion"));
         }
 
@@ -113,16 +80,16 @@ namespace DDMSSense.Util
         private DDMSVersion(string version)
         {
             int index = SupportedVersionsProperty.IndexOf(version);
-            _version = version;
-            _namespace = SupportedDDMSNamespacesProperty[index];
-            _schema = PropertyReader.GetProperty(version + ".ddms.xsdLocation");
-            _gmlNamespace = PropertyReader.GetProperty(version + ".gml.xmlNamespace");
-            _gmlSchema = PropertyReader.GetProperty(version + ".gml.xsdLocation");
-            _ismCveLocation = PropertyReader.GetProperty(version + ".ism.cveLocation");
-            _ismNamespace = PropertyReader.GetProperty(version + ".ism.xmlNamespace");
-            _ntkNamespace = PropertyReader.GetProperty(version + ".ntk.xmlNamespace");
-            _ntkSchema = PropertyReader.GetProperty(version + ".ntk.xsdLocation");
-            _xlinkNamespace = PropertyReader.GetProperty(version + ".xlink.xmlNamespace");
+            Version = version;
+            Namespace = SupportedDDMSNamespacesProperty[index];
+            Schema = PropertyReader.GetProperty(version + ".ddms.xsdLocation");
+            GmlNamespace = PropertyReader.GetProperty(version + ".gml.xmlNamespace");
+            GmlSchema = PropertyReader.GetProperty(version + ".gml.xsdLocation");
+            IsmCveLocation = PropertyReader.GetProperty(version + ".ism.cveLocation");
+            IsmNamespace = PropertyReader.GetProperty(version + ".ism.xmlNamespace");
+            NtkNamespace = PropertyReader.GetProperty(version + ".ntk.xmlNamespace");
+            NtkSchema = PropertyReader.GetProperty(version + ".ntk.xsdLocation");
+            XlinkNamespace = PropertyReader.GetProperty(version + ".xlink.xmlNamespace");
         }
 
 
@@ -154,9 +121,8 @@ namespace DDMSSense.Util
             {
                 var supportedNamespaces = new List<string>();
                 foreach (var version in SupportedVersionsProperty)
-                {
                     supportedNamespaces.Add(PropertyReader.GetProperty(version + ".ddms.xmlNamespace"));
-                }
+                
                 return (supportedNamespaces);
             }
         }
@@ -164,82 +130,52 @@ namespace DDMSSense.Util
         /// <summary>
         ///     Accessor for the version number
         /// </summary>
-        public virtual string Version
-        {
-            get { return _version; }
-        }
+        public virtual string Version {get; private set;}
 
         /// <summary>
         ///     Accessor for the DDMS namespace
         /// </summary>
-        public virtual string Namespace
-        {
-            get { return _namespace; }
-        }
+        public virtual string Namespace {get; private set;}
 
         /// <summary>
         ///     Accessor for the DDMS schema location
         /// </summary>
-        public virtual string Schema
-        {
-            get { return _schema; }
-        }
+        public virtual string Schema {get; private set;}
 
         /// <summary>
         ///     Accessor for the gml namespace
         /// </summary>
-        public virtual string GmlNamespace
-        {
-            get { return _gmlNamespace; }
-        }
+        public virtual string GmlNamespace {get; private set;}
 
         /// <summary>
         ///     Accessor for the gml schema location
         /// </summary>
-        public virtual string GmlSchema
-        {
-            get { return _gmlSchema; }
-        }
+        public virtual string GmlSchema {get; private set;}
 
         /// <summary>
         ///     Accessor for the ISM CVE location
         /// </summary>
-        public virtual string IsmCveLocation
-        {
-            get { return _ismCveLocation; }
-        }
+        public virtual string IsmCveLocation {get; private set;}
 
         /// <summary>
         ///     Accessor for the ISM namespace
         /// </summary>
-        public virtual string IsmNamespace
-        {
-            get { return _ismNamespace; }
-        }
+        public virtual string IsmNamespace {get; private set;}
 
         /// <summary>
         ///     Accessor for the NTK namespace
         /// </summary>
-        public virtual string NtkNamespace
-        {
-            get { return _ntkNamespace; }
-        }
+        public virtual string NtkNamespace {get; private set;}
 
         /// <summary>
         ///     Accessor for the NTK schema location
         /// </summary>
-        public virtual string NtkSchema
-        {
-            get { return _ntkSchema; }
-        }
+        public virtual string NtkSchema {get; private set;}
 
         /// <summary>
         ///     Accessor for the xlink namespace
         /// </summary>
-        public virtual string XlinkNamespace
-        {
-            get { return _xlinkNamespace; }
-        }
+        public virtual string XlinkNamespace {get; private set;}
 
         /// <summary>
         ///     Convenience method to check if a DDMS version number is equal to or higher that some
@@ -252,9 +188,8 @@ namespace DDMSSense.Util
         {
             version = AliasVersion(version);
             if (!SupportedVersionsProperty.Contains(version))
-            {
                 throw new UnsupportedVersionException(version);
-            }
+            
             int index = SupportedVersionsProperty.IndexOf(Version);
             int testIndex = SupportedVersionsProperty.IndexOf(version);
             return (index >= testIndex);
@@ -280,9 +215,8 @@ namespace DDMSSense.Util
         {
             version = AliasVersion(version);
             if (!SupportedVersionsProperty.Contains(version))
-            {
                 throw new UnsupportedVersionException(version);
-            }
+            
             return (VERSIONS_TO_DETAILS.GetValueOrNull(version));
         }
 
@@ -300,11 +234,11 @@ namespace DDMSSense.Util
             versions.Reverse();
             foreach (var version in versions)
             {
-                if (version.Namespace.Equals(@namespace) || version.IsmNamespace.Equals(@namespace) ||
-                    version.NtkNamespace.Equals(@namespace) || version.GmlNamespace.Equals(@namespace))
-                {
+                if (version.Namespace.Equals(@namespace) || 
+                    version.IsmNamespace.Equals(@namespace) ||
+                    version.NtkNamespace.Equals(@namespace) || 
+                    version.GmlNamespace.Equals(@namespace))
                     return (version);
-                }
             }
             throw new UnsupportedVersionException("for XML namespace " + @namespace);
         }
@@ -319,13 +253,12 @@ namespace DDMSSense.Util
         /// <exception cref="UnsupportedVersionException"> if the version is not supported </exception>
         public static DDMSVersion SetCurrentVersion(string version)
         {
-            lock (typeof (DDMSVersion))
+            lock (typeof(DDMSVersion))
             {
                 version = AliasVersion(version);
                 if (!SupportedVersionsProperty.Contains(version))
-                {
                     throw new UnsupportedVersionException(version);
-                }
+                
                 _currentVersion = GetVersionFor(version);
                 ISMVocabulary.DDMSVersion = GetCurrentVersion();
                 return (GetCurrentVersion());
@@ -342,13 +275,11 @@ namespace DDMSSense.Util
         private static string AliasVersion(string version)
         {
             if ("3.0.1".Equals(version))
-            {
                 return ("3.0");
-            }
+            
             if ("4.0.1".Equals(version))
-            {
                 return ("4.1");
-            }
+            
             return (version);
         }
 

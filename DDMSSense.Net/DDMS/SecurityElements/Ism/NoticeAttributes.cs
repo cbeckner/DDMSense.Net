@@ -53,7 +53,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
+    
     ///     @since 2.0.0
     /// </summary>
     public sealed class NoticeAttributes : AbstractAttributeGroup

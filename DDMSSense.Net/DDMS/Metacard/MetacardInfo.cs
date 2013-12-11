@@ -78,7 +78,7 @@ namespace DDMSSense.DDMS.Metacard
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
+    
     ///     @since 2.0.0
     /// </summary>
     public sealed class MetacardInfo : AbstractBaseComponent

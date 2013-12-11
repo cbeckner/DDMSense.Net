@@ -7,26 +7,6 @@ using System.Linq;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.Util
 {
     /// <summary>
@@ -44,8 +24,8 @@ namespace DDMSSense.Util
     ///         Changing a namespace prefix will affect both components created from scratch and components loaded from XML
     ///         files.
     ///     </para>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    
+    
     /// </summary>
     public class PropertyReader
     {
@@ -96,9 +76,8 @@ namespace DDMSSense.Util
         {
             string value = ConfigurationManager.AppSettings[name];
             if (value == null)
-            {
                 throw new ArgumentException(UNDEFINED_PROPERTY + name);
-            }
+            
             return (value);
         }
 
@@ -111,9 +90,8 @@ namespace DDMSSense.Util
         public static void SetProperty(string name, string value)
         {
             if (!CUSTOM_PROPERTIES.Contains(name))
-            {
                 throw new ArgumentException(name + " is not a configurable property.");
-            }
+            
             ConfigurationManager.AppSettings.Set(name, Util.GetNonNullString(value).Trim());
         }
 
@@ -122,7 +100,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="name">		the simple name of the property, without "DDMSSense." </param>
         /// <returns> the property specified </returns>
-        /// <exception cref="IllegalArgumentException"> if the property does not exist </exception>
+        /// <exception cref="ArgumentException"> if the property does not exist </exception>
         public static List<string> GetListProperty(string name)
         {
             string value = GetProperty(name);

@@ -15,7 +15,7 @@ namespace DDMSSense
     ///         Extensions of this class are generally expected to be immutable. It is assumed that after the constructor on
     ///         a component has been called, the component will be well-formed and valid.
     ///     </para>
-    ///     @author Brian Uri!
+    
     ///     @since 1.1.0
     /// </summary>
     public abstract class AbstractAttributeGroup

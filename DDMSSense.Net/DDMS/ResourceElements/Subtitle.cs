@@ -64,8 +64,8 @@ namespace DDMSSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    
+    
     /// </summary>
     public sealed class Subtitle : AbstractSimpleString
     {

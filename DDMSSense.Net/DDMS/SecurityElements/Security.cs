@@ -68,8 +68,8 @@ namespace DDMSSense.DDMS.SecurityElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    
+    
     /// </summary>
     public sealed class Security : AbstractBaseComponent
     {

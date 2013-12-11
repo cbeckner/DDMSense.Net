@@ -23,17 +23,15 @@ namespace DDMSSense.Util
     /// <summary>
     ///     A collection of static utility methods.
     /// </summary>
-    public class Util
+    public static class Util
     {
-        private const string DDMS_DATE_HOUR_MIN_PATTERN =
-            "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(Z|[\\-\\+][0-9]{2}:[0-9]{2})?";
+        private static const string DDMS_DATE_HOUR_MIN_PATTERN = "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(Z|[\\-\\+][0-9]{2}:[0-9]{2})?";
 
         private static readonly Dictionary<string, string> XML_SPECIAL_CHARS = new Dictionary<string, string>();
         private static XslCompiledTransform _schematronAbstractTransform;
         private static XslCompiledTransform _schematronIncludeTransform;
 
-        private static readonly IDictionary<string, XslCompiledTransform> _schematronSvrlTransforms =
-            new Dictionary<string, XslCompiledTransform>();
+        private static readonly IDictionary<string, XslCompiledTransform> _schematronSvrlTransforms = new Dictionary<string, XslCompiledTransform>();
 
         private static readonly List<XmlQualifiedName> DATE_DATATYPES = new List<XmlQualifiedName>();
 
@@ -47,13 +45,6 @@ namespace DDMSSense.Util
         }
 
         /// <summary>
-        ///     Private to prevent instantiation.
-        /// </summary>
-        private Util()
-        {
-        }
-
-        /// <summary>
         ///     Lazy instantiation / cached accessor for the second step of Schematron validation.
         /// </summary>
         /// <returns> the phase two transform </returns>
@@ -61,13 +52,11 @@ namespace DDMSSense.Util
         {
             get
             {
-                lock (typeof (Util))
+                lock (typeof(Util))
                 {
                     if (_schematronAbstractTransform == null)
                     {
-                        Stream abstractStylesheet =
-                            Assembly.GetCallingAssembly()
-                                .GetManifestResourceStream("schematron/iso_abstract_expand.xsl");
+                        Stream abstractStylesheet = Assembly.GetCallingAssembly().GetManifestResourceStream("schematron/iso_abstract_expand.xsl");
                         XmlReader reader = XmlReader.Create(abstractStylesheet);
                         _schematronAbstractTransform = new XslCompiledTransform();
                         _schematronAbstractTransform.Load(reader);
@@ -86,12 +75,11 @@ namespace DDMSSense.Util
         {
             get
             {
-                lock (typeof (Util))
+                lock (typeof(Util))
                 {
                     if (_schematronIncludeTransform == null)
                     {
-                        Stream includeStylesheet =
-                            Assembly.GetCallingAssembly().GetManifestResourceStream("schematron/iso_dsdl_include.xsl");
+                        Stream includeStylesheet = Assembly.GetCallingAssembly().GetManifestResourceStream("schematron/iso_dsdl_include.xsl");
                         XmlReader reader = XmlReader.Create(includeStylesheet);
                         _schematronIncludeTransform = new XslCompiledTransform();
                         _schematronIncludeTransform.Load(reader);
@@ -111,13 +99,10 @@ namespace DDMSSense.Util
         /// <param name="attributeName"> the name of the attribute </param>
         /// <param name="namespaceURI"> the namespace this attribute is in </param>
         /// <param name="attributeValue"> the value of the attribute </param>
-        public static void AddAttribute(XElement element, string prefix, string attributeName, string namespaceURI,
-            string attributeValue)
+        public static void AddAttribute(XElement element, string prefix, string attributeName, string namespaceURI, string attributeValue)
         {
             if (!String.IsNullOrEmpty(attributeValue))
-            {
                 element.Add(BuildAttribute(prefix, attributeName, namespaceURI, attributeValue));
-            }
         }
 
         /// <summary>
@@ -143,9 +128,7 @@ namespace DDMSSense.Util
         public static void AddDDMSChildElement(XElement element, string childName, string childValue)
         {
             if (!String.IsNullOrEmpty(childValue))
-            {
                 element.Add(BuildDDMSElement(childName, childValue));
-            }
         }
 
         /// <summary>
@@ -171,9 +154,8 @@ namespace DDMSSense.Util
             RequireValue("value", value);
             prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix + ":");
             if (namespaceURI == null)
-            {
                 namespaceURI = "";
-            }
+
             return (new XAttribute(XName.Get(prefix + name, namespaceURI), value));
         }
 
@@ -185,8 +167,7 @@ namespace DDMSSense.Util
         /// <param name="value"> the value of the attribute </param>
         public static XAttribute BuildDDMSAttribute(string name, string value)
         {
-            return
-                (BuildAttribute(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace, value));
+            return (BuildAttribute(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace, value));
         }
 
         /// <summary>
@@ -197,9 +178,7 @@ namespace DDMSSense.Util
         /// <param name="childText"> the text of the element (optional) </param>
         public static XElement BuildDDMSElement(string name, string childText)
         {
-            return
-                (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace,
-                    childText));
+            return (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace, childText));
         }
 
         /// <summary>
@@ -216,9 +195,8 @@ namespace DDMSSense.Util
             prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix + ":");
             var element = new XElement(prefix + name, namespaceURI);
             if (!String.IsNullOrEmpty(childText))
-            {
                 element.Add(childText);
-            }
+
             return (element);
         }
 
@@ -292,19 +270,17 @@ namespace DDMSSense.Util
         /// <summary>
         ///     Capitalizes the first letter of a String. Silently does nothing if the string is null, empty, or not a letter.
         /// </summary>
-        /// <param name="string">	the string to capitalize </param>
+        /// <param name="str">	the string to capitalize </param>
         /// <returns> the capitalized string </returns>
-        public static string Capitalize(string @string)
+        public static string Capitalize(string str)
         {
-            if (String.IsNullOrEmpty(@string))
-            {
-                return (@string);
-            }
-            if (@string.Length == 1)
-            {
-                return (@string.ToUpper());
-            }
-            return (@string.Substring(0, 1).ToUpper() + @string.Substring(1, @string.Length - 1));
+            if (String.IsNullOrEmpty(str))
+                return (str);
+
+            if (str.Length == 1)
+                return (str.ToUpper());
+
+            return (str.Substring(0, 1).ToUpper() + str.Substring(1, str.Length - 1));
         }
 
         /// <summary>
@@ -328,15 +304,13 @@ namespace DDMSSense.Util
             RequireValue("parent element", parent);
             RequireValue("child name", name);
             if (!DDMSVersion.IsSupportedDDMSNamespace(parent.Name.NamespaceName))
-            {
                 throw new ArgumentException("This method should only be called on an element in the DDMS namespace.");
-            }
+
             var childTexts = new List<string>();
             IEnumerable<XElement> childElements = parent.Elements(XName.Get(name, parent.Name.NamespaceName));
             foreach (var el in childElements)
-            {
                 childTexts.Add(el.Value);
-            }
+
             return (childTexts);
         }
 
@@ -351,9 +325,8 @@ namespace DDMSSense.Util
             RequireValue("parent element", parent);
             RequireValue("child name", name);
             if (!DDMSVersion.IsSupportedDDMSNamespace(parent.Name.NamespaceName))
-            {
                 throw new ArgumentException("This method should only be called on an element in the DDMS namespace.");
-            }
+
             XElement child = parent.Element(XName.Get(name, parent.Name.NamespaceName));
             return (child == null ? "" : child.Value);
         }
@@ -388,14 +361,12 @@ namespace DDMSSense.Util
         public static string GetXsList<T1>(List<T1> list)
         {
             if (list == null)
-            {
                 return ("");
-            }
+
             var buffer = new StringBuilder();
             foreach (object @string in list)
-            {
                 buffer.Append(@string).Append(" ");
-            }
+
             return (buffer.ToString().Trim());
         }
 
@@ -425,9 +396,8 @@ namespace DDMSSense.Util
         public static bool IsBounded(int testCount, int lowBound, int highBound)
         {
             if (lowBound > highBound)
-            {
                 throw new ArgumentException("Invalid number range: " + lowBound + " to " + highBound);
-            }
+
             return (testCount >= lowBound && testCount <= highBound);
         }
 
@@ -442,25 +412,20 @@ namespace DDMSSense.Util
         public static bool ListEquals<T1, T2>(List<T1> list1, List<T2> list2)
         {
             if (list1 == null || list2 == null)
-            {
                 throw new ArgumentException("Null lists cannot be compared.");
-            }
+
             if (list1.Equals(list2))
-            {
                 return (true);
-            }
+
             if (list1.Count != list2.Count)
-            {
                 return (false);
-            }
+
             for (int i = 0; i < list1.Count; i++)
             {
                 object value1 = list1[i];
                 object value2 = list2[i];
                 if (!NullEquals(value1, value2))
-                {
                     return (false);
-                }
             }
             return (true);
         }
@@ -496,18 +461,14 @@ namespace DDMSSense.Util
                 {
                     error.Append("Exactly ").Append(highBound).Append(" ").Append(childName).Append(" element");
                     if (highBound != 1)
-                    {
                         error.Append("s");
-                    }
                     error.Append(" must exist.");
                 }
                 else if (lowBound == 0)
                 {
                     error.Append("No more than ").Append(highBound).Append(" ").Append(childName).Append(" element");
                     if (highBound != 1)
-                    {
                         error.Append("s");
-                    }
                     error.Append(" can exist.");
                 }
                 else
@@ -537,23 +498,14 @@ namespace DDMSSense.Util
             // Cover acceptable case where parent (e.g. BoundingGeometry) has different XML namespace than child.
             string parentNamespace = parent.Namespace;
             if (child is Polygon || child is Point)
-            {
                 parentNamespace = DDMSVersion.GetVersionForNamespace(parentNamespace).GmlNamespace;
-            }
             if (child is Access)
-            {
                 parentNamespace = DDMSVersion.GetVersionForNamespace(parentNamespace).NtkNamespace;
-            }
             if (child is Notice)
-            {
                 parentNamespace = DDMSVersion.GetVersionForNamespace(parentNamespace).IsmNamespace;
-            }
             string childNamespace = child.Namespace;
             if (!parentNamespace.Equals(childNamespace))
-            {
-                throw new InvalidDDMSException("A child component, " + child.Name +
-                                               ", is using a different version of DDMS from its parent.");
-            }
+                throw new InvalidDDMSException("A child component, " + child.Name + ", is using a different version of DDMS from its parent.");
         }
 
         /// <summary>
@@ -567,9 +519,7 @@ namespace DDMSSense.Util
             DDMSVersion version = DDMSVersion.GetVersionForNamespace(ddmsNamespace);
 
             if (version.IsAtLeast("4.1") && Regex.Matches(date, DDMS_DATE_HOUR_MIN_PATTERN).Count > 0)
-            {
                 return;
-            }
 
             bool isXsdType = false;
             try
@@ -586,9 +536,7 @@ namespace DDMSSense.Util
             {
                 string message = "The date datatype must be one of " + DATE_DATATYPES;
                 if (version.IsAtLeast("4.1"))
-                {
                     message += " or ddms:DateHourMinType";
-                }
                 throw new InvalidDDMSException(message);
             }
         }
@@ -604,11 +552,8 @@ namespace DDMSSense.Util
         {
             RequireValue("element", element);
             RequireValue("local name", localName);
-            if (!localName.Equals(element.Name.LocalName) ||
-                !DDMSVersion.IsSupportedDDMSNamespace(element.Name.NamespaceName))
-            {
+            if (!localName.Equals(element.Name.LocalName) || !DDMSVersion.IsSupportedDDMSNamespace(element.Name.NamespaceName))
                 throw new InvalidDDMSException("Unexpected namespace URI and local name encountered: " + element.Name);
-            }
         }
 
         /// <summary>
@@ -637,10 +582,8 @@ namespace DDMSSense.Util
         /// <exception cref="InvalidDDMSException"> if the value is null or empty </exception>
         public static void RequireDDMSValue(string description, object value)
         {
-            if (value == null || (value is string && String.IsNullOrEmpty((string) value)))
-            {
+            if (value == null || (value is string && String.IsNullOrEmpty((string)value)))
                 throw new InvalidDDMSException(description + " is required.");
-            }
         }
 
         /// <summary>
@@ -655,13 +598,9 @@ namespace DDMSSense.Util
             RequireValue("element", element);
             RequireValue("local name", localName);
             if (namespaceURI == null)
-            {
                 namespaceURI = "";
-            }
             if (!localName.Equals(element.Name.LocalName) || !namespaceURI.Equals(element.Name.NamespaceName))
-            {
                 throw new InvalidDDMSException("Unexpected namespace URI and local name encountered: " + element.Name);
-            }
         }
 
         /// <summary>
@@ -672,9 +611,7 @@ namespace DDMSSense.Util
         public static void RequireValidLatitude(double? value)
         {
             if (value == null || (-90L).CompareTo(value) > 0 || (90L).CompareTo(value) < 0)
-            {
                 throw new InvalidDDMSException("A latitude value must be between -90 and 90 degrees: " + value);
-            }
         }
 
         /// <summary>
@@ -685,9 +622,7 @@ namespace DDMSSense.Util
         public static void RequireValidLongitude(double? value)
         {
             if (value == null || (-180L).CompareTo(value) > 0 || (180L).CompareTo(value) < 0)
-            {
                 throw new InvalidDDMSException("A longitude value must be between -180 and 180 degrees: " + value);
-            }
         }
 
         /// <summary>
@@ -714,13 +649,10 @@ namespace DDMSSense.Util
         public static void RequireValidNCNames(List<string> names)
         {
             if (names == null)
-            {
                 names = new List<string>();
-            }
+
             foreach (var name in names)
-            {
                 RequireValidNCName(name);
-            }
         }
 
         /// <summary>
@@ -746,10 +678,8 @@ namespace DDMSSense.Util
         /// <exception cref="IllegalArgumentException"> if the value is null or empty </exception>
         public static void RequireValue(string description, object value)
         {
-            if (value == null || (value is string && String.IsNullOrEmpty((string) value)))
-            {
+            if (value == null || (value is string && String.IsNullOrEmpty((string)value)))
                 throw new ArgumentException(description + " is required.");
-            }
         }
 
         /// <summary>
@@ -761,7 +691,7 @@ namespace DDMSSense.Util
         {
             if (input != null)
             {
-                for (IEnumerator<string> iterator = XML_SPECIAL_CHARS.Keys.GetEnumerator(); iterator.MoveNext();)
+                for (IEnumerator<string> iterator = XML_SPECIAL_CHARS.Keys.GetEnumerator(); iterator.MoveNext(); )
                 {
                     string pattern = iterator.Current;
                     input = Regex.Replace(input, pattern, XML_SPECIAL_CHARS[pattern]);
@@ -775,7 +705,7 @@ namespace DDMSSense.Util
         /// </summary>
         private static void ClearTransformCaches()
         {
-            lock (typeof (Util))
+            lock (typeof(Util))
             {
                 _schematronIncludeTransform = null;
                 _schematronAbstractTransform = null;
@@ -791,22 +721,15 @@ namespace DDMSSense.Util
         /// <exception cref="IllegalArgumentException"> if the queryBinding is unsupported </exception>
         private static XslCompiledTransform GetSchematronSvrlTransform(string queryBinding)
         {
-            lock (typeof (Util))
+            lock (typeof(Util))
             {
                 string resourceName;
                 if ("xslt2".Equals(queryBinding))
-                {
                     resourceName = "schematron/iso_svrl_for_xslt2.xsl";
-                }
                 else if ("xslt".Equals(queryBinding))
-                {
                     resourceName = "schematron/iso_svrl_for_xslt1.xsl";
-                }
                 else
-                {
-                    throw new ArgumentException(
-                        "DDMSence currently only supports Schematron files with a queryBinding attribute of \"xslt\" or \"xslt2\".");
-                }
+                    throw new ArgumentException("DDMSence currently only supports Schematron files with a queryBinding attribute of \"xslt\" or \"xslt2\".");
                 if (_schematronSvrlTransforms.GetValueOrNull(resourceName) == null)
                 {
                     try

@@ -11,54 +11,23 @@ using DDMSSense.DDMS;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.Util
 {
-    #region usings
-
-    using Document = XDocument;
-    using Element = XElement;
-    using ParsingException = XmlException;
-    using XMLReader = XmlReader;
-
-    #endregion
-
     /// <summary>
     ///     Reader class which loads an XML file containing DDMS information and converts it into XOM elements.
     ///     <para>
     ///         This parsing performs schema validation against a local set of DDMS/ISM schemas.
     ///     </para>
-    ///     @author Brian Uri!
-    ///     @since 0.9.b
+    
+    
     /// </summary>
     public class DDMSReader
     {
         private const string PROP_XERCES_VALIDATION = "http://xml.org/sax/features/validation";
         private const string PROP_XERCES_SCHEMA_VALIDATION = "http://apache.org/xml/features/validation/schema";
+        private const string PROP_XERCES_EXTERNAL_LOCATION = "http://apache.org/xml/properties/schema/external-schemaLocation";
 
-        private const string PROP_XERCES_EXTERNAL_LOCATION =
-            "http://apache.org/xml/properties/schema/external-schemaLocation";
-
-        private readonly XMLReader _reader;
+        private readonly XmlReader _reader;
 
         /// <summary>
         ///     Constructor
@@ -109,7 +78,7 @@ namespace DDMSSense.Util
         /// <summary>
         ///     Accessor for the reader
         /// </summary>
-        private XMLReader Reader
+        private XmlReader Reader
         {
             get { return _reader; }
         }
@@ -147,9 +116,8 @@ namespace DDMSSense.Util
         {
             string xsd = ConfigurationManager.AppSettings[schemaLocation];
             if (xsd == null)
-            {
                 throw new ArgumentException("Unable to load a local copy of the schema for validation.");
-            }
+
             return xsd;
         }
 
@@ -183,15 +151,15 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="file"> the file containing the XML document </param>
         /// <returns> a XOM element representing the root node in the document </returns>
-        public virtual Element GetElementFromFile(string path)
+        public virtual XElement GetElementFromFile(string path)
         {
             Util.RequireValue("path", path);
             try
             {
-                Document doc = XDocument.Load(path);
+                XDocument doc = XDocument.Load(path);
                 return doc.Root;
             }
-            catch (ParsingException e)
+            catch (XmlException e)
             {
                 throw new InvalidDDMSException(e);
             }
@@ -203,7 +171,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="xml"> a string containing the XML document </param>
         /// <returns> a XOM element representing the root node in the document  </returns>
-        public virtual Element GetElement(string xml)
+        public virtual XElement GetElement(string xml)
         {
             Util.RequireValue("XML string", xml);
             return (GetElement(xml));
@@ -214,15 +182,15 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="reader"> a reader mapping to an XML document </param>
         /// <returns> a XOM element representing the root node in the document </returns>
-        public virtual Element GetElement(Stream reader)
+        public virtual XElement GetElement(Stream reader)
         {
             Util.RequireValue("reader", reader);
             try
             {
-                Document doc = XDocument.Load(reader);
+                XDocument doc = XDocument.Load(reader);
                 return (doc.Root);
             }
-            catch (ParsingException e)
+            catch (XmlException e)
             {
                 throw new InvalidDDMSException(e);
             }
@@ -267,13 +235,13 @@ namespace DDMSSense.Util
         /// <summary>
         ///     Shared helper method to build a DDMS Resource from a XOM Element
         /// </summary>
-        /// <param name="xomElement"> </param>
+        /// <param name="element"> </param>
         /// <returns> a DDMS Resource </returns>
         /// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-        protected internal virtual Resource BuildResource(Element xomElement)
+        protected internal virtual Resource BuildResource(XElement element)
         {
-            DDMSVersion.SetCurrentVersion(DDMSVersion.GetVersionForNamespace(xomElement.Name.NamespaceName).Version);
-            return (new Resource(xomElement));
+            DDMSVersion.SetCurrentVersion(DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName).Version);
+            return (new Resource(element));
         }
     }
 }
