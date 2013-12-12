@@ -269,18 +269,18 @@ namespace DDMSSense.DDMS.Summary.Gml
         }
 
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
-        public override string GetOutput(bool isHTML, string prefix)
+        public override string GetOutput(bool isHtml, string prefix)
         {
             string localPrefix = Util.Util.GetNonNullString(prefix);
             var text = new StringBuilder();
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + "srsName", SrsName));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "srsName", SrsName));
             if (SrsDimension != null)
             {
-                text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + "srsDimension",
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "srsDimension",
                     Convert.ToString(SrsDimension)));
             }
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + "axisLabels", AxisLabelsAsXsList));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + "uomLabels", UomLabelsAsXsList));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "axisLabels", AxisLabelsAsXsList));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "uomLabels", UomLabelsAsXsList));
             return (text.ToString());
         }
 

@@ -71,7 +71,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="name">		the simple name of the property, without "DDMSSense." </param>
         /// <returns> the property specified </returns>
-        /// <exception cref="IllegalArgumentException"> if the property does not exist. </exception>
+        /// <exception cref="ArgumentException"> if the property does not exist. </exception>
         public static string GetProperty(string name)
         {
             string value = ConfigurationManager.AppSettings[name];
@@ -86,7 +86,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="name"> the key of the property, without the "DDMSSense." prefix </param>
         /// <param name="value"> the new value of the property </param>
-        /// <exception cref="IllegalArgumentException"> if the property is not a valid configurable property. </exception>
+        /// <exception cref="ArgumentException"> if the property is not a valid configurable property. </exception>
         public static void SetProperty(string name, string value)
         {
             if (!CUSTOM_PROPERTIES.Contains(name))

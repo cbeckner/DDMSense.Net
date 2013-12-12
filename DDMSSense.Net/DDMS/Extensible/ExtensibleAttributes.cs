@@ -11,34 +11,10 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.Extensible
 {
-    #region usings
-
-    using Attribute = XAttribute;
-    using Element = XElement;
-
-    #endregion
+    using System.Linq;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     ///     Attribute group representing the xs:anyAttribute tag which appears on various DDMS components.
@@ -93,8 +69,8 @@ namespace DDMSSense.DDMS.Extensible
     /// </summary>
     public sealed class ExtensibleAttributes : AbstractAttributeGroup
     {
-        private readonly List<XmlQualifiedName> RESERVED_RESOURCE_NAMES = new List<XmlQualifiedName>();
-        private readonly List<Attribute> _attributes;
+        private readonly List<XmlQualifiedName> _reservedResourceNames = new List<XmlQualifiedName>();
+        private readonly List<XAttribute> _attributes;
 
         /// <summary>
         ///     Base constructor
@@ -104,18 +80,17 @@ namespace DDMSSense.DDMS.Extensible
         ///     </para>
         /// </summary>
         /// <param name="element"> the XOM element which is decorated with these attributes. </param>
-        public ExtensibleAttributes(Element element) : base(element.Name.NamespaceName)
+        public ExtensibleAttributes(XElement element) : base(element.Name.NamespaceName)
         {
             BuildReservedNames(element.Name.NamespaceName);
 
-            _attributes = new List<Attribute>();
+            _attributes = new List<XAttribute>();
             foreach (var attribute in element.Attributes())
             {
                 // Skip ddms: attributes.
                 if (element.Name.NamespaceName.Equals(attribute.Name.NamespaceName))
-                {
                     continue;
-                }
+                
                 // Skip reserved ISM attributes on Resource and Category
                 DDMSVersion version = DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName);
                 if (Resource.GetName(version).Equals(element.Name.LocalName) ||
@@ -123,10 +98,8 @@ namespace DDMSSense.DDMS.Extensible
                     Keyword.GetName(version).Equals(element.Name.LocalName))
                 {
                     var testName = new XmlQualifiedName(attribute.Name.NamespaceName, attribute.Name.LocalName);
-                    if (RESERVED_RESOURCE_NAMES.Contains(testName))
-                    {
+                    if (_reservedResourceNames.Contains(testName))
                         continue;
-                    }
                 }
                 _attributes.Add(attribute);
             }
@@ -140,13 +113,12 @@ namespace DDMSSense.DDMS.Extensible
         /// </summary>
         /// <param name="attributes"> a list of extensible attributes </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ExtensibleAttributes(List<Attribute> attributes) : base(DDMSVersion.GetCurrentVersion().Namespace)
+        public ExtensibleAttributes(List<XAttribute> attributes) : base(DDMSVersion.GetCurrentVersion().Namespace)
         {
             if (attributes == null)
-            {
-                attributes = new List<Attribute>();
-            }
-            _attributes = new List<Attribute>(attributes);
+                attributes = new List<XAttribute>();
+            
+            _attributes = new List<XAttribute>(attributes);
             Validate();
         }
 
@@ -162,16 +134,11 @@ namespace DDMSSense.DDMS.Extensible
         /// <summary>
         ///     Accessor for the attributes. Returns a copy.
         /// </summary>
-        public List<Attribute> Attributes
+        public List<XAttribute> Attributes
         {
             get
             {
-                var attributes = new List<Attribute>();
-                foreach (var attribute in _attributes)
-                {
-                    attributes.Add(attribute);
-                }
-                return attributes;
+                return _attributes.ToList();
             }
         }
 
@@ -183,9 +150,7 @@ namespace DDMSSense.DDMS.Extensible
         /// <exception cref="InvalidDDMSException"> if there are problems creating the empty attributes instance </exception>
         public static ExtensibleAttributes GetNonNullInstance(ExtensibleAttributes extensibleAttributes)
         {
-            return (extensibleAttributes == null
-                ? new ExtensibleAttributes((List<Attribute>) null)
-                : extensibleAttributes);
+            return (extensibleAttributes ?? new ExtensibleAttributes((List<XAttribute>) null));
         }
 
         /// <summary>
@@ -198,25 +163,21 @@ namespace DDMSSense.DDMS.Extensible
         private void BuildReservedNames(string parentNamespace)
         {
             DDMSVersion version = DDMSVersion.GetVersionForNamespace(parentNamespace);
-            RESERVED_RESOURCE_NAMES.Clear();
+            _reservedResourceNames.Clear();
             string ismPrefix = PropertyReader.GetPrefix("ism");
             string ntkPrefix = PropertyReader.GetPrefix("ntk");
             foreach (var reservedName in Resource.NON_EXTENSIBLE_NAMES)
-            {
-                RESERVED_RESOURCE_NAMES.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
-            }
+                _reservedResourceNames.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
+            
             foreach (var reservedName in SecurityAttributes.NON_EXTENSIBLE_NAMES)
-            {
-                RESERVED_RESOURCE_NAMES.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
-            }
-            if (version.IsAtLeast("4.0.1"))
-            {
-                foreach (var reservedName in NoticeAttributes.NON_EXTENSIBLE_NAMES)
-                {
-                    RESERVED_RESOURCE_NAMES.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
-                }
-                RESERVED_RESOURCE_NAMES.Add(new XmlQualifiedName(version.NtkNamespace, Resource.DES_VERSION_NAME));
-            }
+                _reservedResourceNames.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
+
+            if (!version.IsAtLeast("4.0.1")) return;
+            
+            foreach (var reservedName in NoticeAttributes.NON_EXTENSIBLE_NAMES)
+                _reservedResourceNames.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
+            
+            _reservedResourceNames.Add(new XmlQualifiedName(version.NtkNamespace, Resource.DES_VERSION_NAME));
         }
 
         /// <summary>
@@ -224,15 +185,13 @@ namespace DDMSSense.DDMS.Extensible
         /// </summary>
         /// <param name="element"> the element to decorate </param>
         /// <exception cref="InvalidDDMSException"> if the attribute already exists </exception>
-        public void AddTo(Element element)
+        public void AddTo(XElement element)
         {
             foreach (var attribute in Attributes)
             {
                 if (element.Attribute(XName.Get(attribute.Name.LocalName, attribute.Name.NamespaceName)).Value != null)
-                {
-                    throw new InvalidDDMSException("The extensible attribute with the name, " + attribute.Name +
-                                                   " conflicts with a pre-existing attribute on the element.");
-                }
+                    throw new InvalidDDMSException("The extensible attribute with the name, " + attribute.Name +" conflicts with a pre-existing attribute on the element.");
+                
                 element.Add(attribute);
             }
         }
@@ -247,15 +206,12 @@ namespace DDMSSense.DDMS.Extensible
         }
 
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
-        public override string GetOutput(bool isHTML, string prefix)
+        public override string GetOutput(bool isHtml, string prefix)
         {
             string localPrefix = Util.Util.GetNonNullString(prefix);
             var text = new StringBuilder();
             foreach (var attribute in Attributes)
-            {
-                text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + "." + attribute.Name.LocalName,
-                    attribute.Value));
-            }
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "." + attribute.Name.LocalName,attribute.Value));
             return (text.ToString());
         }
 
@@ -263,24 +219,19 @@ namespace DDMSSense.DDMS.Extensible
         public override bool Equals(object obj)
         {
             if (!(obj is ExtensibleAttributes))
-            {
                 return (false);
-            }
+            
             var test = (ExtensibleAttributes) obj;
             // XOM Attribute has no logical equality. Must compare by hand.
             if (Attributes.Count != test.Attributes.Count)
-            {
                 return (false);
-            }
-            for (int i = 0; i < Attributes.Count; i++)
+
+            for (int i = 0; i < Attributes.Count(); i++)
             {
-                Attribute attr1 = Attributes[i];
-                Attribute attr2 = test.Attributes[i];
-                if (!attr1.Name.LocalName.Equals(attr2.Name.LocalName) ||
-                    !attr1.Name.NamespaceName.Equals(attr1.Name.NamespaceName))
-                {
+                XAttribute attr1 = Attributes[i];
+                XAttribute attr2 = test.Attributes[i];
+                if (!attr1.Name.LocalName.Equals(attr2.Name.LocalName) || !attr1.Name.NamespaceName.Equals(attr1.Name.NamespaceName))
                     return (false);
-                }
             }
             return (true);
         }
@@ -289,7 +240,7 @@ namespace DDMSSense.DDMS.Extensible
         public override int GetHashCode()
         {
             int result = 0;
-            // XOM Attribute has no logical equality. Must calculate by hand.		
+            // Attribute has no logical equality. Must calculate by hand.		
             foreach (var attribute in Attributes)
             {
                 result = 7*result + attribute.Name.LocalName.GetHashCode();
@@ -307,18 +258,10 @@ namespace DDMSSense.DDMS.Extensible
         ///         implement the IBuilder interface.
         ///     </para>
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.9.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class AttributeBuilder
         {
-            internal const long SerialVersionUID = -5102193614065692204L;
-            internal string _name;
-            internal XmlNodeType _type;
-            internal string _uri;
-            internal string _value;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -329,7 +272,7 @@ namespace DDMSSense.DDMS.Extensible
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
-            public AttributeBuilder(Attribute attribute)
+            public AttributeBuilder(XAttribute attribute)
             {
                 Name = attribute.Name.LocalName;
                 Uri = attribute.Name.NamespaceName;
@@ -342,54 +285,34 @@ namespace DDMSSense.DDMS.Extensible
             {
                 get
                 {
-                    return (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Uri) && String.IsNullOrEmpty(Value) &&
-                            Type == null);
+                    return (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Uri) && String.IsNullOrEmpty(Value) && Type == null);
                 }
             }
 
             /// <summary>
             ///     Builder accessor for the name
             /// </summary>
-            public virtual string Name
-            {
-                get { return _name; }
-                set { _name = value; }
-            }
-
+            public virtual string Name { get; set; }
 
             /// <summary>
             ///     Builder accessor for the uri
             /// </summary>
-            public virtual string Uri
-            {
-                get { return _uri; }
-                set { _uri = value; }
-            }
-
+            public virtual string Uri { get; set; }
 
             /// <summary>
             ///     Builder accessor for the value
             /// </summary>
-            public virtual string Value
-            {
-                get { return _value; }
-                set { _value = value; }
-            }
-
+            public virtual string Value { get; set; }
 
             /// <summary>
             ///     Builder accessor for the type
             /// </summary>
-            public virtual XmlNodeType Type
-            {
-                get { return _type; }
-                set { _type = value; }
-            }
+            public virtual XmlNodeType Type { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
-            public virtual Attribute Commit()
+            public virtual XAttribute Commit()
             {
-                return (Empty ? null : new Attribute(XName.Get(Name, Uri), Value));
+                return (Empty ? null : new XAttribute(XName.Get(Name, Uri), Value));
             }
         }
 
@@ -401,20 +324,16 @@ namespace DDMSSense.DDMS.Extensible
         ///         null.
         ///     </para>
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder
         {
-            internal const long SerialVersionUID = 1257270526054778197L;
-            internal List<AttributeBuilder> _attributes;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                Attributes = new List<AttributeBuilder>();
             }
 
             /// <summary>
@@ -422,10 +341,9 @@ namespace DDMSSense.DDMS.Extensible
             /// </summary>
             public Builder(ExtensibleAttributes attributes)
             {
+                Attributes = new List<AttributeBuilder>();
                 foreach (var attribute in attributes.Attributes)
-                {
                     Attributes.Add(new AttributeBuilder(attribute));
-                }
             }
 
             /// <summary>
@@ -440,17 +358,7 @@ namespace DDMSSense.DDMS.Extensible
             /// <summary>
             ///     Builder accessor for the attributes
             /// </summary>
-            public virtual List<AttributeBuilder> Attributes
-            {
-                get
-                {
-                    if (_attributes == null)
-                    {
-                        _attributes = new List<AttributeBuilder>();
-                    }
-                    return _attributes;
-                }
-            }
+            public virtual List<AttributeBuilder> Attributes{get;private set;}
 
             /// <summary>
             ///     Finalizes the data gathered for this builder instance. Will always return an empty instance instead of
@@ -459,15 +367,7 @@ namespace DDMSSense.DDMS.Extensible
             /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
             public virtual ExtensibleAttributes Commit()
             {
-                var attributes = new List<Attribute>();
-                foreach (var builder in Attributes)
-                {
-                    Attribute attr = builder.Commit();
-                    if (attr != null)
-                    {
-                        attributes.Add(attr);
-                    }
-                }
+                var attributes = Attributes.Select(builder => builder.Commit()).Where(attr => attr != null).ToList();
                 return (new ExtensibleAttributes(attributes));
             }
         }

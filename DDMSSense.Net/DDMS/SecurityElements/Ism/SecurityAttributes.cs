@@ -845,59 +845,59 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         }
 
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
-        public override string GetOutput(bool isHTML, string prefix)
+        public override string GetOutput(bool isHtml, string prefix)
         {
             string localPrefix = Util.Util.GetNonNullString(prefix);
             var text = new StringBuilder();
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + ATOMIC_ENERGY_MARKINGS_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + ATOMIC_ENERGY_MARKINGS_NAME,
                 Util.Util.GetXsList(AtomicEnergyMarkings)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + CLASSIFICATION_NAME, Classification));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + CLASSIFICATION_REASON_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFICATION_NAME, Classification));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFICATION_REASON_NAME,
                 ClassificationReason));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + CLASSIFIED_BY_NAME, ClassifiedBy));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + COMPILATION_REASON_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFIED_BY_NAME, ClassifiedBy));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + COMPILATION_REASON_NAME,
                 CompilationReason));
             if (DateOfExemptedSource != null)
             {
-                text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DATE_OF_EXEMPTED_SOURCE_NAME,
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DATE_OF_EXEMPTED_SOURCE_NAME,
                     DateOfExemptedSource.ToString("o")));
             }
             if (DeclassDate != null)
             {
-                text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DECLASS_DATE_NAME,
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_DATE_NAME,
                     DeclassDate.ToString("o")));
             }
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DECLASS_EVENT_NAME, DeclassEvent));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DECLASS_EXCEPTION_NAME, DeclassException));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_EVENT_NAME, DeclassEvent));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_EXCEPTION_NAME, DeclassException));
             if (DeclassManualReview != null)
             {
-                text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DECLASS_MANUAL_REVIEW_NAME,
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_MANUAL_REVIEW_NAME,
                     DeclassManualReview.ToString()));
             }
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DERIVATIVELY_CLASSIFIED_BY_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DERIVATIVELY_CLASSIFIED_BY_NAME,
                 DerivativelyClassifiedBy));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DERIVED_FROM_NAME, DerivedFrom));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DISPLAY_ONLY_TO_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DERIVED_FROM_NAME, DerivedFrom));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DISPLAY_ONLY_TO_NAME,
                 Util.Util.GetXsList(DisplayOnlyTo)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + DISSEMINATION_CONTROLS_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DISSEMINATION_CONTROLS_NAME,
                 Util.Util.GetXsList(DisseminationControls)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + FGI_SOURCE_OPEN_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + FGI_SOURCE_OPEN_NAME,
                 Util.Util.GetXsList(FGIsourceOpen)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + FGI_SOURCE_PROTECTED_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + FGI_SOURCE_PROTECTED_NAME,
                 Util.Util.GetXsList(FGIsourceProtected)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + NON_IC_MARKINGS_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NON_IC_MARKINGS_NAME,
                 Util.Util.GetXsList(NonICmarkings)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + NON_US_CONTROLS_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NON_US_CONTROLS_NAME,
                 Util.Util.GetXsList(NonUSControls)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + OWNER_PRODUCER_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + OWNER_PRODUCER_NAME,
                 Util.Util.GetXsList(OwnerProducers)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + RELEASABLE_TO_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + RELEASABLE_TO_NAME,
                 Util.Util.GetXsList(ReleasableTo)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + SAR_IDENTIFIER_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + SAR_IDENTIFIER_NAME,
                 Util.Util.GetXsList(SARIdentifier)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + SCI_CONTROLS_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + SCI_CONTROLS_NAME,
                 Util.Util.GetXsList(SCIcontrols)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + TYPE_OF_EXEMPTED_SOURCE_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + TYPE_OF_EXEMPTED_SOURCE_NAME,
                 TypeOfExemptedSource));
             return (text.ToString());
         }

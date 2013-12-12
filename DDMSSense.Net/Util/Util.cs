@@ -399,7 +399,7 @@ namespace DDMSSense.Util
         /// <param name="lowBound"> the lowest value the number can be </param>
         /// <param name="highBound"> the highest value the number can be </param>
         /// <returns> true if the number is bounded, false otherwise </returns>
-        /// <exception cref="IllegalArgumentException"> if the range is invalid. </exception>
+        /// <exception cref="ArgumentException"> if the range is invalid. </exception>
         public static bool IsBounded(int testCount, int lowBound, int highBound)
         {
             if (lowBound > highBound)
@@ -415,7 +415,7 @@ namespace DDMSSense.Util
         /// <param name="list1"> the first list </param>
         /// <param name="list2"> the second list </param>
         /// <returns> true if the lists are of equal.Count and contain the same objects, false otherwise. </returns>
-        /// <exception cref="IllegalArgumentException"> if one of the lists is null </exception>
+        /// <exception cref="ArgumentException"> if one of the lists is null </exception>
         public static bool ListEquals<T1, T2>(List<T1> list1, List<T2> list2)
         {
             if (list1 == null || list2 == null)
@@ -599,7 +599,7 @@ namespace DDMSSense.Util
         /// <param name="element"> the element to check </param>
         /// <param name="namespaceUri"> the namespace to check </param>
         /// <param name="localName"> the local name to compare to </param>
-        /// <exception cref="IllegalArgumentException"> if the name is incorrect </exception>
+        /// <exception cref="ArgumentException"> if the name is incorrect </exception>
         public static void RequireQualifiedName(XElement element, string namespaceUri, string localName)
         {
             RequireValue("element", element);

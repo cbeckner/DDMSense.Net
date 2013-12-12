@@ -339,7 +339,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// </summary>
         /// <param name="enumerationKey"> the key of the enumeration </param>
         /// <returns> an unmodifiable set of Strings </returns>
-        /// <exception cref="IllegalArgumentException"> if the key does not match a controlled vocabulary </exception>
+        /// <exception cref="ArgumentException"> if the key does not match a controlled vocabulary </exception>
         public static List<string> GetEnumerationTokens(string enumerationKey)
         {
             UpdateEnumLocation();
@@ -387,7 +387,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// <param name="enumerationKey"> the key of the enumeration </param>
         /// <param name="value"> the test value </param>
         /// <returns> true if the value exists in the enumeration, false otherwise </returns>
-        /// <exception cref="IllegalArgumentException"> on an invalid key </exception>
+        /// <exception cref="ArgumentException"> on an invalid key </exception>
         protected internal static bool EnumContains(string enumerationKey, string value)
         {
             Util.Util.RequireValue("key", enumerationKey);

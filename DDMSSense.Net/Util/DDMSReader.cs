@@ -90,18 +90,15 @@ namespace DDMSSense.Util
         /// <param name="schemaLocation"> the schema location </param>
         /// <param name="schemas"> the buffer to add the schema location to </param>
         /// <param name="processedNamespaces"> namespaces which have already been loaded </param>
-        private void LoadSchema(string @namespace, string schemaLocation, StringBuilder schemas,
-            List<string> processedNamespaces)
+        private void LoadSchema(string @namespace, string schemaLocation, StringBuilder schemas,List<string> processedNamespaces)
         {
-            if (!processedNamespaces.Contains(@namespace))
+            if (processedNamespaces.Contains(@namespace)) return;
+            if (!String.IsNullOrEmpty(schemaLocation))
             {
-                if (!String.IsNullOrEmpty(schemaLocation))
-                {
-                    string xsd = GetLocalSchemaLocation(schemaLocation);
-                    schemas.Append(@namespace).Append(" ").Append(xsd).Append(" ");
-                }
-                processedNamespaces.Add(@namespace);
+                string xsd = GetLocalSchemaLocation(schemaLocation);
+                schemas.Append(@namespace).Append(" ").Append(xsd).Append(" ");
             }
+            processedNamespaces.Add(@namespace);
         }
 
         /// <summary>
@@ -111,7 +108,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="schemaLocation"> the relative schema location as specified in the properties file </param>
         /// <returns> the full path to the schema (generally this is in the JAR file) </returns>
-        /// <exception cref="IllegalArgumentException"> if the schema could not be found. </exception>
+        /// <exception cref="ArgumentException"> if the schema could not be found. </exception>
         private string GetLocalSchemaLocation(string schemaLocation)
         {
             string xsd = ConfigurationManager.AppSettings[schemaLocation];
@@ -127,13 +124,13 @@ namespace DDMSSense.Util
         ///     loads it. This method allows the data-driven constructors for a Resource to do
         ///     a final confirmation that none of the data breaks any schema rules.
         /// </summary>
-        /// <param name="resourceXML"> the XML of the resource to check </param>
+        /// <param name="resourceXml"> the XML of the resource to check </param>
         /// <exception cref="InvalidDDMSException"> if the resource is invalid </exception>
-        public static void ValidateWithSchema(string resourceXML)
+        public static void ValidateWithSchema(string resourceXml)
         {
             try
             {
-                (new DDMSReader()).GetElement(resourceXML);
+                (new DDMSReader()).GetElement(resourceXml);
             }
             catch (IOException e)
             {
@@ -149,9 +146,9 @@ namespace DDMSSense.Util
         ///     Creates a XOM element representing the root XML element in the file.
         ///     <para>The implementation of this method delegates to the Reader-based overloaded method.</para>
         /// </summary>
-        /// <param name="file"> the file containing the XML document </param>
+        /// <param name="path">the file containing the XML document </param>
         /// <returns> a XOM element representing the root node in the document </returns>
-        public virtual XElement GetElementFromFile(string path)
+        protected virtual XElement GetElementFromFile(string path)
         {
             Util.RequireValue("path", path);
             try
@@ -200,7 +197,7 @@ namespace DDMSSense.Util
         ///     Creates a DDMS resource based on the contents of a file, and also sets the DDMSVersion based on the namespace
         ///     URIs in the file.
         /// </summary>
-        /// <param name="file"> the file containing the DDMS Resource. </param>
+        /// <param name="path"> the file containing the DDMS Resource. </param>
         /// <returns> a DDMS Resource </returns>
         /// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
         public virtual Resource GetDDMSResourceFromFile(string path)
@@ -238,7 +235,7 @@ namespace DDMSSense.Util
         /// <param name="element"> </param>
         /// <returns> a DDMS Resource </returns>
         /// <exception cref="InvalidDDMSException"> if the component could not be built </exception>
-        protected internal virtual Resource BuildResource(XElement element)
+        protected virtual Resource BuildResource(XElement element)
         {
             DDMSVersion.SetCurrentVersion(DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName).Version);
             return (new Resource(element));

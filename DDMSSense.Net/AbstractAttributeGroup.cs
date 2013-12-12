@@ -102,9 +102,9 @@ namespace DDMSSense
         /// <summary>
         ///     Outputs to HTML or Text with a prefix at the beginning of each meta tag or line.
         /// </summary>
-        /// <param name="isHTML"> true for HTML, false for Text </param>
+        /// <param name="isHtml"> true for HTML, false for Text </param>
         /// <param name="prefix"> the prefix to add </param>
         /// <returns> the HTML or Text output </returns>
-        public abstract string GetOutput(bool isHTML, string prefix);
+        public abstract string GetOutput(bool isHtml, string prefix);
     }
 }

@@ -7,36 +7,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.Extensible
 {
-    #region usings
-
-    using Document = XDocument;
-    using Element = XElement;
-    using XMLReader = XmlReader;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of an element which might fulfill the xs:any space in the Extensible Layer.
     ///     <para>
@@ -80,7 +52,7 @@ namespace DDMSSense.DDMS.Extensible
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ExtensibleElement(Element element) : base(element)
+        public ExtensibleElement(XElement element) : base(element)
         {
         }
 
@@ -102,9 +74,7 @@ namespace DDMSSense.DDMS.Extensible
         protected internal override void Validate()
         {
             if (DDMSVersion.IsSupportedDDMSNamespace(Namespace))
-            {
                 throw new InvalidDDMSException("Extensible elements cannot be defined in the DDMS namespace.");
-            }
             base.Validate();
         }
 
@@ -118,9 +88,8 @@ namespace DDMSSense.DDMS.Extensible
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is ExtensibleElement))
-            {
                 return (false);
-            }
+            
             var test = (ExtensibleElement) obj;
             return (Element.ToString().Equals(test.Element.ToString()));
         }
@@ -136,15 +105,10 @@ namespace DDMSSense.DDMS.Extensible
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7276942157278555643L;
-            internal string _xml;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -163,22 +127,16 @@ namespace DDMSSense.DDMS.Extensible
             /// <summary>
             ///     Builder accessor for the XML string representing the element.
             /// </summary>
-            public virtual string Xml
-            {
-                get { return _xml; }
-                set { _xml = value; }
-            }
+            public virtual string Xml { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
                 try
                 {
-                    Document doc = Document.Parse(Xml);
+                    XDocument doc = XDocument.Parse(Xml);
                     return (new ExtensibleElement(doc.Root));
                 }
                 catch (Exception e)

@@ -13,33 +13,9 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.Metacard
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
+    using System.Linq;
 
     /// <summary>
     ///     An immutable implementation of ddms:metacardInfo.
@@ -78,7 +54,7 @@ namespace DDMSSense.DDMS.Metacard
     ///             </td>
     ///         </tr>
     ///     </table>
-    
+
     ///     @since 2.0.0
     /// </summary>
     public sealed class MetacardInfo : AbstractBaseComponent
@@ -98,7 +74,7 @@ namespace DDMSSense.DDMS.Metacard
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public MetacardInfo(Element element)
+        public MetacardInfo(XElement element)
         {
             NoticeList = null;
             RecordsManagementInfo = null;
@@ -110,11 +86,11 @@ namespace DDMSSense.DDMS.Metacard
                 SetElement(element, false);
                 DDMSVersion version = DDMSVersion;
                 _identifiers = new List<Identifier>();
-                IEnumerable<Element> components = element.Elements(XName.Get(Identifier.GetName(version), Namespace));
+                IEnumerable<XElement> components = element.Elements(XName.Get(Identifier.GetName(version), Namespace));
                 foreach (var comp in components)
                     _identifiers.Add(new Identifier(comp));
 
-                Element component = element.Element(XName.Get(Dates.GetName(version), Namespace));
+                XElement component = element.Element(XName.Get(Dates.GetName(version), Namespace));
                 if (component != null)
                     Dates = new Dates(component);
 
@@ -136,9 +112,8 @@ namespace DDMSSense.DDMS.Metacard
 
                 component = element.Element(XName.Get(Description.GetName(version), Namespace));
                 if (component != null)
-                {
                     Description = new Description(component);
-                }
+
                 components = element.Elements(XName.Get(ProcessingInfo.GetName(version), Namespace));
                 foreach (var comp in components)
                     _processingInfos.Add(new ProcessingInfo(comp));
@@ -166,7 +141,7 @@ namespace DDMSSense.DDMS.Metacard
             catch (InvalidDDMSException e)
             {
                 e.Locator = QualifiedName;
-                throw (e);
+                throw;
             }
         }
 
@@ -197,79 +172,44 @@ namespace DDMSSense.DDMS.Metacard
             try
             {
                 if (childComponents == null)
-                {
                     childComponents = new List<IDDMSComponent>();
-                }
 
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
                 SetElement(element, false);
 
-                foreach (var component in childComponents)
+                foreach (var component in childComponents.Where(component => component != null))
                 {
-                    if (component == null)
-                    {
-                        continue;
-                    }
-
                     if (component is Identifier)
-                    {
-                        _identifiers.Add((Identifier) component);
-                    }
+                        _identifiers.Add((Identifier)component);
                     else if (component is Dates)
-                    {
-                        Dates = (Dates) component;
-                    }
+                        Dates = (Dates)component;
                     else if (component is Contributor)
-                    {
-                        _contributors.Add((Contributor) component);
-                    }
+                        _contributors.Add((Contributor)component);
                     else if (component is Creator)
-                    {
-                        _creators.Add((Creator) component);
-                    }
+                        _creators.Add((Creator)component);
                     else if (component is PointOfContact)
-                    {
-                        _pointOfContacts.Add((PointOfContact) component);
-                    }
+                        _pointOfContacts.Add((PointOfContact)component);
                     else if (component is Publisher)
-                    {
-                        _publishers.Add((Publisher) component);
-                    }
+                        _publishers.Add((Publisher)component);
                     else if (component is Description)
-                    {
-                        Description = (Description) component;
-                    }
+                        Description = (Description)component;
                     else if (component is ProcessingInfo)
-                    {
-                        _processingInfos.Add((ProcessingInfo) component);
-                    }
+                        _processingInfos.Add((ProcessingInfo)component);
                     else if (component is RevisionRecall)
-                    {
-                        RevisionRecall = (RevisionRecall) component;
-                    }
+                        RevisionRecall = (RevisionRecall)component;
                     else if (component is RecordsManagementInfo)
-                    {
-                        RecordsManagementInfo = (RecordsManagementInfo) component;
-                    }
+                        RecordsManagementInfo = (RecordsManagementInfo)component;
                     else if (component is NoticeList)
-                    {
-                        NoticeList = (NoticeList) component;
-                    }
+                        NoticeList = (NoticeList)component;
                     else if (component is Access)
-                    {
-                        _access = (Access) component;
-                    }
+                        _access = (Access)component;
                     else
-                    {
-                        throw new InvalidDDMSException(component.Name +
-                                                       " is not a valid child component in a metacardInfo element.");
-                    }
+                        throw new InvalidDDMSException(component.Name + " is not a valid child component in a metacardInfo element.");
                 }
                 PopulatedOrderedList();
                 foreach (var component in NestedComponents)
-                {
                     element.Add(component.ElementCopy);
-                }
+
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 _securityAttributes.AddTo(element);
                 Validate();
@@ -395,34 +335,27 @@ namespace DDMSSense.DDMS.Metacard
         {
             _orderedList.AddRange(Identifiers);
             if (Dates != null)
-            {
                 _orderedList.Add(Dates);
-            }
+
             _orderedList.AddRange(Publishers);
             _orderedList.AddRange(Contributors);
             _orderedList.AddRange(Creators);
             _orderedList.AddRange(PointOfContacts);
             if (Description != null)
-            {
                 _orderedList.Add(Description);
-            }
+
             _orderedList.AddRange(ProcessingInfos);
             if (RevisionRecall != null)
-            {
                 _orderedList.Add(RevisionRecall);
-            }
+
             if (RecordsManagementInfo != null)
-            {
                 _orderedList.Add(RecordsManagementInfo);
-            }
+
             if (NoticeList != null)
-            {
                 _orderedList.Add(NoticeList);
-            }
+
             if (Access != null)
-            {
                 _orderedList.Add(Access);
-            }
         }
 
         /// <summary>
@@ -448,15 +381,11 @@ namespace DDMSSense.DDMS.Metacard
         {
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (Identifiers.Count == 0)
-            {
-                throw new InvalidDDMSException(
-                    "At least one ddms:identifier must exist within a ddms:metacardInfo element.");
-            }
+                throw new InvalidDDMSException("At least one ddms:identifier must exist within a ddms:metacardInfo element.");
+
             if (Publishers.Count == 0)
-            {
-                throw new InvalidDDMSException(
-                    "At least one ddms:publisher must exist within a ddms:metacardInfo element.");
-            }
+                throw new InvalidDDMSException("At least one ddms:publisher must exist within a ddms:metacardInfo element.");
+
             Util.Util.RequireBoundedChildCount(Element, Dates.GetName(DDMSVersion), 1, 1);
             Util.Util.RequireBoundedChildCount(Element, Description.GetName(DDMSVersion), 0, 1);
             Util.Util.RequireBoundedChildCount(Element, RevisionRecall.GetName(DDMSVersion), 0, 1);
@@ -485,9 +414,7 @@ namespace DDMSSense.DDMS.Metacard
         protected internal override void ValidateWarnings()
         {
             if (Access != null)
-            {
                 AddDdms40Warning("ntk:Access element");
-            }
 
             base.ValidateWarnings();
         }
@@ -501,34 +428,27 @@ namespace DDMSSense.DDMS.Metacard
             // Traverse child components, suppressing the resource prefix
             text.Append(BuildOutput(isHtml, localPrefix, Identifiers));
             if (Dates != null)
-            {
                 text.Append(Dates.GetOutput(isHtml, localPrefix, ""));
-            }
+
             text.Append(BuildOutput(isHtml, localPrefix, Publishers));
             text.Append(BuildOutput(isHtml, localPrefix, Contributors));
             text.Append(BuildOutput(isHtml, localPrefix, Creators));
             text.Append(BuildOutput(isHtml, localPrefix, PointOfContacts));
             if (Description != null)
-            {
                 text.Append(Description.GetOutput(isHtml, localPrefix, ""));
-            }
+
             text.Append(BuildOutput(isHtml, localPrefix, ProcessingInfos));
             if (RevisionRecall != null)
-            {
                 text.Append(RevisionRecall.GetOutput(isHtml, localPrefix, ""));
-            }
+
             if (RecordsManagementInfo != null)
-            {
                 text.Append(RecordsManagementInfo.GetOutput(isHtml, localPrefix, ""));
-            }
+
             if (NoticeList != null)
-            {
                 text.Append(NoticeList.GetOutput(isHtml, localPrefix, ""));
-            }
+
             if (Access != null)
-            {
                 text.Append(Access.GetOutput(isHtml, localPrefix, ""));
-            }
 
             text.Append(SecurityAttributes.GetOutput(isHtml, localPrefix));
             return (text.ToString());
@@ -537,11 +457,7 @@ namespace DDMSSense.DDMS.Metacard
         /// <see cref="object#equals(Object)"></see>
         public override bool Equals(object obj)
         {
-            if (!base.Equals(obj) || !(obj is MetacardInfo))
-            {
-                return (false);
-            }
-            return (true);
+            return base.Equals(obj) && obj is MetacardInfo;
         }
 
         /// <summary>
@@ -564,26 +480,24 @@ namespace DDMSSense.DDMS.Metacard
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7851044806424206976L;
-            internal Access.Builder _access;
-            internal List<Contributor.Builder> _contributors;
-            internal List<Creator.Builder> _creators;
-            internal Dates.Builder _dates;
-            internal Description.Builder _description;
-            internal List<Identifier.Builder> _identifiers;
-            internal NoticeList.Builder _noticeList;
-            internal List<PointOfContact.Builder> _pointOfContacts;
-            internal List<ProcessingInfo.Builder> _processingInfos;
-            internal List<Publisher.Builder> _publishers;
-            internal RecordsManagementInfo.Builder _recordsManagementInfo;
-            internal RevisionRecall.Builder _revisionRecall;
-            internal SecurityAttributes.Builder _securityAttributes;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                Access = new Access.Builder();
+                Contributors = new List<Contributor.Builder>();
+                Creators = new List<Creator.Builder>();
+                Dates = new Dates.Builder();
+                Description = new Description.Builder();
+                Identifiers = new List<Identifier.Builder>();
+                NoticeList = new NoticeList.Builder();
+                PointOfContacts = new List<PointOfContact.Builder>();
+                ProcessingInfos = new List<ProcessingInfo.Builder>();
+                Publishers = new List<Publisher.Builder>();
+                RecordsManagementInfo = new RecordsManagementInfo.Builder();
+                RevisionRecall = new RevisionRecall.Builder();
+                SecurityAttributes = new SecurityAttributes.Builder();
             }
 
             /// <summary>
@@ -594,53 +508,29 @@ namespace DDMSSense.DDMS.Metacard
                 foreach (var component in metacardInfo.ChildComponents)
                 {
                     if (component is Identifier)
-                    {
-                        Identifiers.Add(new Identifier.Builder((Identifier) component));
-                    }
+                        Identifiers.Add(new Identifier.Builder((Identifier)component));
                     else if (component is Dates)
-                    {
-                        Dates = new Dates.Builder((Dates) component);
-                    }
+                        Dates = new Dates.Builder((Dates)component);
                     else if (component is Creator)
-                    {
-                        Creators.Add(new Creator.Builder((Creator) component));
-                    }
+                        Creators.Add(new Creator.Builder((Creator)component));
                     else if (component is Contributor)
-                    {
-                        Contributors.Add(new Contributor.Builder((Contributor) component));
-                    }
+                        Contributors.Add(new Contributor.Builder((Contributor)component));
                     else if (component is Publisher)
-                    {
-                        Publishers.Add(new Publisher.Builder((Publisher) component));
-                    }
+                        Publishers.Add(new Publisher.Builder((Publisher)component));
                     else if (component is PointOfContact)
-                    {
-                        PointOfContacts.Add(new PointOfContact.Builder((PointOfContact) component));
-                    }
+                        PointOfContacts.Add(new PointOfContact.Builder((PointOfContact)component));
                     else if (component is Description)
-                    {
-                        Description = new Description.Builder((Description) component);
-                    }
+                        Description = new Description.Builder((Description)component);
                     else if (component is ProcessingInfo)
-                    {
-                        ProcessingInfos.Add(new ProcessingInfo.Builder((ProcessingInfo) component));
-                    }
+                        ProcessingInfos.Add(new ProcessingInfo.Builder((ProcessingInfo)component));
                     else if (component is RevisionRecall)
-                    {
-                        RevisionRecall = new RevisionRecall.Builder((RevisionRecall) component);
-                    }
+                        RevisionRecall = new RevisionRecall.Builder((RevisionRecall)component);
                     else if (component is RecordsManagementInfo)
-                    {
-                        RecordsManagementInfo = new RecordsManagementInfo.Builder((RecordsManagementInfo) component);
-                    }
+                        RecordsManagementInfo = new RecordsManagementInfo.Builder((RecordsManagementInfo)component);
                     else if (component is NoticeList)
-                    {
-                        NoticeList = new NoticeList.Builder((NoticeList) component);
-                    }
+                        NoticeList = new NoticeList.Builder((NoticeList)component);
                     else if (component is Access)
-                    {
-                        Access = new Access.Builder((Access) component);
-                    }
+                        Access = new Access.Builder((Access)component);
                 }
                 SecurityAttributes = new SecurityAttributes.Builder(metacardInfo.SecurityAttributes);
             }
@@ -673,228 +563,79 @@ namespace DDMSSense.DDMS.Metacard
             /// <summary>
             ///     Builder accessor for the taskingInfos
             /// </summary>
-            public virtual List<Identifier.Builder> Identifiers
-            {
-                get
-                {
-                    if (_identifiers == null)
-                    {
-                        _identifiers = new List<Identifier.Builder>();
-                    }
-                    return _identifiers;
-                }
-            }
+            public virtual List<Identifier.Builder> Identifiers { get; private set; }
 
             /// <summary>
             ///     Builder accessor for the dates
             /// </summary>
-            public virtual Dates.Builder Dates
-            {
-                get
-                {
-                    if (_dates == null)
-                    {
-                        _dates = new Dates.Builder();
-                    }
-                    return _dates;
-                }
-                set { _dates = value; }
-            }
-
+            public virtual Dates.Builder Dates { get; set; }
 
             /// <summary>
             ///     Builder accessor for creators
             /// </summary>
-            public virtual List<Creator.Builder> Creators
-            {
-                get
-                {
-                    if (_creators == null)
-                    {
-                        _creators = new List<Creator.Builder>();
-                    }
-                    return _creators;
-                }
-            }
+            public virtual List<Creator.Builder> Creators { get; private set; }
 
             /// <summary>
             ///     Builder accessor for contributors
             /// </summary>
-            public virtual List<Contributor.Builder> Contributors
-            {
-                get
-                {
-                    if (_contributors == null)
-                    {
-                        _contributors = new List<Contributor.Builder>();
-                    }
-                    return _contributors;
-                }
-            }
+            public virtual List<Contributor.Builder> Contributors { get; private set; }
 
             /// <summary>
             ///     Builder accessor for publishers
             /// </summary>
-            public virtual List<Publisher.Builder> Publishers
-            {
-                get
-                {
-                    if (_publishers == null)
-                    {
-                        _publishers = new List<Publisher.Builder>();
-                    }
-                    return _publishers;
-                }
-            }
+            public virtual List<Publisher.Builder> Publishers { get; private set; }
 
             /// <summary>
             ///     Builder accessor for points of contact
             /// </summary>
-            public virtual List<PointOfContact.Builder> PointOfContacts
-            {
-                get
-                {
-                    if (_pointOfContacts == null)
-                    {
-                        _pointOfContacts = new List<PointOfContact.Builder>();
-                    }
-                    return _pointOfContacts;
-                }
-            }
+            public virtual List<PointOfContact.Builder> PointOfContacts { get; private set; }
 
             /// <summary>
             ///     Builder accessor for the description
             /// </summary>
-            public virtual Description.Builder Description
-            {
-                get
-                {
-                    if (_description == null)
-                    {
-                        _description = new Description.Builder();
-                    }
-                    return _description;
-                }
-                set { _description = value; }
-            }
-
+            public virtual Description.Builder Description { get; set; }
 
             /// <summary>
             ///     Builder accessor for the processingInfos
             /// </summary>
-            public virtual List<ProcessingInfo.Builder> ProcessingInfos
-            {
-                get
-                {
-                    if (_processingInfos == null)
-                    {
-                        _processingInfos = new List<ProcessingInfo.Builder>();
-                    }
-                    return _processingInfos;
-                }
-                set { _processingInfos = value; }
-            }
+            public virtual List<ProcessingInfo.Builder> ProcessingInfos { get; set; }
 
             /// <summary>
             ///     Builder accessor for the revisionRecall
             /// </summary>
-            public virtual RevisionRecall.Builder RevisionRecall
-            {
-                get
-                {
-                    if (_revisionRecall == null)
-                    {
-                        _revisionRecall = new RevisionRecall.Builder();
-                    }
-                    return _revisionRecall;
-                }
-                set { _revisionRecall = value; }
-            }
+            public virtual RevisionRecall.Builder RevisionRecall { get; set; }
 
 
             /// <summary>
             ///     Builder accessor for the recordsManagementInfo
             /// </summary>
-            public virtual RecordsManagementInfo.Builder RecordsManagementInfo
-            {
-                get
-                {
-                    if (_recordsManagementInfo == null)
-                    {
-                        _recordsManagementInfo = new RecordsManagementInfo.Builder();
-                    }
-                    return _recordsManagementInfo;
-                }
-                set { _recordsManagementInfo = value; }
-            }
+            public virtual RecordsManagementInfo.Builder RecordsManagementInfo { get; set; }
 
 
             /// <summary>
             ///     Builder accessor for the noticeList
             /// </summary>
-            public virtual NoticeList.Builder NoticeList
-            {
-                get
-                {
-                    if (_noticeList == null)
-                    {
-                        _noticeList = new NoticeList.Builder();
-                    }
-                    return _noticeList;
-                }
-                set { _noticeList = value; }
-            }
+            public virtual NoticeList.Builder NoticeList { get; set; }
 
 
             /// <summary>
             ///     Builder accessor for the access
             /// </summary>
-            public virtual Access.Builder Access
-            {
-                get
-                {
-                    if (_access == null)
-                    {
-                        _access = new Access.Builder();
-                    }
-                    return _access;
-                }
-                set { _access = value; }
-            }
+            public virtual Access.Builder Access { get; set; }
 
 
             /// <summary>
             ///     Builder accessor for the Security Attributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
-                var childComponents = new List<IDDMSComponent>();
-                foreach (var builder in ChildBuilders)
-                {
-                    IDDMSComponent component = builder.Commit();
-                    if (component != null)
-                    {
-                        childComponents.Add(component);
-                    }
-                }
+                
+                var childComponents = ChildBuilders.Select(builder => builder.Commit()).Where(component => component != null).ToList();
                 return (new MetacardInfo(childComponents, SecurityAttributes.Commit()));
             }
 
@@ -903,11 +644,7 @@ namespace DDMSSense.DDMS.Metacard
             {
                 get
                 {
-                    bool hasValueInList = false;
-                    foreach (var builder in ChildBuilders)
-                    {
-                        hasValueInList = hasValueInList || !builder.Empty;
-                    }
+                    bool hasValueInList = ChildBuilders.Aggregate(false, (current, builder) => current || !builder.Empty);
                     return (!hasValueInList && SecurityAttributes.Empty);
                 }
             }

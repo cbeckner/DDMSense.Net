@@ -395,18 +395,18 @@ namespace DDMSSense.DDMS.Summary.Xlink
         }
 
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
-        public override string GetOutput(bool isHTML, string prefix)
+        public override string GetOutput(bool isHtml, string prefix)
         {
             string localPrefix = Util.Util.GetNonNullString(prefix);
             var text = new StringBuilder();
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + TYPE_NAME, Type));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + HREF_NAME, Href));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + ROLE_NAME, Role));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + TITLE_NAME, Title));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + LABEL_NAME, Label));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + ARC_ROLE_NAME, Arcrole));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + SHOW_NAME, Show));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + ACTUATE_NAME, Actuate));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + TYPE_NAME, Type));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + HREF_NAME, Href));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + ROLE_NAME, Role));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + TITLE_NAME, Title));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + LABEL_NAME, Label));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + ARC_ROLE_NAME, Arcrole));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + SHOW_NAME, Show));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + ACTUATE_NAME, Actuate));
             return (text.ToString());
         }
 

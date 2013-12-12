@@ -10,34 +10,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.FormatElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:format.
     ///     <para>
@@ -80,10 +54,9 @@ namespace DDMSSense.DDMS.FormatElements
     /// </summary>
     public sealed class Format : AbstractBaseComponent
     {
-        private const string MEDIA_NAME = "Media";
-        private const string MIME_TYPE_NAME = "mimeType";
-        private const string MEDIUM_NAME = "medium";
-        private Extent _extent;
+        private const string MediaName = "Media";
+        private const string MimeTypeName = "mimeType";
+        private const string MediumName = "medium";
         private string _medium;
         private string _mimeType;
 
@@ -92,29 +65,25 @@ namespace DDMSSense.DDMS.FormatElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Format(Element element)
+        public Format(XElement element)
         {
             try
             {
                 SetElement(element, false);
-                Element mediaElement = MediaElement;
+                XElement mediaElement = MediaElement;
                 if (mediaElement != null)
                 {
-                    Element mimeTypeElement = mediaElement.Element(XName.Get(MIME_TYPE_NAME, Namespace));
+                    XElement mimeTypeElement = mediaElement.Element(XName.Get(MimeTypeName, Namespace));
                     if (mimeTypeElement != null)
-                    {
                         _mimeType = mimeTypeElement.Value;
-                    }
-                    Element extentElement = mediaElement.Element(XName.Get(Extent.GetName(DDMSVersion), Namespace));
+                    
+                    XElement extentElement = mediaElement.Element(XName.Get(Extent.GetName(DDMSVersion), Namespace));
                     if (extentElement != null)
-                    {
-                        _extent = new Extent(extentElement);
-                    }
-                    Element mediumElement = mediaElement.Element(XName.Get(MEDIUM_NAME, Namespace));
+                        Extent = new Extent(extentElement);
+                    
+                    XElement mediumElement = mediaElement.Element(XName.Get(MediumName, Namespace));
                     if (mediumElement != null)
-                    {
                         _medium = mediumElement.Value;
-                    }
                 }
                 Validate();
             }
@@ -136,24 +105,20 @@ namespace DDMSSense.DDMS.FormatElements
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
-                Element mediaElement = DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement mediaElement = DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")
                     ? element
-                    : Util.Util.BuildDDMSElement(MEDIA_NAME, null);
-                Util.Util.AddDDMSChildElement(mediaElement, MIME_TYPE_NAME, mimeType);
+                    : Util.Util.BuildDDMSElement(MediaName, null);
+                Util.Util.AddDDMSChildElement(mediaElement, MimeTypeName, mimeType);
                 if (extent != null)
-                {
                     mediaElement.Add(extent.ElementCopy);
-                }
-                Util.Util.AddDDMSChildElement(mediaElement, MEDIUM_NAME, medium);
+                Util.Util.AddDDMSChildElement(mediaElement, MediumName, medium);
 
                 if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1"))
-                {
                     element.Add(mediaElement);
-                }
 
                 _mimeType = mimeType;
-                _extent = extent;
+                Extent = extent;
                 _medium = medium;
                 SetElement(element, true);
             }
@@ -171,7 +136,7 @@ namespace DDMSSense.DDMS.FormatElements
             {
                 return (DDMSVersion.IsAtLeast("4.0.1")
                     ? ""
-                    : ValidationMessage.ElementPrefix + Element.GetPrefix() + ":" + MEDIA_NAME);
+                    : ValidationMessage.ElementPrefix + Element.GetPrefix() + ":" + MediaName);
             }
         }
 
@@ -191,9 +156,9 @@ namespace DDMSSense.DDMS.FormatElements
         ///     this is a wrapper element called ddms:Media. Starting in DDMS 4.0.1, it is the ddms:format
         ///     element itself.
         /// </summary>
-        private Element MediaElement
+        private XElement MediaElement
         {
-            get { return (DDMSVersion.IsAtLeast("4.0.1") ? Element : GetChild(MEDIA_NAME)); }
+            get { return (DDMSVersion.IsAtLeast("4.0.1") ? Element : GetChild(MediaName)); }
         }
 
         /// <summary>
@@ -209,11 +174,7 @@ namespace DDMSSense.DDMS.FormatElements
         /// <summary>
         ///     Accessor for the extent
         /// </summary>
-        public Extent Extent
-        {
-            get { return (_extent); }
-            set { _extent = value; }
-        }
+        public Extent Extent { get; set; }
 
         /// <summary>
         ///     Convenience accessor for the extent qualifier. Returns an empty string if there is not extent.
@@ -260,12 +221,12 @@ namespace DDMSSense.DDMS.FormatElements
         protected internal override void Validate()
         {
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
-            Element mediaElement = MediaElement;
+            XElement mediaElement = MediaElement;
             Util.Util.RequireDDMSValue("Media element", mediaElement);
-            Util.Util.RequireDDMSValue(MIME_TYPE_NAME, MimeType);
-            Util.Util.RequireBoundedChildCount(mediaElement, MIME_TYPE_NAME, 1, 1);
+            Util.Util.RequireDDMSValue(MimeTypeName, MimeType);
+            Util.Util.RequireBoundedChildCount(mediaElement, MimeTypeName, 1, 1);
             Util.Util.RequireBoundedChildCount(mediaElement, Extent.GetName(DDMSVersion), 0, 1);
-            Util.Util.RequireBoundedChildCount(mediaElement, MEDIUM_NAME, 0, 1);
+            Util.Util.RequireBoundedChildCount(mediaElement, MediumName, 0, 1);
 
             base.Validate();
         }
@@ -285,12 +246,10 @@ namespace DDMSSense.DDMS.FormatElements
         /// </summary>
         protected internal override void ValidateWarnings()
         {
-            Element mediaElement = MediaElement;
-            if (String.IsNullOrEmpty(Medium) &&
-                mediaElement.Elements(XName.Get(MEDIUM_NAME, mediaElement.Name.NamespaceName)).Count() == 1)
-            {
+            XElement mediaElement = MediaElement;
+            if (String.IsNullOrEmpty(Medium) && mediaElement.Elements(XName.Get(MediumName, mediaElement.Name.NamespaceName)).Count() == 1)
                 AddWarning("A ddms:medium element was found with no value.");
-            }
+            
             base.ValidateWarnings();
         }
 
@@ -299,16 +258,14 @@ namespace DDMSSense.DDMS.FormatElements
         {
             string localPrefix = BuildPrefix(prefix, Name, suffix + ".");
             if (!DDMSVersion.IsAtLeast("4.0.1"))
-            {
-                localPrefix += MEDIA_NAME + ".";
-            }
+                localPrefix += MediaName + ".";
+            
             var text = new StringBuilder();
-            text.Append(BuildOutput(isHtml, localPrefix + MIME_TYPE_NAME, MimeType));
+            text.Append(BuildOutput(isHtml, localPrefix + MimeTypeName, MimeType));
             if (Extent != null)
-            {
                 text.Append(Extent.GetOutput(isHtml, localPrefix, ""));
-            }
-            text.Append(BuildOutput(isHtml, localPrefix + MEDIUM_NAME, Medium));
+            
+            text.Append(BuildOutput(isHtml, localPrefix + MediumName, Medium));
             return (text.ToString());
         }
 
@@ -316,9 +273,8 @@ namespace DDMSSense.DDMS.FormatElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is Format))
-            {
                 return (false);
-            }
+            
             var test = (Format) obj;
             bool isEqual = MimeType.Equals(test.MimeType) && Medium.Equals(test.Medium);
             return (isEqual);
@@ -353,16 +309,12 @@ namespace DDMSSense.DDMS.FormatElements
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7851044806424206976L;
-            internal Extent.Builder _extent;
-            internal string _medium;
-            internal string _mimeType;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                Extent = new Extent.Builder();
             }
 
             /// <summary>
@@ -372,47 +324,24 @@ namespace DDMSSense.DDMS.FormatElements
             {
                 MimeType = format.MimeType;
                 if (format.Extent != null)
-                {
                     Extent = new Extent.Builder(format.Extent);
-                }
                 Medium = format.Medium;
             }
 
             /// <summary>
             ///     Builder accessor for the mimeType element child text.
             /// </summary>
-            public virtual string MimeType
-            {
-                get { return _mimeType; }
-                set { _mimeType = value; }
-            }
-
+            public virtual string MimeType { get; set; }
 
             /// <summary>
             ///     Builder accessor for the mediaExtent element.
             /// </summary>
-            public virtual Extent.Builder Extent
-            {
-                get
-                {
-                    if (_extent == null)
-                    {
-                        _extent = new Extent.Builder();
-                    }
-                    return _extent;
-                }
-                set { _extent = value; }
-            }
-
+            public virtual Extent.Builder Extent { get; set; }
 
             /// <summary>
             ///     Builder accessor for the medium element child text.
             /// </summary>
-            public virtual string Medium
-            {
-                get { return _medium; }
-                set { _medium = value; }
-            }
+            public virtual string Medium { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()

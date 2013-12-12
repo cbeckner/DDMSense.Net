@@ -324,22 +324,22 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         }
 
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
-        public override string GetOutput(bool isHTML, string prefix)
+        public override string GetOutput(bool isHtml, string prefix)
         {
             string localPrefix = Util.Util.GetNonNullString(prefix);
             var text = new StringBuilder();
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + NOTICE_TYPE_NAME, NoticeType));
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + NOTICE_REASON_NAME, NoticeReason));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_TYPE_NAME, NoticeType));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_REASON_NAME, NoticeReason));
             if (NoticeDate != null)
             {
-                text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + NOTICE_DATE_NAME,
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_DATE_NAME,
                     NoticeDate.ToString("o")));
             }
-            text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + UNREGISTERED_NOTICE_TYPE_NAME,
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + UNREGISTERED_NOTICE_TYPE_NAME,
                 UnregisteredNoticeType));
             if (ExternalReference != null)
             {
-                text.Append(AbstractBaseComponent.BuildOutput(isHTML, localPrefix + EXTERNAL_NOTICE_NAME,
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + EXTERNAL_NOTICE_NAME,
                     Convert.ToString(ExternalReference)));
             }
 
