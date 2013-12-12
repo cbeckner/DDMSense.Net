@@ -22,17 +22,6 @@ using Type = DDMSSense.DDMS.ResourceElements.Type;
 
 namespace DDMSSense.DDMS
 {
-    #region usings
-
-    using Document = XDocument;
-    using Element = XElement;
-    using Node = XNode;
-    using XPathContext = XPathDocument;
-    using XSLException = XsltException;
-    using XSLTransform = XslCompiledTransform;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:resource (the top-level element of a DDMS record).
     ///     <para>
@@ -184,7 +173,7 @@ namespace DDMSSense.DDMS
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Resource(Element element)
+        public Resource(XElement element)
         {
             Rights = null;
             Dates = null;
@@ -251,12 +240,12 @@ namespace DDMSSense.DDMS
                 DDMSVersion version = DDMSVersion;
 
                 // Metacard Set
-                Element component = GetChild(MetacardInfo.GetName(version));
+                XElement component = GetChild(MetacardInfo.GetName(version));
                 if (component != null)
                     MetacardInfo = new MetacardInfo(component);
 
                 // Resource Set
-                IEnumerable<Element> components = element.Elements(XName.Get(Identifier.GetName(version), @namespace));
+                IEnumerable<XElement> components = element.Elements(XName.Get(Identifier.GetName(version), @namespace));
                 foreach (var comp in components)
                     Identifiers.Add(new Identifier(component));
 
@@ -349,7 +338,7 @@ namespace DDMSSense.DDMS
 
                     // We use the security component to locate the extensible layer. If it is null, this resource is going
                     // to fail validation anyhow, so we skip the extensible layer.
-                    IEnumerable<Element> allElements = element.Elements();
+                    IEnumerable<XElement> allElements = element.Elements();
                     foreach (var el in allElements)
                         ExtensibleElements.Add(new ExtensibleElement(el));
                 }
@@ -496,7 +485,7 @@ namespace DDMSSense.DDMS
                 string ismNamespace = version.IsmNamespace;
                 string ntkPrefix = PropertyReader.GetPrefix("ntk");
                 string ntkNamespace = version.NtkNamespace;
-                Element element = Util.Util.BuildDDMSElement(GetName(version), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(version), null);
 
                 // Attributes
                 CompliesWiths = compliesWiths;
@@ -809,9 +798,9 @@ namespace DDMSSense.DDMS
         ///     must be mediated into a separate RelatedResource instance.
         /// </summary>
         /// <param name="resource"> the top-level element </param>
-        private void LoadRelatedResource(Element resource)
+        private void LoadRelatedResource(XElement resource)
         {
-            IEnumerable<Element> children = resource.Elements(XName.Get(RelatedResource.OLD_INNER_NAME, Namespace));
+            IEnumerable<XElement> children = resource.Elements(XName.Get(RelatedResource.OLD_INNER_NAME, Namespace));
             if (children.Count() <= 1)
             {
                 RelatedResources.Add(new RelatedResource(resource));
@@ -820,9 +809,9 @@ namespace DDMSSense.DDMS
             {
                 foreach (var child in children)
                 {
-                    var copy = new Element(resource);
+                    var copy = new XElement(resource);
                     copy.RemoveAll();
-                    copy.Add(new Element(child));
+                    copy.Add(new XElement(child));
                     RelatedResources.Add(new RelatedResource(copy));
                 }
             }
@@ -897,7 +886,7 @@ namespace DDMSSense.DDMS
         public List<ValidationMessage> ValidateWithSchematron(string schematronFile)
         {
             var messages = new List<ValidationMessage>();
-            XSLTransform schematronTransform = Util.Util.BuildSchematronTransform(schematronFile);
+            XslCompiledTransform schematronTransform = Util.Util.BuildSchematronTransform(schematronFile);
             //TODO: Find a way to rewrite this method.
             //Node nodes = schematronTransform.Transform(new Document(XOMElementCopy));
             //Document doc = XSLTransform.toDocument(nodes);
@@ -962,7 +951,7 @@ namespace DDMSSense.DDMS
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
 
             if (Identifiers.Count < 1)
                 throw new InvalidDDMSException("At least 1 identifier is required.");

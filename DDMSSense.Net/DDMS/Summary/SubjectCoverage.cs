@@ -227,7 +227,7 @@ namespace DDMSSense.DDMS.Summary
             {
                 return (DDMSVersion.IsAtLeast("4.0.1")
                     ? ""
-                    : ValidationMessage.ELEMENT_PREFIX + Element.GetPrefix() + ":" + SUBJECT_NAME);
+                    : ValidationMessage.ElementPrefix + Element.GetPrefix() + ":" + SUBJECT_NAME);
             }
         }
 
@@ -317,7 +317,7 @@ namespace DDMSSense.DDMS.Summary
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Element subjectElement = SubjectElement;
             Util.Util.RequireDDMSValue("Subject element", subjectElement);
             string @namespace = subjectElement.Name.NamespaceName;

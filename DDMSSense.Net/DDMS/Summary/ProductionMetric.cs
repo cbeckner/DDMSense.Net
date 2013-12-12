@@ -170,7 +170,7 @@ namespace DDMSSense.DDMS.Summary
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue("subject attribute", Subject);
             Util.Util.RequireDDMSValue("coverage attribute", Coverage);
 

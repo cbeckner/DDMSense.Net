@@ -174,7 +174,7 @@ namespace DDMSSense.DDMS.Summary
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue("type attribute", XLinkAttributes.Type);
             Util.Util.RequireDDMSValue("href attribute", XLinkAttributes.Href);
 

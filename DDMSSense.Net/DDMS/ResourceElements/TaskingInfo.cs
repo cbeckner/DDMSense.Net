@@ -255,7 +255,7 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue("taskID", TaskID);
             Util.Util.RequireBoundedChildCount(Element, Description.GetName(DDMSVersion), 0, 1);
             Util.Util.RequireBoundedChildCount(Element, TaskID.GetName(DDMSVersion), 1, 1);

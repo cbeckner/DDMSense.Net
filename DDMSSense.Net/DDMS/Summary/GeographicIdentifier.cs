@@ -273,7 +273,7 @@ namespace DDMSSense.DDMS.Summary
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (Names.Count == 0 && Regions.Count == 0 && CountryCode == null && SubDivisionCode == null &&
                 FacilityIdentifier == null)
             {

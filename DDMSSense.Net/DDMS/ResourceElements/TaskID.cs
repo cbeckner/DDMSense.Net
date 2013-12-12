@@ -201,7 +201,7 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue("value", Value);
             if (!String.IsNullOrEmpty(XLinkAttributes.Type) && !XLinkAttributes.Type.Equals(FIXED_TYPE))
             {

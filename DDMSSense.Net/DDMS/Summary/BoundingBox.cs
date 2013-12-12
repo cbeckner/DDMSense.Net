@@ -208,7 +208,7 @@ namespace DDMSSense.DDMS.Summary
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue("westbound longitude", WestBL);
             Util.Util.RequireDDMSValue("eastbound longitude", EastBL);
             Util.Util.RequireDDMSValue("southbound latitude", SouthBL);

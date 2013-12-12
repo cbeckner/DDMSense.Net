@@ -176,10 +176,10 @@ namespace DDMSSense.DDMS.Summary
         protected internal override void Validate()
         {
             // Do not call super.validate(), because securityAttributes are optional.
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (!String.IsNullOrEmpty(Qualifier))
             {
-                Util.Util.RequireDDMSValidURI(Qualifier);
+                Util.Util.RequireDDMSValidUri(Qualifier);
             }
             // Should be reviewed as additional versions of DDMS are supported.
             RequireVersion("4.0.1");

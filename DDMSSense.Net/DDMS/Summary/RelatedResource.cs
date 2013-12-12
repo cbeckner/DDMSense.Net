@@ -346,16 +346,16 @@ namespace DDMSSense.DDMS.Summary
         /// <exception cref="InvalidDDMSException">  if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue("relationship attribute", Relationship);
-            Util.Util.RequireDDMSValidURI(Relationship);
+            Util.Util.RequireDDMSValidUri(Relationship);
             if (!String.IsNullOrEmpty(Direction))
             {
                 ValidateRelationshipDirection(Direction);
             }
             Util.Util.RequireDDMSValue("qualifier attribute", Qualifier);
             Util.Util.RequireDDMSValue("value attribute", Value);
-            Util.Util.RequireDDMSValidURI(Qualifier);
+            Util.Util.RequireDDMSValidUri(Qualifier);
             if (Links.Count == 0)
             {
                 throw new InvalidDDMSException("At least 1 link must exist.");

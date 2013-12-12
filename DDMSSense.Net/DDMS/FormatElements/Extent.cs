@@ -111,14 +111,14 @@ namespace DDMSSense.DDMS.FormatElements
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (!String.IsNullOrEmpty(Value))
             {
                 Util.Util.RequireDDMSValue("qualifier attribute", Qualifier);
             }
             if (!String.IsNullOrEmpty(Qualifier))
             {
-                Util.Util.RequireDDMSValidURI(Qualifier);
+                Util.Util.RequireDDMSValidUri(Qualifier);
             }
 
             base.Validate();

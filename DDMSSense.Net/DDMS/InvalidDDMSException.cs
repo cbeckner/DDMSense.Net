@@ -22,9 +22,8 @@ namespace DDMSSense.DDMS
     ///         @since 0.9.b
     ///     </para>
     /// </summary>
-    public class InvalidDDMSException : Exception
+    public sealed class InvalidDDMSException : Exception
     {
-        private const long SerialVersionUID = -183915550465140589L;
         private readonly ValidationMessage _message;
 
         /// <see cref="Exception#Exception(String)"></see>
@@ -59,7 +58,7 @@ namespace DDMSSense.DDMS
         /// <summary>
         ///     Accessor for the locator
         /// </summary>
-        public virtual string Locator
+        public string Locator
         {
             get { return ValidationMessage.Locator; }
             set { ValidationMessage.Locator = value; }

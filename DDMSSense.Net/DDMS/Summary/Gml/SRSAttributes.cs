@@ -249,7 +249,7 @@ namespace DDMSSense.DDMS.Summary.Gml
         {
             if (!String.IsNullOrEmpty(SrsName))
             {
-                Util.Util.RequireDDMSValidURI(SrsName);
+                Util.Util.RequireDDMSValidUri(SrsName);
             }
             if (SrsDimension != null && (int) SrsDimension < 0)
             {

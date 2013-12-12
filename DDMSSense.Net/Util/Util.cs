@@ -25,23 +25,23 @@ namespace DDMSSense.Util
     /// </summary>
     public static class Util
     {
-        private static const string DDMS_DATE_HOUR_MIN_PATTERN = "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(Z|[\\-\\+][0-9]{2}:[0-9]{2})?";
+        private const string DdmsDateHourMinPattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(Z|[\\-\\+][0-9]{2}:[0-9]{2})?";
 
-        private static readonly Dictionary<string, string> XML_SPECIAL_CHARS = new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> XmlSpecialChars = new Dictionary<string, string>();
         private static XslCompiledTransform _schematronAbstractTransform;
         private static XslCompiledTransform _schematronIncludeTransform;
 
         private static readonly IDictionary<string, XslCompiledTransform> _schematronSvrlTransforms = new Dictionary<string, XslCompiledTransform>();
 
-        private static readonly List<XmlQualifiedName> DATE_DATATYPES = new List<XmlQualifiedName>();
+        private static readonly List<XmlQualifiedName> DateDatatypes = new List<XmlQualifiedName>();
 
         static Util()
         {
-            XML_SPECIAL_CHARS.Add("&", "&amp;");
-            XML_SPECIAL_CHARS.Add("\"", "&quot;");
-            XML_SPECIAL_CHARS.Add("'", "&apos;");
-            XML_SPECIAL_CHARS.Add("<", "&lt;");
-            XML_SPECIAL_CHARS.Add(">", "&gt;");
+            XmlSpecialChars.Add("&", "&amp;");
+            XmlSpecialChars.Add("\"", "&quot;");
+            XmlSpecialChars.Add("'", "&apos;");
+            XmlSpecialChars.Add("<", "&lt;");
+            XmlSpecialChars.Add(">", "&gt;");
         }
 
         /// <summary>
@@ -57,9 +57,12 @@ namespace DDMSSense.Util
                     if (_schematronAbstractTransform == null)
                     {
                         Stream abstractStylesheet = Assembly.GetCallingAssembly().GetManifestResourceStream("schematron/iso_abstract_expand.xsl");
-                        XmlReader reader = XmlReader.Create(abstractStylesheet);
-                        _schematronAbstractTransform = new XslCompiledTransform();
-                        _schematronAbstractTransform.Load(reader);
+                        if (abstractStylesheet != null)
+                        {
+                            XmlReader reader = XmlReader.Create(abstractStylesheet);
+                            _schematronAbstractTransform = new XslCompiledTransform();
+                            _schematronAbstractTransform.Load(reader);
+                        }
                         return _schematronAbstractTransform;
                     }
                     return (_schematronAbstractTransform);
@@ -80,9 +83,12 @@ namespace DDMSSense.Util
                     if (_schematronIncludeTransform == null)
                     {
                         Stream includeStylesheet = Assembly.GetCallingAssembly().GetManifestResourceStream("schematron/iso_dsdl_include.xsl");
-                        XmlReader reader = XmlReader.Create(includeStylesheet);
-                        _schematronIncludeTransform = new XslCompiledTransform();
-                        _schematronIncludeTransform.Load(reader);
+                        if (includeStylesheet != null)
+                        {
+                            XmlReader reader = XmlReader.Create(includeStylesheet);
+                            _schematronIncludeTransform = new XslCompiledTransform();
+                            _schematronIncludeTransform.Load(reader);
+                        }
                         return _schematronIncludeTransform;
                     }
                     return (_schematronIncludeTransform);
@@ -97,12 +103,12 @@ namespace DDMSSense.Util
         /// <param name="element"> the element to decorate </param>
         /// <param name="prefix"> the prefix to use (without a trailing colon) </param>
         /// <param name="attributeName"> the name of the attribute </param>
-        /// <param name="namespaceURI"> the namespace this attribute is in </param>
+        /// <param name="namespaceUri"> the namespace this attribute is in </param>
         /// <param name="attributeValue"> the value of the attribute </param>
-        public static void AddAttribute(XElement element, string prefix, string attributeName, string namespaceURI, string attributeValue)
+        public static void AddAttribute(XElement element, string prefix, string attributeName, string namespaceUri, string attributeValue)
         {
             if (!String.IsNullOrEmpty(attributeValue))
-                element.Add(BuildAttribute(prefix, attributeName, namespaceURI, attributeValue));
+                element.Add(BuildAttribute(prefix, attributeName, namespaceUri, attributeValue));
         }
 
         /// <summary>
@@ -146,17 +152,17 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="prefix"> the prefix to use (without a trailing colon) </param>
         /// <param name="name"> the local name of the attribute </param>
-        /// <param name="namespaceURI"> the namespace this attribute is in </param>
+        /// <param name="namespaceUri"> the namespace this attribute is in </param>
         /// <param name="value"> the value of the attribute </param>
-        public static XAttribute BuildAttribute(string prefix, string name, string namespaceURI, string value)
+        public static XAttribute BuildAttribute(string prefix, string name, string namespaceUri, string value)
         {
             RequireValue("name", name);
             RequireValue("value", value);
             prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix + ":");
-            if (namespaceURI == null)
-                namespaceURI = "";
+            if (namespaceUri == null)
+                namespaceUri = "";
 
-            return (new XAttribute(XName.Get(prefix + name, namespaceURI), value));
+            return (new XAttribute(XName.Get(prefix + name, namespaceUri), value));
         }
 
         /// <summary>
@@ -187,13 +193,14 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="prefix"> the prefix to use (without a trailing colon) </param>
         /// <param name="name"> the local name of the element </param>
-        /// <param name="namespaceURI"> the namespace this element is in </param>
+        /// <param name="namespaceUri"> the namespace this element is in </param>
         /// <param name="childText"> the text of the element (optional) </param>
-        public static XElement BuildElement(string prefix, string name, string namespaceURI, string childText)
+        public static XElement BuildElement(string prefix, string name, string namespaceUri, string childText)
         {
+            if (namespaceUri == null) throw new ArgumentNullException("namespaceUri");
             RequireValue("name", name);
             prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix + ":");
-            var element = new XElement(prefix + name, namespaceURI);
+            var element = new XElement(prefix + name, namespaceUri);
             if (!String.IsNullOrEmpty(childText))
                 element.Add(childText);
 
@@ -518,7 +525,7 @@ namespace DDMSSense.Util
         {
             DDMSVersion version = DDMSVersion.GetVersionForNamespace(ddmsNamespace);
 
-            if (version.IsAtLeast("4.1") && Regex.Matches(date, DDMS_DATE_HOUR_MIN_PATTERN).Count > 0)
+            if (version.IsAtLeast("4.1") && Regex.Matches(date, DdmsDateHourMinPattern).Count > 0)
                 return;
 
             bool isXsdType = false;
@@ -534,7 +541,7 @@ namespace DDMSSense.Util
             }
             if (!isXsdType)
             {
-                string message = "The date datatype must be one of " + DATE_DATATYPES;
+                string message = "The date datatype must be one of " + DateDatatypes;
                 if (version.IsAtLeast("4.1"))
                     message += " or ddms:DateHourMinType";
                 throw new InvalidDDMSException(message);
@@ -548,7 +555,7 @@ namespace DDMSSense.Util
         /// <param name="element"> the element to check </param>
         /// <param name="localName"> the local name to compare to </param>
         /// <exception cref="InvalidDDMSException"> if the name is incorrect </exception>
-        public static void RequireDDMSQName(XElement element, string localName)
+        public static void RequireDDMSQualifiedName(XElement element, string localName)
         {
             RequireValue("element", element);
             RequireValue("local name", localName);
@@ -561,7 +568,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="uri">	the string to test </param>
         /// <exception cref="InvalidDDMSException"> if the string cannot be built into a URI </exception>
-        public static void RequireDDMSValidURI(string uri)
+        public static void RequireDDMSValidUri(string uri)
         {
             RequireValue("uri", uri);
             try
@@ -590,16 +597,16 @@ namespace DDMSSense.Util
         ///     Asserts that the qualified name of an element matches the expected name and namespace URI
         /// </summary>
         /// <param name="element"> the element to check </param>
-        /// <param name="namespaceURI"> the namespace to check </param>
+        /// <param name="namespaceUri"> the namespace to check </param>
         /// <param name="localName"> the local name to compare to </param>
         /// <exception cref="IllegalArgumentException"> if the name is incorrect </exception>
-        public static void RequireQualifiedName(XElement element, string namespaceURI, string localName)
+        public static void RequireQualifiedName(XElement element, string namespaceUri, string localName)
         {
             RequireValue("element", element);
             RequireValue("local name", localName);
-            if (namespaceURI == null)
-                namespaceURI = "";
-            if (!localName.Equals(element.Name.LocalName) || !namespaceURI.Equals(element.Name.NamespaceName))
+            if (namespaceUri == null)
+                namespaceUri = "";
+            if (!localName.Equals(element.Name.LocalName) || !namespaceUri.Equals(element.Name.NamespaceName))
                 throw new InvalidDDMSException("Unexpected namespace URI and local name encountered: " + element.Name);
         }
 
@@ -633,11 +640,8 @@ namespace DDMSSense.Util
         /// <exception cref="InvalidDDMSException"> if the name is not an NCName. </exception>
         public static void RequireValidNCName(string name)
         {
-            //TODO: Find a replacement for Name10Checker
-            //if (!((new Name10Checker()).isValidNCName(GetNonNullString(name))))
-            //{
-            //    throw new InvalidDDMSException("\"" + name + "\" is not a valid NCName.");
-            //}
+            if (String.IsNullOrEmpty(XmlConvert.VerifyNCName(GetNonNullString(name))))
+                throw new InvalidDDMSException("\"" + name + "\" is not a valid NCName.");
         }
 
         /// <summary>
@@ -663,11 +667,8 @@ namespace DDMSSense.Util
         /// <exception cref="InvalidDDMSException"> if the name is not an NMTOKEN. </exception>
         public static void RequireValidNMToken(string name)
         {
-            //TODO: Find replacement for Name10Checker
-            //if (!((new Name10Checker()).isValidNmtoken(GetNonNullString(name))))
-            //{
-            //    throw new InvalidDDMSException("\"" + name + "\" is not a valid NMTOKEN.");
-            //}
+            if (String.IsNullOrEmpty(XmlConvert.VerifyNMTOKEN(GetNonNullString(name)))) 
+                throw new InvalidDDMSException("\"" + name + "\" is not a valid NMTOKEN.");
         }
 
         /// <summary>
@@ -675,7 +676,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="description">	a descriptive name of the value </param>
         /// <param name="value">			the value to check </param>
-        /// <exception cref="IllegalArgumentException"> if the value is null or empty </exception>
+        /// <exception cref="ArgumentException"> if the value is null or empty </exception>
         public static void RequireValue(string description, object value)
         {
             if (value == null || (value is string && String.IsNullOrEmpty((string)value)))
@@ -683,7 +684,7 @@ namespace DDMSSense.Util
         }
 
         /// <summary>
-        ///     Replaces XML special characters - '&', '<', '>', '\'', '"'
+        ///     Replaces XML special characters - '&', '&lt;', '&gt;', '\'', '"'
         /// </summary>
         /// <param name="input"> the string to escape. </param>
         /// <returns> escaped String </returns>
@@ -691,10 +692,10 @@ namespace DDMSSense.Util
         {
             if (input != null)
             {
-                for (IEnumerator<string> iterator = XML_SPECIAL_CHARS.Keys.GetEnumerator(); iterator.MoveNext(); )
+                for (IEnumerator<string> iterator = XmlSpecialChars.Keys.GetEnumerator(); iterator.MoveNext(); )
                 {
                     string pattern = iterator.Current;
-                    input = Regex.Replace(input, pattern, XML_SPECIAL_CHARS[pattern]);
+                    input = Regex.Replace(input, pattern, XmlSpecialChars[pattern]);
                 }
             }
             return input;
@@ -718,7 +719,7 @@ namespace DDMSSense.Util
         /// </summary>
         /// <param name="queryBinding"> the queryBinding value of the Schematron file. Currently "xslt" or "xslt2" are supported. </param>
         /// <returns> the phase three transform </returns>
-        /// <exception cref="IllegalArgumentException"> if the queryBinding is unsupported </exception>
+        /// <exception cref="ArgumentException"> if the queryBinding is unsupported </exception>
         private static XslCompiledTransform GetSchematronSvrlTransform(string queryBinding)
         {
             lock (typeof(Util))

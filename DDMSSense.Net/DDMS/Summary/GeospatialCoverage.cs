@@ -265,7 +265,7 @@ namespace DDMSSense.DDMS.Summary
             {
                 return (DDMSVersion.IsAtLeast("4.0.1")
                     ? ""
-                    : ValidationMessage.ELEMENT_PREFIX + Element.GetPrefix() + ":" + GEOSPATIAL_EXTENT_NAME);
+                    : ValidationMessage.ElementPrefix + Element.GetPrefix() + ":" + GEOSPATIAL_EXTENT_NAME);
             }
         }
 
@@ -393,7 +393,7 @@ namespace DDMSSense.DDMS.Summary
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Element extElement = ExtentElement;
             Util.Util.RequireDDMSValue("GeospatialExtent element", extElement);
 

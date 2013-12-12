@@ -171,7 +171,7 @@ namespace DDMSSense.DDMS.FormatElements
             {
                 return (DDMSVersion.IsAtLeast("4.0.1")
                     ? ""
-                    : ValidationMessage.ELEMENT_PREFIX + Element.GetPrefix() + ":" + MEDIA_NAME);
+                    : ValidationMessage.ElementPrefix + Element.GetPrefix() + ":" + MEDIA_NAME);
             }
         }
 
@@ -259,7 +259,7 @@ namespace DDMSSense.DDMS.FormatElements
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Element mediaElement = MediaElement;
             Util.Util.RequireDDMSValue("Media element", mediaElement);
             Util.Util.RequireDDMSValue(MIME_TYPE_NAME, MimeType);

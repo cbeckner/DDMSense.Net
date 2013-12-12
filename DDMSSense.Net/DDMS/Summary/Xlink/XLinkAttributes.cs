@@ -364,7 +364,7 @@ namespace DDMSSense.DDMS.Summary.Xlink
         {
             if (!String.IsNullOrEmpty(Href))
             {
-                Util.Util.RequireDDMSValidURI(Href);
+                Util.Util.RequireDDMSValidUri(Href);
             }
 
             // Should be reviewed as additional versions of DDMS are supported.
@@ -372,7 +372,7 @@ namespace DDMSSense.DDMS.Summary.Xlink
             {
                 if (!String.IsNullOrEmpty(Role))
                 {
-                    Util.Util.RequireDDMSValidURI(Role);
+                    Util.Util.RequireDDMSValidUri(Role);
                 }
                 if (!String.IsNullOrEmpty(Label))
                 {
@@ -381,7 +381,7 @@ namespace DDMSSense.DDMS.Summary.Xlink
             }
             if (!String.IsNullOrEmpty(Arcrole))
             {
-                Util.Util.RequireDDMSValidURI(Arcrole);
+                Util.Util.RequireDDMSValidUri(Arcrole);
             }
             if (!String.IsNullOrEmpty(Show) && !SHOW_TYPES.Contains(Show))
             {

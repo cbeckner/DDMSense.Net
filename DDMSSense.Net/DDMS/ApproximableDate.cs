@@ -76,16 +76,14 @@ namespace DDMSSense.DDMS
     /// </summary>
     public sealed class ApproximableDate : AbstractBaseComponent
     {
-        private const string DESCRIPTION_NAME = "description";
-        private const string APPROXIMABLE_DATE_NAME = "approximableDate";
-        private const string APPROXIMATION_NAME = "approximation";
-        private const string SEARCHABLE_DATE_NAME = "searchableDate";
-        private const string START_NAME = "start";
-        private const string END_NAME = "end";
-
-        private static readonly List<string> APPROXIMATION_TYPES = new List<string>();
-
-        private static readonly List<string> NAME_TYPES = new List<string>();
+        private const string DescriptionName = "description";
+        private const string ApproximableDateName = "approximableDate";
+        private const string ApproximationName = "approximation";
+        private const string SearchableDateName = "searchableDate";
+        private const string StartName = "start";
+        private const string EndName = "end";
+        private static readonly List<string> ApproximationTypes = new List<string>();
+        private static readonly List<string> NameTypes = new List<string>();
 
         /// <summary>
         ///     Constructor for creating a component from a XOM Element
@@ -94,19 +92,19 @@ namespace DDMSSense.DDMS
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public ApproximableDate(XElement element)
         {
-            APPROXIMATION_TYPES.Add("1st qtr");
-            APPROXIMATION_TYPES.Add("2nd qtr");
-            APPROXIMATION_TYPES.Add("3rd qtr");
-            APPROXIMATION_TYPES.Add("4th qtr");
-            APPROXIMATION_TYPES.Add("circa");
-            APPROXIMATION_TYPES.Add("early");
-            APPROXIMATION_TYPES.Add("mid");
-            APPROXIMATION_TYPES.Add("late");
-            NAME_TYPES.Add("acquiredOn");
-            NAME_TYPES.Add("approximableStart");
-            NAME_TYPES.Add("approximableEnd");
+            ApproximationTypes.Add("1st qtr");
+            ApproximationTypes.Add("2nd qtr");
+            ApproximationTypes.Add("3rd qtr");
+            ApproximationTypes.Add("4th qtr");
+            ApproximationTypes.Add("circa");
+            ApproximationTypes.Add("early");
+            ApproximationTypes.Add("mid");
+            ApproximationTypes.Add("late");
+            NameTypes.Add("acquiredOn");
+            NameTypes.Add("approximableStart");
+            NameTypes.Add("approximableEnd");
 
-            base.SetElement(element, true);
+            SetElement(element, true);
         }
 
         /// <summary>
@@ -127,19 +125,19 @@ namespace DDMSSense.DDMS
                 SetElement(element, false);
 
                 if (!String.IsNullOrEmpty(description))
-                    Util.Util.AddDDMSChildElement(Element, DESCRIPTION_NAME, description);
+                    Util.Util.AddDDMSChildElement(Element, DescriptionName, description);
 
                 if (!String.IsNullOrEmpty(approximableDate) || String.IsNullOrEmpty(approximation))
                 {
-                    XElement approximableElment = Util.Util.BuildDDMSElement(APPROXIMABLE_DATE_NAME, approximableDate);
-                    Util.Util.AddDDMSAttribute(approximableElment, APPROXIMATION_NAME, approximation);
+                    XElement approximableElment = Util.Util.BuildDDMSElement(ApproximableDateName, approximableDate);
+                    Util.Util.AddDDMSAttribute(approximableElment, ApproximationName, approximation);
                     Element.Add(approximableElment);
                 }
                 if (!String.IsNullOrEmpty(searchableStartDate) || String.IsNullOrEmpty(searchableEndDate))
                 {
-                    XElement searchableElement = Util.Util.BuildDDMSElement(SEARCHABLE_DATE_NAME, null);
-                    Util.Util.AddDDMSChildElement(searchableElement, START_NAME, searchableStartDate);
-                    Util.Util.AddDDMSChildElement(searchableElement, END_NAME, searchableEndDate);
+                    XElement searchableElement = Util.Util.BuildDDMSElement(SearchableDateName, null);
+                    Util.Util.AddDDMSChildElement(searchableElement, StartName, searchableStartDate);
+                    Util.Util.AddDDMSChildElement(searchableElement, EndName, searchableEndDate);
                     Element.Add(searchableElement);
                 }
                 Validate();
@@ -147,7 +145,7 @@ namespace DDMSSense.DDMS
             catch (InvalidDDMSException e)
             {
                 e.Locator = QualifiedName;
-                throw (e);
+                throw;
             }
         }
 
@@ -158,7 +156,7 @@ namespace DDMSSense.DDMS
         {
             get
             {
-                XElement descriptionElement = GetChild(DESCRIPTION_NAME);
+                XElement descriptionElement = GetChild(DescriptionName);
                 return (descriptionElement == null ? "" : Util.Util.GetNonNullString(descriptionElement.Value));
             }
         }
@@ -170,7 +168,7 @@ namespace DDMSSense.DDMS
         {
             get
             {
-                XElement dateElement = GetChild(APPROXIMABLE_DATE_NAME);
+                XElement dateElement = GetChild(ApproximableDateName);
                 return (dateElement == null ? "" : Util.Util.GetNonNullString(dateElement.Value));
             }
         }
@@ -183,9 +181,9 @@ namespace DDMSSense.DDMS
             get
             {
                 string approximation = null;
-                XElement approximableDateElement = GetChild(APPROXIMABLE_DATE_NAME);
+                XElement approximableDateElement = GetChild(ApproximableDateName);
                 if (approximableDateElement != null)
-                    approximation = approximableDateElement.Attribute(XName.Get(APPROXIMATION_NAME, Namespace)).Value;
+                    approximation = approximableDateElement.Attribute(XName.Get(ApproximationName, Namespace)).Value;
 
                 return (Util.Util.GetNonNullString(approximation));
             }
@@ -199,10 +197,10 @@ namespace DDMSSense.DDMS
             get
             {
                 string date = "";
-                XElement dateElement = GetChild(SEARCHABLE_DATE_NAME);
+                XElement dateElement = GetChild(SearchableDateName);
                 if (dateElement != null)
                 {
-                    XElement startElement = dateElement.Element(XName.Get(START_NAME, Namespace));
+                    XElement startElement = dateElement.Element(XName.Get(StartName, Namespace));
                     if (startElement != null)
                         date = Util.Util.GetNonNullString(startElement.Value);
                 }
@@ -218,10 +216,10 @@ namespace DDMSSense.DDMS
             get
             {
                 string date = "";
-                XElement dateElement = GetChild(SEARCHABLE_DATE_NAME);
+                XElement dateElement = GetChild(SearchableDateName);
                 if (dateElement != null)
                 {
-                    XElement endElement = dateElement.Element(XName.Get(END_NAME, Namespace));
+                    XElement endElement = dateElement.Element(XName.Get(EndName, Namespace));
                     if (endElement != null)
                         date = Util.Util.GetNonNullString(endElement.Value);
                 }
@@ -237,8 +235,8 @@ namespace DDMSSense.DDMS
         public static void ValidateApproximation(string approximation)
         {
             Util.Util.RequireDDMSValue("approximation", approximation);
-            if (!APPROXIMATION_TYPES.Contains(approximation))
-                throw new InvalidDDMSException("The approximation must be one of " + APPROXIMATION_TYPES);
+            if (!ApproximationTypes.Contains(approximation))
+                throw new InvalidDDMSException("The approximation must be one of " + ApproximationTypes);
         }
 
         /// <summary>
@@ -249,8 +247,8 @@ namespace DDMSSense.DDMS
         public static void ValidateElementName(string name)
         {
             Util.Util.RequireDDMSValue("name", name);
-            if (!NAME_TYPES.Contains(name))
-                throw new InvalidDDMSException("The element name must be one of " + NAME_TYPES);
+            if (!NameTypes.Contains(name))
+                throw new InvalidDDMSException("The element name must be one of " + NameTypes);
         }
 
         /// <summary>
@@ -316,7 +314,7 @@ namespace DDMSSense.DDMS
                 String.IsNullOrEmpty(SearchableEndString))
                 AddWarning("A completely empty " + QualifiedName + " element was found.");
 
-            if (GetChild(DESCRIPTION_NAME) != null && String.IsNullOrEmpty(Description))
+            if (GetChild(DescriptionName) != null && String.IsNullOrEmpty(Description))
                 AddWarning("A completely empty ddms:description element was found.");
 
             base.ValidateWarnings();
@@ -327,11 +325,11 @@ namespace DDMSSense.DDMS
         {
             string localPrefix = BuildPrefix(prefix, Name, suffix);
             var text = new StringBuilder();
-            text.Append(BuildOutput(isHtml, localPrefix + "." + DESCRIPTION_NAME, Description));
-            text.Append(BuildOutput(isHtml, localPrefix + "." + APPROXIMABLE_DATE_NAME, ApproximableDateString));
-            text.Append(BuildOutput(isHtml, localPrefix + "." + APPROXIMABLE_DATE_NAME + "." + APPROXIMATION_NAME, Approximation));
-            text.Append(BuildOutput(isHtml, localPrefix + "." + SEARCHABLE_DATE_NAME + "." + START_NAME, SearchableStartString));
-            text.Append(BuildOutput(isHtml, localPrefix + "." + SEARCHABLE_DATE_NAME + "." + END_NAME, SearchableEndString));
+            text.Append(BuildOutput(isHtml, localPrefix + "." + DescriptionName, Description));
+            text.Append(BuildOutput(isHtml, localPrefix + "." + ApproximableDateName, ApproximableDateString));
+            text.Append(BuildOutput(isHtml, localPrefix + "." + ApproximableDateName + "." + ApproximationName, Approximation));
+            text.Append(BuildOutput(isHtml, localPrefix + "." + SearchableDateName + "." + StartName, SearchableStartString));
+            text.Append(BuildOutput(isHtml, localPrefix + "." + SearchableDateName + "." + EndName, SearchableEndString));
             return (text.ToString());
         }
 
@@ -370,8 +368,6 @@ namespace DDMSSense.DDMS
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -7348511606867959470L;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -395,35 +391,35 @@ namespace DDMSSense.DDMS
             /// <summary>
             ///     Builder accessor for the name of the element
             /// </summary>
-            public virtual string Name { get; set; }
+            public string Name { get; set; }
 
             /// <summary>
             ///     Builder accessor for the description
             /// </summary>
-            public virtual string Description { get; set; }
+            public string Description { get; set; }
 
             /// <summary>
             ///     Builder accessor for the approximableDate
             /// </summary>
-            public virtual string ApproximableDate { get; set; }
+            public string ApproximableDate { get; set; }
 
             /// <summary>
             ///     Builder accessor for the approximation
             /// </summary>
-            public virtual string Approximation { get; set; }
+            public string Approximation { get; set; }
 
             /// <summary>
             ///     Builder accessor for the searchableStart
             /// </summary>
-            public virtual string SearchableStart { get; set; }
+            public string SearchableStart { get; set; }
 
             /// <summary>
             ///     Builder accessor for the searchableEnd
             /// </summary>
-            public virtual string SearchableEnd { get; set; }
+            public string SearchableEnd { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
-            public virtual IDDMSComponent Commit()
+            public IDDMSComponent Commit()
             {
                 return (Empty
                         ? null
@@ -434,7 +430,7 @@ namespace DDMSSense.DDMS
             ///     Does not include the element name.
             /// </summary>
             /// <see cref="IBuilder#isEmpty()"></see>
-            public virtual bool Empty
+            public bool Empty
             {
                 get
                 {

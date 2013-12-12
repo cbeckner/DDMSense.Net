@@ -53,7 +53,7 @@ namespace DDMSSense
             catch (InvalidDDMSException e)
             {
                 e.Locator = QualifiedName;
-                throw (e);
+                throw;
             }
         }
 
@@ -103,7 +103,7 @@ namespace DDMSSense
             catch (InvalidDDMSException e)
             {
                 e.Locator = QualifiedName;
-                throw (e);
+                throw;
             }
         }
 
@@ -172,24 +172,14 @@ namespace DDMSSense
         /// </summary>
         protected internal override void ValidateWarnings()
         {
-            IEnumerable<XElement> phoneElements = Element.Elements(XName.Get(PHONE_NAME, Namespace));
-            for (int i = 0; i < phoneElements.Count(); i++)
-            {
-                if (String.IsNullOrEmpty(phoneElements.ToList()[i].Value))
-                {
-                    AddWarning("A ddms:phone element was found with no value.");
-                    break;
-                }
-            }
-            IEnumerable<XElement> emailElements = Element.Elements(XName.Get(EMAIL_NAME, Namespace));
-            for (int i = 0; i < emailElements.Count(); i++)
-            {
-                if (String.IsNullOrEmpty(emailElements.ToList()[i].Value))
-                {
-                    AddWarning("A ddms:email element was found with no value.");
-                    break;
-                }
-            }
+            var phoneElements = Element.Elements(XName.Get(PHONE_NAME, Namespace));
+            if (phoneElements.ToList().Any(element => String.IsNullOrEmpty(element.Value)))
+                AddWarning("A ddms:phone element was found with no value.");
+            
+            var emailElements = Element.Elements(XName.Get(EMAIL_NAME, Namespace));
+            if (emailElements.ToList().Any(element => String.IsNullOrEmpty(element.Value))) 
+                AddWarning("A ddms:email element was found with no value.");
+            
             base.ValidateWarnings();
         }
 
@@ -238,17 +228,15 @@ namespace DDMSSense
         [Serializable]
         public abstract class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -1694935853087559491L;
-            internal List<string> _emails;
-            internal ExtensibleAttributes.Builder _extensibleAttributes;
-            internal List<string> _names;
-            internal List<string> _phones;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             protected internal Builder()
             {
+                Emails = new List<string>();
+                ExtensibleAttributes = new ExtensibleAttributes.Builder();
+                Names = new List<string>();
+                Phones = new List<string>();
             }
 
             /// <summary>
@@ -265,66 +253,23 @@ namespace DDMSSense
             /// <summary>
             ///     Builder accessor for the names
             /// </summary>
-            public virtual List<string> Names
-            {
-                get
-                {
-                    if (_names == null)
-                        _names = new List<string>();
-                    
-                    return _names;
-                }
-                set { _names = value; }
-            }
-
+            public virtual List<string> Names { get; set; }
 
             /// <summary>
             ///     Builder accessor for the phones
             /// </summary>
-            public virtual List<string> Phones
-            {
-                get
-                {
-                    if (_phones == null)
-                        _phones = new List<string>();
-                    
-                    return _phones;
-                }
-                set { _phones = value; }
-            }
-
+            public virtual List<string> Phones { get; set; }
 
             /// <summary>
             ///     Builder accessor for the emails
             /// </summary>
-            public virtual List<string> Emails
-            {
-                get
-                {
-                    if (_emails == null)
-                        _emails = new List<string>();
-                    
-                    return _emails;
-                }
-                set { _emails = value; }
-            }
-
+            public virtual List<string> Emails { get; set; }
 
             /// <summary>
             ///     Builder accessor for the Extensible Attributes
             /// </summary>
-            public virtual ExtensibleAttributes.Builder ExtensibleAttributes
-            {
-                get
-                {
-                    if (_extensibleAttributes == null)
-                        _extensibleAttributes = new ExtensibleAttributes.Builder();
-                    
-                    return _extensibleAttributes;
-                }
-                set { _extensibleAttributes = value; }
-            }
-
+            public virtual ExtensibleAttributes.Builder ExtensibleAttributes { get; set; }
+            
             public abstract IDDMSComponent Commit();
 
             /// <summary>

@@ -179,8 +179,8 @@ namespace DDMSSense.DDMS.Summary.Gml
             get
             {
                 string gmlPrefix = PropertyReader.GetPrefix("gml");
-                return (ValidationMessage.ELEMENT_PREFIX + gmlPrefix + ":" + EXTERIOR_NAME +
-                        ValidationMessage.ELEMENT_PREFIX + gmlPrefix + ":" + LINEAR_RING_NAME);
+                return (ValidationMessage.ElementPrefix + gmlPrefix + ":" + EXTERIOR_NAME +
+                        ValidationMessage.ElementPrefix + gmlPrefix + ":" + LINEAR_RING_NAME);
             }
         }
 

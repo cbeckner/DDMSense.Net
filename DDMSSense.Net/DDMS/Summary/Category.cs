@@ -218,11 +218,11 @@ namespace DDMSSense.DDMS.Summary
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue("label attribute", Label);
             if (!String.IsNullOrEmpty(Qualifier))
             {
-                Util.Util.RequireDDMSValidURI(Qualifier);
+                Util.Util.RequireDDMSValidUri(Qualifier);
             }
             // Should be reviewed as additional versions of DDMS are supported.
             if (!DDMSVersion.IsAtLeast("4.0.1") && !SecurityAttributes.Empty)

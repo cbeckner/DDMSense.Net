@@ -137,7 +137,7 @@ namespace DDMSSense.DDMS.Summary
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue(BE_NUMBER_NAME, BeNumber);
             Util.Util.RequireDDMSValue(OSUFFIX_NAME, Osuffix);
             base.Validate();

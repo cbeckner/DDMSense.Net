@@ -13,8 +13,6 @@ namespace DDMSSense.DDMS
     /// </summary>
     public class UnsupportedVersionException : Exception
     {
-        private const long SerialVersionUID = -183915550465140589L;
-
         /// <see cref="Exception#Exception(String)"></see>
         public UnsupportedVersionException(string version) : base("DDMS Version " + version + " is not yet supported.") { }
     }

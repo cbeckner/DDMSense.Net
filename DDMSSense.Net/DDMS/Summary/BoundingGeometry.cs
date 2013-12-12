@@ -176,7 +176,7 @@ namespace DDMSSense.DDMS.Summary
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (Polygons.Count + Points.Count == 0)
             {
                 throw new InvalidDDMSException("At least 1 of Polygon or Point must be used.");

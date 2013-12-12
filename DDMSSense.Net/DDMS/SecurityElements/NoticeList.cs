@@ -179,7 +179,7 @@ namespace DDMSSense.DDMS.SecurityElements
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
 
             if (Notices.Count == 0)
             {

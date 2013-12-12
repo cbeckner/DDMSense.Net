@@ -172,10 +172,10 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (!String.IsNullOrEmpty(SchemaHref))
             {
-                Util.Util.RequireDDMSValidURI(SchemaHref);
+                Util.Util.RequireDDMSValidUri(SchemaHref);
             }
             // Should be reviewed as additional versions of DDMS are supported.
             if (!DDMSVersion.IsAtLeast("3.0") && !SecurityAttributes.Empty)

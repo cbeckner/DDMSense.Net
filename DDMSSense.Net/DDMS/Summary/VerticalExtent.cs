@@ -270,7 +270,7 @@ namespace DDMSSense.DDMS.Summary
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue(MinVerticalExtentName, MinVerticalExtent);
             Util.Util.RequireDDMSValue(MaxVerticalExtentName, MaxVerticalExtent);
             Util.Util.RequireDDMSValue(UOM_NAME, UnitOfMeasure);

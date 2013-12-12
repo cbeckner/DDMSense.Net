@@ -143,7 +143,7 @@ namespace DDMSSense
         /// <summary>
         ///     Accessor for whether this is an NMTOKEN-based string
         /// </summary>
-        private bool TokenBased { get; private set; }
+        private bool TokenBased { get; set; }
 
         /// <summary>
         ///     Validates the component.

@@ -383,7 +383,7 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
 
             bool hasChildText = false;
             foreach (var child in Element.Descendants())

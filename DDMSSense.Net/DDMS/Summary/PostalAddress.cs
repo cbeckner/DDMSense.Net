@@ -264,7 +264,7 @@ namespace DDMSSense.DDMS.Summary
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (!String.IsNullOrEmpty(State) && !String.IsNullOrEmpty(Province))
             {
                 throw new InvalidDDMSException("Only 1 of state or province can be used.");

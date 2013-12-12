@@ -407,7 +407,7 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <see cref="AbstractBaseComponent#validate()"></see>
         protected internal override void Validate()
         {
-            Util.Util.RequireDDMSQName(Element, GetName(DDMSVersion));
+            Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (!String.IsNullOrEmpty(CreatedString))
             {
                 Util.Util.RequireDDMSDateFormat(CreatedString, Namespace);

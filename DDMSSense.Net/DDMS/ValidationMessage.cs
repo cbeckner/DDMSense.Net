@@ -29,22 +29,22 @@ namespace DDMSSense.DDMS
     ///         @since 0.9.c
     ///     </para>
     /// </summary>
-    public class ValidationMessage
+    public sealed class ValidationMessage
     {
         /// <summary>
         ///     Constant type for a warning.
         /// </summary>
-        public const string WARNING_TYPE = "Warning";
+        public const string WarningType = "Warning";
 
         /// <summary>
         ///     Constant type for an error.
         /// </summary>
-        public const string ERROR_TYPE = "Error";
+        public const string ErrorType = "Error";
 
         /// <summary>
         ///     XPath prefix to separate elements
         /// </summary>
-        public const string ELEMENT_PREFIX = "/";
+        public const string ElementPrefix = "/";
 
         private string _locator;
 
@@ -68,20 +68,20 @@ namespace DDMSSense.DDMS
         /// <summary>
         ///     Accessor for the type
         /// </summary>
-        public virtual string Type {get; private set;}
+        public string Type {get; private set;}
 
         /// <summary>
         ///     Accessor for the text
         /// </summary>
-        public virtual string Text { get; private set; }
+        public string Text { get; private set; }
 
         /// <summary>
         ///     Accessor for the locator
         /// </summary>
-        public virtual string Locator
+        public string Locator
         {
             get { return _locator; }
-            set { _locator = (value == null ? "" : ELEMENT_PREFIX + value); }
+            set { _locator = (value == null ? "" : ElementPrefix + value); }
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace DDMSSense.DDMS
         /// <returns> a new warning message </returns>
         public static ValidationMessage NewWarning(string text, string locator)
         {
-            return (new ValidationMessage(WARNING_TYPE, text, locator));
+            return (new ValidationMessage(WarningType, text, locator));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace DDMSSense.DDMS
         /// <returns> a new error message </returns>
         public static ValidationMessage NewError(string text, string locator)
         {
-            return (new ValidationMessage(ERROR_TYPE, text, locator));
+            return (new ValidationMessage(ErrorType, text, locator));
         }
 
         public override string ToString()
