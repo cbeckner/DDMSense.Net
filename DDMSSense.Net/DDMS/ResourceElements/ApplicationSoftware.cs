@@ -8,33 +8,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
 
     /// <summary>
     ///     An immutable implementation of ddms:applicationSoftware.
@@ -65,7 +40,7 @@ namespace DDMSSense.DDMS.ResourceElements
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class ApplicationSoftware : AbstractSimpleString
     {
@@ -74,7 +49,7 @@ namespace DDMSSense.DDMS.ResourceElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ApplicationSoftware(Element element) : base(element, true)
+        public ApplicationSoftware(XElement element) : base(element, true)
         {
         }
 
@@ -132,9 +107,7 @@ namespace DDMSSense.DDMS.ResourceElements
         protected internal override void ValidateWarnings()
         {
             if (String.IsNullOrEmpty(Value))
-            {
                 AddWarning("A ddms:applicationSoftware element was found with no value.");
-            }
             base.ValidateWarnings();
         }
 
@@ -152,9 +125,7 @@ namespace DDMSSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is ApplicationSoftware))
-            {
                 return (false);
-            }
             return (true);
         }
 
@@ -177,8 +148,6 @@ namespace DDMSSense.DDMS.ResourceElements
         /// @since 2.0.0"></see>
         public class Builder : AbstractSimpleString.Builder
         {
-            internal const long SerialVersionUID = -7348511606867959470L;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>

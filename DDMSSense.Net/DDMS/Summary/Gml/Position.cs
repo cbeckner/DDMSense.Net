@@ -262,7 +262,7 @@ namespace DDMSSense.DDMS.Summary.Gml
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 33638279863455987L;
+            
             internal List<DoubleBuilder> _coordinates;
             internal SRSAttributes.Builder _srsAttributes;
 
@@ -366,7 +366,7 @@ namespace DDMSSense.DDMS.Summary.Gml
         [Serializable]
         public class DoubleBuilder
         {
-            internal const long SerialVersionUID = -5102193614065692204L;
+            
             internal double? _value;
 
             /// <summary>

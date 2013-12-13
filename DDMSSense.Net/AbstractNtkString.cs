@@ -38,7 +38,7 @@ namespace DDMSSense
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public abstract class AbstractNtkString : AbstractBaseComponent
     {
@@ -207,7 +207,7 @@ namespace DDMSSense
         [Serializable]
         public abstract class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7824644958681123708L;
+            
 
 
             /// <summary>

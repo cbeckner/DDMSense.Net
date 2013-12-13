@@ -8,34 +8,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.SecurityElements.Ism
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ISM:NoticeText.
     ///     <table class="info">
@@ -66,25 +40,22 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    ///     @since 2.0.0
     /// </summary>
     public sealed class NoticeText : AbstractSimpleString
     {
         private const string POC_TYPE_NAME = "pocType";
-        private List<string> _pocTypes;
 
         /// <summary>
         ///     Constructor for creating a component from a XOM Element
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public NoticeText(Element element) : base(element, false)
+        public NoticeText(XElement element) : base(element, false)
         {
             try
             {
                 string pocTypes = element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace)).Value;
-                _pocTypes = Util.Util.GetXsListAsList(pocTypes);
+                PocTypes = Util.Util.GetXsListAsList(pocTypes);
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -102,22 +73,17 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public NoticeText(string value, List<string> pocTypes, SecurityAttributes securityAttributes)
-            : base(
-                PropertyReader.GetPrefix("ism"), DDMSVersion.GetCurrentVersion().IsmNamespace,
-                GetName(DDMSVersion.GetCurrentVersion()), value, securityAttributes, false)
+            : base(                PropertyReader.GetPrefix("ism"), DDMSVersion.GetCurrentVersion().IsmNamespace,                GetName(DDMSVersion.GetCurrentVersion()), value, securityAttributes, false)
         {
             try
             {
                 if (pocTypes == null)
-                {
                     pocTypes = new List<string>();
-                }
+                
                 if (pocTypes.Count > 0)
-                {
-                    Util.Util.AddAttribute(Element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME,
-                        DDMSVersion.GetCurrentVersion().IsmNamespace, Util.Util.GetXsList(pocTypes));
-                }
-                _pocTypes = pocTypes;
+                    Util.Util.AddAttribute(Element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME,                        DDMSVersion.GetCurrentVersion().IsmNamespace, Util.Util.GetXsList(pocTypes));
+                
+                PocTypes = pocTypes;
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -130,11 +96,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// <summary>
         ///     Accessor for the pocType attribute.
         /// </summary>
-        public List<string> PocTypes
-        {
-            get { return (_pocTypes); }
-            set { _pocTypes = value; }
-        }
+        public List<string> PocTypes { get; set; }
 
         /// <summary>
         ///     Validates the component.
@@ -161,9 +123,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             if (DDMSVersion.IsAtLeast("4.0.1"))
             {
                 foreach (var pocType in PocTypes)
-                {
                     ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_POC_TYPE, pocType);
-                }
             }
             base.Validate();
         }
@@ -185,9 +145,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         protected internal override void ValidateWarnings()
         {
             if (String.IsNullOrEmpty(Value))
-            {
                 AddWarning("An ISM:" + Name + " element was found with no value.");
-            }
+            
             base.ValidateWarnings();
         }
 
@@ -206,9 +165,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is NoticeText))
-            {
                 return (false);
-            }
+            
             var test = (NoticeText) obj;
             return (Util.Util.ListEquals(PocTypes, test.PocTypes));
         }
@@ -235,19 +193,15 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 2.0.0"></see>
+        /// <see cref="IBuilder"></see>
         public class Builder : AbstractSimpleString.Builder
         {
-            internal const long SerialVersionUID = 7750664735441105296L;
-            internal List<string> _pocTypes;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                PocTypes = new List<string>();
             }
 
             /// <summary>
@@ -261,18 +215,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             /// <summary>
             ///     Builder accessor for the pocTypes
             /// </summary>
-            public virtual List<string> PocTypes
-            {
-                get
-                {
-                    if (_pocTypes == null)
-                    {
-                        _pocTypes = new List<string>();
-                    }
-                    return _pocTypes;
-                }
-                set { _pocTypes = value; }
-            }
+            public virtual List<string> PocTypes { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public override IDDMSComponent Commit()

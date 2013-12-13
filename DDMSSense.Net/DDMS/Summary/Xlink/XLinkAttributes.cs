@@ -99,7 +99,7 @@ namespace DDMSSense.DDMS.Summary.Xlink
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class XLinkAttributes : AbstractAttributeGroup
     {
@@ -452,7 +452,7 @@ namespace DDMSSense.DDMS.Summary.Xlink
         [Serializable]
         public class Builder
         {
-            internal const long SerialVersionUID = 6071979027185230870L;
+            
             internal string _actuate;
             internal string _arcrole;
             internal string _href;

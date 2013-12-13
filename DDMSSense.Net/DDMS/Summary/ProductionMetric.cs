@@ -69,7 +69,7 @@ namespace DDMSSense.DDMS.Summary
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class ProductionMetric : AbstractBaseComponent
     {
@@ -231,7 +231,7 @@ namespace DDMSSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -9012648230977148516L;
+            
             internal string _coverage;
             internal SecurityAttributes.Builder _securityAttributes;
             internal string _subject;

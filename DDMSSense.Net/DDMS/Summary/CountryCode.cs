@@ -161,7 +161,7 @@ namespace DDMSSense.DDMS.Summary
         /// @since 1.8.0"></see>
         public class Builder : AbstractQualifierValue.Builder
         {
-            internal const long SerialVersionUID = 2136329013144660166L;
+            
 
             /// <summary>
             ///     Empty constructor

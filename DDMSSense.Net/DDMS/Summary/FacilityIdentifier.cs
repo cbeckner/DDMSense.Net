@@ -193,7 +193,7 @@ namespace DDMSSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 4781523669271343048L;
+            
             internal string _beNumber;
             internal string _osuffix;
 

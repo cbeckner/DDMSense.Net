@@ -76,7 +76,7 @@ namespace DDMSSense.DDMS.Summary
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class NonStateActor : AbstractSimpleString
     {
@@ -266,7 +266,7 @@ namespace DDMSSense.DDMS.Summary
         /// @since 2.0.0"></see>
         public class Builder : AbstractSimpleString.Builder
         {
-            internal const long SerialVersionUID = 7750664735441105296L;
+            
             internal int? _order;
             internal string _qualifier;
 

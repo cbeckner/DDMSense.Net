@@ -7,33 +7,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
 
     /// <summary>
     ///     An immutable implementation of ddms:language.
@@ -76,7 +51,7 @@ namespace DDMSSense.DDMS.ResourceElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Language(Element element) : base(element)
+        public Language(XElement element) : base(element)
         {
         }
 
@@ -112,9 +87,7 @@ namespace DDMSSense.DDMS.ResourceElements
         {
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (!String.IsNullOrEmpty(Value))
-            {
                 Util.Util.RequireDDMSValue("qualifier attribute", Qualifier);
-            }
 
             base.Validate();
         }
@@ -136,13 +109,11 @@ namespace DDMSSense.DDMS.ResourceElements
         protected internal override void ValidateWarnings()
         {
             if (!String.IsNullOrEmpty(Qualifier) && String.IsNullOrEmpty(Value))
-            {
                 AddWarning("A qualifier has been set without an accompanying value attribute.");
-            }
+            
             if (String.IsNullOrEmpty(Qualifier) && String.IsNullOrEmpty(Value))
-            {
                 AddWarning("Neither a qualifier nor a value was set on this language.");
-            }
+            
             base.ValidateWarnings();
         }
 
@@ -181,8 +152,6 @@ namespace DDMSSense.DDMS.ResourceElements
         /// @since 1.8.0"></see>
         public class Builder : AbstractQualifierValue.Builder
         {
-            internal const long SerialVersionUID = -6370530125138751078L;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>

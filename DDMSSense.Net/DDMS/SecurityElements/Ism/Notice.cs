@@ -9,34 +9,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.SecurityElements.Ism
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ISM:Notice.
     ///     <table class="info">
@@ -66,31 +40,24 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    ///     @since 2.0.0
     /// </summary>
     public sealed class Notice : AbstractBaseComponent
     {
-        private readonly List<NoticeText> _noticeTexts;
-        private NoticeAttributes _noticeAttributes;
-        private SecurityAttributes _securityAttributes;
-
         /// <summary>
         ///     Constructor for creating a component from a XOM Element
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Notice(Element element)
+        public Notice(XElement element)
         {
             try
             {
                 SetElement(element, false);
-                _noticeTexts = new List<NoticeText>();
-                IEnumerable<Element> noticeTexts =
-                    element.Elements(XName.Get(NoticeText.GetName(DDMSVersion), DDMSVersion.IsmNamespace));
-                noticeTexts.ToList().ForEach(n => _noticeTexts.Add(new NoticeText(n)));
-                _noticeAttributes = new NoticeAttributes(element);
-                _securityAttributes = new SecurityAttributes(element);
+                NoticeTexts = new List<NoticeText>();
+                IEnumerable<XElement> noticeTexts =                    element.Elements(XName.Get(NoticeText.GetName(DDMSVersion), DDMSVersion.IsmNamespace));
+                noticeTexts.ToList().ForEach(n => NoticeTexts.Add(new NoticeText(n)));
+                NoticeAttributes = new NoticeAttributes(element);
+                SecurityAttributes = new SecurityAttributes(element);
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -113,21 +80,18 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             try
             {
                 if (noticeTexts == null)
-                {
                     noticeTexts = new List<NoticeText>();
-                }
+                
                 DDMSVersion version = DDMSVersion.GetCurrentVersion();
-                Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("ism"), GetName(version),
-                    version.IsmNamespace, null);
+                XElement element = Util.Util.BuildElement(PropertyReader.GetPrefix("ism"), GetName(version),                    version.IsmNamespace, null);
                 foreach (var noticeText in noticeTexts)
-                {
                     element.Add(noticeText.ElementCopy);
-                }
-                _noticeTexts = noticeTexts;
-                _noticeAttributes = NoticeAttributes.GetNonNullInstance(noticeAttributes);
-                _noticeAttributes.AddTo(element);
-                _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-                _securityAttributes.AddTo(element);
+                
+                NoticeTexts = noticeTexts;
+                NoticeAttributes = NoticeAttributes.GetNonNullInstance(noticeAttributes);
+                NoticeAttributes.AddTo(element);
+                SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+                SecurityAttributes.AddTo(element);
                 SetElement(element, true);
             }
             catch (InvalidDDMSException e)
@@ -151,28 +115,17 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// <summary>
         ///     Accessor for the list of NoticeTexts.
         /// </summary>
-        public List<NoticeText> NoticeTexts
-        {
-            get { return _noticeTexts; }
-        }
+        public List<NoticeText> NoticeTexts { get; private set; }
 
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
-        public override SecurityAttributes SecurityAttributes
-        {
-            get { return (_securityAttributes); }
-            set { _securityAttributes = value; }
-        }
+        public override SecurityAttributes SecurityAttributes { get; set; }
 
         /// <summary>
         ///     Accessor for the Notice Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
-        public NoticeAttributes NoticeAttributes
-        {
-            get { return (_noticeAttributes); }
-            set { _noticeAttributes = value; }
-        }
+        public NoticeAttributes NoticeAttributes { get; set; }
 
         /// <summary>
         ///     Validates the component.
@@ -194,10 +147,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         {
             Util.Util.RequireQualifiedName(Element, DDMSVersion.IsmNamespace, GetName(DDMSVersion));
             if (NoticeTexts.Count == 0)
-            {
                 throw new InvalidDDMSException("At least one ISM:NoticeText must exist within an ISM:Notice element.");
-            }
-
+            
             // Should be reviewed as additional versions of DDMS are supported.
             RequireVersion("4.0.1");
 
@@ -224,9 +175,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             {
                 AddWarnings(NoticeAttributes.ValidationWarnings, true);
                 if (NoticeAttributes.ExternalReference != null)
-                {
                     AddDdms40Warning("ISM:externalNotice attribute");
-                }
             }
             base.ValidateWarnings();
         }
@@ -246,9 +195,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is Notice))
-            {
                 return (false);
-            }
+            
             var test = (Notice) obj;
             return (NoticeAttributes.Equals(test.NoticeAttributes));
         }
@@ -275,33 +223,28 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 2.0.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7750664735441105296L;
-            internal NoticeAttributes.Builder _noticeAttributes = null;
-            internal List<NoticeText.Builder> _noticeTexts;
-            internal SecurityAttributes.Builder _securityAttributes = null;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                NoticeAttributes = new NoticeAttributes.Builder();
+                NoticeTexts = new List<NoticeText.Builder>();
+                SecurityAttributes = new SecurityAttributes.Builder();
             }
 
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
-            public Builder(Notice notice)
+            public Builder(Notice notice) :this()
             {
                 foreach (var noticeText in notice.NoticeTexts)
-                {
                     NoticeTexts.Add(new NoticeText.Builder(noticeText));
-                }
+                
                 SecurityAttributes = new SecurityAttributes.Builder(notice.SecurityAttributes);
                 NoticeAttributes = new NoticeAttributes.Builder(notice.NoticeAttributes);
             }
@@ -309,66 +252,31 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             /// <summary>
             ///     Builder accessor for the noticeTexts
             /// </summary>
-            public virtual List<NoticeText.Builder> NoticeTexts
-            {
-                get
-                {
-                    if (_noticeTexts == null)
-                    {
-                        _noticeTexts = new List<NoticeText.Builder>();
-                    }
-                    return _noticeTexts;
-                }
-            }
+            public virtual List<NoticeText.Builder> NoticeTexts { get; private set; }
 
             /// <summary>
             ///     Builder accessor for the securityAttributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
 
 
             /// <summary>
             ///     Builder accessor for the noticeAttributes
             /// </summary>
-            public virtual NoticeAttributes.Builder NoticeAttributes
-            {
-                get
-                {
-                    if (_noticeAttributes == null)
-                    {
-                        _noticeAttributes = new NoticeAttributes.Builder();
-                    }
-                    return _noticeAttributes;
-                }
-                set { _noticeAttributes = value; }
-            }
+            public virtual NoticeAttributes.Builder NoticeAttributes { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
+                
                 var noticeTexts = new List<NoticeText>();
                 foreach (IBuilder builder in NoticeTexts)
                 {
                     var component = (NoticeText) builder.Commit();
                     if (component != null)
-                    {
                         noticeTexts.Add(component);
-                    }
                 }
                 return (new Notice(noticeTexts, SecurityAttributes.Commit(), NoticeAttributes.Commit()));
             }
@@ -380,9 +288,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
                 {
                     bool hasValueInList = false;
                     foreach (IBuilder builder in NoticeTexts)
-                    {
                         hasValueInList = hasValueInList || !builder.Empty;
-                    }
+                    
                     return (!hasValueInList && SecurityAttributes.Empty && NoticeAttributes.Empty);
                 }
             }

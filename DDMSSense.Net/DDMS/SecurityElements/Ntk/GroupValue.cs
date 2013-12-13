@@ -71,7 +71,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class GroupValue : AbstractNtkString
     {
@@ -184,7 +184,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
         /// @since 2.0.0"></see>
         public class Builder : AbstractNtkString.Builder
         {
-            internal const long SerialVersionUID = 7750664735441105296L;
+            
 
             /// <summary>
             ///     Empty constructor

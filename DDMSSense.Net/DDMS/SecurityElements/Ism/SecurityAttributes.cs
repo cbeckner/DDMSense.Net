@@ -9,34 +9,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
- */
-
 namespace DDMSSense.DDMS.SecurityElements.Ism
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     Attribute group for the ISM markings used throughout DDMS.
     ///     <para>
@@ -83,8 +57,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
+
     /// </summary>
     public sealed class SecurityAttributes : AbstractAttributeGroup
     {
@@ -210,22 +184,9 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// </summary>
         public static readonly List<string> NON_EXTENSIBLE_NAMES = ALL_NAMES;
 
-        private List<string> _atomicEnergyMarkings;
-        private string _classification;
-        private string _classificationReason;
-        private string _classifiedBy;
-        private string _compilationReason;
-        private DateTime? _dateOfExemptedSource;
-        private DateTime? _declassDate;
-        private string _declassEvent;
-        private string _declassException;
-        private bool? _declassManualReview;
-        private string _derivativelyClassifiedBy;
-        private string _derivedFrom;
-        private string _typeOfExemptedSource;
-
-        static SecurityAttributes()
+        private void Initialize()
         {
+            AtomicEnergyMarkings = new List<string>();
             ALL_NAMES.Add(ATOMIC_ENERGY_MARKINGS_NAME);
             ALL_NAMES.Add(CLASSIFICATION_NAME);
             ALL_NAMES.Add(CLASSIFICATION_REASON_NAME);
@@ -255,53 +216,44 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         ///     Base constructor
         /// </summary>
         /// <param name="element"> the XOM element which is decorated with these attributes. </param>
-        public SecurityAttributes(Element element) : base(element.Name.NamespaceName)
+        public SecurityAttributes(XElement element)
+            : base(element.Name.NamespaceName)
         {
+            Initialize();
             string icNamespace = DDMSVersion.IsmNamespace;
-            _atomicEnergyMarkings =
+            AtomicEnergyMarkings =
                 Util.Util.GetXsListAsList(element.Attribute(XName.Get(ATOMIC_ENERGY_MARKINGS_NAME, icNamespace)).Value);
-            _classification = element.Attribute(XName.Get(CLASSIFICATION_NAME, icNamespace)).Value;
-            _classificationReason = element.Attribute(XName.Get(CLASSIFICATION_REASON_NAME, icNamespace)).Value;
-            _classifiedBy = element.Attribute(XName.Get(CLASSIFIED_BY_NAME, icNamespace)).Value;
-            _compilationReason = element.Attribute(XName.Get(COMPILATION_REASON_NAME, icNamespace)).Value;
+            Classification = element.Attribute(XName.Get(CLASSIFICATION_NAME, icNamespace)).Value;
+            ClassificationReason = element.Attribute(XName.Get(CLASSIFICATION_REASON_NAME, icNamespace)).Value;
+            ClassifiedBy = element.Attribute(XName.Get(CLASSIFIED_BY_NAME, icNamespace)).Value;
+            CompilationReason = element.Attribute(XName.Get(COMPILATION_REASON_NAME, icNamespace)).Value;
             string dateOfExemptedSource = element.Attribute(XName.Get(DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace)).Value;
             if (!String.IsNullOrEmpty(dateOfExemptedSource))
-            {
-                _dateOfExemptedSource = DateTime.Parse(dateOfExemptedSource);
-            }
+                DateOfExemptedSource = DateTime.Parse(dateOfExemptedSource);
+
             string declassDate = element.Attribute(XName.Get(DECLASS_DATE_NAME, icNamespace)).Value;
             if (!String.IsNullOrEmpty(declassDate))
-            {
-                _declassDate = DateTime.Parse(declassDate);
-            }
-            _declassEvent = element.Attribute(XName.Get(DECLASS_EVENT_NAME, icNamespace)).Value;
-            _declassException = element.Attribute(XName.Get(DECLASS_EXCEPTION_NAME, icNamespace)).Value;
+                DeclassDate = DateTime.Parse(declassDate);
+
+            DeclassEvent = element.Attribute(XName.Get(DECLASS_EVENT_NAME, icNamespace)).Value;
+            DeclassException = element.Attribute(XName.Get(DECLASS_EXCEPTION_NAME, icNamespace)).Value;
             string manualReview = element.Attribute(XName.Get(DECLASS_MANUAL_REVIEW_NAME, icNamespace)).Value;
             if (!String.IsNullOrEmpty(manualReview))
-            {
-                _declassManualReview = Convert.ToBoolean(manualReview);
-            }
-            _derivativelyClassifiedBy = element.Attribute(XName.Get(DERIVATIVELY_CLASSIFIED_BY_NAME, icNamespace)).Value;
-            _derivedFrom = element.Attribute(XName.Get(DERIVED_FROM_NAME, icNamespace)).Value;
-            DisplayOnlyTo =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(DISPLAY_ONLY_TO_NAME, icNamespace)).Value);
-            DisseminationControls =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(DISSEMINATION_CONTROLS_NAME, icNamespace)).Value);
-            FGIsourceOpen =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(FGI_SOURCE_OPEN_NAME, icNamespace)).Value);
-            FGIsourceProtected =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(FGI_SOURCE_PROTECTED_NAME, icNamespace)).Value);
-            NonICmarkings =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(NON_IC_MARKINGS_NAME, icNamespace)).Value);
-            NonUSControls =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(NON_US_CONTROLS_NAME, icNamespace)).Value);
-            OwnerProducers =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(OWNER_PRODUCER_NAME, icNamespace)).Value);
+                DeclassManualReview = Convert.ToBoolean(manualReview);
+
+            DerivativelyClassifiedBy = element.Attribute(XName.Get(DERIVATIVELY_CLASSIFIED_BY_NAME, icNamespace)).Value;
+            DerivedFrom = element.Attribute(XName.Get(DERIVED_FROM_NAME, icNamespace)).Value;
+            DisplayOnlyTo = Util.Util.GetXsListAsList(element.Attribute(XName.Get(DISPLAY_ONLY_TO_NAME, icNamespace)).Value);
+            DisseminationControls = Util.Util.GetXsListAsList(element.Attribute(XName.Get(DISSEMINATION_CONTROLS_NAME, icNamespace)).Value);
+            FGIsourceOpen = Util.Util.GetXsListAsList(element.Attribute(XName.Get(FGI_SOURCE_OPEN_NAME, icNamespace)).Value);
+            FGIsourceProtected = Util.Util.GetXsListAsList(element.Attribute(XName.Get(FGI_SOURCE_PROTECTED_NAME, icNamespace)).Value);
+            NonICmarkings = Util.Util.GetXsListAsList(element.Attribute(XName.Get(NON_IC_MARKINGS_NAME, icNamespace)).Value);
+            NonUSControls = Util.Util.GetXsListAsList(element.Attribute(XName.Get(NON_US_CONTROLS_NAME, icNamespace)).Value);
+            OwnerProducers = Util.Util.GetXsListAsList(element.Attribute(XName.Get(OWNER_PRODUCER_NAME, icNamespace)).Value);
             ReleasableTo = Util.Util.GetXsListAsList(element.Attribute(XName.Get(RELEASABLE_TO_NAME, icNamespace)).Value);
-            SARIdentifier =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(SAR_IDENTIFIER_NAME, icNamespace)).Value);
+            SARIdentifier = Util.Util.GetXsListAsList(element.Attribute(XName.Get(SAR_IDENTIFIER_NAME, icNamespace)).Value);
             SCIcontrols = Util.Util.GetXsListAsList(element.Attribute(XName.Get(SCI_CONTROLS_NAME, icNamespace)).Value);
-            _typeOfExemptedSource = element.Attribute(XName.Get(TYPE_OF_EXEMPTED_SOURCE_NAME, icNamespace)).Value;
+            TypeOfExemptedSource = element.Attribute(XName.Get(TYPE_OF_EXEMPTED_SOURCE_NAME, icNamespace)).Value;
             Validate();
         }
 
@@ -326,9 +278,10 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         ///     appears in XML.
         /// </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public SecurityAttributes(string classification, List<string> ownerProducers,
-            IDictionary<string, string> otherAttributes) : base(DDMSVersion.GetCurrentVersion().Namespace)
+        public SecurityAttributes(string classification, List<string> ownerProducers, IDictionary<string, string> otherAttributes)
+            : base(DDMSVersion.GetCurrentVersion().Namespace)
         {
+            Initialize();
             SCIcontrols = null;
             SARIdentifier = null;
             ReleasableTo = null;
@@ -340,31 +293,26 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             DisseminationControls = null;
             DisplayOnlyTo = null;
             if (ownerProducers == null)
-            {
                 ownerProducers = new List<string>();
-            }
-            if (otherAttributes == null)
-            {
-                otherAttributes = new Dictionary<string, string>();
-            }
 
-            _atomicEnergyMarkings =
-                Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(ATOMIC_ENERGY_MARKINGS_NAME));
-            _classification = classification;
-            _classificationReason = otherAttributes.GetValueOrNull(CLASSIFICATION_REASON_NAME);
-            _classifiedBy = otherAttributes.GetValueOrNull(CLASSIFIED_BY_NAME);
-            _compilationReason = otherAttributes.GetValueOrNull(COMPILATION_REASON_NAME);
+            if (otherAttributes == null)
+                otherAttributes = new Dictionary<string, string>();
+
+            AtomicEnergyMarkings = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(ATOMIC_ENERGY_MARKINGS_NAME));
+            Classification = classification;
+            ClassificationReason = otherAttributes.GetValueOrNull(CLASSIFICATION_REASON_NAME);
+            ClassifiedBy = otherAttributes.GetValueOrNull(CLASSIFIED_BY_NAME);
+            CompilationReason = otherAttributes.GetValueOrNull(COMPILATION_REASON_NAME);
             string dateOfExemptedSource = otherAttributes.GetValueOrNull(DATE_OF_EXEMPTED_SOURCE_NAME);
             if (!String.IsNullOrEmpty(dateOfExemptedSource))
             {
                 try
                 {
-                    _dateOfExemptedSource = DateTime.Parse(dateOfExemptedSource);
+                    DateOfExemptedSource = DateTime.Parse(dateOfExemptedSource);
                 }
                 catch (ArgumentException)
                 {
-                    throw new InvalidDDMSException(
-                        "The ISM:dateOfExemptedSource attribute is not in a valid date format.");
+                    throw new InvalidDDMSException("The ISM:dateOfExemptedSource attribute is not in a valid date format.");
                 }
             }
             string declassDate = otherAttributes.GetValueOrNull(DECLASS_DATE_NAME);
@@ -372,25 +320,23 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             {
                 try
                 {
-                    _declassDate = DateTime.Parse(declassDate);
+                    DeclassDate = DateTime.Parse(declassDate);
                 }
                 catch (ArgumentException)
                 {
                     throw new InvalidDDMSException("The ISM:declassDate attribute is not in a valid date format.");
                 }
             }
-            _declassEvent = otherAttributes.GetValueOrNull(DECLASS_EVENT_NAME);
-            _declassException = otherAttributes.GetValueOrNull(DECLASS_EXCEPTION_NAME);
+            DeclassEvent = otherAttributes.GetValueOrNull(DECLASS_EVENT_NAME);
+            DeclassException = otherAttributes.GetValueOrNull(DECLASS_EXCEPTION_NAME);
             string manualReview = otherAttributes.GetValueOrNull(DECLASS_MANUAL_REVIEW_NAME);
             if (!String.IsNullOrEmpty(manualReview))
-            {
-                _declassManualReview = Convert.ToBoolean(manualReview);
-            }
-            _derivativelyClassifiedBy = otherAttributes.GetValueOrNull(DERIVATIVELY_CLASSIFIED_BY_NAME);
-            _derivedFrom = otherAttributes.GetValueOrNull(DERIVED_FROM_NAME);
+                DeclassManualReview = Convert.ToBoolean(manualReview);
+
+            DerivativelyClassifiedBy = otherAttributes.GetValueOrNull(DERIVATIVELY_CLASSIFIED_BY_NAME);
+            DerivedFrom = otherAttributes.GetValueOrNull(DERIVED_FROM_NAME);
             DisplayOnlyTo = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(DISPLAY_ONLY_TO_NAME));
-            DisseminationControls =
-                Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(DISSEMINATION_CONTROLS_NAME));
+            DisseminationControls = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(DISSEMINATION_CONTROLS_NAME));
             FGIsourceOpen = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(FGI_SOURCE_OPEN_NAME));
             FGIsourceProtected = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(FGI_SOURCE_PROTECTED_NAME));
             NonICmarkings = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(NON_IC_MARKINGS_NAME));
@@ -399,7 +345,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             ReleasableTo = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(RELEASABLE_TO_NAME));
             SARIdentifier = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(SAR_IDENTIFIER_NAME));
             SCIcontrols = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(SCI_CONTROLS_NAME));
-            _typeOfExemptedSource = otherAttributes.GetValueOrNull(TYPE_OF_EXEMPTED_SOURCE_NAME);
+            TypeOfExemptedSource = otherAttributes.GetValueOrNull(TYPE_OF_EXEMPTED_SOURCE_NAME);
             Validate();
         }
 
@@ -411,15 +357,28 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         {
             get
             {
-                return (AtomicEnergyMarkings.Count == 0 && String.IsNullOrEmpty(Classification) &&
-                        String.IsNullOrEmpty(ClassificationReason) && String.IsNullOrEmpty(ClassifiedBy) &&
-                        String.IsNullOrEmpty(CompilationReason) && DateOfExemptedSource == null && DeclassDate == null &&
-                        String.IsNullOrEmpty(DeclassEvent) && String.IsNullOrEmpty(DeclassException) &&
-                        DeclassManualReview == null && String.IsNullOrEmpty(DerivativelyClassifiedBy) &&
-                        String.IsNullOrEmpty(DerivedFrom) && DisplayOnlyTo.Count == 0 &&
-                        DisseminationControls.Count == 0 && FGIsourceOpen.Count == 0 && FGIsourceProtected.Count == 0 &&
-                        NonICmarkings.Count == 0 && NonUSControls.Count == 0 && OwnerProducers.Count == 0 &&
-                        ReleasableTo.Count == 0 && SARIdentifier.Count == 0 && SCIcontrols.Count == 0 &&
+                return (AtomicEnergyMarkings.Count == 0 &&
+                        String.IsNullOrEmpty(Classification) &&
+                        String.IsNullOrEmpty(ClassificationReason) &&
+                        String.IsNullOrEmpty(ClassifiedBy) &&
+                        String.IsNullOrEmpty(CompilationReason) &&
+                        DateOfExemptedSource == null &&
+                        DeclassDate == null &&
+                        String.IsNullOrEmpty(DeclassEvent) &&
+                        String.IsNullOrEmpty(DeclassException) &&
+                        DeclassManualReview == null &&
+                        String.IsNullOrEmpty(DerivativelyClassifiedBy) &&
+                        String.IsNullOrEmpty(DerivedFrom) &&
+                        DisplayOnlyTo.Count == 0 &&
+                        DisseminationControls.Count == 0 &&
+                        FGIsourceOpen.Count == 0 &&
+                        FGIsourceProtected.Count == 0 &&
+                        NonICmarkings.Count == 0 &&
+                        NonUSControls.Count == 0 &&
+                        OwnerProducers.Count == 0 &&
+                        ReleasableTo.Count == 0 &&
+                        SARIdentifier.Count == 0 &&
+                        SCIcontrols.Count == 0 &&
                         String.IsNullOrEmpty(TypeOfExemptedSource));
             }
         }
@@ -427,115 +386,63 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// <summary>
         ///     Accessor for the atomicEnergyMarkings attribute. Returns a copy.
         /// </summary>
-        public List<string> AtomicEnergyMarkings
-        {
-            get { return _atomicEnergyMarkings; }
-            set
-            {
-                _atomicEnergyMarkings = value;
-                ;
-            }
-        }
+        public List<string> AtomicEnergyMarkings { get; set; }
 
         /// <summary>
         ///     Accessor for the classification attribute.
         /// </summary>
-        public string Classification
-        {
-            get { return (Util.Util.GetNonNullString(_classification)); }
-            set { _classification = value; }
-        }
+        public string Classification { get; set; }
 
         /// <summary>
         ///     Accessor for the classificationReason attribute.
         /// </summary>
-        public string ClassificationReason
-        {
-            get { return (Util.Util.GetNonNullString(_classificationReason)); }
-            set { _classificationReason = value; }
-        }
+        public string ClassificationReason { get; set; }
 
         /// <summary>
         ///     Accessor for the classifiedBy attribute.
         /// </summary>
-        public string ClassifiedBy
-        {
-            get { return (Util.Util.GetNonNullString(_classifiedBy)); }
-            set { _classifiedBy = value; }
-        }
+        public string ClassifiedBy { get; set; }
 
         /// <summary>
         ///     Accessor for the compilationReason attribute.
         /// </summary>
-        public string CompilationReason
-        {
-            get { return (Util.Util.GetNonNullString(_compilationReason)); }
-            set { _compilationReason = value; }
-        }
+        public string CompilationReason { get; set; }
 
         /// <summary>
         ///     Accessor for the dateOfExemptedSource attribute. May return null if not set.
         /// </summary>
-        public DateTime DateOfExemptedSource
-        {
-            get { return DateTime.Parse(_dateOfExemptedSource.Value.ToString("o")); }
-            set { _dateOfExemptedSource = value; }
-        }
+        public DateTime? DateOfExemptedSource { get; set; }
 
         /// <summary>
         ///     Accessor for the declassDate attribute. May return null if not set.
         /// </summary>
-        public DateTime DeclassDate
-        {
-            get { return DateTime.Parse(_declassDate.Value.ToString("o")); }
-            set { _declassDate = value; }
-        }
+        public DateTime? DeclassDate { get; set; }
 
         /// <summary>
         ///     Accessor for the declassEvent attribute.
         /// </summary>
-        public string DeclassEvent
-        {
-            get { return (Util.Util.GetNonNullString(_declassEvent)); }
-            set { _declassEvent = value; }
-        }
+        public string DeclassEvent { get; set; }
 
         /// <summary>
         ///     Accessor for the declassException attribute. In DDMS 2.0, this could be a list of tokens. This is represented
         ///     here as a space-delimited string.
         /// </summary>
-        public string DeclassException
-        {
-            get { return (Util.Util.GetNonNullString(_declassException)); }
-            set { _declassException = value; }
-        }
+        public string DeclassException { get; set; }
 
         /// <summary>
         ///     Accessor for the declassManualReview attribute. Will be null in DDMS 3.0.
         /// </summary>
-        public bool? DeclassManualReview
-        {
-            get { return (_declassManualReview); }
-            set { _declassManualReview = value; }
-        }
+        public bool? DeclassManualReview { get; set; }
 
         /// <summary>
         ///     Accessor for the derivativelyClassifiedBy attribute.
         /// </summary>
-        public string DerivativelyClassifiedBy
-        {
-            get { return (Util.Util.GetNonNullString(_derivativelyClassifiedBy)); }
-            set { _derivativelyClassifiedBy = value; }
-        }
+        public string DerivativelyClassifiedBy { get; set; }
 
         /// <summary>
         ///     Accessor for the derivedFrom attribute.
         /// </summary>
-        public string DerivedFrom
-        {
-            get { return (Util.Util.GetNonNullString(_derivedFrom)); }
-            set { _derivedFrom = value; }
-        }
+        public string DerivedFrom { get; set; }
 
         /// <summary>
         ///     Accessor for the displayOnlyTo attribute. Returns a copy.
@@ -591,11 +498,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         ///     Accessor for the typeOfExemptedSource attribute. In DDMS 2.0, this could be a list of tokens. This is represented
         ///     here as a space-delimited string.
         /// </summary>
-        public string TypeOfExemptedSource
-        {
-            get { return (Util.Util.GetNonNullString(_typeOfExemptedSource)); }
-            set { _typeOfExemptedSource = value; }
-        }
+        public string TypeOfExemptedSource { get; set; }
 
         /// <summary>
         ///     Returns a non-null instance of security attributes. If the instance passed in is not null, it will be returned.
@@ -612,35 +515,29 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         ///     Convenience method to add these attributes onto an existing XOM Element
         /// </summary>
         /// <param name="element"> the element to decorate </param>
-        public void AddTo(Element element)
+        public void AddTo(XElement element)
         {
             DDMSVersion elementVersion = DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName);
             ValidateSameVersion(elementVersion);
             string icNamespace = elementVersion.IsmNamespace;
             string icPrefix = PropertyReader.GetPrefix("ism");
 
-            Util.Util.AddAttribute(element, icPrefix, ATOMIC_ENERGY_MARKINGS_NAME, icNamespace,
-                Util.Util.GetXsList(AtomicEnergyMarkings));
+            Util.Util.AddAttribute(element, icPrefix, ATOMIC_ENERGY_MARKINGS_NAME, icNamespace, Util.Util.GetXsList(AtomicEnergyMarkings));
             Util.Util.AddAttribute(element, icPrefix, CLASSIFICATION_NAME, icNamespace, Classification);
             Util.Util.AddAttribute(element, icPrefix, CLASSIFICATION_REASON_NAME, icNamespace, ClassificationReason);
             Util.Util.AddAttribute(element, icPrefix, CLASSIFIED_BY_NAME, icNamespace, ClassifiedBy);
             Util.Util.AddAttribute(element, icPrefix, COMPILATION_REASON_NAME, icNamespace, CompilationReason);
-            if (DateOfExemptedSource != null)
-            {
-                Util.Util.AddAttribute(element, icPrefix, DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace,
-                    DateOfExemptedSource.ToString("o"));
-            }
-            if (DeclassDate != null)
-            {
-                Util.Util.AddAttribute(element, icPrefix, DECLASS_DATE_NAME, icNamespace, DeclassDate.ToString("o"));
-            }
+            if (DateOfExemptedSource.HasValue)
+                Util.Util.AddAttribute(element, icPrefix, DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace, DateOfExemptedSource.GetValueOrDefault().ToString("o"));
+
+            if (DeclassDate.HasValue)
+                Util.Util.AddAttribute(element, icPrefix, DECLASS_DATE_NAME, icNamespace, DeclassDate.GetValueOrDefault().ToString("o"));
+
             Util.Util.AddAttribute(element, icPrefix, DECLASS_EVENT_NAME, icNamespace, DeclassEvent);
             Util.Util.AddAttribute(element, icPrefix, DECLASS_EXCEPTION_NAME, icNamespace, DeclassException);
             if (DeclassManualReview != null)
-            {
-                Util.Util.AddAttribute(element, icPrefix, DECLASS_MANUAL_REVIEW_NAME, icNamespace,
-                    DeclassManualReview.ToString());
-            }
+                Util.Util.AddAttribute(element, icPrefix, DECLASS_MANUAL_REVIEW_NAME, icNamespace, DeclassManualReview.ToString());
+
             Util.Util.AddAttribute(element, icPrefix, DERIVATIVELY_CLASSIFIED_BY_NAME, icNamespace,
                 DerivativelyClassifiedBy);
             Util.Util.AddAttribute(element, icPrefix, DERIVED_FROM_NAME, icNamespace, DerivedFrom);
@@ -709,47 +606,35 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             bool isDDMS20 = "2.0".Equals(version.Version);
 
             if (!version.IsAtLeast("3.1") && AtomicEnergyMarkings.Count > 0)
-            {
-                throw new InvalidDDMSException(
-                    "The atomicEnergyMarkings attribute cannot be used until DDMS 3.1 or later.");
-            }
+                throw new InvalidDDMSException("The atomicEnergyMarkings attribute cannot be used until DDMS 3.1 or later.");
+
             foreach (var atomic in AtomicEnergyMarkings)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_ATOMIC_ENERGY_MARKINGS, atomic);
-            }
+
             if (!String.IsNullOrEmpty(Classification))
             {
                 if (version.IsAtLeast("3.0") || !ISMVocabulary.UsingOldClassification(Classification))
-                {
                     ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_ALL_CLASSIFICATIONS, Classification);
-                }
             }
             if (!version.IsAtLeast("3.0") && !String.IsNullOrEmpty(CompilationReason))
-            {
                 throw new InvalidDDMSException("The compilationReason attribute cannot be used until DDMS 3.0 or later.");
-            }
+
             if (version.IsAtLeast("3.1") && DateOfExemptedSource != null)
-            {
                 throw new InvalidDDMSException("The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0.");
-            }
+
             if (DateOfExemptedSource != null)
-            {
-                throw new InvalidDDMSException(
-                    "The dateOfExemptedSource attribute must be in the xs:date format (YYYY-MM-DD).");
-            }
+                throw new InvalidDDMSException("The dateOfExemptedSource attribute must be in the xs:date format (YYYY-MM-DD).");
+
             if (DeclassDate != null)
-            {
                 throw new InvalidDDMSException("The declassDate must be in the xs:date format (YYYY-MM-DD).");
-            }
+
             if (!String.IsNullOrEmpty(DeclassException))
             {
                 if (isDDMS20)
                 {
                     // In DDMS 2.0, this can be a list of tokens.
                     foreach (var value in Util.Util.GetXsListAsList(DeclassException))
-                    {
                         ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_DECLASS_EXCEPTION, value);
-                    }
                 }
                 else
                 {
@@ -757,66 +642,51 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
                 }
             }
             if (!isDDMS20 && DeclassManualReview != null)
-            {
                 throw new InvalidDDMSException("The declassManualReview attribute can only be used in DDMS 2.0.");
-            }
+
             if (!version.IsAtLeast("3.1") && DisplayOnlyTo.Count > 0)
-            {
                 throw new InvalidDDMSException("The displayOnlyTo attribute cannot be used until DDMS 3.1 or later.");
-            }
+
             foreach (var display in DisplayOnlyTo)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_DISPLAY_ONLY_TO, display);
-            }
+
             foreach (var dissemination in DisseminationControls)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_DISSEMINATION_CONTROLS, dissemination);
-            }
+
             foreach (var fgiSourceOpen in FGIsourceOpen)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_FGI_SOURCE_OPEN, fgiSourceOpen);
-            }
+
             foreach (var fgiSourceProtected in FGIsourceProtected)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_FGI_SOURCE_PROTECTED, fgiSourceProtected);
-            }
+
             foreach (var nonIC in NonICmarkings)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_NON_IC_MARKINGS, nonIC);
-            }
+
             if (!version.IsAtLeast("3.1") && NonUSControls.Count > 0)
-            {
                 throw new InvalidDDMSException("The nonUSControls attribute cannot be used until DDMS 3.1 or later.");
-            }
+
             foreach (var nonUS in NonUSControls)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_NON_US_CONTROLS, nonUS);
-            }
+
             foreach (var op in OwnerProducers)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_OWNER_PRODUCERS, op);
-            }
+
             foreach (var releasableTo in ReleasableTo)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_RELEASABLE_TO, releasableTo);
-            }
+
             foreach (var sarId in SARIdentifier)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_SAR_IDENTIFIER, sarId);
-            }
+
             foreach (var sciControls in SCIcontrols)
-            {
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_SCI_CONTROLS, sciControls);
-            }
+
             if (!String.IsNullOrEmpty(TypeOfExemptedSource))
             {
                 if (isDDMS20)
                 {
                     // In DDMS 2.0, this can be a list of tokens.
                     foreach (var value in Util.Util.GetXsListAsList(TypeOfExemptedSource))
-                    {
                         ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_TYPE_EXEMPTED_SOURCE, value);
-                    }
                 }
                 else if ("3.0".Equals(version.Version))
                 {
@@ -839,9 +709,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         {
             Util.Util.RequireDDMSValue(CLASSIFICATION_NAME, Classification);
             if (OwnerProducers.Count == 0)
-            {
                 throw new InvalidDDMSException("At least 1 ownerProducer must be set.");
-            }
         }
 
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
@@ -849,56 +717,35 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         {
             string localPrefix = Util.Util.GetNonNullString(prefix);
             var text = new StringBuilder();
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + ATOMIC_ENERGY_MARKINGS_NAME,
-                Util.Util.GetXsList(AtomicEnergyMarkings)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + ATOMIC_ENERGY_MARKINGS_NAME, Util.Util.GetXsList(AtomicEnergyMarkings)));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFICATION_NAME, Classification));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFICATION_REASON_NAME,
-                ClassificationReason));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFICATION_REASON_NAME, ClassificationReason));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFIED_BY_NAME, ClassifiedBy));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + COMPILATION_REASON_NAME,
-                CompilationReason));
-            if (DateOfExemptedSource != null)
-            {
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DATE_OF_EXEMPTED_SOURCE_NAME,
-                    DateOfExemptedSource.ToString("o")));
-            }
-            if (DeclassDate != null)
-            {
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_DATE_NAME,
-                    DeclassDate.ToString("o")));
-            }
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + COMPILATION_REASON_NAME, CompilationReason));
+            if (DateOfExemptedSource.HasValue)
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DATE_OF_EXEMPTED_SOURCE_NAME, DateOfExemptedSource.GetValueOrDefault().ToString("o")));
+
+            if (DeclassDate.HasValue)
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_DATE_NAME, DeclassDate.GetValueOrDefault().ToString("o")));
+
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_EVENT_NAME, DeclassEvent));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_EXCEPTION_NAME, DeclassException));
             if (DeclassManualReview != null)
-            {
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_MANUAL_REVIEW_NAME,
-                    DeclassManualReview.ToString()));
-            }
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DERIVATIVELY_CLASSIFIED_BY_NAME,
-                DerivativelyClassifiedBy));
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_MANUAL_REVIEW_NAME, DeclassManualReview.ToString()));
+
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DERIVATIVELY_CLASSIFIED_BY_NAME, DerivativelyClassifiedBy));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DERIVED_FROM_NAME, DerivedFrom));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DISPLAY_ONLY_TO_NAME,
-                Util.Util.GetXsList(DisplayOnlyTo)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DISSEMINATION_CONTROLS_NAME,
-                Util.Util.GetXsList(DisseminationControls)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + FGI_SOURCE_OPEN_NAME,
-                Util.Util.GetXsList(FGIsourceOpen)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + FGI_SOURCE_PROTECTED_NAME,
-                Util.Util.GetXsList(FGIsourceProtected)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NON_IC_MARKINGS_NAME,
-                Util.Util.GetXsList(NonICmarkings)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NON_US_CONTROLS_NAME,
-                Util.Util.GetXsList(NonUSControls)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + OWNER_PRODUCER_NAME,
-                Util.Util.GetXsList(OwnerProducers)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + RELEASABLE_TO_NAME,
-                Util.Util.GetXsList(ReleasableTo)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + SAR_IDENTIFIER_NAME,
-                Util.Util.GetXsList(SARIdentifier)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + SCI_CONTROLS_NAME,
-                Util.Util.GetXsList(SCIcontrols)));
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + TYPE_OF_EXEMPTED_SOURCE_NAME,
-                TypeOfExemptedSource));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DISPLAY_ONLY_TO_NAME, Util.Util.GetXsList(DisplayOnlyTo)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DISSEMINATION_CONTROLS_NAME, Util.Util.GetXsList(DisseminationControls)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + FGI_SOURCE_OPEN_NAME, Util.Util.GetXsList(FGIsourceOpen)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + FGI_SOURCE_PROTECTED_NAME, Util.Util.GetXsList(FGIsourceProtected)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NON_IC_MARKINGS_NAME, Util.Util.GetXsList(NonICmarkings)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NON_US_CONTROLS_NAME, Util.Util.GetXsList(NonUSControls)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + OWNER_PRODUCER_NAME, Util.Util.GetXsList(OwnerProducers)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + RELEASABLE_TO_NAME, Util.Util.GetXsList(ReleasableTo)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + SAR_IDENTIFIER_NAME, Util.Util.GetXsList(SARIdentifier)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + SCI_CONTROLS_NAME, Util.Util.GetXsList(SCIcontrols)));
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + TYPE_OF_EXEMPTED_SOURCE_NAME, TypeOfExemptedSource));
             return (text.ToString());
         }
 
@@ -906,19 +753,22 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         public override bool Equals(object obj)
         {
             if (!(obj is SecurityAttributes))
-            {
                 return (false);
-            }
-            var test = (SecurityAttributes) obj;
+            
+            var test = (SecurityAttributes)obj;
             return (Util.Util.ListEquals(AtomicEnergyMarkings, test.AtomicEnergyMarkings) &&
-                    Classification.Equals(test.Classification) && ClassificationReason.Equals(test.ClassificationReason) &&
-                    ClassifiedBy.Equals(test.ClassifiedBy) && CompilationReason.Equals(test.CompilationReason) &&
+                    Classification.Equals(test.Classification) && 
+                    ClassificationReason.Equals(test.ClassificationReason) &&
+                    ClassifiedBy.Equals(test.ClassifiedBy) && 
+                    CompilationReason.Equals(test.CompilationReason) &&
                     Util.Util.NullEquals(DateOfExemptedSource, test.DateOfExemptedSource) &&
-                    Util.Util.NullEquals(DeclassDate, test.DeclassDate) && DeclassEvent.Equals(test.DeclassEvent) &&
+                    Util.Util.NullEquals(DeclassDate, test.DeclassDate) && 
+                    DeclassEvent.Equals(test.DeclassEvent) &&
                     DeclassException.Equals(test.DeclassException) &&
                     Util.Util.NullEquals(DeclassManualReview, test.DeclassManualReview) &&
                     DerivativelyClassifiedBy.Equals(test.DerivativelyClassifiedBy) &&
-                    DerivedFrom.Equals(test.DerivedFrom) && Util.Util.ListEquals(DisplayOnlyTo, test.DisplayOnlyTo) &&
+                    DerivedFrom.Equals(test.DerivedFrom) && 
+                    Util.Util.ListEquals(DisplayOnlyTo, test.DisplayOnlyTo) &&
                     Util.Util.ListEquals(DisseminationControls, test.DisseminationControls) &&
                     Util.Util.ListEquals(FGIsourceOpen, test.FGIsourceOpen) &&
                     Util.Util.ListEquals(FGIsourceProtected, test.FGIsourceProtected) &&
@@ -935,38 +785,35 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         public override int GetHashCode()
         {
             int result = 0;
-            result = 7*result + AtomicEnergyMarkings.GetHashCode();
-            result = 7*result + Classification.GetHashCode();
-            result = 7*result + ClassificationReason.GetHashCode();
-            result = 7*result + ClassifiedBy.GetHashCode();
-            result = 7*result + CompilationReason.GetHashCode();
+            result = 7 * result + AtomicEnergyMarkings.GetHashCode();
+            result = 7 * result + Classification.GetHashCode();
+            result = 7 * result + ClassificationReason.GetHashCode();
+            result = 7 * result + ClassifiedBy.GetHashCode();
+            result = 7 * result + CompilationReason.GetHashCode();
             if (DateOfExemptedSource != null)
-            {
-                result = 7*result + DateOfExemptedSource.GetHashCode();
-            }
+                result = 7 * result + DateOfExemptedSource.GetHashCode();
+            
             if (DeclassDate != null)
-            {
-                result = 7*result + DeclassDate.GetHashCode();
-            }
-            result = 7*result + DeclassEvent.GetHashCode();
-            result = 7*result + DeclassException.GetHashCode();
+                result = 7 * result + DeclassDate.GetHashCode();
+            
+            result = 7 * result + DeclassEvent.GetHashCode();
+            result = 7 * result + DeclassException.GetHashCode();
             if (DeclassManualReview != null)
-            {
-                result = 7*result + DeclassManualReview.GetHashCode();
-            }
-            result = 7*result + DerivativelyClassifiedBy.GetHashCode();
-            result = 7*result + DerivedFrom.GetHashCode();
-            result = 7*result + DisplayOnlyTo.GetHashCode();
-            result = 7*result + DisseminationControls.GetHashCode();
-            result = 7*result + FGIsourceOpen.GetHashCode();
-            result = 7*result + FGIsourceProtected.GetHashCode();
-            result = 7*result + NonICmarkings.GetHashCode();
-            result = 7*result + NonUSControls.GetHashCode();
-            result = 7*result + OwnerProducers.GetHashCode();
-            result = 7*result + ReleasableTo.GetHashCode();
-            result = 7*result + SARIdentifier.GetHashCode();
-            result = 7*result + SCIcontrols.GetHashCode();
-            result = 7*result + TypeOfExemptedSource.GetHashCode();
+                result = 7 * result + DeclassManualReview.GetHashCode();
+            
+            result = 7 * result + DerivativelyClassifiedBy.GetHashCode();
+            result = 7 * result + DerivedFrom.GetHashCode();
+            result = 7 * result + DisplayOnlyTo.GetHashCode();
+            result = 7 * result + DisseminationControls.GetHashCode();
+            result = 7 * result + FGIsourceOpen.GetHashCode();
+            result = 7 * result + FGIsourceProtected.GetHashCode();
+            result = 7 * result + NonICmarkings.GetHashCode();
+            result = 7 * result + NonUSControls.GetHashCode();
+            result = 7 * result + OwnerProducers.GetHashCode();
+            result = 7 * result + ReleasableTo.GetHashCode();
+            result = 7 * result + SARIdentifier.GetHashCode();
+            result = 7 * result + SCIcontrols.GetHashCode();
+            result = 7 * result + TypeOfExemptedSource.GetHashCode();
             return (result);
         }
 
@@ -978,49 +825,40 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         ///         null.
         ///     </para>
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder
         {
-            internal const long SerialVersionUID = 279072341662308051L;
-
-            internal bool? _declassManualReview = null;
-            internal IDictionary<string, List<string>> _listAttributes = new Dictionary<string, List<string>>();
-            internal IDictionary<string, string> _stringAttributes = new Dictionary<string, string>();
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                ListAttributes = new Dictionary<string, List<string>>();
+                StringAttributes = new Dictionary<string, string>();
             }
 
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
-            public Builder(SecurityAttributes attributes)
+            public Builder(SecurityAttributes attributes) : this()
             {
                 AtomicEnergyMarkings = attributes.AtomicEnergyMarkings;
                 Classification = attributes.Classification;
                 ClassificationReason = attributes.ClassificationReason;
                 ClassifiedBy = attributes.ClassifiedBy;
                 CompilationReason = attributes.CompilationReason;
-                if (attributes.DateOfExemptedSource != null)
-                {
-                    DateOfExemptedSource = attributes.DateOfExemptedSource.ToString("o");
-                }
-                if (attributes.DeclassDate != null)
-                {
-                    DeclassDate = attributes.DeclassDate.ToString("o");
-                }
+                if (attributes.DateOfExemptedSource.HasValue)
+                    DateOfExemptedSource = attributes.DateOfExemptedSource.GetValueOrDefault().ToString("o");
+                
+                if (attributes.DeclassDate.HasValue)
+                    DeclassDate = attributes.DeclassDate.GetValueOrDefault().ToString("o");
+                
                 DeclassEvent = attributes.DeclassEvent;
                 DeclassException = attributes.DeclassException;
                 if (attributes.DeclassManualReview != null)
-                {
                     DeclassManualReview = attributes.DeclassManualReview;
-                }
+                
                 DerivativelyClassifiedBy = attributes.DerivativelyClassifiedBy;
                 DerivedFrom = attributes.DerivedFrom;
                 DisplayOnlyTo = attributes.DisplayOnlyTo;
@@ -1046,13 +884,11 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
                 {
                     bool isEmpty = true;
                     foreach (var value in StringAttributes.Values)
-                    {
                         isEmpty = isEmpty && String.IsNullOrEmpty(value);
-                    }
+                    
                     foreach (var list in ListAttributes.Values)
-                    {
                         isEmpty = isEmpty && Util.Util.ContainsOnlyEmptyValues(list);
-                    }
+                    
                     return (isEmpty && DeclassManualReview == null);
                 }
             }
@@ -1150,11 +986,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             /// <summary>
             ///     Builder accessor for the declassManualReview attribute
             /// </summary>
-            public virtual bool? DeclassManualReview
-            {
-                get { return _declassManualReview; }
-                set { _declassManualReview = value; }
-            }
+            public virtual bool? DeclassManualReview { get; set; }
 
 
             /// <summary>
@@ -1290,18 +1122,12 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             /// <summary>
             ///     Accessor for the map of attribute names to list values
             /// </summary>
-            internal virtual IDictionary<string, List<string>> ListAttributes
-            {
-                get { return (_listAttributes); }
-            }
+            internal virtual IDictionary<string, List<string>> ListAttributes { get; private set; }
 
             /// <summary>
             ///     Accessor for the map of attribute names to string values
             /// </summary>
-            internal virtual IDictionary<string, string> StringAttributes
-            {
-                get { return (_stringAttributes); }
-            }
+            internal virtual IDictionary<string, string> StringAttributes { get; private set; }
 
             /// <summary>
             ///     Finalizes the data gathered for this builder instance. Will always return an empty instance instead of a null
@@ -1320,9 +1146,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
                 otherAttributes[DECLASS_EVENT_NAME] = DeclassEvent;
                 otherAttributes[DECLASS_EXCEPTION_NAME] = DeclassException;
                 if (DeclassManualReview != null)
-                {
                     otherAttributes[DECLASS_MANUAL_REVIEW_NAME] = DeclassManualReview.ToString();
-                }
+                
                 otherAttributes[DERIVATIVELY_CLASSIFIED_BY_NAME] = DerivativelyClassifiedBy;
                 otherAttributes[DERIVED_FROM_NAME] = DerivedFrom;
                 otherAttributes[DISPLAY_ONLY_TO_NAME] = Util.Util.GetXsList(DisplayOnlyTo);
@@ -1346,9 +1171,8 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
             internal virtual List<string> GetListAttribute(string key)
             {
                 if (ListAttributes.GetValueOrNull(key) == null)
-                {
                     ListAttributes[key] = new List<string>();
-                }
+                
                 return (ListAttributes.GetValueOrNull(key));
             }
 

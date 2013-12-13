@@ -10,34 +10,8 @@ using DDMSSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:person.
     ///     <table class="info">
@@ -89,8 +63,8 @@ namespace DDMSSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
+
     /// </summary>
     public sealed class Person : AbstractRoleEntity
     {
@@ -103,7 +77,8 @@ namespace DDMSSense.DDMS.ResourceElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Person(Element element) : base(element, true)
+        public Person(XElement element)
+            : base(element, true)
         {
         }
 
@@ -116,8 +91,8 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <param name="emails"> an ordered list of email addresses </param>
         /// <param name="userID"> optional unique identifier within an organization </param>
         /// <param name="affiliation"> organizational affiliation of the person </param>
-        public Person(List<string> names, string surname, List<string> phones, List<string> emails, string userID,
-            string affiliation) : this(names, surname, phones, emails, userID, affiliation, null)
+        public Person(List<string> names, string surname, List<string> phones, List<string> emails, string userID, string affiliation)
+            : this(names, surname, phones, emails, userID, affiliation, null)
         {
         }
 
@@ -131,8 +106,7 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <param name="userID"> optional unique identifier within an organization </param>
         /// <param name="affiliation"> organizational affiliation of the person </param>
         /// <param name="extensions"> extensible attributes (optional) </param>
-        public Person(List<string> names, string surname, List<string> phones, List<string> emails, string userID,
-            string affiliation, ExtensibleAttributes extensions)
+        public Person(List<string> names, string surname, List<string> phones, List<string> emails, string userID, string affiliation, ExtensibleAttributes extensions)
             : base(GetName(DDMSVersion.GetCurrentVersion()), names, phones, emails, extensions, false)
         {
             try
@@ -183,35 +157,27 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <exception cref="InvalidDDMSException"> if the result is an invalid component </exception>
         private void AddExtraElements(int insertIndex, string surname, string userID, string affiliation)
         {
-            Element element = Element;
+            XElement element = Element;
             if (DDMSVersion.IsAtLeast("4.0.1"))
             {
                 element.AddFirst(Util.Util.BuildDDMSElement(SURNAME_NAME, surname), insertIndex);
                 if (!String.IsNullOrEmpty(userID))
-                {
                     element.Add(Util.Util.BuildDDMSElement(USERID_NAME, userID));
-                }
+
                 if (!String.IsNullOrEmpty(affiliation))
-                {
                     element.Add(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
-                }
             }
             else
             {
                 // 	Inserting in reverse order allow the same index to be reused. Later inserts will "push" the early ones
                 // 	forward.
                 if (!String.IsNullOrEmpty(affiliation))
-                {
-                    element.AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation),
-                        element.Nodes().ToList()[insertIndex]);
-                }
+                    element.AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation), element.Nodes().ToList()[insertIndex]);
+
                 if (!String.IsNullOrEmpty(userID))
-                {
-                    element.AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID),
-                        element.Nodes().ToList()[insertIndex]);
-                }
-                element.AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname),
-                    element.Nodes().ToList()[insertIndex]);
+                    element.AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID), element.Nodes().ToList()[insertIndex]);
+
+                element.AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname), element.Nodes().ToList()[insertIndex]);
             }
         }
 
@@ -260,14 +226,12 @@ namespace DDMSSense.DDMS.ResourceElements
         protected internal override void ValidateWarnings()
         {
             if (String.IsNullOrEmpty(UserID) && Element.Elements(XName.Get(USERID_NAME, Namespace)).Count() == 1)
-            {
                 AddWarning("A ddms:userID element was found with no value.");
-            }
+            
             if (String.IsNullOrEmpty(Affiliation) &&
                 Element.Elements(XName.Get(AFFILIATION_NAME, Namespace)).Count() == 1)
-            {
                 AddWarning("A ddms:affiliation element was found with no value.");
-            }
+            
             base.ValidateWarnings();
         }
 
@@ -286,10 +250,9 @@ namespace DDMSSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is Person))
-            {
                 return (false);
-            }
-            var test = (Person) obj;
+            
+            var test = (Person)obj;
             return (Surname.Equals(test.Surname) && UserID.Equals(test.UserID) && Affiliation.Equals(test.Affiliation));
         }
 
@@ -297,9 +260,9 @@ namespace DDMSSense.DDMS.ResourceElements
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + Surname.GetHashCode();
-            result = 7*result + UserID.GetHashCode();
-            result = 7*result + Affiliation.GetHashCode();
+            result = 7 * result + Surname.GetHashCode();
+            result = 7 * result + UserID.GetHashCode();
+            result = 7 * result + Affiliation.GetHashCode();
             return (result);
         }
 
@@ -317,16 +280,9 @@ namespace DDMSSense.DDMS.ResourceElements
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         public class Builder : AbstractRoleEntity.Builder
         {
-            internal const long SerialVersionUID = -2933889158864177338L;
-            internal string _affliation;
-            internal string _surname;
-            internal string _userID;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -337,7 +293,8 @@ namespace DDMSSense.DDMS.ResourceElements
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
-            public Builder(Person person) : base(person)
+            public Builder(Person person)
+                : base(person)
             {
                 Surname = person.Surname;
                 UserID = person.UserID;
@@ -360,31 +317,19 @@ namespace DDMSSense.DDMS.ResourceElements
             /// <summary>
             ///     Builder accessor for the surname
             /// </summary>
-            public virtual string Surname
-            {
-                get { return _surname; }
-                set { _surname = value; }
-            }
+            public virtual string Surname { get; set; }
 
 
             /// <summary>
             ///     Builder accessor for the userID
             /// </summary>
-            public virtual string UserID
-            {
-                get { return _userID; }
-                set { _userID = value; }
-            }
+            public virtual string UserID { get; set; }
 
 
             /// <summary>
             ///     Builder accessor for the affliation
             /// </summary>
-            public virtual string Affliation
-            {
-                get { return _affliation; }
-                set { _affliation = value; }
-            }
+            public virtual string Affliation { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public override IDDMSComponent Commit()

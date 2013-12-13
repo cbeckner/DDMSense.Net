@@ -556,7 +556,7 @@ namespace DDMSSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 2895705456552847432L;
+            
             internal BoundingBox.Builder _boundingBox;
             internal BoundingGeometry.Builder _boundingGeometry;
             internal GeographicIdentifier.Builder _geographicIdentifier;

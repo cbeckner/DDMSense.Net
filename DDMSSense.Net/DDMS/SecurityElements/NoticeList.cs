@@ -65,7 +65,7 @@ namespace DDMSSense.DDMS.SecurityElements
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class NoticeList : AbstractBaseComponent
     {
@@ -234,7 +234,7 @@ namespace DDMSSense.DDMS.SecurityElements
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7750664735441105296L;
+            
             internal List<Notice.Builder> _notices;
             internal SecurityAttributes.Builder _securityAttributes = null;
 

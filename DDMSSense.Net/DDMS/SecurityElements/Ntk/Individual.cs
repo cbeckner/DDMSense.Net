@@ -67,7 +67,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class Individual : AbstractAccessEntity
     {
@@ -217,7 +217,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ntk
         /// @since 2.0.0"></see>
         public class Builder : AbstractAccessEntity.Builder
         {
-            internal const long SerialVersionUID = 7851044806424206976L;
+            
             internal List<IndividualValue.Builder> _individualValues;
 
             /// <summary>

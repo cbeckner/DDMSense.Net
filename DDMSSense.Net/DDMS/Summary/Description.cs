@@ -170,7 +170,7 @@ namespace DDMSSense.DDMS.Summary
         /// @since 1.8.0"></see>
         public class Builder : AbstractSimpleString.Builder
         {
-            internal const long SerialVersionUID = 7750664735441105296L;
+            
 
             /// <summary>
             ///     Empty constructor

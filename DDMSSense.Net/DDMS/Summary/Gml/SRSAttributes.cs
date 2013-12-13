@@ -324,7 +324,7 @@ namespace DDMSSense.DDMS.Summary.Gml
         [Serializable]
         public class Builder
         {
-            internal const long SerialVersionUID = 6071979027185230870L;
+            
             internal List<string> _axisLabels;
             internal int? _srsDimension;
             internal string _srsName;

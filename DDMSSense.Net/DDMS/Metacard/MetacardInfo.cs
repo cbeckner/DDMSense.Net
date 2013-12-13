@@ -55,7 +55,7 @@ namespace DDMSSense.DDMS.Metacard
     ///         </tr>
     ///     </table>
 
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class MetacardInfo : AbstractBaseComponent
     {

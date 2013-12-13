@@ -24,7 +24,7 @@ namespace DDMSSense
     ///         before the component is used.
     ///     </para>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public abstract class AbstractRoleEntity : AbstractBaseComponent, IRoleEntity
     {

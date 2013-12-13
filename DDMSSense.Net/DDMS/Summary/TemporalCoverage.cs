@@ -606,7 +606,7 @@ namespace DDMSSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -3187482277963663663L;
+            
             internal ApproximableDate.Builder _approximableEnd;
             internal ApproximableDate.Builder _approximableStart;
             internal string _endString;
