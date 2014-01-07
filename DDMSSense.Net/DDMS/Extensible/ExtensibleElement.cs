@@ -3,11 +3,11 @@
 using System;
 using System.Xml;
 using System.Xml.Linq;
-using DDMSSense.Util;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense.DDMS.Extensible
+namespace DDMSense.DDMS.Extensible
 {
     /// <summary>
     ///     An immutable implementation of an element which might fulfill the xs:any space in the Extensible Layer.

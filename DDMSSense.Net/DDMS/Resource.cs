@@ -8,19 +8,19 @@ using System.Text;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-using DDMSSense.DDMS.Extensible;
-using DDMSSense.DDMS.FormatElements;
-using DDMSSense.DDMS.Metacard;
-using DDMSSense.DDMS.ResourceElements;
-using DDMSSense.DDMS.SecurityElements;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.DDMS.Summary;
-using DDMSSense.Util;
-using Type = DDMSSense.DDMS.ResourceElements.Type;
+using DDMSense.DDMS.Extensible;
+using DDMSense.DDMS.FormatElements;
+using DDMSense.DDMS.Metacard;
+using DDMSense.DDMS.ResourceElements;
+using DDMSense.DDMS.SecurityElements;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.DDMS.Summary;
+using DDMSense.Util;
+using Type = DDMSense.DDMS.ResourceElements.Type;
 
 #endregion
 
-namespace DDMSSense.DDMS
+namespace DDMSense.DDMS
 {
     /// <summary>
     ///     An immutable implementation of ddms:resource (the top-level element of a DDMS record).

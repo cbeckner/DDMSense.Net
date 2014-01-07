@@ -1,13 +1,13 @@
 #region usings
 
 using System.Collections.Generic;
-using DDMSSense.DDMS;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.Util;
+using DDMSense.DDMS;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense
+namespace DDMSense
 {
     /// <summary>
     ///     Top-level base class for attribute groups, such as <see cref="SecurityAttributes" />.

@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 #endregion
 
-namespace DDMSSense.Extensions
+namespace DDMSense.Extensions
 {
     internal static class StringHelperClass
     {

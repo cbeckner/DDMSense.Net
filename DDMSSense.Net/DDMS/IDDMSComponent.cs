@@ -2,11 +2,11 @@
 
 using System.Collections.Generic;
 using System.Xml.Linq;
-using DDMSSense.DDMS.SecurityElements.Ism;
+using DDMSense.DDMS.SecurityElements.Ism;
 
 #endregion
 
-namespace DDMSSense.DDMS
+namespace DDMSense.DDMS
 {
     /// <summary>
     ///     Interface for a single DDMS element.

@@ -10,15 +10,15 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Xsl;
-using DDMSSense.DDMS;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.DDMS.SecurityElements.Ntk;
-using DDMSSense.DDMS.Summary.Gml;
-using DDMSSense.Extensions;
+using DDMSense.DDMS;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.DDMS.SecurityElements.Ntk;
+using DDMSense.DDMS.Summary.Gml;
+using DDMSense.Extensions;
 
 #endregion
 
-namespace DDMSSense.Util
+namespace DDMSense.Util
 {
     /// <summary>
     ///     A collection of static utility methods.

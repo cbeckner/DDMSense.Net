@@ -1,11 +1,11 @@
 #region usings
 
 using System.Collections.Generic;
-using DDMSSense.DDMS.Extensible;
+using DDMSense.DDMS.Extensible;
 
 #endregion
 
-namespace DDMSSense.DDMS
+namespace DDMSense.DDMS
 {
     /// <summary>
     ///     Identifying interface for an entity element (person, organization, service, unknown) which may be used to fulfill

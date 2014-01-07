@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace DDMSSense.DDMS
+namespace DDMSense.DDMS
 {
     /// <summary>
     ///     Exception class for attempts to use a version of DDMS which is not supported by this library.

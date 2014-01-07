@@ -1,13 +1,13 @@
 #region usings
 
 using System.Collections.Generic;
-using DDMSSense.DDMS;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.Extensions;
+using DDMSense.DDMS;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Extensions;
 
 #endregion
 
-namespace DDMSSense.Util
+namespace DDMSense.Util
 {
     /// <summary>
     ///     Manages the supported versions of DDMS.
@@ -18,7 +18,7 @@ namespace DDMSSense.Util
     ///         from
     ///         scratch can then call <code>DDMSVersion.getCurrentVersion()</code> to access various details such as schema
     ///         locations and namespace URIs. If no currentVersion has been set, a default will be used, which maps to
-    ///         <code>DDMSSense.DDMS.defaultVersion</code> in the properties file. This defaults to 4.1 right now.
+    ///         <code>DDMSense.DDMS.defaultVersion</code> in the properties file. This defaults to 4.1 right now.
     ///     </para>
     ///     <para>
     ///         The ddmsence.properties file has a property, <code>ddms.supportedVersions</code> which can be a comma-separated

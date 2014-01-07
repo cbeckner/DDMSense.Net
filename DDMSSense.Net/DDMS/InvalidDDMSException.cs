@@ -4,7 +4,7 @@ using System;
 
 #endregion
 
-namespace DDMSSense.DDMS
+namespace DDMSense.DDMS
 {
     /// <summary>
     ///     Exception class for attempts to generate invalid DDMS components.

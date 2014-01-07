@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using DDMSSense.DDMS;
-using DDMSSense.DDMS.Extensible;
+using DDMSense.DDMS;
+using DDMSense.DDMS.Extensible;
 
 #endregion
 
-namespace DDMSSense
+namespace DDMSense
 {
     /// <summary>
     ///     Base class for entities which fulfill some role, such as ddms:person and ddms:organization.

@@ -4,16 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
-using DDMSSense.DDMS.ResourceElements;
-using DDMSSense.DDMS.SecurityElements;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.DDMS.SecurityElements.Ntk;
-using DDMSSense.DDMS.Summary;
-using DDMSSense.Util;
+using DDMSense.DDMS.ResourceElements;
+using DDMSense.DDMS.SecurityElements;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.DDMS.SecurityElements.Ntk;
+using DDMSense.DDMS.Summary;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense.DDMS.Metacard
+namespace DDMSense.DDMS.Metacard
 {
     using System.Linq;
 

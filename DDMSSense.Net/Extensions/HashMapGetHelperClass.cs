@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace DDMSSense.Extensions
+namespace DDMSense.Extensions
 {
     internal static class HashMapGetHelperClass
     {

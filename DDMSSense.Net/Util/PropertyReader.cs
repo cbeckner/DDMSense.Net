@@ -7,13 +7,13 @@ using System.Linq;
 
 #endregion
 
-namespace DDMSSense.Util
+namespace DDMSense.Util
 {
     /// <summary>
     ///     Utility class for dealing with the property file.
     ///     <para>
     ///         Properties in DDMSence are found in the <code>ddmsence.properties</code> file. All properties are prefixed with
-    ///         "DDMSSense.", so <code>getProperty</code> calls should be performed with just the property suffix.
+    ///         "DDMSense.", so <code>getProperty</code> calls should be performed with just the property suffix.
     ///     </para>
     ///     <para>
     ///         The Property Reader supports several custom properties, which can be specified at runtime. The complete list of
@@ -69,7 +69,7 @@ namespace DDMSSense.Util
         /// <summary>
         ///     Locates a property and returns it. Assumes that the property is required.
         /// </summary>
-        /// <param name="name">		the simple name of the property, without "DDMSSense." </param>
+        /// <param name="name">		the simple name of the property, without "DDMSense." </param>
         /// <returns> the property specified </returns>
         /// <exception cref="ArgumentException"> if the property does not exist. </exception>
         public static string GetProperty(string name)
@@ -84,7 +84,7 @@ namespace DDMSSense.Util
         /// <summary>
         ///     Attempts to set one of the properties defined as a configurable property.
         /// </summary>
-        /// <param name="name"> the key of the property, without the "DDMSSense." prefix </param>
+        /// <param name="name"> the key of the property, without the "DDMSense." prefix </param>
         /// <param name="value"> the new value of the property </param>
         /// <exception cref="ArgumentException"> if the property is not a valid configurable property. </exception>
         public static void SetProperty(string name, string value)
@@ -98,7 +98,7 @@ namespace DDMSSense.Util
         /// <summary>
         ///     Locates a list property and returns it as a List
         /// </summary>
-        /// <param name="name">		the simple name of the property, without "DDMSSense." </param>
+        /// <param name="name">		the simple name of the property, without "DDMSense." </param>
         /// <returns> the property specified </returns>
         /// <exception cref="ArgumentException"> if the property does not exist </exception>
         public static List<string> GetListProperty(string name)

@@ -1,4 +1,4 @@
-namespace DDMSSense.DDMS
+namespace DDMSense.DDMS
 {
     /// <summary>
     ///     Identifying interface for a mutable Builder of components

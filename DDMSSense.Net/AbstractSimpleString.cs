@@ -2,13 +2,13 @@
 
 using System;
 using System.Xml.Linq;
-using DDMSSense.DDMS;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.Util;
+using DDMSense.DDMS;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense
+namespace DDMSense
 {
     /// <summary>
     ///     Base class for DDMS elements which consist of simple child text, possibly decorated with attributes, such as

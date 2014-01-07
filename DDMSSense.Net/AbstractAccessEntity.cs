@@ -3,14 +3,14 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using DDMSSense.DDMS;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.DDMS.SecurityElements.Ntk;
-using DDMSSense.Util;
+using DDMSense.DDMS;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.DDMS.SecurityElements.Ntk;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense
+namespace DDMSense
 {
     #region usings
 

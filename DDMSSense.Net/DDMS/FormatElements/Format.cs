@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using DDMSSense.Extensions;
-using DDMSSense.Util;
+using DDMSense.Extensions;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense.DDMS.FormatElements
+namespace DDMSense.DDMS.FormatElements
 {
     /// <summary>
     ///     An immutable implementation of ddms:format.

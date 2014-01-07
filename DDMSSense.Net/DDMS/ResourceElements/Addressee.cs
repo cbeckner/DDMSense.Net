@@ -1,12 +1,12 @@
 #region usings
 
 using System.Xml.Linq;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.Util;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense.DDMS.ResourceElements
+namespace DDMSense.DDMS.ResourceElements
 {
     #region usings
 

@@ -4,7 +4,7 @@
 
 #endregion
 
-namespace DDMSSense.Extensions
+namespace DDMSense.Extensions
 {
     #region usings
 

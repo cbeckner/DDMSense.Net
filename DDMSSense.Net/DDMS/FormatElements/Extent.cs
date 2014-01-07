@@ -3,11 +3,11 @@
 using System;
 using System.Text;
 using System.Xml.Linq;
-using DDMSSense.Util;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense.DDMS.FormatElements
+namespace DDMSense.DDMS.FormatElements
 {
     /// <summary>
     ///     An immutable implementation of ddms:extent.

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using DDMSSense.DDMS;
-using DDMSSense.DDMS.ResourceElements;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.Util;
+using DDMSense.DDMS;
+using DDMSense.DDMS.ResourceElements;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense
+namespace DDMSense
 {
     /// <summary>
     ///     Base class for DDMS producer elements, such as ddms:creator and ddms:contributor.

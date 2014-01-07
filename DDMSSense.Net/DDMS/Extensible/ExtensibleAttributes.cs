@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.DDMS.Summary;
-using DDMSSense.Util;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.DDMS.Summary;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense.DDMS.Extensible
+namespace DDMSense.DDMS.Extensible
 {
     using System.Linq;
     using System.Runtime.InteropServices;
@@ -19,12 +19,12 @@ namespace DDMSSense.DDMS.Extensible
     /// <summary>
     ///     Attribute group representing the xs:anyAttribute tag which appears on various DDMS components.
     ///     <para>
-    ///         Starting in DDMS 3.0, this attribute group can decorate <see cref="DDMSSense.DDMS.Resource.Organization" />,
-    ///         <see cref="DDMSSense.DDMS.Resource.Person" />, <see cref="DDMSSense.DDMS.Resource.Service" />,
-    ///         <see cref="DDMSSense.DDMS.Resource.Unknown" />, <see cref="Keyword" />, <see cref="Category" />, or the
+    ///         Starting in DDMS 3.0, this attribute group can decorate <see cref="DDMSense.DDMS.Resource.Organization" />,
+    ///         <see cref="DDMSense.DDMS.Resource.Person" />, <see cref="DDMSense.DDMS.Resource.Service" />,
+    ///         <see cref="DDMSense.DDMS.Resource.Unknown" />, <see cref="Keyword" />, <see cref="Category" />, or the
     ///         <see cref="Resource" /> itself.
-    ///         In DDMS 2.0, this attribute group can only decorate <see cref="DDMSSense.DDMS.Resource.Organization" />,
-    ///         <see cref="DDMSSense.DDMS.Resource.Person" />, <see cref="DDMSSense.DDMS.Resource.Service" />, or the
+    ///         In DDMS 2.0, this attribute group can only decorate <see cref="DDMSense.DDMS.Resource.Organization" />,
+    ///         <see cref="DDMSense.DDMS.Resource.Person" />, <see cref="DDMSense.DDMS.Resource.Service" />, or the
     ///         <see cref="Resource" />.
     ///     </para>
     ///     <para>

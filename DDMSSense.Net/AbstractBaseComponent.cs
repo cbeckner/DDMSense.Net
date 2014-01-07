@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
-using DDMSSense.DDMS;
-using DDMSSense.DDMS.Extensible;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.Extensions;
-using DDMSSense.Util;
+using DDMSense.DDMS;
+using DDMSense.DDMS.Extensible;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Extensions;
+using DDMSense.Util;
 
 #endregion
 
-namespace DDMSSense
+namespace DDMSense
 {
     /// <summary>
     ///     Top-level base class for all DDMS elements and attributes modeled as Java objects.

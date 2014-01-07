@@ -2,11 +2,11 @@
 
 using System;
 using System.Xml.Linq;
-using DDMSSense.DDMS;
+using DDMSense.DDMS;
 
 #endregion
 
-namespace DDMSSense
+namespace DDMSense
 {
     /// <summary>
     ///     Base class for DDMS elements which have a qualifier/value attribute, such as ddms:Identifier and ddms:source.

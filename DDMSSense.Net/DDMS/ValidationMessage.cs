@@ -4,7 +4,7 @@ using System.Text;
 
 #endregion
 
-namespace DDMSSense.DDMS
+namespace DDMSense.DDMS
 {
     /// <summary>
     ///     Simple class representing a validation message.

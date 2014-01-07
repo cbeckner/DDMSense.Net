@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 #endregion
 
-namespace DDMSSense.DDMS
+namespace DDMSense.DDMS
 {
     /// <summary>
     ///     Base class for DDMS elements which are an approximable date, such as ddms:dates/ddms:acquiredOn.

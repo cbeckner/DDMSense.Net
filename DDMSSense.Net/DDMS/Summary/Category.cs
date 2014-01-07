@@ -3,9 +3,9 @@
 using System;
 using System.Text;
 using System.Xml.Linq;
-using DDMSSense.DDMS.Extensible;
-using DDMSSense.DDMS.SecurityElements.Ism;
-using DDMSSense.Util;
+using DDMSense.DDMS.Extensible;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Util;
 
 #endregion
 
@@ -29,7 +29,7 @@ using DDMSSense.Util;
    home page is located at http://ddmsence.urizone.net/
 */
 
-namespace DDMSSense.DDMS.Summary
+namespace DDMSense.DDMS.Summary
 {
     #region usings
 

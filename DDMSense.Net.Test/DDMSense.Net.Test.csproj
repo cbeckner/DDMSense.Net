@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DDMSense.Net.Test</RootNamespace>
+    <AssemblyName>DDMSense.Net.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="AbstractBaseTestCase.cs" />
+    <Compile Include="BaseComponentTest.cs" />
+    <Compile Include="DDMS\ApproximableDateTest.cs" />
+    <Compile Include="DDMS\Extensible\ExtensibleAttributesTest.cs" />
+    <Compile Include="DDMS\Extensible\ExtensibleElementTest.cs" />
+    <Compile Include="DDMS\FormatElements\ExtentTest.cs" />
+    <Compile Include="DDMS\FormatElements\FormatTest.cs" />
+    <Compile Include="DDMS\Metacard\MetacardInfoTest.cs" />
+    <Compile Include="DDMS\ResourceTest.cs" />
+    <Compile Include="DDMS\ResourceElements\AddresseeTest.cs" />
+    <Compile Include="DDMS\ResourceElements\ApplicationSoftwareTest.cs" />
+    <Compile Include="DDMS\ResourceElements\ContributorTest.cs" />
+    <Compile Include="DDMS\ResourceElements\CreatorTest.cs" />
+    <Compile Include="DDMS\ResourceElements\DatesTest.cs" />
+    <Compile Include="DDMS\ResourceElements\DetailsTest.cs" />
+    <Compile Include="DDMS\ResourceElements\IdentifierTest.cs" />
+    <Compile Include="DDMS\ResourceElements\LanguageTest.cs" />
+    <Compile Include="DDMS\ResourceElements\OrganizationTest.cs" />
+    <Compile Include="DDMS\ResourceElements\PersonTest.cs" />
+    <Compile Include="DDMS\ResourceElements\PointOfContactTest.cs" />
+    <Compile Include="DDMS\ResourceElements\ProcessingInfoTest.cs" />
+    <Compile Include="DDMS\ResourceElements\PublisherTest.cs" />
+    <Compile Include="DDMS\ResourceElements\RecordKeeperTest.cs" />
+    <Compile Include="DDMS\ResourceElements\RecordsManagementInfoTest.cs" />
+    <Compile Include="DDMS\ResourceElements\RequesterInfoTest.cs" />
+    <Compile Include="DDMS\ResourceElements\ResourceManagementTest.cs" />
+    <Compile Include="DDMS\ResourceElements\RevisionRecallTest.cs" />
+    <Compile Include="DDMS\ResourceElements\RightsTest.cs" />
+    <Compile Include="DDMS\ResourceElements\ServiceTest.cs" />
+    <Compile Include="DDMS\ResourceElements\SourceTest.cs" />
+    <Compile Include="DDMS\ResourceElements\SubOrganizationTest.cs" />
+    <Compile Include="DDMS\ResourceElements\SubtitleTest.cs" />
+    <Compile Include="DDMS\ResourceElements\TaskIDTest.cs" />
+    <Compile Include="DDMS\ResourceElements\TaskingInfoTest.cs" />
+    <Compile Include="DDMS\ResourceElements\TitleTest.cs" />
+    <Compile Include="DDMS\ResourceElements\TypeTest.cs" />
+    <Compile Include="DDMS\ResourceElements\UnknownTest.cs" />
+    <Compile Include="DDMS\RoleEntityTest.cs" />
+    <Compile Include="DDMS\SchematronValidationTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\ISMVocabularyTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\NoticeAttributesTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\NoticeTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\NoticeTextTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ism\SecurityAttributesTest.cs" />
+    <Compile Include="DDMS\SecurityElements\NoticeListTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\AccessTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\GroupTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\GroupValueTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\IndividualTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\IndividualValueTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\ProfileListTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\ProfileTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\ProfileValueTest.cs" />
+    <Compile Include="DDMS\SecurityElements\Ntk\SystemNameTest.cs" />
+    <Compile Include="DDMS\SecurityElements\SecurityTest.cs" />
+    <Compile Include="DDMS\Summary\BoundingBoxTest.cs" />
+    <Compile Include="DDMS\Summary\BoundingGeometryTest.cs" />
+    <Compile Include="DDMS\Summary\CategoryTest.cs" />
+    <Compile Include="DDMS\Summary\CountryCodeTest.cs" />
+    <Compile Include="DDMS\Summary\DescriptionTest.cs" />
+    <Compile Include="DDMS\Summary\FacilityIdentifierTest.cs" />
+    <Compile Include="DDMS\Summary\GeographicIdentifierTest.cs" />
+    <Compile Include="DDMS\Summary\GeospatialCoverageTest.cs" />
+    <Compile Include="DDMS\Summary\Gml\PointTest.cs" />
+    <Compile Include="DDMS\Summary\Gml\PolygonTest.cs" />
+    <Compile Include="DDMS\Summary\Gml\PositionTest.cs" />
+    <Compile Include="DDMS\Summary\Gml\SRSAttributesTest.cs" />
+    <Compile Include="DDMS\Summary\KeywordTest.cs" />
+    <Compile Include="DDMS\Summary\LinkTest.cs" />
+    <Compile Include="DDMS\Summary\NonStateActorTest.cs" />
+    <Compile Include="DDMS\Summary\PostalAddressTest.cs" />
+    <Compile Include="DDMS\Summary\ProductionMetricTest.cs" />
+    <Compile Include="DDMS\Summary\RelatedResourceTest.cs" />
+    <Compile Include="DDMS\Summary\SubDivisionCodeTest.cs" />
+    <Compile Include="DDMS\Summary\SubjectCoverageTest.cs" />
+    <Compile Include="DDMS\Summary\TemporalCoverageTest.cs" />
+    <Compile Include="DDMS\Summary\VerticalExtentTest.cs" />
+    <Compile Include="DDMS\Summary\VirtualCoverageTest.cs" />
+    <Compile Include="DDMS\Summary\Xlink\XLinkAttributesTest.cs" />
+    <Compile Include="DDMS\ValidationMessageTest.cs" />
+    <Compile Include="Util\DDMSReaderTest.cs" />
+    <Compile Include="Util\DDMSVersionTest.cs" />
+    <Compile Include="Util\LazyListTest.cs" />
+    <Compile Include="Util\PropertyReaderTest.cs" />
+    <Compile Include="Util\UtilTest.cs" />
+    <Compile Include="Extensions\HashMapGetHelperClass.cs" />
+    <Compile Include="Extensions\StringHelperClass.cs" />
+    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DDMSSense.Net\DDMSSense.Net.csproj">
+      <Project>{4754a927-98c9-4208-8f68-6b384d691685}</Project>
+      <Name>DDMSSense.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

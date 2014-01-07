@@ -7,11 +7,11 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using DDMSSense.DDMS;
+using DDMSense.DDMS;
 
 #endregion
 
-namespace DDMSSense.Util
+namespace DDMSense.Util
 {
     /// <summary>
     ///     Reader class which loads an XML file containing DDMS information and converts it into XOM elements.
