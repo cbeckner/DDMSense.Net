@@ -26,7 +26,14 @@ namespace DDMSSense.Util
     public static class Util
     {
         private const string DdmsDateHourMinPattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(Z|[\\-\\+][0-9]{2}:[0-9]{2})?";
-
+	
+    //    private static Set<QName> DATE_DATATYPES = new HashSet<QName>();
+    //    static {
+    //    DATE_DATATYPES.add(DatatypeConstants.DATE);
+    //    DATE_DATATYPES.add(DatatypeConstants.DATETIME);
+    //    DATE_DATATYPES.add(DatatypeConstants.GYEARMONTH);
+    //    DATE_DATATYPES.add(DatatypeConstants.GYEAR);
+    //    }
         private static readonly Dictionary<string, string> XmlSpecialChars = new Dictionary<string, string>();
         private static XslCompiledTransform _schematronAbstractTransform;
         private static XslCompiledTransform _schematronIncludeTransform;

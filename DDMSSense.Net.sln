@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDMSSense.Net", "DDMSSense.Net\DDMSSense.Net.csproj", "{4754A927-98C9-4208-8F68-6B384D691685}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDMSenseConsole", "..\..\Visual Studio 2013\Projects\DDMSenseConsole\DDMSenseConsole.csproj", "{8B0CE58B-BE17-4839-8C8A-3273CF79DEED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4754A927-98C9-4208-8F68-6B384D691685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4754A927-98C9-4208-8F68-6B384D691685}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4754A927-98C9-4208-8F68-6B384D691685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B0CE58B-BE17-4839-8C8A-3273CF79DEED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B0CE58B-BE17-4839-8C8A-3273CF79DEED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B0CE58B-BE17-4839-8C8A-3273CF79DEED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B0CE58B-BE17-4839-8C8A-3273CF79DEED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

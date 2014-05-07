@@ -260,8 +260,10 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         /// <param name="enumerationKey"> the key for the enumeration, which doubles as the filename. </param>
         private static void LoadEnumeration(string enumLocation, string enumerationKey)
         {
-            Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(enumLocation + enumerationKey);
-            XDocument doc = XDocument.Load(stream);
+            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), enumLocation.Substring(1, enumLocation.Length - 1));
+            path = Path.Combine(path.Replace("/", "\\"), enumerationKey);
+
+            XDocument doc = XDocument.Load(path);
             var tokens = new List<string>();
             var patterns = new List<string>();
             string cveNamespace = PropertyReader.GetProperty(DDMSVersion.Version + ".ism.cve.xmlNamespace");
@@ -300,7 +302,7 @@ namespace DDMSSense.DDMS.SecurityElements.Ism
         public static List<string> GetEnumerationTokens(string enumerationKey)
         {
             UpdateEnumLocation();
-            List<string> vocabulary = LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation)[enumerationKey];
+            List<string> vocabulary = LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation).GetValueOrNull(enumerationKey);
             if (vocabulary == null)
                 throw new ArgumentException("No controlled vocabulary could be found for this key: " + enumerationKey);
             

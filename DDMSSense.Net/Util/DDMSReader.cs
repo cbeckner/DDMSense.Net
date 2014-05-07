@@ -111,11 +111,15 @@ namespace DDMSSense.Util
         /// <exception cref="ArgumentException"> if the schema could not be found. </exception>
         private string GetLocalSchemaLocation(string schemaLocation)
         {
-            string xsd = ConfigurationManager.AppSettings[schemaLocation];
+            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), schemaLocation.Substring(1,schemaLocation.Length-1));
+
+            Uri xsd = new Uri(path);
+
+            //string xsd =  ConfigurationManager.AppSettings[schemaLocation];
             if (xsd == null)
                 throw new ArgumentException("Unable to load a local copy of the schema for validation.");
 
-            return xsd;
+            return xsd.AbsoluteUri;
         }
 
         /// <summary>
@@ -171,6 +175,8 @@ namespace DDMSSense.Util
         public virtual XElement GetElement(string xml)
         {
             Util.RequireValue("XML string", xml);
+
+            //var reader = new MemoryStream(
             return (GetElement(xml));
         }
 
