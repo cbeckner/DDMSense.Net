@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDMSenseConsole", "DDMSense
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDMSSense.NetTests", "DDMSSense.NetTests\DDMSSense.NetTests.csproj", "{803122C6-F454-4E3E-B736-3A9AA77A7BC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDMSense.Net.Test", "DDMSense.Net.Test\DDMSense.Net.Test.csproj", "{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,9 @@ Global
 		{803122C6-F454-4E3E-B736-3A9AA77A7BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{803122C6-F454-4E3E-B736-3A9AA77A7BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{803122C6-F454-4E3E-B736-3A9AA77A7BC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
