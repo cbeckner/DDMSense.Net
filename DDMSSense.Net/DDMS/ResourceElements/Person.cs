@@ -63,8 +63,8 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-
-
+    
+    
     /// </summary>
     public sealed class Person : AbstractRoleEntity
     {
@@ -166,7 +166,7 @@ namespace DDMSense.DDMS.ResourceElements
 
                 if (!String.IsNullOrEmpty(affiliation))
                     element.Add(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
-            }
+                }
             else
             {
                 // 	Inserting in reverse order allow the same index to be reused. Later inserts will "push" the early ones

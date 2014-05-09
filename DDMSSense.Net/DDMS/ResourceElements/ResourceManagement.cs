@@ -47,7 +47,7 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-
+    
 
     /// </summary>
     public sealed class ResourceManagement : AbstractBaseComponent
@@ -321,14 +321,14 @@ namespace DDMSense.DDMS.ResourceElements
                     var info = (TaskingInfo)builder.Commit();
                     if (info != null)
                         taskingInfos.Add(info);
-                }
+                    }
                 var processingInfos = new List<ProcessingInfo>();
                 foreach (var builder in ProcessingInfos)
                 {
                     var point = (ProcessingInfo)builder.Commit();
                     if (point != null)
                         processingInfos.Add(point);
-                }
+                    }
                 return (new ResourceManagement((RecordsManagementInfo)RecordsManagementInfo.Commit(), (RevisionRecall)RevisionRecall.Commit(), taskingInfos, processingInfos, SecurityAttributes.Commit()));
             }
 

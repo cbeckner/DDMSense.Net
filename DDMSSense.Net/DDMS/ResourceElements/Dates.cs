@@ -488,7 +488,7 @@ namespace DDMSense.DDMS.ResourceElements
         [Serializable]
         public class Builder : IBuilder
         {
-            
+
             /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -560,7 +560,7 @@ namespace DDMSense.DDMS.ResourceElements
                     var component = (ApproximableDate) builder.Commit();
                     if (component != null)
                         acquiredOns.Add(component);
-                }
+                    }
                 return (new Dates(acquiredOns, Created, Posted, ValidTil, InfoCutOff, ApprovedOn, ReceivedOn));
             }
 

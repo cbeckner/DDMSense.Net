@@ -324,14 +324,14 @@ namespace DDMSense.DDMS.ResourceElements
                     var component = (RequesterInfo)builder.Commit();
                     if (component != null)
                         requesterInfos.Add(component);
-                }
+                    }
                 var addressees = new List<Addressee>();
                 foreach (IBuilder builder in Addressees)
                 {
                     var component = (Addressee)builder.Commit();
                     if (component != null)
                         addressees.Add(component);
-                }
+                    }
                 return (new TaskingInfo(requesterInfos, addressees, (Description)Description.Commit(), (TaskID)TaskID.Commit(), SecurityAttributes.Commit()));
             }
 

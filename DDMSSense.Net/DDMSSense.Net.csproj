@@ -7,8 +7,8 @@
     <ProjectGuid>{4754A927-98C9-4208-8F68-6B384D691685}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DDMSSense</RootNamespace>
-    <AssemblyName>DDMSSense.Net</AssemblyName>
+    <RootNamespace>DDMSense</RootNamespace>
+    <AssemblyName>DDMSense.Net</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

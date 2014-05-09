@@ -83,9 +83,9 @@ namespace DDMSense.DDMS.ResourceElements
         protected internal override void Validate()
         {
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
-            Util.Util.RequireDDMSValue("qualifier attribute", Qualifier);
+            Util.Util.RequireDDMSValue("qualifier attribute", Value);
+            Util.Util.RequireDDMSValidUri(Value);
             Util.Util.RequireDDMSValue("value attribute", Value);
-            Util.Util.RequireDDMSValidUri(Qualifier);
             base.Validate();
         }
 

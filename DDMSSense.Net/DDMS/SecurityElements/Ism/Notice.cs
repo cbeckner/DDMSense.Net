@@ -9,7 +9,6 @@ using DDMSense.Util;
 
 #endregion
 
-
 namespace DDMSense.DDMS.SecurityElements.Ism
 {
     /// <summary>

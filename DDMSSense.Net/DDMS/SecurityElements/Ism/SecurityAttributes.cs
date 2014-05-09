@@ -9,9 +9,7 @@ using DDMSense.Util;
 
 #endregion
 
-
 namespace DDMSense.DDMS.SecurityElements.Ism
-
 {
     /// <summary>
     ///     Attribute group for the ISM markings used throughout DDMS.
@@ -224,38 +222,38 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             Initialize();
             string icNamespace = DDMSVersion.IsmNamespace;
             AtomicEnergyMarkings =
-                Util.Util.GetXsListAsList(element.Attribute(XName.Get(ATOMIC_ENERGY_MARKINGS_NAME, icNamespace)).Value);
-            Classification = element.Attribute(XName.Get(CLASSIFICATION_NAME, icNamespace)).Value;
-            ClassificationReason = element.Attribute(XName.Get(CLASSIFICATION_REASON_NAME, icNamespace)).Value;
-            ClassifiedBy = element.Attribute(XName.Get(CLASSIFIED_BY_NAME, icNamespace)).Value;
-            CompilationReason = element.Attribute(XName.Get(COMPILATION_REASON_NAME, icNamespace)).Value;
-            string dateOfExemptedSource = element.Attribute(XName.Get(DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace)).Value;
+                Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(ATOMIC_ENERGY_MARKINGS_NAME, icNamespace)));
+            Classification = (string) element.Attribute(XName.Get(CLASSIFICATION_NAME, icNamespace));
+            ClassificationReason = (string)element.Attribute(XName.Get(CLASSIFICATION_REASON_NAME, icNamespace));
+            ClassifiedBy = (string) element.Attribute(XName.Get(CLASSIFIED_BY_NAME, icNamespace));
+            CompilationReason = (string) element.Attribute(XName.Get(COMPILATION_REASON_NAME, icNamespace));
+            string dateOfExemptedSource = (string) element.Attribute(XName.Get(DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace));
             if (!String.IsNullOrEmpty(dateOfExemptedSource))
                 DateOfExemptedSource = DateTime.Parse(dateOfExemptedSource);
 
-            string declassDate = element.Attribute(XName.Get(DECLASS_DATE_NAME, icNamespace)).Value;
+            string declassDate = (string) element.Attribute(XName.Get(DECLASS_DATE_NAME, icNamespace));
             if (!String.IsNullOrEmpty(declassDate))
                 DeclassDate = DateTime.Parse(declassDate);
 
-            DeclassEvent = element.Attribute(XName.Get(DECLASS_EVENT_NAME, icNamespace)).Value;
-            DeclassException = element.Attribute(XName.Get(DECLASS_EXCEPTION_NAME, icNamespace)).Value;
-            string manualReview = element.Attribute(XName.Get(DECLASS_MANUAL_REVIEW_NAME, icNamespace)).Value;
+            DeclassEvent = (string) element.Attribute(XName.Get(DECLASS_EVENT_NAME, icNamespace));
+            DeclassException = (string) element.Attribute(XName.Get(DECLASS_EXCEPTION_NAME, icNamespace));
+            string manualReview = (string) element.Attribute(XName.Get(DECLASS_MANUAL_REVIEW_NAME, icNamespace));
             if (!String.IsNullOrEmpty(manualReview))
                 DeclassManualReview = Convert.ToBoolean(manualReview);
 
-            DerivativelyClassifiedBy = element.Attribute(XName.Get(DERIVATIVELY_CLASSIFIED_BY_NAME, icNamespace)).Value;
-            DerivedFrom = element.Attribute(XName.Get(DERIVED_FROM_NAME, icNamespace)).Value;
-            DisplayOnlyTo = Util.Util.GetXsListAsList(element.Attribute(XName.Get(DISPLAY_ONLY_TO_NAME, icNamespace)).Value);
-            DisseminationControls = Util.Util.GetXsListAsList(element.Attribute(XName.Get(DISSEMINATION_CONTROLS_NAME, icNamespace)).Value);
-            FGIsourceOpen = Util.Util.GetXsListAsList(element.Attribute(XName.Get(FGI_SOURCE_OPEN_NAME, icNamespace)).Value);
-            FGIsourceProtected = Util.Util.GetXsListAsList(element.Attribute(XName.Get(FGI_SOURCE_PROTECTED_NAME, icNamespace)).Value);
-            NonICmarkings = Util.Util.GetXsListAsList(element.Attribute(XName.Get(NON_IC_MARKINGS_NAME, icNamespace)).Value);
-            NonUSControls = Util.Util.GetXsListAsList(element.Attribute(XName.Get(NON_US_CONTROLS_NAME, icNamespace)).Value);
-            OwnerProducers = Util.Util.GetXsListAsList(element.Attribute(XName.Get(OWNER_PRODUCER_NAME, icNamespace)).Value);
-            ReleasableTo = Util.Util.GetXsListAsList(element.Attribute(XName.Get(RELEASABLE_TO_NAME, icNamespace)).Value);
-            SARIdentifier = Util.Util.GetXsListAsList(element.Attribute(XName.Get(SAR_IDENTIFIER_NAME, icNamespace)).Value);
-            SCIcontrols = Util.Util.GetXsListAsList(element.Attribute(XName.Get(SCI_CONTROLS_NAME, icNamespace)).Value);
-            TypeOfExemptedSource = element.Attribute(XName.Get(TYPE_OF_EXEMPTED_SOURCE_NAME, icNamespace)).Value;
+            DerivativelyClassifiedBy = (string) element.Attribute(XName.Get(DERIVATIVELY_CLASSIFIED_BY_NAME, icNamespace));
+            DerivedFrom = (string) element.Attribute(XName.Get(DERIVED_FROM_NAME, icNamespace));
+            DisplayOnlyTo = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(DISPLAY_ONLY_TO_NAME, icNamespace)));
+            DisseminationControls = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(DISSEMINATION_CONTROLS_NAME, icNamespace)));
+            FGIsourceOpen = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(FGI_SOURCE_OPEN_NAME, icNamespace)));
+            FGIsourceProtected = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(FGI_SOURCE_PROTECTED_NAME, icNamespace)));
+            NonICmarkings = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(NON_IC_MARKINGS_NAME, icNamespace)));
+            NonUSControls = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(NON_US_CONTROLS_NAME, icNamespace)));
+            OwnerProducers = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(OWNER_PRODUCER_NAME, icNamespace)));
+            ReleasableTo = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(RELEASABLE_TO_NAME, icNamespace)));
+            SARIdentifier = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(SAR_IDENTIFIER_NAME, icNamespace)));
+            SCIcontrols = Util.Util.GetXsListAsList((string) element.Attribute(XName.Get(SCI_CONTROLS_NAME, icNamespace)));
+            TypeOfExemptedSource = (string) element.Attribute(XName.Get(TYPE_OF_EXEMPTED_SOURCE_NAME, icNamespace));
             Validate();
         }
 

@@ -67,7 +67,7 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-
+    
 
     /// </summary>
     public sealed class RevisionRecall : AbstractBaseComponent
@@ -533,14 +533,14 @@ namespace DDMSense.DDMS.ResourceElements
                     var component = (Link)builder.Commit();
                     if (component != null)
                         links.Add(component);
-                }
+                    }
                 var details = new List<Details>();
                 foreach (IBuilder builder in Details)
                 {
                     var component = (Details)builder.Commit();
                     if (component != null)
                         details.Add(component);
-                }
+                    }
                 return (new RevisionRecall(Value, links, details, RevisionID, RevisionType, Network, OtherNetwork, XLinkAttributes.Commit(), SecurityAttributes.Commit()));
             }
 

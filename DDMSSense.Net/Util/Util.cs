@@ -15,6 +15,7 @@ using DDMSense.DDMS.SecurityElements.Ism;
 using DDMSense.DDMS.SecurityElements.Ntk;
 using DDMSense.DDMS.Summary.Gml;
 using DDMSense.Extensions;
+using System.Globalization;
 
 #endregion
 
@@ -27,6 +28,13 @@ namespace DDMSense.Util
     {
         private const string DdmsDateHourMinPattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(Z|[\\-\\+][0-9]{2}:[0-9]{2})?";
 
+	//    private static Set<QName> DATE_DATATYPES = new HashSet<QName>();
+	//    static {
+	//    DATE_DATATYPES.add(DatatypeConstants.DATE);
+	//    DATE_DATATYPES.add(DatatypeConstants.DATETIME);
+	//    DATE_DATATYPES.add(DatatypeConstants.GYEARMONTH);
+	//    DATE_DATATYPES.add(DatatypeConstants.GYEAR);
+	//    }
         private static readonly Dictionary<string, string> XmlSpecialChars = new Dictionary<string, string>();
         private static XslCompiledTransform _schematronAbstractTransform;
         private static XslCompiledTransform _schematronIncludeTransform;
@@ -297,7 +305,7 @@ namespace DDMSense.Util
         /// <returns> true if the list only has null or empty values </returns>
         public static bool ContainsOnlyEmptyValues(List<string> list)
         {
-            return list.Any(s => !String.IsNullOrEmpty(s));
+			return list.Any(s => String.IsNullOrEmpty(s));
         }
 
         /// <summary>
@@ -527,13 +535,34 @@ namespace DDMSense.Util
 
             if (version.IsAtLeast("4.1") && Regex.Matches(date, DdmsDateHourMinPattern).Count > 0)
                 return;
+			/*  YYYY
+				YYYY-MM
+				YYYY-MM-DD
+				YYYY-MM-DDThhTZD
+				YYYY-MM-DDThh:mmTZD
+				YYYY-MM-DDThh:mm.ssTZD
+				YYYY-MM-DDThh:mm:ss.sTZD
+				Where:
+				YYYY	0000 through current year
+				MM	01 through 12  (month)
+				DD	01 through 31  (day)
+				hh	00 through 24  (hour)
+				mm	00 through 59  (minute)
+				ss	00 through 60  (second)
+				.s	.0 through 999 (fractional second)
+				TZD  = time zone designator (Z or +hh:mm or -hh:mm)
 
+			 */
             bool isXsdType = false;
+			string[] validFormats = {"yyyy", "yyyy-mm", 
+				   "yyyy-mm-dd", "yyyy-mm-ddzzzhhK", 
+				   "yyyy-mm-ddzzzhh:mmK", "yyyy-mm-ddzzzhh:mm.ssK", 
+				   "yyyy-mm-ddzzzhh:mm:ss.fffK"};
             try
             {
-                DateTime calendar = DateTime.Parse(date);
-                //TODO: Fix Date Type
-                //isXsdType = DATE_DATATYPES.Contains(calendar.XMLSchemaType);
+				DateTime calendar;
+				isXsdType = DateTime.TryParseExact(date, validFormats, new CultureInfo("en-US"), DateTimeStyles.None, out calendar);
+				//TODO: Validate all date formats defined
             }
             catch (ArgumentException)
             {
@@ -541,7 +570,7 @@ namespace DDMSense.Util
             }
             if (!isXsdType)
             {
-                string message = "The date datatype must be one of " + DateDatatypes;
+				string message = "The date datatype must be one of " + string.Join(",",validFormats);
                 if (version.IsAtLeast("4.1"))
                     message += " or ddms:DateHourMinType";
                 throw new InvalidDDMSException(message);

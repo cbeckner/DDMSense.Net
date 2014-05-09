@@ -390,7 +390,11 @@ namespace DDMSense
         protected internal virtual string GetAttributeValue(string name, string namespaceURI)
         {
             Util.Util.RequireValue("name", name);
-            string attrValue = Element.Attribute(XName.Get(name, Util.Util.GetNonNullString(namespaceURI))).Value;
+            string attrValue = null;
+            
+            if (Element.Attribute(XName.Get(name, Util.Util.GetNonNullString(namespaceURI))) != null)
+                attrValue = Element.Attribute(XName.Get(name, Util.Util.GetNonNullString(namespaceURI))).Value;
+
             return (Util.Util.GetNonNullString(attrValue));
         }
 

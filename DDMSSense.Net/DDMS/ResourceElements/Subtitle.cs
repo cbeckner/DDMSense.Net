@@ -8,7 +8,7 @@ using DDMSense.Util;
 
 #endregion
 
-
+   
 namespace DDMSense.DDMS.ResourceElements
 {
     /// <summary>
