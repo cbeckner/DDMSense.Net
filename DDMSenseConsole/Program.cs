@@ -17,10 +17,7 @@ namespace DDMSenseConsole
         static void Main(string[] args)
         {
 
-            loadFile(new FileInfo(@"D:\Users\aaron.mcalpine.USA\Desktop\ddmsence-src-2.2.0\ddmsence-src-2.2.0\data\sample\4.1-ddmsenceExample.xml"));
-
-             
-
+            loadFile(new FileInfo(@"4.1-ddmsenceExample.xml"));
         }
 
         private static void loadFile(FileInfo file)
@@ -34,9 +31,6 @@ namespace DDMSenseConsole
             string xmlFormat = getResource().ToXML();
             string htmlFormat = getResource().ToHTML();
             string textFormat = getResource().ToText();
-
-
-
         }
 
         /**
