@@ -247,15 +247,15 @@ namespace DDMSense.DDMS
                 // Resource Set
                 IEnumerable<XElement> components = element.Elements(XName.Get(Identifier.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Identifiers.Add(new Identifier(component));
+                    Identifiers.Add(new Identifier(comp));
 
                 components = element.Elements(XName.Get(Title.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Titles.Add(new Title(component));
+                    Titles.Add(new Title(comp));
 
                 components = element.Elements(XName.Get(Subtitle.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Subtitles.Add(new Subtitle(component));
+                    Subtitles.Add(new Subtitle(comp));
 
                 component = GetChild(Description.GetName(version));
                 if (component != null)
@@ -263,7 +263,7 @@ namespace DDMSense.DDMS
 
                 components = element.Elements(XName.Get(Language.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Languages.Add(new Language(component));
+                    Languages.Add(new Language(comp));
 
                 component = GetChild(Dates.GetName(version));
                 if (component != null)
@@ -275,27 +275,27 @@ namespace DDMSense.DDMS
 
                 components = element.Elements(XName.Get(Source.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Sources.Add(new Source(component));
+                    Sources.Add(new Source(comp));
 
                 components = element.Elements(XName.Get(Type.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Types.Add(new Type(component));
+                    Types.Add(new Type(comp));
 
                 components = element.Elements(XName.Get(Creator.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Creators.Add(new Creator(component));
+                    Creators.Add(new Creator(comp));
 
                 components = element.Elements(XName.Get(Publisher.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Publishers.Add(new Publisher(component));
+                    Publishers.Add(new Publisher(comp));
 
                 components = element.Elements(XName.Get(Contributor.GetName(version), @namespace));
                 foreach (var comp in components)
-                    Contributors.Add(new Contributor(component));
+                    Contributors.Add(new Contributor(comp));
 
                 components = element.Elements(XName.Get(PointOfContact.GetName(version), @namespace));
                 foreach (var comp in components)
-                    PointOfContacts.Add(new PointOfContact(component));
+                    PointOfContacts.Add(new PointOfContact(comp));
 
                 // Format Set
                 component = GetChild(Format.GetName(version));
@@ -305,23 +305,23 @@ namespace DDMSense.DDMS
                 // Summary Set
                 components = element.Elements(XName.Get(SubjectCoverage.GetName(version), @namespace));
                 foreach (var comp in components)
-                    SubjectCoverages.Add(new SubjectCoverage(component));
+                    SubjectCoverages.Add(new SubjectCoverage(comp));
 
                 components = element.Elements(XName.Get(VirtualCoverage.GetName(version), @namespace));
                 foreach (var comp in components)
-                    VirtualCoverages.Add(new VirtualCoverage(component));
+                    VirtualCoverages.Add(new VirtualCoverage(comp));
 
                 components = element.Elements(XName.Get(TemporalCoverage.GetName(version), @namespace));
                 foreach (var comp in components)
-                    TemporalCoverages.Add(new TemporalCoverage(component));
+                    TemporalCoverages.Add(new TemporalCoverage(comp));
 
                 components = element.Elements(XName.Get(GeospatialCoverage.GetName(version), @namespace));
                 foreach (var comp in components)
-                    GeospatialCoverages_Renamed.Add(new GeospatialCoverage(component));
+                    GeospatialCoverages_Renamed.Add(new GeospatialCoverage(comp));
 
                 components = element.Elements(XName.Get(RelatedResource.GetName(version), @namespace));
                 foreach (var comp in components)
-                    LoadRelatedResource(component);
+                    LoadRelatedResource(comp);
 
                 // Resource Set again
                 component = GetChild(ResourceManagement.GetName(version));
@@ -334,13 +334,15 @@ namespace DDMSense.DDMS
                 {
                     Security = new Security(component);
 
+                    //TODO - Validate we should ignore the extension layer or handle it in some way
+
                     // Extensible Layer
 
                     // We use the security component to locate the extensible layer. If it is null, this resource is going
                     // to fail validation anyhow, so we skip the extensible layer.
-                    IEnumerable<XElement> allElements = element.Elements();
-                    foreach (var el in allElements)
-                        ExtensibleElements.Add(new ExtensibleElement(el));
+                    //IEnumerable<XElement> allElements = element.Elements();
+                    //foreach (var el in allElements)
+                       // ExtensibleElements.Add(new ExtensibleElement(el));
                 }
                 PopulatedOrderedList();
                 Validate();
@@ -768,7 +770,7 @@ namespace DDMSense.DDMS
         ///     Accessor for an ordered list of the components in this Resource. Components which are missing are not represented
         ///     in this list (no null entries).
         /// </summary>
-        public List<IDDMSComponent> TopLevelComponents { get; private set; }
+        public List<IDDMSComponent> TopLevelComponents { get {return _orderedList;}  }
 
         /// <see cref="AbstractBaseComponent#getNestedComponents()"></see>
         protected internal override List<IDDMSComponent> NestedComponents

@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DDMSSense.AbstractBaseComponent">
+    <Position X="46.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>CAICMAAABgCA4MAEgEqAIAQKAAACIMABAIAAAIAACB0=</HashCode>
+      <FileName>AbstractBaseComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DDMSSense.AbstractAccessEntity" Collapsed="true">
+    <Position X="0.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgCAAAAAgAAAAAAAAAAAAEAAAgAAAAAAAAA=</HashCode>
+      <FileName>AbstractAccessEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.AbstractNtkString" Collapsed="true">
+    <Position X="2.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAACAgAAAiAQAIAAAAAgAAMAAAAAgAAAAAAA=</HashCode>
+      <FileName>AbstractNtkString.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.AbstractProducerRole" Collapsed="true">
+    <Position X="5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAIAAAAgCAAAAAgAAAAAAAAAAQAMAAAAAIAAAAAAA=</HashCode>
+      <FileName>AbstractProducerRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.AbstractQualifierValue" Collapsed="true">
+    <Position X="7.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAiAQAAAAAAAAAAIAAACAgAAAAAAA=</HashCode>
+      <FileName>AbstractQualifierValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.AbstractRoleEntity" Collapsed="true">
+    <Position X="9.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>KAAAoAAAACCAQAAAgAAAAAAAAAAIAIAAAAAAIABAAAA=</HashCode>
+      <FileName>AbstractRoleEntity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DDMSSense.AbstractSimpleString" Collapsed="true">
+    <Position X="11.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAgAAAAAAAAAAAAMAAAAAgAAAAAAg=</HashCode>
+      <FileName>AbstractSimpleString.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.AbstractTaskingRole" Collapsed="true">
+    <Position X="14" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAIAAAAgCAAAAAgAAAAAAAAAAAAEAAAAAAEAAAAAg=</HashCode>
+      <FileName>AbstractTaskingRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ApproximableDate" Collapsed="true">
+    <Position X="16.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIgAAQCCgQAAAgAAAAAAggAQBAKAAmACACAAAAgA=</HashCode>
+      <FileName>DDMS\ApproximableDate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Extensible.ExtensibleElement" Collapsed="true">
+    <Position X="18.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAACAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>DDMS\Extensible\ExtensibleElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.FormatElements.Format" Collapsed="true">
+    <Position X="20.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAIAAAEgSIQAQCgAAAAAAAABACAIAAAAAEAAAEBAk=</HashCode>
+      <FileName>DDMS\FormatElements\Format.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Metacard.MetacardInfo" Collapsed="true">
+    <Position X="23" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QEAkJAAAAgCiwEEAoAAAgAAEAAgAAGAACAAAAAIChgg=</HashCode>
+      <FileName>DDMS\Metacard\MetacardInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Resource" Collapsed="true">
+    <Position X="25.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AkAEJKlAGgCiQEEE5BJAAgAEAIgQAcggAACFJAJCBRA=</HashCode>
+      <FileName>DDMS\Resource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ResourceElements.Dates" Collapsed="true">
+    <Position X="27.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAEMAAAAgCIQQAUwAAAAAAQAACAEJQAAAIgBAAAFoA=</HashCode>
+      <FileName>DDMS\ResourceElements\Dates.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ResourceElements.RecordKeeper" Collapsed="true">
+    <Position X="29.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAggCAAAAAgAAAAAABAAAAAIAAAAAAAAAAJAA=</HashCode>
+      <FileName>DDMS\ResourceElements\RecordKeeper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ResourceElements.RecordsManagementInfo" Collapsed="true">
+    <Position X="32" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAIAAAAiCAAAAAgAAAAAAAAAAAAoAAAAAAAAEABAA=</HashCode>
+      <FileName>DDMS\ResourceElements\RecordsManagementInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ResourceElements.ResourceManagement" Collapsed="true">
+    <Position X="34.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEIAAAAgCAAAQAgAAAAAAAAAgAAGAAAAAAAAAABAA=</HashCode>
+      <FileName>DDMS\ResourceElements\ResourceManagement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ResourceElements.RevisionRecall" Collapsed="true">
+    <Position X="36.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIgAQAhCJQCAAgEAAAAAAAAAAAMAASAAiQAQABgE=</HashCode>
+      <FileName>DDMS\ResourceElements\RevisionRecall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ResourceElements.Rights" Collapsed="true">
+    <Position X="38.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAoAABAICAAAAAgAACAAAAAAAQAIBAAAAAAAAABAA=</HashCode>
+      <FileName>DDMS\ResourceElements\Rights.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ResourceElements.TaskID" Collapsed="true">
+    <Position X="41" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIgAQIACIQAAAgEAAAAAAAAAAAIAAAAAgQAQABgE=</HashCode>
+      <FileName>DDMS\ResourceElements\TaskID.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.ResourceElements.TaskingInfo" Collapsed="true">
+    <Position X="43.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAgCgAAAAgAAACAAAAAgAAEAAAAAAAAIABAA=</HashCode>
+      <FileName>DDMS\ResourceElements\TaskingInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.SecurityElements.Ism.Notice" Collapsed="true">
+    <Position X="45.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAgCAQAAAgAIAAAAAAAAAAMAgAAAAAAAABAA=</HashCode>
+      <FileName>DDMS\SecurityElements\Ism\Notice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.SecurityElements.NoticeList" Collapsed="true">
+    <Position X="47.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAgCAAAAAgAAAQAEAAAAAAEAAAAAAAAAABAg=</HashCode>
+      <FileName>DDMS\SecurityElements\NoticeList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.SecurityElements.Ntk.Access" Collapsed="true">
+    <Position X="50" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAIEIAAiCAQAAAoAAAAIACEAAAAEAAAAAABAAABAg=</HashCode>
+      <FileName>DDMS\SecurityElements\Ntk\Access.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.SecurityElements.Ntk.ProfileList" Collapsed="true">
+    <Position X="52.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAgCAAgAAgAAAAAAAAAAAAEAAAAAAAAAABAg=</HashCode>
+      <FileName>DDMS\SecurityElements\Ntk\ProfileList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.SecurityElements.Security" Collapsed="true">
+    <Position X="54.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAIAAAAgCAAEAAgAAAAABAAABAAEAAAAIAIAAABgg=</HashCode>
+      <FileName>DDMS\SecurityElements\Security.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.BoundingBox" Collapsed="true">
+    <Position X="56.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CEEBIAAgAACAAAAAiAIBABAAIAAAAIAAAACAAAQABAA=</HashCode>
+      <FileName>DDMS\Summary\BoundingBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.BoundingGeometry" Collapsed="true">
+    <Position X="59" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAgCAgAAAgAAAAAAAAAAIAAABAAAAAAAABAA=</HashCode>
+      <FileName>DDMS\Summary\BoundingGeometry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.Category" Collapsed="true">
+    <Position X="61.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAIAAAEACAAAAAyAQgAAAAAAAAAMAEAAAAAABABAg=</HashCode>
+      <FileName>DDMS\Summary\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.FacilityIdentifier" Collapsed="true">
+    <Position X="63.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAACAAAAAgAAAAABAABAAAIAAAQAAAAAABIA=</HashCode>
+      <FileName>DDMS\Summary\FacilityIdentifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.GeographicIdentifier" Collapsed="true">
+    <Position X="65.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CCAAqQAAAgCAAAAAgAAAAAAQAAgAAYAAQAAAAAEABIA=</HashCode>
+      <FileName>DDMS\Summary\GeographicIdentifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.GeospatialCoverage" Collapsed="true">
+    <Position X="68" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAMAIAAAAgCAAAgggAMAACAUACgAAMBAAAAAAQAQhAg=</HashCode>
+      <FileName>DDMS\Summary\GeospatialCoverage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.Gml.Point" Collapsed="true">
+    <Position X="70.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAgCAQAAggAAAAAAAAAAAAIAAAAAAggACBAA=</HashCode>
+      <FileName>DDMS\Summary\Gml\Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.Gml.Polygon" Collapsed="true">
+    <Position X="72.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAgCAQAAggAAIAAAAAAAAQIAAAAAAAgACDAg=</HashCode>
+      <FileName>DDMS\Summary\Gml\Polygon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.Gml.Position" Collapsed="true">
+    <Position X="74.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAIACIQAAAgAAAAAAAIAAAAIAAAAAAAgACBAA=</HashCode>
+      <FileName>DDMS\Summary\Gml\Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.Keyword" Collapsed="true">
+    <Position X="77" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAACAAAAAwAAAAAAAAAAAAMAAACAgAABABAg=</HashCode>
+      <FileName>DDMS\Summary\Keyword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.Link" Collapsed="true">
+    <Position X="79.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAQAACAQAAAgAAAAAABAAAAAMAAAAAAAAAABgg=</HashCode>
+      <FileName>DDMS\Summary\Link.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.PostalAddress" Collapsed="true">
+    <Position X="81.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAIAAAIgCAQACYoAAACACAAAgACIAQAAAABgECBAA=</HashCode>
+      <FileName>DDMS\Summary\PostalAddress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.ProductionMetric" Collapsed="true">
+    <Position X="83.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAQAACACAAAgIAAAAAAAAAAAMAAAAAAAAAABAg=</HashCode>
+      <FileName>DDMS\Summary\ProductionMetric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.SubjectCoverage" Collapsed="true">
+    <Position X="86" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAQAgCAQAAAgAAAgAAQAAAAEEAAAAAAQAIAhQg=</HashCode>
+      <FileName>DDMS\Summary\SubjectCoverage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.TemporalCoverage" Collapsed="true">
+    <Position X="88.25" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAIAICAAAiDCQABAgAAAAABAAgAAAMAgCEQAAAhBBAg=</HashCode>
+      <FileName>DDMS\Summary\TemporalCoverage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.VerticalExtent" Collapsed="true">
+    <Position X="90.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAIAAKAAAAggAAAAAAAAgACAIACEhhAAAAAhAA=</HashCode>
+      <FileName>DDMS\Summary\VerticalExtent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDMSSense.DDMS.Summary.VirtualCoverage" Collapsed="true">
+    <Position X="92.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAACAQAQAgAAAAABAAAAAAMACAAAEAAAABAg=</HashCode>
+      <FileName>DDMS\Summary\VirtualCoverage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

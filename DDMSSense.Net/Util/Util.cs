@@ -551,7 +551,6 @@ namespace DDMSense.Util
 				ss	00 through 60  (second)
 				.s	.0 through 999 (fractional second)
 				TZD  = time zone designator (Z or +hh:mm or -hh:mm)
-
 			 */
             bool isXsdType = false;
 			string[] validFormats = {"yyyy", "yyyy-mm", 

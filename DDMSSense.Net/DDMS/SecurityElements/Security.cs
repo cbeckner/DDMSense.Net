@@ -248,7 +248,7 @@ namespace DDMSense.DDMS.SecurityElements
                 {
                     throw new InvalidDDMSException("The excludeFromRollup attribute is required.");
                 }
-                if (!FIXED_ROLLUP.Equals(Convert.ToString(ExcludeFromRollup)))
+                if (!FIXED_ROLLUP.ToLower().Equals(Convert.ToString(ExcludeFromRollup).ToLower()))
                 {
                     throw new InvalidDDMSException("The excludeFromRollup attribute must have a fixed value of \"" +
                                                    FIXED_ROLLUP + "\".");
