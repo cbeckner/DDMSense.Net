@@ -257,7 +257,7 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 4325950371570699184L;
+            
             internal SecurityAttributes.Builder _securityAttributes;
             internal XLinkAttributes.Builder _xlinkAttributes;
 

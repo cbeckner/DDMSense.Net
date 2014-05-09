@@ -8,34 +8,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:type.
     ///     <para>
@@ -79,23 +53,19 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
     /// </summary>
     public sealed class Type : AbstractQualifierValue
     {
-        private SecurityAttributes _securityAttributes;
-
         /// <summary>
         ///     Constructor for creating a component from a XOM Element
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Type(Element element)
+        public Type(XElement element)
         {
             try
             {
-                _securityAttributes = new SecurityAttributes(element);
+                SecurityAttributes = new SecurityAttributes(element);
                 SetElement(element, true);
             }
             catch (InvalidDDMSException e)
@@ -121,13 +91,12 @@ namespace DDMSense.DDMS.ResourceElements
         {
             try
             {
-                Element element = Element;
+                XElement element = Element;
                 if (!String.IsNullOrEmpty(description))
-                {
                     element.Add(description);
-                }
-                _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-                _securityAttributes.AddTo(element);
+                
+                SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+                SecurityAttributes.AddTo(element);
                 SetElement(element, true);
             }
             catch (InvalidDDMSException e)
@@ -150,11 +119,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null, even if it has no values set.
         /// </summary>
-        public override SecurityAttributes SecurityAttributes
-        {
-            get { return (_securityAttributes); }
-            set { _securityAttributes = value; }
-        }
+        public override SecurityAttributes SecurityAttributes { get; set; }
 
         /// <summary>
         ///     Validates the component.
@@ -179,21 +144,14 @@ namespace DDMSense.DDMS.ResourceElements
         {
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (!String.IsNullOrEmpty(Value))
-            {
                 Util.Util.RequireDDMSValue("qualifier attribute", Qualifier);
-            }
 
             // Should be reviewed as additional versions of DDMS are supported.
             if (!DDMSVersion.IsAtLeast("4.0.1") && !String.IsNullOrEmpty(Description))
-            {
-                throw new InvalidDDMSException(
-                    "This component cannot contain description child text until DDMS 4.0.1 or later.");
-            }
+                throw new InvalidDDMSException(                    "This component cannot contain description child text until DDMS 4.0.1 or later.");
+            
             if (!DDMSVersion.IsAtLeast("4.0.1") && !SecurityAttributes.Empty)
-            {
-                throw new InvalidDDMSException(
-                    "Security attributes cannot be applied to this component until DDMS 4.0.1 or later.");
-            }
+                throw new InvalidDDMSException(                    "Security attributes cannot be applied to this component until DDMS 4.0.1 or later.");
 
             base.Validate();
         }
@@ -215,13 +173,11 @@ namespace DDMSense.DDMS.ResourceElements
         protected internal override void ValidateWarnings()
         {
             if (!String.IsNullOrEmpty(Qualifier) && String.IsNullOrEmpty(Value))
-            {
                 AddWarning("A qualifier has been set without an accompanying value attribute.");
-            }
+            
             if (String.IsNullOrEmpty(Qualifier) && String.IsNullOrEmpty(Value))
-            {
                 AddWarning("Neither a qualifier nor a value was set on this type.");
-            }
+            
             base.ValidateWarnings();
         }
 
@@ -241,9 +197,8 @@ namespace DDMSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is Type))
-            {
                 return (false);
-            }
+            
             var test = (Type) obj;
             return (Description.Equals(test.Description));
         }
@@ -270,15 +225,9 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         public class Builder : AbstractQualifierValue.Builder
         {
-            internal const long SerialVersionUID = 4388694130954618393L;
-            internal string _description;
-            internal SecurityAttributes.Builder _securityAttributes;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -304,28 +253,12 @@ namespace DDMSense.DDMS.ResourceElements
             /// <summary>
             ///     Builder accessor for the description
             /// </summary>
-            public virtual string Description
-            {
-                get { return _description; }
-                set { _description = value; }
-            }
-
+            public virtual string Description { get; set; }
 
             /// <summary>
             ///     Builder accessor for the Security Attributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public override IDDMSComponent Commit()

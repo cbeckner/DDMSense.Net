@@ -89,7 +89,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class Access : AbstractBaseComponent
     {
@@ -402,7 +402,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7851044806424206976L;
+            
             internal bool? _externalReference;
             internal List<Group.Builder> _groups;
             internal List<Individual.Builder> _individuals;

@@ -275,7 +275,7 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -2364407215439097065L;
+            
             internal double? _eastBL;
             internal double? _northBL;
             internal double? _southBL;

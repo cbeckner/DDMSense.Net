@@ -165,7 +165,7 @@ namespace DDMSense
         [Serializable]
         public abstract class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -1694935853087559491L;
+            
             internal Organization.Builder _organization;
             internal Person.Builder _person;
             internal SecurityAttributes.Builder _securityAttributes;

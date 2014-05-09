@@ -9,34 +9,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
- */
-
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:recordKeeper.
     ///     <table class="info">
@@ -66,19 +40,18 @@ namespace DDMSense.DDMS.ResourceElements
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public class RecordKeeper : AbstractBaseComponent
     {
         private const string RECORD_KEEPER_ID_NAME = "recordKeeperID";
-        private Organization _organization;
 
         /// <summary>
         ///     Constructor for creating a component from a XOM Element
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public RecordKeeper(Element element)
+        public RecordKeeper(XElement element)
         {
             try
             {
@@ -87,9 +60,7 @@ namespace DDMSense.DDMS.ResourceElements
                 {
                     var organizationElement = (XElement) element.FirstNode;
                     if (organizationElement != null)
-                    {
-                        _organization = new Organization(organizationElement);
-                    }
+                        Organization = new Organization(organizationElement);
                 }
                 SetElement(element, true);
             }
@@ -109,16 +80,14 @@ namespace DDMSense.DDMS.ResourceElements
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
                 if (!String.IsNullOrEmpty(recordKeeperID))
-                {
                     element.Add(Util.Util.BuildDDMSElement(RECORD_KEEPER_ID_NAME, recordKeeperID));
-                }
+                
                 if (organization != null)
-                {
                     element.Add(organization.ElementCopy);
-                }
-                _organization = organization;
+                
+                Organization = organization;
                 SetElement(element, true);
             }
             catch (InvalidDDMSException e)
@@ -150,11 +119,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Accessor for the organization
         /// </summary>
-        public virtual Organization Organization
-        {
-            get { return (_organization); }
-            set { _organization = value; }
-        }
+        public virtual Organization Organization{get;set;}
 
         /// <summary>
         ///     Validates the component.
@@ -231,27 +196,22 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 2.0.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 4565840434345629470L;
-            internal Organization.Builder _organization;
-            internal string _recordKeeperID;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                Organization = new Organization.Builder();
             }
 
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
-            public Builder(RecordKeeper keeper)
+            public Builder(RecordKeeper keeper) : this()
             {
                 RecordKeeperID = keeper.RecordKeeperID;
                 Organization = new Organization.Builder(keeper.Organization);
@@ -260,28 +220,13 @@ namespace DDMSense.DDMS.ResourceElements
             /// <summary>
             ///     Builder accessor for the recordKeeperID
             /// </summary>
-            public virtual string RecordKeeperID
-            {
-                get { return _recordKeeperID; }
-                set { _recordKeeperID = value; }
-            }
+            public virtual string RecordKeeperID { get; set; }
 
 
             /// <summary>
             ///     Builder accessor for the organization builder
             /// </summary>
-            public virtual Organization.Builder Organization
-            {
-                get
-                {
-                    if (_organization == null)
-                    {
-                        _organization = new Organization.Builder();
-                    }
-                    return _organization;
-                }
-                set { _organization = value; }
-            }
+            public virtual Organization.Builder Organization { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()

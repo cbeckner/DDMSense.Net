@@ -10,33 +10,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
 
     /// <summary>
     ///     An immutable implementation of ddms:organization.
@@ -101,12 +76,12 @@ namespace DDMSense.DDMS.ResourceElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Organization(Element element) : base(element, false)
+        public Organization(XElement element) : base(element, false)
         {
             try
             {
                 string @namespace = element.Name.NamespaceName;
-                IEnumerable<Element> components =
+                IEnumerable<XElement> components =
                     element.Elements(XName.Get(SubOrganization.GetName(DDMSVersion), @namespace));
                 _subOrganizations = new List<SubOrganization>();
                 components.ToList().ForEach(c => _subOrganizations.Add(new SubOrganization(c)));
@@ -128,8 +103,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="emails"> an ordered list of email addresses </param>
         /// <param name="subOrganizations"> an ordered list of suborganizations </param>
         /// <param name="acronym"> the organization's acronym </param>
-        public Organization(List<string> names, List<string> phones, List<string> emails,
-            List<SubOrganization> subOrganizations, string acronym)
+        public Organization(List<string> names, List<string> phones, List<string> emails,            List<SubOrganization> subOrganizations, string acronym)
             : this(names, phones, emails, subOrganizations, acronym, null)
         {
         }
@@ -143,21 +117,18 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="subOrganizations"> an ordered list of suborganizations </param>
         /// <param name="acronym"> the organization's acronym </param>
         /// <param name="extensions"> extensible attributes (optional) </param>
-        public Organization(List<string> names, List<string> phones, List<string> emails,
-            List<SubOrganization> subOrganizations, string acronym, ExtensibleAttributes extensions)
+        public Organization(List<string> names, List<string> phones, List<string> emails,            List<SubOrganization> subOrganizations, string acronym, ExtensibleAttributes extensions)
             : base(GetName(DDMSVersion.GetCurrentVersion()), names, phones, emails, extensions, false)
         {
             try
             {
                 if (subOrganizations == null)
-                {
                     subOrganizations = new List<SubOrganization>();
-                }
+                
                 Util.Util.AddDDMSAttribute(Element, ACRONYM_NAME, acronym);
                 foreach (var subOrganization in subOrganizations)
-                {
                     Element.Add(subOrganization.ElementCopy);
-                }
+                
                 _subOrganizations = subOrganizations;
                 Validate();
             }
@@ -219,9 +190,7 @@ namespace DDMSense.DDMS.ResourceElements
             if (!DDMSVersion.IsAtLeast("4.0.1"))
             {
                 if (!String.IsNullOrEmpty(Acronym))
-                {
                     throw new InvalidDDMSException("An organization cannot have an acronym until DDMS 4.0.1 or later.");
-                }
             }
 
             base.Validate();
@@ -245,9 +214,7 @@ namespace DDMSense.DDMS.ResourceElements
             if (DDMSVersion.IsAtLeast("4.0.1"))
             {
                 if (String.IsNullOrEmpty(Acronym) && Element.Attribute(XName.Get(ACRONYM_NAME, Namespace)).Value != null)
-                {
                     AddWarning("A ddms:acronym attribute was found with no value.");
-                }
             }
             base.ValidateWarnings();
         }
@@ -266,9 +233,8 @@ namespace DDMSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is Organization))
-            {
                 return (false);
-            }
+            
             var test = (Organization) obj;
             return (Acronym.Equals(test.Acronym));
         }
@@ -300,15 +266,12 @@ namespace DDMSense.DDMS.ResourceElements
         /// @since 1.8.0"></see>
         public class Builder : AbstractRoleEntity.Builder
         {
-            internal const long SerialVersionUID = 4565840434345629470L;
-            internal string _acronym;
-            internal List<SubOrganization.Builder> _subOrganizations;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                SubOrganizations = new List<SubOrganization.Builder>();
             }
 
             /// <summary>
@@ -316,10 +279,10 @@ namespace DDMSense.DDMS.ResourceElements
             /// </summary>
             public Builder(Organization organization) : base(organization)
             {
+                SubOrganizations = new List<SubOrganization.Builder>();
                 foreach (var subOrg in organization.SubOrganizations)
-                {
                     SubOrganizations.Add(new SubOrganization.Builder(subOrg));
-                }
+                
                 Acronym = organization.Acronym;
             }
 
@@ -330,9 +293,8 @@ namespace DDMSense.DDMS.ResourceElements
                 {
                     bool hasValueInList = false;
                     foreach (IBuilder builder in SubOrganizations)
-                    {
                         hasValueInList = hasValueInList || !builder.Empty;
-                    }
+                
                     return (base.Empty && !hasValueInList && String.IsNullOrEmpty(Acronym));
                 }
             }
@@ -340,42 +302,25 @@ namespace DDMSense.DDMS.ResourceElements
             /// <summary>
             ///     Builder accessor for suborganizations
             /// </summary>
-            public virtual List<SubOrganization.Builder> SubOrganizations
-            {
-                get
-                {
-                    if (_subOrganizations == null)
-                    {
-                        _subOrganizations = new List<SubOrganization.Builder>();
-                    }
-                    return _subOrganizations;
-                }
-            }
+            public virtual List<SubOrganization.Builder> SubOrganizations { get; private set; }
 
             /// <summary>
             ///     Builder accessor for the acronym
             /// </summary>
-            public virtual string Acronym
-            {
-                get { return _acronym; }
-                set { _acronym = value; }
-            }
+            public virtual string Acronym { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public override IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
+                
                 var subOrgs = new List<SubOrganization>();
                 foreach (IBuilder builder in SubOrganizations)
                 {
                     var component = (SubOrganization) builder.Commit();
                     if (component != null)
-                    {
                         subOrgs.Add(component);
-                    }
                 }
                 return (new Organization(Names, Phones, Emails, subOrgs, Acronym, ExtensibleAttributes.Commit()));
             }

@@ -419,7 +419,7 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -1550204187042536412L;
+            
             internal List<Category.Builder> _categories;
             internal List<Keyword.Builder> _keywords;
             internal List<NonStateActor.Builder> _nonStateActors;

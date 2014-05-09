@@ -285,7 +285,7 @@ namespace DDMSense.DDMS.Summary.Gml
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 4003805386998809149L;
+            
             internal string _id;
             internal Position.Builder _position;
             internal SRSAttributes.Builder _srsAttributes;

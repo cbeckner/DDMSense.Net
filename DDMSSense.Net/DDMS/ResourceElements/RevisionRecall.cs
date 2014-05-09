@@ -11,34 +11,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-
-   This file is part of DDMSence.
-
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public
-   License as published by the Free Software Foundation.
-
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-   GNU Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:revisionRecall.
     ///     <para>
@@ -93,8 +67,8 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    ///     @since 2.0.0
+
+
     /// </summary>
     public sealed class RevisionRecall : AbstractBaseComponent
     {
@@ -115,19 +89,19 @@ namespace DDMSense.DDMS.ResourceElements
         private const string NETWORK_NAME = "network";
         private const string OTHER_NETWORK_NAME = "otherNetwork";
 
-        private static readonly List<string> REVISION_TYPE_TYPES = new List<string>();
-        private readonly List<Details> _details;
-        private readonly List<Link> _links;
-        private int? _revisionID;
-        private SecurityAttributes _securityAttributes;
-        private XLinkAttributes _xlinkAttributes;
+        private readonly List<string> RevisionTypeTypes;
 
-        static RevisionRecall()
+        public RevisionRecall()
         {
-            REVISION_TYPE_TYPES.Add("ADMINISTRATIVE RECALL");
-            REVISION_TYPE_TYPES.Add("ADMINISTRATIVE REVISION");
-            REVISION_TYPE_TYPES.Add("SUBSTANTIVE RECALL");
-            REVISION_TYPE_TYPES.Add("SUBSTANTIVE REVISION");
+            RevisionTypeTypes = new List<string>();
+            RevisionTypeTypes.Add("ADMINISTRATIVE RECALL");
+            RevisionTypeTypes.Add("ADMINISTRATIVE REVISION");
+            RevisionTypeTypes.Add("SUBSTANTIVE RECALL");
+            RevisionTypeTypes.Add("SUBSTANTIVE REVISION");
+
+            Details = new List<Details>();
+            Links = new List<Link>();
+            XLinkAttributes = new XLinkAttributes();
         }
 
         /// <summary>
@@ -135,28 +109,28 @@ namespace DDMSense.DDMS.ResourceElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public RevisionRecall(Element element)
+        public RevisionRecall(XElement element)
+            : this()
         {
             try
             {
                 SetElement(element, false);
-                _links = new List<Link>();
-                IEnumerable<Element> links = element.Elements(XName.Get(Link.GetName(DDMSVersion), Namespace));
+                Links = new List<Link>();
+                IEnumerable<XElement> links = element.Elements(XName.Get(Link.GetName(DDMSVersion), Namespace));
                 foreach (var link in links)
-                    _links.Add(new Link(link));
+                    Links.Add(new Link(link));
 
-                _details = new List<Details>();
-                IEnumerable<Element> details =
-                    element.Elements(XName.Get(ResourceElements.Details.GetName(DDMSVersion), Namespace));
+                Details = new List<Details>();
+                IEnumerable<XElement> details = element.Elements(XName.Get(ResourceElements.Details.GetName(DDMSVersion), Namespace));
                 foreach (var detail in details)
-                    _details.Add(new Details(detail));
+                    Details.Add(new Details(detail));
 
                 string revisionID = element.Attribute(XName.Get(REVISION_ID_NAME, Namespace)).Value;
                 if (!String.IsNullOrEmpty(revisionID))
                 {
                     try
                     {
-                        _revisionID = Convert.ToInt32(revisionID);
+                        RevisionID = Convert.ToInt32(revisionID);
                     }
                     catch (FormatException)
                     {
@@ -164,8 +138,8 @@ namespace DDMSense.DDMS.ResourceElements
                         // 	This will be thrown as an InvalidDDMSException during validation
                     }
                 }
-                _xlinkAttributes = new XLinkAttributes(element);
-                _securityAttributes = new SecurityAttributes(element);
+                XLinkAttributes = new XLinkAttributes(element);
+                SecurityAttributes = new SecurityAttributes(element);
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -187,11 +161,8 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
         /// <param name="securityAttributes"> security attributes (required) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public RevisionRecall(List<Link> links, List<Details> details, int? revisionID, string revisionType,
-            string network, string otherNetwork, XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes)
-            : this(
-                null, links, details, revisionID, revisionType, network, otherNetwork, xlinkAttributes,
-                securityAttributes)
+        public RevisionRecall(List<Link> links, List<Details> details, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes)
+            : this(null, links, details, revisionID, revisionType, network, otherNetwork, xlinkAttributes, securityAttributes)
         {
         }
 
@@ -206,10 +177,8 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
         /// <param name="securityAttributes"> security attributes (required) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public RevisionRecall(string value, int? revisionID, string revisionType, string network, string otherNetwork,
-            XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes)
-            : this(
-                value, null, null, revisionID, revisionType, network, otherNetwork, xlinkAttributes, securityAttributes)
+        public RevisionRecall(string value, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes)
+            : this(value, null, null, revisionID, revisionType, network, otherNetwork, xlinkAttributes, securityAttributes)
         {
         }
 
@@ -226,44 +195,43 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
         /// <param name="securityAttributes"> security attributes (required) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        private RevisionRecall(string value, List<Link> links, List<Details> details, int? revisionID,
-            string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes,
-            SecurityAttributes securityAttributes)
+        private RevisionRecall(string value, List<Link> links, List<Details> details, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes, SecurityAttributes securityAttributes)
         {
+            RevisionTypeTypes = new List<string>();
+            RevisionTypeTypes.Add("ADMINISTRATIVE RECALL");
+            RevisionTypeTypes.Add("ADMINISTRATIVE REVISION");
+            RevisionTypeTypes.Add("SUBSTANTIVE RECALL");
+            RevisionTypeTypes.Add("SUBSTANTIVE REVISION");
+
             try
             {
                 if (links == null)
-                {
                     links = new List<Link>();
-                }
-                if (details == null)
-                {
-                    details = new List<Details>();
-                }
 
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), value);
+                if (details == null)
+                    details = new List<Details>();
+
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), value);
                 foreach (var link in links)
-                {
                     element.Add(link.ElementCopy);
-                }
+
                 foreach (var detail in details)
-                {
                     element.Add(detail.ElementCopy);
-                }
+
                 if (revisionID != null)
                 {
-                    _revisionID = revisionID;
+                    RevisionID = revisionID;
                     Util.Util.AddDDMSAttribute(element, REVISION_ID_NAME, revisionID.ToString());
                 }
                 Util.Util.AddDDMSAttribute(element, REVISION_TYPE_NAME, revisionType);
                 Util.Util.AddAttribute(element, NO_PREFIX, NETWORK_NAME, NO_NAMESPACE, network);
                 Util.Util.AddAttribute(element, NO_PREFIX, OTHER_NETWORK_NAME, NO_NAMESPACE, otherNetwork);
-                _links = links;
-                _details = details;
-                _xlinkAttributes = XLinkAttributes.GetNonNullInstance(xlinkAttributes);
-                _xlinkAttributes.AddTo(element);
-                _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-                _securityAttributes.AddTo(element);
+                Links = links;
+                Details = details;
+                XLinkAttributes = XLinkAttributes.GetNonNullInstance(xlinkAttributes);
+                XLinkAttributes.AddTo(element);
+                SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+                SecurityAttributes.AddTo(element);
                 SetElement(element, true);
             }
             catch (InvalidDDMSException e)
@@ -288,36 +256,22 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Accessor for the list of Links.
         /// </summary>
-        public List<Link> Links
-        {
-            get { return _links; }
-        }
+        public List<Link> Links { get; private set; }
 
         /// <summary>
         ///     Accessor for the list of Details.
         /// </summary>
-        public List<Details> Details
-        {
-            get { return _details; }
-        }
+        public List<Details> Details { get; private set; }
 
         /// <summary>
         ///     Accessor for the value of the child text.
         /// </summary>
-        public string Value
-        {
-            get { return (Element.Value); }
-            set { Element.Value = value; }
-        }
+        public string Value { get; set; }
 
         /// <summary>
         ///     Accessor for the revisionID attribute.
         /// </summary>
-        public int? RevisionID
-        {
-            get { return (_revisionID); }
-            set { _revisionID = value; }
-        }
+        public int? RevisionID { get; set; }
 
         /// <summary>
         ///     Accessor for the revisionType attribute.
@@ -346,20 +300,12 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Accessor for the XDetails Attributes. Will always be non-null, even if it has no values set.
         /// </summary>
-        public XLinkAttributes XLinkAttributes
-        {
-            get { return (_xlinkAttributes); }
-            set { _xlinkAttributes = value; }
-        }
+        public XLinkAttributes XLinkAttributes { get; set; }
 
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null, even if it has no values set.
         /// </summary>
-        public override SecurityAttributes SecurityAttributes
-        {
-            get { return (_securityAttributes); }
-            set { _securityAttributes = value; }
-        }
+        public override SecurityAttributes SecurityAttributes { get; set; }
 
         /// <summary>
         ///     Validates the component.
@@ -387,34 +333,27 @@ namespace DDMSense.DDMS.ResourceElements
 
             bool hasChildText = false;
             foreach (var child in Element.Descendants())
-            {
                 hasChildText = (hasChildText || (!String.IsNullOrEmpty(child.Value.Trim())));
-            }
+
             bool hasNestedElements = (Links.Count > 0 || Details.Count > 0);
 
             if (hasChildText && hasNestedElements)
-            {
-                throw new InvalidDDMSException(
-                    "A ddms:revisionRecall element cannot have both child text and nested elements.");
-            }
+                throw new InvalidDDMSException("A ddms:revisionRecall element cannot have both child text and nested elements.");
+
             foreach (var link in Links)
             {
                 Util.Util.RequireDDMSValue("link security attributes", link.SecurityAttributes);
                 link.SecurityAttributes.RequireClassification();
             }
             Util.Util.RequireDDMSValue("revision ID", RevisionID);
-            if (!REVISION_TYPE_TYPES.Contains(RevisionType))
-            {
-                throw new InvalidDDMSException("The revisionType attribute must be one of " + REVISION_TYPE_TYPES);
-            }
+            if (!RevisionTypeTypes.Contains(RevisionType))
+                throw new InvalidDDMSException("The revisionType attribute must be one of " + RevisionTypeTypes);
+
             if (!String.IsNullOrEmpty(XLinkAttributes.Type) && !XLinkAttributes.Type.Equals(FIXED_TYPE))
-            {
                 throw new InvalidDDMSException("The type attribute must have a fixed value of \"" + FIXED_TYPE + "\".");
-            }
+
             if (!String.IsNullOrEmpty(Network))
-            {
                 ISMVocabulary.RequireValidNetwork(Network);
-            }
 
             base.Validate();
         }
@@ -435,9 +374,8 @@ namespace DDMSense.DDMS.ResourceElements
         protected internal override void ValidateWarnings()
         {
             if (XLinkAttributes != null)
-            {
                 AddWarnings(XLinkAttributes.ValidationWarnings, true);
-            }
+
             base.ValidateWarnings();
         }
 
@@ -448,9 +386,8 @@ namespace DDMSense.DDMS.ResourceElements
             string localPrefix = BuildPrefix(prefix, Name, suffix);
             var text = new StringBuilder();
             if (!hasNestedElements)
-            {
                 text.Append(BuildOutput(isHtml, localPrefix, Value));
-            }
+
             text.Append(BuildOutput(isHtml, localPrefix + "." + REVISION_ID_NAME, Convert.ToString(RevisionID)));
             text.Append(BuildOutput(isHtml, localPrefix + "." + REVISION_TYPE_NAME, RevisionType));
             text.Append(BuildOutput(isHtml, localPrefix + "." + NETWORK_NAME, Network));
@@ -466,10 +403,9 @@ namespace DDMSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is RevisionRecall))
-            {
                 return (false);
-            }
-            var test = (RevisionRecall) obj;
+
+            var test = (RevisionRecall)obj;
             return (Value.Equals(test.Value) && Util.Util.NullEquals(RevisionID, test.RevisionID) &&
                     RevisionType.Equals(test.RevisionType) && Network.Equals(test.Network) &&
                     OtherNetwork.Equals(test.OtherNetwork) && XLinkAttributes.Equals(test.XLinkAttributes));
@@ -479,12 +415,12 @@ namespace DDMSense.DDMS.ResourceElements
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + Value.GetHashCode();
-            result = 7*result + RevisionID.GetHashCode();
-            result = 7*result + RevisionType.GetHashCode();
-            result = 7*result + Network.GetHashCode();
-            result = 7*result + OtherNetwork.GetHashCode();
-            result = 7*result + XLinkAttributes.GetHashCode();
+            result = 7 * result + Value.GetHashCode();
+            result = 7 * result + RevisionID.GetHashCode();
+            result = 7 * result + RevisionType.GetHashCode();
+            result = 7 * result + Network.GetHashCode();
+            result = 7 * result + OtherNetwork.GetHashCode();
+            result = 7 * result + XLinkAttributes.GetHashCode();
             return (result);
         }
 
@@ -502,47 +438,36 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 4325950371570699184L;
-            internal List<Details.Builder> _details;
-            internal List<Link.Builder> _links;
-            internal string _network;
-            internal string _otherNetwork;
-            internal int? _revisionID;
-            internal string _revisionType;
-            internal SecurityAttributes.Builder _securityAttributes;
-            internal string _value;
-            internal XLinkAttributes.Builder _xlinkAttributes;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                Details = new List<Details.Builder>();
+                Links = new List<Link.Builder>();
+                SecurityAttributes = new SecurityAttributes.Builder();
+                XLinkAttributes = new XLinkAttributes.Builder();
             }
 
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
             public Builder(RevisionRecall recall)
+                : this()
             {
                 foreach (var link in recall.Links)
-                {
                     Links.Add(new Link.Builder(link));
-                }
+
                 foreach (var detail in recall.Details)
-                {
                     Details.Add(new Details.Builder(detail));
-                }
+
                 if (recall.Links.Count == 0 && recall.Details.Count == 0)
-                {
                     Value = recall.Value;
-                }
+
                 RevisionID = recall.RevisionID;
                 RevisionType = recall.RevisionType;
                 Network = recall.Network;
@@ -554,140 +479,69 @@ namespace DDMSense.DDMS.ResourceElements
             /// <summary>
             ///     Builder accessor for the value
             /// </summary>
-            public virtual string Value
-            {
-                get { return _value; }
-                set { _value = value; }
-            }
+            public virtual string Value { get; set; }
 
             /// <summary>
             ///     Builder accessor for the links
             /// </summary>
-            public virtual List<Link.Builder> Links
-            {
-                get
-                {
-                    if (_links == null)
-                    {
-                        _links = new List<Link.Builder>();
-                    }
-                    return _links;
-                }
-                set { _links = value; }
-            }
+            public virtual List<Link.Builder> Links { get; set; }
 
             /// <summary>
             ///     Builder accessor for the details
             /// </summary>
-            public virtual List<Details.Builder> Details
-            {
-                get
-                {
-                    if (_details == null)
-                    {
-                        _details = new List<Details.Builder>();
-                    }
-                    return _details;
-                }
-                set { _details = value; }
-            }
+            public virtual List<Details.Builder> Details { get; set; }
 
             /// <summary>
             ///     Builder accessor for the revisionID
             /// </summary>
-            public virtual int? RevisionID
-            {
-                get { return _revisionID; }
-                set { _revisionID = value; }
-            }
+            public virtual int? RevisionID { get; set; }
 
             /// <summary>
             ///     Builder accessor for the revisionType
             /// </summary>
-            public virtual string RevisionType
-            {
-                get { return _revisionType; }
-                set { _revisionType = value; }
-            }
+            public virtual string RevisionType { get; set; }
 
             /// <summary>
             ///     Builder accessor for the network
             /// </summary>
-            public virtual string Network
-            {
-                get { return _network; }
-                set { _network = value; }
-            }
+            public virtual string Network { get; set; }
 
             /// <summary>
             ///     Builder accessor for the otherNetwork
             /// </summary>
-            public virtual string OtherNetwork
-            {
-                get { return _otherNetwork; }
-                set { _otherNetwork = value; }
-            }
+            public virtual string OtherNetwork { get; set; }
 
             /// <summary>
             ///     Builder accessor for the XLink Attributes
             /// </summary>
-            public virtual XLinkAttributes.Builder XLinkAttributes
-            {
-                get
-                {
-                    if (_xlinkAttributes == null)
-                    {
-                        _xlinkAttributes = new XLinkAttributes.Builder();
-                    }
-                    return _xlinkAttributes;
-                }
-                set { _xlinkAttributes = value; }
-            }
+            public virtual XLinkAttributes.Builder XLinkAttributes { get; set; }
 
             /// <summary>
             ///     Builder accessor for the Security Attributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
+
                 var links = new List<Link>();
                 foreach (IBuilder builder in Links)
                 {
-                    var component = (Link) builder.Commit();
+                    var component = (Link)builder.Commit();
                     if (component != null)
-                    {
                         links.Add(component);
-                    }
                 }
                 var details = new List<Details>();
                 foreach (IBuilder builder in Details)
                 {
-                    var component = (Details) builder.Commit();
+                    var component = (Details)builder.Commit();
                     if (component != null)
-                    {
                         details.Add(component);
-                    }
                 }
-                return
-                    (new RevisionRecall(Value, links, details, RevisionID, RevisionType, Network, OtherNetwork,
-                        XLinkAttributes.Commit(), SecurityAttributes.Commit()));
+                return (new RevisionRecall(Value, links, details, RevisionID, RevisionType, Network, OtherNetwork, XLinkAttributes.Commit(), SecurityAttributes.Commit()));
             }
 
             /// <see cref="IBuilder#isEmpty()"></see>
@@ -697,16 +551,19 @@ namespace DDMSense.DDMS.ResourceElements
                 {
                     bool hasValueInList = false;
                     foreach (IBuilder builder in Links)
-                    {
                         hasValueInList = hasValueInList || !builder.Empty;
-                    }
+
                     foreach (IBuilder builder in Details)
-                    {
                         hasValueInList = hasValueInList || !builder.Empty;
-                    }
-                    return (!hasValueInList && String.IsNullOrEmpty(Value) && RevisionID == null &&
-                            String.IsNullOrEmpty(RevisionType) && String.IsNullOrEmpty(Network) &&
-                            String.IsNullOrEmpty(OtherNetwork) && XLinkAttributes.Empty && SecurityAttributes.Empty);
+
+                    return (!hasValueInList &&
+                            String.IsNullOrEmpty(Value) &&
+                            RevisionID == null &&
+                            String.IsNullOrEmpty(RevisionType) &&
+                            String.IsNullOrEmpty(Network) &&
+                            String.IsNullOrEmpty(OtherNetwork) &&
+                            XLinkAttributes.Empty &&
+                            SecurityAttributes.Empty);
                 }
             }
         }

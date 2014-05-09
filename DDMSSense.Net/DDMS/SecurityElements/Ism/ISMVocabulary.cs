@@ -11,37 +11,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSense.DDMS.SecurityElements.Ism
 {
-    #region usings
-
-    using Document = XDocument;
-    using Element = XElement;
-    using ParsingException = XmlException;
-    using XMLReader = XmlReader;
-
-    #endregion
-
     /// <summary>
     ///     Representation of the Controlled Vocabulary enumerations used by ISM attributes.
     ///     <para>
@@ -79,10 +50,8 @@ namespace DDMSense.DDMS.SecurityElements.Ism
     ///         </li>
     ///     </ul>
     ///     <para>Some of these vocabularies include regular expression patterns.</para>
-    
-    ///     @since 0.9.d
     /// </summary>
-    public class ISMVocabulary
+    public static class ISMVocabulary
     {
         /// <summary>
         ///     Filename for the enumerations allowed in a declassException attribute
@@ -222,13 +191,6 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         }
 
         /// <summary>
-        ///     Private to prevent instantiation
-        /// </summary>
-        private ISMVocabulary()
-        {
-        }
-
-        /// <summary>
         ///     Maintains a DDMSVersion which will be used to look up the CVE files.
         /// </summary>
         /// <param name="version"> the DDMS version </param>
@@ -298,28 +260,23 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <param name="enumerationKey"> the key for the enumeration, which doubles as the filename. </param>
         private static void LoadEnumeration(string enumLocation, string enumerationKey)
         {
-            Stream stream =
-                (new ISMVocabulary()).GetType().Assembly.GetManifestResourceStream(enumLocation + enumerationKey);
-            Document doc = Document.Load(stream);
+            Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(enumLocation + enumerationKey);
+            XDocument doc = XDocument.Load(stream);
             var tokens = new List<string>();
             var patterns = new List<string>();
             string cveNamespace = PropertyReader.GetProperty(DDMSVersion.Version + ".ism.cve.xmlNamespace");
-            Element enumerationElement = doc.Root.Element(XName.Get(ENUMERATION_NAME, cveNamespace));
-            IEnumerable<Element> terms = enumerationElement.Elements(XName.Get(TERM_NAME, cveNamespace));
+            XElement enumerationElement = doc.Root.Element(XName.Get(ENUMERATION_NAME, cveNamespace));
+            IEnumerable<XElement> terms = enumerationElement.Elements(XName.Get(TERM_NAME, cveNamespace));
             foreach (var term in terms)
             {
-                Element value = term.Element(XName.Get(VALUE_NAME, cveNamespace));
+                XElement value = term.Element(XName.Get(VALUE_NAME, cveNamespace));
                 bool isPattern = Convert.ToBoolean(value.Attribute(REG_EXP_NAME));
                 if (value != null)
                 {
                     if (isPattern)
-                    {
                         patterns.Add(value.Value);
-                    }
                     else
-                    {
                         tokens.Add(value.Value);
-                    }
                 }
             }
             LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, tokens);
@@ -345,9 +302,8 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             UpdateEnumLocation();
             List<string> vocabulary = LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation)[enumerationKey];
             if (vocabulary == null)
-            {
                 throw new ArgumentException("No controlled vocabulary could be found for this key: " + enumerationKey);
-            }
+            
             return (vocabulary);
         }
 
@@ -388,7 +344,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <param name="value"> the test value </param>
         /// <returns> true if the value exists in the enumeration, false otherwise </returns>
         /// <exception cref="ArgumentException"> on an invalid key </exception>
-        protected internal static bool EnumContains(string enumerationKey, string value)
+        internal static bool EnumContains(string enumerationKey, string value)
         {
             Util.Util.RequireValue("key", enumerationKey);
             bool isValidToken = GetEnumerationTokens(enumerationKey).Contains(value);
@@ -425,8 +381,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <returns> a String </returns>
         public static string GetInvalidMessage(string enumerationKey, string value)
         {
-            return (value + " is not a valid enumeration token for this attribute, as specified in " + enumerationKey +
-                    ".");
+            return (value + " is not a valid enumeration token for this attribute, as specified in " + enumerationKey +                    ".");
         }
 
         /// <summary>
@@ -437,9 +392,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         public static void RequireValidNetwork(string network)
         {
             if (!COMMON_NETWORK_TYPES.Contains(network))
-            {
                 throw new InvalidDDMSException("The network attribute must be one of " + COMMON_NETWORK_TYPES);
-            }
         }
     }
 }

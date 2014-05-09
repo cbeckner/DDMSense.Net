@@ -225,7 +225,7 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -5734267242408462644L;
+            
             internal List<Point.Builder> _points;
             internal List<Polygon.Builder> _polygons;
 

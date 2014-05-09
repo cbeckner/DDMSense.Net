@@ -50,7 +50,7 @@ namespace DDMSense
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public abstract class AbstractAccessEntity : AbstractBaseComponent
     {
@@ -157,7 +157,7 @@ namespace DDMSense
         [Serializable]
         public abstract class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7851044806424206976L;
+            
 
             /// <summary>
             ///     Empty constructor

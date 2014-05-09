@@ -12,7 +12,7 @@ namespace DDMSense.DDMS
     ///     a producer role (creator, contributor, pointOfContact, publisher) or a tasking role (addressee, requesterInfo,
     ///     recordKeeper).
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public interface IRoleEntity : IDDMSComponent
     {

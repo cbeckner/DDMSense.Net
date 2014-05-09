@@ -238,7 +238,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7851044806424206976L;
+            
             internal List<Profile.Builder> _profiles;
             internal SecurityAttributes.Builder _securityAttributes;
 

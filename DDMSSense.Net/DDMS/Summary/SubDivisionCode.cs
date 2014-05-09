@@ -62,7 +62,7 @@ namespace DDMSense.DDMS.Summary
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class SubDivisionCode : AbstractQualifierValue
     {
@@ -155,7 +155,7 @@ namespace DDMSense.DDMS.Summary
         /// @since 2.0.0"></see>
         public class Builder : AbstractQualifierValue.Builder
         {
-            internal const long SerialVersionUID = 2136329013144660166L;
+            
 
             /// <summary>
             ///     Empty constructor

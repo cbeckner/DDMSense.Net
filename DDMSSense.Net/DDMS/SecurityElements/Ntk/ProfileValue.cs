@@ -72,7 +72,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class ProfileValue : AbstractNtkString
     {
@@ -219,7 +219,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         /// @since 2.0.0"></see>
         public class Builder : AbstractNtkString.Builder
         {
-            internal const long SerialVersionUID = 7750664735441105296L;
+            
             internal string _vocabulary;
 
             /// <summary>

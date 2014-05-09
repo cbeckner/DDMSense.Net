@@ -9,34 +9,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:taskID.
     ///     <para>This element is not a global component, but is being implemented because it has attributes.</para>
@@ -69,8 +43,6 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    ///     @since 2.0.0
     /// </summary>
     public sealed class TaskID : AbstractBaseComponent
     {
@@ -89,18 +61,17 @@ namespace DDMSense.DDMS.ResourceElements
         private const string NETWORK_NAME = "network";
         private const string OTHER_NETWORK_NAME = "otherNetwork";
         private const string TASKING_SYSTEM_NAME = "taskingSystem";
-        private XLinkAttributes _xlinkAttributes;
 
         /// <summary>
         ///     Constructor for creating a component from a XOM Element
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public TaskID(Element element)
+        public TaskID(XElement element)
         {
             try
             {
-                _xlinkAttributes = new XLinkAttributes(element);
+                XLinkAttributes = new XLinkAttributes(element);
                 SetElement(element, true);
             }
             catch (InvalidDDMSException e)
@@ -124,13 +95,13 @@ namespace DDMSense.DDMS.ResourceElements
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), value);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), value);
                 Util.Util.AddDDMSAttribute(element, TASKING_SYSTEM_NAME, taskingSystem);
                 Util.Util.AddAttribute(element, NO_PREFIX, NETWORK_NAME, NO_NAMESPACE, network);
                 Util.Util.AddAttribute(element, NO_PREFIX, OTHER_NETWORK_NAME, NO_NAMESPACE, otherNetwork);
 
-                _xlinkAttributes = XLinkAttributes.GetNonNullInstance(xlinkAttributes);
-                _xlinkAttributes.AddTo(element);
+                XLinkAttributes = XLinkAttributes.GetNonNullInstance(xlinkAttributes);
+                XLinkAttributes.AddTo(element);
                 SetElement(element, true);
             }
             catch (InvalidDDMSException e)
@@ -176,11 +147,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Accessor for the XLink Attributes. Will always be non-null, even if it has no values set.
         /// </summary>
-        public XLinkAttributes XLinkAttributes
-        {
-            get { return (_xlinkAttributes); }
-            set { _xlinkAttributes = value; }
-        }
+        public XLinkAttributes XLinkAttributes { get; set; }
 
         /// <summary>
         ///     Validates the component.
@@ -204,13 +171,11 @@ namespace DDMSense.DDMS.ResourceElements
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             Util.Util.RequireDDMSValue("value", Value);
             if (!String.IsNullOrEmpty(XLinkAttributes.Type) && !XLinkAttributes.Type.Equals(FIXED_TYPE))
-            {
                 throw new InvalidDDMSException("The type attribute must have a fixed value of \"" + FIXED_TYPE + "\".");
-            }
+
             if (!String.IsNullOrEmpty(Network))
-            {
                 ISMVocabulary.RequireValidNetwork(Network);
-            }
+
             base.Validate();
         }
 
@@ -230,9 +195,8 @@ namespace DDMSense.DDMS.ResourceElements
         protected internal override void ValidateWarnings()
         {
             if (XLinkAttributes != null)
-            {
                 AddWarnings(XLinkAttributes.ValidationWarnings, true);
-            }
+
             base.ValidateWarnings();
         }
 
@@ -253,10 +217,9 @@ namespace DDMSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is TaskID))
-            {
                 return (false);
-            }
-            var test = (TaskID) obj;
+
+            var test = (TaskID)obj;
             return (Value.Equals(test.Value) && TaskingSystem.Equals(test.TaskingSystem) && Network.Equals(test.Network) &&
                     OtherNetwork.Equals(test.OtherNetwork) && XLinkAttributes.Equals(test.XLinkAttributes));
         }
@@ -265,11 +228,11 @@ namespace DDMSense.DDMS.ResourceElements
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + Value.GetHashCode();
-            result = 7*result + TaskingSystem.GetHashCode();
-            result = 7*result + Network.GetHashCode();
-            result = 7*result + OtherNetwork.GetHashCode();
-            result = 7*result + XLinkAttributes.GetHashCode();
+            result = 7 * result + Value.GetHashCode();
+            result = 7 * result + TaskingSystem.GetHashCode();
+            result = 7 * result + Network.GetHashCode();
+            result = 7 * result + OtherNetwork.GetHashCode();
+            result = 7 * result + XLinkAttributes.GetHashCode();
             return (result);
         }
 
@@ -293,24 +256,19 @@ namespace DDMSense.DDMS.ResourceElements
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 4325950371570699184L;
-            internal string _network;
-            internal string _otherNetwork;
-            internal string _taskingSystem;
-            internal string _value;
-            internal XLinkAttributes.Builder _xlinkAttributes;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                XLinkAttributes = new XLinkAttributes.Builder();
             }
 
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
             public Builder(TaskID taskID)
+                : this()
             {
                 Value = taskID.Value;
                 TaskingSystem = taskID.TaskingSystem;
@@ -322,58 +280,27 @@ namespace DDMSense.DDMS.ResourceElements
             /// <summary>
             ///     Builder accessor for the value
             /// </summary>
-            public virtual string Value
-            {
-                get { return _value; }
-                set { _value = value; }
-            }
-
+            public virtual string Value { get; set; }
 
             /// <summary>
             ///     Builder accessor for the taskingSystem
             /// </summary>
-            public virtual string TaskingSystem
-            {
-                get { return _taskingSystem; }
-                set { _taskingSystem = value; }
-            }
-
+            public virtual string TaskingSystem { get; set; }
 
             /// <summary>
             ///     Builder accessor for the network
             /// </summary>
-            public virtual string Network
-            {
-                get { return _network; }
-                set { _network = value; }
-            }
-
+            public virtual string Network { get; set; }
 
             /// <summary>
             ///     Builder accessor for the otherNetwork
             /// </summary>
-            public virtual string OtherNetwork
-            {
-                get { return _otherNetwork; }
-                set { _otherNetwork = value; }
-            }
-
+            public virtual string OtherNetwork { get; set; }
 
             /// <summary>
             ///     Builder accessor for the XLink Attributes
             /// </summary>
-            public virtual XLinkAttributes.Builder XLinkAttributes
-            {
-                get
-                {
-                    if (_xlinkAttributes == null)
-                    {
-                        _xlinkAttributes = new XLinkAttributes.Builder();
-                    }
-                    return _xlinkAttributes;
-                }
-                set { _xlinkAttributes = value; }
-            }
+            public virtual XLinkAttributes.Builder XLinkAttributes { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
@@ -386,8 +313,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 get
                 {
-                    return (String.IsNullOrEmpty(Value) && String.IsNullOrEmpty(TaskingSystem) &&
-                            String.IsNullOrEmpty(Network) && String.IsNullOrEmpty(OtherNetwork) && XLinkAttributes.Empty);
+                    return (String.IsNullOrEmpty(Value) && String.IsNullOrEmpty(TaskingSystem) && String.IsNullOrEmpty(Network) && String.IsNullOrEmpty(OtherNetwork) && XLinkAttributes.Empty);
                 }
             }
         }

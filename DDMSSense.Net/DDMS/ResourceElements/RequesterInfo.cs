@@ -8,12 +8,6 @@ using DDMSense.Util;
 
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:requesterInfo.
     ///     <table class="info">
@@ -44,7 +38,7 @@ namespace DDMSense.DDMS.ResourceElements
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public class RequesterInfo : AbstractTaskingRole
     {
@@ -53,7 +47,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public RequesterInfo(Element element) : base(element)
+        public RequesterInfo(XElement element) : base(element)
         {
         }
 
@@ -92,9 +86,8 @@ namespace DDMSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is RequesterInfo))
-            {
                 return (false);
-            }
+            
             return (true);
         }
 
@@ -112,13 +105,9 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 2.0.0"></see>
+        /// <see cref="IBuilder"></see>
         public class Builder : AbstractTaskingRole.Builder
         {
-            internal const long SerialVersionUID = 4565840434345629470L;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>

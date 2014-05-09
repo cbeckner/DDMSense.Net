@@ -318,7 +318,7 @@ namespace DDMSense.DDMS.SecurityElements
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -7744353774641616270L;
+            
             internal Access.Builder _access;
             internal NoticeList.Builder _noticeList;
             internal SecurityAttributes.Builder _securityAttributes;

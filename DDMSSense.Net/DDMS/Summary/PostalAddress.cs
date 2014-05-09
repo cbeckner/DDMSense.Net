@@ -363,7 +363,7 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public sealed class Builder : IBuilder
         {
-            internal const long SerialVersionUid = 6887962646280796652L;
+            
             internal string _city;
             internal CountryCode.Builder _countryCode;
             internal string _postalCode;

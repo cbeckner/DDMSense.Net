@@ -7,33 +7,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
 
     /// <summary>
     ///     An immutable implementation of ddms:rights.
@@ -50,8 +25,6 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
     /// </summary>
     public sealed class Rights : AbstractBaseComponent
     {
@@ -64,7 +37,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Rights(Element element) : base(element)
+        public Rights(XElement element) : base(element)
         {
         }
 
@@ -77,7 +50,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public Rights(bool privacyAct, bool intellectualProperty, bool copyright)
         {
-            Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+            XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
             Util.Util.AddDDMSAttribute(element, PRIVACY_ACT_NAME, Convert.ToString(privacyAct));
             Util.Util.AddDDMSAttribute(element, INTELLECTUAL_PROPERY_NAME, Convert.ToString(intellectualProperty));
             Util.Util.AddDDMSAttribute(element, COPYRIGHT_NAME, Convert.ToString(copyright));
@@ -146,12 +119,10 @@ namespace DDMSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is Rights))
-            {
                 return (false);
-            }
+            
             var test = (Rights) obj;
-            return (PrivacyAct == test.PrivacyAct && IntellectualProperty == test.IntellectualProperty &&
-                    Copyright == test.Copyright);
+            return (PrivacyAct == test.PrivacyAct && IntellectualProperty == test.IntellectualProperty &&                    Copyright == test.Copyright);
         }
 
         /// <see cref="object#hashCode()"></see>
@@ -178,17 +149,10 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 1.8.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -2290965863004046496L;
-            internal bool? _copyright = null;
-            internal bool? _intellectualProperty = null;
-            internal bool? _privacyAct = null;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -201,44 +165,31 @@ namespace DDMSense.DDMS.ResourceElements
             /// </summary>
             public Builder(Rights rights)
             {
-                _privacyAct = Convert.ToBoolean(rights.PrivacyAct);
-                _intellectualProperty = Convert.ToBoolean(rights.IntellectualProperty);
-                _copyright = Convert.ToBoolean(rights.Copyright);
+                PrivacyAct = Convert.ToBoolean(rights.PrivacyAct);
+                IntellectualProperty = Convert.ToBoolean(rights.IntellectualProperty);
+                Copyright = Convert.ToBoolean(rights.Copyright);
             }
 
             /// <summary>
             ///     Builder accessor for the privacyAct attribute.
             /// </summary>
-            public virtual bool? PrivacyAct
-            {
-                get { return _privacyAct; }
-            }
-
+            public virtual bool? PrivacyAct { get; private set; }
 
             /// <summary>
             ///     Builder accessor for the intellectualProperty attribute.
             /// </summary>
-            public virtual bool? IntellectualProperty
-            {
-                get { return _intellectualProperty; }
-            }
-
+            public virtual bool? IntellectualProperty { get; private set; }
 
             /// <summary>
             ///     Builder accessor for the copyright attribute.
             /// </summary>
-            public virtual bool? Copyright
-            {
-                get { return _copyright; }
-            }
+            public virtual bool? Copyright { get; private set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
 
                 // Handle default values.
                 bool privacyAct = (PrivacyAct == null) ? false : (bool) PrivacyAct;

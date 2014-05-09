@@ -458,7 +458,7 @@ namespace DDMSense.DDMS.Summary
         /// @since 1.8.0"></see>
         public class Builder : AbstractQualifierValue.Builder
         {
-            internal const long SerialVersionUID = 5430464017408842022L;
+            
             internal string _direction;
             internal List<Link.Builder> _links;
             internal string _relationship;

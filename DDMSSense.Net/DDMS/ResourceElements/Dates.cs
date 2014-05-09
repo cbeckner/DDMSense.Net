@@ -8,34 +8,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:dates.
     ///     <table class="info">
@@ -96,13 +70,13 @@ namespace DDMSense.DDMS.ResourceElements
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Dates(Element element)
+        public Dates(XElement element)
         {
             try
             {
                 SetElement(element, false);
                 _acquiredOns = new List<ApproximableDate>();
-                IEnumerable<Element> acquiredOns = element.Elements(XName.Get(ACQUIRED_ON_NAME, Namespace));
+                IEnumerable<XElement> acquiredOns = element.Elements(XName.Get(ACQUIRED_ON_NAME, Namespace));
                 foreach (var el in acquiredOns)
                     _acquiredOns.Add(new ApproximableDate(el));
 
@@ -127,8 +101,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="approvedOn"> the approved on date (optional, starting in DDMS 3.1) </param>
         /// <param name="receivedOn"> the received on date (optional, starting in DDMS 4.0.1) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Dates(string created, string posted, string validTil, string infoCutOff, string approvedOn,
-            string receivedOn) : this(null, created, posted, validTil, infoCutOff, approvedOn, receivedOn)
+        public Dates(string created, string posted, string validTil, string infoCutOff, string approvedOn,            string receivedOn) : this(null, created, posted, validTil, infoCutOff, approvedOn, receivedOn)
         {
         }
 
@@ -145,21 +118,17 @@ namespace DDMSense.DDMS.ResourceElements
         ///     the received on date (optional, starting in DDMS 4.0.1)
         /// </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public Dates(List<ApproximableDate> acquiredOns, string created, string posted, string validTil,
-            string infoCutOff, string approvedOn, string receivedOn)
+        public Dates(List<ApproximableDate> acquiredOns, string created, string posted, string validTil,            string infoCutOff, string approvedOn, string receivedOn)
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
                 if (acquiredOns == null)
-                {
                     acquiredOns = new List<ApproximableDate>();
-                }
+                
                 _acquiredOns = acquiredOns;
                 foreach (var acquiredOn in acquiredOns)
-                {
                     element.Add(acquiredOn.ElementCopy);
-                }
 
                 Util.Util.AddDDMSAttribute(element, CREATED_NAME, created);
                 Util.Util.AddDDMSAttribute(element, POSTED_NAME, posted);
@@ -409,43 +378,25 @@ namespace DDMSense.DDMS.ResourceElements
         {
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
             if (!String.IsNullOrEmpty(CreatedString))
-            {
                 Util.Util.RequireDDMSDateFormat(CreatedString, Namespace);
-            }
             if (!String.IsNullOrEmpty(PostedString))
-            {
                 Util.Util.RequireDDMSDateFormat(PostedString, Namespace);
-            }
             if (!String.IsNullOrEmpty(ValidTilString))
-            {
                 Util.Util.RequireDDMSDateFormat(ValidTilString, Namespace);
-            }
             if (!String.IsNullOrEmpty(InfoCutOffString))
-            {
                 Util.Util.RequireDDMSDateFormat(InfoCutOffString, Namespace);
-            }
             if (!String.IsNullOrEmpty(ApprovedOnString))
-            {
                 Util.Util.RequireDDMSDateFormat(ApprovedOnString, Namespace);
-            }
             if (!String.IsNullOrEmpty(ReceivedOnString))
-            {
                 Util.Util.RequireDDMSDateFormat(ReceivedOnString, Namespace);
-            }
 
             // Should be reviewed as additional versions of DDMS are supported.
             if (!DDMSVersion.IsAtLeast("3.1") && !String.IsNullOrEmpty(ApprovedOnString))
-            {
                 throw new InvalidDDMSException("This component cannot have an approvedOn date until DDMS 3.1 or later.");
-            }
             if (!DDMSVersion.IsAtLeast("4.0.1") && !String.IsNullOrEmpty(ReceivedOnString))
-            {
                 throw new InvalidDDMSException("This component cannot have a receivedOn date until DDMS 4.0.1 or later.");
-            }
             if (!DDMSVersion.IsAtLeast("4.1") && AcquiredOns.Count > 0)
-            {
                 throw new InvalidDDMSException("This component cannot have an acquiredOn date until DDMS 4.1 or later.");
-            }
 
             base.Validate();
         }
@@ -470,13 +421,9 @@ namespace DDMSense.DDMS.ResourceElements
                 String.IsNullOrEmpty(ValidTilString) && String.IsNullOrEmpty(InfoCutOffString) &&
                 String.IsNullOrEmpty(ApprovedOnString) && String.IsNullOrEmpty(ReceivedOnString) &&
                 AcquiredOns.Count == 0)
-            {
                 AddWarning("A completely empty ddms:dates element was found.");
-            }
             if (AcquiredOns.Count > 0)
-            {
                 AddDdms40Warning("ddms:acquiredOn element");
-            }
 
             base.ValidateWarnings();
         }
@@ -500,9 +447,8 @@ namespace DDMSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is Dates))
-            {
                 return (false);
-            }
+            
             var test = (Dates) obj;
             return (CreatedString.Equals(test.CreatedString) && PostedString.Equals(test.PostedString) &&
                     ValidTilString.Equals(test.ValidTilString) && InfoCutOffString.Equals(test.InfoCutOffString) &&
@@ -542,31 +488,23 @@ namespace DDMSense.DDMS.ResourceElements
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = -2857638896738260719L;
-            internal List<ApproximableDate.Builder> _acquiredOns;
-            internal string _approvedOn;
-            internal string _created;
-            internal string _infoCutOff;
-            internal string _posted;
-            internal string _receivedOn;
-            internal string _validTil;
-
+            
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                AcquiredOns = new List<ApproximableDate.Builder>();
             }
 
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
-            public Builder(Dates dates)
+            public Builder(Dates dates) : this()
             {
                 foreach (var acquiredOn in dates.AcquiredOns)
-                {
                     AcquiredOns.Add(new ApproximableDate.Builder(acquiredOn));
-                }
+                
                 Created = dates.CreatedString;
                 Posted = dates.PostedString;
                 ValidTil = dates.ValidTilString;
@@ -578,93 +516,50 @@ namespace DDMSense.DDMS.ResourceElements
             /// <summary>
             ///     Builder accessor for the acquiredOn dates
             /// </summary>
-            public virtual List<ApproximableDate.Builder> AcquiredOns
-            {
-                get
-                {
-                    if (_acquiredOns == null)
-                    {
-                        _acquiredOns = new List<ApproximableDate.Builder>();
-                    }
-                    return _acquiredOns;
-                }
-                set { _acquiredOns = value; }
-            }
+            public virtual List<ApproximableDate.Builder> AcquiredOns {get;set;}
 
             /// <summary>
             ///     Builder accessor for the created date.
             /// </summary>
-            public virtual string Created
-            {
-                get { return _created; }
-                set { _created = value; }
-            }
-
+            public virtual string Created { get; set; }
 
             /// <summary>
             ///     Builder accessor for the posted date.
             /// </summary>
-            public virtual string Posted
-            {
-                get { return _posted; }
-                set { _posted = value; }
-            }
-
+            public virtual string Posted { get; set; }
 
             /// <summary>
             ///     Builder accessor for the validTil date.
             /// </summary>
-            public virtual string ValidTil
-            {
-                get { return _validTil; }
-                set { _validTil = value; }
-            }
-
+            public virtual string ValidTil { get; set; }
 
             /// <summary>
             ///     Builder accessor for the infoCutOff date.
             /// </summary>
-            public virtual string InfoCutOff
-            {
-                get { return _infoCutOff; }
-                set { _infoCutOff = value; }
-            }
-
+            public virtual string InfoCutOff { get; set; }
 
             /// <summary>
             ///     Builder accessor for the approvedOn date.
             /// </summary>
-            public virtual string ApprovedOn
-            {
-                get { return _approvedOn; }
-                set { _approvedOn = value; }
-            }
-
+            public virtual string ApprovedOn { get; set; }
 
             /// <summary>
             ///     Builder accessor for the receivedOn
             /// </summary>
-            public virtual string ReceivedOn
-            {
-                get { return _receivedOn; }
-                set { _receivedOn = value; }
-            }
+            public virtual string ReceivedOn { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
+                
                 var acquiredOns = new List<ApproximableDate>();
                 foreach (IBuilder builder in AcquiredOns)
                 {
                     var component = (ApproximableDate) builder.Commit();
                     if (component != null)
-                    {
                         acquiredOns.Add(component);
-                    }
                 }
                 return (new Dates(acquiredOns, Created, Posted, ValidTil, InfoCutOff, ApprovedOn, ReceivedOn));
             }
@@ -676,12 +571,15 @@ namespace DDMSense.DDMS.ResourceElements
                 {
                     bool hasValueInList = false;
                     foreach (IBuilder builder in AcquiredOns)
-                    {
                         hasValueInList = hasValueInList || !builder.Empty;
-                    }
-                    return (!hasValueInList && String.IsNullOrEmpty(Created) && String.IsNullOrEmpty(Posted) &&
-                            String.IsNullOrEmpty(ValidTil) && String.IsNullOrEmpty(InfoCutOff) &&
-                            String.IsNullOrEmpty(ApprovedOn) && String.IsNullOrEmpty(ReceivedOn));
+                
+                    return (!hasValueInList && 
+                            String.IsNullOrEmpty(Created) && 
+                            String.IsNullOrEmpty(Posted) &&
+                            String.IsNullOrEmpty(ValidTil) && 
+                            String.IsNullOrEmpty(InfoCutOff) &&
+                            String.IsNullOrEmpty(ApprovedOn) && 
+                            String.IsNullOrEmpty(ReceivedOn));
                 }
             }
         }

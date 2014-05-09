@@ -9,34 +9,8 @@ using DDMSense.Util;
 
 #endregion
 
-/* Copyright 2010 - 2013 by Brian Uri!
-   
-   This file is part of DDMSence.
-   
-   This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
-   License as published by the Free Software Foundation.
-   
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-   GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
-   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
-   You can contact the author at ddmsence@urizone.net. The DDMSence
-   home page is located at http://ddmsence.urizone.net/
-*/
-
 namespace DDMSense.DDMS.ResourceElements
 {
-    #region usings
-
-    using Element = XElement;
-
-    #endregion
-
     /// <summary>
     ///     An immutable implementation of ddms:resourceManagement.
     ///     <table class="info">
@@ -73,51 +47,40 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    ///     @since 2.0.0
+
+
     /// </summary>
     public sealed class ResourceManagement : AbstractBaseComponent
     {
-        private readonly List<ProcessingInfo> _processingInfos;
-        private readonly List<TaskingInfo> _taskingInfos;
-        private SecurityAttributes _securityAttributes;
-
         /// <summary>
         ///     Constructor for creating a component from a XOM Element
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ResourceManagement(Element element)
+        public ResourceManagement(XElement element)
         {
             RevisionRecall = null;
             RecordsManagementInfo = null;
             try
             {
                 SetElement(element, false);
-                Element recordsManagementInfo =
-                    element.Element(XName.Get(RecordsManagementInfo.GetName(DDMSVersion), Namespace));
+                XElement recordsManagementInfo = element.Element(XName.Get(RecordsManagementInfo.GetName(DDMSVersion), Namespace));
                 if (recordsManagementInfo != null)
-                {
                     RecordsManagementInfo = new RecordsManagementInfo(recordsManagementInfo);
-                }
-                Element revisionRecall = element.Element(XName.Get(RevisionRecall.GetName(DDMSVersion), Namespace));
+                XElement revisionRecall = element.Element(XName.Get(RevisionRecall.GetName(DDMSVersion), Namespace));
                 if (revisionRecall != null)
-                {
                     RevisionRecall = new RevisionRecall(revisionRecall);
-                }
-                _taskingInfos = new List<TaskingInfo>();
-                IEnumerable<Element> taskingInfos =
-                    element.Elements(XName.Get(TaskingInfo.GetName(DDMSVersion), Namespace));
+                TaskingInfos = new List<TaskingInfo>();
+                IEnumerable<XElement> taskingInfos = element.Elements(XName.Get(TaskingInfo.GetName(DDMSVersion), Namespace));
                 foreach (var taskingInfo in taskingInfos)
-                    _taskingInfos.Add(new TaskingInfo(taskingInfo));
+                    TaskingInfos.Add(new TaskingInfo(taskingInfo));
 
-                _processingInfos = new List<ProcessingInfo>();
-                IEnumerable<Element> processingInfos =
-                    element.Elements(XName.Get(ProcessingInfo.GetName(DDMSVersion), Namespace));
+                ProcessingInfos = new List<ProcessingInfo>();
+                IEnumerable<XElement> processingInfos = element.Elements(XName.Get(ProcessingInfo.GetName(DDMSVersion), Namespace));
                 foreach (var processingInfo in processingInfos)
-                    _processingInfos.Add(new ProcessingInfo(processingInfo));
+                    ProcessingInfos.Add(new ProcessingInfo(processingInfo));
 
-                _securityAttributes = new SecurityAttributes(element);
+                SecurityAttributes = new SecurityAttributes(element);
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -136,47 +99,37 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="processingInfos"> list of processing info (optional) </param>
         /// <param name="securityAttributes"> security attributes (optional) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ResourceManagement(RecordsManagementInfo recordsManagementInfo, RevisionRecall revisionRecall,
-            List<TaskingInfo> taskingInfos, List<ProcessingInfo> processingInfos, SecurityAttributes securityAttributes)
+        public ResourceManagement(RecordsManagementInfo recordsManagementInfo, RevisionRecall revisionRecall, List<TaskingInfo> taskingInfos, List<ProcessingInfo> processingInfos, SecurityAttributes securityAttributes)
         {
             RevisionRecall = null;
             RecordsManagementInfo = null;
             try
             {
                 if (taskingInfos == null)
-                {
                     taskingInfos = new List<TaskingInfo>();
-                }
                 if (processingInfos == null)
-                {
                     processingInfos = new List<ProcessingInfo>();
-                }
 
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
                 SetElement(element, false);
                 if (recordsManagementInfo != null)
-                {
                     element.Add(recordsManagementInfo.ElementCopy);
-                }
+
                 if (revisionRecall != null)
-                {
                     element.Add(revisionRecall.ElementCopy);
-                }
+
                 foreach (var info in taskingInfos)
-                {
                     element.Add(info.ElementCopy);
-                }
+
                 foreach (var info in processingInfos)
-                {
                     element.Add(info.ElementCopy);
-                }
 
                 RecordsManagementInfo = recordsManagementInfo;
                 RevisionRecall = revisionRecall;
-                _taskingInfos = taskingInfos;
-                _processingInfos = processingInfos;
-                _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
-                _securityAttributes.AddTo(element);
+                TaskingInfos = taskingInfos;
+                ProcessingInfos = processingInfos;
+                SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
+                SecurityAttributes.AddTo(element);
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -213,27 +166,17 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Accessor for the tasking information
         /// </summary>
-        public List<TaskingInfo> TaskingInfos
-        {
-            get { return _taskingInfos; }
-        }
+        public List<TaskingInfo> TaskingInfos { get; private set; }
 
         /// <summary>
         ///     Accessor for the processing information
         /// </summary>
-        public List<ProcessingInfo> ProcessingInfos
-        {
-            get { return _processingInfos; }
-        }
+        public List<ProcessingInfo> ProcessingInfos { get; private set; }
 
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
-        public override SecurityAttributes SecurityAttributes
-        {
-            get { return (_securityAttributes); }
-            set { _securityAttributes = value; }
-        }
+        public override SecurityAttributes SecurityAttributes { get; set; }
 
         /// <summary>
         ///     Validates the component.
@@ -270,13 +213,11 @@ namespace DDMSense.DDMS.ResourceElements
             string localPrefix = BuildPrefix(prefix, Name, suffix + ".");
             var text = new StringBuilder();
             if (RecordsManagementInfo != null)
-            {
                 text.Append(RecordsManagementInfo.GetOutput(isHtml, localPrefix, ""));
-            }
+
             if (RevisionRecall != null)
-            {
                 text.Append(RevisionRecall.GetOutput(isHtml, localPrefix, ""));
-            }
+
             text.Append(BuildOutput(isHtml, localPrefix, TaskingInfos));
             text.Append(BuildOutput(isHtml, localPrefix, ProcessingInfos));
             text.Append(SecurityAttributes.GetOutput(isHtml, localPrefix));
@@ -287,9 +228,8 @@ namespace DDMSense.DDMS.ResourceElements
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj) || !(obj is ResourceManagement))
-            {
                 return (false);
-            }
+
             return (true);
         }
 
@@ -307,159 +247,89 @@ namespace DDMSense.DDMS.ResourceElements
         /// <summary>
         ///     Builder for this DDMS component.
         /// </summary>
-        /// <see cref="IBuilder
-        /// @author Brian Uri!
-        /// @since 2.0.0"></see>
+        /// <see cref="IBuilder"></see>
         [Serializable]
         public class Builder : IBuilder
         {
-            internal const long SerialVersionUID = 7851044806424206976L;
-            internal List<ProcessingInfo.Builder> _processingInfos;
-            internal RecordsManagementInfo.Builder _recordsManagementInfo;
-            internal RevisionRecall.Builder _revisionRecall;
-            internal SecurityAttributes.Builder _securityAttributes;
-            internal List<TaskingInfo.Builder> _taskingInfos;
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
             {
+                ProcessingInfos = new List<ProcessingInfo.Builder>();
+                RecordsManagementInfo = new RecordsManagementInfo.Builder();
+                RevisionRecall = new RevisionRecall.Builder();
+                SecurityAttributes = new SecurityAttributes.Builder();
+                TaskingInfos = new List<TaskingInfo.Builder>();
             }
 
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
             public Builder(ResourceManagement resourceManagement)
+                : this()
             {
                 if (resourceManagement.RecordsManagementInfo != null)
-                {
                     RecordsManagementInfo = new RecordsManagementInfo.Builder(resourceManagement.RecordsManagementInfo);
-                }
+
                 if (resourceManagement.RevisionRecall != null)
-                {
                     RevisionRecall = new RevisionRecall.Builder(resourceManagement.RevisionRecall);
-                }
+
                 foreach (var info in resourceManagement.TaskingInfos)
-                {
                     TaskingInfos.Add(new TaskingInfo.Builder(info));
-                }
+
                 foreach (var info in resourceManagement.ProcessingInfos)
-                {
                     ProcessingInfos.Add(new ProcessingInfo.Builder(info));
-                }
+
                 SecurityAttributes = new SecurityAttributes.Builder(resourceManagement.SecurityAttributes);
             }
 
             /// <summary>
             ///     Builder accessor for the recordsManagementInfo
             /// </summary>
-            public virtual RecordsManagementInfo.Builder RecordsManagementInfo
-            {
-                get
-                {
-                    if (_recordsManagementInfo == null)
-                    {
-                        _recordsManagementInfo = new RecordsManagementInfo.Builder();
-                    }
-                    return _recordsManagementInfo;
-                }
-                set { _recordsManagementInfo = value; }
-            }
-
+            public virtual RecordsManagementInfo.Builder RecordsManagementInfo { get; set; }
 
             /// <summary>
             ///     Builder accessor for the revisionRecall
             /// </summary>
-            public virtual RevisionRecall.Builder RevisionRecall
-            {
-                get
-                {
-                    if (_revisionRecall == null)
-                    {
-                        _revisionRecall = new RevisionRecall.Builder();
-                    }
-                    return _revisionRecall;
-                }
-                set { _revisionRecall = value; }
-            }
-
+            public virtual RevisionRecall.Builder RevisionRecall { get; set; }
 
             /// <summary>
             ///     Builder accessor for the taskingInfos
             /// </summary>
-            public virtual List<TaskingInfo.Builder> TaskingInfos
-            {
-                get
-                {
-                    if (_taskingInfos == null)
-                    {
-                        _taskingInfos = new List<TaskingInfo.Builder>();
-                    }
-                    return _taskingInfos;
-                }
-            }
+            public virtual List<TaskingInfo.Builder> TaskingInfos { get; private set; }
 
             /// <summary>
             ///     Builder accessor for the processingInfos
             /// </summary>
-            public virtual List<ProcessingInfo.Builder> ProcessingInfos
-            {
-                get
-                {
-                    if (_processingInfos == null)
-                    {
-                        _processingInfos = new List<ProcessingInfo.Builder>();
-                    }
-                    return _processingInfos;
-                }
-            }
+            public virtual List<ProcessingInfo.Builder> ProcessingInfos { get; private set; }
 
             /// <summary>
             ///     Builder accessor for the Security Attributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes
-            {
-                get
-                {
-                    if (_securityAttributes == null)
-                    {
-                        _securityAttributes = new SecurityAttributes.Builder();
-                    }
-                    return _securityAttributes;
-                }
-                set { _securityAttributes = value; }
-            }
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
                 if (Empty)
-                {
                     return (null);
-                }
+
                 var taskingInfos = new List<TaskingInfo>();
                 foreach (var builder in TaskingInfos)
                 {
-                    var info = (TaskingInfo) builder.Commit();
+                    var info = (TaskingInfo)builder.Commit();
                     if (info != null)
-                    {
                         taskingInfos.Add(info);
-                    }
                 }
                 var processingInfos = new List<ProcessingInfo>();
                 foreach (var builder in ProcessingInfos)
                 {
-                    var point = (ProcessingInfo) builder.Commit();
+                    var point = (ProcessingInfo)builder.Commit();
                     if (point != null)
-                    {
                         processingInfos.Add(point);
-                    }
                 }
-                return
-                    (new ResourceManagement((RecordsManagementInfo) RecordsManagementInfo.Commit(),
-                        (RevisionRecall) RevisionRecall.Commit(), taskingInfos, processingInfos,
-                        SecurityAttributes.Commit()));
+                return (new ResourceManagement((RecordsManagementInfo)RecordsManagementInfo.Commit(), (RevisionRecall)RevisionRecall.Commit(), taskingInfos, processingInfos, SecurityAttributes.Commit()));
             }
 
             /// <see cref="IBuilder#isEmpty()"></see>
@@ -469,13 +339,11 @@ namespace DDMSense.DDMS.ResourceElements
                 {
                     bool hasValueInList = false;
                     foreach (IBuilder builder in ProcessingInfos)
-                    {
                         hasValueInList = hasValueInList || !builder.Empty;
-                    }
+                    
                     foreach (IBuilder builder in TaskingInfos)
-                    {
                         hasValueInList = hasValueInList || !builder.Empty;
-                    }
+                    
                     return (!hasValueInList && RecordsManagementInfo.Empty && RevisionRecall.Empty &&
                             SecurityAttributes.Empty);
                 }

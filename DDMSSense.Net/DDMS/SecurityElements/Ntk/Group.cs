@@ -68,7 +68,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
     ///         </tr>
     ///     </table>
     
-    ///     @since 2.0.0
+    
     /// </summary>
     public sealed class Group : AbstractAccessEntity
     {
@@ -214,7 +214,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         /// @since 2.0.0"></see>
         public class Builder : AbstractAccessEntity.Builder
         {
-            internal const long SerialVersionUID = 7851044806424206976L;
+            
             internal List<GroupValue.Builder> _groupValues;
 
             /// <summary>
