@@ -305,7 +305,7 @@ namespace DDMSense.Util
         /// <returns> true if the list only has null or empty values </returns>
         public static bool ContainsOnlyEmptyValues(List<string> list)
         {
-			return list.Any(s => String.IsNullOrEmpty(s));
+			return list.All(s => String.IsNullOrEmpty(s));
         }
 
         /// <summary>
