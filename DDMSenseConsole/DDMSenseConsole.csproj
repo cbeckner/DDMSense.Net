@@ -610,7 +610,28 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="4.1-ddmsenceExample.xml">
+    <Content Include="SampleXML\2.0-earlierVersionExample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleXML\3.0-extensibleLayerExample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleXML\3.0-invalidResourceExample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleXML\3.1-boundingGeometryExample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleXML\3.1-identifierPostalAddressExample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleXML\4.1-ddmsenceExample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleXML\4.1-irmExample.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleXML\5.0-ddmsenceExample.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="schemas\2.0\ISM\CVE\CVEnumISM25X.xml">

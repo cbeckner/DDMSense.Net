@@ -16,8 +16,8 @@ namespace DDMSenseConsole
 
         static void Main(string[] args)
         {
-
-            loadFile(new FileInfo(@"4.1-ddmsenceExample.xml"));
+            string sampleXML = Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "SampleXML");
+            loadFile(new FileInfo(Path.Combine(sampleXML, "3.1-identifierPostalAddressExample.xml")));
         }
 
         private static void loadFile(FileInfo file)
