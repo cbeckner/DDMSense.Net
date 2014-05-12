@@ -33,7 +33,7 @@ namespace DDMSense.Util
 		private static XslCompiledTransform _schematronIncludeTransform;
 
 		private static readonly IDictionary<string, XslCompiledTransform> _schematronSvrlTransforms = new Dictionary<string, XslCompiledTransform>();
-        
+		
 		static Util()
 		{
 			XmlSpecialChars.Add("&", "&amp;");
@@ -515,10 +515,10 @@ namespace DDMSense.Util
 		}
 
 		/// <summary>
-        ///     DoD Discovery Metadata Specification
-        ///     * Table C7.T11. dates Category / Element * 
+		///     DoD Discovery Metadata Specification
+		///     * Table C7.T11. dates Category / Element * 
 		///     Asserts that a date format is one of the 5 types accepted by DDMS.
-        ///     YYYY
+		///     YYYY
 		///		YYYY-MM
 		///		YYYY-MM-DD
 		///		YYYY-MM-DDThhTZD
@@ -556,7 +556,7 @@ namespace DDMSense.Util
 										"yyyy-MM-ddTHH:mm:ss.fK",
 										"yyyy-MM-ddTHH:mm:ss.ffK",
 										"yyyy-MM-ddTHH:mm:ss.fffK"
-                                    };
+									};
 			try
 			{
 				DateTime calendar;
