@@ -205,7 +205,8 @@ namespace DDMSense.DDMS
                     _createDate = DateTime.Parse(createDate);
 
                 CompliesWiths = Util.Util.GetXsListAsList(GetAttributeValue(COMPLIES_WITH_NAME, ismNamespace));
-                string ismDESVersion = element.Attribute(XName.Get(DES_VERSION_NAME, ismNamespace)).Value;
+                
+                string ismDESVersion = (string)element.Attribute(XName.Get(DES_VERSION_NAME, ismNamespace));
                 if (!String.IsNullOrEmpty(ismDESVersion))
                 {
                     try
@@ -219,8 +220,7 @@ namespace DDMSense.DDMS
                 }
                 if (DDMSVersion.IsAtLeast("4.0.1"))
                 {
-                    string ntkDESVersion =
-                        element.Attribute(XName.Get(DES_VERSION_NAME, DDMSVersion.NtkNamespace)).Value;
+                    string ntkDESVersion = (string)element.Attribute(XName.Get(DES_VERSION_NAME, DDMSVersion.NtkNamespace));
                     if (!String.IsNullOrEmpty(ntkDESVersion))
                     {
                         try
@@ -520,7 +520,7 @@ namespace DDMSense.DDMS
                         throw new InvalidDDMSException("The ISM:createDate attribute is not in a valid date format.");
                     }
                     Util.Util.AddAttribute(element, ismPrefix, CREATE_DATE_NAME, version.IsmNamespace,
-                        CreateDate.ToString("o"));
+                        CreateDate.Value.ToString("o"));
                 }
                 NoticeAttributes = NoticeAttributes.GetNonNullInstance(noticeAttributes);
                 NoticeAttributes.AddTo(element);
@@ -744,9 +744,14 @@ namespace DDMSense.DDMS
         /// <summary>
         ///     Accessor for the createDate date (optional). Returns a copy. This may be null for v2.0 Resource components.
         /// </summary>
-        public DateTime CreateDate
+        public DateTime? CreateDate
         {
-            get { return DateTime.Parse(_createDate.Value.ToString("o")); }
+            get {
+                if (_createDate.HasValue)
+                    return DateTime.Parse(_createDate.Value.ToString("o"));
+                else
+                    return null;
+            }
             set { _createDate = value; }
         }
 
@@ -1074,8 +1079,8 @@ namespace DDMSense.DDMS
             if (ResourceElement != null)
                 text.Append(BuildOutput(isHtml, localPrefix + RESOURCE_ELEMENT_NAME, Convert.ToString(ResourceElement)));
 
-            if (CreateDate != null)
-                text.Append(BuildOutput(isHtml, localPrefix + CREATE_DATE_NAME, CreateDate.ToString("o")));
+            if (CreateDate.HasValue)
+                text.Append(BuildOutput(isHtml, localPrefix + CREATE_DATE_NAME, CreateDate.Value.ToString("o")));
 
             text.Append(BuildOutput(isHtml, localPrefix + COMPLIES_WITH_NAME, Util.Util.GetXsList(CompliesWiths)));
             if (IsmDESVersion != null)
@@ -1287,8 +1292,8 @@ namespace DDMSense.DDMS
                     else if (component is ExtensibleElement)
                         ExtensibleElements.Add(new ExtensibleElement.Builder((ExtensibleElement)component));
                 }
-                if (resource.CreateDate != null)
-                    CreateDate = resource.CreateDate.ToString("o");
+                if (resource.CreateDate.HasValue)
+                    CreateDate = resource.CreateDate.Value.ToString("o");
 
                 ResourceElement = resource.ResourceElement;
                 CompliesWiths = resource.CompliesWiths;

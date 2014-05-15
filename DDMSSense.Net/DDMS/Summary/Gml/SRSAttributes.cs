@@ -97,19 +97,20 @@ namespace DDMSense.DDMS.Summary.Gml
         /// <param name="element"> the XOM element which is decorated with these attributes. </param>
         public SRSAttributes(Element element) : base(element.Name.NamespaceName)
         {
-            _srsName = element.Attribute(XName.Get(SRS_NAME_NAME, NO_NAMESPACE)).Value;
-            string srsDimension = element.Attribute(XName.Get(SRS_DIMENSION_NAME, NO_NAMESPACE)).Value;
+            _srsName = (string)element.Attribute(XName.Get(SRS_NAME_NAME, NO_NAMESPACE));
+            
+            string srsDimension = (string)element.Attribute(XName.Get(SRS_DIMENSION_NAME, NO_NAMESPACE));
             if (!String.IsNullOrEmpty(srsDimension))
             {
                 _srsDimension = Convert.ToInt32(srsDimension);
             }
-            string axisLabels = element.Attribute(XName.Get(AXIS_LABELS_NAME, NO_NAMESPACE)).Value;
+            string axisLabels = (string)element.Attribute(XName.Get(AXIS_LABELS_NAME, NO_NAMESPACE));
             _axisLabels = new List<string>();
             if (!String.IsNullOrEmpty(axisLabels))
             {
                 _axisLabels.AddRange(Util.Util.GetXsListAsList(axisLabels));
             }
-            string uomLabels = element.Attribute(XName.Get(UOM_LABELS_NAME, NO_NAMESPACE)).Value;
+            string uomLabels = (string)element.Attribute(XName.Get(UOM_LABELS_NAME, NO_NAMESPACE));
             _uomLabels = new List<string>();
             if (!String.IsNullOrEmpty(uomLabels))
             {

@@ -645,8 +645,10 @@ namespace DDMSense.Util
 		/// <exception cref="InvalidDDMSException"> </exception>
 		public static void RequireValidLatitude(double? value)
 		{
-            if (value == null || (-90D).CompareTo(value) > 0 || (90D).CompareTo(value) < 0)
-				throw new InvalidDDMSException("A latitude value must be between -90 and 90 degrees: " + value);
+			if (!value.HasValue
+				|| (value.HasValue && (-90D).CompareTo(value.Value) > 0)
+				|| (value.HasValue && (90D).CompareTo(value.Value) < 0))
+				throw new InvalidDDMSException(string.Format("A latitude value must be between -90 and 90 degrees: {0}", value.HasValue ? value.Value.ToString() : "No value provided"));
 		}
 
 		/// <summary>
@@ -656,8 +658,10 @@ namespace DDMSense.Util
 		/// <exception cref="InvalidDDMSException"> </exception>
 		public static void RequireValidLongitude(double? value)
 		{
-            if (value == null || (-180D).CompareTo(value) > 0 || (180D).CompareTo(value) < 0)
-				throw new InvalidDDMSException("A longitude value must be between -180 and 180 degrees: " + value);
+			if (!value.HasValue
+				|| (value.HasValue && (-180D).CompareTo(value.Value) > 0)
+				|| (value.HasValue && (180D).CompareTo(value.Value) < 0))
+				throw new InvalidDDMSException(string.Format("A longitude value must be between -180 and 180 degrees: {0}", value.HasValue ? value.Value.ToString() : "No value provided"));
 		}
 
 		/// <summary>
