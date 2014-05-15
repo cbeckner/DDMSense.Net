@@ -58,7 +58,7 @@ namespace DDMSense.DDMS.ResourceElements
                 Util.Util.RequireDDMSValue("element", element);
                 if (element.Nodes().Count() > 1)
                 {
-                    var organizationElement = (XElement) element.FirstNode;
+                    var organizationElement = (XElement) element.FirstNode.NextNode;
                     if (organizationElement != null)
                         Organization = new Organization(organizationElement);
                 }

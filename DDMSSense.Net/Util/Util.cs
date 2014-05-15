@@ -601,7 +601,7 @@ namespace DDMSense.Util
 			RequireValue("uri", uri);
 			try
 			{
-				new Uri(uri);
+                new Uri(uri, UriKind.RelativeOrAbsolute);
 			}
 			catch (UriFormatException e)
 			{
@@ -645,7 +645,7 @@ namespace DDMSense.Util
 		/// <exception cref="InvalidDDMSException"> </exception>
 		public static void RequireValidLatitude(double? value)
 		{
-			if (value == null || (-90L).CompareTo(value) > 0 || (90L).CompareTo(value) < 0)
+            if (value == null || (-90D).CompareTo(value) > 0 || (90D).CompareTo(value) < 0)
 				throw new InvalidDDMSException("A latitude value must be between -90 and 90 degrees: " + value);
 		}
 
@@ -656,7 +656,7 @@ namespace DDMSense.Util
 		/// <exception cref="InvalidDDMSException"> </exception>
 		public static void RequireValidLongitude(double? value)
 		{
-			if (value == null || (-180L).CompareTo(value) > 0 || (180L).CompareTo(value) < 0)
+            if (value == null || (-180D).CompareTo(value) > 0 || (180D).CompareTo(value) < 0)
 				throw new InvalidDDMSException("A longitude value must be between -180 and 180 degrees: " + value);
 		}
 

@@ -25,7 +25,17 @@ namespace DDMSenseConsole
         public Program()
         {
             string sampleXML = Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "SampleXML");
-            loadFile(new FileInfo(Path.Combine(sampleXML, DDMSENCEEXAMPLE4_1)));
+
+            loadFile(new FileInfo(Path.Combine(sampleXML,
+                        //EARLIER_VERSION_EXAMPLE_2_0
+                        //EXTENSIBLE_LAYER_EXAMPLE_3_0
+                        //INVALID_RESOURCE_EXAMPLE_3_0
+                        //BOUNDING_GEOMETRY_EXAMPLE_3_1
+                        //IDENTIFIER_POSTAL_ADDRESS_EXAMPLE_3_1
+                        //DDMSENCEEXAMPLE4_1
+                        IRM_EXAMPLE_4_1
+                        //DDMSENCE_EXAMPLE_5_0
+            )));
         }
 
         static void Main(string[] args)
@@ -37,16 +47,16 @@ namespace DDMSenseConsole
         {
             //DDMSVersion version = DDMSVersion.GetVersionFor("4.1"); // DDMSVersion.GetCurrentVersion();
 
-            //var reader = new DDMSReader();
+            var reader = new DDMSReader();
 
-            //_resource = reader.GetDDMSResourceFromFile(file.FullName);
+            _resource = reader.GetDDMSResourceFromFile(file.FullName);
        
-            //string xmlFormat = getResource().ToXML();
-            //string htmlFormat = getResource().ToHTML();
-            //string textFormat = getResource().ToText();
+            string xmlFormat = getResource().ToXML();
+            string htmlFormat = getResource().ToHTML();
+            string textFormat = getResource().ToText();
 
             //_resource = new Resource()
-            Resource.Builder builder = new Resource.Builder();
+            //Resource.Builder builder = new Resource.Builder();
         }
 
         /**

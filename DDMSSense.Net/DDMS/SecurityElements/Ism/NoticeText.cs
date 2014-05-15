@@ -54,7 +54,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         {
             try
             {
-                string pocTypes = element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace)).Value;
+                string pocTypes = (string)element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace));
                 PocTypes = Util.Util.GetXsListAsList(pocTypes);
                 Validate();
             }

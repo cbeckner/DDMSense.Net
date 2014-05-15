@@ -153,14 +153,14 @@ namespace DDMSense.DDMS.Summary.Xlink
         public XLinkAttributes(Element element) : base(element.Name.NamespaceName)
         {
             string xlinkNamespace = DDMSVersion.XlinkNamespace;
-            _type = element.Attribute(XName.Get(TYPE_NAME, xlinkNamespace)).Value;
-            _href = element.Attribute(XName.Get(HREF_NAME, xlinkNamespace)).Value;
-            _role = element.Attribute(XName.Get(ROLE_NAME, xlinkNamespace)).Value;
-            _title = element.Attribute(XName.Get(TITLE_NAME, xlinkNamespace)).Value;
-            _label = element.Attribute(XName.Get(LABEL_NAME, xlinkNamespace)).Value;
-            _arcrole = element.Attribute(XName.Get(ARC_ROLE_NAME, xlinkNamespace)).Value;
-            _show = element.Attribute(XName.Get(SHOW_NAME, xlinkNamespace)).Value;
-            _actuate = element.Attribute(XName.Get(ACTUATE_NAME, xlinkNamespace)).Value;
+            _type = (string)element.Attribute(XName.Get(TYPE_NAME, xlinkNamespace));
+            _href = (string)element.Attribute(XName.Get(HREF_NAME, xlinkNamespace));
+            _role = (string)element.Attribute(XName.Get(ROLE_NAME, xlinkNamespace));
+            _title = (string)element.Attribute(XName.Get(TITLE_NAME, xlinkNamespace));
+            _label = (string)element.Attribute(XName.Get(LABEL_NAME, xlinkNamespace));
+            _arcrole = (string)element.Attribute(XName.Get(ARC_ROLE_NAME, xlinkNamespace));
+            _show = (string)element.Attribute(XName.Get(SHOW_NAME, xlinkNamespace));
+            _actuate = (string)element.Attribute(XName.Get(ACTUATE_NAME, xlinkNamespace));
             Validate();
         }
 

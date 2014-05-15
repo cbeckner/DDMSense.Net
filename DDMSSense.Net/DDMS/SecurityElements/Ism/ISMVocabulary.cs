@@ -239,6 +239,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                                 }
                                 catch (Exception)
                                 {
+                                    continue;
                                 }
                             }
                         }
@@ -272,7 +273,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             foreach (var term in terms)
             {
                 XElement value = term.Element(XName.Get(VALUE_NAME, cveNamespace));
-                bool isPattern = Convert.ToBoolean(value.Attribute(REG_EXP_NAME));
+                bool isPattern = Convert.ToBoolean((string)value.Attribute(REG_EXP_NAME));
                 if (value != null)
                 {
                     if (isPattern)
@@ -281,8 +282,12 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                         tokens.Add(value.Value);
                 }
             }
-            LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, tokens);
-            LOCATION_TO_ENUM_PATTERNS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, patterns);
+
+            if(!LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation).ContainsKey(enumerationKey))
+                LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, tokens);
+
+            if (!LOCATION_TO_ENUM_PATTERNS.GetValueOrNull(LastEnumLocation).ContainsKey(enumerationKey))
+                LOCATION_TO_ENUM_PATTERNS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, patterns);
         }
 
         /// <summary>
