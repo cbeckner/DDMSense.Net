@@ -18,10 +18,10 @@ namespace DDMSense.Util.Tests
 			Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy"), "urn:us:mil:ces:metadata:ddms:4");
 			Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM"), "urn:us:mil:ces:metadata:ddms:4");
 			Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-dd"), "urn:us:mil:ces:metadata:ddms:4");
-            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHHK"), "urn:us:mil:ces:metadata:ddms:4");
-            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
-            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.ffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
-            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+			Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHHK"), "urn:us:mil:ces:metadata:ddms:4");
+			Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+			Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.ffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+			Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
 		}
 
 		[TestMethod()]
@@ -29,10 +29,10 @@ namespace DDMSense.Util.Tests
 		public void Invalid_RequireDDMSDateFormat()
 		{
 			//Util.RequireDDMSDateFormat(DateTime.Now.ToString(), "urn:us:mil:ces:metadata:ddms:4");
-            //Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy/MM/ddTHHK"), "urn:us:mil:ces:metadata:ddms:4");
-            //Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.f"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
-            //Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.ffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
-            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+			//Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy/MM/ddTHHK"), "urn:us:mil:ces:metadata:ddms:4");
+			//Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.f"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+			//Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.ffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+			Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
 		}
 	}
 }

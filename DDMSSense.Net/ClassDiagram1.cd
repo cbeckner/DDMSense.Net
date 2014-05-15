@@ -86,8 +86,19 @@
       <FileName>DDMS\Metacard\MetacardInfo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DDMSense.DDMS.Resource" Collapsed="true">
+  <Class Name="DDMSense.DDMS.Resource">
     <Position X="25.25" Y="9.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="DDMSense.DDMS.Resource.Builder">
+        <TypeIdentifier>
+          <NewMemberFileName>DDMS\Resource.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AkAEJKlAGgCiQEEE5BJAAgAEAIgQAcggAACFJAJCBRA=</HashCode>
       <FileName>DDMS\Resource.cs</FileName>
@@ -95,6 +106,14 @@
   </Class>
   <Class Name="DDMSense.DDMS.ResourceElements.Dates" Collapsed="true">
     <Position X="27.5" Y="9.5" Width="1.75" />
+    <NestedTypes>
+      <Class Name="DDMSense.DDMS.ResourceElements.Dates.Builder" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DDMS\ResourceElements\Dates.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>ACAEMAAAAgCIQQAUwAAAAAAQAACAEJQAAAIgBAAAFoA=</HashCode>
       <FileName>DDMS\ResourceElements\Dates.cs</FileName>
@@ -130,6 +149,14 @@
   </Class>
   <Class Name="DDMSense.DDMS.ResourceElements.Rights" Collapsed="true">
     <Position X="38.75" Y="9.5" Width="1.75" />
+    <NestedTypes>
+      <Class Name="DDMSense.DDMS.ResourceElements.Rights.Builder" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DDMS\ResourceElements\Rights.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAoAABAICAAAAAgAACAAAAAAAQAIBAAAAAAAAABAA=</HashCode>
       <FileName>DDMS\ResourceElements\Rights.cs</FileName>
@@ -179,6 +206,17 @@
   </Class>
   <Class Name="DDMSense.DDMS.SecurityElements.Security" Collapsed="true">
     <Position X="54.5" Y="9.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="DDMSense.DDMS.SecurityElements.Security.Builder" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DDMS\SecurityElements\Security.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>QAAAIAAAAgCAAEAAgAAAAABAAABAAEAAAAIAIAAABgg=</HashCode>
       <FileName>DDMS\SecurityElements\Security.cs</FileName>
@@ -275,8 +313,19 @@
       <FileName>DDMS\Summary\ProductionMetric.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DDMSense.DDMS.Summary.SubjectCoverage" Collapsed="true">
+  <Class Name="DDMSense.DDMS.Summary.SubjectCoverage">
     <Position X="86" Y="9.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="DDMSense.DDMS.Summary.SubjectCoverage.Builder">
+        <TypeIdentifier>
+          <NewMemberFileName>DDMS\Summary\SubjectCoverage.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AACAIAAQAgCAQAAAgAAAgAAQAAAAEEAAAAAAQAIAhQg=</HashCode>
       <FileName>DDMS\Summary\SubjectCoverage.cs</FileName>
