@@ -46,8 +46,6 @@ namespace DDMSense.Test.DDMS.FormatElements
         /// <summary>
         /// Constructor
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public FormatTest() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public FormatTest()
             : base("format.xml")
         {
@@ -143,8 +141,6 @@ namespace DDMSense.Test.DDMS.FormatElements
         /// <summary>
         /// Returns the expected HTML or Text output for this unit test
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         private string GetExpectedOutput(bool isHTML)
         {
             DDMSVersion version = DDMSVersion.CurrentVersion;
