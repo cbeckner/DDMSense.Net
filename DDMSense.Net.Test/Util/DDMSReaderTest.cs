@@ -106,7 +106,7 @@ namespace DDMSense.Test.Util {
         public virtual void TestGetElementFileSuccess()
         {
             //Reader.GetElement(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml"));
-            Assert.Fail():
+            Assert.Fail("Not Implemented");
 		}
 
         [TestMethod]
@@ -119,14 +119,14 @@ namespace DDMSense.Test.Util {
         public virtual void TestGetElementInputStreamSuccess()
         {
             //Reader.GetElement(new FileInputStream(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml")));
-            Assert.Fail():
+            Assert.Fail("Not Implemented");
 		}
 
         [TestMethod]
         public virtual void TestGetElementReaderSuccess()
         {
             //Reader.GetElement(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml")));
-            Assert.Fail():
+            Assert.Fail("Not Implemented");
 		}
 
         [TestMethod]
@@ -144,27 +144,28 @@ namespace DDMSense.Test.Util {
         public virtual void TestGetResourceSuccessFile()
         {
             //Reader.GetDDMSResource(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml"));
-            Assert.Fail():
+            Assert.Fail("Not Implemented");
 		}
 
         [TestMethod]
         public virtual void TestGetResourceSuccessString()
         {
-			LineNumberReader reader = new LineNumberReader(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
-			StringBuilder xmlString = new StringBuilder();
-			string nextLine = reader.readLine();
-			while (nextLine != null) {
-				xmlString.Append(nextLine);
-				nextLine = reader.readLine();
-			}
-			Reader.GetDDMSResource(xmlString.ToString());
+            //LineNumberReader reader = new LineNumberReader(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
+            //StringBuilder xmlString = new StringBuilder();
+            //string nextLine = reader.readLine();
+            //while (nextLine != null) {
+            //    xmlString.Append(nextLine);
+            //    nextLine = reader.readLine();
+            //}
+            //Reader.GetDDMSResource(xmlString.ToString());
+            Assert.Fail("Not Implemented");
 		}
 
         [TestMethod]
         public virtual void TestGetResourceSuccessInputStream()
         {
             //Reader.GetDDMSResource(new FileInputStream(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
-            Assert.Fail():
+            Assert.Fail("Not Implemented");
 		}
 
         [TestMethod]
