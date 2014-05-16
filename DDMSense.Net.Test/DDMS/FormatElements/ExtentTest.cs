@@ -1,5 +1,5 @@
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -25,10 +25,11 @@ namespace DDMSense.Test.DDMS.FormatElements
 
     using DDMSense.DDMS;
     using DDMSense.DDMS.FormatElements;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <para> Tests related to ddms:extent elements </para>
@@ -78,7 +79,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         /// <returns> a valid object </returns>
         private Extent GetInstance(string message, XElement element)
         {
-            bool expectFailure = !string.IsNullOrEmpty(message);
+            bool expectFailure = !String.IsNullOrEmpty(message);
             Extent component = null;
             try
             {
@@ -102,7 +103,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         /// <returns> a valid object </returns>
         private Extent GetInstance(string message, string qualifier, string value)
         {
-            bool expectFailure = !string.IsNullOrEmpty(message);
+            bool expectFailure = !String.IsNullOrEmpty(message);
             Extent component = null;
             try
             {
@@ -141,6 +142,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -152,6 +154,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -167,6 +170,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -181,6 +185,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -200,6 +205,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -214,6 +220,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestWarnings()
         {
             foreach (string sVersion in SupportedVersions)
@@ -223,13 +230,13 @@ namespace DDMSense.Test.DDMS.FormatElements
 
                 // No warnings
                 Extent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count);
+                Assert.Equals(0, component.ValidationWarnings.Count());
 
                 // Qualifier without value
                 XElement element = Util.BuildDDMSElement(extentName, null);
                 Util.AddDDMSAttribute(element, "qualifier", TEST_QUALIFIER);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count);
+                Assert.Equals(1, component.ValidationWarnings.Count());
 
                 string text = "A qualifier has been set without an accompanying value attribute.";
                 string locator = "ddms:extent";
@@ -238,13 +245,14 @@ namespace DDMSense.Test.DDMS.FormatElements
                 // Neither attribute
                 element = Util.BuildDDMSElement(extentName, null);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count);
+                Assert.Equals(1, component.ValidationWarnings.Count());
                 text = "A completely empty ddms:extent element was found.";
                 locator = "ddms:extent";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
             }
         }
 
+        [TestMethod]
         public virtual void TestConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -258,6 +266,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
@@ -273,8 +282,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestHTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -291,6 +299,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestXMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -305,8 +314,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -319,8 +327,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
@@ -336,8 +343,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)

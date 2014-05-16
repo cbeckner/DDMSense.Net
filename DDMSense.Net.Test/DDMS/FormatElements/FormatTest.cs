@@ -29,6 +29,7 @@ namespace DDMSense.Test.DDMS.FormatElements
     using Util = DDMSense.Util.Util;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using DDMSense.DDMS;
+    using System;
 
     /// <summary>
     /// <para> Tests related to ddms:format elements </para>
@@ -80,7 +81,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         /// <returns> a valid object </returns>
         private Format GetInstance(string message, XElement element)
         {
-            bool expectFailure = !string.IsNullOrEmpty(message);
+            bool expectFailure = !String.IsNullOrEmpty(message);
             Format component = null;
             try
             {
@@ -105,7 +106,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         /// <returns> a valid object </returns>
         private Format GetInstance(string message, string mimeType, Extent extent, string medium)
         {
-            bool expectFailure = !string.IsNullOrEmpty(message);
+            bool expectFailure = !String.IsNullOrEmpty(message);
             Format component = null;
             try
             {
@@ -181,6 +182,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             return (FormatXml(xml.ToString(), preserveFormatting));
         }
 
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -192,6 +194,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -207,8 +210,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -222,6 +224,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -268,8 +271,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -283,8 +285,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestWarnings()
         {
             foreach (string sVersion in SupportedVersions)
@@ -314,8 +315,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -328,8 +328,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
@@ -348,8 +347,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestHTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -365,8 +363,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestXMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -380,8 +377,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testExtentReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestExtentReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -393,6 +389,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestGetExtentQualifier()
         {
             foreach (string sVersion in SupportedVersions)
@@ -403,6 +400,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestGetExtentQualifierNoExtent()
         {
             foreach (string sVersion in SupportedVersions)
@@ -413,6 +411,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestGetExtentValue()
         {
             foreach (string sVersion in SupportedVersions)
@@ -423,6 +422,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
+        [TestMethod]
         public virtual void TestGetExtentValueNoExtent()
         {
             foreach (string sVersion in SupportedVersions)
@@ -433,8 +433,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -447,8 +446,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
@@ -464,8 +462,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
