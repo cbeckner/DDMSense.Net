@@ -73,7 +73,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private ExtensibleAttributes GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ExtensibleAttributes attributes = null;
 //            try {
 //                attributes = new ExtensibleAttributes(element);
@@ -92,7 +92,7 @@
 //        /// <param name="attributes"> a list of attributes (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private ExtensibleAttributes GetInstance(string message, IList<XAttribute> attributes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ExtensibleAttributes exAttributes = null;
 //            try {
 //                exAttributes = new ExtensibleAttributes(attributes);
@@ -117,7 +117,7 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                XElement element = (new Keyword("testValue", null)).XOMElementCopy;
@@ -132,7 +132,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                IList<Attribute> attributes = new List<Attribute>();
@@ -146,14 +146,14 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No invalid cases right now, since reserved names are silently skipped.
 //            }
 //        }
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No invalid cases right now. The validation occurs when the attributes are added to some component.
 //            }
 //        }
@@ -162,13 +162,13 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                XElement element = (new Keyword("testValue", null)).XOMElementCopy;
 //                element.addAttribute(new Attribute(TEST_ATTRIBUTE));
 //                GetInstance(SUCCESS, element);
 //                ExtensibleAttributes component = GetInstance(SUCCESS, element);
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
@@ -176,7 +176,7 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XElement element = (new Keyword("testValue", null)).XOMElementCopy;
 //                element.addAttribute(new Attribute(TEST_ATTRIBUTE));
@@ -186,8 +186,8 @@
 //                attributes.Add(new Attribute(TEST_ATTRIBUTE));
 //                ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, attributes);
 
-//                assertEquals(elementAttributes, dataAttributes);
-//                assertEquals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+//                Assert.Equals(elementAttributes, dataAttributes);
+//                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 //            }
 //        }
 
@@ -195,17 +195,17 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                XElement element = (new Keyword("testValue", null)).XOMElementCopy;
 //                element.addAttribute(new Attribute(TEST_ATTRIBUTE));
 //                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                IList<Attribute> attributes = new List<Attribute>();
 //                attributes.Add(new Attribute("essence:confidence", "http://essence/", "test"));
 //                ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, attributes);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, (IList<Attribute>) null);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 //            }
 //        }
 
@@ -213,12 +213,12 @@
 ////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                XElement element = (new Keyword("testValue", null)).XOMElementCopy;
 //                element.addAttribute(new Attribute(TEST_ATTRIBUTE));
 //                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                Rights wrongComponent = new Rights(true, true, true);
-//                assertFalse(elementAttributes.Equals(wrongComponent));
+//                Assert.IsFalse(elementAttributes.Equals(wrongComponent));
 //            }
 //        }
 
@@ -226,18 +226,18 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                XElement element = (new Keyword("testValue", null)).XOMElementCopy;
 //                element.addAttribute(new Attribute(TEST_ATTRIBUTE));
 //                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
-//                assertEquals(GetExpectedOutput(true), elementAttributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false), elementAttributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true), elementAttributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false), elementAttributes.getOutput(false, ""));
 
 //                IList<Attribute> attributes = new List<Attribute>();
 //                attributes.Add(new Attribute(TEST_ATTRIBUTE));
 //                elementAttributes = GetInstance(SUCCESS, attributes);
-//                assertEquals(GetExpectedOutput(true), elementAttributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false), elementAttributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true), elementAttributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false), elementAttributes.getOutput(false, ""));
 //            }
 //        }
 
@@ -245,13 +245,13 @@
 ////ORIGINAL LINE: public void testAddTo() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestAddTo() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                ExtensibleAttributes component = Fixture;
 
 //                XElement element = Util.buildDDMSElement("sample", null);
 //                component.addTo(element);
 //                ExtensibleAttributes output = new ExtensibleAttributes(element);
-//                assertEquals(component, output);
+//                Assert.Equals(component, output);
 //            }
 //        }
 
@@ -260,24 +260,24 @@
 //        public virtual void TestGetNonNull() {
 //            ExtensibleAttributes component = new ExtensibleAttributes((IList) null);
 //            ExtensibleAttributes output = ExtensibleAttributes.getNonNullInstance(null);
-//            assertEquals(component, output);
+//            Assert.Equals(component, output);
 
 //            output = ExtensibleAttributes.getNonNullInstance(Fixture);
-//            assertEquals(Fixture, output);
+//            Assert.Equals(Fixture, output);
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 ////ORIGINAL LINE: public void testIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                XElement element = (new Keyword("testValue", null)).XOMElementCopy;
 //                element.addAttribute(new Attribute(TEST_ATTRIBUTE));
 //                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
-//                assertFalse(elementAttributes.Empty);
+//                Assert.IsFalse(elementAttributes.Empty);
 
 //                ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, (IList<Attribute>) null);
-//                assertTrue(dataAttributes.Empty);
+//                Assert.IsTrue(dataAttributes.Empty);
 //            }
 //        }
 
@@ -285,13 +285,13 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XElement element = (new Keyword("testValue", null)).XOMElementCopy;
 //                element.addAttribute(new Attribute(TEST_ATTRIBUTE));
 //                ExtensibleAttributes component = GetInstance(SUCCESS, element);
 //                ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -299,13 +299,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder();
 //                assertNotNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsTrue(builder.Empty);
 //                builder.Attributes.add(new ExtensibleAttributes.AttributeBuilder(TEST_ATTRIBUTE));
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -314,7 +314,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // No invalid cases right now, because validation cannot occur until these attributes are attached to something.
 //            }
@@ -324,10 +324,10 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder();
 //                assertNotNull(builder.Attributes.get(1));
-//                assertTrue(builder.commit().Attributes.Empty);
+//                Assert.IsTrue(builder.commit().Attributes.Empty);
 //            }
 //        }
 //    }
