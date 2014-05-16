@@ -169,7 +169,7 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                GetInstance(SUCCESS, FixtureElement);
 //            }
@@ -179,7 +179,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                GetInstance(SUCCESS, TEST_VALUE);
 //            }
@@ -205,7 +205,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Missing child text
 //                GetInstance("subOrganization value is required.", (string) null);
@@ -219,11 +219,11 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // No warnings
 //                SubOrganization component = GetInstance(SUCCESS, FixtureElement);
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
@@ -231,12 +231,12 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubOrganization elementComponent = GetInstance(SUCCESS, FixtureElement);
 //                SubOrganization dataComponent = GetInstance(SUCCESS, TEST_VALUE);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -244,11 +244,11 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubOrganization elementComponent = GetInstance(SUCCESS, FixtureElement);
 //                SubOrganization dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -256,15 +256,15 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubOrganization component = GetInstance(SUCCESS, FixtureElement);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -272,19 +272,19 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubOrganization component = GetInstance(SUCCESS, FixtureElement);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 //            }
 //        }
 
 //        public virtual void TestWrongVersion() {
 //            try {
-//                DDMSVersion.CurrentVersion = "2.0";
+//                DDMSVersion.SetCurrentVersion("2.0");
 //                new SubOrganization(TEST_VALUE, SecurityAttributesTest.Fixture);
 //                fail("Allowed invalid data.");
 //            } catch (InvalidDDMSException e) {
@@ -296,11 +296,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubOrganization component = GetInstance(SUCCESS, FixtureElement);
 //                SubOrganization.Builder builder = new SubOrganization.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -308,13 +308,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubOrganization.Builder builder = new SubOrganization.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -323,7 +323,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubOrganization.Builder builder = new SubOrganization.Builder();
 //                builder.Value = TEST_VALUE;

@@ -186,7 +186,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, TEST_VALUE, TEST_POC_TYPES);
@@ -215,7 +215,7 @@
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Invalid pocType
 //                GetInstance("Unknown is not a valid enumeration token", TEST_VALUE, Util.getXsListAsList("Unknown"));
@@ -234,16 +234,16 @@
 
 //                // No warnings
 //                NoticeText component = GetInstance(SUCCESS, FixtureElement);
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 
 //                // Empty value
 //                XElement element = Util.buildElement(ismPrefix, NoticeText.getName(version), version.IsmNamespace, null);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                component = GetInstance(SUCCESS, element);
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "An ISM:NoticeText element was found with no value.";
 //                string locator = "ISM:NoticeText";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //            }
 //        }
 
@@ -251,13 +251,13 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeText elementComponent = GetInstance(SUCCESS, FixtureElement);
 //                NoticeText dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_POC_TYPES);
 
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -265,14 +265,14 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeText elementComponent = GetInstance(SUCCESS, FixtureElement);
 //                NoticeText dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_POC_TYPES);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_VALUE, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -280,15 +280,15 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeText component = GetInstance(SUCCESS, FixtureElement);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_POC_TYPES);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -296,19 +296,19 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeText component = GetInstance(SUCCESS, FixtureElement);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_POC_TYPES);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 //            }
 //        }
 
 //        public virtual void TestWrongVersion() {
 //            try {
-//                DDMSVersion.CurrentVersion = "2.0";
+//                DDMSVersion.SetCurrentVersion("2.0");
 //                new NoticeText(TEST_VALUE, TEST_POC_TYPES, null);
 //                fail("Allowed invalid data.");
 //            } catch (InvalidDDMSException e) {
@@ -320,11 +320,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeText component = GetInstance(SUCCESS, FixtureElement);
 //                NoticeText.Builder builder = new NoticeText.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -332,13 +332,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeText.Builder builder = new NoticeText.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -347,7 +347,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeText.Builder builder = new NoticeText.Builder();
 //                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
@@ -366,7 +366,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                NoticeText.Builder builder = new NoticeText.Builder();
 //                assertNotNull(builder.PocTypes.get(1));
 //            }

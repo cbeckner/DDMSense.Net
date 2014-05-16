@@ -230,7 +230,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID);
 //            }
@@ -320,7 +320,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing SRS Name
 //                SRSAttributes attr = new SRSAttributes(null, SRSAttributesTest.Fixture.SrsDimension, null, null);
 //                GetInstance("srsName is required.", PositionTest.FixtureList, attr, TEST_ID);
@@ -359,10 +359,10 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
@@ -370,11 +370,11 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Polygon elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Polygon dataComponent = GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -382,20 +382,20 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                SRSAttributes attr = new SRSAttributes(SRSAttributesTest.Fixture.SrsName, Convert.ToInt32(11), SRSAttributesTest.Fixture.AxisLabels, SRSAttributesTest.Fixture.UomLabels);
 //                Polygon elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Polygon dataComponent = GetInstance(SUCCESS, PositionTest.FixtureList, attr, TEST_ID);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
 //                newPositions.Add(PositionTest.FixtureList[0]);
 //                dataComponent = GetInstance(SUCCESS, newPositions, SRSAttributesTest.Fixture, TEST_ID);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, DIFFERENT_VALUE);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //            }
 //        }
@@ -404,10 +404,10 @@
 ////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Polygon elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Rights wrongComponent = new Rights(true, true, true);
-//                assertFalse(elementComponent.Equals(wrongComponent));
+//                Assert.IsFalse(elementComponent.Equals(wrongComponent));
 //            }
 //        }
 
@@ -415,14 +415,14 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -430,12 +430,12 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 
 //                component = GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 //            }
 //        }
 
@@ -443,7 +443,7 @@
 ////ORIGINAL LINE: public void testPositionReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestPositionReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                IList<Position> positions = PositionTest.FixtureList;
 //                GetInstance(SUCCESS, positions, SRSAttributesTest.Fixture, TEST_ID);
 //                GetInstance(SUCCESS, positions, SRSAttributesTest.Fixture, TEST_ID);
@@ -452,10 +452,10 @@
 
 //        public virtual void TestGetLocatorSuffix() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Because Positions don't have any ValidationWarnings, no existing code uses this locator method right now.
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals("/gml:exterior/gml:LinearRing", component.LocatorSuffix);
+//                Assert.Equals("/gml:exterior/gml:LinearRing", component.LocatorSuffix);
 //            }
 //        }
 
@@ -463,11 +463,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Polygon.Builder builder = new Polygon.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -475,13 +475,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Polygon.Builder builder = new Polygon.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.Id = TEST_ID;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -489,7 +489,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Polygon.Builder builder = new Polygon.Builder();
 //                builder.Id = TEST_ID;
@@ -500,13 +500,13 @@
 //                    ExpectMessage(e, "srsName is required.");
 //                }
 //                builder.SrsAttributes.SrsName = "http://metadata.dod.mil/mdr/ns/GSIP/crs/WGS84E_2D";
-//                builder.Positions.get(0).Coordinates.get(0).Value = Convert.ToDouble(1);
-//                builder.Positions.get(0).Coordinates.get(1).Value = Convert.ToDouble(1);
-//                builder.Positions.get(1).Coordinates.get(0).Value = Convert.ToDouble(2);
+//                builder.Positions[0].Coordinates[0].Value = Convert.ToDouble(1);
+//                builder.Positions[0].Coordinates.get(1).Value = Convert.ToDouble(1);
+//                builder.Positions.get(1).Coordinates[0].Value = Convert.ToDouble(2);
 //                builder.Positions.get(1).Coordinates.get(1).Value = Convert.ToDouble(2);
-//                builder.Positions.get(2).Coordinates.get(0).Value = Convert.ToDouble(3);
+//                builder.Positions.get(2).Coordinates[0].Value = Convert.ToDouble(3);
 //                builder.Positions.get(2).Coordinates.get(1).Value = Convert.ToDouble(3);
-//                builder.Positions.get(3).Coordinates.get(0).Value = Convert.ToDouble(1);
+//                builder.Positions.get(3).Coordinates[0].Value = Convert.ToDouble(1);
 //                builder.Positions.get(3).Coordinates.get(1).Value = Convert.ToDouble(1);
 //                builder.commit();
 
@@ -515,13 +515,13 @@
 //                builder.Id = TEST_ID;
 //                Position.Builder emptyBuilder = new Position.Builder();
 //                Position.Builder fullBuilder1 = new Position.Builder();
-//                fullBuilder1.Coordinates.get(0).Value = Convert.ToDouble(0);
+//                fullBuilder1.Coordinates[0].Value = Convert.ToDouble(0);
 //                fullBuilder1.Coordinates.get(1).Value = Convert.ToDouble(0);
 //                Position.Builder fullBuilder2 = new Position.Builder();
-//                fullBuilder2.Coordinates.get(0).Value = Convert.ToDouble(0);
+//                fullBuilder2.Coordinates[0].Value = Convert.ToDouble(0);
 //                fullBuilder2.Coordinates.get(1).Value = Convert.ToDouble(1);
 //                Position.Builder fullBuilder3 = new Position.Builder();
-//                fullBuilder3.Coordinates.get(0).Value = Convert.ToDouble(1);
+//                fullBuilder3.Coordinates[0].Value = Convert.ToDouble(1);
 //                fullBuilder3.Coordinates.get(1).Value = Convert.ToDouble(1);
 //                builder.Positions.add(emptyBuilder);
 //                builder.Positions.add(fullBuilder1);
@@ -529,7 +529,7 @@
 //                builder.Positions.add(fullBuilder3);
 //                builder.Positions.add(fullBuilder1);
 //                builder.SrsAttributes = new SRSAttributes.Builder(SRSAttributesTest.Fixture);
-//                assertEquals(4, builder.commit().Positions.size());
+//                Assert.Equals(4, builder.commit().Positions.size());
 //            }
 //        }
 
@@ -537,7 +537,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Polygon.Builder builder = new Polygon.Builder();
 //                assertNotNull(builder.Positions.get(1));
 //            }

@@ -61,18 +61,18 @@
 //            entityElement.appendChild(Util.buildDDMSElement("name", "name"));
 //            entityElement.appendChild(Util.buildDDMSElement("phone", ""));
 //            Organization component = new Organization(entityElement);
-//            assertEquals(1, component.ValidationWarnings.size());
-//            assertEquals(ValidationMessage.WARNING_TYPE, component.ValidationWarnings.get(0).Type);
-//            assertEquals("A ddms:phone element was found with no value.", component.ValidationWarnings.get(0).Text);
+//            Assert.Equals(1, component.ValidationWarnings.size());
+//            Assert.Equals(ValidationMessage.WARNING_TYPE, component.ValidationWarnings[0].Type);
+//            Assert.Equals("A ddms:phone element was found with no value.", component.ValidationWarnings[0].Text);
 
 //            // Empty email
 //            entityElement = Util.buildDDMSElement(Organization.getName(version), null);
 //            entityElement.appendChild(Util.buildDDMSElement("name", "name"));
 //            entityElement.appendChild(Util.buildDDMSElement("email", ""));
 //            component = new Organization(entityElement);
-//            assertEquals(1, component.ValidationWarnings.size());
-//            assertEquals(ValidationMessage.WARNING_TYPE, component.ValidationWarnings.get(0).Type);
-//            assertEquals("A ddms:email element was found with no value.", component.ValidationWarnings.get(0).Text);
+//            Assert.Equals(1, component.ValidationWarnings.size());
+//            Assert.Equals(ValidationMessage.WARNING_TYPE, component.ValidationWarnings[0].Type);
+//            Assert.Equals("A ddms:email element was found with no value.", component.ValidationWarnings[0].Text);
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -83,20 +83,20 @@
 //            Person person = new Person(names, "Uri", phones, null, null, null);
 
 //            PropertyReader.setProperty("output.indexLevel", "0");
-//            assertEquals("entityType: person\nname: Brian\nname: BU\nphone: 703-885-1000\nsurname: Uri\n", person.toText());
+//            Assert.Equals("entityType: person\nname: Brian\nname: BU\nphone: 703-885-1000\nsurname: Uri\n", person.toText());
 
 //            PropertyReader.setProperty("output.indexLevel", "1");
-//            assertEquals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone: 703-885-1000\nsurname: Uri\n", person.toText());
+//            Assert.Equals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone: 703-885-1000\nsurname: Uri\n", person.toText());
 
 //            PropertyReader.setProperty("output.indexLevel", "2");
-//            assertEquals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone[1]: 703-885-1000\nsurname: Uri\n", person.toText());
+//            Assert.Equals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone[1]: 703-885-1000\nsurname: Uri\n", person.toText());
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 ////ORIGINAL LINE: public void testExtensibleSuccess() throws InvalidDDMSException
 //        public virtual void TestExtensibleSuccess() {
 //            foreach (string sVersion in DDMSVersion.SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ExtensibleAttributes attr = ExtensibleAttributesTest.Fixture;
 //                IList<string> names = new List<string>();

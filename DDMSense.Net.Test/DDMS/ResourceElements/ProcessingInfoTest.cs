@@ -171,7 +171,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, TEST_VALUE, TEST_DATE_PROCESSED);
@@ -202,7 +202,7 @@
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Missing date
 //                GetInstance("dateProcessed is required.", TEST_VALUE, null);
@@ -231,17 +231,17 @@
 
 //                // No warnings
 //                ProcessingInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 
 //                // No value
 //                XElement element = Util.buildDDMSElement(ProcessingInfo.getName(version), null);
 //                Util.addDDMSAttribute(element, "dateProcessed", TEST_DATE_PROCESSED);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                component = GetInstance(SUCCESS, element);
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "A ddms:processingInfo element was found with no value.";
 //                string locator = "ddms:processingInfo";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //            }
 //        }
 
@@ -252,12 +252,12 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 
 //                ProcessingInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(TEST_DATE_PROCESSED, component.DateProcessed.toXMLFormat());
+//                Assert.Equals(TEST_DATE_PROCESSED, component.DateProcessed.toXMLFormat());
 
 //                // Not compatible with XMLGregorianCalendar
 //                if (version.isAtLeast("4.1")) {
 //                    component = new ProcessingInfo(TEST_VALUE, "2012-01-01T01:02Z", SecurityAttributesTest.Fixture);
-//                    assertNull(component.DateProcessed);
+//                    Assert.IsNull(component.DateProcessed);
 //                }
 //            }
 //        }
@@ -266,12 +266,12 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProcessingInfo elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProcessingInfo dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_DATE_PROCESSED);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -279,14 +279,14 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProcessingInfo elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProcessingInfo dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_DATE_PROCESSED);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_VALUE, "2011");
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -294,15 +294,15 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProcessingInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_DATE_PROCESSED);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -310,19 +310,19 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProcessingInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_DATE_PROCESSED);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 //            }
 //        }
 
 //        public virtual void TestWrongVersion() {
 //            try {
-//                DDMSVersion.CurrentVersion = "2.0";
+//                DDMSVersion.SetCurrentVersion("2.0");
 //                new ProcessingInfo(TEST_VALUE, TEST_DATE_PROCESSED, SecurityAttributesTest.Fixture);
 //                fail("Allowed invalid data.");
 //            } catch (InvalidDDMSException e) {
@@ -334,11 +334,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProcessingInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProcessingInfo.Builder builder = new ProcessingInfo.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -346,13 +346,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProcessingInfo.Builder builder = new ProcessingInfo.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -361,7 +361,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProcessingInfo.Builder builder = new ProcessingInfo.Builder();
 //                builder.Value = TEST_VALUE;

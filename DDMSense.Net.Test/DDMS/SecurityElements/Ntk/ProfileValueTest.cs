@@ -179,7 +179,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, TEST_VALUE, TEST_VOCABULARY, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
@@ -210,7 +210,7 @@
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Missing vocabulary
 //                GetInstance("\"\" is not a valid NMTOKEN.", TEST_VALUE, null, null, null, null);
@@ -228,51 +228,51 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // No warnings
 //                ProfileValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 
 //                // No value
 //                component = GetInstance(SUCCESS, null, TEST_VOCABULARY, null, null, null);
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "A ntk:AccessProfileValue element was found with no value.";
 //                string locator = "ntk:AccessProfileValue";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //            }
 //        }
 
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileValue elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProfileValue dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_VOCABULARY, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileValue elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProfileValue dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_VOCABULARY, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_VALUE, DIFFERENT_VALUE, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_VOCABULARY, DIFFERENT_VALUE, TEST_ID_REFERENCE, TEST_QUALIFIER);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_VOCABULARY, TEST_ID, DIFFERENT_VALUE, TEST_QUALIFIER);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_VOCABULARY, TEST_ID, TEST_ID_REFERENCE, DIFFERENT_VALUE);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -280,27 +280,27 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_VOCABULARY, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_VOCABULARY, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 //            }
 //        }
 
@@ -312,11 +312,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProfileValue.Builder builder = new ProfileValue.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -324,13 +324,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileValue.Builder builder = new ProfileValue.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -338,7 +338,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileValue.Builder builder = new ProfileValue.Builder();
 //                builder.Value = TEST_VALUE;

@@ -199,7 +199,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, ProfileListTest.Fixture, ExternalReference);
@@ -226,7 +226,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Missing security attributes
 //                try {
@@ -248,22 +248,22 @@
 
 //                // 4.1 ntk:externalReference used
 //                if (version.isAtLeast("4.1")) {
-//                    assertEquals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.size());
 //                    string text = "The ntk:externalReference attribute in this DDMS component";
 //                    string locator = "ntk:Access";
-//                    AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //                // No warnings 
 //                else {
-//                    assertEquals(0, component.ValidationWarnings.size());
+//                    Assert.Equals(0, component.ValidationWarnings.size());
 //                }
 
 //                // Empty
 //                component = GetInstance(SUCCESS, null, null, null, null);
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "An ntk:Access element was found with no";
 //                string locator = "ntk:Access";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //            }
 //        }
 
@@ -271,10 +271,10 @@
 ////ORIGINAL LINE: public void testDeprecatedConstructor() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDeprecatedConstructor() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Access component = new Access(IndividualTest.FixtureList, null, null, SecurityAttributesTest.Fixture);
-//                assertNull(component.ExternalReference);
+//                Assert.IsNull(component.ExternalReference);
 //            }
 //        }
 
@@ -282,12 +282,12 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Access elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Access dataComponent = GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, ProfileListTest.Fixture, ExternalReference);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -299,17 +299,17 @@
 
 //                Access elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Access dataComponent = GetInstance(SUCCESS, null, GroupTest.FixtureList, ProfileListTest.Fixture, ExternalReference);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, IndividualTest.FixtureList, null, ProfileListTest.Fixture, ExternalReference);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, null, ExternalReference);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                if (version.isAtLeast("4.1")) {
 //                    dataComponent = GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, ProfileListTest.Fixture, false);
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 //                }
 //            }
 //        }
@@ -318,15 +318,15 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Access component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, ProfileListTest.Fixture, ExternalReference);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -334,13 +334,13 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Access component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 
 //                component = GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, ProfileListTest.Fixture, ExternalReference);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 //            }
 //        }
 
@@ -348,11 +348,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Access component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Access.Builder builder = new Access.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -360,15 +360,15 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Access.Builder builder = new Access.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
-//                builder.Individuals.get(0);
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
+//                builder.Individuals[0];
+//                Assert.IsTrue(builder.Empty);
 //                builder.Groups.get(1).SecurityAttributes.Classification = "U";
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -376,7 +376,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Access.Builder builder = new Access.Builder();
 //                builder.SecurityAttributes.Classification = "U";
@@ -399,7 +399,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Access.Builder builder = new Access.Builder();
 //                assertNotNull(builder.Individuals.get(1));
 //                assertNotNull(builder.Groups.get(1));

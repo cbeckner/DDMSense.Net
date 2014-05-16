@@ -254,7 +254,7 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // geographicIdentifier
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
@@ -319,7 +319,7 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // At least 1 of geographicIdentifier, boundingBox, boundingGeometry, postalAddress, or verticalExtent
 //                // must be used.
 //                XElement element = BuildComponentElement((IDDMSComponent) null);
@@ -373,7 +373,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // At least 1 of geographicIdentifier, boundingBox, boundingGeometry, postalAddress, or verticalExtent
 //                // must be used.
 //                GetInstance("At least 1 of ", null, null, null, null, null, null, null);
@@ -385,10 +385,10 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
@@ -402,36 +402,36 @@
 
 //                GeospatialCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                GeospatialCoverage dataComponent = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, precedence, order);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
 //                // boundingBox
 //                XElement element = BuildComponentElement(BoundingBoxTest.Fixture);
 //                elementComponent = GetInstance(SUCCESS, element);
 //                dataComponent = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
 //                // boundingGeometry
 //                element = BuildComponentElement(BoundingGeometryTest.Fixture);
 //                elementComponent = GetInstance(SUCCESS, element);
 //                dataComponent = GetInstance(SUCCESS, null, null, BoundingGeometryTest.Fixture, null, null, null, null);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
 //                // postalAddress
 //                element = BuildComponentElement(PostalAddressTest.Fixture);
 //                elementComponent = GetInstance(SUCCESS, element);
 //                dataComponent = GetInstance(SUCCESS, null, null, null, PostalAddressTest.Fixture, null, null, null);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
 //                // verticalExtent
 //                element = BuildComponentElement(VerticalExtentTest.Fixture);
 //                elementComponent = GetInstance(SUCCESS, element);
 //                dataComponent = GetInstance(SUCCESS, null, null, null, null, VerticalExtentTest.Fixture, null, null);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -444,28 +444,28 @@
 //                GeospatialCoverage dataComponent = null;
 //                if (version.isAtLeast("4.0.1")) {
 //                    dataComponent = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, TEST_PRECEDENCE, null);
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                    dataComponent = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, null, TEST_ORDER);
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 //                }
 //                dataComponent = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, null, null, BoundingGeometryTest.Fixture, null, null, null, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, null, null, null, PostalAddressTest.Fixture, null, null, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, null, null, null, null, VerticalExtentTest.Fixture, null, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //            }
 //        }
@@ -483,28 +483,28 @@
 //                int? order = version.isAtLeast("4.0.1") ? TEST_ORDER : null;
 
 //                GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, precedence, order);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
-//                assertEquals(BoundingBoxTest.Fixture.getOutput(true, prefix, "") + HtmlIcism, component.toHTML());
-//                assertEquals(BoundingBoxTest.Fixture.getOutput(false, prefix, "") + TextIcism, component.toText());
+//                Assert.Equals(BoundingBoxTest.Fixture.getOutput(true, prefix, "") + HtmlIcism, component.toHTML());
+//                Assert.Equals(BoundingBoxTest.Fixture.getOutput(false, prefix, "") + TextIcism, component.toText());
 
 //                component = GetInstance(SUCCESS, null, null, BoundingGeometryTest.Fixture, null, null, null, null);
-//                assertEquals(BoundingGeometryTest.Fixture.getOutput(true, prefix, "") + HtmlIcism, component.toHTML());
-//                assertEquals(BoundingGeometryTest.Fixture.getOutput(false, prefix, "") + TextIcism, component.toText());
+//                Assert.Equals(BoundingGeometryTest.Fixture.getOutput(true, prefix, "") + HtmlIcism, component.toHTML());
+//                Assert.Equals(BoundingGeometryTest.Fixture.getOutput(false, prefix, "") + TextIcism, component.toText());
 
 //                component = GetInstance(SUCCESS, null, null, null, PostalAddressTest.Fixture, null, null, null);
-//                assertEquals(PostalAddressTest.Fixture.getOutput(true, prefix, "") + HtmlIcism, component.toHTML());
-//                assertEquals(PostalAddressTest.Fixture.getOutput(false, prefix, "") + TextIcism, component.toText());
+//                Assert.Equals(PostalAddressTest.Fixture.getOutput(true, prefix, "") + HtmlIcism, component.toHTML());
+//                Assert.Equals(PostalAddressTest.Fixture.getOutput(false, prefix, "") + TextIcism, component.toText());
 
 //                component = GetInstance(SUCCESS, null, null, null, null, VerticalExtentTest.Fixture, null, null);
-//                assertEquals(VerticalExtentTest.Fixture.getOutput(true, prefix, "") + HtmlIcism, component.toHTML());
-//                assertEquals(VerticalExtentTest.Fixture.getOutput(false, prefix, "") + TextIcism, component.toText());
+//                Assert.Equals(VerticalExtentTest.Fixture.getOutput(true, prefix, "") + HtmlIcism, component.toHTML());
+//                Assert.Equals(VerticalExtentTest.Fixture.getOutput(false, prefix, "") + TextIcism, component.toText());
 //            }
 //        }
 
@@ -517,10 +517,10 @@
 //                int? order = version.isAtLeast("4.0.1") ? TEST_ORDER : null;
 
 //                GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 
 //                component = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, precedence, order);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 //            }
 //        }
 
@@ -528,7 +528,7 @@
 ////ORIGINAL LINE: public void testGeographicIdentifierReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestGeographicIdentifierReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                GeographicIdentifier geoId = GeographicIdentifierTest.CountryCodeBasedFixture;
 //                GetInstance(SUCCESS, geoId, null, null, null, null, null, null);
 //                GetInstance(SUCCESS, geoId, null, null, null, null, null, null);
@@ -539,7 +539,7 @@
 ////ORIGINAL LINE: public void testBoundingBoxReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBoundingBoxReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingBox box = BoundingBoxTest.Fixture;
 //                GetInstance(SUCCESS, null, box, null, null, null, null, null);
 //                GetInstance(SUCCESS, null, box, null, null, null, null, null);
@@ -550,7 +550,7 @@
 ////ORIGINAL LINE: public void testBoundingGeometryReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBoundingGeometryReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingGeometry geo = BoundingGeometryTest.Fixture;
 //                GetInstance(SUCCESS, null, null, geo, null, null, null, null);
 //                GetInstance(SUCCESS, null, null, geo, null, null, null, null);
@@ -561,7 +561,7 @@
 ////ORIGINAL LINE: public void testPostalAddressReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestPostalAddressReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                PostalAddress address = PostalAddressTest.Fixture;
 //                GetInstance(SUCCESS, null, null, null, address, null, null, null);
 //                GetInstance(SUCCESS, null, null, null, address, null, null, null);
@@ -572,7 +572,7 @@
 ////ORIGINAL LINE: public void testVerticalExtentReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestVerticalExtentReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                VerticalExtent extent = VerticalExtentTest.Fixture;
 //                GetInstance(SUCCESS, null, null, null, null, extent, null, null);
 //                GetInstance(SUCCESS, null, null, null, null, extent, null, null);
@@ -587,9 +587,9 @@
 //                SecurityAttributes attr = (!version.isAtLeast("3.0") ? null : SecurityAttributesTest.Fixture);
 //                GeospatialCoverage component = new GeospatialCoverage(GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, null, null, attr);
 //                if (!version.isAtLeast("3.0")) {
-//                    assertTrue(component.SecurityAttributes.Empty);
+//                    Assert.IsTrue(component.SecurityAttributes.Empty);
 //                } else {
-//                    assertEquals(attr, component.SecurityAttributes);
+//                    Assert.Equals(attr, component.SecurityAttributes);
 //                }
 //            }
 //        }
@@ -597,7 +597,7 @@
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 ////ORIGINAL LINE: public void testWrongVersionSecurityAttributes() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWrongVersionSecurityAttributes() {
-//            DDMSVersion.CurrentVersion = "2.0";
+//            DDMSVersion.SetCurrentVersion("2.0");
 //            try {
 //                new GeospatialCoverage(GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, null, null, SecurityAttributesTest.Fixture);
 //                fail("Allowed invalid data.");
@@ -607,7 +607,7 @@
 //        }
 
 //        public virtual void TestWrongVersionPrecedenceOrder() {
-//            DDMSVersion.CurrentVersion = "2.0";
+//            DDMSVersion.SetCurrentVersion("2.0");
 //            try {
 //                new GeospatialCoverage(GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, TEST_PRECEDENCE, null, null);
 //                fail("Allowed different versions.");
@@ -643,7 +643,7 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                string suffix = version.isAtLeast("4.0.1") ? "" : "/ddms:GeospatialExtent";
-//                assertEquals(suffix, component.LocatorSuffix);
+//                Assert.Equals(suffix, component.LocatorSuffix);
 //            }
 //        }
 
@@ -651,27 +651,27 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                GeospatialCoverage component = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, null, null);
 //                GeospatialCoverage.Builder builder = new GeospatialCoverage.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 
 //                component = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
 //                builder = new GeospatialCoverage.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 
 //                component = GetInstance(SUCCESS, null, null, BoundingGeometryTest.Fixture, null, null, null, null);
 //                builder = new GeospatialCoverage.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 
 //                component = GetInstance(SUCCESS, null, null, null, PostalAddressTest.Fixture, null, null, null);
 //                builder = new GeospatialCoverage.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 
 //                component = GetInstance(SUCCESS, null, null, null, null, VerticalExtentTest.Fixture, null, null);
 //                builder = new GeospatialCoverage.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -679,13 +679,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                GeospatialCoverage.Builder builder = new GeospatialCoverage.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.Order = TEST_ORDER;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -694,7 +694,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                GeospatialCoverage.Builder builder = new GeospatialCoverage.Builder();
 //                builder.VerticalExtent.Datum = "AGL";

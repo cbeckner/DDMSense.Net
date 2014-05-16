@@ -125,9 +125,9 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(Rights.getName(version), component.Name);
-//                assertEquals(PropertyReader.getPrefix("ddms"), component.Prefix);
-//                assertEquals(PropertyReader.getPrefix("ddms") + ":" + Rights.getName(version), component.QualifiedName);
+//                Assert.Equals(Rights.getName(version), component.Name);
+//                Assert.Equals(PropertyReader.getPrefix("ddms"), component.Prefix);
+//                Assert.Equals(PropertyReader.getPrefix("ddms") + ":" + Rights.getName(version), component.QualifiedName);
 
 //                // Wrong name/namespace
 //                XElement element = Util.buildDDMSElement("wrongName", null);
@@ -149,7 +149,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, true, true, true);
 //            }
@@ -157,35 +157,35 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Rights elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Rights dataComponent = GetInstance(SUCCESS, true, true, false);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Rights elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Rights dataComponent = GetInstance(SUCCESS, false, true, false);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, true, false, false);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, true, true, true);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -193,10 +193,10 @@
 ////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Rights elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Language wrongComponent = new Language("qualifier", "value");
-//                assertFalse(elementComponent.Equals(wrongComponent));
+//                Assert.IsFalse(elementComponent.Equals(wrongComponent));
 //            }
 //        }
 
@@ -204,25 +204,25 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, true, true, false);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 
 //                component = GetInstance(SUCCESS, true, true, false);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 //            }
 //        }
 
@@ -231,9 +231,9 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                XElement element = Util.buildDDMSElement(Rights.getName(version), null);
 //                Rights component = GetInstance(SUCCESS, element);
-//                assertFalse(component.PrivacyAct);
-//                assertFalse(component.IntellectualProperty);
-//                assertFalse(component.Copyright);
+//                Assert.IsFalse(component.PrivacyAct);
+//                Assert.IsFalse(component.IntellectualProperty);
+//                Assert.IsFalse(component.Copyright);
 //            }
 //        }
 
@@ -241,11 +241,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Rights.Builder builder = new Rights.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -253,13 +253,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Rights.Builder builder = new Rights.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.Copyright = true;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -267,16 +267,16 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Default values (at least 1 value must be explicit to prevent a null commit)
 //                Rights.Builder builder = new Rights.Builder();
 //                builder.PrivacyAct = true;
-//                assertFalse(builder.commit().IntellectualProperty);
-//                assertFalse(builder.commit().Copyright);
+//                Assert.IsFalse(builder.commit().IntellectualProperty);
+//                Assert.IsFalse(builder.commit().Copyright);
 //                builder = new Rights.Builder();
 //                builder.IntellectualProperty = true;
-//                assertFalse(builder.commit().PrivacyAct);
+//                Assert.IsFalse(builder.commit().PrivacyAct);
 //            }
 //        }
 //    }

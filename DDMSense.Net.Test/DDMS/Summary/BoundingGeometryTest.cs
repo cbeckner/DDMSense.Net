@@ -166,7 +166,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Point
 //                GetInstance(SUCCESS, null, PointTest.FixtureList);
 
@@ -189,7 +189,7 @@
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No polygons or points
 //                GetInstance("At least 1 of ", null, null);
 //            }
@@ -197,10 +197,10 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
@@ -208,11 +208,11 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingGeometry elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                BoundingGeometry dataComponent = GetInstance(SUCCESS, null, PointTest.FixtureList);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -220,13 +220,13 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingGeometry elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                BoundingGeometry dataComponent = GetInstance(SUCCESS, PolygonTest.FixtureList, PointTest.FixtureList);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, PolygonTest.FixtureList, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -234,20 +234,20 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 
 //                BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, null, PointTest.FixtureList);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, PolygonTest.FixtureList, null);
-//                assertEquals(PolygonTest.FixtureList[0].getOutput(true, "boundingGeometry.", ""), component.toHTML());
-//                assertEquals(PolygonTest.FixtureList[0].getOutput(false, "boundingGeometry.", ""), component.toText());
+//                Assert.Equals(PolygonTest.FixtureList[0].getOutput(true, "boundingGeometry.", ""), component.toHTML());
+//                Assert.Equals(PolygonTest.FixtureList[0].getOutput(false, "boundingGeometry.", ""), component.toText());
 //            }
 //        }
 
@@ -255,12 +255,12 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 
 //                component = GetInstance(SUCCESS, null, PointTest.FixtureList);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 //            }
 //        }
 
@@ -268,18 +268,18 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // Equality after Building (Point-based)
 //                BoundingGeometry.Builder builder = new BoundingGeometry.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 
 //                // Equality after Building (Polygon-based)
 //                component = new BoundingGeometry(PolygonTest.FixtureList, null);
 //                builder = new BoundingGeometry.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -287,13 +287,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                BoundingGeometry.Builder builder = new BoundingGeometry.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
-//                builder.Points.get(0).Id = TEST_ID;
-//                assertFalse(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
+//                builder.Points[0].Id = TEST_ID;
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -301,7 +301,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                BoundingGeometry.Builder builder = new BoundingGeometry.Builder();
 //                foreach (Point point in PointTest.FixtureList) {
@@ -327,11 +327,11 @@
 //                Point.Builder fullBuilder = new Point.Builder();
 //                fullBuilder.SrsAttributes = new SRSAttributes.Builder(SRSAttributesTest.Fixture);
 //                fullBuilder.Id = TEST_ID;
-//                fullBuilder.Position.Coordinates.get(0).Value = Convert.ToDouble(0);
+//                fullBuilder.Position.Coordinates[0].Value = Convert.ToDouble(0);
 //                fullBuilder.Position.Coordinates.get(1).Value = Convert.ToDouble(0);
 //                builder.Points.add(emptyBuilder);
 //                builder.Points.add(fullBuilder);
-//                assertEquals(1, builder.commit().Points.size());
+//                Assert.Equals(1, builder.commit().Points.size());
 
 //                // Skip empty Polygons
 //                builder = new BoundingGeometry.Builder();
@@ -343,21 +343,21 @@
 //                fullPolygonBuilder.Positions.add(new Position.Builder());
 //                fullPolygonBuilder.Positions.add(new Position.Builder());
 //                fullPolygonBuilder.Positions.add(new Position.Builder());
-//                fullPolygonBuilder.Positions.get(0).Coordinates.get(0).Value = PositionTest.TEST_COORDS[0];
-//                fullPolygonBuilder.Positions.get(0).Coordinates.get(1).Value = PositionTest.TEST_COORDS[1];
+//                fullPolygonBuilder.Positions[0].Coordinates[0].Value = PositionTest.TEST_COORDS[0];
+//                fullPolygonBuilder.Positions[0].Coordinates.get(1).Value = PositionTest.TEST_COORDS[1];
 
-//                fullPolygonBuilder.Positions.get(1).Coordinates.get(0).Value = PositionTest.TEST_COORDS_2[0];
+//                fullPolygonBuilder.Positions.get(1).Coordinates[0].Value = PositionTest.TEST_COORDS_2[0];
 //                fullPolygonBuilder.Positions.get(1).Coordinates.get(1).Value = PositionTest.TEST_COORDS_2[1];
 
-//                fullPolygonBuilder.Positions.get(2).Coordinates.get(0).Value = PositionTest.TEST_COORDS_3[0];
+//                fullPolygonBuilder.Positions.get(2).Coordinates[0].Value = PositionTest.TEST_COORDS_3[0];
 //                fullPolygonBuilder.Positions.get(2).Coordinates.get(1).Value = PositionTest.TEST_COORDS_3[1];
 
-//                fullPolygonBuilder.Positions.get(3).Coordinates.get(0).Value = PositionTest.TEST_COORDS[0];
+//                fullPolygonBuilder.Positions.get(3).Coordinates[0].Value = PositionTest.TEST_COORDS[0];
 //                fullPolygonBuilder.Positions.get(3).Coordinates.get(1).Value = PositionTest.TEST_COORDS[1];
 
 //                builder.Polygons.add(emptyPolygonBuilder);
 //                builder.Polygons.add(fullPolygonBuilder);
-//                assertEquals(1, builder.commit().Polygons.size());
+//                Assert.Equals(1, builder.commit().Polygons.size());
 //            }
 //        }
 
@@ -365,7 +365,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingGeometry.Builder builder = new BoundingGeometry.Builder();
 //                assertNotNull(builder.Points.get(1));
 //                assertNotNull(builder.Polygons.get(1));

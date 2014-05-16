@@ -29,23 +29,23 @@
 
 //        public virtual void TestFactory() {
 //            ValidationMessage message = ValidationMessage.newWarning("Test", "ddms:test");
-//            assertEquals(ValidationMessage.WARNING_TYPE, message.Type);
-//            assertEquals("Test", message.Text);
-//            assertEquals("/ddms:test", message.Locator);
+//            Assert.Equals(ValidationMessage.WARNING_TYPE, message.Type);
+//            Assert.Equals("Test", message.Text);
+//            Assert.Equals("/ddms:test", message.Locator);
 
 //            message = ValidationMessage.newError("Test", "ddms:test");
-//            assertEquals(ValidationMessage.ERROR_TYPE, message.Type);
-//            assertEquals("Test", message.Text);
-//            assertEquals("/ddms:test", message.Locator);
+//            Assert.Equals(ValidationMessage.ERROR_TYPE, message.Type);
+//            Assert.Equals("Test", message.Text);
+//            Assert.Equals("/ddms:test", message.Locator);
 //        }
 
 //        public virtual void TestEquality() {
 //            ValidationMessage message1 = ValidationMessage.newWarning("Test", "ddms:test");
 //            ValidationMessage message2 = ValidationMessage.newWarning("Test", "ddms:test");
-//            assertEquals(message1, message1);
-//            assertEquals(message1, message2);
-//            assertEquals(message1.GetHashCode(), message2.GetHashCode());
-//            assertEquals(message1.ToString(), message2.ToString());
+//            Assert.Equals(message1, message1);
+//            Assert.Equals(message1, message2);
+//            Assert.Equals(message1.GetHashCode(), message2.GetHashCode());
+//            Assert.Equals(message1.ToString(), message2.ToString());
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -53,13 +53,13 @@
 //        public virtual void TestInequalityDifferentValues() {
 //            ValidationMessage message1 = ValidationMessage.newWarning("Test", "ddms:test");
 //            ValidationMessage message2 = ValidationMessage.newError("Test", "ddms:test");
-//            assertFalse(message1.Equals(message2));
+//            Assert.IsFalse(message1.Equals(message2));
 
 //            message2 = ValidationMessage.newWarning("Test2", "ddms:test");
-//            assertFalse(message1.Equals(message2));
+//            Assert.IsFalse(message1.Equals(message2));
 
 //            message2 = ValidationMessage.newWarning("Test", "ddms:test2");
-//            assertFalse(message1.Equals(message2));
+//            Assert.IsFalse(message1.Equals(message2));
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -67,7 +67,7 @@
 //        public virtual void TestInequalityWrongClass() {
 //            ValidationMessage message = ValidationMessage.newWarning("Test", "ddms:test");
 //            Rights wrongComponent = new Rights(true, true, true);
-//            assertFalse(message.Equals(wrongComponent));
+//            Assert.IsFalse(message.Equals(wrongComponent));
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -75,7 +75,7 @@
 //        public virtual void TestLocatorEquality() {
 //            InvalidDDMSException e = new InvalidDDMSException("test");
 //            e.Locator = "test";
-//            assertEquals("/test", e.Locator);
+//            Assert.Equals("/test", e.Locator);
 //        }
 //    }
 

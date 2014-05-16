@@ -136,7 +136,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, TEST_NOTICE_TYPE, TEST_NOTICE_REASON, TEST_NOTICE_DATE, TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
@@ -181,7 +181,7 @@
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // invalid noticeType
 //                GetInstance("Unknown is not a valid enumeration token", "Unknown", TEST_NOTICE_REASON, "2001", TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
@@ -216,7 +216,7 @@
 
 //                Fixture.addTo(element);
 //                NoticeAttributes attr = GetInstance(SUCCESS, element);
-//                assertEquals(0, attr.ValidationWarnings.size());
+//                Assert.Equals(0, attr.ValidationWarnings.size());
 //            }
 //        }
 
@@ -224,10 +224,10 @@
 ////ORIGINAL LINE: public void testDeprecatedConstructor() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDeprecatedConstructor() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeAttributes attr = new NoticeAttributes(TEST_NOTICE_TYPE, null, null, null);
-//                assertNull(attr.ExternalReference);
+//                Assert.IsNull(attr.ExternalReference);
 //            }
 //        }
 
@@ -244,9 +244,9 @@
 //                NoticeAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                NoticeAttributes dataAttributes = GetInstance(SUCCESS, TEST_NOTICE_TYPE, TEST_NOTICE_REASON, TEST_NOTICE_DATE, TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
 
-//                assertEquals(elementAttributes, elementAttributes);
-//                assertEquals(elementAttributes, dataAttributes);
-//                assertEquals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+//                Assert.Equals(elementAttributes, elementAttributes);
+//                Assert.Equals(elementAttributes, dataAttributes);
+//                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 //            }
 //        }
 
@@ -261,20 +261,20 @@
 //                NoticeAttributes expected = GetInstance(SUCCESS, element);
 
 //                NoticeAttributes test = GetInstance(SUCCESS, "DoD-Dist-C", TEST_NOTICE_REASON, TEST_NOTICE_DATE, TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
-//                assertFalse(expected.Equals(test));
+//                Assert.IsFalse(expected.Equals(test));
 
 //                test = GetInstance(SUCCESS, TEST_NOTICE_TYPE, DIFFERENT_VALUE, TEST_NOTICE_DATE, TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
-//                assertFalse(expected.Equals(test));
+//                Assert.IsFalse(expected.Equals(test));
 
 //                test = GetInstance(SUCCESS, TEST_NOTICE_TYPE, TEST_NOTICE_REASON, "2011-08-15", TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
-//                assertFalse(expected.Equals(test));
+//                Assert.IsFalse(expected.Equals(test));
 
 //                test = GetInstance(SUCCESS, TEST_NOTICE_TYPE, TEST_NOTICE_REASON, TEST_NOTICE_DATE, DIFFERENT_VALUE, ExternalNotice);
-//                assertFalse(expected.Equals(test));
+//                Assert.IsFalse(expected.Equals(test));
 
 //                if (version.isAtLeast("4.1")) {
 //                    test = GetInstance(SUCCESS, TEST_NOTICE_TYPE, TEST_NOTICE_REASON, TEST_NOTICE_DATE, TEST_UNREGISTERED_NOTICE_TYPE, null);
-//                    assertFalse(expected.Equals(test));
+//                    Assert.IsFalse(expected.Equals(test));
 //                }
 //            }
 //        }
@@ -283,11 +283,11 @@
 ////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeAttributes elementAttributes = Fixture;
 //                Rights wrongComponent = new Rights(true, true, true);
-//                assertFalse(elementAttributes.Equals(wrongComponent));
+//                Assert.IsFalse(elementAttributes.Equals(wrongComponent));
 //            }
 //        }
 
@@ -295,13 +295,13 @@
 ////ORIGINAL LINE: public void testAddTo() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestAddTo() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                NoticeAttributes component = Fixture;
 
 //                XElement element = Util.buildDDMSElement("sample", null);
 //                component.addTo(element);
 //                NoticeAttributes output = new NoticeAttributes(element);
-//                assertEquals(component, output);
+//                Assert.Equals(component, output);
 //            }
 //        }
 
@@ -310,11 +310,11 @@
 //        public virtual void TestGetNonNull() {
 //            NoticeAttributes component = new NoticeAttributes(null, null, null, null);
 //            NoticeAttributes output = NoticeAttributes.getNonNullInstance(null);
-//            assertEquals(component, output);
-//            assertTrue(output.Empty);
+//            Assert.Equals(component, output);
+//            Assert.IsTrue(output.Empty);
 
 //            output = NoticeAttributes.getNonNullInstance(Fixture);
-//            assertEquals(Fixture, output);
+//            Assert.Equals(Fixture, output);
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -337,12 +337,12 @@
 
 //        public virtual void TestIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeAttributes dataAttributes = GetInstance(SUCCESS, null, null, null, null, null);
-//                assertTrue(dataAttributes.Empty);
+//                Assert.IsTrue(dataAttributes.Empty);
 //                dataAttributes = GetInstance(SUCCESS, null, null, null, TEST_UNREGISTERED_NOTICE_TYPE, null);
-//                assertFalse(dataAttributes.Empty);
+//                Assert.IsFalse(dataAttributes.Empty);
 //            }
 //        }
 
@@ -350,11 +350,11 @@
 ////ORIGINAL LINE: public void testDateOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDateOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeAttributes dataAttributes = GetInstance(SUCCESS, null, null, "2005-10-10", null, null);
-//                assertEquals(BuildOutput(true, "noticeDate", "2005-10-10"), dataAttributes.getOutput(true, ""));
-//                assertEquals(BuildOutput(false, "noticeDate", "2005-10-10"), dataAttributes.getOutput(false, ""));
+//                Assert.Equals(BuildOutput(true, "noticeDate", "2005-10-10"), dataAttributes.getOutput(true, ""));
+//                Assert.Equals(BuildOutput(false, "noticeDate", "2005-10-10"), dataAttributes.getOutput(false, ""));
 //            }
 //        }
 
@@ -362,11 +362,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeAttributes component = Fixture;
 //                NoticeAttributes.Builder builder = new NoticeAttributes.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -374,15 +374,15 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeAttributes.Builder builder = new NoticeAttributes.Builder();
 //                assertNotNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsTrue(builder.Empty);
 //                builder.NoticeType = "";
-//                assertTrue(builder.Empty);
+//                Assert.IsTrue(builder.Empty);
 //                builder.NoticeReason = TEST_NOTICE_REASON;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -390,7 +390,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeAttributes.Builder builder = new NoticeAttributes.Builder();
 //                builder.NoticeDate = "2001";

@@ -289,7 +289,7 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Wrong date format (using xs:gDay here)
 //                XElement periodElement = Util.buildDDMSElement("TimePeriod", null);
@@ -301,7 +301,7 @@
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Wrong date format (using xs:gDay here)
 //                GetInstance("The date datatype must be one of", TEST_NAME, "---31", null, TEST_END, null);
 //            }
@@ -313,7 +313,7 @@
 
 //                // No warnings, exact-exact
 //                TemporalCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 
 //                // Empty name element
 //                XElement periodElement = Util.buildDDMSElement("TimePeriod", null);
@@ -321,10 +321,10 @@
 //                periodElement.appendChild(Util.buildDDMSElement("start", TEST_START));
 //                periodElement.appendChild(Util.buildDDMSElement("end", TEST_END));
 //                component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "A ddms:name element was found with no value.";
 //                string locator = version.isAtLeast("4.0.1") ? "ddms:temporalCoverage" : "ddms:temporalCoverage/ddms:TimePeriod";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
 //                // 4.1 ddms:approximableStart/End element used
 //                if (version.isAtLeast("4.1")) {
@@ -332,10 +332,10 @@
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableStart", true));
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
 //                    component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-//                    assertEquals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.size());
 //                    text = "The ddms:approximableStart or ddms:approximableEnd element";
 //                    locator = "ddms:temporalCoverage";
-//                    AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //            }
 //        }
@@ -349,8 +349,8 @@
 //                // exact-exact
 //                TemporalCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                TemporalCoverage dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_START, null, TEST_END, null);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
 //                // approx-approx
 //                if (version.isAtLeast("4.1")) {
@@ -359,8 +359,8 @@
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableEnd", false));
 //                    elementComponent = GetInstance(SUCCESS, WrapInnerElement(periodElement));
 //                    dataComponent = GetInstance(SUCCESS, null, null, GetApproximableStart(false), null, GetApproximableEnd(false));
-//                    assertEquals(elementComponent, dataComponent);
-//                    assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                    Assert.Equals(elementComponent, dataComponent);
+//                    Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //                }
 //            }
 //        }
@@ -372,13 +372,13 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                TemporalCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                TemporalCoverage dataComponent = GetInstance(SUCCESS, "", TEST_START, null, TEST_END, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_NAME, "Not Applicable", null, TEST_END, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_START, null, "2050", null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                if (version.isAtLeast("4.1")) {
 //                    XElement periodElement = Util.buildDDMSElement("TimePeriod", null);
@@ -386,13 +386,13 @@
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableEnd", false));
 //                    elementComponent = GetInstance(SUCCESS, WrapInnerElement(periodElement));
 //                    dataComponent = GetInstance(SUCCESS, TEST_NAME, null, GetApproximableStart(false), null, GetApproximableEnd(false));
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                    dataComponent = GetInstance(SUCCESS, null, null, GetApproximableStart(false), TEST_END, null);
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                    dataComponent = GetInstance(SUCCESS, null, TEST_START, null, null, GetApproximableEnd(false));
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 //                }
 //            }
 //        }
@@ -401,10 +401,10 @@
 ////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                TemporalCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Rights wrongComponent = new Rights(true, true, true);
-//                assertFalse(elementComponent.Equals(wrongComponent));
+//                Assert.IsFalse(elementComponent.Equals(wrongComponent));
 //            }
 //        }
 
@@ -414,12 +414,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                TemporalCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true, false), component.toHTML());
-//                assertEquals(GetExpectedOutput(false, false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true, false), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false, false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_NAME, TEST_START, null, TEST_END, null);
-//                assertEquals(GetExpectedOutput(true, false), component.toHTML());
-//                assertEquals(GetExpectedOutput(false, false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true, false), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false, false), component.toText());
 
 //                if (version.isAtLeast("4.1")) {
 //                    XElement periodElement = Util.buildDDMSElement("TimePeriod", null);
@@ -427,12 +427,12 @@
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableStart", true));
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
 //                    component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-//                    assertEquals(GetExpectedOutput(true, true), component.toHTML());
-//                    assertEquals(GetExpectedOutput(false, true), component.toText());
+//                    Assert.Equals(GetExpectedOutput(true, true), component.toHTML());
+//                    Assert.Equals(GetExpectedOutput(false, true), component.toText());
 
 //                    component = GetInstance(SUCCESS, TEST_NAME, null, GetApproximableStart(true), null, GetApproximableEnd(true));
-//                    assertEquals(GetExpectedOutput(true, true), component.toHTML());
-//                    assertEquals(GetExpectedOutput(false, true), component.toText());
+//                    Assert.Equals(GetExpectedOutput(true, true), component.toHTML());
+//                    Assert.Equals(GetExpectedOutput(false, true), component.toText());
 //                }
 //            }
 //        }
@@ -443,10 +443,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                TemporalCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_NAME, TEST_START, null, TEST_END, null);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 
 //                if (version.isAtLeast("4.1")) {
 //                    XElement periodElement = Util.buildDDMSElement("TimePeriod", null);
@@ -454,29 +454,29 @@
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableStart", true));
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
 //                    component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-//                    assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                    Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 
 //                    component = GetInstance(SUCCESS, TEST_NAME, null, GetApproximableStart(true), null, GetApproximableEnd(true));
-//                    assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                    Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 //                }
 //            }
 //        }
 
 //        public virtual void TestDefaultValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XElement periodElement = Util.buildDDMSElement("TimePeriod", null);
 //                periodElement.appendChild(Util.buildDDMSElement("start", ""));
 //                periodElement.appendChild(Util.buildDDMSElement("end", ""));
 //                TemporalCoverage component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-//                assertEquals("Unknown", component.StartString);
-//                assertEquals("Unknown", component.EndString);
+//                Assert.Equals("Unknown", component.StartString);
+//                Assert.Equals("Unknown", component.EndString);
 
 //                component = GetInstance(SUCCESS, "", "", null, "", null);
-//                assertEquals("Unknown", component.TimePeriodName);
-//                assertEquals("Unknown", component.StartString);
-//                assertEquals("Unknown", component.EndString);
+//                Assert.Equals("Unknown", component.TimePeriodName);
+//                Assert.Equals("Unknown", component.StartString);
+//                Assert.Equals("Unknown", component.EndString);
 
 //            }
 //        }
@@ -485,18 +485,18 @@
 ////ORIGINAL LINE: public void testDeprecatedAccessors() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDeprecatedAccessors() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XElement periodElement = Util.buildDDMSElement("TimePeriod", null);
 //                periodElement.appendChild(Util.buildDDMSElement("start", ""));
 //                periodElement.appendChild(Util.buildDDMSElement("end", ""));
 //                TemporalCoverage component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-//                assertNull(component.Start);
-//                assertNull(component.End);
+//                Assert.IsNull(component.Start);
+//                Assert.IsNull(component.End);
 
 //                component = GetInstance(SUCCESS, "", TEST_START, null, TEST_START, null);
-//                assertEquals(TEST_START, component.Start.toXMLFormat());
-//                assertEquals(TEST_START, component.End.toXMLFormat());
+//                Assert.Equals(TEST_START, component.Start.toXMLFormat());
+//                Assert.Equals(TEST_START, component.End.toXMLFormat());
 //            }
 //        }
 
@@ -508,9 +508,9 @@
 //                SecurityAttributes attr = (!version.isAtLeast("3.0") ? null : SecurityAttributesTest.Fixture);
 //                TemporalCoverage component = new TemporalCoverage(TEST_NAME, TEST_START, TEST_END, attr);
 //                if (!version.isAtLeast("3.0")) {
-//                    assertTrue(component.SecurityAttributes.Empty);
+//                    Assert.IsTrue(component.SecurityAttributes.Empty);
 //                } else {
-//                    assertEquals(attr, component.SecurityAttributes);
+//                    Assert.Equals(attr, component.SecurityAttributes);
 //                }
 //            }
 //        }
@@ -518,7 +518,7 @@
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 ////ORIGINAL LINE: public void testWrongVersionSecurityAttributes() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWrongVersionSecurityAttributes() {
-//            DDMSVersion.CurrentVersion = "2.0";
+//            DDMSVersion.SetCurrentVersion("2.0");
 //            try {
 //                new TemporalCoverage(TEST_NAME, TEST_START, TEST_END, SecurityAttributesTest.Fixture);
 //                fail("Allowed invalid data.");
@@ -547,7 +547,7 @@
 
 //                TemporalCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                TemporalCoverage.Builder builder = new TemporalCoverage.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 
 //                if (version.isAtLeast("4.1")) {
 //                    XElement periodElement = Util.buildDDMSElement("TimePeriod", null);
@@ -556,7 +556,7 @@
 //                    periodElement.appendChild(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
 //                    component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
 //                    builder = new TemporalCoverage.Builder(component);
-//                    assertEquals(component, builder.commit());
+//                    Assert.Equals(component, builder.commit());
 //                }
 //            }
 //        }
@@ -565,13 +565,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                TemporalCoverage.Builder builder = new TemporalCoverage.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.StartString = TEST_START;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
