@@ -80,7 +80,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private SRSAttributes GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SRSAttributes attributes = null;
 //            try {
 //                attributes = new SRSAttributes(element);
@@ -102,7 +102,7 @@
 //        /// <param name="uomLabels"> the labels for UOM (required when axisLabels is set) </param>
 //        /// <returns> a valid object </returns>
 //        private SRSAttributes GetInstance(string message, string srsName, int? srsDimension, IList<string> axisLabels, IList<string> uomLabels) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SRSAttributes attributes = null;
 //            try {
 //                attributes = new SRSAttributes(srsName, srsDimension, axisLabels, uomLabels);

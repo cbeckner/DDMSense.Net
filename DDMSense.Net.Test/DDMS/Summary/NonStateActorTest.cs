@@ -100,7 +100,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private NonStateActor GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NonStateActor component = null;
 //            try {
 //                component = new NonStateActor(element);
@@ -121,7 +121,7 @@
 //        /// <param name="qualifier"> the qualifier of the actor (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private NonStateActor GetInstance(string message, string value, int? order, string qualifier) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NonStateActor component = null;
 //            try {
 //                component = new NonStateActor(value, order, qualifier, SecurityAttributesTest.Fixture);
@@ -262,7 +262,7 @@
 //                DDMSVersion.CurrentVersion = sVersion;
 
 //                NonStateActor dataComponent = new NonStateActor(TEST_VALUE, TEST_ORDER, SecurityAttributesTest.Fixture);
-//                assertTrue(Util.isEmpty(dataComponent.Qualifier));
+//                assertTrue(String.IsNullOrEmpty(dataComponent.Qualifier));
 //            }
 //        }
 

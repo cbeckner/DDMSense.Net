@@ -71,7 +71,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Polygon GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Polygon component = null;
 //            try {
 //                component = new Polygon(element);
@@ -92,7 +92,7 @@
 //        /// <param name="id"> the id (required) </param>
 //        /// <returns> a valid object </returns>
 //        private Polygon GetInstance(string message, IList<Position> positions, SRSAttributes srsAttributes, string id) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Polygon component = null;
 //            try {
 //                component = new Polygon(positions, srsAttributes, id);

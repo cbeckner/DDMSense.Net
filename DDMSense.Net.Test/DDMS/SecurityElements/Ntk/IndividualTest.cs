@@ -79,7 +79,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Individual GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Individual component = null;
 //            try {
 //                component = new Individual(element);
@@ -98,7 +98,7 @@
 //        /// <param name="systemName"> the system (required) </param>
 //        /// <param name="values"> the values (1 required) </param>
 //        private Individual GetInstance(string message, SystemName systemName, IList<IndividualValue> values) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Individual component = null;
 //            try {
 //                component = new Individual(systemName, values, SecurityAttributesTest.Fixture);

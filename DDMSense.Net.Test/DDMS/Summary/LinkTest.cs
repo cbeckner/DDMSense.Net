@@ -105,7 +105,7 @@
 //        /// <param name="element"> the element to build from </param>
 //        /// <returns> a valid object </returns>
 //        private Link GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Link component = null;
 //            try {
 //                component = new Link(element);
@@ -124,7 +124,7 @@
 //        /// <param name="attributes"> the XLink Attributes </param>
 //        /// <returns> a valid object </returns>
 //        private Link GetInstance(string message, XLinkAttributes attributes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Link component = null;
 //            try {
 //                component = new Link(attributes);

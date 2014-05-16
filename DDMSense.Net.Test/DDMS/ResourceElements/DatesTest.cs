@@ -75,7 +75,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Dates GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Dates component = null;
 //            try {
 //                component = new Dates(element);
@@ -100,7 +100,7 @@
 //        /// <param name="receivedOn"> the received on date (optional, starting in 4.0.1) </param>
 //        /// <returns> a valid object </returns>
 //        private Dates GetInstance(string message, IList<ApproximableDate> acquiredOns, string created, string posted, string validTil, string infoCutOff, string approvedOn, string receivedOn) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Dates component = null;
 //            try {
 //                component = new Dates(acquiredOns, created, posted, validTil, infoCutOff, approvedOn, receivedOn);

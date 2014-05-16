@@ -84,7 +84,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private GroupValue GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            GroupValue component = null;
 //            try {
 //                component = new GroupValue(element);
@@ -106,7 +106,7 @@
 //        /// <param name="qualifier"> an NTK qualifier (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private GroupValue GetInstance(string message, string value, string id, string idReference, string qualifier) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            GroupValue component = null;
 //            try {
 //                component = new GroupValue(value, id, idReference, qualifier, SecurityAttributesTest.Fixture);

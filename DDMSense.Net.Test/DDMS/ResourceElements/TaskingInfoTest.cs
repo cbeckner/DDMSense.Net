@@ -100,7 +100,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private TaskingInfo GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            TaskingInfo component = null;
 //            try {
 //                component = new TaskingInfo(element);
@@ -121,7 +121,7 @@
 //        /// <param name="description"> description of tasking (optional) </param>
 //        /// <param name="taskID"> taskID for tasking (required) </param>
 //        private TaskingInfo GetInstance(string message, IList<RequesterInfo> requesterInfos, IList<Addressee> addressees, Description description, TaskID taskID) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            TaskingInfo component = null;
 //            try {
 //                component = new TaskingInfo(requesterInfos, addressees, description, taskID, SecurityAttributesTest.Fixture);

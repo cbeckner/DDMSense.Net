@@ -72,7 +72,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Keyword GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Keyword component = null;
 //            try {
 //                component = new Keyword(element);
@@ -91,7 +91,7 @@
 //        /// <param name="value"> the value child text </param>
 //        /// <returns> a valid object </returns>
 //        private Keyword GetInstance(string message, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            DDMSVersion version = DDMSVersion.CurrentVersion;
 //            Keyword component = null;
 //            try {

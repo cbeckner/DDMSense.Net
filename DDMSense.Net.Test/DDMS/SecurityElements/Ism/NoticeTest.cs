@@ -96,7 +96,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Notice GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Notice component = null;
 //            try {
 //                component = new Notice(element);
@@ -115,7 +115,7 @@
 //        /// <param name="noticeTexts"> the notice texts (at least 1 required) </param>
 //        /// <returns> a valid object </returns>
 //        private Notice GetInstance(string message, IList<NoticeText> noticeTexts) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Notice component = null;
 //            try {
 //                component = new Notice(noticeTexts, SecurityAttributesTest.Fixture, NoticeAttributesTest.Fixture);

@@ -79,7 +79,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Profile GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Profile component = null;
 //            try {
 //                component = new Profile(element);
@@ -98,7 +98,7 @@
 //        /// <param name="systemName"> the system (required) </param>
 //        /// <param name="values"> the values (1 required) </param>
 //        private Profile GetInstance(string message, SystemName systemName, IList<ProfileValue> values) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Profile component = null;
 //            try {
 //                component = new Profile(systemName, values, SecurityAttributesTest.Fixture);

@@ -102,7 +102,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Position GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Position component = null;
 //            try {
 //                component = new Position(element);
@@ -122,7 +122,7 @@
 //        /// <param name="srsAttributes"> the srs attributes (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private Position GetInstance(string message, IList<double?> coordinates, SRSAttributes srsAttributes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Position component = null;
 //            try {
 //                component = new Position(coordinates, srsAttributes);

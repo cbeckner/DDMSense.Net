@@ -81,7 +81,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private ProcessingInfo GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProcessingInfo component = null;
 //            try {
 //                component = new ProcessingInfo(element);
@@ -101,7 +101,7 @@
 //        /// <param name="dateProcessed"> the processing date </param>
 //        /// <returns> a valid object </returns>
 //        private ProcessingInfo GetInstance(string message, string value, string dateProcessed) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProcessingInfo component = null;
 //            try {
 //                component = new ProcessingInfo(value, dateProcessed, SecurityAttributesTest.Fixture);

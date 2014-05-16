@@ -100,7 +100,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private XLinkAttributes GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            XLinkAttributes attributes = null;
 //            try {
 //                attributes = new XLinkAttributes(element);
@@ -121,7 +121,7 @@
 //        /// <param name="label"> the name of the link (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private XLinkAttributes GetInstance(string message, string role, string title, string label) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            XLinkAttributes attributes = null;
 //            try {
 //                attributes = new XLinkAttributes(role, title, label);
@@ -143,7 +143,7 @@
 //        /// <param name="label"> the name of the link (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private XLinkAttributes GetInstance(string message, string href, string role, string title, string label) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            XLinkAttributes attributes = null;
 //            try {
 //                attributes = new XLinkAttributes(href, role, title, label);
@@ -167,7 +167,7 @@
 //        /// <param name="actuate"> the actuate token (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private XLinkAttributes GetInstance(string message, string href, string role, string title, string arcrole, string show, string actuate) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            XLinkAttributes attributes = null;
 //            try {
 //                attributes = new XLinkAttributes(href, role, title, arcrole, show, actuate);
@@ -566,7 +566,7 @@
 
 //                // An untyped instance
 //                XLinkAttributes output = builder.commit();
-//                assertTrue(Util.isEmpty(output.Type));
+//                assertTrue(String.IsNullOrEmpty(output.Type));
 //            }
 //        }
 

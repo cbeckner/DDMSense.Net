@@ -84,7 +84,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private IndividualValue GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            IndividualValue component = null;
 //            try {
 //                component = new IndividualValue(element);
@@ -106,7 +106,7 @@
 //        /// <param name="qualifier"> an NTK qualifier (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private IndividualValue GetInstance(string message, string value, string id, string idReference, string qualifier) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            IndividualValue component = null;
 //            try {
 //                component = new IndividualValue(value, id, idReference, qualifier, SecurityAttributesTest.Fixture);

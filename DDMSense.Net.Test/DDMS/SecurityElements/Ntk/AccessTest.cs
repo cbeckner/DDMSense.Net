@@ -80,7 +80,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Access GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Access component = null;
 //            try {
 //                component = new Access(element);
@@ -101,7 +101,7 @@
 //        /// <param name="profileList"> the profilesprofiles the profiles in this list (required) </param>
 //        /// <param name="externalReference"> the external reference attribute </param>
 //        private Access GetInstance(string message, IList<Individual> individuals, IList<Group> groups, ProfileList profileList, bool? externalReference) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Access component = null;
 //            try {
 //                component = new Access(individuals, groups, profileList, externalReference, SecurityAttributesTest.Fixture);

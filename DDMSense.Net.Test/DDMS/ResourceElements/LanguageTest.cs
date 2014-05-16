@@ -66,7 +66,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Language GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Language component = null;
 //            try {
 //                component = new Language(element);
@@ -86,7 +86,7 @@
 //        /// <param name="value"> the value </param>
 //        /// <returns> a valid object </returns>
 //        private Language GetInstance(string message, string qualifier, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Language component = null;
 //            try {
 //                component = new Language(qualifier, value);

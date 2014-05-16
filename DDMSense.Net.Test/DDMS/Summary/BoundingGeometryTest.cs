@@ -74,7 +74,7 @@
 //        /// <param name="element"> the element to build from </param>
 //        /// <returns> a valid object </returns>
 //        private BoundingGeometry GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            BoundingGeometry component = null;
 //            try {
 //                component = new BoundingGeometry(element);
@@ -94,7 +94,7 @@
 //        /// <param name="points"> an ordered list of the points used in this geometry </param>
 //        /// <returns> a valid object </returns>
 //        private BoundingGeometry GetInstance(string message, IList<Polygon> polygons, IList<Point> points) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            BoundingGeometry component = null;
 //            try {
 //                component = new BoundingGeometry(polygons, points);

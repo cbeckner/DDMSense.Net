@@ -71,7 +71,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private SystemName GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SystemName component = null;
 //            try {
 //                component = new SystemName(element);
@@ -93,7 +93,7 @@
 //        /// <param name="qualifier"> an NTK qualifier (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private SystemName GetInstance(string message, string value, string id, string idReference, string qualifier) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SystemName component = null;
 //            try {
 //                component = new SystemName(value, id, idReference, qualifier, SecurityAttributesTest.Fixture);

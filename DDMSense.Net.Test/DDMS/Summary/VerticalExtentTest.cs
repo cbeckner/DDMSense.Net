@@ -69,7 +69,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private VerticalExtent GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            VerticalExtent component = null;
 //            try {
 //                component = new VerticalExtent(element);
@@ -91,7 +91,7 @@
 //        /// <param name="datum"> the datum (required) </param>
 //        /// <returns> a valid object </returns>
 //        private VerticalExtent GetInstance(string message, double minVerticalExtent, double maxVerticalExtent, string unitOfMeasure, string datum) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            VerticalExtent component = null;
 //            try {
 //                component = new VerticalExtent(minVerticalExtent, maxVerticalExtent, unitOfMeasure, datum);

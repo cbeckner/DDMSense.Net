@@ -71,7 +71,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Point GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Point component = null;
 //            try {
 //                component = new Point(element);
@@ -92,7 +92,7 @@
 //        /// <param name="id"> the id (required) </param>
 //        /// <returns> a valid object </returns>
 //        private Point GetInstance(string message, Position position, SRSAttributes srsAttributes, string id) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Point component = null;
 //            try {
 //                component = new Point(position, srsAttributes, id);

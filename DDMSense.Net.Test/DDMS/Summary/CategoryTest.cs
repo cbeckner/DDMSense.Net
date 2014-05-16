@@ -74,7 +74,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Category GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Category component = null;
 //            try {
 //                component = new Category(element);
@@ -95,7 +95,7 @@
 //        /// <param name="label"> the label (required) </param>
 //        /// <returns> a valid object </returns>
 //        private Category GetInstance(string message, string qualifier, string code, string label) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            DDMSVersion version = DDMSVersion.CurrentVersion;
 //            Category component = null;
 //            try {

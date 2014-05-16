@@ -66,7 +66,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Description GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Description component = null;
 //            try {
 //                component = new Description(element);
@@ -85,7 +85,7 @@
 //        /// <param name="value"> the description </param>
 //        /// <returns> a valid object </returns>
 //        private Description GetInstance(string message, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Description component = null;
 //            try {
 //                component = new Description(value, SecurityAttributesTest.Fixture);

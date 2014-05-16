@@ -104,7 +104,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Details GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Details component = null;
 //            try {
 //                component = new Details(element);
@@ -123,7 +123,7 @@
 //        /// <param name="value"> the child text </param>
 //        /// <returns> a valid object </returns>
 //        private Details GetInstance(string message, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Details component = null;
 //            try {
 //                component = new Details(value, SecurityAttributesTest.Fixture);

@@ -66,7 +66,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Title GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Title component = null;
 //            try {
 //                component = new Title(element);
@@ -85,7 +85,7 @@
 //        /// <param name="title"> the title child text </param>
 //        /// <returns> a valid object </returns>
 //        private Title GetInstance(string message, string title) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Title component = null;
 //            try {
 //                component = new Title(title, SecurityAttributesTest.Fixture);
