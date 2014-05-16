@@ -112,7 +112,7 @@ namespace DDMSense.DDMS.ResourceElements
                 if (addressees == null)
                     addressees = new List<Addressee>();
 
-                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 SetElement(element, false);
                 foreach (var info in requesterInfos)
                     element.Add(info.ElementCopy);

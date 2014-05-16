@@ -57,7 +57,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="entity"> the actual entity who is the addressee (required) </param>
         /// <param name="securityAttributes"> any security attributes (required) </param>
         public Addressee(IRoleEntity entity, SecurityAttributes securityAttributes)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), entity, securityAttributes)
+            : base(GetName(DDMSVersion.CurrentVersion), entity, securityAttributes)
         {
         }
 

@@ -88,7 +88,7 @@ namespace DDMSense.DDMS.ResourceElements
             RecordKeeper = null;
             try
             {
-                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 SetElement(element, false);
                 if (recordKeeper != null)
                     element.Add(recordKeeper.ElementCopy);

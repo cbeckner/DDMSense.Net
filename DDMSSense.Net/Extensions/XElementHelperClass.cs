@@ -19,4 +19,12 @@ namespace DDMSense.Extensions
             return element.GetPrefixOfNamespace(element.Name.Namespace);
         }
     }
+
+    public static class XAttributeHelperClass
+    {
+        public static string GetPrefix(this XAttribute attribute)
+        {
+            return attribute.Parent.GetPrefixOfNamespace(attribute.Name.Namespace);
+        }
+    }
 }

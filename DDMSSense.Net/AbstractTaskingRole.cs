@@ -263,7 +263,7 @@ namespace DDMSense
             /// <returns> the entity </returns>
             protected internal virtual IRoleEntity CommitSelectedEntity()
             {
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 if (DDMS.ResourceElements.Organization.GetName(version).Equals(EntityType))
                     return ((Organization) Organization.Commit());
                 

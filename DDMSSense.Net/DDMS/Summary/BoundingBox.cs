@@ -99,7 +99,7 @@ namespace DDMSense.DDMS.Summary
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 SetElement(element, false);
                 element.Add(Util.Util.BuildDDMSElement(WestBLName, Convert.ToString(westBL)));
                 element.Add(Util.Util.BuildDDMSElement(EastBLName, Convert.ToString(eastBL)));

@@ -147,7 +147,7 @@ namespace DDMSense.DDMS.Summary.Gml
                 {
                     positions = new List<Position>();
                 }
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 string gmlPrefix = PropertyReader.GetPrefix("gml");
                 string gmlNamespace = version.GmlNamespace;
                 Element ringElement = Util.Util.BuildElement(gmlPrefix, LINEAR_RING_NAME, gmlNamespace, null);

@@ -112,7 +112,7 @@ namespace DDMSense.Util
 
 		/// <summary>
 		///     Helper method to add a ddms attribute to an element. Will not add the attribute if the value
-		///     is empty or null. This method uses the DDMS namespace defined with DDMSVersion.getCurrentVersion().
+		///     is empty or null. This method uses the DDMS namespace defined with DDMSVersion.CurrentVersion.
 		/// </summary>
 		/// <param name="element"> the element to decorate </param>
 		/// <param name="attributeName"> the name of the attribute (will be within the DDMS namespace) </param>
@@ -120,7 +120,7 @@ namespace DDMSense.Util
 		public static void AddDDMSAttribute(XElement element, string attributeName, string attributeValue)
 		{
 			AddAttribute(element, PropertyReader.GetPrefix("ddms"), attributeName,
-				DDMSVersion.GetCurrentVersion().Namespace, attributeValue);
+				DDMSVersion.CurrentVersion.Namespace, attributeValue);
 		}
 
 		/// <summary>
@@ -172,7 +172,7 @@ namespace DDMSense.Util
 		/// <param name="value"> the value of the attribute </param>
 		public static XAttribute BuildDDMSAttribute(string name, string value)
 		{
-			return (BuildAttribute(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace, value));
+			return (BuildAttribute(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.CurrentVersion.Namespace, value));
 		}
 
 		/// <summary>
@@ -183,7 +183,7 @@ namespace DDMSense.Util
 		/// <param name="childText"> the text of the element (optional) </param>
 		public static XElement BuildDDMSElement(string name, string childText)
 		{
-			return (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace, childText));
+			return (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.CurrentVersion.Namespace, childText));
 		}
 
 		/// <summary>
@@ -601,7 +601,7 @@ namespace DDMSense.Util
 			RequireValue("uri", uri);
 			try
 			{
-				new Uri(uri);
+                new Uri(uri, UriKind.RelativeOrAbsolute);
 			}
 			catch (UriFormatException e)
 			{
@@ -646,8 +646,8 @@ namespace DDMSense.Util
 		public static void RequireValidLatitude(double? value)
 		{
 			if (!value.HasValue
-				|| (value.HasValue && ((double)-90L).CompareTo(value.Value) > 0)
-				|| (value.HasValue && ((double)90L).CompareTo(value.Value) < 0))
+				|| (value.HasValue && (-90D).CompareTo(value.Value) > 0)
+				|| (value.HasValue && (90D).CompareTo(value.Value) < 0))
 				throw new InvalidDDMSException(string.Format("A latitude value must be between -90 and 90 degrees: {0}", value.HasValue ? value.Value.ToString() : "No value provided"));
 		}
 
@@ -659,8 +659,8 @@ namespace DDMSense.Util
 		public static void RequireValidLongitude(double? value)
 		{
 			if (!value.HasValue
-				|| (value.HasValue && ((double)-180L).CompareTo(value.Value) > 0)
-				|| (value.HasValue && ((double)180L).CompareTo(value.Value) < 0))
+				|| (value.HasValue && (-180D).CompareTo(value.Value) > 0)
+				|| (value.HasValue && (180D).CompareTo(value.Value) < 0))
 				throw new InvalidDDMSException(string.Format("A longitude value must be between -180 and 180 degrees: {0}", value.HasValue ? value.Value.ToString() : "No value provided"));
 		}
 

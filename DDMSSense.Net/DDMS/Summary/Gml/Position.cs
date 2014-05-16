@@ -116,7 +116,7 @@ namespace DDMSense.DDMS.Summary.Gml
                 {
                     coordinates = new List<double?>();
                 }
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("gml"), GetName(version),
                     version.GmlNamespace, Util.Util.GetXsList(coordinates));
 

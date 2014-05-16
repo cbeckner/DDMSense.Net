@@ -111,7 +111,7 @@ namespace DDMSense.DDMS.Summary
                 {
                     points = new List<Point>();
                 }
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 foreach (var polygon in polygons)
                 {
                     element.Add(polygon.ElementCopy);

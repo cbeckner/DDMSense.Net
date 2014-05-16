@@ -84,7 +84,7 @@ namespace DDMSense
             try
             {
                 string ntkPrefix = PropertyReader.GetPrefix("ntk");
-                string ntkNamespace = DDMSVersion.GetCurrentVersion().NtkNamespace;
+                string ntkNamespace = DDMSVersion.CurrentVersion.NtkNamespace;
                 XElement element = Util.Util.BuildElement(ntkPrefix, name, ntkNamespace, value);
                 Util.Util.AddAttribute(element, ntkPrefix, ID_NAME, ntkNamespace, id);
                 Util.Util.AddAttribute(element, ntkPrefix, ID_REFERENCE_NAME, ntkNamespace, idReference);

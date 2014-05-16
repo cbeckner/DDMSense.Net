@@ -54,7 +54,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         {
             try
             {
-                string pocTypes = element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace)).Value;
+                string pocTypes = (string)element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace));
                 PocTypes = Util.Util.GetXsListAsList(pocTypes);
                 Validate();
             }
@@ -73,7 +73,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public NoticeText(string value, List<string> pocTypes, SecurityAttributes securityAttributes)
-            : base(                PropertyReader.GetPrefix("ism"), DDMSVersion.GetCurrentVersion().IsmNamespace,                GetName(DDMSVersion.GetCurrentVersion()), value, securityAttributes, false)
+            : base(                PropertyReader.GetPrefix("ism"), DDMSVersion.CurrentVersion.IsmNamespace,                GetName(DDMSVersion.CurrentVersion), value, securityAttributes, false)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                     pocTypes = new List<string>();
                 
                 if (pocTypes.Count > 0)
-                    Util.Util.AddAttribute(Element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME,                        DDMSVersion.GetCurrentVersion().IsmNamespace, Util.Util.GetXsList(pocTypes));
+                    Util.Util.AddAttribute(Element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME,                        DDMSVersion.CurrentVersion.IsmNamespace, Util.Util.GetXsList(pocTypes));
                 
                 PocTypes = pocTypes;
                 Validate();

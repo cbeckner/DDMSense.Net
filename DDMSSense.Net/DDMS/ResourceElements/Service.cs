@@ -87,7 +87,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="emails"> an ordered list of email addresses </param>
         /// <param name="extensions"> extensible attributes (optional) </param>
         public Service(List<string> names, List<string> phones, List<string> emails, ExtensibleAttributes extensions)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), names, phones, emails, extensions, true)
+            : base(GetName(DDMSVersion.CurrentVersion), names, phones, emails, extensions, true)
         {
         }
 

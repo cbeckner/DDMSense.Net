@@ -57,7 +57,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="entity"> the actual entity who is the requester (required) </param>
         /// <param name="securityAttributes"> any security attributes (required) </param>
         public RequesterInfo(IRoleEntity entity, SecurityAttributes securityAttributes)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), entity, securityAttributes)
+            : base(GetName(DDMSVersion.CurrentVersion), entity, securityAttributes)
         {
         }
 

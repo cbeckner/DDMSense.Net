@@ -106,7 +106,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public Individual(SystemName systemName, List<IndividualValue> individualValues,
             SecurityAttributes securityAttributes)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), systemName, securityAttributes)
+            : base(GetName(DDMSVersion.CurrentVersion), systemName, securityAttributes)
         {
             try
             {

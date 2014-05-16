@@ -122,7 +122,7 @@ namespace DDMSense.DDMS.ResourceElements
         {
             try
             {
-                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 if (acquiredOns == null)
                     acquiredOns = new List<ApproximableDate>();
                 

@@ -211,7 +211,7 @@ namespace DDMSense.DDMS.ResourceElements
                 if (details == null)
                     details = new List<Details>();
 
-                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), value);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), value);
                 foreach (var link in links)
                     element.Add(link.ElementCopy);
 

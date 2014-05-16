@@ -187,7 +187,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             ALL_ENUMS.Add(CVE_SAR_IDENTIFIER);
             ALL_ENUMS.Add(CVE_SCI_CONTROLS);
             ALL_ENUMS.Add(CVE_TYPE_EXEMPTED_SOURCE);
-            DDMSVersion = DDMSVersion.GetCurrentVersion();
+            DDMSVersion = DDMSVersion.CurrentVersion;
         }
 
         /// <summary>
@@ -239,6 +239,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                                 }
                                 catch (Exception)
                                 {
+                                    continue;
                                 }
                             }
                         }
@@ -272,7 +273,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             foreach (var term in terms)
             {
                 XElement value = term.Element(XName.Get(VALUE_NAME, cveNamespace));
-                bool isPattern = Convert.ToBoolean(value.Attribute(REG_EXP_NAME));
+                bool isPattern = Convert.ToBoolean((string)value.Attribute(REG_EXP_NAME));
                 if (value != null)
                 {
                     if (isPattern)
@@ -281,8 +282,12 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                         tokens.Add(value.Value);
                 }
             }
-            LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, tokens);
-            LOCATION_TO_ENUM_PATTERNS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, patterns);
+
+            if(!LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation).ContainsKey(enumerationKey))
+                LOCATION_TO_ENUM_TOKENS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, tokens);
+
+            if (!LOCATION_TO_ENUM_PATTERNS.GetValueOrNull(LastEnumLocation).ContainsKey(enumerationKey))
+                LOCATION_TO_ENUM_PATTERNS.GetValueOrNull(LastEnumLocation).Add(enumerationKey, patterns);
         }
 
         /// <summary>
@@ -293,7 +298,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         ///         in advance, to ensure that the appropriate set of CVE files is used to look up the tokens, OR
         ///         you may use the configurable property, <code>icism.cve.customEnumLocation</code>, to force the
         ///         use of a custom set of CVE files. If neither option is used, the default set of tokens returned
-        ///         will be based on the current value of <code>DDMSVersion.getCurrentVersion()</code>.
+        ///         will be based on the current value of <code>DDMSVersion.CurrentVersion</code>.
         ///     </para>
         /// </summary>
         /// <param name="enumerationKey"> the key of the enumeration </param>
