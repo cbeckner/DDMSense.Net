@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DDMSVersion = DDMSense.Util.DDMSVersion;
 
 /* Copyright 2010 - 2013 by Brian Uri!
    
@@ -34,28 +36,30 @@ namespace DDMSense.Test.DDMS {
 	using MetacardInfoTest = DDMSense.Test.DDMS.Metacard.MetacardInfoTest;
 	using SecurityTest = DDMSense.Test.DDMS.SecurityElements.SecurityTest;
 	using NoticeAttributes = DDMSense.DDMS.SecurityElements.Ism.NoticeAttributes;
-    using NoticeAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.NoticeAttributesTest;
+	using NoticeAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.NoticeAttributesTest;
 	using SecurityAttributes = DDMSense.DDMS.SecurityElements.Ism.SecurityAttributes;
-    using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
-    using DescriptionTest = DDMSense.Test.DDMS.Summary.DescriptionTest;
+	using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
+	using DescriptionTest = DDMSense.Test.DDMS.Summary.DescriptionTest;
 	using GeospatialCoverage = DDMSense.DDMS.Summary.GeospatialCoverage;
-    using GeospatialCoverageTest = DDMSense.Test.DDMS.Summary.GeospatialCoverageTest;
+	using GeospatialCoverageTest = DDMSense.Test.DDMS.Summary.GeospatialCoverageTest;
 	using Keyword = DDMSense.DDMS.Summary.Keyword;
 	using Link = DDMSense.DDMS.Summary.Link;
 	using PostalAddress = DDMSense.DDMS.Summary.PostalAddress;
 	using RelatedResource = DDMSense.DDMS.Summary.RelatedResource;
-    using RelatedResourceTest = DDMSense.Test.DDMS.Summary.RelatedResourceTest;
-    using SubjectCoverageTest = DDMSense.Test.DDMS.Summary.SubjectCoverageTest;
+	using RelatedResourceTest = DDMSense.Test.DDMS.Summary.RelatedResourceTest;
+	using SubjectCoverageTest = DDMSense.Test.DDMS.Summary.SubjectCoverageTest;
 	using TemporalCoverage = DDMSense.DDMS.Summary.TemporalCoverage;
-    using TemporalCoverageTest = DDMSense.Test.DDMS.Summary.TemporalCoverageTest;
+	using TemporalCoverageTest = DDMSense.Test.DDMS.Summary.TemporalCoverageTest;
 	using VirtualCoverage = DDMSense.DDMS.Summary.VirtualCoverage;
-    using VirtualCoverageTest = DDMSense.Test.DDMS.Summary.VirtualCoverageTest;
+	using VirtualCoverageTest = DDMSense.Test.DDMS.Summary.VirtualCoverageTest;
 	using XLinkAttributes = DDMSense.DDMS.Summary.Xlink.XLinkAttributes;
 	using DDMSVersion = DDMSense.Util.DDMSVersion;
 	using PropertyReader = DDMSense.Util.PropertyReader;
 	using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS;
-    using System.Xml.Linq;
+	using DDMSense.DDMS;
+	using System.Xml.Linq;
+	using DDMSense.Test.DDMS.ResourceElements;
+	using DDMSense.DDMS.ResourceElements;
 
 	/// <summary>
 	/// <para> Tests related to ddms:resource elements </para>
@@ -69,7 +73,7 @@ namespace DDMSense.Test.DDMS {
 
 		private static readonly bool? TEST_RESOURCE_ELEMENT = true;
 		private const string TEST_CREATE_DATE = "2010-01-21";
-		private static readonly IList<string> TEST_COMPLIES_WITH = Util.getXsListAsList("DoD5230.24");
+		private static readonly IList<string> TEST_COMPLIES_WITH = Util.GetXsListAsList("DoD5230.24");
 
 		/// <summary>
 		/// Constructor
@@ -99,6 +103,7 @@ namespace DDMSense.Test.DDMS {
 			TEST_TOP_LEVEL_COMPONENTS.Add(PublisherTest.Fixture);
 			TEST_TOP_LEVEL_COMPONENTS.Add(CreatorTest.Fixture);
 			TEST_TOP_LEVEL_COMPONENTS.Add(TypeTest.Fixture);
+			//TEST_TOP_LEVEL_COMPONENTS.Add(TypeTest.Fixture);
 			TEST_TOP_LEVEL_COMPONENTS.Add(SourceTest.Fixture);
 			TEST_TOP_LEVEL_COMPONENTS.Add(RightsTest.Fixture);
 			TEST_TOP_LEVEL_COMPONENTS.Add(DatesTest.Fixture);
@@ -127,15 +132,15 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: private nu.xom.XElement getResourceWithoutHeaderElement() throws InvalidDDMSException
 		private XElement ResourceWithoutHeaderElement {
 			get {
-				XElement element = Util.buildDDMSElement(Resource.getName(DDMSVersion.CurrentVersion), null);
-				if (DDMSVersion.CurrentVersion.isAtLeast("4.0.1")) {
-					element.appendChild(MetacardInfoTest.Fixture.XOMElementCopy);
+				XElement element = Util.BuildDDMSElement(Resource.GetName(DDMSVersion.GetCurrentVersion()), null);
+				if (DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")) {
+					element.Add(MetacardInfoTest.Fixture.ElementCopy);
 				}
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				return (element);
 			}
 		}
@@ -149,20 +154,20 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: private nu.xom.XElement getResourceWithoutBodyElement() throws InvalidDDMSException
 		private XElement ResourceWithoutBodyElement {
 			get {
-				DDMSVersion version = DDMSVersion.CurrentVersion;
-				string ismPrefix = PropertyReader.getPrefix("ism");
+				DDMSVersion version = DDMSVersion.GetCurrentVersion();
+				string ismPrefix = PropertyReader.GetPrefix("ism");
 				string ismNamespace = version.IsmNamespace;
-				string ntkPrefix = PropertyReader.getPrefix("ntk");
+				string ntkPrefix = PropertyReader.GetPrefix("ntk");
 				string ntkNamespace = version.NtkNamespace;
-    
-				XElement element = Util.buildDDMSElement(Resource.getName(version), null);
-				Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
-				Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
-				Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
-				if (version.isAtLeast("4.0.1")) {
-					Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
+	
+				XElement element = Util.BuildDDMSElement(Resource.GetName(version), null);
+				Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+				Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
+				Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
+				if (version.IsAtLeast("4.0.1")) {
+					Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
 				}
-				SecurityAttributesTest.Fixture.addTo(element);
+				SecurityAttributesTest.Fixture.AddTo(element);
 				return (element);
 			}
 		}
@@ -177,56 +182,56 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: private nu.xom.XElement getResourceWithMultipleRelated() throws InvalidDDMSException
 		private XElement ResourceWithMultipleRelated {
 			get {
-				DDMSVersion version = DDMSVersion.CurrentVersion;
-				if (version.isAtLeast("4.0.1")) {
+				DDMSVersion version = DDMSVersion.GetCurrentVersion();
+				if (version.IsAtLeast("4.0.1")) {
 					return null;
 				}
-				string ismPrefix = PropertyReader.getPrefix("ism");
+				string ismPrefix = PropertyReader.GetPrefix("ism");
 				string ismNamespace = version.IsmNamespace;
-    
-				XElement element = Util.buildDDMSElement(Resource.getName(version), null);
-				Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
-				Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
-				Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
-				SecurityAttributesTest.Fixture.addTo(element);
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-    
+	
+				XElement element = Util.BuildDDMSElement(Resource.GetName(version), null);
+				Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+				Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
+				Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
+				SecurityAttributesTest.Fixture.AddTo(element);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+	
 				Link link = new Link(new XLinkAttributes("http://en.wikipedia.org/wiki/Tank", "role", null, null));
-    
+	
 				// #1: a ddms:relatedResources containing 1 ddms:RelatedResource
-				XElement rel1 = Util.buildDDMSElement(RelatedResource.getName(version), null);
-				Util.addDDMSAttribute(rel1, "relationship", "http://purl.org/dc/terms/references");
-				XElement innerElement = Util.buildDDMSElement("RelatedResource", null);
-				Util.addDDMSAttribute(innerElement, "qualifier", "http://purl.org/dc/terms/URI");
-				Util.addDDMSAttribute(innerElement, "value", "http://en.wikipedia.org/wiki/Tank1");
-				innerElement.appendChild(link.XOMElementCopy);
-				rel1.appendChild(innerElement);
-				element.appendChild(rel1);
-    
+				XElement rel1 = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
+				Util.AddDDMSAttribute(rel1, "relationship", "http://purl.org/dc/terms/references");
+				XElement innerElement = Util.BuildDDMSElement("RelatedResource", null);
+				Util.AddDDMSAttribute(innerElement, "qualifier", "http://purl.org/dc/terms/URI");
+				Util.AddDDMSAttribute(innerElement, "value", "http://en.wikipedia.org/wiki/Tank1");
+				innerElement.Add(link.ElementCopy);
+				rel1.Add(innerElement);
+				element.Add(rel1);
+	
 				// #2: a ddms:relatedResources containing 3 ddms:RelatedResources
-				XElement rel2 = Util.buildDDMSElement(RelatedResource.getName(version), null);
-				Util.addDDMSAttribute(rel2, "relationship", "http://purl.org/dc/terms/references");
-				XElement innerElement1 = Util.buildDDMSElement("RelatedResource", null);
-				Util.addDDMSAttribute(innerElement1, "qualifier", "http://purl.org/dc/terms/URI");
-				Util.addDDMSAttribute(innerElement1, "value", "http://en.wikipedia.org/wiki/Tank2");
-				innerElement1.appendChild(link.XOMElementCopy);
-				XElement innerElement2 = Util.buildDDMSElement("RelatedResource", null);
-				Util.addDDMSAttribute(innerElement2, "qualifier", "http://purl.org/dc/terms/URI");
-				Util.addDDMSAttribute(innerElement2, "value", "http://en.wikipedia.org/wiki/Tank3");
-				innerElement2.appendChild(link.XOMElementCopy);
-				XElement innerElement3 = Util.buildDDMSElement("RelatedResource", null);
-				Util.addDDMSAttribute(innerElement3, "qualifier", "http://purl.org/dc/terms/URI");
-				Util.addDDMSAttribute(innerElement3, "value", "http://en.wikipedia.org/wiki/Tank4");
-				innerElement3.appendChild(link.XOMElementCopy);
-				rel2.appendChild(innerElement1);
-				rel2.appendChild(innerElement2);
-				rel2.appendChild(innerElement3);
-				element.appendChild(rel2);
-    
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				XElement rel2 = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
+				Util.AddDDMSAttribute(rel2, "relationship", "http://purl.org/dc/terms/references");
+				XElement innerElement1 = Util.BuildDDMSElement("RelatedResource", null);
+				Util.AddDDMSAttribute(innerElement1, "qualifier", "http://purl.org/dc/terms/URI");
+				Util.AddDDMSAttribute(innerElement1, "value", "http://en.wikipedia.org/wiki/Tank2");
+				innerElement1.Add(link.ElementCopy);
+				XElement innerElement2 = Util.BuildDDMSElement("RelatedResource", null);
+				Util.AddDDMSAttribute(innerElement2, "qualifier", "http://purl.org/dc/terms/URI");
+				Util.AddDDMSAttribute(innerElement2, "value", "http://en.wikipedia.org/wiki/Tank3");
+				innerElement2.Add(link.ElementCopy);
+				XElement innerElement3 = Util.BuildDDMSElement("RelatedResource", null);
+				Util.AddDDMSAttribute(innerElement3, "qualifier", "http://purl.org/dc/terms/URI");
+				Util.AddDDMSAttribute(innerElement3, "value", "http://en.wikipedia.org/wiki/Tank4");
+				innerElement3.Add(link.ElementCopy);
+				rel2.Add(innerElement1);
+				rel2.Add(innerElement2);
+				rel2.Add(innerElement3);
+				element.Add(rel2);
+	
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				return (element);
 			}
 		}
@@ -237,10 +242,10 @@ namespace DDMSense.Test.DDMS {
 		/// <returns> a DESVersion </returns>
 		private int? IsmDESVersion {
 			get {
-				if (!DDMSVersion.CurrentVersion.isAtLeast("3.1")) {
+				if (!DDMSVersion.GetCurrentVersion().IsAtLeast("3.1")) {
 					return (Convert.ToInt32(2));
 				}
-				if (!DDMSVersion.CurrentVersion.isAtLeast("4.0.1")) {
+				if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")) {
 					return (Convert.ToInt32(5));
 				}
 				return (Convert.ToInt32(9));
@@ -253,7 +258,7 @@ namespace DDMSense.Test.DDMS {
 		/// <returns> a DESVersion </returns>
 		private int? NtkDESVersion {
 			get {
-				if (!DDMSVersion.CurrentVersion.isAtLeast("4.0.1")) {
+				if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")) {
 					return (null);
 				}
 				return (Convert.ToInt32(7));
@@ -268,7 +273,7 @@ namespace DDMSense.Test.DDMS {
 		/// </param>
 		/// <returns> a valid object </returns>
 		private Resource GetInstance(string message, XElement element) {
-			bool expectFailure = !Util.isEmpty(message);
+			bool expectFailure = !string.IsNullOrEmpty(message);
 			Resource component = null;
 			try {
 				component = new Resource(element);
@@ -292,12 +297,12 @@ namespace DDMSense.Test.DDMS {
 		/// <param name="ntkDESVersion"> the NTK DES Version as an Integer (required, starting in DDMS 4.0.1) </param>
 		/// <returns> a valid object </returns>
 		private Resource GetInstance(string message, IList<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, IList<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion) {
-			bool expectFailure = !Util.isEmpty(message);
-			DDMSVersion version = DDMSVersion.CurrentVersion;
+			bool expectFailure = !string.IsNullOrEmpty(message);
+			DDMSVersion version = DDMSVersion.GetCurrentVersion();
 			Resource component = null;
 			try {
-				NoticeAttributes notice = (!version.isAtLeast("4.0.1") ? null : NoticeAttributesTest.Fixture);
-				SecurityAttributes attr = (!version.isAtLeast("3.0") ? null : SecurityAttributesTest.Fixture);
+				NoticeAttributes notice = (!version.IsAtLeast("4.0.1") ? null : NoticeAttributesTest.Fixture);
+				SecurityAttributes attr = (!version.IsAtLeast("3.0") ? null : SecurityAttributesTest.Fixture);
 				component = new Resource(topLevelComponents, resourceElement, createDate, compliesWiths, ismDESVersion, ntkDESVersion, attr, notice, null);
 				CheckConstructorSuccess(expectFailure);
 			} catch (InvalidDDMSException e) {
@@ -313,27 +318,27 @@ namespace DDMSense.Test.DDMS {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws InvalidDDMSException
 		private string GetExpectedOutput(bool isHTML) {
-			DDMSVersion version = DDMSVersion.CurrentVersion;
+			DDMSVersion version = DDMSVersion.GetCurrentVersion();
 			StringBuilder text = new StringBuilder();
-			string resourcePrefix = Resource.getName(version);
-			if (version.isAtLeast("3.0")) {
+			string resourcePrefix = Resource.GetName(version);
+			if (version.IsAtLeast("3.0")) {
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".resourceElement", "true"));
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".createDate", "2010-01-21"));
 			}
 			text.Append(BuildOutput(isHTML, resourcePrefix + ".ism.DESVersion", Convert.ToString(IsmDESVersion)));
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".ntk.DESVersion", Convert.ToString(NtkDESVersion)));
 			}
-			if (version.isAtLeast("3.0")) {
+			if (version.IsAtLeast("3.0")) {
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".classification", "U"));
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".ownerProducer", "USA"));
 			}
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".noticeType", "DoD-Dist-B"));
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".noticeReason", "noticeReason"));
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".noticeDate", "2011-09-15"));
 				text.Append(BuildOutput(isHTML, resourcePrefix + ".unregisteredNoticeType", "unregisteredNoticeType"));
-				if (version.isAtLeast("4.1")) {
+				if (version.IsAtLeast("4.1")) {
 					text.Append(BuildOutput(isHTML, resourcePrefix + ".externalNotice", "false"));
 				}
 				text.Append(BuildOutput(isHTML, "metacardInfo.identifier.qualifier", "URI"));
@@ -365,27 +370,27 @@ namespace DDMSense.Test.DDMS {
 			text.Append(BuildOutput(isHTML, "source.value", "http://www.xmethods.com"));
 			text.Append(BuildOutput(isHTML, "type.qualifier", "DCMITYPE"));
 			text.Append(BuildOutput(isHTML, "type.value", "http://purl.org/dc/dcmitype/Text"));
-			text.Append(BuildOutput(isHTML, "creator.entityType", Organization.getName(version)));
+			text.Append(BuildOutput(isHTML, "creator.entityType", Organization.GetName(version)));
 			text.Append(BuildOutput(isHTML, "creator.name", "DISA"));
-			text.Append(BuildOutput(isHTML, "publisher.entityType", Person.getName(version)));
+			text.Append(BuildOutput(isHTML, "publisher.entityType", Person.GetName(version)));
 			text.Append(BuildOutput(isHTML, "publisher.name", "Brian"));
 			text.Append(BuildOutput(isHTML, "publisher.surname", "Uri"));
-			text.Append(BuildOutput(isHTML, "contributor.entityType", Service.getName(version)));
+			text.Append(BuildOutput(isHTML, "contributor.entityType", Service.GetName(version)));
 			text.Append(BuildOutput(isHTML, "contributor.name", "https://metadata.dod.mil/ebxmlquery/soap"));
-			if (version.isAtLeast("3.0")) {
-				text.Append(BuildOutput(isHTML, "pointOfContact.entityType", Unknown.getName(version)));
+			if (version.IsAtLeast("3.0")) {
+				text.Append(BuildOutput(isHTML, "pointOfContact.entityType", Unknown.GetName(version)));
 				text.Append(BuildOutput(isHTML, "pointOfContact.name", "UnknownEntity"));
 			} else {
-				text.Append(BuildOutput(isHTML, "pointOfContact.entityType", Person.getName(version)));
+				text.Append(BuildOutput(isHTML, "pointOfContact.entityType", Person.GetName(version)));
 				text.Append(BuildOutput(isHTML, "pointOfContact.name", "Brian"));
 				text.Append(BuildOutput(isHTML, "pointOfContact.surname", "Uri"));
 			}
 
-			string formatPrefix = (version.isAtLeast("4.0.1") ? "format." : "format.Media.");
-			string subjectPrefix = (version.isAtLeast("4.0.1") ? "subjectCoverage." : "subjectCoverage.Subject.");
-			string temporalPrefix = (version.isAtLeast("4.0.1") ? "temporalCoverage." : "temporalCoverage.TimePeriod.");
-			string geospatialPrefix = version.isAtLeast("4.0.1") ? "geospatialCoverage." : "geospatialCoverage.GeospatialExtent.";
-			string relatedPrefix = (version.isAtLeast("4.0.1") ? "relatedResource." : "relatedResources.RelatedResource.");
+			string formatPrefix = (version.IsAtLeast("4.0.1") ? "format." : "format.Media.");
+			string subjectPrefix = (version.IsAtLeast("4.0.1") ? "subjectCoverage." : "subjectCoverage.Subject.");
+			string temporalPrefix = (version.IsAtLeast("4.0.1") ? "temporalCoverage." : "temporalCoverage.TimePeriod.");
+			string geospatialPrefix = version.IsAtLeast("4.0.1") ? "geospatialCoverage." : "geospatialCoverage.GeospatialExtent.";
+			string relatedPrefix = (version.IsAtLeast("4.0.1") ? "relatedResource." : "relatedResources.RelatedResource.");
 
 			text.Append(BuildOutput(isHTML, formatPrefix + "mimeType", "text/xml"));
 			text.Append(BuildOutput(isHTML, subjectPrefix + "keyword", "DDMSence"));
@@ -408,7 +413,7 @@ namespace DDMSense.Test.DDMS {
 			text.Append(BuildOutput(isHTML, relatedPrefix + "link.href", "http://en.wikipedia.org/wiki/Tank"));
 			text.Append(BuildOutput(isHTML, relatedPrefix + "link.role", "role"));
 
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				text.Append(BuildOutput(isHTML, "resourceManagement.processingInfo", "XSLT Transformation to convert DDMS 2.0 to DDMS 3.1."));
 				text.Append(BuildOutput(isHTML, "resourceManagement.processingInfo.dateProcessed", "2011-08-19"));
 				text.Append(BuildOutput(isHTML, "resourceManagement.processingInfo.classification", "U"));
@@ -416,15 +421,15 @@ namespace DDMSense.Test.DDMS {
 				text.Append(BuildOutput(isHTML, "resourceManagement.classification", "U"));
 				text.Append(BuildOutput(isHTML, "resourceManagement.ownerProducer", "USA"));
 			}
-			if (version.isAtLeast("3.0")) {
+			if (version.IsAtLeast("3.0")) {
 				text.Append(BuildOutput(isHTML, "security.excludeFromRollup", "true"));
 			}
 			text.Append(BuildOutput(isHTML, "security.classification", "U"));
 			text.Append(BuildOutput(isHTML, "security.ownerProducer", "USA"));
 			text.Append(BuildOutput(isHTML, "extensible.layer", "false"));
-			text.Append(BuildOutput(isHTML, "ddms.generator", "DDMSence " + PropertyReader.getProperty("version")));
+			text.Append(BuildOutput(isHTML, "ddms.generator", "DDMSence " + PropertyReader.GetProperty("version")));
 			// Output for version will be based upon XML namespace of created resource, not the currently set version.
-			text.Append(BuildOutput(isHTML, "ddms.version", DDMSVersion.getVersionForNamespace(version.Namespace).Version));
+			text.Append(BuildOutput(isHTML, "ddms.version", DDMSVersion.GetVersionForNamespace(version.Namespace).Version));
 			return (text.ToString());
 		}
 
@@ -433,36 +438,36 @@ namespace DDMSense.Test.DDMS {
 		/// </summary>
 		/// <param name="preserveFormatting"> if true, include line breaks and tabs. </param>
 		private string GetExpectedXMLOutput(bool preserveFormatting) {
-			DDMSVersion version = DDMSVersion.CurrentVersion;
+			DDMSVersion version = DDMSVersion.GetCurrentVersion();
 			StringBuilder xml = new StringBuilder();
-			xml.Append("<ddms:").Append(Resource.getName(version)).Append(" ").Append(XmlnsDDMS);
-			if (version.isAtLeast("4.0.1")) {
+			xml.Append("<ddms:").Append(Resource.GetName(version)).Append(" ").Append(XmlnsDDMS);
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append(" ").Append(XmlnsNTK);
 			}
 			xml.Append(" ").Append(XmlnsISM);
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append(" ntk:DESVersion=\"").Append(NtkDESVersion).Append("\"");
 			}
-			if (version.isAtLeast("3.0")) {
+			if (version.IsAtLeast("3.0")) {
 				xml.Append(" ISM:resourceElement=\"true\"");
 			}
 			// Adding DESVersion in DDMS 2.0 allows the namespace declaration to definitely be in the Resource element.
 			xml.Append(" ISM:DESVersion=\"").Append(IsmDESVersion).Append("\"");
-			if (version.isAtLeast("3.0")) {
+			if (version.IsAtLeast("3.0")) {
 				xml.Append(" ISM:createDate=\"2010-01-21\"");
 			}
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append(" ISM:noticeType=\"DoD-Dist-B\" ISM:noticeReason=\"noticeReason\" ISM:noticeDate=\"2011-09-15\" ");
 				xml.Append("ISM:unregisteredNoticeType=\"unregisteredNoticeType\"");
-				if (version.isAtLeast("4.1")) {
+				if (version.IsAtLeast("4.1")) {
 					xml.Append(" ISM:externalNotice=\"false\"");
 				}
 			}
-			if (version.isAtLeast("3.0")) {
+			if (version.IsAtLeast("3.0")) {
 				xml.Append(" ISM:classification=\"U\" ISM:ownerProducer=\"USA\"");
 			}
 			xml.Append(">\n");
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append("\t<ddms:metacardInfo ISM:classification=\"U\" ISM:ownerProducer=\"USA\">");
 				xml.Append("<ddms:identifier ddms:qualifier=\"URI\" ddms:value=\"urn:buri:ddmsence:testIdentifier\" />");
 				xml.Append("<ddms:dates ddms:created=\"2003\" /><ddms:publisher><ddms:person><ddms:name>Brian</ddms:name>");
@@ -481,35 +486,35 @@ namespace DDMSense.Test.DDMS {
 			xml.Append("\t<ddms:source ddms:value=\"http://www.xmethods.com\" />\n");
 			xml.Append("\t<ddms:type ddms:qualifier=\"DCMITYPE\" ddms:value=\"http://purl.org/dc/dcmitype/Text\" />\n");
 			xml.Append("\t<ddms:creator>\n");
-			xml.Append("\t\t<ddms:").Append(Organization.getName(version)).Append(">\n");
+			xml.Append("\t\t<ddms:").Append(Organization.GetName(version)).Append(">\n");
 			xml.Append("\t\t\t<ddms:name>DISA</ddms:name>\n");
-			xml.Append("\t\t</ddms:").Append(Organization.getName(version)).Append(">\t\n");
+			xml.Append("\t\t</ddms:").Append(Organization.GetName(version)).Append(">\t\n");
 			xml.Append("\t</ddms:creator>\n");
 			xml.Append("\t<ddms:publisher>\n");
-			xml.Append("\t\t<ddms:").Append(Person.getName(version)).Append(">\n");
+			xml.Append("\t\t<ddms:").Append(Person.GetName(version)).Append(">\n");
 			xml.Append("\t\t\t<ddms:name>Brian</ddms:name>\n");
 			xml.Append("\t\t\t<ddms:surname>Uri</ddms:surname>\n");
-			xml.Append("\t\t</ddms:").Append(Person.getName(version)).Append(">\t\n");
+			xml.Append("\t\t</ddms:").Append(Person.GetName(version)).Append(">\t\n");
 			xml.Append("\t</ddms:publisher>\n");
 			xml.Append("\t<ddms:contributor>\n");
-			xml.Append("\t\t<ddms:").Append(Service.getName(version)).Append(">\n");
+			xml.Append("\t\t<ddms:").Append(Service.GetName(version)).Append(">\n");
 			xml.Append("\t\t\t<ddms:name>https://metadata.dod.mil/ebxmlquery/soap</ddms:name>\n");
-			xml.Append("\t\t</ddms:").Append(Service.getName(version)).Append(">\t\n");
+			xml.Append("\t\t</ddms:").Append(Service.GetName(version)).Append(">\t\n");
 			xml.Append("\t</ddms:contributor>\n");
 			xml.Append("\t<ddms:pointOfContact>\n");
-			if (version.isAtLeast("3.0")) {
-				xml.Append("\t\t<ddms:").Append(Unknown.getName(version)).Append(">\n");
+			if (version.IsAtLeast("3.0")) {
+				xml.Append("\t\t<ddms:").Append(Unknown.GetName(version)).Append(">\n");
 				xml.Append("\t\t\t<ddms:name>UnknownEntity</ddms:name>\n");
-				xml.Append("\t\t</ddms:").Append(Unknown.getName(version)).Append(">\t\n");
+				xml.Append("\t\t</ddms:").Append(Unknown.GetName(version)).Append(">\t\n");
 			} else {
-				xml.Append("\t\t<ddms:").Append(Person.getName(version)).Append(">\n");
+				xml.Append("\t\t<ddms:").Append(Person.GetName(version)).Append(">\n");
 				xml.Append("\t\t\t<ddms:name>Brian</ddms:name>\n");
 				xml.Append("\t\t\t<ddms:surname>Uri</ddms:surname>\n");
-				xml.Append("\t\t</ddms:").Append(Person.getName(version)).Append(">\n");
+				xml.Append("\t\t</ddms:").Append(Person.GetName(version)).Append(">\n");
 			}
 			xml.Append("\t</ddms:pointOfContact>\n");
 			xml.Append("\t<ddms:format>\n");
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append("\t\t<ddms:mimeType>text/xml</ddms:mimeType>\n");
 			} else {
 				xml.Append("\t\t<ddms:Media>\n");
@@ -518,7 +523,7 @@ namespace DDMSense.Test.DDMS {
 			}
 			xml.Append("\t</ddms:format>\n");
 			xml.Append("\t<ddms:subjectCoverage>\n");
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append("\t\t<ddms:keyword ddms:value=\"DDMSence\" />\n");
 			} else {
 				xml.Append("\t\t<ddms:Subject>\n");
@@ -528,7 +533,7 @@ namespace DDMSense.Test.DDMS {
 			xml.Append("\t</ddms:subjectCoverage>\n");
 			xml.Append("\t<ddms:virtualCoverage ddms:address=\"123.456.789.0\" ddms:protocol=\"IP\" />\n");
 			xml.Append("\t<ddms:temporalCoverage>\n");
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append("\t\t<ddms:start>1979-09-15</ddms:start>\n");
 				xml.Append("\t\t<ddms:end>Not Applicable</ddms:end>\n");
 			} else {
@@ -539,7 +544,7 @@ namespace DDMSense.Test.DDMS {
 			}
 			xml.Append("\t</ddms:temporalCoverage>\n");
 			xml.Append("\t<ddms:geospatialCoverage>\n");
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append("\t\t<ddms:boundingGeometry>\n");
 				xml.Append("\t\t\t<gml:Point xmlns:gml=\"").Append(version.GmlNamespace).Append("\" ");
 				xml.Append("gml:id=\"IDValue\" srsName=\"http://metadata.dod.mil/mdr/ns/GSIP/crs/WGS84E_2D\" ");
@@ -559,7 +564,7 @@ namespace DDMSense.Test.DDMS {
 				xml.Append("\t\t</ddms:GeospatialExtent>\n");
 			}
 			xml.Append("\t</ddms:geospatialCoverage>\n");
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append("\t<ddms:relatedResource ddms:relationship=\"http://purl.org/dc/terms/references\" ").Append("ddms:direction=\"outbound\" ddms:qualifier=\"http://purl.org/dc/terms/URI\" ").Append("ddms:value=\"http://en.wikipedia.org/wiki/Tank\">\n");
 				xml.Append("\t\t<ddms:link xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:type=\"locator\" ").Append("xlink:href=\"http://en.wikipedia.org/wiki/Tank\" xlink:role=\"role\" />\n");
 				xml.Append("\t</ddms:relatedResource>\n");
@@ -570,7 +575,7 @@ namespace DDMSense.Test.DDMS {
 				xml.Append("\t\t</ddms:RelatedResource>\n");
 				xml.Append("\t</ddms:relatedResources>\n");
 			}
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				xml.Append("\t<ddms:resourceManagement ISM:classification=\"U\" ISM:ownerProducer=\"USA\">");
 				xml.Append("<ddms:processingInfo ISM:classification=\"U\" ISM:ownerProducer=\"USA\" ");
 				xml.Append("ddms:dateProcessed=\"2011-08-19\">");
@@ -578,18 +583,18 @@ namespace DDMSense.Test.DDMS {
 				xml.Append("</ddms:resourceManagement>\n");
 			}
 			xml.Append("\t<ddms:security ");
-			if (version.isAtLeast("3.0")) {
+			if (version.IsAtLeast("3.0")) {
 				xml.Append("ISM:excludeFromRollup=\"true\" ");
 			}
 			xml.Append("ISM:classification=\"U\" ISM:ownerProducer=\"USA\" />\n");
-			xml.Append("</ddms:").Append(Resource.getName(version)).Append(">");
+			xml.Append("</ddms:").Append(Resource.GetName(version)).Append(">");
 			return (FormatXml(xml.ToString(), preserveFormatting));
 		}
 
 		public virtual void TestNameAndNamespace() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-				AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Resource.getName(version));
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+				AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Resource.GetName(version));
 				GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 			}
 		}
@@ -598,7 +603,7 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testElementConstructorValid() throws InvalidDDMSException
 		public virtual void TestElementConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
 				// All fields
@@ -606,26 +611,26 @@ namespace DDMSense.Test.DDMS {
 
 				// No optional fields
 				XElement element = ResourceWithoutBodyElement;
-				if (version.isAtLeast("4.0.1")) {
-					element.appendChild(MetacardInfoTest.Fixture.XOMElementCopy);
+				if (version.IsAtLeast("4.0.1")) {
+					element.Add(MetacardInfoTest.Fixture.ElementCopy);
 				}
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				GetInstance(SUCCESS, element);
 
 				// More than 1 subjectCoverage
-				if (version.isAtLeast("4.0.1")) {
+				if (version.IsAtLeast("4.0.1")) {
 					element = ResourceWithoutBodyElement;
-					element.appendChild(MetacardInfoTest.Fixture.XOMElementCopy);
-					element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-					element.appendChild(TitleTest.Fixture.XOMElementCopy);
-					element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-					element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-					element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-					element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+					element.Add(MetacardInfoTest.Fixture.ElementCopy);
+					element.Add(IdentifierTest.Fixture.ElementCopy);
+					element.Add(TitleTest.Fixture.ElementCopy);
+					element.Add(CreatorTest.Fixture.ElementCopy);
+					element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+					element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+					element.Add(SecurityTest.Fixture.ElementCopy);
 					GetInstance(SUCCESS, element);
 				}
 			}
@@ -635,7 +640,7 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testDataConstructorValid() throws InvalidDDMSException
 		public virtual void TestDataConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
 				// All fields
@@ -650,217 +655,217 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testElementConstructorInvalid() throws InvalidDDMSException
 		public virtual void TestElementConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
-				string ismPrefix = PropertyReader.getPrefix("ism");
+				string ismPrefix = PropertyReader.GetPrefix("ism");
 				string ismNamespace = version.IsmNamespace;
-				string ntkPrefix = PropertyReader.getPrefix("ntk");
+				string ntkPrefix = PropertyReader.GetPrefix("ntk");
 				string ntkNamespace = version.NtkNamespace;
-
-				if (version.isAtLeast("3.0")) {
+				XElement element;
+				if (version.IsAtLeast("3.0")) {
 					// Missing resourceElement
-					XElement element = ResourceWithoutHeaderElement;
-					Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
-					Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
-					if (version.isAtLeast("4.0.1")) {
-						Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
+					element = ResourceWithoutHeaderElement;
+					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
+					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
+					if (version.IsAtLeast("4.0.1")) {
+						Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
 					}
-					SecurityAttributesTest.Fixture.addTo(element);
+					SecurityAttributesTest.Fixture.AddTo(element);
 					GetInstance("resourceElement is required.", element);
 
 					// Empty resourceElement
 					element = ResourceWithoutHeaderElement;
-					Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, "");
-					Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
-					Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
-					if (version.isAtLeast("4.0.1")) {
-						Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
+					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, "");
+					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
+					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
+					if (version.IsAtLeast("4.0.1")) {
+						Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
 					}
-					SecurityAttributesTest.Fixture.addTo(element);
+					SecurityAttributesTest.Fixture.AddTo(element);
 					GetInstance("resourceElement is required.", element);
 
 					// Invalid resourceElement
 					element = ResourceWithoutHeaderElement;
-					Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, "aardvark");
-					Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
-					Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
-					if (version.isAtLeast("4.0.1")) {
-						Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
+					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, "aardvark");
+					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
+					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
+					if (version.IsAtLeast("4.0.1")) {
+						Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
 					}
-					SecurityAttributesTest.Fixture.addTo(element);
+					SecurityAttributesTest.Fixture.AddTo(element);
 					GetInstance("resourceElement is required.", element);
 
 					// Missing createDate
 					element = ResourceWithoutHeaderElement;
-					Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
-					Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
-					if (version.isAtLeast("4.0.1")) {
-						Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
+					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
+					if (version.IsAtLeast("4.0.1")) {
+						Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
 					}
-					SecurityAttributesTest.Fixture.addTo(element);
+					SecurityAttributesTest.Fixture.AddTo(element);
 					GetInstance("createDate is required.", element);
 
 					// Invalid createDate
 					element = ResourceWithoutHeaderElement;
-					Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
-					Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, "2004");
-					Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
-					if (version.isAtLeast("4.0.1")) {
-						Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
+					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, "2004");
+					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
+					if (version.IsAtLeast("4.0.1")) {
+						Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
 					}
-					SecurityAttributesTest.Fixture.addTo(element);
+					SecurityAttributesTest.Fixture.AddTo(element);
 					GetInstance("The createDate must be in the xs:date format", element);
 
 					// Missing desVersion
 					element = ResourceWithoutHeaderElement;
-					Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
-					Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
-					if (version.isAtLeast("4.0.1")) {
-						Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
+					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
+					if (version.IsAtLeast("4.0.1")) {
+						Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
 					}
-					SecurityAttributesTest.Fixture.addTo(element);
+					SecurityAttributesTest.Fixture.AddTo(element);
 					GetInstance("ISM:DESVersion is required.", element);
 
 					// desVersion not an integer
 					element = ResourceWithoutHeaderElement;
-					Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
-					Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
-					Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, "one");
-					if (version.isAtLeast("4.0.1")) {
-						Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
+					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
+					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, "one");
+					if (version.IsAtLeast("4.0.1")) {
+						Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
 					}
-					SecurityAttributesTest.Fixture.addTo(element);
+					SecurityAttributesTest.Fixture.AddTo(element);
 					GetInstance("ISM:DESVersion is required", element);
 				}
-				if (version.isAtLeast("4.0.1")) {
+				if (version.IsAtLeast("4.0.1")) {
 					// NTK desVersion not an integer
-					XElement element = ResourceWithoutHeaderElement;
-					Util.addAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
-					Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
-					Util.addAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
-					Util.addAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, "one");
-					SecurityAttributesTest.Fixture.addTo(element);
+					element = ResourceWithoutHeaderElement;
+					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
+					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
+					Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, "one");
+					SecurityAttributesTest.Fixture.AddTo(element);
 					GetInstance("ntk:DESVersion is required.", element);
 				}
 
 				// At least 1 producer
-				XElement element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
+				element = ResourceWithoutBodyElement;
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
 				GetInstance("Exactly 1 security element must exist.", element);
 
 				// At least 1 identifier
 				element = ResourceWithoutBodyElement;
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				GetInstance("At least 1 identifier is required.", element);
 
 				// At least 1 title
 				element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				GetInstance("At least 1 title is required.", element);
 
 				// No more than 1 description
 				element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(DescriptionTest.Fixture.XOMElementCopy);
-				element.appendChild(DescriptionTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(DescriptionTest.Fixture.ElementCopy);
+				element.Add(DescriptionTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				GetInstance("No more than 1 description element can exist.", element);
 
 				// No more than 1 dates
 				element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(DatesTest.Fixture.XOMElementCopy);
-				element.appendChild(DatesTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(DatesTest.Fixture.ElementCopy);
+				element.Add(DatesTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				GetInstance("No more than 1 dates element can exist.", element);
 
 				// No more than 1 rights
 				element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(RightsTest.Fixture.XOMElementCopy);
-				element.appendChild(RightsTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(RightsTest.Fixture.ElementCopy);
+				element.Add(RightsTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				GetInstance("No more than 1 rights element can exist.", element);
 
 				// No more than 1 formats
 				element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(FormatTest.Fixture.XOMElementCopy);
-				element.appendChild(FormatTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(FormatTest.Fixture.ElementCopy);
+				element.Add(FormatTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				GetInstance("No more than 1 format element can exist.", element);
 
 				// No more than 1 resourceManagement
-				if (version.isAtLeast("4.0.1")) {
+				if (version.IsAtLeast("4.0.1")) {
 					element = ResourceWithoutBodyElement;
-					element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-					element.appendChild(TitleTest.Fixture.XOMElementCopy);
-					element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-					element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-					element.appendChild(ResourceManagementTest.Fixture.XOMElementCopy);
-					element.appendChild(ResourceManagementTest.Fixture.XOMElementCopy);
-					element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+					element.Add(IdentifierTest.Fixture.ElementCopy);
+					element.Add(TitleTest.Fixture.ElementCopy);
+					element.Add(CreatorTest.Fixture.ElementCopy);
+					element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+					element.Add(ResourceManagementTest.Fixture.ElementCopy);
+					element.Add(ResourceManagementTest.Fixture.ElementCopy);
+					element.Add(SecurityTest.Fixture.ElementCopy);
 					GetInstance("No more than 1 resourceManagement", element);
 				}
 
 				// At least 1 subjectCoverage
 				element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
-				string message = version.isAtLeast("4.0.1") ? "At least 1 subjectCoverage is required." : "Exactly 1 subjectCoverage element must exist.";
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
+				string message = version.IsAtLeast("4.0.1") ? "At least 1 subjectCoverage is required." : "Exactly 1 subjectCoverage element must exist.";
 				GetInstance(message, element);
 
 				// No more than 1 subjectCoverage
-				if (!version.isAtLeast("4.0.1")) {
+				if (!version.IsAtLeast("4.0.1")) {
 					element = ResourceWithoutBodyElement;
-					element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-					element.appendChild(TitleTest.Fixture.XOMElementCopy);
-					element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-					element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-					element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-					element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+					element.Add(IdentifierTest.Fixture.ElementCopy);
+					element.Add(TitleTest.Fixture.ElementCopy);
+					element.Add(CreatorTest.Fixture.ElementCopy);
+					element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+					element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+					element.Add(SecurityTest.Fixture.ElementCopy);
 					GetInstance("Exactly 1 subjectCoverage element must exist.", element);
 				}
 
 				// At least 1 security
 				element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
 				GetInstance("Exactly 1 security element must exist.", element);
 
 				// No more than 1 security
 				element = ResourceWithoutBodyElement;
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
 				GetInstance("Extensible elements cannot be defined", element);
 
 				// No top level components
@@ -873,10 +878,10 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testDataConstructorInvalid() throws InvalidDDMSException
 		public virtual void TestDataConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
-				if (version.isAtLeast("3.0")) {
+				if (version.IsAtLeast("3.0")) {
 					// Missing createDate
 					GetInstance("createDate is required.", TEST_NO_OPTIONAL_COMPONENTS, TEST_RESOURCE_ELEMENT, null, null, IsmDESVersion, NtkDESVersion);
 
@@ -889,7 +894,7 @@ namespace DDMSense.Test.DDMS {
 					// Missing desVersion
 					GetInstance("ISM:DESVersion is required.", TEST_NO_OPTIONAL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, null, NtkDESVersion);
 				}
-				if (version.isAtLeast("4.0.1")) {
+				if (version.IsAtLeast("4.0.1")) {
 					// Missing desVersion
 					GetInstance("ntk:DESVersion is required", TEST_NO_OPTIONAL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, null);
 				}
@@ -910,7 +915,7 @@ namespace DDMSense.Test.DDMS {
 				GetInstance("At least 1 title is required.", components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 
 				// At least 1 subjectCoverage
-				string message = version.isAtLeast("4.0.1") ? "At least 1 subjectCoverage is required." : "Exactly 1 subjectCoverage element must exist.";
+				string message = version.IsAtLeast("4.0.1") ? "At least 1 subjectCoverage is required." : "Exactly 1 subjectCoverage element must exist.";
 				components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Remove(SubjectCoverageTest.Fixture);
 				GetInstance(message, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
@@ -934,57 +939,59 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testWarnings() throws InvalidDDMSException
 		public virtual void TestWarnings() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
+				string text = string.Empty;
+				string locator = string.Empty;
 
 				Resource component = GetInstance(SUCCESS, GetValidElement(sVersion));
 
 				// 4.1 ism:Notice used
-				if (version.isAtLeast("4.1")) {
-					assertEquals(1, component.ValidationWarnings.size());
-					string text = "The ISM:externalNotice attribute in this DDMS component";
-					string locator = "ddms:resource";
-					AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+				if (version.IsAtLeast("4.1")) {
+					Assert.Equals(1, component.ValidationWarnings.Count);
+					text = "The ISM:externalNotice attribute in this DDMS component";
+					locator = "ddms:resource";
+					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 				}
 				// No warnings 
 				else {
-					assertEquals(0, component.ValidationWarnings.size());
+					Assert.Equals(0, component.ValidationWarnings.Count);
 				}
 
-				int countIndex = version.isAtLeast("4.1") ? 1 : 0;
+				int countIndex = version.IsAtLeast("4.1") ? 1 : 0;
 
 				// Nested warnings
 				IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Add(new Format("test", new Extent("test", ""), "test"));
 				component = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
-				assertEquals(countIndex + 1, component.ValidationWarnings.size());
+				Assert.Equals(countIndex + 1, component.ValidationWarnings.Count);
 
-				if (version.isAtLeast("4.1")) {
-					string text = "The ISM:externalNotice attribute";
-					string locator = "ddms:resource";
-					AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+				if (version.IsAtLeast("4.1")) {
+					text = "The ISM:externalNotice attribute";
+					locator = "ddms:resource";
+					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 				}
-				string resourceName = Resource.getName(version);
-				string text = "A qualifier has been set without an accompanying value attribute.";
-				string locator = (version.isAtLeast("4.0.1")) ? "ddms:" + resourceName + "/ddms:format/ddms:extent" : "ddms:" + resourceName + "/ddms:format/ddms:Media/ddms:extent";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(countIndex));
+				string resourceName = Resource.GetName(version);
+				text = "A qualifier has been set without an accompanying value attribute.";
+				locator = (version.IsAtLeast("4.0.1")) ? "ddms:" + resourceName + "/ddms:format/ddms:extent" : "ddms:" + resourceName + "/ddms:format/ddms:Media/ddms:extent";
+				AssertWarningEquality(text, locator, component.ValidationWarnings[countIndex]);
 
 				// More nested warnings
-				XElement element = Util.buildDDMSElement(PostalAddress.getName(version), null);
+				XElement element = Util.BuildDDMSElement(PostalAddress.GetName(version), null);
 				PostalAddress address = new PostalAddress(element);
 				components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Add(new GeospatialCoverage(null, null, null, address, null, null, null, null));
 				component = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
-				assertEquals(countIndex + 1, component.ValidationWarnings.size());
+				Assert.Equals(countIndex + 1, component.ValidationWarnings.Count);
 
-				if (version.isAtLeast("4.1")) {
+				if (version.IsAtLeast("4.1")) {
 					text = "The ISM:externalNotice attribute";
 					locator = "ddms:resource";
-					AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 				}
 				text = "A completely empty ddms:postalAddress element was found.";
-				locator = (version.isAtLeast("4.0.1")) ? "ddms:" + resourceName + "/ddms:geospatialCoverage/ddms:postalAddress" : "ddms:" + resourceName + "/ddms:geospatialCoverage/ddms:GeospatialExtent/ddms:postalAddress";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(countIndex));
+				locator = (version.IsAtLeast("4.0.1")) ? "ddms:" + resourceName + "/ddms:geospatialCoverage/ddms:postalAddress" : "ddms:" + resourceName + "/ddms:geospatialCoverage/ddms:GeospatialExtent/ddms:postalAddress";
+				AssertWarningEquality(text, locator, component.ValidationWarnings[countIndex]);
 			}
 		}
 
@@ -992,13 +999,13 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testConstructorEquality() throws InvalidDDMSException
 		public virtual void TestConstructorEquality() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
 				Resource elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Resource dataComponent = (!version.isAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
-				assertEquals(elementComponent, dataComponent);
-				assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+				Resource dataComponent = (!version.IsAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
+				Assert.Equals(elementComponent, dataComponent);
+				Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 			}
 		}
 
@@ -1006,28 +1013,28 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws InvalidDDMSException
 		public virtual void TestConstructorInequalityDifferentValues() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
 				Resource elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 				Resource dataComponent;
 				// resourceElement is fixed starting in 3.1.
-				if (!version.isAtLeast("3.1")) {
+				if (!version.IsAtLeast("3.1")) {
 					dataComponent = GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, false, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
-					assertFalse(elementComponent.Equals(dataComponent));
+					Assert.IsFalse(elementComponent.Equals(dataComponent));
 				}
 
 				dataComponent = GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, "1999-10-10", null, IsmDESVersion, NtkDESVersion);
-				assertFalse(elementComponent.Equals(dataComponent));
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 				// Can only use alternate DESVersions in early DDMS versions
-				if (!version.isAtLeast("3.1")) {
+				if (!version.IsAtLeast("3.1")) {
 					dataComponent = GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, Convert.ToInt32(1), NtkDESVersion);
-					assertFalse(elementComponent.Equals(dataComponent));
+					Assert.IsFalse(elementComponent.Equals(dataComponent));
 				}
 
 				dataComponent = GetInstance(SUCCESS, TEST_NO_OPTIONAL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
-				assertFalse(elementComponent.Equals(dataComponent));
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
 			}
 		}
 
@@ -1035,15 +1042,15 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testHTMLTextOutput() throws InvalidDDMSException
 		public virtual void TestHTMLTextOutput() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 				Resource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+				Assert.Equals(GetExpectedOutput(false), component.ToText());
 
-				component = (!version.isAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+				component = (!version.IsAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
+				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+				Assert.Equals(GetExpectedOutput(false), component.ToText());
 			}
 		}
 
@@ -1051,22 +1058,22 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testXMLOutput() throws InvalidDDMSException
 		public virtual void TestXMLOutput() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
 				Resource component = GetInstance(SUCCESS, GetValidElement(sVersion));
 
-				assertEquals(GetExpectedXMLOutput(true), component.toXML());
+				Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
-				component = (!version.isAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
-				assertEquals(GetExpectedXMLOutput(false), component.toXML());
+				component = (!version.IsAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
+				Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 			}
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testWrongVersionCompliesWith() throws InvalidDDMSException
 		public virtual void TestWrongVersionCompliesWith() {
-			DDMSVersion.CurrentVersion = "3.0";
+			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 
 			GetInstance("The compliesWith attribute cannot be used", TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, NtkDESVersion);
@@ -1075,7 +1082,7 @@ namespace DDMSense.Test.DDMS {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testWrongVersionSecurityAttributes() throws InvalidDDMSException
 		public virtual void TestWrongVersionSecurityAttributes() {
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
 			// Security attributes do not exist in 2.0
 			new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
@@ -1088,12 +1095,12 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testExtensibleSuccess() throws InvalidDDMSException
 		public virtual void TestExtensibleSuccess() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
 				// Extensible attribute added
 				ExtensibleAttributes attr = ExtensibleAttributesTest.Fixture;
-				if (!version.isAtLeast("3.0")) {
+				if (!version.IsAtLeast("3.0")) {
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, attr);
 				} else {
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, attr);
@@ -1104,37 +1111,37 @@ namespace DDMSense.Test.DDMS {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void test20ExtensibleElementSize() throws InvalidDDMSException
 		public virtual void Test20ExtensibleElementSize() {
-			DDMSVersion version = DDMSVersion.setCurrentVersion("2.0");
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
-			string ismPrefix = PropertyReader.getPrefix("ism");
+			string ismPrefix = PropertyReader.GetPrefix("ism");
 
 			// ISM:DESVersion in element
 			XElement element = ResourceWithoutHeaderElement;
-			Util.addAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, version.IsmNamespace, Convert.ToString(IsmDESVersion));
+			Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, version.IsmNamespace, Convert.ToString(IsmDESVersion));
 			Resource component = new Resource(element);
-			assertEquals(IsmDESVersion, component.IsmDESVersion);
-			assertTrue(component.SecurityAttributes.Empty);
-			assertEquals(0, component.ExtensibleAttributes.Attributes.size());
+			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
+			Assert.IsTrue(component.SecurityAttributes.Empty);
+			Assert.Equals(0, component.ExtensibleAttributes.Attributes.Count);
 
 			// ISM:classification in element
 			element = ResourceWithoutHeaderElement;
-			Util.addAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, version.IsmNamespace, "U");
+			Util.AddAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, version.IsmNamespace, "U");
 			component = new Resource(element);
-			assertFalse(component.SecurityAttributes.Empty);
-			assertEquals(0, component.ExtensibleAttributes.Attributes.size());
+			Assert.IsFalse(component.SecurityAttributes.Empty);
+			Assert.Equals(0, component.ExtensibleAttributes.Attributes.Count);
 
 			// ddmsence:confidence in element
 			element = ResourceWithoutHeaderElement;
-			Util.addAttribute(element, "ddmsence", "confidence", "http://ddmsence.urizone.net/", "95");
+			Util.AddAttribute(element, "ddmsence", "confidence", "http://ddmsence.urizone.net/", "95");
 			component = new Resource(element);
-			assertTrue(component.SecurityAttributes.Empty);
-			assertEquals(1, component.ExtensibleAttributes.Attributes.size());
+			Assert.IsTrue(component.SecurityAttributes.Empty);
+			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void test20ExtensibleDataSizes() throws InvalidDDMSException
 		public virtual void Test20ExtensibleDataSizes() {
-			DDMSVersion version = DDMSVersion.setCurrentVersion("2.0");
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
 
 			// This can be a parameter or an extensible.
@@ -1147,69 +1154,69 @@ namespace DDMSense.Test.DDMS {
 
 			// Base Case
 			Resource component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
-			assertNull(component.IsmDESVersion);
-			assertTrue(component.SecurityAttributes.Empty);
-			assertEquals(0, component.ExtensibleAttributes.Attributes.size());
+			Assert.IsNull(component.IsmDESVersion);
+			Assert.IsTrue(component.SecurityAttributes.Empty);
+			Assert.Equals(0, component.ExtensibleAttributes.Attributes.Count);
 
 			// icAttribute as parameter, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
 			exAttr.Add(new Attribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, null, null, new ExtensibleAttributes(exAttr));
-			assertEquals(IsmDESVersion, component.IsmDESVersion);
-			assertTrue(component.SecurityAttributes.Empty);
-			assertEquals(1, component.ExtensibleAttributes.Attributes.size());
+			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
+			Assert.IsTrue(component.SecurityAttributes.Empty);
+			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
 
 			// icAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
 			exAttr.Add(new Attribute(icAttribute));
 			exAttr.Add(new Attribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
-			assertNull(component.IsmDESVersion);
-			assertTrue(component.SecurityAttributes.Empty);
-			assertEquals(2, component.ExtensibleAttributes.Attributes.size());
+			Assert.IsNull(component.IsmDESVersion);
+			Assert.IsTrue(component.SecurityAttributes.Empty);
+			Assert.Equals(2, component.ExtensibleAttributes.Attributes.Count);
 
 			// secAttribute as securityAttribute, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
 			exAttr.Add(new Attribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
-			assertNull(component.IsmDESVersion);
-			assertFalse(component.SecurityAttributes.Empty);
-			assertEquals(1, component.ExtensibleAttributes.Attributes.size());
+			Assert.IsNull(component.IsmDESVersion);
+			Assert.IsFalse(component.SecurityAttributes.Empty);
+			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
 
 			// secAttribute and uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
 			exAttr.Add(new Attribute(secAttribute));
 			exAttr.Add(new Attribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
-			assertNull(component.IsmDESVersion);
-			assertTrue(component.SecurityAttributes.Empty);
-			assertEquals(2, component.ExtensibleAttributes.Attributes.size());
+			Assert.IsNull(component.IsmDESVersion);
+			Assert.IsTrue(component.SecurityAttributes.Empty);
+			Assert.Equals(2, component.ExtensibleAttributes.Attributes.Count);
 
 			// icAttribute as parameter, secAttribute as securityAttribute, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
 			exAttr.Add(new Attribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
-			assertEquals(IsmDESVersion, component.IsmDESVersion);
-			assertFalse(component.SecurityAttributes.Empty);
-			assertEquals(1, component.ExtensibleAttributes.Attributes.size());
+			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
+			Assert.IsFalse(component.SecurityAttributes.Empty);
+			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
 
 			// icAttribute as parameter, secAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
 			exAttr.Add(new Attribute(secAttribute));
 			exAttr.Add(new Attribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, null, null, new ExtensibleAttributes(exAttr));
-			assertEquals(IsmDESVersion, component.IsmDESVersion);
-			assertTrue(component.SecurityAttributes.Empty);
-			assertEquals(2, component.ExtensibleAttributes.Attributes.size());
+			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
+			Assert.IsTrue(component.SecurityAttributes.Empty);
+			Assert.Equals(2, component.ExtensibleAttributes.Attributes.Count);
 
 			// secAttribute as securityAttribute, icAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
 			exAttr.Add(new Attribute(icAttribute));
 			exAttr.Add(new Attribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
-			assertNull(component.IsmDESVersion);
-			assertFalse(component.SecurityAttributes.Empty);
-			assertEquals(2, component.ExtensibleAttributes.Attributes.size());
+			Assert.IsNull(component.IsmDESVersion);
+			Assert.IsFalse(component.SecurityAttributes.Empty);
+			Assert.Equals(2, component.ExtensibleAttributes.Attributes.Count);
 
 			// all three as extensibleAttributes
 			exAttr.Clear();
@@ -1217,16 +1224,16 @@ namespace DDMSense.Test.DDMS {
 			exAttr.Add(new Attribute(secAttribute));
 			exAttr.Add(new Attribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
-			assertNull(component.IsmDESVersion);
-			assertTrue(component.SecurityAttributes.Empty);
-			assertEquals(3, component.ExtensibleAttributes.Attributes.size());
+			Assert.IsNull(component.IsmDESVersion);
+			Assert.IsTrue(component.SecurityAttributes.Empty);
+			Assert.Equals(3, component.ExtensibleAttributes.Attributes.Count);
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testExtensibleDataDuplicates() throws InvalidDDMSException
 		public virtual void TestExtensibleDataDuplicates() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
 				// IsmDESVersion in parameter AND extensible.
@@ -1234,18 +1241,18 @@ namespace DDMSense.Test.DDMS {
 					IList<Attribute> exAttr = new List<Attribute>();
 					exAttr.Add(new Attribute("ISM:DESVersion", version.IsmNamespace, "2"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
-					fail("Allowed invalid data.");
+					Assert.Fail("Allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "The extensible attribute with the name, ISM:DESVersion");
 				}
 
 				// NtkDESVersion in parameter AND extensible.
-				if (version.isAtLeast("4.0.1")) {
+				if (version.IsAtLeast("4.0.1")) {
 					try {
 						IList<Attribute> exAttr = new List<Attribute>();
 						exAttr.Add(new Attribute("ntk:DESVersion", version.NtkNamespace, "2"));
 						new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
-						fail("Allowed invalid data.");
+						Assert.Fail("Allowed invalid data.");
 					} catch (InvalidDDMSException e) {
 						ExpectMessage(e, "The extensible attribute with the name, ntk:DESVersion");
 					}
@@ -1256,7 +1263,7 @@ namespace DDMSense.Test.DDMS {
 					IList<Attribute> exAttr = new List<Attribute>();
 					exAttr.Add(new Attribute("ISM:classification", version.IsmNamespace, "U"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
-					fail("Allowed invalid data.");
+					Assert.Fail("Allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "The extensible attribute with the name, ISM:classification");
 				}
@@ -1267,20 +1274,20 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testExtensibleElementElementConstructor() throws InvalidDDMSException
 		public virtual void TestExtensibleElementElementConstructor() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
 				ExtensibleElement component = new ExtensibleElement(ExtensibleElementTest.FixtureElement);
 				XElement element = ResourceWithoutBodyElement;
-				if (version.isAtLeast("4.0.1")) {
-					element.appendChild(MetacardInfoTest.Fixture.XOMElementCopy);
+				if (version.IsAtLeast("4.0.1")) {
+					element.Add(MetacardInfoTest.Fixture.ElementCopy);
 				}
-				element.appendChild(IdentifierTest.Fixture.XOMElementCopy);
-				element.appendChild(TitleTest.Fixture.XOMElementCopy);
-				element.appendChild(CreatorTest.Fixture.XOMElementCopy);
-				element.appendChild(SubjectCoverageTest.Fixture.XOMElementCopy);
-				element.appendChild(SecurityTest.Fixture.XOMElementCopy);
-				element.appendChild(component.XOMElementCopy);
+				element.Add(IdentifierTest.Fixture.ElementCopy);
+				element.Add(TitleTest.Fixture.ElementCopy);
+				element.Add(CreatorTest.Fixture.ElementCopy);
+				element.Add(SubjectCoverageTest.Fixture.ElementCopy);
+				element.Add(SecurityTest.Fixture.ElementCopy);
+				element.Add(component.ElementCopy);
 				GetInstance(SUCCESS, element);
 			}
 		}
@@ -1288,23 +1295,23 @@ namespace DDMSense.Test.DDMS {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testExtensibleElementOutput() throws InvalidDDMSException
 		public virtual void TestExtensibleElementOutput() {
-			DDMSVersion.CurrentVersion = "3.0";
+			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 			ExtensibleElement component = new ExtensibleElement(ExtensibleElementTest.FixtureElement);
 
 			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(component);
 			Resource resource = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
-			assertTrue(resource.toHTML().IndexOf(BuildOutput(true, "extensible.layer", "true")) != -1);
-			assertTrue(resource.toText().IndexOf(BuildOutput(false, "extensible.layer", "true")) != -1);
+			Assert.IsTrue(resource.ToHTML().IndexOf(BuildOutput(true, "extensible.layer", "true")) != -1);
+			Assert.IsTrue(resource.ToText().IndexOf(BuildOutput(false, "extensible.layer", "true")) != -1);
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testWrongVersionExtensibleElementAllowed() throws InvalidDDMSException
 		public virtual void TestWrongVersionExtensibleElementAllowed() {
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion.SetCurrentVersion("2.0");
 			ExtensibleElement component = new ExtensibleElement(ExtensibleElementTest.FixtureElement);
-			DDMSVersion.CurrentVersion = "3.0";
+			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 
 			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
@@ -1315,7 +1322,7 @@ namespace DDMSense.Test.DDMS {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void test20TooManyExtensibleElements() throws InvalidDDMSException
 		public virtual void Test20TooManyExtensibleElements() {
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
 
 			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
@@ -1327,7 +1334,7 @@ namespace DDMSense.Test.DDMS {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testAfter20TooManyExtensibleElements() throws InvalidDDMSException
 		public virtual void TestAfter20TooManyExtensibleElements() {
-			DDMSVersion.CurrentVersion = "3.0";
+			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 
 			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
@@ -1339,36 +1346,36 @@ namespace DDMSense.Test.DDMS {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void test20DeclassManualReviewAttribute() throws InvalidDDMSException
 		public virtual void Test20DeclassManualReviewAttribute() {
-			DDMSVersion version = DDMSVersion.setCurrentVersion("2.0");
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
 			string ismNamespace = version.IsmNamespace;
 
 			XElement element = ResourceWithoutHeaderElement;
-			Util.addAttribute(element, PropertyReader.getPrefix("ism"), SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME, ismNamespace, "true");
-			SecurityAttributesTest.Fixture.addTo(element);
+			Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME, ismNamespace, "true");
+			SecurityAttributesTest.Fixture.AddTo(element);
 			Resource resource = GetInstance(SUCCESS, element);
 
 			// ISM:declassManualReview should not get picked up as an extensible attribute
-			assertEquals(0, resource.ExtensibleAttributes.Attributes.size());
+			Assert.Equals(0, resource.ExtensibleAttributes.Attributes.Count);
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testRelatedResourcesMediation() throws InvalidDDMSException
 		public virtual void TestRelatedResourcesMediation() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
-				if (version.isAtLeast("4.0.1")) {
+				if (version.IsAtLeast("4.0.1")) {
 					continue;
 				}
 
 				XElement element = ResourceWithMultipleRelated;
 				Resource resource = GetInstance(SUCCESS, element);
-				assertEquals(4, resource.RelatedResources.size());
-				assertEquals("http://en.wikipedia.org/wiki/Tank1", resource.RelatedResources.get(0).Value);
-				assertEquals("http://en.wikipedia.org/wiki/Tank2", resource.RelatedResources.get(1).Value);
-				assertEquals("http://en.wikipedia.org/wiki/Tank3", resource.RelatedResources.get(2).Value);
-				assertEquals("http://en.wikipedia.org/wiki/Tank4", resource.RelatedResources.get(3).Value);
+				Assert.Equals(4, resource.RelatedResources.Count);
+				Assert.Equals("http://en.wikipedia.org/wiki/Tank1", resource.RelatedResources[0].Value);
+				Assert.Equals("http://en.wikipedia.org/wiki/Tank2", resource.RelatedResources.get(1).Value);
+				Assert.Equals("http://en.wikipedia.org/wiki/Tank3", resource.RelatedResources.get(2).Value);
+				Assert.Equals("http://en.wikipedia.org/wiki/Tank4", resource.RelatedResources.get(3).Value);
 			}
 		}
 
@@ -1376,9 +1383,9 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testOrderConstraints() throws InvalidDDMSException
 		public virtual void TestOrderConstraints() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
-				if (!version.isAtLeast("4.0.1")) {
+				if (!version.IsAtLeast("4.0.1")) {
 					continue;
 				}
 
@@ -1410,43 +1417,42 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testConstructorChaining() throws InvalidDDMSException
 		public virtual void TestConstructorChaining() {
 			// DDMS 2.0
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
 			Resource resource = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
 			Resource fullResource = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, null, null, null);
-			assertEquals(resource, fullResource);
+			Assert.Equals(resource, fullResource);
 
 			// DDMS 3.0
-			DDMSVersion.CurrentVersion = "3.0";
+			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 			resource = new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, IsmDESVersion, SecurityAttributesTest.Fixture, null);
 			fullResource = new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, null, SecurityAttributesTest.Fixture, null, null);
-			assertEquals(resource, fullResource);
+			Assert.Equals(resource, fullResource);
 
 			// DDMS 3.1
-			DDMSVersion.CurrentVersion = "3.1";
+			DDMSVersion.SetCurrentVersion("3.1");
 			CreateComponents();
 			resource = new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, SecurityAttributesTest.Fixture, null);
 			fullResource = new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, null, SecurityAttributesTest.Fixture, null, null);
-			assertEquals(resource, fullResource);
+			Assert.Equals(resource, fullResource);
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testBuilderEquality() throws InvalidDDMSException
 		public virtual void TestBuilderEquality() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-
+				DDMSVersion.SetCurrentVersion(sVersion);
 				Resource component = GetInstance(SUCCESS, GetValidElement(sVersion));
 				Resource.Builder builder = new Resource.Builder(component);
-				assertEquals(component, builder.commit());
+				Assert.Equals(component, builder.Commit());
 
 				// Equality with ExtensibleElement
-				builder.ExtensibleElements.add(new ExtensibleElement.Builder());
-				builder.ExtensibleElements.get(0).Xml = "<ddmsence:extension xmlns:ddmsence=\"http://ddmsence.urizone.net/\">" + "This is an extensible element.</ddmsence:extension>";
-				component = builder.commit();
+				builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
+				builder.ExtensibleElements[0].Xml = "<ddmsence:extension xmlns:ddmsence=\"http://ddmsence.urizone.net/\">" + "This is an extensible element.</ddmsence:extension>";
+				component = builder.Commit();
 				builder = new Resource.Builder(component);
-				assertEquals(component, builder.commit());
+				Assert.Equals(component, builder.Commit());
 			}
 		}
 
@@ -1454,44 +1460,44 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testBuilderIsEmpty() throws InvalidDDMSException
 		public virtual void TestBuilderIsEmpty() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				Resource.Builder builder = new Resource.Builder();
-				assertNull(builder.commit());
-				assertTrue(builder.Empty);
-				builder.Identifiers.add(new Identifier.Builder());
-				assertTrue(builder.Empty);
-				builder.Titles.add(new Title.Builder());
-				assertTrue(builder.Empty);
-				builder.Subtitles.add(new Subtitle.Builder());
-				assertTrue(builder.Empty);
-				builder.Languages.add(new Language.Builder());
-				assertTrue(builder.Empty);
-				builder.Sources.add(new Source.Builder());
-				assertTrue(builder.Empty);
-				builder.Types.add(new Type.Builder());
-				assertTrue(builder.Empty);
-				builder.Creators.add(new Creator.Builder());
-				assertTrue(builder.Empty);
-				builder.Contributors.add(new Contributor.Builder());
-				assertTrue(builder.Empty);
-				builder.Publishers.add(new Publisher.Builder());
-				assertTrue(builder.Empty);
-				builder.PointOfContacts.add(new PointOfContact.Builder());
-				assertTrue(builder.Empty);
-				assertEquals(4, builder.Producers.size());
-				builder.VirtualCoverages.add(new VirtualCoverage.Builder());
-				assertTrue(builder.Empty);
-				builder.TemporalCoverages.add(new TemporalCoverage.Builder());
-				assertTrue(builder.Empty);
-				builder.GeospatialCoverages.add(new GeospatialCoverage.Builder());
-				assertTrue(builder.Empty);
-				builder.RelatedResources.add(new RelatedResource.Builder());
-				assertTrue(builder.Empty);
-				builder.ExtensibleElements.add(new ExtensibleElement.Builder());
-				assertTrue(builder.Empty);
-				builder.ExtensibleElements.get(0).Xml = "InvalidXml";
-				assertFalse(builder.Empty);
+				Assert.IsNull(builder.Commit());
+				Assert.IsTrue(builder.Empty);
+				builder.Identifiers.Add(new Identifier.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.Titles.Add(new Title.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.Subtitles.Add(new Subtitle.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.Languages.Add(new Language.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.Sources.Add(new Source.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.Types.Add(new Type.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.Creators.Add(new Creator.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.Contributors.Add(new Contributor.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.Publishers.Add(new Publisher.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.PointOfContacts.Add(new PointOfContact.Builder());
+				Assert.IsTrue(builder.Empty);
+				Assert.Equals(4, builder.Producers.Count);
+				builder.VirtualCoverages.Add(new VirtualCoverage.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.TemporalCoverages.Add(new TemporalCoverage.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.GeospatialCoverages.Add(new GeospatialCoverage.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.RelatedResources.Add(new RelatedResource.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
+				Assert.IsTrue(builder.Empty);
+				builder.ExtensibleElements[0].Xml = "InvalidXml";
+				Assert.IsFalse(builder.Empty);
 
 			}
 		}
@@ -1500,13 +1506,13 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testBuilderValidation() throws InvalidDDMSException
 		public virtual void TestBuilderValidation() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				Resource.Builder builder = new Resource.Builder();
 				builder.CreateDate = TEST_CREATE_DATE;
 				try {
-					builder.commit();
-					fail("Builder allowed invalid data.");
+					builder.Commit();
+					Assert.Fail("Builder allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "At least 1 identifier is required.");
 				}
@@ -1518,23 +1524,23 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testBuilderLazyList() throws InvalidDDMSException
 		public virtual void TestBuilderLazyList() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 				Resource.Builder builder = new Resource.Builder();
-				assertNotNull(builder.Identifiers.get(1));
-				assertNotNull(builder.Titles.get(1));
-				assertNotNull(builder.Subtitles.get(1));
-				assertNotNull(builder.Languages.get(1));
-				assertNotNull(builder.Sources.get(1));
-				assertNotNull(builder.Types.get(1));
-				assertNotNull(builder.Creators.get(1));
-				assertNotNull(builder.Contributors.get(1));
-				assertNotNull(builder.Publishers.get(1));
-				assertNotNull(builder.PointOfContacts.get(1));
-				assertNotNull(builder.VirtualCoverages.get(1));
-				assertNotNull(builder.TemporalCoverages.get(1));
-				assertNotNull(builder.GeospatialCoverages.get(1));
-				assertNotNull(builder.RelatedResources.get(1));
-				assertNotNull(builder.ExtensibleElements.get(1));
+				Assert.IsNotNull(builder.Identifiers[1]);
+				Assert.IsNotNull(builder.Titles[1]);
+				Assert.IsNotNull(builder.Subtitles[1]);
+				Assert.IsNotNull(builder.Languages[1]);
+				Assert.IsNotNull(builder.Sources[1]);
+				Assert.IsNotNull(builder.Types[1]);
+				Assert.IsNotNull(builder.Creators[1]);
+				Assert.IsNotNull(builder.Contributors[1]);
+				Assert.IsNotNull(builder.Publishers[1]);
+				Assert.IsNotNull(builder.PointOfContacts[1]);
+				Assert.IsNotNull(builder.VirtualCoverages[1]);
+				Assert.IsNotNull(builder.TemporalCoverages[1]);
+				Assert.IsNotNull(builder.GeospatialCoverages[1]);
+				Assert.IsNotNull(builder.RelatedResources[1]);
+				Assert.IsNotNull(builder.ExtensibleElements[1]);
 			}
 		}
 
@@ -1542,32 +1548,32 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testBuild20Commit30() throws InvalidDDMSException
 		public virtual void TestBuild20Commit30() {
 			// Version during building should be 100% irrelevant
-			DDMSVersion version = DDMSVersion.setCurrentVersion("2.0");
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			Resource.Builder builder = new Resource.Builder();
 			builder.ResourceElement = TEST_RESOURCE_ELEMENT;
 			builder.CreateDate = TEST_CREATE_DATE;
 			builder.IsmDESVersion = IsmDESVersion;
 			builder.SecurityAttributes.Classification = "U";
-			builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+			builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 
-			builder.Identifiers.get(0).Qualifier = "testQualifier";
-			builder.Identifiers.get(0).Value = "testValue";
-			builder.Titles.get(0).Value = "testTitle";
-			builder.Titles.get(0).SecurityAttributes.Classification = "U";
-			builder.Titles.get(0).SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-			builder.Creators.get(0).EntityType = Organization.getName(version);
-			builder.Creators.get(0).Organization.Names = Util.getXsListAsList("testName");
-			builder.SubjectCoverages.get(0).Keywords.get(0).Value = "keyword";
+			builder.Identifiers[0].Qualifier = "testQualifier";
+			builder.Identifiers[0].Value = "testValue";
+			builder.Titles[0].Value = "testTitle";
+			builder.Titles[0].SecurityAttributes.Classification = "U";
+			builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+			builder.Creators[0].EntityType = Organization.GetName(version);
+			builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
+			builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
 			builder.Security.SecurityAttributes.Classification = "U";
-			builder.Security.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-			DDMSVersion.CurrentVersion = "3.0";
-			builder.commit();
+			builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+			DDMSVersion.SetCurrentVersion("3.0");
+			builder.Commit();
 
 			// Using a 2.0-specific value
 			builder.Security.SecurityAttributes.Classification = "NS-S";
 			try {
-				builder.commit();
-				fail("Builder allowed invalid data.");
+				builder.Commit();
+				Assert.Fail("Builder allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "NS-S is not a valid enumeration token");
 			}
@@ -1577,33 +1583,33 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testBuild30Commit20() throws InvalidDDMSException
 		public virtual void TestBuild30Commit20() {
 			// Version during building should be 100% irrelevant
-			DDMSVersion version = DDMSVersion.setCurrentVersion("3.0");
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
 			Resource.Builder builder = new Resource.Builder();
 			builder.ResourceElement = TEST_RESOURCE_ELEMENT;
 			builder.IsmDESVersion = IsmDESVersion;
 			builder.SecurityAttributes.Classification = "U";
-			builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+			builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 
-			builder.Identifiers.get(0).Qualifier = "testQualifier";
-			builder.Identifiers.get(0).Value = "testValue";
-			builder.Titles.get(0).Value = "testTitle";
-			builder.Titles.get(0).SecurityAttributes.Classification = "U";
-			builder.Titles.get(0).SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-			builder.Creators.get(0).EntityType = Organization.getName(version);
-			builder.Creators.get(0).Organization.Names = Util.getXsListAsList("testName");
-			builder.SubjectCoverages.get(0).Keywords.get(0).Value = "keyword";
+			builder.Identifiers[0].Qualifier = "testQualifier";
+			builder.Identifiers[0].Value = "testValue";
+			builder.Titles[0].Value = "testTitle";
+			builder.Titles[0].SecurityAttributes.Classification = "U";
+			builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+			builder.Creators[0].EntityType = Organization.GetName(version);
+			builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
+			builder.SubjectCoverages[0].Keywords.Add(new [0] = "keyword";
 			builder.Security.SecurityAttributes.Classification = "U";
-			builder.Security.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+			builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 
-			DDMSVersion.CurrentVersion = "2.0";
-			builder.commit();
+			DDMSVersion.SetCurrentVersion("2.0");
+			builder.Commit();
 
 			// Using a 3.0-specific value
-			builder.SubjectCoverages.get(0).SecurityAttributes.Classification = "U";
-			builder.SubjectCoverages.get(0).SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+			builder.SubjectCoverages[0].SecurityAttributes.Classification = "U";
+			builder.SubjectCoverages[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 			try {
-				builder.commit();
-				fail("Builder allowed invalid data.");
+				builder.Commit();
+				Assert.Fail("Builder allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "Security attributes cannot be applied");
 			}
@@ -1615,21 +1621,21 @@ namespace DDMSense.Test.DDMS {
 			Resource.Builder builder = new Resource.Builder(new Resource(GetValidElement("3.0")));
 
 			// Direct mapping works
-			DDMSVersion.CurrentVersion = "3.0";
-			builder.commit();
+			DDMSVersion.SetCurrentVersion("3.0");
+			builder.Commit();
 
 			// Transform back to 2.0 fails on 3.0-specific fields
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion.SetCurrentVersion("2.0");
 			try {
-				builder.commit();
-				fail("Builder allowed invalid data.");
+				builder.Commit();
+				Assert.Fail("Builder allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The Unknown element cannot be used");
 			}
 
 			// Wiping of 3.0-specific fields works
-			builder.PointOfContacts.clear();
-			builder.commit();
+			builder.PointOfContacts.Clear();
+			builder.Commit();
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -1638,14 +1644,14 @@ namespace DDMSense.Test.DDMS {
 			Resource.Builder builder = new Resource.Builder(new Resource(GetValidElement("2.0")));
 
 			// Direct mapping works
-			DDMSVersion.CurrentVersion = "2.0";
-			builder.commit();
+			DDMSVersion.SetCurrentVersion("2.0");
+			builder.Commit();
 
 			// Transform up to 3.0 fails on 3.0-specific fields
-			DDMSVersion.CurrentVersion = "3.0";
+			DDMSVersion.SetCurrentVersion("3.0");
 			try {
-				builder.commit();
-				fail("Builder allowed invalid data.");
+				builder.Commit();
+				Assert.Fail("Builder allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "resourceElement is required.");
 			}
@@ -1655,8 +1661,8 @@ namespace DDMSense.Test.DDMS {
 			builder.CreateDate = TEST_CREATE_DATE;
 			builder.IsmDESVersion = IsmDESVersion;
 			builder.SecurityAttributes.Classification = "U";
-			builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-			builder.commit();
+			builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+			builder.Commit();
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -1665,21 +1671,21 @@ namespace DDMSense.Test.DDMS {
 			Resource.Builder builder = new Resource.Builder(new Resource(GetValidElement("3.0")));
 
 			// Direct mapping works
-			DDMSVersion.CurrentVersion = "3.0";
-			builder.commit();
+			DDMSVersion.SetCurrentVersion("3.0");
+			builder.Commit();
 
 			// Transform up to 3.1 fails on 3.0-specific fields
-			DDMSVersion.CurrentVersion = "3.1";
+			DDMSVersion.SetCurrentVersion("3.1");
 			try {
-				builder.commit();
-				fail("Builder allowed invalid data.");
+				builder.Commit();
+				Assert.Fail("Builder allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "nu.xom.ValidityException: cvc-attribute.4: The value '2' of attribute 'ISM:DESVersion'");
 			}
 
 			// Adding 3.1-specific fields works
 			builder.IsmDESVersion = Convert.ToInt32(5);
-			builder.commit();
+			builder.Commit();
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -1688,14 +1694,14 @@ namespace DDMSense.Test.DDMS {
 			Resource.Builder builder = new Resource.Builder(new Resource(GetValidElement("3.1")));
 
 			// Direct mapping works
-			DDMSVersion.CurrentVersion = "3.1";
-			builder.commit();
+			DDMSVersion.SetCurrentVersion("3.1");
+			builder.Commit();
 
 			// Transform up to 4.0.1 fails on 3.1-specific fields
-			DDMSVersion.CurrentVersion = "4.0.1";
+			DDMSVersion.SetCurrentVersion("4.0.1");
 			try {
-				builder.commit();
-				fail("Builder allowed invalid data.");
+				builder.Commit();
+				Assert.Fail("Builder allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "ntk:DESVersion is required.");
 			}
@@ -1703,32 +1709,33 @@ namespace DDMSense.Test.DDMS {
 			// Adding 4.0.1-specific fields works
 			builder.NtkDESVersion = Convert.ToInt32(7);
 			builder.IsmDESVersion = Convert.ToInt32(9);
-			builder.MetacardInfo.Identifiers.get(0).Qualifier = "qualifier";
-			builder.MetacardInfo.Identifiers.get(0).Value = "value";
+			builder.MetacardInfo.Identifiers[0].Qualifier = "qualifier";
+			builder.MetacardInfo.Identifiers[0].Value = "value";
 			builder.MetacardInfo.Dates.Created = "2011-09-25";
-			builder.MetacardInfo.Publishers.get(0).EntityType = "organization";
-			builder.MetacardInfo.Publishers.get(0).Organization.Names = Util.getXsListAsList("DISA");
-			builder.commit();
+			builder.MetacardInfo.Publishers[0].EntityType = "organization";
+			builder.MetacardInfo.Publishers[0].Organization.Names = Util.GetXsListAsList("DISA");
+			builder.Commit();
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testBuilderSerialization() throws Exception
 		public virtual void TestBuilderSerialization() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 				Resource component = GetInstance(SUCCESS, GetValidElement(sVersion));
 
 				Resource.Builder builder = new Resource.Builder(component);
-				ByteArrayOutputStream @out = new ByteArrayOutputStream();
-				ObjectOutputStream oos = new ObjectOutputStream(@out);
-				oos.writeObject(builder);
-				oos.close();
-				sbyte[] serialized = @out.toByteArray();
-				assertTrue(serialized.Length > 0);
+				// TODO - Find .NET version of this code
+				//ByteArrayOutputStream @out = new ByteArrayOutputStream();
+				//ObjectOutputStream oos = new ObjectOutputStream(@out);
+				//oos.writeObject(builder);
+				//oos.close();
+				//sbyte[] serialized = @out.toByteArray();
+				//Assert.IsTrue(serialized.Length > 0);
 
-				ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(serialized));
-				Resource.Builder unserializedBuilder = (Resource.Builder) ois.readObject();
-				assertEquals(component, unserializedBuilder.commit());
+				//ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(serialized));
+				//Resource.Builder unserializedBuilder = (Resource.Builder) ois.readObject();
+				//Assert.Equals(component, unserializedBuilder.commit());
 			}
 		}
 

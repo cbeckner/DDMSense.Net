@@ -22,13 +22,13 @@ using System.Text;
 namespace DDMSense.Test.DDMS {
 
 
-    using DDMSense.DDMS;
-    using DDMSense.DDMS;
-    using System.Xml.Linq;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
-    using PropertyReader = DDMSense.Util.PropertyReader;
-    using Util = DDMSense.Util.Util;
-
+	using DDMSense.DDMS;
+	using DDMSense.DDMS;
+	using System.Xml.Linq;
+	using DDMSVersion = DDMSense.Util.DDMSVersion;
+	using PropertyReader = DDMSense.Util.PropertyReader;
+	using Util = DDMSense.Util.Util;
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	/// <summary>
 	/// <para> Tests related to elements of type ddms:ApproximableDateType (includes ddms:acquiredOn, and the ddms:start / ddms:end values in a ddms:temporalCoverage element.</para>
 	/// 
@@ -60,20 +60,20 @@ namespace DDMSense.Test.DDMS {
 		/// <param name="name"> the element name </param>
 		/// <param name="includeAllFields"> true to include optional fields </param>
 		public static XElement GetFixtureElement(string name, bool includeAllFields) {
-			DDMSVersion version = DDMSVersion.CurrentVersion;
-			XElement element = Util.buildDDMSElement(name, null);
-			element.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
+			DDMSVersion version = DDMSVersion.GetCurrentVersion();
+			XElement element = Util.BuildDDMSElement(name, null);
+			element.Add(PropertyReader.GetPrefix("ddms"), version.Namespace);//TODO - Verify this logic/code is correct
 			if (includeAllFields) {
-				Util.addDDMSChildElement(element, "description", TEST_DESCRIPTION);
+				Util.AddDDMSChildElement(element, "description", TEST_DESCRIPTION);
 
-				XElement approximableElment = Util.buildDDMSElement("approximableDate", TEST_APPROXIMABLE_DATE);
-				Util.addDDMSAttribute(approximableElment, "approximation", TEST_APPROXIMATION);
-				element.appendChild(approximableElment);
+				XElement approximableElment = Util.BuildDDMSElement("approximableDate", TEST_APPROXIMABLE_DATE);
+				Util.AddDDMSAttribute(approximableElment, "approximation", TEST_APPROXIMATION);
+				element.Add(approximableElment);
 
-				XElement searchableElement = Util.buildDDMSElement("searchableDate", null);
-				Util.addDDMSChildElement(searchableElement, "start", TEST_START_DATE);
-				Util.addDDMSChildElement(searchableElement, "end", TEST_END_DATE);
-				element.appendChild(searchableElement);
+				XElement searchableElement = Util.BuildDDMSElement("searchableDate", null);
+				Util.AddDDMSChildElement(searchableElement, "start", TEST_START_DATE);
+				Util.AddDDMSChildElement(searchableElement, "end", TEST_END_DATE);
+				element.Add(searchableElement);
 			}
 			return (element);
 		}
@@ -86,7 +86,7 @@ namespace DDMSense.Test.DDMS {
 		/// </param>
 		/// <returns> a valid object </returns>
 		private ApproximableDate GetInstance(string message, XElement element) {
-			bool expectFailure = !Util.isEmpty(message);
+			bool expectFailure = !string.IsNullOrEmpty(message);
 			ApproximableDate component = null;
 			try {
 				component = new ApproximableDate(element);
@@ -111,7 +111,7 @@ namespace DDMSense.Test.DDMS {
 		/// <param name="entity"> the person or organization in this role </param>
 		/// <param name="org"> the organization </param>
 		private ApproximableDate GetInstance(string message, string name, string description, string approximableDate, string approximation, string searchableStartDate, string searchableEndDate) {
-			bool expectFailure = !Util.isEmpty(message);
+			bool expectFailure = !string.IsNullOrEmpty(message);
 			ApproximableDate component = null;
 			try {
 				component = new ApproximableDate(name, description, approximableDate, approximation, searchableStartDate, searchableEndDate);
@@ -159,7 +159,7 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testNameAndNamespace() throws InvalidDDMSException
 		public virtual void TestNameAndNamespace() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				AssertNameAndNamespace(GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true)), DEFAULT_DDMS_PREFIX, TEST_NAME);
 				GetInstance("The element name must be one of", WrongNameElementFixture);
@@ -170,7 +170,7 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testElementConstructorValid() throws InvalidDDMSException
 		public virtual void TestElementConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				// All fields
 				GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
@@ -184,7 +184,7 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testDataConstructorValid() throws InvalidDDMSException
 		public virtual void TestDataConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				// All fields
 				GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
@@ -198,35 +198,35 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testElementConstructorInvalid() throws InvalidDDMSException
 		public virtual void TestElementConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				 // Wrong date format: approximableDate
-				XElement element = Util.buildDDMSElement(TEST_NAME, null);
-				XElement approximableElment = Util.buildDDMSElement("approximableDate", "---31");
-				element.appendChild(approximableElment);
+				XElement element = Util.BuildDDMSElement(TEST_NAME, null);
+				XElement approximableElment = Util.BuildDDMSElement("approximableDate", "---31");
+				element.Add(approximableElment);
 				GetInstance("The date datatype", element);
 
 				 // Invalid approximation
-				element = Util.buildDDMSElement(TEST_NAME, null);
-				approximableElment = Util.buildDDMSElement("approximableDate", TEST_APPROXIMABLE_DATE);
-				Util.addDDMSAttribute(approximableElment, "approximation", "almost-nearly");
-				element.appendChild(approximableElment);
+				element = Util.BuildDDMSElement(TEST_NAME, null);
+				approximableElment = Util.BuildDDMSElement("approximableDate", TEST_APPROXIMABLE_DATE);
+				Util.AddDDMSAttribute(approximableElment, "approximation", "almost-nearly");
+				element.Add(approximableElment);
 				GetInstance("The approximation must be one of", element);
 
 				 // Wrong date format: start
-				element = Util.buildDDMSElement(TEST_NAME, null);
-				XElement searchableElement = Util.buildDDMSElement("searchableDate", null);
-				Util.addDDMSChildElement(searchableElement, "start", "---31");
-				Util.addDDMSChildElement(searchableElement, "end", TEST_END_DATE);
-				element.appendChild(searchableElement);
+				element = Util.BuildDDMSElement(TEST_NAME, null);
+				XElement searchableElement = Util.BuildDDMSElement("searchableDate", null);
+				Util.AddDDMSChildElement(searchableElement, "start", "---31");
+				Util.AddDDMSChildElement(searchableElement, "end", TEST_END_DATE);
+				element.Add(searchableElement);
 				GetInstance("The date datatype", element);
 
 				 // Wrong date format: end
-				element = Util.buildDDMSElement(TEST_NAME, null);
-				searchableElement = Util.buildDDMSElement("searchableDate", null);
-				Util.addDDMSChildElement(searchableElement, "start", TEST_START_DATE);
-				Util.addDDMSChildElement(searchableElement, "end", "---31");
-				element.appendChild(searchableElement);
+				element = Util.BuildDDMSElement(TEST_NAME, null);
+				searchableElement = Util.BuildDDMSElement("searchableDate", null);
+				Util.AddDDMSChildElement(searchableElement, "start", TEST_START_DATE);
+				Util.AddDDMSChildElement(searchableElement, "end", "---31");
+				element.Add(searchableElement);
 				GetInstance("The date datatype", element);
 			}
 		}
@@ -235,7 +235,7 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testDataConstructorInvalid() throws InvalidDDMSException
 		public virtual void TestDataConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				 // Wrong date format: approximableDate
 				GetInstance("The date datatype", TEST_NAME, TEST_DESCRIPTION, "---31", TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
@@ -255,29 +255,30 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testWarnings() throws InvalidDDMSException
 		public virtual void TestWarnings() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				// No warnings
 				ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
-				assertEquals(0, component.ValidationWarnings.size());
+				
+				Assert.Equals(0, component.ValidationWarnings.Count);
 
 				// Empty element
 				component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, false));
-				assertEquals(1, component.ValidationWarnings.size());
+				Assert.Equals(1, component.ValidationWarnings.Count);
 				string text = "A completely empty ddms:acquiredOn";
 				string locator = "ddms:acquiredOn";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+				AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
 				// Description element with no child text
-				XElement element = Util.buildDDMSElement(TEST_NAME, null);
-				element.appendChild(Util.buildDDMSElement("description", null));
-				Util.addDDMSChildElement(element, "description", null);
-				Util.addDDMSChildElement(element, "approximableDate", TEST_APPROXIMABLE_DATE);
+				XElement element = Util.BuildDDMSElement(TEST_NAME, null);
+				element.Add(Util.BuildDDMSElement("description", null));
+				Util.AddDDMSChildElement(element, "description", null);
+				Util.AddDDMSChildElement(element, "approximableDate", TEST_APPROXIMABLE_DATE);
 				component = GetInstance(SUCCESS, element);
-				assertEquals(1, component.ValidationWarnings.size());
+				Assert.Equals(1, component.ValidationWarnings.Count);
 				text = "A completely empty ddms:description";
 				locator = "ddms:acquiredOn";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+				AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 			}
 		}
 
@@ -285,12 +286,12 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testConstructorEquality() throws InvalidDDMSException
 		public virtual void TestConstructorEquality() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				ApproximableDate elementComponent = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
 				ApproximableDate dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-				assertEquals(elementComponent, dataComponent);
-				assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+				Assert.Equals(elementComponent, dataComponent);
+				Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 			}
 		}
 
@@ -298,26 +299,26 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws InvalidDDMSException
 		public virtual void TestConstructorInequalityDifferentValues() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				ApproximableDate elementComponent = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
 				ApproximableDate dataComponent = GetInstance(SUCCESS, "approximableStart", TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-				assertFalse(elementComponent.Equals(dataComponent));
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 				dataComponent = GetInstance(SUCCESS, TEST_NAME, DIFFERENT_VALUE, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-				assertFalse(elementComponent.Equals(dataComponent));
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 				dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, "2000", TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-				assertFalse(elementComponent.Equals(dataComponent));
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 				dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, "2nd qtr", TEST_START_DATE, TEST_END_DATE);
-				assertFalse(elementComponent.Equals(dataComponent));
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 				dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, "2000", TEST_END_DATE);
-				assertFalse(elementComponent.Equals(dataComponent));
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 				dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, "2500");
-				assertFalse(elementComponent.Equals(dataComponent));
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
 			}
 		}
 
@@ -325,15 +326,15 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testHTMLTextOutput() throws InvalidDDMSException
 		public virtual void TestHTMLTextOutput() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+				Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 				component = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+				Assert.Equals(GetExpectedOutput(false), component.ToText());
 			}
 		}
 
@@ -341,21 +342,21 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testXMLOutput() throws InvalidDDMSException
 		public virtual void TestXMLOutput() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
-				assertEquals(ExpectedXMLOutput, component.toXML());
+				Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 				component = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-				assertEquals(ExpectedXMLOutput, component.toXML());
+				Assert.Equals(ExpectedXMLOutput, component.ToXML());
 			}
 		}
 
 		public virtual void TestWrongVersion() {
 			try {
-				DDMSVersion.CurrentVersion = "2.0";
+				DDMSVersion.SetCurrentVersion("2.0");
 				new ApproximableDate(TEST_NAME, null, null, null, null, null);
-				fail("Allowed invalid data.");
+				Assert.Fail("Allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The acquiredOn element cannot be used");
 			}
@@ -365,11 +366,11 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testBuilderEquality() throws InvalidDDMSException
 		public virtual void TestBuilderEquality() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
 				ApproximableDate.Builder builder = new ApproximableDate.Builder(component);
-				assertEquals(component, builder.commit());
+				Assert.Equals(component, builder.Commit());
 			}
 		}
 
@@ -377,14 +378,13 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testBuilderIsEmpty() throws InvalidDDMSException
 		public virtual void TestBuilderIsEmpty() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				ApproximableDate.Builder builder = new ApproximableDate.Builder();
-				assertNull(builder.commit());
-				assertTrue(builder.Empty);
+				Assert.IsNull(builder.Commit());
+				Assert.IsTrue(builder.Empty);
 				builder.Description = TEST_DESCRIPTION;
-				assertFalse(builder.Empty);
-
+				Assert.IsFalse(builder.Empty);
 			}
 		}
 
@@ -392,20 +392,20 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: public void testBuilderValidation() throws InvalidDDMSException
 		public virtual void TestBuilderValidation() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion.SetCurrentVersion(sVersion);
 
 				ApproximableDate.Builder builder = new ApproximableDate.Builder();
 				builder.Name = TEST_NAME;
 				builder.ApproximableDate = TEST_APPROXIMABLE_DATE;
 				builder.Approximation = "almost-nearly";
 				try {
-					builder.commit();
-					fail("Builder allowed invalid data.");
+					builder.Commit();
+					Assert.Fail("Builder allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "The approximation");
 				}
 				builder.Approximation = TEST_APPROXIMATION;
-				builder.commit();
+				builder.Commit();
 			}
 		}
 	}

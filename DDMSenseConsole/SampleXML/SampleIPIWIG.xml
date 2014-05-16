@@ -1,0 +1,41 @@
+﻿<librarycard xmlns:comn="http://www.nato.int/namespace/ipiwg/common/4.0#" xmlns:img="http://www.nato.int/namespace/ipiwg/imagery/4.0#" xmlns:intel="http://www.nato.int/namespace/ipiwg/intel/4.0#" xmlns:libcard="http://www.nato.int/namespace/ipiwg/libcard/4.0#" xmlns="http://www.nato.int/namespace/ipiwg/4.0#" version="4.0">
+  <cardLayer>
+    <libcard:security.authority>USA</libcard:security.authority>
+    <libcard:security.classification>Confidential</libcard:security.classification>
+    <libcard:security.releasability>ASM</libcard:security.releasability>
+    <libcard:id>BICES_USA_8d76f300-f72b-437a-bcff-042caaf76e51.xml</libcard:id>
+    <libcard:domain>BICES</libcard:domain>
+    <libcard:status>Active</libcard:status>
+  </cardLayer>
+  <commonLayer>
+    <comn:title>dfsd</comn:title>
+    <comn:producer>ALA</comn:producer>
+    <comn:category>Surface-to-Air Missiles (SAMs)</comn:category>
+    <comn:summary>fdsf</comn:summary>
+    <comn:publisher>CIMS : 44 1480 84 2817</comn:publisher>
+    <comn:date.posted>2014-05-13T20:49:46.610484Z</comn:date.posted>
+    <comn:date.available>2014-05-13T00:00:00</comn:date.available>
+    <comn:document.type>Briefing</comn:document.type>
+    <comn:security.authority>USA</comn:security.authority>
+    <comn:security.classification>Confidential</comn:security.classification>
+    <comn:security.releasability>ASM</comn:security.releasability>
+    <comn:poc>CIMS : 44 1480 84 2817</comn:poc>
+    <comn:email.address>CIMS</comn:email.address>
+    <comn:files>
+      <comn:file>
+        <comn:identifier>http://products.usa.bices.dcn/usbicesdocs/2014/5/Duplicate Test.txt</comn:identifier>
+        <comn:format>text/plain</comn:format>
+        <comn:filesize units="KB">0</comn:filesize>
+        <comn:language>en</comn:language>
+      </comn:file>
+    </comn:files>
+  </commonLayer>
+  <intelLayer>
+    <intel:country.reference>ASM</intel:country.reference>
+    <intel:intel.type>Target</intel:intel.type>
+    <intel:date.info minmax="Min">2014-05-12T00:00:00</intel:date.info>
+    <intel:date.info minmax="Max">2014-05-12T00:00:00</intel:date.info>
+    <intel:product.periodicity>Bi-annual</intel:product.periodicity>
+    <intel:operation.reference>EUFOR Tchad/RCA</intel:operation.reference>
+  </intelLayer>
+</librarycard>
