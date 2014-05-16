@@ -290,9 +290,9 @@ namespace DDMSense.Test.DDMS {
 		/// </summary>
 		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
 		/// <param name="topLevelComponents"> a list of top level components </param>
-		/// <param name="resourceElement"> value of the resourceElement attribute (required) </param>
+		/// <param name="resourceElement"> value of the resourceElement XAttribute (required) </param>
 		/// <param name="createDate"> the create date as an xs:date (YYYY-MM-DD) (required) </param>
-		/// <param name="compliesWith"> the compliesWith attribute </param>
+		/// <param name="compliesWith"> the compliesWith XAttribute </param>
 		/// <param name="ismDESVersion"> the ISM DES Version as an Integer (required) </param>
 		/// <param name="ntkDESVersion"> the NTK DES Version as an Integer (required, starting in DDMS 4.0.1) </param>
 		/// <returns> a valid object </returns>
@@ -889,7 +889,7 @@ namespace DDMSense.Test.DDMS {
 					GetInstance("The createDate must be in the xs:date format", TEST_NO_OPTIONAL_COMPONENTS, TEST_RESOURCE_ELEMENT, "2001", null, IsmDESVersion, NtkDESVersion);
 
 					// Nonsensical createDate
-					GetInstance("The ISM:createDate attribute is not in a valid date format.", TEST_NO_OPTIONAL_COMPONENTS, TEST_RESOURCE_ELEMENT, "notAnXmlDate", null, IsmDESVersion, NtkDESVersion);
+					GetInstance("The ISM:createDate XAttribute is not in a valid date format.", TEST_NO_OPTIONAL_COMPONENTS, TEST_RESOURCE_ELEMENT, "notAnXmlDate", null, IsmDESVersion, NtkDESVersion);
 
 					// Missing desVersion
 					GetInstance("ISM:DESVersion is required.", TEST_NO_OPTIONAL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, null, NtkDESVersion);
@@ -949,7 +949,7 @@ namespace DDMSense.Test.DDMS {
 				// 4.1 ism:Notice used
 				if (version.IsAtLeast("4.1")) {
 					Assert.Equals(1, component.ValidationWarnings.Count);
-					text = "The ISM:externalNotice attribute in this DDMS component";
+					text = "The ISM:externalNotice XAttribute in this DDMS component";
 					locator = "ddms:resource";
 					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 				}
@@ -967,12 +967,12 @@ namespace DDMSense.Test.DDMS {
 				Assert.Equals(countIndex + 1, component.ValidationWarnings.Count);
 
 				if (version.IsAtLeast("4.1")) {
-					text = "The ISM:externalNotice attribute";
+					text = "The ISM:externalNotice XAttribute";
 					locator = "ddms:resource";
 					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 				}
 				string resourceName = Resource.GetName(version);
-				text = "A qualifier has been set without an accompanying value attribute.";
+				text = "A qualifier has been set without an accompanying value XAttribute.";
 				locator = (version.IsAtLeast("4.0.1")) ? "ddms:" + resourceName + "/ddms:format/ddms:extent" : "ddms:" + resourceName + "/ddms:format/ddms:Media/ddms:extent";
 				AssertWarningEquality(text, locator, component.ValidationWarnings[countIndex]);
 
@@ -985,7 +985,7 @@ namespace DDMSense.Test.DDMS {
 				Assert.Equals(countIndex + 1, component.ValidationWarnings.Count);
 
 				if (version.IsAtLeast("4.1")) {
-					text = "The ISM:externalNotice attribute";
+					text = "The ISM:externalNotice XAttribute";
 					locator = "ddms:resource";
 					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 				}
@@ -1076,7 +1076,7 @@ namespace DDMSense.Test.DDMS {
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 
-			GetInstance("The compliesWith attribute cannot be used", TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, NtkDESVersion);
+			GetInstance("The compliesWith XAttribute cannot be used", TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, NtkDESVersion);
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -1098,7 +1098,7 @@ namespace DDMSense.Test.DDMS {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 
-				// Extensible attribute added
+				// Extensible XAttribute added
 				ExtensibleAttributes attr = ExtensibleAttributesTest.Fixture;
 				if (!version.IsAtLeast("3.0")) {
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, attr);
@@ -1145,12 +1145,12 @@ namespace DDMSense.Test.DDMS {
 			CreateComponents();
 
 			// This can be a parameter or an extensible.
-			Attribute icAttribute = new Attribute("ISM:DESVersion", version.IsmNamespace, "2");
+			XAttribute icAttribute = new XAttribute(XName.Get("ISM:DESVersion", version.IsmNamespace), "2");
 			// This can be a securityAttribute or an extensible.
-			Attribute secAttribute = new Attribute("ISM:classification", version.IsmNamespace, "U");
+			XAttribute secAttribute = new XAttribute(XName.Get("ISM:classification", version.IsmNamespace), "U");
 			// This can be an extensible.
-			Attribute uniqueAttribute = new Attribute("ddmsence:confidence", "http://ddmsence.urizone.net/", "95");
-			IList<Attribute> exAttr = new List<Attribute>();
+			XAttribute uniqueAttribute = new XAttribute(XName.Get("ddmsence:confidence", "http://ddmsence.urizone.net/"), "95");
+			IList<XAttribute> exAttr = new List<XAttribute>();
 
 			// Base Case
 			Resource component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
@@ -1160,7 +1160,7 @@ namespace DDMSense.Test.DDMS {
 
 			// icAttribute as parameter, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
-			exAttr.Add(new Attribute(uniqueAttribute));
+			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, null, null, new ExtensibleAttributes(exAttr));
 			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
@@ -1168,8 +1168,8 @@ namespace DDMSense.Test.DDMS {
 
 			// icAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
-			exAttr.Add(new Attribute(icAttribute));
-			exAttr.Add(new Attribute(uniqueAttribute));
+			exAttr.Add(new XAttribute(icAttribute));
+			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
@@ -1177,7 +1177,7 @@ namespace DDMSense.Test.DDMS {
 
 			// secAttribute as securityAttribute, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
-			exAttr.Add(new Attribute(uniqueAttribute));
+			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsFalse(component.SecurityAttributes.Empty);
@@ -1185,8 +1185,8 @@ namespace DDMSense.Test.DDMS {
 
 			// secAttribute and uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
-			exAttr.Add(new Attribute(secAttribute));
-			exAttr.Add(new Attribute(uniqueAttribute));
+			exAttr.Add(new XAttribute(secAttribute));
+			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
@@ -1194,7 +1194,7 @@ namespace DDMSense.Test.DDMS {
 
 			// icAttribute as parameter, secAttribute as securityAttribute, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
-			exAttr.Add(new Attribute(uniqueAttribute));
+			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
 			Assert.IsFalse(component.SecurityAttributes.Empty);
@@ -1202,8 +1202,8 @@ namespace DDMSense.Test.DDMS {
 
 			// icAttribute as parameter, secAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
-			exAttr.Add(new Attribute(secAttribute));
-			exAttr.Add(new Attribute(uniqueAttribute));
+			exAttr.Add(new XAttribute(secAttribute));
+			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, null, null, new ExtensibleAttributes(exAttr));
 			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
@@ -1211,8 +1211,8 @@ namespace DDMSense.Test.DDMS {
 
 			// secAttribute as securityAttribute, icAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
-			exAttr.Add(new Attribute(icAttribute));
-			exAttr.Add(new Attribute(uniqueAttribute));
+			exAttr.Add(new XAttribute(icAttribute));
+			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsFalse(component.SecurityAttributes.Empty);
@@ -1220,9 +1220,9 @@ namespace DDMSense.Test.DDMS {
 
 			// all three as extensibleAttributes
 			exAttr.Clear();
-			exAttr.Add(new Attribute(icAttribute));
-			exAttr.Add(new Attribute(secAttribute));
-			exAttr.Add(new Attribute(uniqueAttribute));
+			exAttr.Add(new XAttribute(icAttribute));
+			exAttr.Add(new XAttribute(secAttribute));
+			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
@@ -1238,34 +1238,34 @@ namespace DDMSense.Test.DDMS {
 
 				// IsmDESVersion in parameter AND extensible.
 				try {
-					IList<Attribute> exAttr = new List<Attribute>();
-					exAttr.Add(new Attribute("ISM:DESVersion", version.IsmNamespace, "2"));
+					IList<XAttribute> exAttr = new List<XAttribute>();
+					exAttr.Add(new XAttribute(XName.Get("ISM:DESVersion", version.IsmNamespace), "2"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 					Assert.Fail("Allowed invalid data.");
 				} catch (InvalidDDMSException e) {
-					ExpectMessage(e, "The extensible attribute with the name, ISM:DESVersion");
+					ExpectMessage(e, "The extensible XAttribute with the name, ISM:DESVersion");
 				}
 
 				// NtkDESVersion in parameter AND extensible.
 				if (version.IsAtLeast("4.0.1")) {
 					try {
-						IList<Attribute> exAttr = new List<Attribute>();
-						exAttr.Add(new Attribute("ntk:DESVersion", version.NtkNamespace, "2"));
+						IList<XAttribute> exAttr = new List<XAttribute>();
+						exAttr.Add(new XAttribute(XName.Get("ntk:DESVersion", version.NtkNamespace), "2"));
 						new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 						Assert.Fail("Allowed invalid data.");
 					} catch (InvalidDDMSException e) {
-						ExpectMessage(e, "The extensible attribute with the name, ntk:DESVersion");
+						ExpectMessage(e, "The extensible XAttribute with the name, ntk:DESVersion");
 					}
 				}
 
 				// classification in securityAttributes AND extensible.
 				try {
-					IList<Attribute> exAttr = new List<Attribute>();
-					exAttr.Add(new Attribute("ISM:classification", version.IsmNamespace, "U"));
+					IList<XAttribute> exAttr = new List<XAttribute>();
+					exAttr.Add(new XAttribute(XName.Get("ISM:classification", version.IsmNamespace,) "U"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 					Assert.Fail("Allowed invalid data.");
 				} catch (InvalidDDMSException e) {
-					ExpectMessage(e, "The extensible attribute with the name, ISM:classification");
+					ExpectMessage(e, "The extensible XAttribute with the name, ISM:classification");
 				}
 			}
 		}
@@ -1355,7 +1355,7 @@ namespace DDMSense.Test.DDMS {
 			SecurityAttributesTest.Fixture.AddTo(element);
 			Resource resource = GetInstance(SUCCESS, element);
 
-			// ISM:declassManualReview should not get picked up as an extensible attribute
+			// ISM:declassManualReview should not get picked up as an extensible XAttribute
 			Assert.Equals(0, resource.ExtensibleAttributes.Attributes.Count);
 		}
 
@@ -1373,9 +1373,9 @@ namespace DDMSense.Test.DDMS {
 				Resource resource = GetInstance(SUCCESS, element);
 				Assert.Equals(4, resource.RelatedResources.Count);
 				Assert.Equals("http://en.wikipedia.org/wiki/Tank1", resource.RelatedResources[0].Value);
-				Assert.Equals("http://en.wikipedia.org/wiki/Tank2", resource.RelatedResources.get(1).Value);
-				Assert.Equals("http://en.wikipedia.org/wiki/Tank3", resource.RelatedResources.get(2).Value);
-				Assert.Equals("http://en.wikipedia.org/wiki/Tank4", resource.RelatedResources.get(3).Value);
+				Assert.Equals("http://en.wikipedia.org/wiki/Tank2", resource.RelatedResources[1].Value);
+				Assert.Equals("http://en.wikipedia.org/wiki/Tank3", resource.RelatedResources[2].Value);
+				Assert.Equals("http://en.wikipedia.org/wiki/Tank4", resource.RelatedResources[3].Value);
 			}
 		}
 
@@ -1563,7 +1563,8 @@ namespace DDMSense.Test.DDMS {
 			builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 			builder.Creators[0].EntityType = Organization.GetName(version);
 			builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
-			builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
+            //TODO - Figure out how to implement the assignment below
+			//builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
 			builder.Security.SecurityAttributes.Classification = "U";
 			builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 			DDMSVersion.SetCurrentVersion("3.0");
@@ -1597,7 +1598,8 @@ namespace DDMSense.Test.DDMS {
 			builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 			builder.Creators[0].EntityType = Organization.GetName(version);
 			builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
-			builder.SubjectCoverages[0].Keywords.Add("keyword");
+            //TODO - Figure out how to implement the assignment below
+			//builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
 			builder.Security.SecurityAttributes.Classification = "U";
 			builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 
@@ -1680,7 +1682,7 @@ namespace DDMSense.Test.DDMS {
 				builder.Commit();
 				Assert.Fail("Builder allowed invalid data.");
 			} catch (InvalidDDMSException e) {
-				ExpectMessage(e, "nu.xom.ValidityException: cvc-attribute.4: The value '2' of attribute 'ISM:DESVersion'");
+				ExpectMessage(e, "nu.xom.ValidityException: cvc-XAttribute.4: The value '2' of XAttribute 'ISM:DESVersion'");
 			}
 
 			// Adding 3.1-specific fields works

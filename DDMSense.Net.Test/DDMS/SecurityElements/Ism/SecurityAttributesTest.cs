@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 /* Copyright 2010 - 2013 by Brian Uri!
    
@@ -24,11 +25,14 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 
 
 
-    using DDMSense.DDMS.SecurityElements.Ism;
-    using System.Xml.Linq;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
-    using PropertyReader = DDMSense.Util.PropertyReader;
-    using Util = DDMSense.Util.Util;
+	using DDMSense.DDMS.SecurityElements.Ism;
+	using System.Xml.Linq;
+	using DDMSVersion = DDMSense.Util.DDMSVersion;
+	using PropertyReader = DDMSense.Util.PropertyReader;
+	using Util = DDMSense.Util.Util;
+	using DDMSense.DDMS;
+	using DDMSense.DDMS.SecurityElements;
+	using DDMSense.DDMS.ResourceElements;
 
 	/// <summary>
 	/// <para> Tests related to the ISM attributes </para>
@@ -39,7 +43,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 	public class SecurityAttributesTest : AbstractBaseTestCase {
 
 		private const string TEST_CLASS = "U";
-		private static readonly IList<string> TEST_OWNERS = Util.getXsListAsList("USA");
+		private static readonly IList<string> TEST_OWNERS = Util.GetXsListAsList("USA");
 
 		private static readonly IDictionary<string, string> TEST_OTHERS_41 = new Dictionary<string, string>();
 		static SecurityAttributesTest() {
@@ -142,7 +146,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 				try {
 					return (new SecurityAttributes(TEST_CLASS, TEST_OWNERS, null));
 				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
+					Assert.Fail("Could not create fixture: " + e.Message);
 				}
 				return (null);
 			}
@@ -156,7 +160,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 				try {
 					return (new SecurityAttributes(TEST_CLASS, TEST_OWNERS, OtherAttributes));
 				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
+					Assert.Fail("Could not create fixture: " + e.Message);
 				}
 				return (null);
 			}
@@ -202,7 +206,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 		/// <param name="value"> the value of the attribute that will change </param>
 		private void AssertAttributeChangeAffectsEquality(SecurityAttributes expected, string key, string value) {
 			IDictionary<string, string> others = GetOtherAttributes(key, value);
-			assertFalse(expected.Equals(GetInstance(SUCCESS, TEST_CLASS, TEST_OWNERS, others)));
+			Assert.IsFalse(expected.Equals(GetInstance(SUCCESS, TEST_CLASS, TEST_OWNERS, others)));
 		}
 
 		/// <summary>
@@ -213,7 +217,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 		/// </param>
 		/// <returns> a valid object </returns>
 		private SecurityAttributes GetInstance(string message, XElement element) {
-			bool expectFailure = !Util.isEmpty(message);
+			bool expectFailure = !string.IsNullOrEmpty(message);
 			SecurityAttributes attributes = null;
 			try {
 				attributes = new SecurityAttributes(element);
@@ -235,7 +239,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 		/// appears in XML. </param>
 		/// <returns> a valid object </returns>
 		private SecurityAttributes GetInstance(string message, string classification, IList<string> ownerProducers, IDictionary<string, string> otherAttributes) {
-			bool expectFailure = !Util.isEmpty(message);
+			bool expectFailure = !string.IsNullOrEmpty(message);
 			SecurityAttributes attributes = null;
 			try {
 				attributes = new SecurityAttributes(classification, ownerProducers, otherAttributes);
@@ -251,28 +255,28 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestElementConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-				string ismPrefix = PropertyReader.getPrefix("ism");
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+				string ismPrefix = PropertyReader.GetPrefix("ism");
 				string icNamespace = version.IsmNamespace;
 
 				// All fields
-				XElement element = Util.buildDDMSElement(Security.getName(version), null);
-				Util.addAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
-				FullFixture.addTo(element);
+				XElement element = Util.BuildDDMSElement(Security.GetName(version), null);
+				Util.AddAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
+				FullFixture.AddTo(element);
 				GetInstance(SUCCESS, element);
 
 				// No optional fields
-				element = Util.buildDDMSElement(Security.getName(version), null);
-				Util.addAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, icNamespace, TEST_CLASS);
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.getXsList(TEST_OWNERS));
+				element = Util.BuildDDMSElement(Security.GetName(version), null);
+				Util.AddAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, icNamespace, TEST_CLASS);
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.GetXsList(TEST_OWNERS));
 				GetInstance(SUCCESS, element);
 			}
 		}
 
 		public virtual void TestDataConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 				// All fields
 				GetInstance(SUCCESS, TEST_CLASS, TEST_OWNERS, OtherAttributes);
@@ -287,33 +291,33 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 
 		public virtual void TestElementConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-				string ismPrefix = PropertyReader.getPrefix("ism");
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+				string ismPrefix = PropertyReader.GetPrefix("ism");
 				string icNamespace = version.IsmNamespace;
 
 				// invalid declassDate
-				XElement element = Util.buildDDMSElement(Security.getName(version), null);
-				Util.addAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, icNamespace, TEST_CLASS);
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.getXsList(TEST_OWNERS));
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.DECLASS_DATE_NAME, icNamespace, "2001");
+				XElement element = Util.BuildDDMSElement(Security.GetName(version), null);
+				Util.AddAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, icNamespace, TEST_CLASS);
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.GetXsList(TEST_OWNERS));
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.DECLASS_DATE_NAME, icNamespace, "2001");
 				GetInstance("The declassDate must be in the xs:date format", element);
 
 				// invalid dateOfExemptedSource
-				element = Util.buildDDMSElement(Security.getName(version), null);
-				Util.addAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, icNamespace, TEST_CLASS);
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.getXsList(TEST_OWNERS));
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.DECLASS_DATE_NAME, icNamespace, "2001");
-				Util.addAttribute(element, ismPrefix, SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace, "2001");
-				string message = (version.isAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "The dateOfExemptedSource attribute must be in the xs:date format");
+				element = Util.BuildDDMSElement(Security.GetName(version), null);
+				Util.AddAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, icNamespace, TEST_CLASS);
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.GetXsList(TEST_OWNERS));
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.DECLASS_DATE_NAME, icNamespace, "2001");
+				Util.AddAttribute(element, ismPrefix, SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace, "2001");
+				string message = (version.IsAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "The dateOfExemptedSource attribute must be in the xs:date format");
 				GetInstance(message, element);
 			}
 		}
 
 		public virtual void TestDataConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 				// invalid declassDate
 				GetInstance("The declassDate must be in the xs:date format", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "2004"));
@@ -322,7 +326,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 				GetInstance("The ISM:declassDate attribute is not in a valid date format.", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "notAnXmlDate"));
 
 				// invalid dateOfExemptedSource
-				string message = (version.isAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "The dateOfExemptedSource attribute must be in the xs:date format");
+				string message = (version.IsAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "The dateOfExemptedSource attribute must be in the xs:date format");
 				GetInstance(message, TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2004"));
 
 				// nonsensical dateOfExemptedSource
@@ -334,15 +338,15 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestWarnings() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				string icNamespace = version.IsmNamespace;
 
 				// No warnings
-				XElement element = Util.buildDDMSElement(Security.getName(version), null);
-				Util.addAttribute(element, PropertyReader.getPrefix("ism"), Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
-				FullFixture.addTo(element);
+				XElement element = Util.BuildDDMSElement(Security.GetName(version), null);
+				Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
+				FullFixture.AddTo(element);
 				SecurityAttributes attr = GetInstance(SUCCESS, element);
-				assertEquals(0, attr.ValidationWarnings.size());
+				Assert.Equals(0, attr.ValidationWarnings.Count);
 			}
 		}
 
@@ -350,18 +354,18 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestConstructorEquality() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				string icNamespace = version.IsmNamespace;
 
-				XElement element = Util.buildDDMSElement(Security.getName(version), null);
-				Util.addAttribute(element, PropertyReader.getPrefix("ism"), Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
-				FullFixture.addTo(element);
+				XElement element = Util.BuildDDMSElement(Security.GetName(version), null);
+				Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
+				FullFixture.AddTo(element);
 				SecurityAttributes elementAttributes = GetInstance(SUCCESS, element);
 				SecurityAttributes dataAttributes = GetInstance(SUCCESS, TEST_CLASS, TEST_OWNERS, OtherAttributes);
 
-				assertEquals(elementAttributes, elementAttributes);
-				assertEquals(elementAttributes, dataAttributes);
-				assertEquals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+				Assert.Equals(elementAttributes, elementAttributes);
+				Assert.Equals(elementAttributes, dataAttributes);
+				Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 			}
 		}
 
@@ -369,48 +373,48 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestConstructorInequalityDifferentValues() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				string icNamespace = version.IsmNamespace;
 
-				XElement element = Util.buildDDMSElement(Security.getName(version), null);
-				Util.addAttribute(element, PropertyReader.getPrefix("ism"), Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
-				FullFixture.addTo(element);
+				XElement element = Util.BuildDDMSElement(Security.GetName(version), null);
+				Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
+				FullFixture.AddTo(element);
 				SecurityAttributes expected = GetInstance(SUCCESS, element);
 
-				if (version.isAtLeast("3.1")) {
+				if (version.IsAtLeast("3.1")) {
 					AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.ATOMIC_ENERGY_MARKINGS_NAME, "FRD");
 				}
-				assertFalse(expected.Equals(GetInstance(SUCCESS, "C", TEST_OWNERS, OtherAttributes))); // Classification
+				Assert.IsFalse(expected.Equals(GetInstance(SUCCESS, "C", TEST_OWNERS, OtherAttributes))); // Classification
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.CLASSIFIED_BY_NAME, DIFFERENT_VALUE);
-				if (version.isAtLeast("3.0")) {
+				if (version.IsAtLeast("3.0")) {
 					AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.COMPILATION_REASON_NAME, DIFFERENT_VALUE);
 				}
-				if (!version.isAtLeast("3.1")) {
+				if (!version.IsAtLeast("3.1")) {
 					AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2001-10-10");
 				}
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DECLASS_DATE_NAME, "2001-10-10");
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DECLASS_EVENT_NAME, DIFFERENT_VALUE);
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DECLASS_EXCEPTION_NAME, "25X4");
-				if (!version.isAtLeast("3.0")) {
+				if (!version.IsAtLeast("3.0")) {
 					AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME, "false");
 				}
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME, DIFFERENT_VALUE);
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DERIVED_FROM_NAME, DIFFERENT_VALUE);
-				if (version.isAtLeast("3.1")) {
+				if (version.IsAtLeast("3.1")) {
 					AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DISPLAY_ONLY_TO_NAME, "USA");
 				}
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.DISSEMINATION_CONTROLS_NAME, "EYES");
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.FGI_SOURCE_OPEN_NAME, "BGR");
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.FGI_SOURCE_PROTECTED_NAME, "BGR");
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.NON_IC_MARKINGS_NAME, "SBU");
-				if (version.isAtLeast("3.1")) {
+				if (version.IsAtLeast("3.1")) {
 					AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.NON_US_CONTROLS_NAME, "BALK");
 				}
-				assertFalse(expected.Equals(GetInstance(SUCCESS, TEST_CLASS, Util.getXsListAsList("AUS"), OtherAttributes))); // OwnerProducer
+				Assert.IsFalse(expected.Equals(GetInstance(SUCCESS, TEST_CLASS, Util.GetXsListAsList("AUS"), OtherAttributes))); // OwnerProducer
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.RELEASABLE_TO_NAME, "BGR");
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.SAR_IDENTIFIER_NAME, "SAR-AIA");
 				AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.SCI_CONTROLS_NAME, "TK");
-				if (!version.isAtLeast("3.1")) {
+				if (!version.IsAtLeast("3.1")) {
 					AssertAttributeChangeAffectsEquality(expected, SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME, "X4");
 				}
 			}
@@ -420,10 +424,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestConstructorInequalityWrongClass() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				SecurityAttributes elementAttributes = FullFixture;
 				Rights wrongComponent = new Rights(true, true, true);
-				assertFalse(elementAttributes.Equals(wrongComponent));
+				Assert.IsFalse(elementAttributes.Equals(wrongComponent));
 			}
 		}
 
@@ -431,13 +435,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testAddTo() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestAddTo() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				SecurityAttributes component = Fixture;
 
-				XElement element = Util.buildDDMSElement("sample", null);
-				component.addTo(element);
+				XElement element = Util.BuildDDMSElement("sample", null);
+				component.AddTo(element);
 				SecurityAttributes output = new SecurityAttributes(element);
-				assertEquals(component, output);
+				Assert.Equals(component, output);
 			}
 		}
 
@@ -445,33 +449,33 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testGetNonNull() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestGetNonNull() {
 			SecurityAttributes component = new SecurityAttributes(null, null, null);
-			SecurityAttributes output = SecurityAttributes.getNonNullInstance(null);
-			assertEquals(component, output);
+			SecurityAttributes output = SecurityAttributes.GetNonNullInstance(null);
+			Assert.Equals(component, output);
 
-			output = SecurityAttributes.getNonNullInstance(Fixture);
-			assertEquals(Fixture, output);
+			output = SecurityAttributes.GetNonNullInstance(Fixture);
+			Assert.Equals(Fixture, output);
 		}
 
 		public virtual void TestIsEmpty() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 				SecurityAttributes dataAttributes = GetInstance(SUCCESS, null, null, null);
-				assertTrue(dataAttributes.Empty);
+				Assert.IsTrue(dataAttributes.Empty);
 				dataAttributes = GetInstance(SUCCESS, TEST_CLASS, null, null);
-				assertFalse(dataAttributes.Empty);
+				Assert.IsFalse(dataAttributes.Empty);
 			}
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testWrongVersionAttributes() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestWrongVersionAttributes() {
-			DDMSVersion.CurrentVersion = "3.0";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
 			SecurityAttributes attr = GetInstance(SUCCESS, TEST_CLASS, TEST_OWNERS, OtherAttributes);
-			DDMSVersion.CurrentVersion = "2.0";
+			version = DDMSVersion.SetCurrentVersion("2.0");
 			try {
 				new Title("Wrong Version Title", attr);
-				fail("Allowed different versions.");
+				Assert.Fail("Allowed different versions.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "These attributes cannot decorate");
 			}
@@ -480,11 +484,12 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void test30AttributesIn31() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void Test30AttributesIn31() {
-			DDMSVersion.CurrentVersion = "3.1";
+			
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("3.1");
 			IDictionary<string, string> others = GetOtherAttributes(SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME, "OADR");
 			try {
 				new SecurityAttributes(TEST_CLASS, TEST_OWNERS, others);
-				fail("Allowed 3.0 attributes in 3.1.");
+				Assert.Fail("Allowed 3.0 attributes in 3.1.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The typeOfExemptedSource attribute can only be used");
 			}
@@ -492,7 +497,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 			others = GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2010-01-01");
 			try {
 				new SecurityAttributes(TEST_CLASS, TEST_OWNERS, others);
-				fail("Allowed 3.0 attributes in 3.1.");
+				Assert.Fail("Allowed 3.0 attributes in 3.1.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The dateOfExemptedSource attribute can only be used");
 			}
@@ -501,11 +506,11 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void test31AttributesIn30() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void Test31AttributesIn30() {
-			DDMSVersion.CurrentVersion = "3.0";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
 			IDictionary<string, string> others = GetOtherAttributes(SecurityAttributes.ATOMIC_ENERGY_MARKINGS_NAME, "RD");
 			try {
 				new SecurityAttributes(TEST_CLASS, TEST_OWNERS, others);
-				fail("Allowed 3.1 attributes in 3.0.");
+				Assert.Fail("Allowed 3.1 attributes in 3.0.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The atomicEnergyMarkings attribute cannot be used");
 			}
@@ -513,7 +518,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 			others = GetOtherAttributes(SecurityAttributes.DISPLAY_ONLY_TO_NAME, "AIA");
 			try {
 				new SecurityAttributes(TEST_CLASS, TEST_OWNERS, others);
-				fail("Allowed 3.1 attributes in 3.0.");
+				Assert.Fail("Allowed 3.1 attributes in 3.0.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The displayOnlyTo attribute cannot be used");
 			}
@@ -521,7 +526,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 			others = GetOtherAttributes(SecurityAttributes.NON_US_CONTROLS_NAME, "ATOMAL");
 			try {
 				new SecurityAttributes(TEST_CLASS, TEST_OWNERS, others);
-				fail("Allowed 3.1 attributes in 3.0.");
+				Assert.Fail("Allowed 3.1 attributes in 3.0.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The nonUSControls attribute cannot be used");
 			}
@@ -531,14 +536,14 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testClassificationValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestClassificationValidation() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				IDictionary<string, string> others = OtherAttributes;
 
 				// Missing classification
 				SecurityAttributes dataAttributes = GetInstance(SUCCESS, null, TEST_OWNERS, others);
 				try {
-					dataAttributes.requireClassification();
-					fail("Allowed invalid data.");
+					dataAttributes.RequireClassification();
+					Assert.Fail("Allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "classification is required.");
 				}
@@ -546,8 +551,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 				// Empty classification
 				dataAttributes = GetInstance(SUCCESS, "", TEST_OWNERS, others);
 				try {
-					dataAttributes.requireClassification();
-					fail("Allowed invalid data.");
+					dataAttributes.RequireClassification();
+					Assert.Fail("Allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "classification is required.");
 				}
@@ -558,8 +563,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 				// No ownerProducers
 				dataAttributes = GetInstance(SUCCESS, TEST_CLASS, null, others);
 				try {
-					dataAttributes.requireClassification();
-					fail("Allowed invalid data.");
+					dataAttributes.RequireClassification();
+					Assert.Fail("Allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "At least 1 ownerProducer must be set.");
 				}
@@ -575,19 +580,19 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testDateOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestDateOutput() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				IDictionary<string, string> others = new Dictionary<string, string>();
 				others[SecurityAttributes.DECLASS_DATE_NAME] = "2005-10-10";
 				SecurityAttributes dataAttributes = GetInstance(SUCCESS, null, null, others);
-				assertEquals(BuildOutput(true, "declassDate", "2005-10-10"), dataAttributes.getOutput(true, ""));
-				assertEquals(BuildOutput(false, "declassDate", "2005-10-10"), dataAttributes.getOutput(false, ""));
+				Assert.Equals(BuildOutput(true, "declassDate", "2005-10-10"), dataAttributes.getOutput(true, ""));
+				Assert.Equals(BuildOutput(false, "declassDate", "2005-10-10"), dataAttributes.getOutput(false, ""));
 
-				if (!version.isAtLeast("3.1")) {
+				if (!version.IsAtLeast("3.1")) {
 					others = new Dictionary<string, string>();
 					others[SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME] = "2005-10-10";
 					dataAttributes = GetInstance(SUCCESS, null, null, others);
-					assertEquals(BuildOutput(true, "dateOfExemptedSource", "2005-10-10"), dataAttributes.getOutput(true, ""));
-					assertEquals(BuildOutput(false, "dateOfExemptedSource", "2005-10-10"), dataAttributes.getOutput(false, ""));
+					Assert.Equals(BuildOutput(true, "dateOfExemptedSource", "2005-10-10"), dataAttributes.getOutput(true, ""));
+					Assert.Equals(BuildOutput(false, "dateOfExemptedSource", "2005-10-10"), dataAttributes.getOutput(false, ""));
 				}
 			}
 		}
@@ -595,10 +600,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testOldClassifications() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestOldClassifications() {
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			GetInstance(SUCCESS, "NS-S", TEST_OWNERS, null);
 			GetInstance(SUCCESS, "NS-A", TEST_OWNERS, null);
-			DDMSVersion.CurrentVersion = "3.0";
+			version = DDMSVersion.SetCurrentVersion("3.0");
 			GetInstance("NS-S is not a valid enumeration token", "NS-S", TEST_OWNERS, null);
 			GetInstance("NS-A is not a valid enumeration token for this attribute", "NS-A", TEST_OWNERS, null);
 		}
@@ -607,11 +612,11 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void test30AttributesIn20() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void Test30AttributesIn20() {
 			try {
-				DDMSVersion.CurrentVersion = "3.0";
+				DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
 				IDictionary<string, string> others = OtherAttributes;
-				DDMSVersion.CurrentVersion = "2.0";
+				version = DDMSVersion.SetCurrentVersion("2.0");
 				new SecurityAttributes(TEST_CLASS, TEST_OWNERS, others);
-				fail("Allowed DDMS 3.0 attributes to be used in DDMS 2.0.");
+				Assert.Fail("Allowed DDMS 3.0 attributes to be used in DDMS 2.0.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The compilationReason attribute cannot be used");
 			}
@@ -620,27 +625,27 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void test20AttributesIn30() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void Test20AttributesIn30() {
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			IDictionary<string, string> map = GetOtherAttributes(SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME, "true");
 			try {
-				DDMSVersion.CurrentVersion = "3.0";
+				version = DDMSVersion.SetCurrentVersion("3.0");
 				new SecurityAttributes(TEST_CLASS, TEST_OWNERS, map);
-				fail("Allowed DDMS 2.0 attributes to be used in DDMS 3.0.");
+				Assert.Fail("Allowed DDMS 2.0 attributes to be used in DDMS 3.0.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "The declassManualReview attribute can only be used in DDMS 2.0.");
 			}
 
-			DDMSVersion.CurrentVersion = "2.0";
+			version = DDMSVersion.SetCurrentVersion("2.0");
 			map.Remove(SecurityAttributes.COMPILATION_REASON_NAME);
 			SecurityAttributes attr = new SecurityAttributes(TEST_CLASS, TEST_OWNERS, map);
-			assertTrue(attr.getOutput(true, "").contains(BuildOutput(true, "declassManualReview", "true")));
-			assertTrue(attr.getOutput(false, "").contains(BuildOutput(false, "declassManualReview", "true")));
+			Assert.IsTrue(attr.GetOutput(true, "").contains(BuildOutput(true, "declassManualReview", "true")));
+			Assert.IsTrue(attr.GetOutput(false, "").contains(BuildOutput(false, "declassManualReview", "true")));
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testMultipleDeclassException() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestMultipleDeclassException() {
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			IDictionary<string, string> map = GetOtherAttributes(SecurityAttributes.DECLASS_EXCEPTION_NAME, "25X1 25X2");
 			new SecurityAttributes(TEST_CLASS, TEST_OWNERS, map);
 		}
@@ -648,7 +653,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testMultipleTypeExempted() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestMultipleTypeExempted() {
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			IDictionary<string, string> map = GetOtherAttributes(SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME, "X1 X2");
 			new SecurityAttributes(TEST_CLASS, TEST_OWNERS, map);
 		}
@@ -656,11 +661,11 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testDeclassManualReviewHtmlOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestDeclassManualReviewHtmlOutput() {
-			DDMSVersion.CurrentVersion = "2.0";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			IDictionary<string, string> map = new Dictionary<string, string>();
 			map[SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME] = "true";
 			SecurityAttributes attributes = new SecurityAttributes(TEST_CLASS, TEST_OWNERS, map);
-			assertEquals(BuildOutput(true, "classification", "U") + BuildOutput(true, "declassManualReview", "true") + BuildOutput(true, "ownerProducer", "USA"), attributes.getOutput(true, ""));
+			Assert.Equals(BuildOutput(true, "classification", "U") + BuildOutput(true, "declassManualReview", "true") + BuildOutput(true, "ownerProducer", "USA"), attributes.getOutput(true, ""));
 		}
 
 		public virtual void TestCVEErrorsByDefault() {
@@ -668,7 +673,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 			map[SecurityAttributes.DECLASS_EXCEPTION_NAME] = "UnknownValue";
 			try {
 				new SecurityAttributes(TEST_CLASS, TEST_OWNERS, map);
-				fail("Allowed invalid CVE value without throwing an Exception.");
+				Assert.Fail("Allowed invalid CVE value without throwing an Exception.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "UnknownValue is not a valid enumeration token");
 			}
@@ -678,11 +683,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestBuilderEquality() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				SecurityAttributes component = FullFixture;
 				SecurityAttributes.Builder builder = new SecurityAttributes.Builder(component);
-				assertEquals(component, builder.commit());
+				Assert.Equals(component, builder.Commit());
 			}
 		}
 
@@ -690,15 +694,15 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestBuilderIsEmpty() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 				SecurityAttributes.Builder builder = new SecurityAttributes.Builder();
-				assertNotNull(builder.commit());
-				assertTrue(builder.Empty);
-				builder.AtomicEnergyMarkings = Util.getXsListAsList("");
-				assertTrue(builder.Empty);
-				builder.AtomicEnergyMarkings = Util.getXsListAsList("RD FRD");
-				assertFalse(builder.Empty);
+				Assert.IsNotNull(builder.Commit());
+				Assert.IsTrue(builder.Empty);
+				builder.AtomicEnergyMarkings = Util.GetXsListAsList("");
+				Assert.IsTrue(builder.Empty);
+				builder.AtomicEnergyMarkings = Util.GetXsListAsList("RD FRD");
+				Assert.IsFalse(builder.Empty);
 			}
 		}
 
@@ -706,18 +710,18 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestBuilderValidation() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 				SecurityAttributes.Builder builder = new SecurityAttributes.Builder();
 				builder.Classification = "SuperSecret";
 				try {
-					builder.commit();
-					fail("Builder allowed invalid data.");
+					builder.Commit();
+					Assert.Fail("Builder allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "SuperSecret is not a valid enumeration token");
 				}
 				builder.Classification = "U";
-				builder.commit();
+				builder.Commit();
 			}
 		}
 
@@ -725,21 +729,21 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
 //ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestBuilderLazyList() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				SecurityAttributes.Builder builder = new SecurityAttributes.Builder();
-				assertNotNull(builder.OwnerProducers.get(1));
-				assertNotNull(builder.SCIcontrols.get(1));
-				assertNotNull(builder.SARIdentifier.get(1));
-				assertNotNull(builder.DisseminationControls.get(1));
-				assertNotNull(builder.FGIsourceOpen.get(1));
-				assertNotNull(builder.FGIsourceProtected.get(1));
-				assertNotNull(builder.ReleasableTo.get(1));
-				assertNotNull(builder.NonICmarkings.get(1));
+				Assert.IsNotNull(builder.OwnerProducers[1]);
+				Assert.IsNotNull(builder.SCIcontrols[1]);
+				Assert.IsNotNull(builder.SARIdentifier[1]);
+				Assert.IsNotNull(builder.DisseminationControls[1]);
+				Assert.IsNotNull(builder.FGIsourceOpen[1]);
+				Assert.IsNotNull(builder.FGIsourceProtected[1]);
+				Assert.IsNotNull(builder.ReleasableTo[1]);
+				Assert.IsNotNull(builder.NonICmarkings[1]);
 
-				if (version.isAtLeast("3.1")) {
-					assertNotNull(builder.AtomicEnergyMarkings.get(1));
-					assertNotNull(builder.DisplayOnlyTo.get(1));
-					assertNotNull(builder.NonUSControls.get(1));
+				if (version.IsAtLeast("3.1")) {
+					Assert.IsNotNull(builder.AtomicEnergyMarkings[1]);
+					Assert.IsNotNull(builder.DisplayOnlyTo[1]);
+					Assert.IsNotNull(builder.NonUSControls[1]);
 				}
 			}
 		}
