@@ -34,7 +34,6 @@ namespace DDMSense.Test.Util {
 	/// <summary>
 	/// A collection of Util tests.
 	/// </summary>
-    [TestClass]
 	public class UtilTest : AbstractBaseTestCase {
 
 		protected internal static readonly string TEST_NAMESPACE = DDMSVersion.CurrentVersion.Namespace;
