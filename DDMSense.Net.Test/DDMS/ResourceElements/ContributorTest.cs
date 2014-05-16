@@ -84,7 +84,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             Contributor component = null;
             try
             {
-                SecurityAttributesTest.Fixture.addTo(element);
+                SecurityAttributesTest.Fixture.AddTo(element);
                 component = new Contributor(element);
                 CheckConstructorSuccess(expectFailure);
             }
@@ -102,7 +102,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
         /// <param name="entity"> the producer entity </param>
         /// <param name="pocTypes"> the pocType (DDMS 4.0.1 or later) </param>
-        private Contributor GetInstance(string message, IRoleEntity entity, IList<string> pocTypes)
+        private Contributor GetInstance(string message, IRoleEntity entity, List<string> pocTypes)
         {
             bool expectFailure = !String.IsNullOrEmpty(message);
             Contributor component = null;
@@ -128,7 +128,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         {
             DDMSVersion version = DDMSVersion.CurrentVersion;
             StringBuilder text = new StringBuilder();
-            text.Append(OrganizationTest.Fixture.getOutput(isHTML, "contributor.", ""));
+            text.Append(OrganizationTest.Fixture.GetOutput(isHTML, "contributor.", ""));
             if (version.IsAtLeast("4.0.1"))
             {
                 text.Append(BuildOutput(isHTML, "contributor.pocType", "DoD-Dist-B"));
