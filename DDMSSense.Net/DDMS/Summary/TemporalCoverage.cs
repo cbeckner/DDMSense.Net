@@ -243,11 +243,11 @@ namespace DDMSense.DDMS.Summary
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
-                Element periodElement = DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
+                Element periodElement = DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")
                     ? element
                     : Util.Util.BuildDDMSElement(TIME_PERIOD_NAME, null);
-                if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1"))
+                if (!DDMSVersion.CurrentVersion.IsAtLeast("4.0.1"))
                 {
                     element.Add(periodElement);
                 }

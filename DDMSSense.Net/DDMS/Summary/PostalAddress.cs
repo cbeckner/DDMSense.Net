@@ -150,7 +150,7 @@ namespace DDMSense.DDMS.Summary
                 {
                     streets = new List<string>();
                 }
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 foreach (var street in streets)
                 {
                     element.Add(Util.Util.BuildDDMSElement(StreetName, street));

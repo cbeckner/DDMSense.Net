@@ -122,7 +122,7 @@ namespace DDMSense.DDMS.Summary.Gml
         {
             try
             {
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("gml"), GetName(version),
                     version.GmlNamespace, null);
                 if (position != null)
@@ -130,7 +130,7 @@ namespace DDMSense.DDMS.Summary.Gml
                     element.Add(position.ElementCopy);
                 }
                 Util.Util.AddAttribute(element, PropertyReader.GetPrefix("gml"), ID_NAME,
-                    DDMSVersion.GetCurrentVersion().GmlNamespace, id);
+                    DDMSVersion.CurrentVersion.GmlNamespace, id);
 
                 _position = position;
                 _srsAttributes = SRSAttributes.GetNonNullInstance(srsAttributes);

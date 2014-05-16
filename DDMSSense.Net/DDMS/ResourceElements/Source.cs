@@ -80,7 +80,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="securityAttributes"> any security attributes (optional) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public Source(string qualifier, string value, string schemaQualifier, string schemaHref, SecurityAttributes securityAttributes)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), qualifier, value, false)
+            : base(GetName(DDMSVersion.CurrentVersion), qualifier, value, false)
         {
             try
             {

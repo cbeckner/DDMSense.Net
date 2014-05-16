@@ -61,7 +61,7 @@ namespace DDMSense.DDMS.FormatElements
         /// <param name="value"> the value of the value attribute </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public Extent(string qualifier, string value)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), qualifier, value, true)
+            : base(GetName(DDMSVersion.CurrentVersion), qualifier, value, true)
         {
         }
 

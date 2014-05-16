@@ -49,7 +49,7 @@ namespace DDMSense
         /// <param name="attributes"> the security attributes </param>
         /// <param name="validateNow"> true if the component should be validated here </param>
         protected internal AbstractSimpleString(string name, string value, SecurityAttributes attributes, bool validateNow)
-            : this(PropertyReader.GetPrefix("ddms"), DDMSVersion.GetCurrentVersion().Namespace, name, value, attributes, validateNow)
+            : this(PropertyReader.GetPrefix("ddms"), DDMSVersion.CurrentVersion.Namespace, name, value, attributes, validateNow)
         {
         }
 

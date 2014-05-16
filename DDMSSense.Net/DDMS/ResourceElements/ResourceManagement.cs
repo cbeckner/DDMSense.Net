@@ -110,7 +110,7 @@ namespace DDMSense.DDMS.ResourceElements
                 if (processingInfos == null)
                     processingInfos = new List<ProcessingInfo>();
 
-                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 SetElement(element, false);
                 if (recordsManagementInfo != null)
                     element.Add(recordsManagementInfo.ElementCopy);

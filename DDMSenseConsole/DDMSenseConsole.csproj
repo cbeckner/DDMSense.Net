@@ -634,6 +634,7 @@
     <Content Include="SampleXML\5.0-ddmsenceExample.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="SampleXML\SampleIPIWIG.xml" />
     <Content Include="schemas\2.0\ISM\CVE\CVEnumISM25X.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -748,6 +749,7 @@
     <Content Include="schemas\3.1\ISM\CVE\CVEnumISMSCIControls.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="transforms\IPIWG4_0.xslt" />
     <None Include="schemas\4.1\ISM\CVE\CVEnumISM25X.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

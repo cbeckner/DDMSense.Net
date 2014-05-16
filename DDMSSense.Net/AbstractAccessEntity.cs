@@ -77,7 +77,7 @@ namespace DDMSense
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public AbstractAccessEntity(string name, SystemName systemName, SecurityAttributes securityAttributes)
         {
-            DDMSVersion version = DDMSVersion.GetCurrentVersion();
+            DDMSVersion version = DDMSVersion.CurrentVersion;
             Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("ntk"), name, version.NtkNamespace, null);
             SetElement(element, false);
             if (systemName != null)

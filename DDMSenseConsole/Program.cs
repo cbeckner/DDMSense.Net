@@ -45,7 +45,7 @@ namespace DDMSenseConsole
 
         private void loadFile(FileInfo file)
         {
-            DDMSVersion version = DDMSVersion.GetVersionFor("4.1"); // DDMSVersion.GetCurrentVersion();
+            DDMSVersion version = DDMSVersion.GetVersionFor("4.1"); // DDMSVersion.CurrentVersion;
 
             var reader = new DDMSReader();
 

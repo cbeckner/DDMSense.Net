@@ -174,7 +174,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
             ProfileList = null;
             try
             {
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 string ntkPrefix = PropertyReader.GetPrefix("ntk");
                 string ntkNamespace = version.NtkNamespace;
 

@@ -174,7 +174,7 @@ namespace DDMSense.DDMS.Metacard
                 if (childComponents == null)
                     childComponents = new List<IDDMSComponent>();
 
-                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 SetElement(element, false);
 
                 foreach (var component in childComponents.Where(component => component != null))

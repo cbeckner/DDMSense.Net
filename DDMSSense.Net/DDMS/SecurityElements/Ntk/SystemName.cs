@@ -81,7 +81,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         public SystemName(string value, string id, string idReference, string qualifier,
             SecurityAttributes securityAttributes)
             : base(
-                true, GetName(DDMSVersion.GetCurrentVersion()), value, id, idReference, qualifier, securityAttributes,
+                true, GetName(DDMSVersion.CurrentVersion), value, id, idReference, qualifier, securityAttributes,
                 true)
         {
         }

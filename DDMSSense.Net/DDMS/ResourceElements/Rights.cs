@@ -50,7 +50,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public Rights(bool privacyAct, bool intellectualProperty, bool copyright)
         {
-            XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+            XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
             Util.Util.AddDDMSAttribute(element, PRIVACY_ACT_NAME, Convert.ToString(privacyAct));
             Util.Util.AddDDMSAttribute(element, INTELLECTUAL_PROPERY_NAME, Convert.ToString(intellectualProperty));
             Util.Util.AddDDMSAttribute(element, COPYRIGHT_NAME, Convert.ToString(copyright));

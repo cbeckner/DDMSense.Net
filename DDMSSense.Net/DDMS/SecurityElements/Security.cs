@@ -126,7 +126,7 @@ namespace DDMSense.DDMS.SecurityElements
         {
             try
             {
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
 
                 Element element = Util.Util.BuildDDMSElement(GetName(version), null);
                 if (noticeList != null)
@@ -137,10 +137,10 @@ namespace DDMSense.DDMS.SecurityElements
                 {
                     element.Add(access.ElementCopy);
                 }
-                if (DDMSVersion.GetCurrentVersion().IsAtLeast("3.0"))
+                if (DDMSVersion.CurrentVersion.IsAtLeast("3.0"))
                 {
                     Util.Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), EXCLUDE_FROM_ROLLUP_NAME,
-                        DDMSVersion.GetCurrentVersion().IsmNamespace, FIXED_ROLLUP);
+                        DDMSVersion.CurrentVersion.IsmNamespace, FIXED_ROLLUP);
                 }
                 _noticeList = noticeList;
                 _access = access;
@@ -177,7 +177,7 @@ namespace DDMSense.DDMS.SecurityElements
         {
             get
             {
-                string value = GetAttributeValue(EXCLUDE_FROM_ROLLUP_NAME, DDMSVersion.GetCurrentVersion().IsmNamespace);
+                string value = GetAttributeValue(EXCLUDE_FROM_ROLLUP_NAME, DDMSVersion.CurrentVersion.IsmNamespace);
                 if ("true".Equals(value))
                 {
                     return (true);

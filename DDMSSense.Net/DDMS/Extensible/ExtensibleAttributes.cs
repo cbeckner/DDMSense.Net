@@ -113,7 +113,7 @@ namespace DDMSense.DDMS.Extensible
         /// </summary>
         /// <param name="attributes"> a list of extensible attributes </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ExtensibleAttributes(List<XAttribute> attributes) : base(DDMSVersion.GetCurrentVersion().Namespace)
+        public ExtensibleAttributes(List<XAttribute> attributes) : base(DDMSVersion.CurrentVersion.Namespace)
         {
             if (attributes == null)
                 attributes = new List<XAttribute>();

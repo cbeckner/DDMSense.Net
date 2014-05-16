@@ -112,7 +112,7 @@ namespace DDMSense.Util
 
 		/// <summary>
 		///     Helper method to add a ddms attribute to an element. Will not add the attribute if the value
-		///     is empty or null. This method uses the DDMS namespace defined with DDMSVersion.getCurrentVersion().
+		///     is empty or null. This method uses the DDMS namespace defined with DDMSVersion.CurrentVersion.
 		/// </summary>
 		/// <param name="element"> the element to decorate </param>
 		/// <param name="attributeName"> the name of the attribute (will be within the DDMS namespace) </param>
@@ -120,7 +120,7 @@ namespace DDMSense.Util
 		public static void AddDDMSAttribute(XElement element, string attributeName, string attributeValue)
 		{
 			AddAttribute(element, PropertyReader.GetPrefix("ddms"), attributeName,
-				DDMSVersion.GetCurrentVersion().Namespace, attributeValue);
+				DDMSVersion.CurrentVersion.Namespace, attributeValue);
 		}
 
 		/// <summary>
@@ -172,7 +172,7 @@ namespace DDMSense.Util
 		/// <param name="value"> the value of the attribute </param>
 		public static XAttribute BuildDDMSAttribute(string name, string value)
 		{
-			return (BuildAttribute(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace, value));
+			return (BuildAttribute(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.CurrentVersion.Namespace, value));
 		}
 
 		/// <summary>
@@ -183,7 +183,7 @@ namespace DDMSense.Util
 		/// <param name="childText"> the text of the element (optional) </param>
 		public static XElement BuildDDMSElement(string name, string childText)
 		{
-			return (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.GetCurrentVersion().Namespace, childText));
+			return (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.CurrentVersion.Namespace, childText));
 		}
 
 		/// <summary>

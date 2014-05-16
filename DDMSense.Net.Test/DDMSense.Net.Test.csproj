@@ -134,7 +134,6 @@
     <Compile Include="DDMS\ValidationMessageTest.cs" />
     <Compile Include="Util\DDMSReaderTest.cs" />
     <Compile Include="Util\DDMSVersionTest.cs" />
-    <Compile Include="Util\LazyListTest.cs" />
     <Compile Include="Util\PropertyReaderTest.cs" />
     <Compile Include="Util\UtilTest.cs" />
     <Compile Include="Extensions\HashMapGetHelperClass.cs" />

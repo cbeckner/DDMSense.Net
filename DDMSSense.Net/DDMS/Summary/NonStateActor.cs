@@ -115,7 +115,7 @@ namespace DDMSense.DDMS.Summary
         /// <param name="securityAttributes"> any security attributes (classification and ownerProducer are optional) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public NonStateActor(string value, int? order, string qualifier, SecurityAttributes securityAttributes)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), value, securityAttributes, false)
+            : base(GetName(DDMSVersion.CurrentVersion), value, securityAttributes, false)
         {
             try
             {

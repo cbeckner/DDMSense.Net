@@ -111,7 +111,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         {
             try
             {
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 Element element = Util.Util.BuildElement(PropertyReader.GetPrefix("ntk"), GetName(version),
                     version.NtkNamespace, null);
                 SetElement(element, false);

@@ -168,7 +168,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         ///     Constructor which builds from raw data for an unknown type.
         /// </summary>
         /// <exception cref="InvalidDDMSException"> </exception>
-        public XLinkAttributes() : base(DDMSVersion.GetCurrentVersion().Namespace)
+        public XLinkAttributes() : base(DDMSVersion.CurrentVersion.Namespace)
         {
             Validate();
         }
@@ -181,7 +181,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// <param name="label"> the name of the link (optional) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public XLinkAttributes(string role, string title, string label)
-            : base(DDMSVersion.GetCurrentVersion().Namespace)
+            : base(DDMSVersion.CurrentVersion.Namespace)
         {
             _type = TYPE_RESOURCE;
             _role = role;
@@ -199,7 +199,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// <param name="label"> the name of the link (optional) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public XLinkAttributes(string href, string role, string title, string label)
-            : base(DDMSVersion.GetCurrentVersion().Namespace)
+            : base(DDMSVersion.CurrentVersion.Namespace)
         {
             _type = TYPE_LOCATOR;
             _href = href;
@@ -220,7 +220,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// <param name="actuate"> the actuate token (optional) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public XLinkAttributes(string href, string role, string title, string arcrole, string show, string actuate)
-            : base(DDMSVersion.GetCurrentVersion().Namespace)
+            : base(DDMSVersion.CurrentVersion.Namespace)
         {
             _type = TYPE_SIMPLE;
             _href = href;

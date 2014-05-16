@@ -95,7 +95,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         public GroupValue(string value, string id, string idReference, string qualifier,
             SecurityAttributes securityAttributes)
             : base(
-                false, GetName(DDMSVersion.GetCurrentVersion()), value, id, idReference, qualifier, securityAttributes,
+                false, GetName(DDMSVersion.CurrentVersion), value, id, idReference, qualifier, securityAttributes,
                 true)
         {
         }

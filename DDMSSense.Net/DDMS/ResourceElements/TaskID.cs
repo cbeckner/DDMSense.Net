@@ -95,7 +95,7 @@ namespace DDMSense.DDMS.ResourceElements
         {
             try
             {
-                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), value);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), value);
                 Util.Util.AddDDMSAttribute(element, TASKING_SYSTEM_NAME, taskingSystem);
                 Util.Util.AddAttribute(element, NO_PREFIX, NETWORK_NAME, NO_NAMESPACE, network);
                 Util.Util.AddAttribute(element, NO_PREFIX, OTHER_NETWORK_NAME, NO_NAMESPACE, otherNetwork);

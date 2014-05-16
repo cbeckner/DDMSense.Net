@@ -64,7 +64,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="pocTypes"> the ISM pocType for this producer (optional, starting in DDMS 4.0.1) </param>
         /// <param name="securityAttributes"> any security attributes (optional) </param>
         public Contributor(IRoleEntity entity, List<string> pocTypes, SecurityAttributes securityAttributes)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), entity, pocTypes, securityAttributes)
+            : base(GetName(DDMSVersion.CurrentVersion), entity, pocTypes, securityAttributes)
         {
         }
 

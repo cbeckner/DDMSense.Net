@@ -103,7 +103,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         /// <param name="securityAttributes"> security attributes (required) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public Group(SystemName systemName, List<GroupValue> groupValues, SecurityAttributes securityAttributes)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), systemName, securityAttributes)
+            : base(GetName(DDMSVersion.CurrentVersion), systemName, securityAttributes)
         {
             try
             {

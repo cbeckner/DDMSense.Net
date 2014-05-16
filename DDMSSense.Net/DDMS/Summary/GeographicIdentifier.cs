@@ -155,7 +155,7 @@ namespace DDMSense.DDMS.Summary
                 {
                     regions = new List<string>();
                 }
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 foreach (var name in names)
                 {
                     element.Add(Util.Util.BuildDDMSElement(NAME_NAME, name));
@@ -192,7 +192,7 @@ namespace DDMSense.DDMS.Summary
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public GeographicIdentifier(FacilityIdentifier facilityIdentifier)
         {
-            Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+            Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
             if (facilityIdentifier != null)
             {
                 element.Add(facilityIdentifier.ElementCopy);

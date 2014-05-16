@@ -178,9 +178,9 @@ namespace DDMSense.DDMS.Summary
                 {
                     nonStateActors = new List<NonStateActor>();
                 }
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
 
-                Element subjectElement = DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")
+                Element subjectElement = DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")
                     ? element
                     : Util.Util.BuildDDMSElement(SUBJECT_NAME, null);
                 foreach (var keyword in keywords)
@@ -200,7 +200,7 @@ namespace DDMSense.DDMS.Summary
                     subjectElement.Add(actor.ElementCopy);
                 }
 
-                if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1"))
+                if (!DDMSVersion.CurrentVersion.IsAtLeast("4.0.1"))
                 {
                     element.Add(subjectElement);
                 }

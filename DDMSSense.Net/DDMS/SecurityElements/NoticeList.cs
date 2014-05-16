@@ -112,7 +112,7 @@ namespace DDMSense.DDMS.SecurityElements
                     notices = new List<Notice>();
                 }
 
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 Element element = Util.Util.BuildDDMSElement(GetName(version), null);
                 foreach (var noticeText in notices)
                 {
