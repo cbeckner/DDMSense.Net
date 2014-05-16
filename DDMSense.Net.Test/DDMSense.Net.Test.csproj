@@ -138,7 +138,6 @@
     <Compile Include="Util\UtilTest.cs" />
     <Compile Include="Extensions\HashMapGetHelperClass.cs" />
     <Compile Include="Extensions\StringHelperClass.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

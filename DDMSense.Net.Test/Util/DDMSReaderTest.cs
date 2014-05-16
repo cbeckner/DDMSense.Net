@@ -41,7 +41,9 @@ namespace DDMSense.Test.Util {
 			_reader = new DDMSReader();
 		}
 
-		public virtual void TestGetElementNullString() {
+        [TestMethod]
+        public virtual void TestGetElementNullString()
+        {
 			try {
 				Reader.GetElement((string) null);
 				Assert.Fail("Allowed invalid data.");
@@ -52,7 +54,9 @@ namespace DDMSense.Test.Util {
 			}
 		}
 
-		public virtual void TestGetElementNullInputStream() {
+        [TestMethod]
+        public virtual void TestGetElementNullInputStream()
+        {
 			try {
 				Reader.GetElement((Stream) null);
 				Assert.Fail("Allowed invalid data.");
@@ -63,7 +67,9 @@ namespace DDMSense.Test.Util {
 			}
 		}
 
-		public virtual void TestGetElementDoesNotExistString() {
+        [TestMethod]
+        public virtual void TestGetElementDoesNotExistString()
+        {
 			try {
 				Reader.GetElement("<wrong></wrong>");
 				Assert.Fail("Allowed invalid data.");
@@ -74,54 +80,76 @@ namespace DDMSense.Test.Util {
 			}
 		}
 
-		public virtual void TestGetElementDoesNotExistInputStream() {
+        [TestMethod]
+        public virtual void TestGetElementDoesNotExistInputStream()
+        {
 			try {
-				Reader.GetElement(new FileInputStream(new File("doesnotexist")));
+				Reader.GetElement(new FileStream("doesnotexist", FileMode.Open));
 				Assert.Fail("Allowed invalid data.");
 			} catch (IOException e) {
 				ExpectMessage(e, "doesnotexist (The system cannot find the file specified)");
 			}
 		}
-		
-		public virtual void TestGetElementNotXML() {
+
+        [TestMethod]
+        public virtual void TestGetElementNotXML()
+        {
 			try {
-				Reader.GetElement(new File("conf/ddmsence.properties"));
+                //Reader.GetElement(new File("conf/ddmsence.properties"));
 				Assert.Fail("Allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "nu.xom.ParsingException");
 			}
 		}
 
-		public virtual void TestGetElementFileSuccess() {
-			Reader.GetElement(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml"));
+        [TestMethod]
+        public virtual void TestGetElementFileSuccess()
+        {
+            //Reader.GetElement(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml"));
+            Assert.Fail():
 		}
 
-		public virtual void TestGetElementStringSuccess() {
+        [TestMethod]
+        public virtual void TestGetElementStringSuccess()
+        {
 			Reader.GetElement("<?xml version=\"1.0\" encoding=\"UTF-8\"?><ddms:language " + " xmlns:ddms=\"http://metadata.dod.mil/mdr/ns/DDMS/3.0/\" " + " ddms:qualifier=\"http://purl.org/dc/elements/1.1/language\" ddms:value=\"en\" />");
 		}
 
-		public virtual void TestGetElementInputStreamSuccess() {
-			Reader.GetElement(new FileInputStream(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml")));
+        [TestMethod]
+        public virtual void TestGetElementInputStreamSuccess()
+        {
+            //Reader.GetElement(new FileInputStream(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml")));
+            Assert.Fail():
 		}
 
-		public virtual void TestGetElementReaderSuccess() {
-			Reader.GetElement(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml")));
+        [TestMethod]
+        public virtual void TestGetElementReaderSuccess()
+        {
+            //Reader.GetElement(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml")));
+            Assert.Fail():
 		}
 
-		public virtual void TestGetResourceFailure() {
+        [TestMethod]
+        public virtual void TestGetResourceFailure()
+        {
 			try {
-				Reader.GetDDMSResource(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml"));
+                //Reader.GetDDMSResource(new File(PropertyReader.getProperty("test.unit.data"), "3.0/rights.xml"));
 				Assert.Fail("Allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "Unexpected namespace URI and local name encountered");
 			}
 		}
 
-		public virtual void TestGetResourceSuccessFile() {
-			Reader.GetDDMSResource(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml"));
+        [TestMethod]
+        public virtual void TestGetResourceSuccessFile()
+        {
+            //Reader.GetDDMSResource(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml"));
+            Assert.Fail():
 		}
 
-		public virtual void TestGetResourceSuccessString() {
+        [TestMethod]
+        public virtual void TestGetResourceSuccessString()
+        {
 			LineNumberReader reader = new LineNumberReader(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
 			StringBuilder xmlString = new StringBuilder();
 			string nextLine = reader.readLine();
@@ -132,14 +160,21 @@ namespace DDMSense.Test.Util {
 			Reader.GetDDMSResource(xmlString.ToString());
 		}
 
-		public virtual void TestGetResourceSuccessInputStream() {
-			Reader.GetDDMSResource(new FileInputStream(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
+        [TestMethod]
+        public virtual void TestGetResourceSuccessInputStream()
+        {
+            //Reader.GetDDMSResource(new FileInputStream(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
+            Assert.Fail():
 		}
 
-		public virtual void TestGetResourceSuccessReader() {
-			Reader.GetDDMSResource(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
+        [TestMethod]
+        public virtual void TestGetResourceSuccessReader()
+        {
+            //Reader.GetDDMSResource(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
+            Assert.Fail();
 		}
 
+        [TestMethod]
 		public virtual void TestGetExternalSchemaLocation() {
 			string externalLocations = Reader.ExternalSchemaLocations;
 			Assert.Equals(14, externalLocations.Split(" ", true).Length);
