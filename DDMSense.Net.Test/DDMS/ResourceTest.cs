@@ -132,8 +132,8 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: private nu.xom.XElement getResourceWithoutHeaderElement() throws InvalidDDMSException
 		private XElement ResourceWithoutHeaderElement {
 			get {
-				XElement element = Util.BuildDDMSElement(Resource.GetName(DDMSVersion.GetCurrentVersion()), null);
-				if (DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")) {
+				XElement element = Util.BuildDDMSElement(Resource.GetName(DDMSVersion.CurrentVersion), null);
+				if (DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")) {
 					element.Add(MetacardInfoTest.Fixture.ElementCopy);
 				}
 				element.Add(IdentifierTest.Fixture.ElementCopy);
@@ -154,7 +154,7 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: private nu.xom.XElement getResourceWithoutBodyElement() throws InvalidDDMSException
 		private XElement ResourceWithoutBodyElement {
 			get {
-				DDMSVersion version = DDMSVersion.GetCurrentVersion();
+				DDMSVersion version = DDMSVersion.CurrentVersion;
 				string ismPrefix = PropertyReader.GetPrefix("ism");
 				string ismNamespace = version.IsmNamespace;
 				string ntkPrefix = PropertyReader.GetPrefix("ntk");
@@ -182,7 +182,7 @@ namespace DDMSense.Test.DDMS {
 //ORIGINAL LINE: private nu.xom.XElement getResourceWithMultipleRelated() throws InvalidDDMSException
 		private XElement ResourceWithMultipleRelated {
 			get {
-				DDMSVersion version = DDMSVersion.GetCurrentVersion();
+				DDMSVersion version = DDMSVersion.CurrentVersion;
 				if (version.IsAtLeast("4.0.1")) {
 					return null;
 				}
@@ -242,10 +242,10 @@ namespace DDMSense.Test.DDMS {
 		/// <returns> a DESVersion </returns>
 		private int? IsmDESVersion {
 			get {
-				if (!DDMSVersion.GetCurrentVersion().IsAtLeast("3.1")) {
+				if (!DDMSVersion.CurrentVersion.IsAtLeast("3.1")) {
 					return (Convert.ToInt32(2));
 				}
-				if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")) {
+				if (!DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")) {
 					return (Convert.ToInt32(5));
 				}
 				return (Convert.ToInt32(9));
@@ -258,7 +258,7 @@ namespace DDMSense.Test.DDMS {
 		/// <returns> a DESVersion </returns>
 		private int? NtkDESVersion {
 			get {
-				if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")) {
+				if (!DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")) {
 					return (null);
 				}
 				return (Convert.ToInt32(7));
@@ -298,7 +298,7 @@ namespace DDMSense.Test.DDMS {
 		/// <returns> a valid object </returns>
 		private Resource GetInstance(string message, IList<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, IList<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion) {
 			bool expectFailure = !string.IsNullOrEmpty(message);
-			DDMSVersion version = DDMSVersion.GetCurrentVersion();
+			DDMSVersion version = DDMSVersion.CurrentVersion;
 			Resource component = null;
 			try {
 				NoticeAttributes notice = (!version.IsAtLeast("4.0.1") ? null : NoticeAttributesTest.Fixture);
@@ -318,7 +318,7 @@ namespace DDMSense.Test.DDMS {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws InvalidDDMSException
 		private string GetExpectedOutput(bool isHTML) {
-			DDMSVersion version = DDMSVersion.GetCurrentVersion();
+			DDMSVersion version = DDMSVersion.CurrentVersion;
 			StringBuilder text = new StringBuilder();
 			string resourcePrefix = Resource.GetName(version);
 			if (version.IsAtLeast("3.0")) {
@@ -438,7 +438,7 @@ namespace DDMSense.Test.DDMS {
 		/// </summary>
 		/// <param name="preserveFormatting"> if true, include line breaks and tabs. </param>
 		private string GetExpectedXMLOutput(bool preserveFormatting) {
-			DDMSVersion version = DDMSVersion.GetCurrentVersion();
+			DDMSVersion version = DDMSVersion.CurrentVersion;
 			StringBuilder xml = new StringBuilder();
 			xml.Append("<ddms:").Append(Resource.GetName(version)).Append(" ").Append(XmlnsDDMS);
 			if (version.IsAtLeast("4.0.1")) {
@@ -1597,7 +1597,7 @@ namespace DDMSense.Test.DDMS {
 			builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 			builder.Creators[0].EntityType = Organization.GetName(version);
 			builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
-			builder.SubjectCoverages[0].Keywords.Add(new [0] = "keyword";
+			builder.SubjectCoverages[0].Keywords.Add("keyword");
 			builder.Security.SecurityAttributes.Classification = "U";
 			builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 

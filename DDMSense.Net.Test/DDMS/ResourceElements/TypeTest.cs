@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 /* Copyright 2010 - 2013 by Brian Uri!
    
@@ -26,8 +27,9 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 	using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
 	using DDMSVersion = DDMSense.Util.DDMSVersion;
 	using Util = DDMSense.Util.Util;
-    using System.Xml.Linq;
-
+	using System.Xml.Linq;
+	using DDMSense.DDMS;
+	using DDMSense.DDMS.ResourceElements;
 	/// <summary>
 	/// <para> Tests related to ddms:type elements </para>
 	/// 
@@ -54,7 +56,7 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 				try {
 					return (new Type(null, "DCMITYPE", "http://purl.org/dc/dcmitype/Text", null));
 				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
+					Assert.Fail("Could not create fixture: " + e.Message);
 				}
 				return (null);
 			}
@@ -68,7 +70,7 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 		/// </param>
 		/// <returns> a valid object </returns>
 		private Type GetInstance(string message, XElement element) {
-			bool expectFailure = !Util.isEmpty(message);
+			bool expectFailure = !string.IsNullOrEmpty(message);
 			Type component = null;
 			try {
 				component = new Type(element);
@@ -89,11 +91,11 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 		/// <param name="value"> the value </param>
 		/// <returns> a valid object </returns>
 		private Type GetInstance(string message, string description, string qualifier, string value) {
-			bool expectFailure = !Util.isEmpty(message);
+			bool expectFailure = !string.IsNullOrEmpty(message);
 			DDMSVersion version = DDMSVersion.CurrentVersion;
 			Type component = null;
 			try {
-				component = new Type(description, qualifier, value, version.isAtLeast("4.0.1") ? SecurityAttributesTest.Fixture : null);
+				component = new Type(description, qualifier, value, version.IsAtLeast("4.0.1") ? SecurityAttributesTest.Fixture : null);
 				CheckConstructorSuccess(expectFailure);
 			} catch (InvalidDDMSException e) {
 				CheckConstructorFailure(expectFailure, e);
@@ -110,12 +112,12 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 		private string GetExpectedOutput(bool isHTML) {
 			DDMSVersion version = DDMSVersion.CurrentVersion;
 			StringBuilder text = new StringBuilder();
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				text.Append(BuildOutput(isHTML, "type.description", TEST_DESCRIPTION));
 			}
 			text.Append(BuildOutput(isHTML, "type.qualifier", TEST_QUALIFIER));
 			text.Append(BuildOutput(isHTML, "type.value", TEST_VALUE));
-			if (version.isAtLeast("4.0.1")) {
+			if (version.IsAtLeast("4.0.1")) {
 				text.Append(BuildOutput(isHTML, "type.classification", "U"));
 				text.Append(BuildOutput(isHTML, "type.ownerProducer", "USA"));
 			}
@@ -130,11 +132,11 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 				DDMSVersion version = DDMSVersion.CurrentVersion;
 				StringBuilder xml = new StringBuilder();
 				xml.Append("<ddms:type ").Append(XmlnsDDMS).Append(" ");
-				if (version.isAtLeast("4.0.1")) {
+				if (version.IsAtLeast("4.0.1")) {
 					xml.Append(XmlnsISM).Append(" ");
 				}
 				xml.Append("ddms:qualifier=\"").Append(TEST_QUALIFIER).Append("\" ddms:value=\"").Append(TEST_VALUE).Append("\"");
-				if (version.isAtLeast("4.0.1")) {
+				if (version.IsAtLeast("4.0.1")) {
 					xml.Append(" ISM:classification=\"U\" ISM:ownerProducer=\"USA\">Description</ddms:type>");
 				} else {
 					xml.Append(" />");
@@ -145,30 +147,30 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 
 		public virtual void TestNameAndNamespace() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Type.getName(version));
+				AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Type.GetName(version));
 				GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 			}
 		}
 
 		public virtual void TestElementConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				// All fields
 				GetInstance(SUCCESS, GetValidElement(sVersion));
 
 				// No optional fields
-				XElement element = Util.buildDDMSElement(Type.getName(version), null);
+				XElement element = Util.BuildDDMSElement(Type.GetName(version), null);
 				GetInstance(SUCCESS, element);
 			}
 		}
 
 		public virtual void TestDataConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				// All fields
-				GetInstance(SUCCESS, version.isAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
+				GetInstance(SUCCESS, version.IsAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
 
 				// No optional fields
 				GetInstance(SUCCESS, "", "", "");
@@ -177,17 +179,17 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 
 		public virtual void TestElementConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				// Missing qualifier
-				XElement element = Util.buildDDMSElement(Type.getName(version), null);
-				Util.addDDMSAttribute(element, "value", TEST_VALUE);
+				XElement element = Util.BuildDDMSElement(Type.GetName(version), null);
+				Util.AddDDMSAttribute(element, "value", TEST_VALUE);
 				GetInstance("qualifier attribute is required.", element);
 			}
 		}
 
 		public virtual void TestDataConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				// Missing qualifier
 				GetInstance("qualifier attribute is required.", null, null, TEST_VALUE);
 			}
@@ -195,27 +197,27 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 
 		public virtual void TestWarnings() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				// No warnings
 				Type component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(0, component.ValidationWarnings.size());
+				Assert.Equals(0, component.ValidationWarnings.Count);
 
 				// Qualifier without value
-				XElement element = Util.buildDDMSElement(Type.getName(version), null);
-				Util.addDDMSAttribute(element, "qualifier", TEST_QUALIFIER);
+				XElement element = Util.BuildDDMSElement(Type.GetName(version), null);
+				Util.AddDDMSAttribute(element, "qualifier", TEST_QUALIFIER);
 				component = GetInstance(SUCCESS, element);
-				assertEquals(1, component.ValidationWarnings.size());
+				Assert.Equals(1, component.ValidationWarnings.Count);
 				string text = "A qualifier has been set without an accompanying value attribute.";
 				string locator = "ddms:type";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+				AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
 				// Neither attribute
-				element = Util.buildDDMSElement(Type.getName(version), null);
+				element = Util.BuildDDMSElement(Type.GetName(version), null);
 				component = GetInstance(SUCCESS, element);
-				assertEquals(1, component.ValidationWarnings.size());
+				Assert.Equals(1, component.ValidationWarnings.Count);
 				text = "Neither a qualifier nor a value was set on this type.";
 				locator = "ddms:type";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+				AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 			}
 		}
 
@@ -223,23 +225,23 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 //ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestConstructorEquality() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				Type elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Type dataComponent = GetInstance(SUCCESS, version.isAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
-				assertEquals(elementComponent, dataComponent);
-				assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+				Type dataComponent = GetInstance(SUCCESS, version.IsAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
+				Assert.Equals(elementComponent, dataComponent);
+				Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 			}
 		}
 
 		public virtual void TestConstructorInequalityDifferentValues() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				Type elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Type dataComponent = GetInstance(SUCCESS, version.isAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, DIFFERENT_VALUE);
-				assertFalse(elementComponent.Equals(dataComponent));
-				if (version.isAtLeast("4.0.1")) {
+				Type dataComponent = GetInstance(SUCCESS, version.IsAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, DIFFERENT_VALUE);
+				Assert.IsFalse(elementComponent.Equals(dataComponent));
+				if (version.IsAtLeast("4.0.1")) {
 					dataComponent = GetInstance(SUCCESS, "differentDescription", TEST_QUALIFIER, TEST_VALUE);
-					assertFalse(elementComponent.Equals(dataComponent));
+					Assert.IsFalse(elementComponent.Equals(dataComponent));
 				}
 			}
 		}
@@ -248,35 +250,35 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestHTMLTextOutput() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				Type component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+				Assert.Equals(GetExpectedOutput(false), component.ToText());
 
-				component = GetInstance(SUCCESS, version.isAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+				component = GetInstance(SUCCESS, version.IsAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
+				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+				Assert.Equals(GetExpectedOutput(false), component.ToText());
 			}
 		}
 
 		public virtual void TestXMLOutput() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				Type component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(ExpectedXMLOutput, component.toXML());
+				Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
-				component = GetInstance(SUCCESS, version.isAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
-				assertEquals(ExpectedXMLOutput, component.toXML());
+				component = GetInstance(SUCCESS, version.IsAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
+				Assert.Equals(ExpectedXMLOutput, component.ToXML());
 			}
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testWrongVersionSecurityAttributes() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestWrongVersionSecurityAttributes() {
-			DDMSVersion.CurrentVersion = "3.1";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("3.1");
 			try {
 				new Type(null, TEST_QUALIFIER, TEST_VALUE, SecurityAttributesTest.Fixture);
-				fail("Allowed invalid data.");
+				Assert.Fail("Allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "Security attributes cannot be applied");
 			}
@@ -285,10 +287,10 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: public void testWrongVersionDescriptionAttributes() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestWrongVersionDescriptionAttributes() {
-			DDMSVersion.CurrentVersion = "3.1";
+			DDMSVersion version = DDMSVersion.SetCurrentVersion("3.1");
 			try {
 				new Type(TEST_DESCRIPTION, TEST_QUALIFIER, TEST_VALUE, null);
-				fail("Allowed invalid data.");
+				Assert.Fail("Allowed invalid data.");
 			} catch (InvalidDDMSException e) {
 				ExpectMessage(e, "This component cannot contain description");
 			}
@@ -298,11 +300,11 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestBuilderEquality() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 				Type component = GetInstance(SUCCESS, GetValidElement(sVersion));
 				Type.Builder builder = new Type.Builder(component);
-				assertEquals(component, builder.commit());
+				Assert.Equals(component, builder.Commit());
 			}
 		}
 
@@ -310,13 +312,13 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 		public virtual void TestBuilderIsEmpty() {
 			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 				Type.Builder builder = new Type.Builder();
-				assertNull(builder.commit());
-				assertTrue(builder.Empty);
+				Assert.IsNull(builder.Commit());
+				Assert.IsTrue(builder.Empty);
 				builder.Value = TEST_VALUE;
-				assertFalse(builder.Empty);
+				Assert.IsFalse(builder.Empty);
 			}
 		}
 
@@ -329,13 +331,13 @@ namespace DDMSense.Test.DDMS.ResourceElements {
 				Type.Builder builder = new Type.Builder();
 				builder.Value = TEST_VALUE;
 				try {
-					builder.commit();
-					fail("Builder allowed invalid data.");
+					builder.Commit();
+					Assert.Fail("Builder allowed invalid data.");
 				} catch (InvalidDDMSException e) {
 					ExpectMessage(e, "qualifier attribute is required.");
 				}
 				builder.Qualifier = TEST_QUALIFIER;
-				builder.commit();
+				builder.Commit();
 			}
 		}
 	}
