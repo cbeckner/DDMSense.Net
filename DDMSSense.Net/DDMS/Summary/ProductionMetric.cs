@@ -112,7 +112,7 @@ namespace DDMSense.DDMS.Summary
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 Util.Util.AddDDMSAttribute(element, SUBJECT_NAME, subject);
                 Util.Util.AddDDMSAttribute(element, COVERAGE_NAME, coverage);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);

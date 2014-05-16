@@ -99,13 +99,13 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
         public ProfileValue(string value, string vocabulary, string id, string idReference, string qualifier,
             SecurityAttributes securityAttributes)
             : base(
-                false, GetName(DDMSVersion.GetCurrentVersion()), value, id, idReference, qualifier, securityAttributes,
+                false, GetName(DDMSVersion.CurrentVersion), value, id, idReference, qualifier, securityAttributes,
                 false)
         {
             try
             {
                 Util.Util.AddAttribute(Element, PropertyReader.GetPrefix("ntk"), VOCABULARY_NAME,
-                    DDMSVersion.GetCurrentVersion().NtkNamespace, vocabulary);
+                    DDMSVersion.CurrentVersion.NtkNamespace, vocabulary);
                 Validate();
             }
             catch (InvalidDDMSException e)

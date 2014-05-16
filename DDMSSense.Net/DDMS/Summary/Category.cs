@@ -139,7 +139,7 @@ namespace DDMSense.DDMS.Summary
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 Util.Util.AddDDMSAttribute(element, QUALIFIER_NAME, qualifier);
                 Util.Util.AddDDMSAttribute(element, CODE_NAME, code);
                 Util.Util.AddDDMSAttribute(element, LABEL_NAME, label);

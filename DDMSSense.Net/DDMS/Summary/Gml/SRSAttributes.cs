@@ -128,7 +128,7 @@ namespace DDMSense.DDMS.Summary.Gml
         /// <param name="uomLabels"> the labels for UOM (required when axisLabels is set) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public SRSAttributes(string srsName, int? srsDimension, List<string> axisLabels, List<string> uomLabels)
-            : base(DDMSVersion.GetCurrentVersion().GmlNamespace)
+            : base(DDMSVersion.CurrentVersion.GmlNamespace)
         {
             if (axisLabels == null)
             {

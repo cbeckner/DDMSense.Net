@@ -128,7 +128,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <param name="externalNotice"> true if this notice is for an external resource </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public NoticeAttributes(string noticeType, string noticeReason, string noticeDate, string unregisteredNoticeType, bool? externalNotice)
-            : base(DDMSVersion.GetCurrentVersion().Namespace)
+            : base(DDMSVersion.CurrentVersion.Namespace)
         {
             ALL_NAMES.Add(NOTICE_TYPE_NAME);
             ALL_NAMES.Add(NOTICE_REASON_NAME);

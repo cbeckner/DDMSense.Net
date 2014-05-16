@@ -482,7 +482,7 @@ namespace DDMSense.DDMS
                 if (compliesWiths == null)
                     compliesWiths = new List<string>();
 
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 string ismPrefix = PropertyReader.GetPrefix("ism");
                 string ismNamespace = version.IsmNamespace;
                 string ntkPrefix = PropertyReader.GetPrefix("ntk");

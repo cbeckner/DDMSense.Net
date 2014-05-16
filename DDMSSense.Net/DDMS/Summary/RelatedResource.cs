@@ -195,7 +195,7 @@ namespace DDMSense.DDMS.Summary
                 {
                     links = new List<Link>();
                 }
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 Element element = Util.Util.BuildDDMSElement(GetName(version), null);
                 Util.Util.AddDDMSAttribute(element, RELATIONSHIP_NAME, relationship);
                 Util.Util.AddDDMSAttribute(element, DIRECTION_NAME, direction);
@@ -405,7 +405,7 @@ namespace DDMSense.DDMS.Summary
         public override string GetOutput(bool isHtml, string prefix, string suffix)
         {
             string localPrefix = BuildPrefix(prefix, Name, suffix + ".");
-            if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1"))
+            if (!DDMSVersion.CurrentVersion.IsAtLeast("4.0.1"))
             {
                 localPrefix += "RelatedResource.";
             }

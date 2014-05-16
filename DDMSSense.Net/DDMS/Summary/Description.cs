@@ -85,7 +85,7 @@ namespace DDMSense.DDMS.Summary
         /// <param name="securityAttributes"> any security attributes (classification and ownerProducer are required) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public Description(string description, SecurityAttributes securityAttributes)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), description, securityAttributes, true)
+            : base(GetName(DDMSVersion.CurrentVersion), description, securityAttributes, true)
         {
         }
 

@@ -118,7 +118,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="acronym"> the organization's acronym </param>
         /// <param name="extensions"> extensible attributes (optional) </param>
         public Organization(List<string> names, List<string> phones, List<string> emails,            List<SubOrganization> subOrganizations, string acronym, ExtensibleAttributes extensions)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), names, phones, emails, extensions, false)
+            : base(GetName(DDMSVersion.CurrentVersion), names, phones, emails, extensions, false)
         {
             try
             {

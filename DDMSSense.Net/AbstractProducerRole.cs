@@ -115,7 +115,7 @@ namespace DDMSense
                 Entity = entity;
 
                 if (pocTypes.Count > 0)
-                    Util.Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME, DDMSVersion.GetCurrentVersion().IsmNamespace, Util.Util.GetXsList(pocTypes));
+                    Util.Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME, DDMSVersion.CurrentVersion.IsmNamespace, Util.Util.GetXsList(pocTypes));
 
                 PocTypes = pocTypes;
                 SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
@@ -328,7 +328,7 @@ namespace DDMSense
             /// <returns> the entity </returns>
             protected internal virtual IRoleEntity CommitSelectedEntity()
             {
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 if (DDMS.ResourceElements.Organization.GetName(version).Equals(EntityType, StringComparison.CurrentCultureIgnoreCase))
                     return ((Organization)Organization.Commit());
 

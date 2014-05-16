@@ -121,7 +121,7 @@ namespace DDMSense.DDMS.Summary
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 _xlinkAttributes = XLinkAttributes.GetNonNullInstance(xlinkAttributes);
                 _xlinkAttributes.AddTo(element);
                 _securityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);

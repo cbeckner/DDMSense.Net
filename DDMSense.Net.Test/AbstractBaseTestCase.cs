@@ -32,6 +32,8 @@ namespace DDMSense.Test {
 	using PropertyReader = DDMSense.Util.PropertyReader;
 	using Util = DDMSense.Util.Util;
     using System.Xml.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.IO;
 
 	/// <summary>
 	/// Base class for DDMSence test cases.
@@ -39,10 +41,11 @@ namespace DDMSense.Test {
 	/// @author Brian Uri!
 	/// @since 0.9.b
 	/// </summary>
-	public abstract class AbstractBaseTestCase : TestCase {
+    [TestClass]
+	public abstract class AbstractBaseTestCase {
 
 		private string _type;
-		private IList<string> _supportedVersions = new List<string>(DDMSVersion.SupportedVersions);
+		private List<string> _supportedVersions = new List<string>(DDMSVersion.SupportedVersions);
 
 		private static IDictionary<string, XElement> _elementMap = new Dictionary<string, XElement>();
 
@@ -52,18 +55,19 @@ namespace DDMSense.Test {
 		protected internal const string INVALID_URI = ":::::";
 		protected internal const string DIFFERENT_VALUE = "Different";
 		protected internal const string WRONG_NAME_MESSAGE = "Unexpected namespace URI and local name encountered:";
-		protected internal static readonly string DEFAULT_DDMS_PREFIX = PropertyReader.getPrefix("ddms");
-		protected internal static readonly string DEFAULT_GML_PREFIX = PropertyReader.getPrefix("gml");
-		protected internal static readonly string DEFAULT_ISM_PREFIX = PropertyReader.getPrefix("ism");
-		protected internal static readonly string DEFAULT_NTK_PREFIX = PropertyReader.getPrefix("ntk");
+		protected internal static readonly string DEFAULT_DDMS_PREFIX = PropertyReader.GetPrefix("ddms");
+		protected internal static readonly string DEFAULT_GML_PREFIX = PropertyReader.GetPrefix("gml");
+		protected internal static readonly string DEFAULT_ISM_PREFIX = PropertyReader.GetPrefix("ism");
+		protected internal static readonly string DEFAULT_NTK_PREFIX = PropertyReader.GetPrefix("ntk");
 
 		/// <summary>
 		/// Resets the in-use version of DDMS.
 		/// </summary>
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: protected void setUp() throws Exception
-		protected internal virtual void SetUp() {
-			DDMSVersion.clearCurrentVersion();
+		[TestInitialize]
+        protected internal virtual void SetUp() {
+			DDMSVersion.ClearCurrentVersion();
 		}
 
 		/// <summary>
@@ -71,9 +75,10 @@ namespace DDMSense.Test {
 		/// </summary>
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: protected void tearDown() throws Exception
-		protected internal virtual void TearDown() {
-			DDMSVersion.clearCurrentVersion();
-			PropertyReader.setProperty("output.indexLevel", "0");
+		[TestCleanup]
+        protected internal virtual void TearDown() {
+			DDMSVersion.ClearCurrentVersion();
+			PropertyReader.SetProperty("output.indexLevel", "0");
 		}
 
 		/// <summary>
@@ -92,9 +97,9 @@ namespace DDMSense.Test {
 						if (reader == null) {
 							reader = new DDMSReader();
 						}
-						File file = new File(PropertyReader.getProperty("test.unit.data") + sVersion, validDocumentFile);
-						if (file.exists()) {
-							XElement element = reader.getElement(file);
+						FileInfo file = new FileInfo(PropertyReader.GetProperty("test.unit.data") + sVersion, validDocumentFile);
+						if (file.Exists()) {
+							XElement element = reader.GetElement(file);
 							lock (_elementMap) {
 								_elementMap[Type + ":" + sVersion] = element;
 							}
@@ -126,7 +131,7 @@ namespace DDMSense.Test {
 		/// </summary>
 		protected internal static XElement WrongNameElementFixture {
 			get {
-				return (Util.buildDDMSElement("wrongName", null));
+				return (Util.BuildDDMSElement("wrongName", null));
 			}
 		}
 
@@ -135,9 +140,9 @@ namespace DDMSense.Test {
 		/// succeeded, the test will fail.
 		/// </summary>
 		/// <param name="expectFailure"> true if the constructor was expected to fail. </param>
-		protected internal static void CheckConstructorSuccess(bool expectFailure) {
+        protected internal static void CheckConstructorSuccess(bool expectFailure) {
 			if (expectFailure) {
-				fail("Constructor allowed invalid data.");
+				Assert.Fail("Constructor allowed invalid data.");
 			}
 		}
 
@@ -147,9 +152,9 @@ namespace DDMSense.Test {
 		/// </summary>
 		/// <param name="expectFailure"> true if the constructor was expected to fail. </param>
 		/// <param name="exception"> the exception that occurred </param>
-		protected internal static void CheckConstructorFailure(bool expectFailure, InvalidDDMSException exception) {
+        protected internal static void CheckConstructorFailure(bool expectFailure, InvalidDDMSException exception) {
 			if (!expectFailure) {
-				fail("Constructor failed on valid data: " + exception.Message);
+				Assert.Fail("Constructor failed on valid data: " + exception.Message);
 			}
 		}
 
@@ -159,13 +164,13 @@ namespace DDMSense.Test {
 		/// <param name="text"> the text of the message </param>
 		/// <param name="locator"> the locator text of the message </param>
 		/// <param name="message"> the ValidationMessage to test </param>
-		protected internal virtual void AssertWarningEquality(string text, string locator, ValidationMessage message) {
+        protected internal virtual void AssertWarningEquality(string text, string locator, ValidationMessage message) {
 			if (locator != "") {
 				locator = "/" + locator;
 			}
-			assertTrue(ValidationMessage.WARNING_TYPE.Equals(message.Type));
-			assertTrue(locator.Equals(message.Locator));
-			assertTrue(message.Text.StartsWith(text));
+			Assert.IsTrue(ValidationMessage.WARNING_TYPE.Equals(message.Type));
+			Assert.IsTrue(locator.Equals(message.Locator));
+			Assert.IsTrue(message.Text.StartsWith(text));
 		}
 
 		/// <summary>
@@ -174,13 +179,13 @@ namespace DDMSense.Test {
 		/// <param name="text"> the text of the message </param>
 		/// <param name="locator"> the locator text of the message </param>
 		/// <param name="message"> the ValidationMessage to test </param>
-		protected internal virtual void AssertErrorEquality(string text, string locator, ValidationMessage message) {
+        protected internal virtual void AssertErrorEquality(string text, string locator, ValidationMessage message) {
 			if (locator != "") {
 				locator = "/" + locator;
 			}
-			assertTrue(ValidationMessage.ERROR_TYPE.Equals(message.Type));
-			assertTrue(locator.Equals(message.Locator));
-			assertTrue(message.Text.StartsWith(text));
+			Assert.IsTrue(ValidationMessage.ERROR_TYPE.Equals(message.Type));
+			Assert.IsTrue(locator.Equals(message.Locator));
+			Assert.IsTrue(message.Text.StartsWith(text));
 		}
 
 		/// <summary>
@@ -189,10 +194,11 @@ namespace DDMSense.Test {
 		/// <param name="component"> the component to test </param>
 		/// <param name="prefix"> the expected XML prefix </param>
 		/// <param name="name"> the expected XML local name </param>
-		protected internal virtual void AssertNameAndNamespace(IDDMSComponent component, string prefix, string name) {
-			assertEquals(name, component.Name);
-			assertEquals(prefix, component.Prefix);
-			assertEquals(prefix + ":" + name, component.QualifiedName);
+		
+        protected internal virtual void AssertNameAndNamespace(IDDMSComponent component, string prefix, string name) {
+			Assert.Equals(name, component.Name);
+			Assert.Equals(prefix, component.Prefix);
+			Assert.Equals(prefix + ":" + name, component.QualifiedName);
 		}
 
 		/// <summary>
@@ -205,9 +211,9 @@ namespace DDMSense.Test {
 		public static string BuildOutput(bool isHTML, string name, string content) {
 			StringBuilder tag = new StringBuilder();
 			tag.Append(isHTML ? "<meta name=\"" : "");
-			tag.Append(isHTML ? Util.xmlEscape(name) : name);
+			tag.Append(isHTML ? Util.XmlEscape(name) : name);
 			tag.Append(isHTML ? "\" content=\"" : ": ");
-			tag.Append(isHTML ? Util.xmlEscape(content) : content);
+			tag.Append(isHTML ? Util.XmlEscape(content) : content);
 			tag.Append(isHTML ? "\" />\n" : "\n");
 			return (tag.ToString());
 		}
@@ -216,15 +222,15 @@ namespace DDMSense.Test {
 		/// Strips tabs and new lines from XML output where appropriate. The unit test samples in the XML files have tabs and
 		/// new lines, but the default implementation of XOM toXML() returns XML on a single line.
 		/// </summary>
-		/// <param name="string"> the original string </param>
+		/// <param name="str"> the original string </param>
 		/// <param name="preserveFormatting"> true to retain tabs and new lines, false to strip them. </param>
 		/// <returns> the modified string </returns>
-		protected internal static string FormatXml(string @string, bool preserveFormatting) {
+		protected internal static string FormatXml(string str, bool preserveFormatting) {
 			if (!preserveFormatting) {
-				@string = @string.replaceAll("\t", "");
-				@string = @string.replaceAll("\n", "");
+				str = str.Replace("\t", "");
+				str = str.Replace("\n", "");
 			}
-			return (@string);
+			return (str);
 		}
 
 		/// <summary>
@@ -276,9 +282,8 @@ namespace DDMSense.Test {
 		/// </summary>
 		/// <param name="xsList"> an xs:list containing the unsupported version numbers </param>
 		protected internal virtual void RemoveSupportedVersions(string xsList) {
-			IList<string> unsupportedVersions = Util.getXsListAsList(xsList);
-//JAVA TO C# CONVERTER TODO TASK: There is no .NET equivalent to the java.util.Collection 'removeAll' method:
-			SupportedVersions.removeAll(unsupportedVersions);
+			List<string> unsupportedVersions = Util.GetXsListAsList(xsList);
+            unsupportedVersions.ForEach(x => SupportedVersions.Remove(x));
 		}
 
 		/// <summary>
@@ -293,7 +298,7 @@ namespace DDMSense.Test {
 		/// <summary>
 		/// Accessor for the supported versions for this specific component
 		/// </summary>
-		protected internal virtual IList<string> SupportedVersions {
+		protected internal virtual List<string> SupportedVersions {
 			get {
 				return (_supportedVersions);
 			}

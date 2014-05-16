@@ -107,7 +107,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="affiliation"> organizational affiliation of the person </param>
         /// <param name="extensions"> extensible attributes (optional) </param>
         public Person(List<string> names, string surname, List<string> phones, List<string> emails, string userID, string affiliation, ExtensibleAttributes extensions)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), names, phones, emails, extensions, false)
+            : base(GetName(DDMSVersion.CurrentVersion), names, phones, emails, extensions, false)
         {
             try
             {

@@ -206,9 +206,9 @@ namespace DDMSense.DDMS.Summary
             GeographicIdentifier = null;
             try
             {
-                Element coverageElement = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element coverageElement = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
 
-                Element element = DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1")
+                Element element = DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")
                     ? coverageElement
                     : Util.Util.BuildDDMSElement(GEOSPATIAL_EXTENT_NAME, null);
                 if (geographicIdentifier != null)
@@ -237,7 +237,7 @@ namespace DDMSense.DDMS.Summary
                     Util.Util.AddDDMSAttribute(coverageElement, ORDER_NAME, order.ToString());
                 }
 
-                if (!DDMSVersion.GetCurrentVersion().IsAtLeast("4.0.1"))
+                if (!DDMSVersion.CurrentVersion.IsAtLeast("4.0.1"))
                 {
                     coverageElement.Add(element);
                 }

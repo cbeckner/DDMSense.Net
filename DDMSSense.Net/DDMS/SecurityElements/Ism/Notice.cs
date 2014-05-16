@@ -82,7 +82,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 if (noticeTexts == null)
                     noticeTexts = new List<NoticeText>();
                 
-                DDMSVersion version = DDMSVersion.GetCurrentVersion();
+                DDMSVersion version = DDMSVersion.CurrentVersion;
                 XElement element = Util.Util.BuildElement(PropertyReader.GetPrefix("ism"), GetName(version),                    version.IsmNamespace, null);
                 foreach (var noticeText in noticeTexts)
                     element.Add(noticeText.ElementCopy);

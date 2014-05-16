@@ -16,7 +16,7 @@ namespace DDMSense.Util
     ///         static
     ///         currentVersion variable which can be set at runtime. All DDMS component constructors which build components
     ///         from
-    ///         scratch can then call <code>DDMSVersion.getCurrentVersion()</code> to access various details such as schema
+    ///         scratch can then call <code>DDMSVersion.CurrentVersion</code> to access various details such as schema
     ///         locations and namespace URIs. If no currentVersion has been set, a default will be used, which maps to
     ///         <code>DDMSense.DDMS.defaultVersion</code> in the properties file. This defaults to 4.1 right now.
     ///     </para>
@@ -178,6 +178,14 @@ namespace DDMSense.Util
         public virtual string XlinkNamespace {get; private set;}
 
         /// <summary>
+        ///     Accessor for the current version. If not set, returns the default from the properties file.
+        /// </summary>
+        public static DDMSVersion CurrentVersion
+        {
+            get { return (_currentVersion); }
+        }
+
+        /// <summary>
         ///     Convenience method to check if a DDMS version number is equal to or higher that some
         ///     test number. An example of where this might be used is to determine the capitalization
         ///     of element names, many of which changed in DDMS 4.0.1.
@@ -260,8 +268,8 @@ namespace DDMSense.Util
                     throw new UnsupportedVersionException(version);
                 
                 _currentVersion = GetVersionFor(version);
-                ISMVocabulary.DDMSVersion = GetCurrentVersion();
-                return (GetCurrentVersion());
+                ISMVocabulary.DDMSVersion = _currentVersion;
+                return (_currentVersion);
             }
         }
 
@@ -282,15 +290,7 @@ namespace DDMSense.Util
             
             return (version);
         }
-
-        /// <summary>
-        ///     Accessor for the current version. If not set, returns the default from the properties file.
-        /// </summary>
-        public static DDMSVersion GetCurrentVersion()
-        {
-            return (_currentVersion);
-        }
-
+        
         /// <summary>
         ///     Resets the current version to the default value.
         /// </summary>

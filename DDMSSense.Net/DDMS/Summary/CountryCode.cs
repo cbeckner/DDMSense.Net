@@ -92,7 +92,7 @@ namespace DDMSense.DDMS.Summary
         /// <param name="value">	the value of the value attribute </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public CountryCode(string qualifier, string value)
-            : base(GetName(DDMSVersion.GetCurrentVersion()), qualifier, value, true)
+            : base(GetName(DDMSVersion.CurrentVersion), qualifier, value, true)
         {
         }
 

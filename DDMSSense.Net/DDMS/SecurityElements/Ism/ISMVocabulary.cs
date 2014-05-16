@@ -187,7 +187,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             ALL_ENUMS.Add(CVE_SAR_IDENTIFIER);
             ALL_ENUMS.Add(CVE_SCI_CONTROLS);
             ALL_ENUMS.Add(CVE_TYPE_EXEMPTED_SOURCE);
-            DDMSVersion = DDMSVersion.GetCurrentVersion();
+            DDMSVersion = DDMSVersion.CurrentVersion;
         }
 
         /// <summary>
@@ -298,7 +298,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         ///         in advance, to ensure that the appropriate set of CVE files is used to look up the tokens, OR
         ///         you may use the configurable property, <code>icism.cve.customEnumLocation</code>, to force the
         ///         use of a custom set of CVE files. If neither option is used, the default set of tokens returned
-        ///         will be based on the current value of <code>DDMSVersion.getCurrentVersion()</code>.
+        ///         will be based on the current value of <code>DDMSVersion.CurrentVersion</code>.
         ///     </para>
         /// </summary>
         /// <param name="enumerationKey"> the key of the enumeration </param>

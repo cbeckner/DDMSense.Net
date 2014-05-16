@@ -146,7 +146,7 @@ namespace DDMSense.DDMS.Summary
         {
             try
             {
-                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.GetCurrentVersion()), null);
+                Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 SetElement(element, false);
                 Util.Util.AddDDMSAttribute(element, UOM_NAME, unitOfMeasure);
                 Util.Util.AddDDMSAttribute(element, DATUM_NAME, datum);

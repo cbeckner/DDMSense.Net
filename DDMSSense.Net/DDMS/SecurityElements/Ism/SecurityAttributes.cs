@@ -279,7 +279,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public SecurityAttributes(string classification, List<string> ownerProducers, IDictionary<string, string> otherAttributes)
-            : base(DDMSVersion.GetCurrentVersion().Namespace)
+            : base(DDMSVersion.CurrentVersion.Namespace)
         {
             Initialize();
             SCIcontrols = null;
