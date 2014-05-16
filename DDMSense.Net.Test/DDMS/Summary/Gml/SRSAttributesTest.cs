@@ -159,7 +159,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, TEST_SRS_NAME, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, TEST_UOM_LABELS);
 
@@ -209,7 +209,7 @@
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // srsName not a URI
 //                GetInstance("Invalid URI", INVALID_URI, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, TEST_UOM_LABELS);
 
@@ -241,7 +241,7 @@
 //                XElement element = Util.buildElement(PropertyReader.getPrefix("gml"), Position.getName(version), version.GmlNamespace, null);
 //                AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.getXsList(TEST_AXIS_LABELS), Util.getXsList(TEST_UOM_LABELS));
 //                SRSAttributes component = GetInstance(SUCCESS, element);
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
@@ -253,8 +253,8 @@
 //                SRSAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                SRSAttributes dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, TEST_UOM_LABELS);
 
-//                assertEquals(elementAttributes, dataAttributes);
-//                assertEquals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+//                Assert.Equals(elementAttributes, dataAttributes);
+//                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 //            }
 //        }
 
@@ -265,18 +265,18 @@
 //                AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.getXsList(TEST_AXIS_LABELS), Util.getXsList(TEST_UOM_LABELS));
 //                SRSAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                SRSAttributes dataAttributes = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, TEST_UOM_LABELS);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, null, TEST_AXIS_LABELS, TEST_UOM_LABELS);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                IList<string> newLabels = new List<string>(TEST_AXIS_LABELS);
 //                newLabels.Add("NewLabel");
 //                dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, TEST_SRS_DIMENSION, newLabels, TEST_UOM_LABELS);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, null);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 //            }
 //        }
 
@@ -289,7 +289,7 @@
 //                AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.getXsList(TEST_AXIS_LABELS), Util.getXsList(TEST_UOM_LABELS));
 //                SRSAttributes attributes = new SRSAttributes(element);
 //                Rights wrongComponent = new Rights(true, true, true);
-//                assertFalse(attributes.Equals(wrongComponent));
+//                Assert.IsFalse(attributes.Equals(wrongComponent));
 //            }
 //        }
 
@@ -302,12 +302,12 @@
 //                XElement element = Util.buildElement(PropertyReader.getPrefix("gml"), Position.getName(version), version.GmlNamespace, null);
 //                AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.getXsList(TEST_AXIS_LABELS), Util.getXsList(TEST_UOM_LABELS));
 //                SRSAttributes attributes = new SRSAttributes(element);
-//                assertEquals(GetExpectedOutput(true), attributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false), attributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true), attributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false), attributes.getOutput(false, ""));
 
 //                SRSAttributes dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, TEST_UOM_LABELS);
-//                assertEquals(GetExpectedOutput(true), dataAttributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false), dataAttributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true), dataAttributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false), dataAttributes.getOutput(false, ""));
 //            }
 //        }
 
@@ -321,7 +321,7 @@
 //                XElement element = Util.buildElement(PropertyReader.getPrefix("gml"), "sample", version.GmlNamespace, null);
 //                component.addTo(element);
 //                SRSAttributes output = new SRSAttributes(element);
-//                assertEquals(component, output);
+//                Assert.Equals(component, output);
 //            }
 //        }
 
@@ -330,10 +330,10 @@
 //        public virtual void TestGetNonNull() {
 //            SRSAttributes component = new SRSAttributes(null, null, null, null);
 //            SRSAttributes output = SRSAttributes.getNonNullInstance(null);
-//            assertEquals(component, output);
+//            Assert.Equals(component, output);
 
 //            output = SRSAttributes.getNonNullInstance(Fixture);
-//            assertEquals(Fixture, output);
+//            Assert.Equals(Fixture, output);
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -341,7 +341,7 @@
 //        public virtual void TestWrongVersionAttributes() {
 //            DDMSVersion.CurrentVersion = "3.0";
 //            SRSAttributes attr = Fixture;
-//            DDMSVersion.CurrentVersion = "2.0";
+//            DDMSVersion.SetCurrentVersion("2.0");
 //            try {
 //                new Position(PositionTest.TEST_COORDS, attr);
 //                fail("Allowed different versions.");
@@ -354,11 +354,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SRSAttributes component = Fixture;
 //                SRSAttributes.Builder builder = new SRSAttributes.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -366,27 +366,27 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SRSAttributes.Builder builder = new SRSAttributes.Builder();
 //                assertNotNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsTrue(builder.Empty);
 //                builder.SrsName = TEST_SRS_NAME;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //                builder = new SRSAttributes.Builder();
 //                builder.SrsDimension = TEST_SRS_DIMENSION;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //                builder = new SRSAttributes.Builder();
 //                builder.UomLabels.add(null);
 //                builder.UomLabels.add("label");
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //                builder = new SRSAttributes.Builder();
 //                builder.AxisLabels.add(null);
 //                builder.AxisLabels.add("label");
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -394,7 +394,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SRSAttributes.Builder builder = new SRSAttributes.Builder();
 //                builder.SrsDimension = Convert.ToInt32(-1);
@@ -413,7 +413,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                SRSAttributes.Builder builder = new SRSAttributes.Builder();
 //                assertNotNull(builder.UomLabels.get(1));
 //                assertNotNull(builder.AxisLabels.get(1));

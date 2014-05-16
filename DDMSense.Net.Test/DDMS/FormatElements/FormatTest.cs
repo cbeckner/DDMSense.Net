@@ -166,7 +166,7 @@
 
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
@@ -181,7 +181,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
 
@@ -238,7 +238,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing mimeType
 //                GetInstance("mimeType is required.", null, ExtentTest.Fixture, TEST_MEDIUM);
 
@@ -255,24 +255,24 @@
 
 //                // No warnings
 //                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 
 //                // Medium element with no value or empty value
 //                XElement mediaElement = Util.buildDDMSElement("Media", null);
 //                mediaElement.appendChild(Util.buildDDMSElement("mimeType", TEST_MIME_TYPE));
 //                mediaElement.appendChild(Util.buildDDMSElement("medium", null));
 //                component = GetInstance(SUCCESS, WrapInnerElement(mediaElement));
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "A ddms:medium element was found with no value.";
 //                string locator = version.isAtLeast("4.0.1") ? "ddms:format" : "ddms:format/ddms:Media";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
 //                // Nested warnings
 //                component = GetInstance(SUCCESS, TEST_MIME_TYPE, new Extent("sizeBytes", ""), TEST_MEDIUM);
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                text = "A qualifier has been set without an accompanying value attribute.";
 //                locator = (version.isAtLeast("4.0.1")) ? "ddms:format/ddms:extent" : "ddms:format/ddms:Media/ddms:extent";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //            }
 //        }
 
@@ -280,11 +280,11 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Format elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Format dataComponent = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -292,17 +292,17 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Format elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Format dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, ExtentTest.Fixture, TEST_MEDIUM);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_MIME_TYPE, null, TEST_MEDIUM);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, "TEST_MIME_TYPE", ExtentTest.Fixture, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -310,14 +310,14 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -325,12 +325,12 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 //            }
 //        }
 
@@ -338,7 +338,7 @@
 ////ORIGINAL LINE: public void testExtentReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestExtentReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Extent extent = ExtentTest.Fixture;
 //                GetInstance(SUCCESS, TEST_MIME_TYPE, extent, TEST_MEDIUM);
 //                GetInstance(SUCCESS, TEST_MIME_TYPE, extent, TEST_MEDIUM);
@@ -347,33 +347,33 @@
 
 //        public virtual void TestGetExtentQualifier() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(component.ExtentQualifier, component.Extent.Qualifier);
+//                Assert.Equals(component.ExtentQualifier, component.Extent.Qualifier);
 //            }
 //        }
 
 //        public virtual void TestGetExtentQualifierNoExtent() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Format component = GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
-//                assertEquals("", component.ExtentQualifier);
+//                Assert.Equals("", component.ExtentQualifier);
 //            }
 //        }
 
 //        public virtual void TestGetExtentValue() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(component.ExtentValue, component.Extent.Value);
+//                Assert.Equals(component.ExtentValue, component.Extent.Value);
 //            }
 //        }
 
 //        public virtual void TestGetExtentValueNoExtent() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Format component = GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
-//                assertEquals("", component.ExtentValue);
+//                Assert.Equals("", component.ExtentValue);
 //            }
 //        }
 
@@ -381,11 +381,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Format.Builder builder = new Format.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -393,13 +393,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Format.Builder builder = new Format.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.MimeType = TEST_MIME_TYPE;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -408,7 +408,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Format.Builder builder = new Format.Builder();
 //                builder.Medium = TEST_MEDIUM;
@@ -426,7 +426,7 @@
 //                builder.MimeType = TEST_MIME_TYPE;
 //                builder.Medium = TEST_MEDIUM;
 //                assertNotNull(builder.Extent);
-//                assertNull(builder.commit().Extent);
+//                Assert.IsNull(builder.commit().Extent);
 //                builder.Extent.Qualifier = "sizeBytes";
 //                builder.Extent.Value = "75000";
 //                assertNotNull(builder.commit().Extent);

@@ -260,7 +260,7 @@
 
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields (locator)
 //                XElement element = Util.buildDDMSElement("link", null);
@@ -285,7 +285,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields (locator)
 //                GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 
@@ -367,100 +367,100 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // No warnings
 //                XElement element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes component = GetInstance(SUCCESS, element);
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // locator version
 //                XElement element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                XLinkAttributes dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-//                assertEquals(elementAttributes, dataAttributes);
-//                assertEquals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+//                Assert.Equals(elementAttributes, dataAttributes);
+//                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 
 //                // simple version
 //                element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
 //                elementAttributes = GetInstance(SUCCESS, element);
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
-//                assertEquals(elementAttributes, dataAttributes);
-//                assertEquals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+//                Assert.Equals(elementAttributes, dataAttributes);
+//                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 
 //                // resource version
 //                element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                elementAttributes = GetInstance(SUCCESS, element);
 //                dataAttributes = GetInstance(SUCCESS, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-//                assertEquals(elementAttributes, dataAttributes);
-//                assertEquals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+//                Assert.Equals(elementAttributes, dataAttributes);
+//                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 //            }
 //        }
 
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // locator version
 //                XElement element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                XLinkAttributes dataAttributes = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, DIFFERENT_VALUE, TEST_TITLE, TEST_LABEL);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, DIFFERENT_VALUE, TEST_LABEL);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, DIFFERENT_VALUE);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                // simple version
 //                element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
 
 //                dataAttributes = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, DIFFERENT_VALUE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, DIFFERENT_VALUE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, DIFFERENT_VALUE, TEST_SHOW, TEST_ACTUATE);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, "replace", TEST_ACTUATE);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, "onRequest");
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                // resource version
 //                element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                elementAttributes = GetInstance(SUCCESS, element);
 //                dataAttributes = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_TITLE, TEST_LABEL);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_ROLE, DIFFERENT_VALUE, TEST_LABEL);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_ROLE, TEST_TITLE, DIFFERENT_VALUE);
-//                assertFalse(elementAttributes.Equals(dataAttributes));
+//                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 //            }
 //        }
 
@@ -468,12 +468,12 @@
 ////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                XElement element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes attributes = new XLinkAttributes(element);
 //                Rights wrongComponent = new Rights(true, true, true);
-//                assertFalse(attributes.Equals(wrongComponent));
+//                Assert.IsFalse(attributes.Equals(wrongComponent));
 //            }
 //        }
 
@@ -481,37 +481,37 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XElement element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes attributes = new XLinkAttributes(element);
-//                assertEquals(GetExpectedOutput(true, "locator"), attributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false, "locator"), attributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true, "locator"), attributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false, "locator"), attributes.getOutput(false, ""));
 
 //                XLinkAttributes dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-//                assertEquals(GetExpectedOutput(true, "locator"), dataAttributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false, "locator"), dataAttributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true, "locator"), dataAttributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false, "locator"), dataAttributes.getOutput(false, ""));
 
 //                element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
 //                attributes = new XLinkAttributes(element);
-//                assertEquals(GetExpectedOutput(true, "simple"), attributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false, "simple"), attributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true, "simple"), attributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false, "simple"), attributes.getOutput(false, ""));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
-//                assertEquals(GetExpectedOutput(true, "simple"), dataAttributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false, "simple"), dataAttributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true, "simple"), dataAttributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false, "simple"), dataAttributes.getOutput(false, ""));
 
 //                element = Util.buildDDMSElement("link", null);
 //                AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                attributes = new XLinkAttributes(element);
-//                assertEquals(GetExpectedOutput(true, "resource"), attributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false, "resource"), attributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true, "resource"), attributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false, "resource"), attributes.getOutput(false, ""));
 
 //                dataAttributes = GetInstance(SUCCESS, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-//                assertEquals(GetExpectedOutput(true, "resource"), dataAttributes.getOutput(true, ""));
-//                assertEquals(GetExpectedOutput(false, "resource"), dataAttributes.getOutput(false, ""));
+//                Assert.Equals(GetExpectedOutput(true, "resource"), dataAttributes.getOutput(true, ""));
+//                Assert.Equals(GetExpectedOutput(false, "resource"), dataAttributes.getOutput(false, ""));
 //            }
 //        }
 
@@ -519,13 +519,13 @@
 ////ORIGINAL LINE: public void testAddTo() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestAddTo() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                XLinkAttributes component = LocatorFixture;
 
 //                XElement element = Util.buildDDMSElement("sample", null);
 //                component.addTo(element);
 //                XLinkAttributes output = new XLinkAttributes(element);
-//                assertEquals(component, output);
+//                Assert.Equals(component, output);
 //            }
 //        }
 
@@ -534,21 +534,21 @@
 //        public virtual void TestGetNonNull() {
 //            XLinkAttributes component = new XLinkAttributes();
 //            XLinkAttributes output = XLinkAttributes.getNonNullInstance(null);
-//            assertEquals(component, output);
+//            Assert.Equals(component, output);
 
 //            output = XLinkAttributes.getNonNullInstance(LocatorFixture);
-//            assertEquals(LocatorFixture, output);
+//            Assert.Equals(LocatorFixture, output);
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XLinkAttributes component = LocatorFixture;
 //                XLinkAttributes.Builder builder = new XLinkAttributes.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -556,17 +556,17 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XLinkAttributes.Builder builder = new XLinkAttributes.Builder();
 //                assertNotNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsTrue(builder.Empty);
 //                builder.Label = TEST_LABEL;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //                // An untyped instance
 //                XLinkAttributes output = builder.commit();
-//                assertTrue(String.IsNullOrEmpty(output.Type));
+//                Assert.IsTrue(String.IsNullOrEmpty(output.Type));
 //            }
 //        }
 
@@ -574,7 +574,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XLinkAttributes.Builder builder = new XLinkAttributes.Builder();
 //                builder.Type = "locator";

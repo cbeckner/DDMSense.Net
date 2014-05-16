@@ -64,7 +64,7 @@
 //                    string ddmsNamespace = resource.Namespace;
 //                    string resourceName = Resource.getName(version);
 //                    IList<ValidationMessage> messages = resource.validateWithSchematron(new File("data/test/" + sVersion + "/testSchematronXslt1.sch"));
-//                    assertEquals(version.isAtLeast("4.0.1") ? 3 : 2, messages.Count);
+//                    Assert.Equals(version.isAtLeast("4.0.1") ? 3 : 2, messages.Count);
 
 //                    string text = "A DDMS Resource must have an unknownElement child.";
 //                    string locator = "/*[local-name()='" + resourceName + "' and namespace-uri()='" + ddmsNamespace + "']";
@@ -97,7 +97,7 @@
 //                    string ddmsNamespace = resource.Namespace;
 //                    string gmlNamespace = version.GmlNamespace;
 //                    IList<ValidationMessage> messages = resource.validateWithSchematron(new File("data/test/" + sVersion + "/testSchematronXslt2.sch"));
-//                    assertEquals(1, messages.Count);
+//                    Assert.Equals(1, messages.Count);
 
 //                    string text = "The second coordinate in a gml:pos element must be 40.2 degrees.";
 //                    string extent = version.isAtLeast("4.0.1") ? "" : "/*:GeospatialExtent[namespace-uri()='" + ddmsNamespace + "'][1]";

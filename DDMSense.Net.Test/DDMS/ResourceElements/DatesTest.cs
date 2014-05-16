@@ -228,7 +228,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
@@ -276,23 +276,23 @@
 
 //                // 4.1 ddms:acquiredOn element used
 //                if (version.isAtLeast("4.1")) {
-//                    assertEquals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.size());
 //                    string text = "The ddms:acquiredOn element in this DDMS component";
 //                    string locator = "ddms:dates";
-//                    AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //                // No warnings 
 //                else {
-//                    assertEquals(0, component.ValidationWarnings.size());
+//                    Assert.Equals(0, component.ValidationWarnings.size());
 //                }
 
 //                // Empty element
 //                XElement element = Util.buildDDMSElement(Dates.getName(version), null);
 //                component = GetInstance(SUCCESS, element);
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "A completely empty ddms:dates element was found.";
 //                string locator = "ddms:dates";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //            }
 //        }
 
@@ -300,10 +300,10 @@
 ////ORIGINAL LINE: public void testDeprecatedConstructor() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDeprecatedConstructor() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Dates component = new Dates(TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-//                assertTrue(component.AcquiredOns.Empty);
+//                Assert.IsTrue(component.AcquiredOns.Empty);
 //            }
 //        }
 
@@ -314,26 +314,26 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 
 //                Dates component = new Dates(TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-//                assertEquals(TEST_CREATED, component.Created.toXMLFormat());
-//                assertEquals(TEST_POSTED, component.Posted.toXMLFormat());
-//                assertEquals(TEST_VALID, component.ValidTil.toXMLFormat());
-//                assertEquals(TEST_CUTOFF, component.InfoCutOff.toXMLFormat());
+//                Assert.Equals(TEST_CREATED, component.Created.toXMLFormat());
+//                Assert.Equals(TEST_POSTED, component.Posted.toXMLFormat());
+//                Assert.Equals(TEST_VALID, component.ValidTil.toXMLFormat());
+//                Assert.Equals(TEST_CUTOFF, component.InfoCutOff.toXMLFormat());
 //                if (version.isAtLeast("3.1")) {
-//                    assertEquals(TEST_APPROVED, component.ApprovedOn.toXMLFormat());
+//                    Assert.Equals(TEST_APPROVED, component.ApprovedOn.toXMLFormat());
 //                }
 //                if (version.isAtLeast("4.0.1")) {
-//                    assertEquals(TEST_RECEIVED, component.ReceivedOn.toXMLFormat());
+//                    Assert.Equals(TEST_RECEIVED, component.ReceivedOn.toXMLFormat());
 //                }
 
 //                // Not compatible with XMLGregorianCalendar
 //                if (version.isAtLeast("4.1")) {
 //                    component = new Dates("2012-01-01T01:02Z", "2012-01-01T01:02Z", "2012-01-01T01:02Z", "2012-01-01T01:02Z", "2012-01-01T01:02Z", "2012-01-01T01:02Z");
-//                    assertNull(component.Created);
-//                    assertNull(component.Posted);
-//                    assertNull(component.ValidTil);
-//                    assertNull(component.InfoCutOff);
-//                    assertNull(component.ApprovedOn);
-//                    assertNull(component.ReceivedOn);
+//                    Assert.IsNull(component.Created);
+//                    Assert.IsNull(component.Posted);
+//                    Assert.IsNull(component.ValidTil);
+//                    Assert.IsNull(component.InfoCutOff);
+//                    Assert.IsNull(component.ApprovedOn);
+//                    Assert.IsNull(component.ReceivedOn);
 //                }
 //            }
 //        }
@@ -342,12 +342,12 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Dates elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Dates dataComponent = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -359,30 +359,30 @@
 
 //                Dates elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Dates dataComponent = GetInstance(SUCCESS, AcquiredOns, "", TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, "", TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, "", TEST_CUTOFF, ApprovedOn, ReceivedOn);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, "", ApprovedOn, ReceivedOn);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                if (version.isAtLeast("3.1")) {
 //                    dataComponent = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, "", ReceivedOn);
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 //                }
 
 //                if (version.isAtLeast("4.0.1")) {
 //                    dataComponent = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, "");
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 //                }
 
 //                if (version.isAtLeast("4.1")) {
 //                    dataComponent = GetInstance(SUCCESS, null, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, "");
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 //                }
 //            }
 //        }
@@ -391,11 +391,11 @@
 ////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Dates elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Rights wrongComponent = new Rights(true, true, true);
-//                assertFalse(elementComponent.Equals(wrongComponent));
+//                Assert.IsFalse(elementComponent.Equals(wrongComponent));
 //            }
 //        }
 
@@ -403,15 +403,15 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Dates component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -419,13 +419,13 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Dates component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 
 //                component = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 //            }
 //        }
 
@@ -465,11 +465,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Dates component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Dates.Builder builder = new Dates.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -477,15 +477,15 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Dates.Builder builder = new Dates.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
-//                builder.AcquiredOns.get(0).Description = "";
-//                assertTrue(builder.Empty);
-//                builder.AcquiredOns.get(0).Description = "test";
-//                assertFalse(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
+//                builder.AcquiredOns[0].Description = "";
+//                Assert.IsTrue(builder.Empty);
+//                builder.AcquiredOns[0].Description = "test";
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -494,7 +494,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Dates.Builder builder = new Dates.Builder();
 //                builder.Created = "notAnXmlDate";
@@ -513,7 +513,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Dates.Builder builder = new Dates.Builder();
 //                assertNotNull(builder.AcquiredOns.get(1));
 //            }

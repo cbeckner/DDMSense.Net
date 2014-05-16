@@ -193,7 +193,7 @@
 
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
@@ -235,23 +235,23 @@
 
 //                // 4.1 ddms:qualifier element used
 //                if (version.isAtLeast("4.1")) {
-//                    assertEquals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.size());
 //                    string text = "The ddms:qualifier attribute in this DDMS component";
 //                    string locator = "ddms:nonStateActor";
-//                    AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //                // No warnings 
 //                else {
-//                    assertEquals(0, component.ValidationWarnings.size());
+//                    Assert.Equals(0, component.ValidationWarnings.size());
 //                }
 
 //                // Empty value
 //                XElement element = Util.buildDDMSElement(NonStateActor.getName(version), null);
 //                component = GetInstance(SUCCESS, element);
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "A ddms:nonStateActor element was found with no value.";
 //                string locator = "ddms:nonStateActor";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //            }
 //        }
 
@@ -259,10 +259,10 @@
 ////ORIGINAL LINE: public void testDeprecatedConstructor() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDeprecatedConstructor() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor dataComponent = new NonStateActor(TEST_VALUE, TEST_ORDER, SecurityAttributesTest.Fixture);
-//                assertTrue(String.IsNullOrEmpty(dataComponent.Qualifier));
+//                Assert.IsTrue(String.IsNullOrEmpty(dataComponent.Qualifier));
 //            }
 //        }
 
@@ -270,13 +270,13 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                NonStateActor dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
 
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -286,14 +286,14 @@
 
 //                NonStateActor elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                NonStateActor dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_ORDER, Qualifier);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_VALUE, null, Qualifier);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                if (version.isAtLeast("4.1")) {
 //                    dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, DIFFERENT_VALUE);
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 //                }
 //            }
 //        }
@@ -302,33 +302,33 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
-//                assertEquals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.toXML());
 //            }
 //        }
 
 //        public virtual void TestWrongVersion() {
 //            try {
-//                DDMSVersion.CurrentVersion = "2.0";
+//                DDMSVersion.SetCurrentVersion("2.0");
 //                new NonStateActor(TEST_VALUE, TEST_ORDER, null, null);
 //                fail("Allowed invalid data.");
 //            } catch (InvalidDDMSException e) {
@@ -340,11 +340,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                NonStateActor.Builder builder = new NonStateActor.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -352,13 +352,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor.Builder builder = new NonStateActor.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.Order = TEST_ORDER;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -367,7 +367,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // There are no invalid cases right now -- every field is optional.
 //            }

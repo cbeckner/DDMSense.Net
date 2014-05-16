@@ -143,7 +143,7 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
@@ -154,7 +154,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, ProfileTest.FixtureList);
@@ -186,7 +186,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Missing profile
 //                GetInstance("At least one profile is required.", (IList) null);
@@ -205,11 +205,11 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // No warnings
 //                ProfileList component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
@@ -217,12 +217,12 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProfileList dataComponent = GetInstance(SUCCESS, ProfileTest.FixtureList);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -230,7 +230,7 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                IList<Profile> profiles = ProfileTest.FixtureList;
@@ -238,7 +238,7 @@
 //                valueList.Add(ProfileValueTest.GetFixture("profile2"));
 //                profiles.Add(new Profile(SystemNameTest.Fixture, valueList, SecurityAttributesTest.Fixture));
 //                ProfileList dataComponent = GetInstance(SUCCESS, profiles);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -246,15 +246,15 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, ProfileTest.FixtureList);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -262,13 +262,13 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 
 //                component = GetInstance(SUCCESS, ProfileTest.FixtureList);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 //            }
 //        }
 
@@ -280,11 +280,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProfileList.Builder builder = new ProfileList.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -292,15 +292,15 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList.Builder builder = new ProfileList.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
-//                builder.Profiles.get(0);
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
+//                builder.Profiles[0];
+//                Assert.IsTrue(builder.Empty);
 //                builder.Profiles.get(1).SecurityAttributes.Classification = "U";
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -309,7 +309,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList.Builder builder = new ProfileList.Builder();
 //                builder.SecurityAttributes.Classification = "U";
@@ -319,15 +319,15 @@
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "At least one profile is required.");
 //                }
-//                builder.Profiles.get(0).SystemName.Value = "TEST";
-//                builder.Profiles.get(0).ProfileValues.get(0).Vocabulary = "vocab";
-//                builder.Profiles.get(0).ProfileValues.get(0).Value = "TEST";
-//                builder.Profiles.get(0).SystemName.SecurityAttributes.Classification = "U";
-//                builder.Profiles.get(0).SystemName.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.Profiles.get(0).ProfileValues.get(0).SecurityAttributes.Classification = "U";
-//                builder.Profiles.get(0).ProfileValues.get(0).SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.Profiles.get(0).SecurityAttributes.Classification = "U";
-//                builder.Profiles.get(0).SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+//                builder.Profiles[0].SystemName.Value = "TEST";
+//                builder.Profiles[0].ProfileValues[0].Vocabulary = "vocab";
+//                builder.Profiles[0].ProfileValues[0].Value = "TEST";
+//                builder.Profiles[0].SystemName.SecurityAttributes.Classification = "U";
+//                builder.Profiles[0].SystemName.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+//                builder.Profiles[0].ProfileValues[0].SecurityAttributes.Classification = "U";
+//                builder.Profiles[0].ProfileValues[0].SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+//                builder.Profiles[0].SecurityAttributes.Classification = "U";
+//                builder.Profiles[0].SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
 //                builder.SecurityAttributes.Classification = "U";
 //                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
 //                builder.commit();
@@ -338,7 +338,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                ProfileList.Builder builder = new ProfileList.Builder();
 //                assertNotNull(builder.Profiles.get(1));
 //            }

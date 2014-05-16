@@ -180,7 +180,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
 
@@ -253,7 +253,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Too many streets
 //                IList<string> streets = new List<string>();
 //                for (int i = 0; i < 7; i++) {
@@ -268,15 +268,15 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                // No warnings
 //                PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 
 //                // Empty element
 //                XElement element = Util.buildDDMSElement(PostalAddress.getName(version), null);
 //                component = GetInstance(SUCCESS, element);
-//                assertEquals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "A completely empty ddms:postalAddress element was found.";
 //                string locator = "ddms:postalAddress";
-//                AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //            }
 //        }
 
@@ -284,11 +284,11 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                PostalAddress elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                PostalAddress dataComponent = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -296,26 +296,26 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                PostalAddress dataComponent = GetInstance(SUCCESS, null, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_STREETS, null, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, null, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, null, TEST_POSTAL_CODE, CountryCodeTest.Fixture, false);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, null, CountryCodeTest.Fixture, true);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, null, true);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -323,19 +323,19 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true, true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false, true), component.toText());
+//                Assert.Equals(GetExpectedOutput(true, true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false, true), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-//                assertEquals(GetExpectedOutput(true, true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false, true), component.toText());
+//                Assert.Equals(GetExpectedOutput(true, true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false, true), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_PROVINCE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, false);
-//                assertEquals(GetExpectedOutput(true, false), component.toHTML());
-//                assertEquals(GetExpectedOutput(false, false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true, false), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false, false), component.toText());
 //            }
 //        }
 
@@ -343,16 +343,16 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(true, true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true, true), component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-//                assertEquals(GetExpectedXMLOutput(false, true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false, true), component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_PROVINCE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, false);
-//                assertEquals(GetExpectedXMLOutput(false, false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false, false), component.toXML());
 //            }
 //        }
 
@@ -360,7 +360,7 @@
 ////ORIGINAL LINE: public void testCountryCodeReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestCountryCodeReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                CountryCode code = CountryCodeTest.Fixture;
 //                GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, code, true);
 //                GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, code, true);
@@ -371,17 +371,17 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                PostalAddress.Builder builder = new PostalAddress.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 
 //                // No country code
 //                builder = new PostalAddress.Builder(component);
 //                builder.CountryCode = new CountryCode.Builder();
 //                PostalAddress address = builder.commit();
-//                assertNull(address.CountryCode);
+//                Assert.IsNull(address.CountryCode);
 
 //                // Country code
 //                CountryCode countryCode = CountryCodeTest.Fixture;
@@ -390,7 +390,7 @@
 //                builder.CountryCode.Value = countryCode.Value;
 //                builder.Streets.add("1600 Pennsylvania Avenue, NW");
 //                address = builder.commit();
-//                assertEquals(countryCode, address.CountryCode);
+//                Assert.Equals(countryCode, address.CountryCode);
 //            }
 //        }
 
@@ -398,13 +398,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress.Builder builder = new PostalAddress.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 //                builder.City = TEST_CITY;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -412,7 +412,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress.Builder builder = new PostalAddress.Builder();
 //                builder.State = TEST_STATE;
@@ -432,7 +432,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                PostalAddress.Builder builder = new PostalAddress.Builder();
 //                assertNotNull(builder.Streets.get(1));
 //            }

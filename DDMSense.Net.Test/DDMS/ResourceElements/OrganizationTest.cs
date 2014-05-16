@@ -204,7 +204,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
 
@@ -231,7 +231,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing name
 //                GetInstance("At least 1 name element must exist.", null, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
 
@@ -247,7 +247,7 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                // No warnings
 //                Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 
 //                // Empty acronym in DDMS 4.0.1
 //                if (version.isAtLeast("4.0.1")) {
@@ -255,10 +255,10 @@
 //                    element.appendChild(Util.buildDDMSElement("name", TEST_NAMES[0]));
 //                    element.addAttribute(new Attribute("ddms:acronym", version.Namespace, ""));
 //                    component = GetInstance(SUCCESS, element);
-//                    assertEquals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.size());
 //                    string text = "A ddms:acronym attribute was found with no value.";
 //                    string locator = "ddms:organization";
-//                    AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+//                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //            }
 //        }
@@ -267,11 +267,11 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Organization elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Organization dataComponent = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -282,17 +282,17 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 //                Organization elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Organization dataComponent = GetInstance(SUCCESS, TEST_NAMES, null, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                dataComponent = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, null, SubOrganizationTest.FixtureList, Acronym);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                if (version.isAtLeast("4.0.1")) {
 //                    dataComponent = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, null, Acronym);
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                    dataComponent = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, "NewACRONYM");
-//                    assertFalse(elementComponent.Equals(dataComponent));
+//                    Assert.IsFalse(elementComponent.Equals(dataComponent));
 //                }
 //            }
 //        }
@@ -301,14 +301,14 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -316,12 +316,12 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 //            }
 //        }
 
@@ -329,7 +329,7 @@
 ////ORIGINAL LINE: public void testSubOrganizationReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestSubOrganizationReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                IList<SubOrganization> subOrgs = SubOrganizationTest.FixtureList;
 //                GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, subOrgs, Acronym);
 //                GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, subOrgs, Acronym);
@@ -361,24 +361,24 @@
 //            Organization org = new Organization(names, null, null, SubOrganizationTest.FixtureList, null, null);
 
 //            PropertyReader.setProperty("output.indexLevel", "0");
-//            assertEquals("entityType: organization\nname: DISA\n" + "subOrganization: sub1\nsubOrganization.classification: U\nsubOrganization.ownerProducer: USA\n" + "subOrganization: sub2\nsubOrganization.classification: U\nsubOrganization.ownerProducer: USA\n", org.toText());
+//            Assert.Equals("entityType: organization\nname: DISA\n" + "subOrganization: sub1\nsubOrganization.classification: U\nsubOrganization.ownerProducer: USA\n" + "subOrganization: sub2\nsubOrganization.classification: U\nsubOrganization.ownerProducer: USA\n", org.toText());
 
 //            PropertyReader.setProperty("output.indexLevel", "1");
-//            assertEquals("entityType: organization\nname: DISA\n" + "subOrganization[1]: sub1\nsubOrganization[1].classification: U\nsubOrganization[1].ownerProducer: USA\n" + "subOrganization[2]: sub2\nsubOrganization[2].classification: U\nsubOrganization[2].ownerProducer: USA\n", org.toText());
+//            Assert.Equals("entityType: organization\nname: DISA\n" + "subOrganization[1]: sub1\nsubOrganization[1].classification: U\nsubOrganization[1].ownerProducer: USA\n" + "subOrganization[2]: sub2\nsubOrganization[2].classification: U\nsubOrganization[2].ownerProducer: USA\n", org.toText());
 
 //            PropertyReader.setProperty("output.indexLevel", "2");
-//            assertEquals("entityType: organization\nname[1]: DISA\n" + "subOrganization[1]: sub1\nsubOrganization[1].classification: U\nsubOrganization[1].ownerProducer: USA\n" + "subOrganization[2]: sub2\nsubOrganization[2].classification: U\nsubOrganization[2].ownerProducer: USA\n", org.toText());
+//            Assert.Equals("entityType: organization\nname[1]: DISA\n" + "subOrganization[1]: sub1\nsubOrganization[1].classification: U\nsubOrganization[1].ownerProducer: USA\n" + "subOrganization[2]: sub2\nsubOrganization[2].classification: U\nsubOrganization[2].ownerProducer: USA\n", org.toText());
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Organization.Builder builder = new Organization.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -389,20 +389,20 @@
 //                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
 
 //                Organization.Builder builder = new Organization.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
 
 //                // List Emptiness
 //                if (version.isAtLeast("4.0.1")) {
-//                    assertTrue(builder.Empty);
-//                    builder.SubOrganizations.get(0);
-//                    assertTrue(builder.Empty);
-//                    builder.SubOrganizations.get(0).Value = "TEST";
-//                    assertFalse(builder.Empty);
+//                    Assert.IsTrue(builder.Empty);
+//                    builder.SubOrganizations[0];
+//                    Assert.IsTrue(builder.Empty);
+//                    builder.SubOrganizations[0].Value = "TEST";
+//                    Assert.IsFalse(builder.Empty);
 //                }
 
 //                builder.Names = TEST_NAMES;
-//                assertFalse(builder.Empty);
+//                Assert.IsFalse(builder.Empty);
 
 //            }
 //        }
@@ -411,7 +411,7 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Organization.Builder builder = new Organization.Builder();
 //                builder.Phones = TEST_PHONES;
@@ -430,7 +430,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Organization.Builder builder = new Organization.Builder();
 //                assertNotNull(builder.Names.get(1));
 //                assertNotNull(builder.Phones.get(1));

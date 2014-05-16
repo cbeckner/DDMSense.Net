@@ -198,7 +198,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
 
@@ -240,7 +240,7 @@
 ////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing coordinates
 //                GetInstance("A position must be represented by", null, SRSAttributesTest.Fixture);
 
@@ -261,10 +261,10 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.size());
 //            }
 //        }
 
@@ -272,11 +272,11 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Position elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Position dataComponent = GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
-//                assertEquals(elementComponent, dataComponent);
-//                assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+//                Assert.Equals(elementComponent, dataComponent);
+//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 //            }
 //        }
 
@@ -292,10 +292,10 @@
 //                Position positionEqualWhitespace = new Position(Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, TEST_XS_LIST + "   "));
 //                Position positionUnequal2d = new Position(Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, "32.1 40.0"));
 //                Position positionUnequal3d = new Position(Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, TEST_XS_LIST + " 40.0"));
-//                assertEquals(position, positionEqual);
-//                assertEquals(position, positionEqualWhitespace);
-//                assertFalse(position.Equals(positionUnequal2d));
-//                assertFalse(position.Equals(positionUnequal3d));
+//                Assert.Equals(position, positionEqual);
+//                Assert.Equals(position, positionEqualWhitespace);
+//                Assert.IsFalse(position.Equals(positionUnequal2d));
+//                Assert.IsFalse(position.Equals(positionUnequal3d));
 //            }
 //        }
 
@@ -303,15 +303,15 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Position elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Position dataComponent = GetInstance(SUCCESS, TEST_COORDS, null);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
 //                IList<double?> newCoords = new List<double?>(TEST_COORDS);
 //                newCoords.Add(new double?(100.0));
 //                dataComponent = GetInstance(SUCCESS, newCoords, SRSAttributesTest.Fixture);
-//                assertFalse(elementComponent.Equals(dataComponent));
+//                Assert.IsFalse(elementComponent.Equals(dataComponent));
 //            }
 //        }
 
@@ -319,10 +319,10 @@
 ////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Position elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Rights wrongComponent = new Rights(true, true, true);
-//                assertFalse(elementComponent.Equals(wrongComponent));
+//                Assert.IsFalse(elementComponent.Equals(wrongComponent));
 //            }
 //        }
 
@@ -330,14 +330,14 @@
 ////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestHTMLTextOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 
 //                component = GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
-//                assertEquals(GetExpectedOutput(true), component.toHTML());
-//                assertEquals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.toText());
 //            }
 //        }
 
@@ -345,12 +345,12 @@
 ////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestXMLOutput() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                assertEquals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
 
 //                component = GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
-//                assertEquals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
 //            }
 //        }
 
@@ -358,11 +358,11 @@
 ////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Position.Builder builder = new Position.Builder(component);
-//                assertEquals(component, builder.commit());
+//                Assert.Equals(component, builder.commit());
 //            }
 //        }
 
@@ -370,13 +370,13 @@
 ////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderIsEmpty() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Position.Builder builder = new Position.Builder();
-//                assertNull(builder.commit());
-//                assertTrue(builder.Empty);
-//                builder.Coordinates.get(0).Value = Convert.ToDouble(0);
-//                assertFalse(builder.Empty);
+//                Assert.IsNull(builder.commit());
+//                Assert.IsTrue(builder.Empty);
+//                builder.Coordinates[0].Value = Convert.ToDouble(0);
+//                Assert.IsFalse(builder.Empty);
 //            }
 //        }
 
@@ -384,10 +384,10 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Position.Builder builder = new Position.Builder();
-//                builder.Coordinates.get(0).Value = Convert.ToDouble(0);
+//                builder.Coordinates[0].Value = Convert.ToDouble(0);
 //                try {
 //                    builder.commit();
 //                    fail("Builder allowed invalid data.");
@@ -400,10 +400,10 @@
 //                // Skip empty Coordinates
 //                builder = new Position.Builder();
 //                builder.SrsAttributes = new SRSAttributes.Builder(SRSAttributesTest.Fixture);
-//                builder.Coordinates.get(0).Value = null;
+//                builder.Coordinates[0].Value = null;
 //                builder.Coordinates.get(1).Value = Convert.ToDouble(0);
 //                builder.Coordinates.get(2).Value = Convert.ToDouble(1);
-//                assertEquals(2, builder.commit().Coordinates.size());
+//                Assert.Equals(2, builder.commit().Coordinates.size());
 //            }
 //        }
 
@@ -411,7 +411,7 @@
 ////ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderLazyList() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.CurrentVersion = sVersion;
+//                DDMSVersion.SetCurrentVersion(sVersion);
 //                Position.Builder builder = new Position.Builder();
 //                assertNotNull(builder.Coordinates.get(1));
 //            }
