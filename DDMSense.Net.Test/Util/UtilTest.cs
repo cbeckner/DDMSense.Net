@@ -30,6 +30,7 @@ namespace DDMSense.Test.Util {
     using System.IO;
     using System.Xml.Linq;
     using InvalidDDMSException = DDMSense.DDMS.InvalidDDMSException;
+    using System.Text;
 
 	/// <summary>
 	/// A collection of Util tests.
@@ -986,7 +987,7 @@ namespace DDMSense.Test.Util {
 			XElement element = new XElement("test", "http://test.com");
 			Util.AddDDMSAttribute(element, "testAttribute", "dog");
             XAttribute attr = element.Attribute(XName.Get("testAttribute", DDMSVersion.CurrentVersion.Namespace));
-			Assert.AreEqual("ddms", attr.NamespacePrefix);
+			Assert.AreEqual("ddms", attr.GetPrefix());
 			Assert.AreEqual(DDMSVersion.CurrentVersion.Namespace, attr.Name.NamespaceName);
 			Assert.AreEqual("testAttribute", attr.Name.LocalName);
 			Assert.AreEqual("dog", element.Attribute(XName.Get("testAttribute", DDMSVersion.CurrentVersion.Namespace)));
@@ -1029,9 +1030,10 @@ namespace DDMSense.Test.Util {
 //ORIGINAL LINE: public void testBuildXmlDocument() throws Exception
         [TestMethod]
         public virtual void TestBuildXmlDocument() {
-			File testFile = new File(PropertyReader.getProperty("test.unit.data") + "3.0/", "resource.xml");
-			string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).toXML();
-			Assert.AreEqual(expectedXmlOutput, Util.BuildXmlDocument(new FileInputStream(testFile)).RootElement.toXML());
+            //File testFile = new File(PropertyReader.getProperty("test.unit.data") + "3.0/", "resource.xml");
+            //string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).toXML();
+            //Assert.AreEqual(expectedXmlOutput, Util.BuildXmlDocument(new FileStream(testFile)).RootElement.toXML());
+            Assert.Fail("Not Implemented");
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -1046,7 +1048,7 @@ namespace DDMSense.Test.Util {
 			}
 
 			try {
-				Util.BuildXmlDocument(new ByteArrayInputStream("Not an XML File".GetBytes()));
+				Util.BuildXmlDocument(new MemoryStream(Encoding.ASCII.GetBytes("Not an XML File")));
 				Assert.Fail("Allowed invalid data.");
 			} catch (IOException e) {
 				ExpectMessage(e, "Content is not allowed in prolog.");
@@ -1057,9 +1059,9 @@ namespace DDMSense.Test.Util {
 //ORIGINAL LINE: public void testSchematronQueryBinding() throws Exception
         [TestMethod]
         public virtual void TestSchematronQueryBinding() {
-			XDocument schDocument = Util.BuildXmlDocument(new FileInputStream("data/sample/schematron/testPublisherValueXslt1.sch"));
+			XDocument schDocument = Util.BuildXmlDocument(new FileStream("data/sample/schematron/testPublisherValueXslt1.sch",FileMode.Open));
 			Assert.AreEqual("xslt", Util.GetSchematronQueryBinding(schDocument));
-			schDocument = Util.BuildXmlDocument(new FileInputStream("data/sample/schematron/testPositionValuesXslt2.sch"));
+			schDocument = Util.BuildXmlDocument(new FileStream("data/sample/schematron/testPositionValuesXslt2.sch",FileMode.Open));
 			Assert.AreEqual("xslt2", Util.GetSchematronQueryBinding(schDocument));
 		}
 	}
