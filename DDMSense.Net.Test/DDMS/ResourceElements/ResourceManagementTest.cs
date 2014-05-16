@@ -67,7 +67,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private ResourceManagement GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ResourceManagement component = null;
 //            try {
 //                component = new ResourceManagement(element);
@@ -88,7 +88,7 @@
 //        /// <param name="taskingInfos"> list of tasking info (optional) </param>
 //        /// <param name="processingInfos"> list of processing info (optional) </param>
 //        private ResourceManagement GetInstance(string message, RecordsManagementInfo recordsManagementInfo, RevisionRecall revisionRecall, IList<TaskingInfo> taskingInfos, IList<ProcessingInfo> processingInfos) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ResourceManagement component = null;
 //            try {
 //                component = new ResourceManagement(recordsManagementInfo, revisionRecall, taskingInfos, processingInfos, SecurityAttributesTest.Fixture);

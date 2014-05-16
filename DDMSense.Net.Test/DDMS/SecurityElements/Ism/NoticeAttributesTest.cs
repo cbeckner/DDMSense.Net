@@ -82,7 +82,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private NoticeAttributes GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NoticeAttributes attributes = null;
 //            try {
 //                attributes = new NoticeAttributes(element);
@@ -105,7 +105,7 @@
 //        /// <param name="externalNotice"> the external notice attribute </param>
 //        /// <returns> a valid object </returns>
 //        private NoticeAttributes GetInstance(string message, string noticeType, string noticeReason, string noticeDate, string unregisteredNoticeType, bool? externalNotice) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NoticeAttributes attributes = null;
 //            try {
 //                attributes = new NoticeAttributes(noticeType, noticeReason, noticeDate, unregisteredNoticeType, externalNotice);

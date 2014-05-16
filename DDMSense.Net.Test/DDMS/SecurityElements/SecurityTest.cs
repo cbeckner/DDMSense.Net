@@ -67,7 +67,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Security GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Security component = null;
 //            try {
 //                component = new Security(element);
@@ -87,7 +87,7 @@
 //        /// <param name="access"> NTK access information (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private Security GetInstance(string message, NoticeList noticeList, Access access) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Security component = null;
 //            try {
 //                component = new Security(noticeList, access, SecurityAttributesTest.Fixture);

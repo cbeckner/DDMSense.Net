@@ -85,7 +85,7 @@
 //        /// <param name="element"> the element to build from </param>
 //        /// <returns> a valid object </returns>
 //        private SubjectCoverage GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SubjectCoverage component = null;
 //            try {
 //                if (DDMSVersion.CurrentVersion.isAtLeast("3.0")) {
@@ -110,7 +110,7 @@
 //        /// <param name="actors"> list of non-state actors </param>
 //        /// <returns> a valid object </returns>
 //        private SubjectCoverage GetInstance(string message, IList<Keyword> keywords, IList<Category> categories, IList<ProductionMetric> metrics, IList<NonStateActor> actors) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SubjectCoverage component = null;
 //            try {
 //                SecurityAttributes attr = (!DDMSVersion.CurrentVersion.isAtLeast("3.0")) ? null : SecurityAttributesTest.Fixture;

@@ -75,7 +75,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private ProductionMetric GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProductionMetric component = null;
 //            try {
 //                component = new ProductionMetric(element);
@@ -98,7 +98,7 @@
 //        /// <param name="label"> the label (required) </param>
 //        /// <returns> a valid object </returns>
 //        private ProductionMetric GetInstance(string message, string subject, string coverage) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProductionMetric component = null;
 //            try {
 //                component = new ProductionMetric(subject, coverage, SecurityAttributesTest.Fixture);

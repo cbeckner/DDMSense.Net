@@ -67,7 +67,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private RecordsManagementInfo GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RecordsManagementInfo component = null;
 //            try {
 //                component = new RecordsManagementInfo(element);
@@ -88,7 +88,7 @@
 //        /// <param name="vitalRecord"> whether this is a vital record (optional, defaults to false) </param>
 //        /// <param name="org"> the organization </param>
 //        private RecordsManagementInfo GetInstance(string message, RecordKeeper keeper, ApplicationSoftware software, bool? vitalRecord) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RecordsManagementInfo component = null;
 //            try {
 //                component = new RecordsManagementInfo(keeper, software, vitalRecord);

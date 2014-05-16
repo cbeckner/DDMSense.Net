@@ -86,7 +86,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private RecordKeeper GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RecordKeeper component = null;
 //            try {
 //                component = new RecordKeeper(element);
@@ -105,7 +105,7 @@
 //        /// <param name="recordKeeperID"> ID value </param>
 //        /// <param name="org"> the organization </param>
 //        private RecordKeeper GetInstance(string message, string recordKeeperID, Organization org) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RecordKeeper component = null;
 //            try {
 //                component = new RecordKeeper(recordKeeperID, org);

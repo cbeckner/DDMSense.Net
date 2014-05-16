@@ -69,7 +69,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private ProfileList GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProfileList component = null;
 //            try {
 //                component = new ProfileList(element);
@@ -87,7 +87,7 @@
 //        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
 //        /// <param name="profiles"> the profiles in this list (required) </param>
 //        private ProfileList GetInstance(string message, IList<Profile> profiles) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProfileList component = null;
 //            try {
 //                component = new ProfileList(profiles, SecurityAttributesTest.Fixture);

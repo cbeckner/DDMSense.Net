@@ -68,7 +68,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Format GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Format component = null;
 //            try {
 //                component = new Format(element);
@@ -89,7 +89,7 @@
 //        /// <param name="medium"> the medium element (may be null) </param>
 //        /// <returns> a valid object </returns>
 //        private Format GetInstance(string message, string mimeType, Extent extent, string medium) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Format component = null;
 //            try {
 //                component = new Format(mimeType, extent, medium);

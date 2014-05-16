@@ -92,7 +92,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private ApplicationSoftware GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ApplicationSoftware component = null;
 //            try {
 //                component = new ApplicationSoftware(element);
@@ -111,7 +111,7 @@
 //        /// <param name="value"> the child text </param>
 //        /// <returns> a valid object </returns>
 //        private ApplicationSoftware GetInstance(string message, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ApplicationSoftware component = null;
 //            try {
 //                component = new ApplicationSoftware(value, SecurityAttributesTest.Fixture);

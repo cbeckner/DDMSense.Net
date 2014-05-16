@@ -67,7 +67,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private CountryCode GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            CountryCode component = null;
 //            try {
 //                component = new CountryCode(element);
@@ -87,7 +87,7 @@
 //        /// <param name="value"> the value </param>
 //        /// <returns> a valid object </returns>
 //        private CountryCode GetInstance(string message, string qualifier, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            CountryCode component = null;
 //            try {
 //                component = new CountryCode(qualifier, value);

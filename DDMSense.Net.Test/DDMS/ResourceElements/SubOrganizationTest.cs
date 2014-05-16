@@ -96,7 +96,7 @@
 //        /// <param name="element"> the element to build from </param>
 //        /// <returns> a valid object </returns>
 //        private SubOrganization GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SubOrganization component = null;
 //            try {
 //                component = new SubOrganization(element);
@@ -115,7 +115,7 @@
 //        /// <param name="value"> the value </param>
 //        /// <returns> a valid object </returns>
 //        private SubOrganization GetInstance(string message, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SubOrganization component = null;
 //            try {
 //                component = new SubOrganization(value, SecurityAttributesTest.Fixture);

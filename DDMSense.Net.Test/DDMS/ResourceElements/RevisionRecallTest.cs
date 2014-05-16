@@ -91,7 +91,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private RevisionRecall GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RevisionRecall component = null;
 //            try {
 //                component = new RevisionRecall(element);
@@ -115,7 +115,7 @@
 //        /// <param name="otherNetwork"> another network (optional) </param>
 //        /// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
 //        private RevisionRecall GetInstance(string message, IList<Link> links, IList<Details> details, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RevisionRecall component = null;
 //            try {
 //                component = new RevisionRecall(links, details, revisionID, revisionType, network, otherNetwork, xlinkAttributes, SecurityAttributesTest.Fixture);
@@ -138,7 +138,7 @@
 //        /// <param name="otherNetwork"> another network (optional) </param>
 //        /// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
 //        private RevisionRecall GetInstance(string message, string value, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RevisionRecall component = null;
 //            try {
 //                component = new RevisionRecall(value, revisionID, revisionType, network, otherNetwork, xlinkAttributes, SecurityAttributesTest.Fixture);

@@ -94,7 +94,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private GeographicIdentifier GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            GeographicIdentifier component = null;
 //            try {
 //                component = new GeographicIdentifier(element);
@@ -117,7 +117,7 @@
 //        /// <param name="facilityIdentifier"> the facility identifier (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private GeographicIdentifier GetInstance(string message, IList<string> names, IList<string> regions, CountryCode countryCode, SubDivisionCode subDivisionCode, FacilityIdentifier facilityIdentifier) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            GeographicIdentifier component = null;
 //            try {
 //                if (facilityIdentifier != null) {

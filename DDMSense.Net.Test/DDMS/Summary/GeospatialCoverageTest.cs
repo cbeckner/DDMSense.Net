@@ -90,7 +90,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private GeospatialCoverage GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            GeospatialCoverage component = null;
 //            try {
 //                if (DDMSVersion.CurrentVersion.isAtLeast("3.0")) {
@@ -118,7 +118,7 @@
 //        /// <param name="order"> the order value (optional, DDMS 4.0.1) </param>
 //        /// <returns> a valid object </returns>
 //        private GeospatialCoverage GetInstance(string message, GeographicIdentifier geographicIdentifier, BoundingBox boundingBox, BoundingGeometry boundingGeometry, PostalAddress postalAddress, VerticalExtent verticalExtent, string precedence, int? order) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            GeospatialCoverage component = null;
 //            try {
 //                SecurityAttributes attr = (!DDMSVersion.CurrentVersion.isAtLeast("3.0")) ? null : SecurityAttributesTest.Fixture;

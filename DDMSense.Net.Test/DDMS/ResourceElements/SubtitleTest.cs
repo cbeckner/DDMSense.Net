@@ -67,7 +67,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Subtitle GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Subtitle component = null;
 //            try {
 //                component = new Subtitle(element);
@@ -86,7 +86,7 @@
 //        /// <param name="value"> the child text </param>
 //        /// <returns> a valid object </returns>
 //        private Subtitle GetInstance(string message, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Subtitle component = null;
 //            try {
 //                component = new Subtitle(value, SecurityAttributesTest.Fixture);

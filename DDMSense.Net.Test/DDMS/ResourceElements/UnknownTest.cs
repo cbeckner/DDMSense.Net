@@ -75,7 +75,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Unknown GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Unknown component = null;
 //            try {
 //                component = new Unknown(element);
@@ -95,7 +95,7 @@
 //        /// <param name="phones"> an ordered list of phone numbers </param>
 //        /// <param name="emails"> an ordered list of email addresses </param>
 //        private Unknown GetInstance(string message, IList<string> names, IList<string> phones, IList<string> emails) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Unknown component = null;
 //            try {
 //                component = new Unknown(names, phones, emails);

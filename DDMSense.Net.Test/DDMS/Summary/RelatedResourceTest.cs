@@ -73,7 +73,7 @@
 //        /// <param name="element"> the element to build from </param>
 //        /// <returns> a valid object </returns>
 //        private RelatedResource GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RelatedResource component = null;
 //            try {
 //                component = new RelatedResource(element);
@@ -96,7 +96,7 @@
 //        /// <param name="value"> the value </param>
 //        /// <returns> a valid object </returns>
 //        private RelatedResource GetInstance(string message, IList<Link> links, string relationship, string direction, string qualifier, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RelatedResource component = null;
 //            try {
 //                component = new RelatedResource(links, relationship, direction, qualifier, value, SecurityAttributesTest.Fixture);

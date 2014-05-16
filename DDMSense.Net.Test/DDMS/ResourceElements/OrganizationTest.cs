@@ -85,7 +85,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Organization GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Organization component = null;
 //            try {
 //                component = new Organization(element);
@@ -107,7 +107,7 @@
 //        /// <param name="subOrganizations"> an ordered list of suborganizations </param>
 //        /// <param name="acronym"> the organization acronym </param>
 //        private Organization GetInstance(string message, IList<string> names, IList<string> phones, IList<string> emails, IList<SubOrganization> subOrganizations, string acronym) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Organization component = null;
 //            try {
 //                component = new Organization(names, phones, emails, subOrganizations, acronym, null);

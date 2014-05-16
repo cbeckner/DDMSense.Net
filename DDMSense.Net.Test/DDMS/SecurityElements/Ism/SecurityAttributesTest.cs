@@ -213,7 +213,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private SecurityAttributes GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SecurityAttributes attributes = null;
 //            try {
 //                attributes = new SecurityAttributes(element);
@@ -235,7 +235,7 @@
 //        /// appears in XML. </param>
 //        /// <returns> a valid object </returns>
 //        private SecurityAttributes GetInstance(string message, string classification, IList<string> ownerProducers, IDictionary<string, string> otherAttributes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SecurityAttributes attributes = null;
 //            try {
 //                attributes = new SecurityAttributes(classification, ownerProducers, otherAttributes);

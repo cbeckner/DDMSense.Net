@@ -77,7 +77,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private PostalAddress GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            PostalAddress component = null;
 //            try {
 //                component = new PostalAddress(element);
@@ -102,7 +102,7 @@
 //        /// can exist in a postalAddress) </param>
 //        /// <returns> a valid object </returns>
 //        private PostalAddress GetInstance(string message, IList<string> streets, string city, string stateOrProvince, string postalCode, CountryCode countryCode, bool hasState) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            PostalAddress component = null;
 //            try {
 //                component = new PostalAddress(streets, city, stateOrProvince, postalCode, countryCode, hasState);

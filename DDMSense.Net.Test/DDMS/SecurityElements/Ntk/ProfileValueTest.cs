@@ -84,7 +84,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private ProfileValue GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProfileValue component = null;
 //            try {
 //                component = new ProfileValue(element);
@@ -107,7 +107,7 @@
 //        /// <param name="qualifier"> an NTK qualifier (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private ProfileValue GetInstance(string message, string value, string vocabulary, string id, string idReference, string qualifier) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProfileValue component = null;
 //            try {
 //                component = new ProfileValue(value, vocabulary, id, idReference, qualifier, SecurityAttributesTest.Fixture);

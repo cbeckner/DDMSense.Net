@@ -65,7 +65,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private FacilityIdentifier GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            FacilityIdentifier component = null;
 //            try {
 //                component = new FacilityIdentifier(element);
@@ -85,7 +85,7 @@
 //        /// <param name="osuffix"> the Osuffix (required, because beNumber is required) </param>
 //        /// <returns> a valid object </returns>
 //        private FacilityIdentifier GetInstance(string message, string beNumber, string osuffix) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            FacilityIdentifier component = null;
 //            try {
 //                component = new FacilityIdentifier(beNumber, osuffix);

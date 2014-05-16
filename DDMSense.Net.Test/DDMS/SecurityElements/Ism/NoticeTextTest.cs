@@ -97,7 +97,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private NoticeText GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NoticeText component = null;
 //            try {
 //                component = new NoticeText(element);
@@ -117,7 +117,7 @@
 //        /// <param name="pocTypes"> the poc types (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private NoticeText GetInstance(string message, string value, IList<string> pocTypes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NoticeText component = null;
 //            try {
 //                component = new NoticeText(value, pocTypes, SecurityAttributesTest.Fixture);

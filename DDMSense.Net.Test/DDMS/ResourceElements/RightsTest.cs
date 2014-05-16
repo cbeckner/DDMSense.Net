@@ -64,7 +64,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Rights GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Rights component = null;
 //            try {
 //                component = new Rights(element);
@@ -85,7 +85,7 @@
 //        /// <param name="copyright"> the value for the copyright attribute </param>
 //        /// <returns> a valid object </returns>
 //        private Rights GetInstance(string message, bool privacyAct, bool intellectualProperty, bool copyright) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Rights component = null;
 //            try {
 //                component = new Rights(privacyAct, intellectualProperty, copyright);

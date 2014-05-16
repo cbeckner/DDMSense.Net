@@ -70,7 +70,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Source GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Source component = null;
 //            try {
 //                if (DDMSVersion.CurrentVersion.isAtLeast("3.0")) {
@@ -95,7 +95,7 @@
 //        /// <param name="schemaHref"> the value of the schemaHref attribute </param>
 //        /// <returns> a valid object </returns>
 //        private Source GetInstance(string message, string qualifier, string value, string schemaQualifier, string schemaHref) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Source component = null;
 //            try {
 //                SecurityAttributes attr = (!DDMSVersion.CurrentVersion.isAtLeast("3.0") ? null : SecurityAttributesTest.Fixture);

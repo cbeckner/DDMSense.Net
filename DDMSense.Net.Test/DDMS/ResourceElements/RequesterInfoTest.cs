@@ -92,7 +92,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private RequesterInfo GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RequesterInfo component = null;
 //            try {
 //                component = new RequesterInfo(element);
@@ -111,7 +111,7 @@
 //        /// <param name="entity"> the person or organization in this role </param>
 //        /// <param name="org"> the organization </param>
 //        private RequesterInfo GetInstance(string message, IRoleEntity entity) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RequesterInfo component = null;
 //            try {
 //                component = new RequesterInfo(entity, SecurityAttributesTest.Fixture);

@@ -79,7 +79,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private PointOfContact GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            PointOfContact component = null;
 //            try {
 //                SecurityAttributesTest.Fixture.addTo(element);
@@ -99,7 +99,7 @@
 //        /// <param name="entity"> the producer entity </param>
 //        /// <param name="pocTypes"> the pocType (DDMS 4.0.1 or later) </param>
 //        private PointOfContact GetInstance(string message, IRoleEntity entity, IList<string> pocTypes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            PointOfContact component = null;
 //            try {
 //                component = new PointOfContact(entity, pocTypes, SecurityAttributesTest.Fixture);

@@ -79,7 +79,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Group GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Group component = null;
 //            try {
 //                component = new Group(element);
@@ -98,7 +98,7 @@
 //        /// <param name="systemName"> the system (required) </param>
 //        /// <param name="values"> the values (1 required) </param>
 //        private Group GetInstance(string message, SystemName systemName, IList<GroupValue> values) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Group component = null;
 //            try {
 //                component = new Group(systemName, values, SecurityAttributesTest.Fixture);

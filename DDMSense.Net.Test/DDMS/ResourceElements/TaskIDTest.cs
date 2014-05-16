@@ -98,7 +98,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private TaskID GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            TaskID component = null;
 //            try {
 //                component = new TaskID(element);
@@ -120,7 +120,7 @@
 //        /// <param name="otherNetwork"> another network (optional) </param>
 //        /// <param name="attributes"> the xlink attributes (optional) </param>
 //        private TaskID GetInstance(string message, string value, string taskingSystem, string network, string otherNetwork, XLinkAttributes attributes) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            TaskID component = null;
 //            try {
 //                component = new TaskID(value, taskingSystem, network, otherNetwork, attributes);

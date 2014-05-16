@@ -74,7 +74,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Service GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Service component = null;
 //            try {
 //                component = new Service(element);
@@ -94,7 +94,7 @@
 //        /// <param name="phones"> an ordered list of phone numbers </param>
 //        /// <param name="emails"> an ordered list of email addresses </param>
 //        private Service GetInstance(string message, IList<string> names, IList<string> phones, IList<string> emails) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Service component = null;
 //            try {
 //                component = new Service(names, phones, emails);

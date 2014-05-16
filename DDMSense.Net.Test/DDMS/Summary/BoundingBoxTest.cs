@@ -70,7 +70,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private BoundingBox GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            BoundingBox component = null;
 //            try {
 //                component = new BoundingBox(element);
@@ -92,7 +92,7 @@
 //        /// <param name="northBL"> the northbound latitude </param>
 //        /// <returns> a valid object </returns>
 //        private BoundingBox GetInstance(string message, double westBL, double eastBL, double southBL, double northBL) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            BoundingBox component = null;
 //            try {
 //                component = new BoundingBox(westBL, eastBL, southBL, northBL);

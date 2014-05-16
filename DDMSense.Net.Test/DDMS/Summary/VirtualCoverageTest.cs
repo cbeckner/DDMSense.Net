@@ -66,7 +66,7 @@
 //        /// <param name="element"> the element to build from </param>
 //        /// <returns> a valid object </returns>
 //        private VirtualCoverage GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            VirtualCoverage component = null;
 //            try {
 //                if (DDMSVersion.CurrentVersion.isAtLeast("3.0")) {
@@ -89,7 +89,7 @@
 //        /// <param name="protocol"> the network protocol (optional, should be used if address is provided) </param>
 //        /// <returns> a valid object </returns>
 //        private VirtualCoverage GetInstance(string message, string address, string protocol) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            VirtualCoverage component = null;
 //            try {
 //                SecurityAttributes attr = (!DDMSVersion.CurrentVersion.isAtLeast("3.0")) ? null : SecurityAttributesTest.Fixture;

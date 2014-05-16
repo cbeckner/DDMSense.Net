@@ -93,7 +93,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private NoticeList GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NoticeList component = null;
 //            try {
 //                component = new NoticeList(element);
@@ -112,7 +112,7 @@
 //        /// <param name="notices"> the notices (at least 1 required) </param>
 //        /// <returns> a valid object </returns>
 //        private NoticeList GetInstance(string message, IList<Notice> notices) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NoticeList component = null;
 //            try {
 //                component = new NoticeList(notices, SecurityAttributesTest.Fixture);

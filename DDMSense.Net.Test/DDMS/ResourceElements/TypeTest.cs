@@ -68,7 +68,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private Type GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Type component = null;
 //            try {
 //                component = new Type(element);
@@ -89,7 +89,7 @@
 //        /// <param name="value"> the value </param>
 //        /// <returns> a valid object </returns>
 //        private Type GetInstance(string message, string description, string qualifier, string value) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            DDMSVersion version = DDMSVersion.CurrentVersion;
 //            Type component = null;
 //            try {

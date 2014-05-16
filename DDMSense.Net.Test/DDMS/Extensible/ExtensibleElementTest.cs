@@ -62,7 +62,7 @@
 //        /// </param>
 //        /// <returns> a valid object </returns>
 //        private ExtensibleElement GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ExtensibleElement component = null;
 //            try {
 //                component = new ExtensibleElement(element);

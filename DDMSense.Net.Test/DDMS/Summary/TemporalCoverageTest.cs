@@ -93,7 +93,7 @@
 //        /// <param name="element"> the element to build from </param>
 //        /// <returns> a valid object </returns>
 //        private TemporalCoverage GetInstance(string message, XElement element) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            TemporalCoverage component = null;
 //            try {
 //                if (DDMSVersion.CurrentVersion.isAtLeast("3.0")) {
@@ -119,7 +119,7 @@
 //        /// <param name="approximableEnd"> the end date, as an approximable date (optional) </param>
 //        /// <returns> a valid object </returns>
 //        private TemporalCoverage GetInstance(string message, string timePeriodName, string startString, ApproximableDate approximableStart, string endString, ApproximableDate approximableEnd) {
-//            bool expectFailure = !Util.isEmpty(message);
+//            bool expectFailure = !String.IsNullOrEmpty(message);
 //            TemporalCoverage component = null;
 //            try {
 //                SecurityAttributes attr = (!DDMSVersion.CurrentVersion.isAtLeast("3.0")) ? null : SecurityAttributesTest.Fixture;
