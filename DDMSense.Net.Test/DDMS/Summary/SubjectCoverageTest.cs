@@ -32,7 +32,6 @@ namespace DDMSense.Test.DDMS.Summary
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.Summary;
-    using DDMSense.DDMS.Summary;
     using System.Xml.Linq;
     using DDMSense.DDMS;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

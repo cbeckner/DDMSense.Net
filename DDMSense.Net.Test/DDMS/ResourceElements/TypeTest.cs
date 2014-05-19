@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using System;
 using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
 

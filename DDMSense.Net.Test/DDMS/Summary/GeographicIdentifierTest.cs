@@ -24,7 +24,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DDMSense.Test.DDMS.Summary
 {
     using DDMSense.DDMS.Summary;
-    using DDMSense.DDMS.Summary;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
