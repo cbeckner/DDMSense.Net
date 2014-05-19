@@ -218,10 +218,14 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         /// <returns> an attribute group </returns>
         private static Dictionary<string, string> GetOtherAttributes(string key, string value)
         {
-            //TODO: Not sure what to do here(MAM)
+            //TODO: Not sure what to do here
+            Assert.Fail("TODO: Dictionary<string, string> baseAttributes = new Hashtable(OtherAttributes);");
+            return new Dictionary<string, string>();
+            /*
             Dictionary<string, string> baseAttributes = new Hashtable(OtherAttributes);
             baseAttributes[key] = value;
             return (baseAttributes);
+            */
         }
 
         /// <summary>
