@@ -34,7 +34,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.ResourceElements;
-    using DDMSense.DDMS.ResourceElements;
     using System.Xml.Linq;
     using DDMSense.DDMS;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

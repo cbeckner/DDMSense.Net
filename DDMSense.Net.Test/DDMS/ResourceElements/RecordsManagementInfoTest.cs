@@ -26,7 +26,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
 
     using DDMSense.DDMS.ResourceElements;
-    using DDMSense.DDMS.ResourceElements;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
