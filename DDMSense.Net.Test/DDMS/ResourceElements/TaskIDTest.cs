@@ -77,7 +77,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                     Util.AddDDMSAttribute(element, "taskingSystem", TEST_TASKING_SYSTEM);
                     Util.AddAttribute(element, "", "network", "", TEST_NETWORK);
                     Util.AddAttribute(element, "", "otherNetwork", "", TEST_OTHER_NETWORK);
-                    XLinkAttributesTest.SimpleFixture.addTo(element);
+                    XLinkAttributesTest.SimpleFixture.AddTo(element);
                     return (element);
                 }
                 catch (InvalidDDMSException e)
@@ -167,7 +167,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             text.Append(BuildOutput(isHTML, "taskID.taskingSystem", TEST_TASKING_SYSTEM));
             text.Append(BuildOutput(isHTML, "taskID.network", TEST_NETWORK));
             text.Append(BuildOutput(isHTML, "taskID.otherNetwork", TEST_OTHER_NETWORK));
-            text.Append(XLinkAttributesTest.SimpleFixture.getOutput(isHTML, "taskID."));
+            text.Append(XLinkAttributesTest.SimpleFixture.GetOutput(isHTML, "taskID."));
             return (text.ToString());
         }
 
@@ -240,7 +240,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // Wrong type of XLinkAttributes (locator)
                 XElement element = Util.BuildDDMSElement(TaskID.GetName(version), TEST_VALUE);
-                XLinkAttributesTest.LocatorFixture.addTo(element);
+                XLinkAttributesTest.LocatorFixture.AddTo(element);
                 GetInstance("The type attribute must have a fixed value", element);
 
                 // Missing value

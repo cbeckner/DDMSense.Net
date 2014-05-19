@@ -41,6 +41,8 @@ namespace DDMSense.Test.DDMS.Metacard
     using System.Xml.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using DDMSense.DDMS.ResourceElements;
+    using DDMSense.Test.DDMS.ResourceElements;
+    using System;
 
     /// <summary>
     /// <para> Tests related to ddms:metacardInfo elements </para>
