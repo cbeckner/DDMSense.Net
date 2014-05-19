@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
    
    This library is free software; you can redistribute it and/or modify
@@ -18,7 +18,7 @@ using System.Linq;
    
    You should have received a copy of the GNU Lesser General Public 
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
+   
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
@@ -36,7 +36,7 @@ namespace DDMSense.Test.DDMS.SecurityElements
 	using System.Xml.Linq;
 	using DDMSense.DDMS;
 	using System;
-
+	
 	/// <summary>
 	/// <para> Tests related to ddms:noticeList elements </para>
 	/// 
@@ -82,7 +82,7 @@ namespace DDMSense.Test.DDMS.SecurityElements
 				return (null);
 			}
 		}
-
+	
 		/// <summary>
 		/// Returns a fixture object for testing.
 		/// </summary>
@@ -198,7 +198,7 @@ namespace DDMSense.Test.DDMS.SecurityElements
 			}
 		}
 
-		
+
 		public virtual void TestNameAndNamespace()
 		{
 			foreach (string sVersion in SupportedVersions)
@@ -222,7 +222,7 @@ namespace DDMSense.Test.DDMS.SecurityElements
 			}
 		}
 
-		
+
 		public virtual void TestDataConstructorValid()
 		{
 			foreach (string sVersion in SupportedVersions)

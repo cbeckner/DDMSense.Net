@@ -171,22 +171,22 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, NonStateActor.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, NonStateActor.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
 
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(NonStateActor.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(NonStateActor.GetName(version), null);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -205,11 +205,11 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Bad qualifier
 //                if (version.isAtLeast("4.1")) {
-//                    XElement element = Util.buildDDMSElement(NonStateActor.getName(version), null);
+//                    XElement element = Util.BuildDDMSElement(NonStateActor.GetName(version), null);
 //                    Util.addDDMSAttribute(element, "qualifier", INVALID_URI);
 //                    GetInstance("Invalid URI", element);
 //                }
@@ -218,7 +218,7 @@
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Bad qualifier
 //                if (version.isAtLeast("4.1")) {
@@ -229,26 +229,26 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // 4.1 ddms:qualifier element used
 //                if (version.isAtLeast("4.1")) {
-//                    Assert.Equals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.Count());
 //                    string text = "The ddms:qualifier attribute in this DDMS component";
 //                    string locator = "ddms:nonStateActor";
 //                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //                // No warnings 
 //                else {
-//                    Assert.Equals(0, component.ValidationWarnings.size());
+//                    Assert.Equals(0, component.ValidationWarnings.Count());
 //                }
 
 //                // Empty value
-//                XElement element = Util.buildDDMSElement(NonStateActor.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(NonStateActor.GetName(version), null);
 //                component = GetInstance(SUCCESS, element);
-//                Assert.Equals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.Count());
 //                string text = "A ddms:nonStateActor element was found with no value.";
 //                string locator = "ddms:nonStateActor";
 //                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -282,7 +282,7 @@
 
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                NonStateActor dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_ORDER, Qualifier);
@@ -305,12 +305,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -319,10 +319,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -344,7 +344,7 @@
 
 //                NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                NonStateActor.Builder builder = new NonStateActor.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -355,7 +355,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NonStateActor.Builder builder = new NonStateActor.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Order = TEST_ORDER;
 //                Assert.IsFalse(builder.Empty);

@@ -30,6 +30,7 @@ namespace DDMSense.Test.DDMS.Extensible
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using DDMSense.DDMS;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to extensible layer elements </para>
@@ -142,7 +143,7 @@ namespace DDMSense.Test.DDMS.Extensible
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 ExtensibleElement component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(0, component.ValidationWarnings.Count);
+                Assert.Equals(0, component.ValidationWarnings.Count());
             }
         }
 

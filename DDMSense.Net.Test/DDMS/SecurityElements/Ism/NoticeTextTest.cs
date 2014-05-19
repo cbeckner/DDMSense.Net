@@ -33,6 +33,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ISM:NoticeText elements </para>
@@ -274,13 +275,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
 
                 // No warnings
                 NoticeText component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(0, component.ValidationWarnings.Count);
+                Assert.Equals(0, component.ValidationWarnings.Count());
 
                 // Empty value
                 XElement element = Util.BuildElement(ismPrefix, NoticeText.GetName(version), version.IsmNamespace, null);
                 SecurityAttributesTest.Fixture.AddTo(element);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count);
+                Assert.Equals(1, component.ValidationWarnings.Count());
                 string text = "An ISM:NoticeText element was found with no value.";
                 string locator = "ISM:NoticeText";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -24,10 +24,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DDMSense.Test.DDMS.Extensible
 {
 
-
-	
-	using DDMSVersion = DDMSense.Util.DDMSVersion;
-	using Util = DDMSense.Util.Util;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.Extensible;
     using System.Xml.Linq;
     using DDMSense.DDMS;
@@ -35,32 +33,33 @@ namespace DDMSense.Test.DDMS.Extensible
     using System;
     using DDMSense.DDMS.Summary;
     using DDMSense.DDMS.ResourceElements;
+    using System.Linq;
 
-	/// <summary>
-	/// <para> Tests related to the extensible attributes themselves. How they interact with parent classes is tested in those
-	/// classes. </para>
-	/// 
-	/// @author Brian Uri!
-	/// @since 1.1.0
-	/// </summary>
+    /// <summary>
+    /// <para> Tests related to the extensible attributes themselves. How they interact with parent classes is tested in those
+    /// classes. </para>
+    /// 
+    /// @author Brian Uri!
+    /// @since 1.1.0
+    /// </summary>
     public class ExtensibleAttributesTest : AbstractBaseTestCase
     {
 
-		private const string TEST_NAMESPACE = "http://ddmsence.urizone.net/";
+        private const string TEST_NAMESPACE = "http://ddmsence.urizone.net/";
 
         private static readonly XAttribute TEST_ATTRIBUTE = new XAttribute(XName.Get("ddmsence:relevance", TEST_NAMESPACE), "95");
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ExtensibleAttributesTest()
             : base(null)
         {
-		}
+        }
 
-		/// <summary>
-		/// Returns a fixture object for testing.
-		/// </summary>
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
         public static ExtensibleAttributes Fixture
         {
             get
@@ -69,70 +68,72 @@ namespace DDMSense.Test.DDMS.Extensible
                 {
                     List<XAttribute> attributes = new List<XAttribute>();
                     attributes.Add(new XAttribute(TEST_ATTRIBUTE));
-					return (new ExtensibleAttributes(attributes));
-				} catch (InvalidDDMSException e) {
-					Assert.Fail("Could not create fixture: " + e.Message);
-				}
-				return (null);
-			}
-		}
+                    return (new ExtensibleAttributes(attributes));
+                }
+                catch (InvalidDDMSException e)
+                {
+                    Assert.Fail("Could not create fixture: " + e.Message);
+                }
+                return (null);
+            }
+        }
 
-		/// <summary>
-		/// Attempts to build a component from a XOM element.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="element"> the element to build from
-		/// </param>
-		/// <returns> a valid object </returns>
+        /// <summary>
+        /// Attempts to build a component from a XOM element.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="element"> the element to build from
+        /// </param>
+        /// <returns> a valid object </returns>
         private ExtensibleAttributes GetInstance(string message, XElement element)
         {
             bool expectFailure = !String.IsNullOrEmpty(message);
-			ExtensibleAttributes attributes = null;
+            ExtensibleAttributes attributes = null;
             try
             {
-				attributes = new ExtensibleAttributes(element);
-				CheckConstructorSuccess(expectFailure);
+                attributes = new ExtensibleAttributes(element);
+                CheckConstructorSuccess(expectFailure);
             }
             catch (InvalidDDMSException e)
             {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (attributes);
-		}
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (attributes);
+        }
 
-		/// <summary>
-		/// Helper method to create an object which is expected to be valid.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="attributes"> a list of attributes (optional) </param>
-		/// <returns> a valid object </returns>
+        /// <summary>
+        /// Helper method to create an object which is expected to be valid.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="attributes"> a list of attributes (optional) </param>
+        /// <returns> a valid object </returns>
         private ExtensibleAttributes GetInstance(string message, List<XAttribute> attributes)
         {
             bool expectFailure = !String.IsNullOrEmpty(message);
-			ExtensibleAttributes exAttributes = null;
+            ExtensibleAttributes exAttributes = null;
             try
             {
-				exAttributes = new ExtensibleAttributes(attributes);
-				CheckConstructorSuccess(expectFailure);
+                exAttributes = new ExtensibleAttributes(attributes);
+                CheckConstructorSuccess(expectFailure);
             }
             catch (InvalidDDMSException e)
             {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (exAttributes);
-		}
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (exAttributes);
+        }
 
-		/// <summary>
-		/// Returns the expected HTML or Text output for this unit test
-		/// </summary>
+        /// <summary>
+        /// Returns the expected HTML or Text output for this unit test
+        /// </summary>
         private string GetExpectedOutput(bool isHTML)
         {
-			StringBuilder text = new StringBuilder();
-			text.Append(BuildOutput(isHTML, "ddmsence.relevance", "95"));
-			return (text.ToString());
-		}
+            StringBuilder text = new StringBuilder();
+            text.Append(BuildOutput(isHTML, "ddmsence.relevance", "95"));
+            return (text.ToString());
+        }
 
         [TestMethod] 
         public virtual void TestElementConstructorValid()
@@ -141,16 +142,16 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
-				// All fields
+                // All fields
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
-				GetInstance(SUCCESS, element);
+                GetInstance(SUCCESS, element);
 
-				// No optional fields
+                // No optional fields
                 element = (new Keyword("testValue", null)).ElementCopy;
-				GetInstance(SUCCESS, element);
-			}
-		}
+                GetInstance(SUCCESS, element);
+            }
+        }
 
         [TestMethod]
         public virtual void TestDataConstructorValid()
@@ -159,15 +160,15 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
-				// All fields
+                // All fields
                 List<XAttribute> attributes = new List<XAttribute>();
                 attributes.Add(new XAttribute(TEST_ATTRIBUTE));
-				GetInstance(SUCCESS, attributes);
+                GetInstance(SUCCESS, attributes);
 
-				// No optional fields
+                // No optional fields
                 GetInstance(SUCCESS, (List<XAttribute>)null);
-			}
-		}
+            }
+        }
 
         [TestMethod]
         public virtual void TestElementConstructorInvalid()
@@ -175,9 +176,9 @@ namespace DDMSense.Test.DDMS.Extensible
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
-				// No invalid cases right now, since reserved names are silently skipped.
-			}
-		}
+                // No invalid cases right now, since reserved names are silently skipped.
+            }
+        }
 
         [TestMethod]
         public virtual void TestDataConstructorInvalid()
@@ -185,9 +186,9 @@ namespace DDMSense.Test.DDMS.Extensible
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
-				// No invalid cases right now. The validation occurs when the attributes are added to some component.
-			}
-		}
+                // No invalid cases right now. The validation occurs when the attributes are added to some component.
+            }
+        }
 
         [TestMethod]
         public virtual void TestWarnings()
@@ -195,14 +196,14 @@ namespace DDMSense.Test.DDMS.Extensible
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
-				// No warnings
+                // No warnings
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
-				GetInstance(SUCCESS, element);
-				ExtensibleAttributes component = GetInstance(SUCCESS, element);
-                Assert.Equals(0, component.ValidationWarnings.Count);
-			}
-		}
+                GetInstance(SUCCESS, element);
+                ExtensibleAttributes component = GetInstance(SUCCESS, element);
+                Assert.Equals(0, component.ValidationWarnings.Count());
+            }
+        }
 
         [TestMethod]
         public virtual void TestConstructorEquality()
@@ -213,16 +214,16 @@ namespace DDMSense.Test.DDMS.Extensible
 
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
-				ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
+                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
 
                 List<XAttribute> attributes = new List<XAttribute>();
                 attributes.Add(new XAttribute(TEST_ATTRIBUTE));
-				ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, attributes);
+                ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, attributes);
 
                 Assert.Equals(elementAttributes, dataAttributes);
                 Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
-			}
-		}
+            }
+        }
 
         [TestMethod]
         public virtual void TestConstructorInequalityDifferentValues()
@@ -232,16 +233,16 @@ namespace DDMSense.Test.DDMS.Extensible
                 DDMSVersion.SetCurrentVersion(sVersion);
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
-				ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
+                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
                 List<XAttribute> attributes = new List<XAttribute>();
                 attributes.Add(new XAttribute(XName.Get("essence:confidence", "http://essence/"), "test"));
-				ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, attributes);
+                ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, attributes);
                 Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
                 dataAttributes = GetInstance(SUCCESS, (List<XAttribute>)null);
                 Assert.IsFalse(elementAttributes.Equals(dataAttributes));
-			}
-		}
+            }
+        }
 
         [TestMethod]
         public virtual void TestConstructorInequalityWrongClass()
@@ -251,11 +252,11 @@ namespace DDMSense.Test.DDMS.Extensible
                 DDMSVersion.SetCurrentVersion(sVersion);
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
-				ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
-				Rights wrongComponent = new Rights(true, true, true);
+                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
+                Rights wrongComponent = new Rights(true, true, true);
                 Assert.IsFalse(elementAttributes.Equals(wrongComponent));
-			}
-		}
+            }
+        }
 
         [TestMethod]
         public virtual void TestHTMLTextOutput()
@@ -265,17 +266,17 @@ namespace DDMSense.Test.DDMS.Extensible
                 DDMSVersion.SetCurrentVersion(sVersion);
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
-				ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
+                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
                 Assert.Equals(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
                 Assert.Equals(GetExpectedOutput(false), elementAttributes.GetOutput(false, ""));
 
                 List<XAttribute> attributes = new List<XAttribute>();
                 attributes.Add(new XAttribute(TEST_ATTRIBUTE));
-				elementAttributes = GetInstance(SUCCESS, attributes);
+                elementAttributes = GetInstance(SUCCESS, attributes);
                 Assert.Equals(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
                 Assert.Equals(GetExpectedOutput(false), elementAttributes.GetOutput(false, ""));
-			}
-		}
+            }
+        }
 
         [TestMethod]
         public virtual void TestAddTo()
@@ -283,14 +284,14 @@ namespace DDMSense.Test.DDMS.Extensible
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
-				ExtensibleAttributes component = Fixture;
+                ExtensibleAttributes component = Fixture;
 
                 XElement element = Util.BuildDDMSElement("sample", null);
                 component.AddTo(element);
-				ExtensibleAttributes output = new ExtensibleAttributes(element);
+                ExtensibleAttributes output = new ExtensibleAttributes(element);
                 Assert.Equals(component, output);
-			}
-		}
+            }
+        }
 
         [TestMethod]
         public virtual void TestGetNonNull()
@@ -311,13 +312,13 @@ namespace DDMSense.Test.DDMS.Extensible
                 DDMSVersion.SetCurrentVersion(sVersion);
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
-				ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
-				Assert.Fail(elementAttributes.Empty.ToString());
+                ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
+                Assert.IsFalse(elementAttributes.Empty);
 
-				ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, (List<XAttribute>) null);
-				Assert.IsTrue(dataAttributes.Empty);
-			}
-		}
+                ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, (List<XAttribute>)null);
+                Assert.IsTrue(dataAttributes.Empty);
+            }
+        }
 
         [TestMethod]
         public virtual void TestBuilderEquality()
@@ -328,11 +329,11 @@ namespace DDMSense.Test.DDMS.Extensible
 
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
-				ExtensibleAttributes component = GetInstance(SUCCESS, element);
-				ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder(component);
+                ExtensibleAttributes component = GetInstance(SUCCESS, element);
+                ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder(component);
                 Assert.Equals(component, builder.Commit());
-			}
-		}
+            }
+        }
 
         [TestMethod]
         public virtual void TestBuilderIsEmpty()
@@ -341,14 +342,14 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
-				ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder();
+                ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder();
                 Assert.IsNotNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
                 builder.Attributes.Add(new ExtensibleAttributes.AttributeBuilder(TEST_ATTRIBUTE));
                 Assert.IsFalse(builder.Empty);
 
-			}
-		}
+            }
+        }
 
         [TestMethod]
         public virtual void TestBuilderValidation()
@@ -357,9 +358,9 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
-				// No invalid cases right now, because validation cannot occur until these attributes are attached to something.
-			}
-		}
+                // No invalid cases right now, because validation cannot occur until these attributes are attached to something.
+            }
+        }
 
         [TestMethod]
         public virtual void TestBuilderLazyList()
@@ -367,11 +368,11 @@ namespace DDMSense.Test.DDMS.Extensible
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
-				ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder();
+                ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder();
                 Assert.IsNotNull(builder.Attributes[1]);
                 Assert.IsTrue(builder.Commit().Attributes.Count.Equals(0));
-			}
-		}
-	}
+            }
+        }
+    }
 
 }

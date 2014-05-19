@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
+
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -24,6 +23,8 @@ using System.Linq;
  */
 namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 {
+
+
     using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
@@ -32,6 +33,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
     using DDMSense.DDMS.SecurityElements.Ntk;
     using System.Xml.Linq;
     using DDMSense.DDMS;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ntk:Access elements </para>
@@ -56,7 +59,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         /// <summary>
         /// Returns a fixture object for testing.
         /// </summary>
-        [TestMethod]
         public static Access Fixture
         {
             get
@@ -142,9 +144,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         {
             DDMSVersion version = DDMSVersion.CurrentVersion;
             StringBuilder text = new StringBuilder();
-            text.Append(IndividualTest.Fixture.getOutput(isHTML, "access.individualList.", ""));
-            text.Append(GroupTest.Fixture.getOutput(isHTML, "access.groupList.", ""));
-            text.Append(ProfileListTest.Fixture.getOutput(isHTML, "access.", ""));
+            text.Append(IndividualTest.Fixture.GetOutput(isHTML, "access.individualList.", ""));
+            text.Append(GroupTest.Fixture.GetOutput(isHTML, "access.groupList.", ""));
+            text.Append(ProfileListTest.Fixture.GetOutput(isHTML, "access.", ""));
             if (version.IsAtLeast("4.1"))
             {
                 text.Append(BuildOutput(isHTML, "access.externalReference", Convert.ToString(TEST_EXTERNAL)));
@@ -191,7 +193,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             return (FormatXml(xml.ToString(), preserveFormatting));
         }
 
-
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -236,7 +238,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -250,7 +253,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        [TestMethod]
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -270,17 +274,17 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        [TestMethod]
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestWarnings()
         {
-            string text = string.Empty;
-            string locator = string.Empty;
-
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
                 Access component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                string text = string.Empty;
+                string locator = string.Empty;
 
                 // 4.1 ntk:externalReference used
                 if (version.IsAtLeast("4.1"))
@@ -305,7 +309,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testDeprecatedConstructor() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestDeprecatedConstructor()
         {
             foreach (string sVersion in SupportedVersions)
@@ -317,7 +322,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        [TestMethod]
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -331,7 +337,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        [TestMethod]
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
@@ -356,7 +363,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        [TestMethod]
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestHTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -373,7 +381,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        [TestMethod]
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestXMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -388,7 +397,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        [TestMethod]
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestBuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -401,22 +411,23 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        //TODO - Fix this test.
-        [TestMethod]
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         public virtual void TestBuilderIsEmpty()
         {
-            //foreach (string sVersion in SupportedVersions)
-            //{
-            //    DDMSVersion.SetCurrentVersion(sVersion);
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-            //    Access.Builder builder = new Access.Builder();
-            //    Assert.IsNull(builder.Commit());
-            //    Assert.IsTrue(builder.Empty);
-            //    builder.Individuals[0];
-            //    Assert.IsTrue(builder.Empty);
-            //    builder.Groups[1].SecurityAttributes.Classification = "U";
-            //    Assert.IsFalse(builder.Empty);
-            //}
+                Access.Builder builder = new Access.Builder();
+                Assert.IsNull(builder.Commit());
+                Assert.IsTrue(builder.Empty);
+                //TODO: Not sure what to do here
+                builder.Individuals[0];
+                Assert.IsTrue(builder.Empty);
+                builder.Groups[1].SecurityAttributes.Classification = "U";
+                Assert.IsFalse(builder.Empty);
+            }
         }
 
         [TestMethod]
@@ -442,6 +453,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
+        [TestMethod]
         public virtual void TestWrongVersion()
         {
             // Implicit, since the NTK namespace does not exist before DDMS 4.0.1.

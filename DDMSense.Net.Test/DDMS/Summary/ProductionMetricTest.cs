@@ -140,9 +140,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, ProductionMetric.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, ProductionMetric.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -167,15 +167,15 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Missing subject
-//                XElement element = Util.buildDDMSElement(ProductionMetric.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(ProductionMetric.GetName(version), null);
 //                element.addAttribute(Util.buildDDMSAttribute("coverage", TEST_COVERAGE));
 //                GetInstance("subject attribute is required.", element);
 
 //                // Missing coverage
-//                element = Util.buildDDMSElement(ProductionMetric.getName(version), null);
+//                element = Util.BuildDDMSElement(ProductionMetric.GetName(version), null);
 //                element.addAttribute(Util.buildDDMSAttribute("subject", TEST_SUBJECT));
 //                GetInstance("coverage attribute is required.", element);
 //            }
@@ -199,7 +199,7 @@
 
 //                // No warnings
 //                ProductionMetric component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -248,12 +248,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProductionMetric component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_SUBJECT, TEST_COVERAGE);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -262,10 +262,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProductionMetric component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_SUBJECT, TEST_COVERAGE);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -287,7 +287,7 @@
 
 //                ProductionMetric component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProductionMetric.Builder builder = new ProductionMetric.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -298,7 +298,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProductionMetric.Builder builder = new ProductionMetric.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Coverage = TEST_COVERAGE;
 //                Assert.IsFalse(builder.Empty);
@@ -312,16 +312,16 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProductionMetric.Builder builder = new ProductionMetric.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                builder.Coverage = TEST_COVERAGE;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "subject attribute is required.");
 //                }
 //                builder.Subject = TEST_SUBJECT;
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

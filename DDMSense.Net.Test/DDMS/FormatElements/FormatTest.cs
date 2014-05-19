@@ -30,6 +30,7 @@ namespace DDMSense.Test.DDMS.FormatElements
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using DDMSense.DDMS;
     using System;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ddms:format elements </para>
@@ -290,21 +291,21 @@ namespace DDMSense.Test.DDMS.FormatElements
 
                 // No warnings
                 Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count);
+                Assert.Equals(0, component.ValidationWarnings.Count());
 
                 // Medium element with no value or empty value
                 XElement mediaElement = Util.BuildDDMSElement("Media", null);
                 mediaElement.Add(Util.BuildDDMSElement("mimeType", TEST_MIME_TYPE));
                 mediaElement.Add(Util.BuildDDMSElement("medium", null));
                 component = GetInstance(SUCCESS, WrapInnerElement(mediaElement));
-                Assert.Equals(1, component.ValidationWarnings.Count);
+                Assert.Equals(1, component.ValidationWarnings.Count());
                 string text = "A ddms:medium element was found with no value.";
                 string locator = version.IsAtLeast("4.0.1") ? "ddms:format" : "ddms:format/ddms:Media";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
                 // Nested warnings
                 component = GetInstance(SUCCESS, TEST_MIME_TYPE, new Extent("sizeBytes", ""), TEST_MEDIUM);
-                Assert.Equals(1, component.ValidationWarnings.Count);
+                Assert.Equals(1, component.ValidationWarnings.Count());
                 text = "A qualifier has been set without an accompanying value attribute.";
                 locator = (version.IsAtLeast("4.0.1")) ? "ddms:format/ddms:extent" : "ddms:format/ddms:Media/ddms:extent";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);

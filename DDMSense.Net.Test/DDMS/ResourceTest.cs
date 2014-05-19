@@ -68,12 +68,12 @@ namespace DDMSense.Test.DDMS {
 	/// @since 0.9.b
 	/// </summary>
 	public class ResourceTest : AbstractBaseTestCase {
-		private IList<IDDMSComponent> TEST_TOP_LEVEL_COMPONENTS;
-		private IList<IDDMSComponent> TEST_NO_OPTIONAL_COMPONENTS;
+		private List<IDDMSComponent> TEST_TOP_LEVEL_COMPONENTS;
+		private List<IDDMSComponent> TEST_NO_OPTIONAL_COMPONENTS;
 
 		private static readonly bool? TEST_RESOURCE_ELEMENT = true;
 		private const string TEST_CREATE_DATE = "2010-01-21";
-		private static readonly IList<string> TEST_COMPLIES_WITH = Util.GetXsListAsList("DoD5230.24");
+		private static readonly List<string> TEST_COMPLIES_WITH = Util.GetXsListAsList("DoD5230.24");
 
 		/// <summary>
 		/// Constructor
@@ -289,7 +289,7 @@ namespace DDMSense.Test.DDMS {
 		/// <param name="ismDESVersion"> the ISM DES Version as an Integer (required) </param>
 		/// <param name="ntkDESVersion"> the NTK DES Version as an Integer (required, starting in DDMS 4.0.1) </param>
 		/// <returns> a valid object </returns>
-		private Resource GetInstance(string message, IList<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, IList<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion) {
+		private Resource GetInstance(string message, List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, List<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion) {
 			bool expectFailure = !string.IsNullOrEmpty(message);
 			DDMSVersion version = DDMSVersion.CurrentVersion;
 			Resource component = null;
@@ -1123,7 +1123,7 @@ namespace DDMSense.Test.DDMS {
 			XAttribute secAttribute = new XAttribute(XName.Get("ISM:classification", version.IsmNamespace), "U");
 			// This can be an extensible.
 			XAttribute uniqueAttribute = new XAttribute(XName.Get("ddmsence:confidence", "http://ddmsence.urizone.net/"), "95");
-			IList<XAttribute> exAttr = new List<XAttribute>();
+			List<XAttribute> exAttr = new List<XAttribute>();
 
 			// Base Case
 			Resource component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
@@ -1689,7 +1689,7 @@ namespace DDMSense.Test.DDMS {
 
 				//ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(serialized));
 				//Resource.Builder unserializedBuilder = (Resource.Builder) ois.readObject();
-				//Assert.Equals(component, unserializedBuilder.commit());
+				//Assert.Equals(component, unserializedBuilder.Commit());
 			}
 		}
 

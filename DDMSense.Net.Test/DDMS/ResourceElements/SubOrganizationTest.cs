@@ -34,6 +34,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
     using DDMSense.DDMS;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ddms:subOrganization elements </para>
@@ -258,7 +259,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No warnings
                 SubOrganization component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(0, component.ValidationWarnings.Count);
+                Assert.Equals(0, component.ValidationWarnings.Count());
             }
         }
 

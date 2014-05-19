@@ -23,7 +23,7 @@ namespace DDMSense.Test.DDMS {
 
 
 	using DDMSense.DDMS;
-	using DDMSense.DDMS;
+    using System.Linq;
 	using System.Xml.Linq;
 	using DDMSVersion = DDMSense.Util.DDMSVersion;
 	using PropertyReader = DDMSense.Util.PropertyReader;
@@ -260,11 +260,11 @@ namespace DDMSense.Test.DDMS {
 				// No warnings
 				ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
 				
-				Assert.Equals(0, component.ValidationWarnings.Count);
+				Assert.Equals(0, component.ValidationWarnings.Count());
 
 				// Empty element
 				component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, false));
-				Assert.Equals(1, component.ValidationWarnings.Count);
+				Assert.Equals(1, component.ValidationWarnings.Count());
 				string text = "A completely empty ddms:acquiredOn";
 				string locator = "ddms:acquiredOn";
 				AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -275,7 +275,7 @@ namespace DDMSense.Test.DDMS {
 				Util.AddDDMSChildElement(element, "description", null);
 				Util.AddDDMSChildElement(element, "approximableDate", TEST_APPROXIMABLE_DATE);
 				component = GetInstance(SUCCESS, element);
-				Assert.Equals(1, component.ValidationWarnings.Count);
+				Assert.Equals(1, component.ValidationWarnings.Count());
 				text = "A completely empty ddms:description";
 				locator = "ddms:acquiredOn";
 				AssertWarningEquality(text, locator, component.ValidationWarnings[0]);

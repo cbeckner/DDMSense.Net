@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
-
+using System;
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -32,6 +33,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ddms:service elements </para>
@@ -260,7 +262,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 Service component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count);
+                Assert.Equals(0, component.ValidationWarnings.Count());
             }
         }
 

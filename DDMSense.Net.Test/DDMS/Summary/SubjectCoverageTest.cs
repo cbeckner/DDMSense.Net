@@ -130,12 +130,12 @@
 //        /// <returns> the element itself in DDMS 4.0.1 or later, or the element wrapped in another element </returns>
 //        private XElement WrapInnerElement(XElement innerElement) {
 //            DDMSVersion version = DDMSVersion.CurrentVersion;
-//            string name = SubjectCoverage.getName(version);
+//            string name = SubjectCoverage.GetName(version);
 //            if (version.isAtLeast("4.0.1")) {
 //                innerElement.LocalName = name;
 //                return (innerElement);
 //            }
-//            XElement element = Util.buildDDMSElement(name, null);
+//            XElement element = Util.BuildDDMSElement(name, null);
 //            element.appendChild(innerElement);
 //            return (element);
 //        }
@@ -205,9 +205,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, SubjectCoverage.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, SubjectCoverage.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -221,7 +221,7 @@
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement subjectElement = Util.buildDDMSElement("Subject", null);
+//                XElement subjectElement = Util.BuildDDMSElement("Subject", null);
 //                subjectElement.appendChild(KeywordTest.FixtureList[0].ElementCopy);
 //                GetInstance(SUCCESS, WrapInnerElement(subjectElement));
 //            }
@@ -246,7 +246,7 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No keywords or categories
-//                XElement subjectElement = Util.buildDDMSElement("Subject", null);
+//                XElement subjectElement = Util.BuildDDMSElement("Subject", null);
 //                GetInstance("At least 1 keyword or category must exist.", WrapInnerElement(subjectElement));
 //            }
 //        }
@@ -263,50 +263,50 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubjectCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // 4.1 ddms:qualifier element used
 //                if (version.isAtLeast("4.1")) {
-//                    Assert.Equals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.Count());
 //                    string text = "The ddms:qualifier attribute in this DDMS component";
 //                    string locator = "ddms:subjectCoverage/ddms:nonStateActor";
 //                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //                // No warnings 
 //                else {
-//                    Assert.Equals(0, component.ValidationWarnings.size());
+//                    Assert.Equals(0, component.ValidationWarnings.Count());
 //                }
 
 //                // Identical keywords
-//                XElement subjectElement = Util.buildDDMSElement("Subject", null);
+//                XElement subjectElement = Util.BuildDDMSElement("Subject", null);
 //                subjectElement.appendChild(KeywordTest.FixtureList[0].ElementCopy);
 //                subjectElement.appendChild(KeywordTest.FixtureList[0].ElementCopy);
 //                component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
-//                Assert.Equals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.Count());
 //                string text = "1 or more keywords have the same value.";
 //                string locator = version.isAtLeast("4.0.1") ? "ddms:subjectCoverage" : "ddms:subjectCoverage/ddms:Subject";
 //                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
 //                // Identical categories
-//                subjectElement = Util.buildDDMSElement("Subject", null);
+//                subjectElement = Util.BuildDDMSElement("Subject", null);
 //                subjectElement.appendChild(CategoryTest.FixtureList[0].ElementCopy);
 //                subjectElement.appendChild(CategoryTest.FixtureList[0].ElementCopy);
 //                component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
-//                Assert.Equals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.Count());
 //                text = "1 or more categories have the same value.";
 //                locator = version.isAtLeast("4.0.1") ? "ddms:subjectCoverage" : "ddms:subjectCoverage/ddms:Subject";
 //                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
 //                // Identical productionMetrics
 //                if (version.isAtLeast("4.0.1")) {
-//                    subjectElement = Util.buildDDMSElement("Subject", null);
+//                    subjectElement = Util.BuildDDMSElement("Subject", null);
 //                    subjectElement.appendChild(CategoryTest.FixtureList[0].ElementCopy);
 //                    subjectElement.appendChild(ProductionMetricTest.FixtureList[0].ElementCopy);
 //                    subjectElement.appendChild(ProductionMetricTest.FixtureList[0].ElementCopy);
 //                    component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
-//                    Assert.Equals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.Count());
 //                    text = "1 or more productionMetrics have the same value.";
 //                    locator = "ddms:subjectCoverage";
 //                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -330,7 +330,7 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                SubjectCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                SubjectCoverage dataComponent = GetInstance(SUCCESS, null, CategoryTest.FixtureList, ProductionMetricTest.FixtureList, NonStateActorTest.FixtureList);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
@@ -355,12 +355,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubjectCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, KeywordTest.FixtureList, CategoryTest.FixtureList, ProductionMetricTest.FixtureList, NonStateActorTest.FixtureList);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -370,10 +370,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                SubjectCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, KeywordTest.FixtureList, CategoryTest.FixtureList, ProductionMetricTest.FixtureList, NonStateActorTest.FixtureList);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -425,7 +425,7 @@
 ////ORIGINAL LINE: public void testSecurityAttributes() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestSecurityAttributes() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                SecurityAttributes attr = (!version.isAtLeast("3.0") ? null : SecurityAttributesTest.Fixture);
 //                SubjectCoverage component = new SubjectCoverage(KeywordTest.FixtureList, CategoryTest.FixtureList, null, null, attr);
 //                if (!version.isAtLeast("3.0")) {
@@ -480,7 +480,7 @@
 
 //                SubjectCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                SubjectCoverage.Builder builder = new SubjectCoverage.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -491,7 +491,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubjectCoverage.Builder builder = new SubjectCoverage.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.SecurityAttributes.Classification = "U";
 //                Assert.IsFalse(builder.Empty);
@@ -503,19 +503,19 @@
 ////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestBuilderValidation() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                SubjectCoverage.Builder builder = new SubjectCoverage.Builder();
 //                builder.Categories[0].Code = "TEST";
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "label attribute is required.");
 //                }
 //                builder.Categories[0].Qualifier = "qualifier";
 //                builder.Categories[0].Label = "label";
-//                builder.commit();
+//                builder.Commit();
 
 //                // Skip empty Keywords
 //                builder = new SubjectCoverage.Builder();
@@ -524,7 +524,7 @@
 //                fullBuilder.Value = "keyword";
 //                builder.Keywords.add(emptyBuilder);
 //                builder.Keywords.add(fullBuilder);
-//                Assert.Equals(1, builder.commit().Keywords.size());
+//                Assert.Equals(1, builder.Commit().Keywords.Count());
 
 //                // Skip empty Categories
 //                builder = new SubjectCoverage.Builder();
@@ -533,7 +533,7 @@
 //                fullCategoryBuilder.Label = "label";
 //                builder.Categories.add(emptyCategoryBuilder);
 //                builder.Categories.add(fullCategoryBuilder);
-//                Assert.Equals(1, builder.commit().Categories.size());
+//                Assert.Equals(1, builder.Commit().Categories.Count());
 
 //                if (version.isAtLeast("4.0.1")) {
 //                    // Skip empty metrics
@@ -545,7 +545,7 @@
 //                    builder.Keywords[0].Value = "test";
 //                    builder.ProductionMetrics.add(emptyProductionMetricBuilder);
 //                    builder.ProductionMetrics.add(fullProductionMetricBuilder);
-//                    Assert.Equals(1, builder.commit().ProductionMetrics.size());
+//                    Assert.Equals(1, builder.Commit().ProductionMetrics.Count());
 
 //                    // Skip empty actors
 //                    builder = new SubjectCoverage.Builder();
@@ -555,7 +555,7 @@
 //                    builder.Keywords[0].Value = "test";
 //                    builder.NonStateActors.add(emptyNonStateActorBuilder);
 //                    builder.NonStateActors.add(fullNonStateActorBuilder);
-//                    Assert.Equals(1, builder.commit().NonStateActors.size());
+//                    Assert.Equals(1, builder.Commit().NonStateActors.Count());
 //                }
 //            }
 //        }
