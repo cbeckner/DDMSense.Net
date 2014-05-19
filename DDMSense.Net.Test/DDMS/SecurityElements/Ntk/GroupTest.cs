@@ -23,9 +23,6 @@ using System.Linq;
  */
 namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 {
-
-
-
     using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
@@ -136,8 +133,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         /// <summary>
         /// Returns the expected HTML or Text output for this unit test
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         private string GetExpectedOutput(bool isHTML)
         {
             StringBuilder text = new StringBuilder();
@@ -364,9 +359,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 Group.Builder builder = new Group.Builder();
                 Assert.IsNull(builder.Commit());
-                Assert.IsTrue(builder.Empty);
-                //TODO: Not sure what to do here.
-                builder.GroupValues[0];
                 Assert.IsTrue(builder.Empty);
                 builder.GroupValues[1].Value = "TEST";
                 Assert.IsFalse(builder.Empty);
