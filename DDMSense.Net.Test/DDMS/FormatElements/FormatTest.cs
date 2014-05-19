@@ -21,8 +21,6 @@ using System.Text;
  */
 namespace DDMSense.Test.DDMS.FormatElements
 {
-
-
     using DDMSense.DDMS.FormatElements;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
@@ -485,10 +483,12 @@ namespace DDMSense.Test.DDMS.FormatElements
                 builder.MimeType = TEST_MIME_TYPE;
                 builder.Medium = TEST_MEDIUM;
                 Assert.IsNotNull(builder.Extent);
-                Assert.IsNull(builder.Commit().Extent);
+                builder.Commit();
+                Assert.IsNull(builder.Extent);
                 builder.Extent.Qualifier = "sizeBytes";
                 builder.Extent.Value = "75000";
-                Assert.IsNotNull(builder.Commit().Extent);
+                builder.Commit();
+                Assert.IsNotNull(builder.Extent);
             }
         }
     }
