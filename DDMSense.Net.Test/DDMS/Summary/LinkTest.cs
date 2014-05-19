@@ -63,8 +63,8 @@
 //            get {
 //                try {
 //                    DDMSVersion version = DDMSVersion.CurrentVersion;
-//                    XElement linkElement = Util.buildDDMSElement(Link.getName(version), null);
-//                    linkElement.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
+//                    XElement linkElement = Util.BuildDDMSElement(Link.GetName(version), null);
+//                    linkElement.addNamespaceDeclaration(PropertyReader.GetPrefix("ddms"), version.Namespace);
 //                    XLinkAttributesTest.LocatorFixture.addTo(linkElement);
 //                    return (linkElement);
 //                } catch (InvalidDDMSException e) {
@@ -169,8 +169,8 @@
 //        /// <returns> XElement </returns>
 //        private XElement BuildComponentElement(string type, string href) {
 //            DDMSVersion version = DDMSVersion.CurrentVersion;
-//            XElement element = Util.buildDDMSElement(Link.getName(version), null);
-//            string xlinkPrefix = PropertyReader.getPrefix("xlink");
+//            XElement element = Util.BuildDDMSElement(Link.GetName(version), null);
+//            string xlinkPrefix = PropertyReader.GetPrefix("xlink");
 //            string xlinkNamespace = version.XlinkNamespace;
 //            if (type != null) {
 //                element.addAttribute(Util.buildAttribute(xlinkPrefix, "type", xlinkNamespace, type));
@@ -186,9 +186,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, Link.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, Link.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -255,7 +255,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Link component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -299,12 +299,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Link component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, XLinkAttributesTest.LocatorFixture);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -314,10 +314,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Link component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, XLinkAttributesTest.LocatorFixture);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -339,7 +339,7 @@
 
 //                Link component = GetInstance(SUCCESS, FixtureElement);
 //                Link.Builder builder = new Link.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -350,7 +350,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Link.Builder builder = new Link.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.XLinkAttributes.Role = TEST_ROLE;
 //                Assert.IsFalse(builder.Empty);
@@ -366,14 +366,14 @@
 //                Link.Builder builder = new Link.Builder();
 //                builder.XLinkAttributes.Role = TEST_ROLE;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "type attribute is required.");
 //                }
 //                builder.XLinkAttributes.Type = "locator";
 //                builder.XLinkAttributes.Href = TEST_HREF;
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

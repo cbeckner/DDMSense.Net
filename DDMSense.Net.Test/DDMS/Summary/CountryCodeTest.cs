@@ -124,9 +124,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, CountryCode.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, CountryCode.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -147,26 +147,26 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string countryCodeName = CountryCode.getName(version);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string countryCodeName = CountryCode.GetName(version);
 //                // Missing qualifier
-//                XElement element = Util.buildDDMSElement(countryCodeName, null);
+//                XElement element = Util.BuildDDMSElement(countryCodeName, null);
 //                Util.addDDMSAttribute(element, "value", TEST_VALUE);
 //                GetInstance("qualifier attribute is required.", element);
 
 //                // Empty qualifier
-//                element = Util.buildDDMSElement(countryCodeName, null);
+//                element = Util.BuildDDMSElement(countryCodeName, null);
 //                Util.addDDMSAttribute(element, "qualifier", "");
 //                Util.addDDMSAttribute(element, "value", TEST_VALUE);
 //                GetInstance("qualifier attribute is required.", element);
 
 //                // Missing value
-//                element = Util.buildDDMSElement(countryCodeName, null);
+//                element = Util.BuildDDMSElement(countryCodeName, null);
 //                Util.addDDMSAttribute(element, "qualifier", TEST_QUALIFIER);
 //                GetInstance("value attribute is required.", element);
 
 //                // Empty value
-//                element = Util.buildDDMSElement(countryCodeName, null);
+//                element = Util.BuildDDMSElement(countryCodeName, null);
 //                Util.addDDMSAttribute(element, "qualifier", TEST_QUALIFIER);
 //                Util.addDDMSAttribute(element, "value", "");
 //                GetInstance("value attribute is required.", element);
@@ -195,7 +195,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                CountryCode component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -227,12 +227,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                CountryCode component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -240,10 +240,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                CountryCode component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -255,7 +255,7 @@
 
 //                CountryCode component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                CountryCode.Builder builder = new CountryCode.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -266,7 +266,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                CountryCode.Builder builder = new CountryCode.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
 //                Assert.IsFalse(builder.Empty);
@@ -283,13 +283,13 @@
 //                CountryCode.Builder builder = new CountryCode.Builder();
 //                builder.Value = TEST_VALUE;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "qualifier attribute is required.");
 //                }
 //                builder.Qualifier = TEST_QUALIFIER;
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

@@ -170,9 +170,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, GeographicIdentifier.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, GeographicIdentifier.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -181,33 +181,33 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string geoIdName = GeographicIdentifier.getName(version);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string geoIdName = GeographicIdentifier.GetName(version);
 
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(Util.buildDDMSElement("name", TEST_NAMES[0]));
+//                XElement element = Util.BuildDDMSElement(geoIdName, null);
+//                element.appendChild(Util.BuildDDMSElement("name", TEST_NAMES[0]));
 //                GetInstance(SUCCESS, element);
 
-//                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(Util.buildDDMSElement("region", TEST_REGIONS[0]));
+//                element = Util.BuildDDMSElement(geoIdName, null);
+//                element.appendChild(Util.BuildDDMSElement("region", TEST_REGIONS[0]));
 //                GetInstance(SUCCESS, element);
 
-//                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(CountryCodeTest.Fixture.XOMElementCopy);
+//                element = Util.BuildDDMSElement(geoIdName, null);
+//                element.appendChild(CountryCodeTest.Fixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 
 //                if (version.isAtLeast("4.0.1")) {
-//                    element = Util.buildDDMSElement(geoIdName, null);
-//                    element.appendChild(SubDivisionCodeTest.Fixture.XOMElementCopy);
+//                    element = Util.BuildDDMSElement(geoIdName, null);
+//                    element.appendChild(SubDivisionCodeTest.Fixture.ElementCopy);
 //                    GetInstance(SUCCESS, element);
 //                }
 
-//                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
+//                element = Util.BuildDDMSElement(geoIdName, null);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -216,7 +216,7 @@
 ////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestDataConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                SubDivisionCode subCode = SubDivisionCodeTest.Fixture;
 
 //                // All fields
@@ -237,37 +237,37 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string geoIdName = GeographicIdentifier.getName(version);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string geoIdName = GeographicIdentifier.GetName(version);
 
 //                // At least 1 name, region, countryCode, or facilityIdentifier must exist.
-//                XElement element = Util.buildDDMSElement(geoIdName, null);
+//                XElement element = Util.BuildDDMSElement(geoIdName, null);
 //                GetInstance("At least 1 of ", element);
 
 //                // No more than 1 countryCode
-//                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(CountryCodeTest.Fixture.XOMElementCopy);
-//                element.appendChild(CountryCodeTest.Fixture.XOMElementCopy);
+//                element = Util.BuildDDMSElement(geoIdName, null);
+//                element.appendChild(CountryCodeTest.Fixture.ElementCopy);
+//                element.appendChild(CountryCodeTest.Fixture.ElementCopy);
 //                GetInstance("No more than 1 countryCode", element);
 
 //                // No more than 1 subDivisionCode
 //                if (version.isAtLeast("4.0.1")) {
-//                    element = Util.buildDDMSElement(geoIdName, null);
-//                    element.appendChild(SubDivisionCodeTest.Fixture.XOMElementCopy);
-//                    element.appendChild(SubDivisionCodeTest.Fixture.XOMElementCopy);
+//                    element = Util.BuildDDMSElement(geoIdName, null);
+//                    element.appendChild(SubDivisionCodeTest.Fixture.ElementCopy);
+//                    element.appendChild(SubDivisionCodeTest.Fixture.ElementCopy);
 //                    GetInstance("No more than 1 subDivisionCode", element);
 //                }
 
 //                // No more than 1 facilityIdentifier
-//                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
+//                element = Util.BuildDDMSElement(geoIdName, null);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
 //                GetInstance("No more than 1 facilityIdentifier", element);
 
 //                // facilityIdentifier must be alone
-//                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(CountryCodeTest.Fixture.XOMElementCopy);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
+//                element = Util.BuildDDMSElement(geoIdName, null);
+//                element.appendChild(CountryCodeTest.Fixture.ElementCopy);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
 //                GetInstance("facilityIdentifier cannot be used", element);
 //            }
 //        }
@@ -285,7 +285,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                GeographicIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -293,7 +293,7 @@
 ////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorEquality() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                SubDivisionCode subCode = SubDivisionCodeTest.Fixture;
 
 //                GeographicIdentifier elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
@@ -301,8 +301,8 @@
 //                Assert.Equals(elementComponent, dataComponent);
 //                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
-//                XElement element = Util.buildDDMSElement(GeographicIdentifier.getName(version), null);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
+//                XElement element = Util.BuildDDMSElement(GeographicIdentifier.GetName(version), null);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
 //                elementComponent = GetInstance(SUCCESS, element);
 //                dataComponent = GetInstance(SUCCESS, null, null, null, null, FacilityIdentifierTest.Fixture);
 //                Assert.Equals(elementComponent, dataComponent);
@@ -314,7 +314,7 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                SubDivisionCode subCode = SubDivisionCodeTest.Fixture;
 
 //                GeographicIdentifier elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
@@ -345,12 +345,12 @@
 //                SubDivisionCode subCode = SubDivisionCodeTest.Fixture;
 
 //                GeographicIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_NAMES, TEST_REGIONS, CountryCodeTest.Fixture, subCode, null);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -363,7 +363,7 @@
 //                StringBuilder facIdOutput = new StringBuilder();
 //                facIdOutput.Append("<meta name=\"geographicIdentifier.facilityIdentifier.beNumber\" content=\"1234DD56789\" />\n");
 //                facIdOutput.Append("<meta name=\"geographicIdentifier.facilityIdentifier.osuffix\" content=\"DD123\" />\n");
-//                Assert.Equals(facIdOutput.ToString(), component.toHTML());
+//                Assert.Equals(facIdOutput.ToString(), component.ToHTML());
 //            }
 //        }
 
@@ -376,7 +376,7 @@
 //                StringBuilder facIdOutput = new StringBuilder();
 //                facIdOutput.Append("geographicIdentifier.facilityIdentifier.beNumber: 1234DD56789\n");
 //                facIdOutput.Append("geographicIdentifier.facilityIdentifier.osuffix: DD123\n");
-//                Assert.Equals(facIdOutput.ToString(), component.toText());
+//                Assert.Equals(facIdOutput.ToString(), component.ToText());
 //            }
 //        }
 
@@ -388,10 +388,10 @@
 //                SubDivisionCode subCode = SubDivisionCodeTest.Fixture;
 
 //                GeographicIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_NAMES, TEST_REGIONS, CountryCodeTest.Fixture, subCode, null);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -410,7 +410,7 @@
 ////ORIGINAL LINE: public void testSubDivisionCodeReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestSubDivisionCodeReuse() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                if (!version.isAtLeast("4.0.1")) {
 //                    continue;
@@ -443,13 +443,13 @@
 
 //                // Equality after Building (CountryCode-based)
 //                GeographicIdentifier.Builder builder = new GeographicIdentifier.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 
 //                // Equality after Building (FacID-based)
 //                FacilityIdentifier facId = FacilityIdentifierTest.Fixture;
 //                component = new GeographicIdentifier(facId);
 //                builder = new GeographicIdentifier.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -460,7 +460,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                GeographicIdentifier.Builder builder = new GeographicIdentifier.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Names = TEST_NAMES;
 //                Assert.IsFalse(builder.Empty);
@@ -477,13 +477,13 @@
 //                GeographicIdentifier.Builder builder = new GeographicIdentifier.Builder();
 //                builder.FacilityIdentifier.BeNumber = "1234DD56789";
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "osuffix is required.");
 //                }
 //                builder.FacilityIdentifier.Osuffix = "osuffix";
-//                builder.commit();
+//                builder.Commit();
 
 //                // Non-FacID-based
 //                builder = new GeographicIdentifier.Builder();
@@ -492,7 +492,7 @@
 //                CountryCode countryCode = CountryCodeTest.Fixture;
 //                builder.CountryCode.Qualifier = countryCode.Qualifier;
 //                builder.CountryCode.Value = countryCode.Value;
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 

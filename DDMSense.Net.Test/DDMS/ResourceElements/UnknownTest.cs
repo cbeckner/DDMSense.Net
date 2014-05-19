@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using System;
 using System.Linq;
+
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -389,9 +390,9 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Unknown.Builder builder = new Unknown.Builder();
-                Assert.IsNotNull(builder.Names[0]);
-                Assert.IsNotNull(builder.Phones[0]);
-                Assert.IsNotNull(builder.Emails[0]);
+                Assert.IsNotNull(builder.Names[1]);
+                Assert.IsNotNull(builder.Phones[1]);
+                Assert.IsNotNull(builder.Emails[1]);
             }
         }
     }

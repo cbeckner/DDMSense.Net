@@ -152,9 +152,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, VerticalExtent.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, VerticalExtent.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -175,106 +175,106 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string extentName = VerticalExtent.getName(version);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string extentName = VerticalExtent.GetName(version);
 //                // Missing UOM
-//                XElement element = Util.buildDDMSElement(extentName, null);
+//                XElement element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
 //                GetInstance("unitOfMeasure is required.", element);
 
 //                // Invalid UOM
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", "furlong");
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
 //                GetInstance("The length measure type must be one of", element);
 
 //                // Missing Datum
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
 //                GetInstance("datum is required.", element);
 
 //                // Invalid Datum
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", "PDQ");
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
 //                GetInstance("The vertical datum type must be one of", element);
 
 //                // Missing MinVerticalExtent
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
 //                GetInstance(MinVerticalExtentName + " is required.", element);
 
 //                // Missing MaxVerticalExtent
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
 //                GetInstance(MaxVerticalExtentName + " is required.", element);
 
 //                // MinVerticalExtent UOM doesn't match parent
-//                XElement minElement = Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN));
+//                XElement minElement = Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN));
 //                Util.addDDMSAttribute(minElement, "unitOfMeasure", "Inch");
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
 //                element.appendChild(minElement);
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
 //                GetInstance("The unitOfMeasure on the", element);
 
 //                // MinVerticalExtent Datum doesn't match parent
-//                minElement = Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN));
+//                minElement = Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN));
 //                Util.addDDMSAttribute(minElement, "datum", "PDQ");
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
 //                element.appendChild(minElement);
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX)));
 //                GetInstance("The datum on the", element);
 
 //                // MaxVerticalExtent UOM doesn't match parent
-//                XElement maxElement = Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX));
+//                XElement maxElement = Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX));
 //                Util.addDDMSAttribute(maxElement, "unitOfMeasure", "Inch");
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
 //                element.appendChild(maxElement);
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
 //                GetInstance("The unitOfMeasure on the", element);
 
 //                // MaxVerticalExtent Datum doesn't match parent
-//                maxElement = Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX));
+//                maxElement = Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MAX));
 //                Util.addDDMSAttribute(maxElement, "datum", "PDQ");
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
 //                element.appendChild(maxElement);
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
 //                GetInstance("The datum on the", element);
 
 //                // MinVerticalExtent is not less than MaxVerticalExtent
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MAX)));
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MAX)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString(TEST_MIN)));
 //                GetInstance("Minimum vertical extent must be less", element);
 
 //                // Not Double
-//                element = Util.buildDDMSElement(extentName, null);
+//                element = Util.BuildDDMSElement(extentName, null);
 //                Util.addDDMSAttribute(element, "unitOfMeasure", TEST_UOM);
 //                Util.addDDMSAttribute(element, "datum", TEST_DATUM);
-//                element.appendChild(Util.buildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
-//                element.appendChild(Util.buildDDMSElement(MaxVerticalExtentName, Convert.ToString("ground-level")));
+//                element.appendChild(Util.BuildDDMSElement(MinVerticalExtentName, Convert.ToString(TEST_MIN)));
+//                element.appendChild(Util.BuildDDMSElement(MaxVerticalExtentName, Convert.ToString("ground-level")));
 //                GetInstance(MaxVerticalExtentName + " is required.", element);
 //            }
 //        }
@@ -304,7 +304,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -353,12 +353,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_MIN, TEST_MAX, TEST_UOM, TEST_DATUM);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -366,10 +366,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_MIN, TEST_MAX, TEST_UOM, TEST_DATUM);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -390,7 +390,7 @@
 
 //                VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                VerticalExtent.Builder builder = new VerticalExtent.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -401,7 +401,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                VerticalExtent.Builder builder = new VerticalExtent.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Datum = TEST_DATUM;
 //                Assert.IsFalse(builder.Empty);
@@ -418,7 +418,7 @@
 //                VerticalExtent.Builder builder = new VerticalExtent.Builder();
 //                builder.UnitOfMeasure = TEST_UOM;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "A ddms:verticalExtent requires");

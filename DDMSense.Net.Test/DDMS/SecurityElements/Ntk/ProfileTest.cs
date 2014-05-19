@@ -366,7 +366,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
                 //TODO: Not sure what to do here
-                builder.ProfileValues[0];
+                //builder.ProfileValues[0];
+                Assert.Fail("TODO: builder.ProfileValues[0]");
                 Assert.IsTrue(builder.Empty);
                 builder.ProfileValues[1].Value = "TEST";
                 Assert.IsFalse(builder.Empty);

@@ -341,7 +341,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
                 //TODO: Not sure what to do here.
-                builder.Profiles[0];
+                //builder.Profiles[0];
+                Assert.Fail("TODO: builder.Profiles[0]");
                 Assert.IsTrue(builder.Empty);
                 builder.Profiles[1].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);

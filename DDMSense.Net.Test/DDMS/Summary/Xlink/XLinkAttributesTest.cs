@@ -2,7 +2,7 @@ using System.Text;
 using System;
 using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
    
    This library is free software; you can redistribute it and/or modify
@@ -16,7 +16,7 @@ using System.Linq;
    
    You should have received a copy of the GNU Lesser General Public 
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-
+   
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
@@ -304,6 +304,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             Util.AddAttribute(element, xlinkPrefix, "label", xlinkNamespace, label);
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -331,6 +332,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -350,6 +352,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -391,6 +394,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -423,6 +427,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
+        [TestMethod]
         public virtual void TestWarnings()
         {
             foreach (string sVersion in SupportedVersions)
@@ -437,6 +442,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
+        [TestMethod]
         public virtual void TestConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -469,6 +475,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
+        [TestMethod]
         public virtual void TestConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
@@ -528,8 +535,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
@@ -543,8 +549,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestHTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -583,8 +588,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testAddTo() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestAddTo()
         {
             foreach (string sVersion in SupportedVersions)
@@ -599,8 +603,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testGetNonNull() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestGetNonNull()
         {
             XLinkAttributes component = new XLinkAttributes();
@@ -611,8 +614,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             Assert.Equals(LocatorFixture, output);
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -625,8 +627,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
@@ -645,8 +646,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)

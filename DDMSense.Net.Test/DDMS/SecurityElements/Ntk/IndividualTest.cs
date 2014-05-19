@@ -32,6 +32,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
     using DDMSense.DDMS.SecurityElements.Ntk;
     using System.Xml.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using DDMSense.DDMS;
+    using System;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ntk:AccessIndividual elements </para>
@@ -64,7 +67,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 }
                 catch (InvalidDDMSException e)
                 {
-                    fail("Could not create fixture: " + e.Message);
+                    Assert.Fail("Could not create fixture: " + e.Message);
                 }
                 return (null);
             }
@@ -138,8 +141,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         private string GetExpectedOutput(bool isHTML)
         {
             StringBuilder text = new StringBuilder();
-            text.Append(SystemNameTest.Fixture.getOutput(isHTML, "individual.", ""));
-            text.Append(IndividualValueTest.FixtureList[0].getOutput(isHTML, "individual.", ""));
+            text.Append(SystemNameTest.Fixture.GetOutput(isHTML, "individual.", ""));
+            text.Append(IndividualValueTest.FixtureList[0].GetOutput(isHTML, "individual.", ""));
             text.Append(BuildOutput(isHTML, "individual.classification", "U"));
             text.Append(BuildOutput(isHTML, "individual.ownerProducer", "USA"));
             return (text.ToString());
@@ -165,9 +168,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         {
             foreach (string sVersion in SupportedVersions)
             {
-                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_NTK_PREFIX, Individual.getName(version));
+                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_NTK_PREFIX, Individual.GetName(version));
                 GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
             }
         }
@@ -201,30 +204,30 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         {
             foreach (string sVersion in SupportedVersions)
             {
-                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-                string ntkPrefix = PropertyReader.getPrefix("ntk");
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+                string ntkPrefix = PropertyReader.GetPrefix("ntk");
 
                 // Missing systemName
-                XElement element = Util.buildElement(ntkPrefix, Individual.getName(version), version.NtkNamespace, null);
+                XElement element = Util.BuildElement(ntkPrefix, Individual.GetName(version), version.NtkNamespace, null);
                 foreach (IndividualValue value in IndividualValueTest.FixtureList)
                 {
-                    element.appendChild(value.XOMElementCopy);
+                    element.Add(value.ElementCopy);
                 }
-                SecurityAttributesTest.Fixture.addTo(element);
+                SecurityAttributesTest.Fixture.AddTo(element);
                 GetInstance("systemName is required.", element);
 
                 // Missing individualValue
-                element = Util.buildElement(ntkPrefix, Individual.getName(version), version.NtkNamespace, null);
-                element.appendChild(SystemNameTest.Fixture.XOMElementCopy);
-                SecurityAttributesTest.Fixture.addTo(element);
+                element = Util.BuildElement(ntkPrefix, Individual.GetName(version), version.NtkNamespace, null);
+                element.Add(SystemNameTest.Fixture.ElementCopy);
+                SecurityAttributesTest.Fixture.AddTo(element);
                 GetInstance("At least one individual value is required.", element);
 
                 // Missing security attributes
-                element = Util.buildElement(ntkPrefix, Individual.getName(version), version.NtkNamespace, null);
-                element.appendChild(SystemNameTest.Fixture.XOMElementCopy);
+                element = Util.BuildElement(ntkPrefix, Individual.GetName(version), version.NtkNamespace, null);
+                element.Add(SystemNameTest.Fixture.ElementCopy);
                 foreach (IndividualValue value in IndividualValueTest.FixtureList)
                 {
-                    element.appendChild(value.XOMElementCopy);
+                    element.Add(value.ElementCopy);
                 }
                 GetInstance("classification is required.", element);
             }
@@ -247,7 +250,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 try
                 {
                     new Individual(SystemNameTest.Fixture, IndividualValueTest.FixtureList, null);
-                    fail("Allowed invalid data.");
+                    Assert.Fail("Allowed invalid data.");
                 }
                 catch (InvalidDDMSException e)
                 {
@@ -265,7 +268,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 // No warnings
                 Individual component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.size());
+                Assert.Equals(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -310,12 +313,12 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Individual component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-                Assert.Equals(GetExpectedOutput(false), component.toText());
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, SystemNameTest.Fixture, IndividualValueTest.FixtureList);
-                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-                Assert.Equals(GetExpectedOutput(false), component.toText());
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -327,10 +330,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Individual component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 
                 component = GetInstance(SUCCESS, SystemNameTest.Fixture, IndividualValueTest.FixtureList);
-                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -349,7 +352,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 Individual component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Individual.Builder builder = new Individual.Builder(component);
-                Assert.Equals(component, builder.commit());
+                Assert.Equals(component, builder.Commit());
             }
         }
 
@@ -361,11 +364,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Individual.Builder builder = new Individual.Builder();
-                Assert.IsNull(builder.commit());
+                Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                builder.IndividualValues[0];
+                //TODO: Not sure what to do here.
+                //builder.IndividualValues[0];
+                Assert.Fail("TODO: builder.IndividualValues[0]");
                 Assert.IsTrue(builder.Empty);
-                builder.IndividualValues.get(1).Value = "TEST";
+                builder.IndividualValues[1].Value = "TEST";
                 Assert.IsFalse(builder.Empty);
             }
         }
@@ -379,15 +384,15 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 Individual.Builder builder = new Individual.Builder();
                 builder.SecurityAttributes.Classification = "U";
-                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+                builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
                 builder.SystemName.Value = "value";
                 builder.SystemName.SecurityAttributes.Classification = "U";
-                builder.SystemName.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
+                builder.SystemName.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 
                 try
                 {
-                    builder.commit();
-                    fail("Builder allowed invalid data.");
+                    builder.Commit();
+                    Assert.Fail("Builder allowed invalid data.");
                 }
                 catch (InvalidDDMSException e)
                 {
@@ -396,8 +401,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 builder.IndividualValues[0].Qualifier = "test";
                 builder.IndividualValues[0].Value = "test";
                 builder.IndividualValues[0].SecurityAttributes.Classification = "U";
-                builder.IndividualValues[0].SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-                builder.commit();
+                builder.IndividualValues[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+                builder.Commit();
             }
         }
 
@@ -408,7 +413,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Individual.Builder builder = new Individual.Builder();
-                assertNotNull(builder.IndividualValues.get(1));
+                Assert.IsNotNull(builder.IndividualValues[1]);
             }
         }
     }
