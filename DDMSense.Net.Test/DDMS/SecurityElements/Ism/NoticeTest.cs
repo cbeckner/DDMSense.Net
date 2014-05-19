@@ -21,7 +21,8 @@ using System.Text;
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
-namespace DDMSense.Test.DDMS.SecurityElements.Ism {
+namespace DDMSense.Test.DDMS.SecurityElements.Ism
+{
 
 
 
@@ -30,349 +31,402 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism {
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using DDMSense.DDMS;
+    using System;
 
-	/// <summary>
-	/// <para> Tests related to ISM:Notice elements </para>
-	/// 
-	/// <para> The valid instance of ISM:Notice is generated, rather than relying on the ISM schemas to validate an XML file.
-	/// </para>
-	/// 
-	/// @author Brian Uri!
-	/// @since 2.0.0
-	/// </summary>
-	public class NoticeTest : AbstractBaseTestCase {
+    /// <summary>
+    /// <para> Tests related to ISM:Notice elements </para>
+    /// 
+    /// <para> The valid instance of ISM:Notice is generated, rather than relying on the ISM schemas to validate an XML file.
+    /// </para>
+    /// 
+    /// @author Brian Uri!
+    /// @since 2.0.0
+    /// </summary>
+    public class NoticeTest : AbstractBaseTestCase
+    {
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public NoticeTest() : base(null) {
-			RemoveSupportedVersions("2.0 3.0 3.1");
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public NoticeTest()
+            : base(null)
+        {
+            RemoveSupportedVersions("2.0 3.0 3.1");
+        }
 
-		/// <summary>
-		/// Returns a fixture object for testing.
-		/// </summary>
-		public static XElement FixtureElement {
-			get {
-				try {
-					DDMSVersion version = DDMSVersion.CurrentVersion;
-					string ismPrefix = PropertyReader.getPrefix("ism");
-					string ismNs = version.IsmNamespace;
-    
-					XElement element = Util.buildElement(ismPrefix, Notice.getName(version), ismNs, null);
-					element.addNamespaceDeclaration(ismPrefix, version.IsmNamespace);
-					NoticeAttributesTest.Fixture.addTo(element);
-					SecurityAttributesTest.Fixture.addTo(element);
-					element.appendChild(NoticeTextTest.FixtureElement);
-					return (element);
-				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
-				}
-				return (null);
-			}
-		}
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
+        public static XElement FixtureElement
+        {
+            get
+            {
+                try
+                {
+                    DDMSVersion version = DDMSVersion.CurrentVersion;
+                    string ismPrefix = PropertyReader.GetPrefix("ism");
+                    string ismNs = version.IsmNamespace;
 
-		/// <summary>
-		/// Returns a fixture object for testing.
-		/// </summary>
-		public static IList<Notice> FixtureList {
-			get {
-				try {
-					IList<Notice> list = new List<Notice>();
-					list.Add(new Notice(NoticeTest.FixtureElement));
-					return (list);
-				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
-				}
-				return (null);
-			}
-		}
+                    XElement element = Util.BuildElement(ismPrefix, Notice.GetName(version), ismNs, null);
+                    element.Add(ismPrefix, version.IsmNamespace);
+                    NoticeAttributesTest.Fixture.AddTo(element);
+                    SecurityAttributesTest.Fixture.AddTo(element);
+                    element.Add(NoticeTextTest.FixtureElement);
+                    return (element);
+                }
+                catch (InvalidDDMSException e)
+                {
+                    Assert.Fail("Could not create fixture: " + e.Message);
+                }
+                return (null);
+            }
+        }
 
-		/// <summary>
-		/// Attempts to build a component from a XOM element.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="element"> the element to build from
-		/// </param>
-		/// <returns> a valid object </returns>
-		private Notice GetInstance(string message, XElement element) {
-			bool expectFailure = !Util.isEmpty(message);
-			Notice component = null;
-			try {
-				component = new Notice(element);
-				CheckConstructorSuccess(expectFailure);
-			} catch (InvalidDDMSException e) {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (component);
-		}
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
+        public static List<Notice> FixtureList
+        {
+            get
+            {
+                try
+                {
+                    List<Notice> list = new List<Notice>();
+                    list.Add(new Notice(NoticeTest.FixtureElement));
+                    return (list);
+                }
+                catch (InvalidDDMSException e)
+                {
+                    Assert.Fail("Could not create fixture: " + e.Message);
+                }
+                return (null);
+            }
+        }
 
-		/// <summary>
-		/// Helper method to create an object which is expected to be valid.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="noticeTexts"> the notice texts (at least 1 required) </param>
-		/// <returns> a valid object </returns>
-		private Notice GetInstance(string message, IList<NoticeText> noticeTexts) {
-			bool expectFailure = !Util.isEmpty(message);
-			Notice component = null;
-			try {
-				component = new Notice(noticeTexts, SecurityAttributesTest.Fixture, NoticeAttributesTest.Fixture);
-				CheckConstructorSuccess(expectFailure);
-			} catch (InvalidDDMSException e) {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (component);
-		}
+        /// <summary>
+        /// Attempts to build a component from a XOM element.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="element"> the element to build from
+        /// </param>
+        /// <returns> a valid object </returns>
+        private Notice GetInstance(string message, XElement element)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            Notice component = null;
+            try
+            {
+                component = new Notice(element);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-		/// <summary>
-		/// Returns the expected HTML or Text output for this unit test
-		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		private string GetExpectedOutput(bool isHTML) {
-			StringBuilder text = new StringBuilder();
-			text.Append(BuildOutput(isHTML, "notice.noticeText", "noticeText"));
-			text.Append(BuildOutput(isHTML, "notice.noticeText.pocType", "DoD-Dist-B"));
-			text.Append(BuildOutput(isHTML, "notice.noticeText.classification", "U"));
-			text.Append(BuildOutput(isHTML, "notice.noticeText.ownerProducer", "USA"));
-			text.Append(BuildOutput(isHTML, "notice.classification", "U"));
-			text.Append(BuildOutput(isHTML, "notice.ownerProducer", "USA"));
-			text.Append(BuildOutput(isHTML, "notice.noticeType", "DoD-Dist-B"));
-			text.Append(BuildOutput(isHTML, "notice.noticeReason", "noticeReason"));
-			text.Append(BuildOutput(isHTML, "notice.noticeDate", "2011-09-15"));
-			text.Append(BuildOutput(isHTML, "notice.unregisteredNoticeType", "unregisteredNoticeType"));
-			if (DDMSVersion.CurrentVersion.isAtLeast("4.1")) {
-				text.Append(BuildOutput(isHTML, "notice.externalNotice", "false"));
-			}
-			return (text.ToString());
-		}
+        /// <summary>
+        /// Helper method to create an object which is expected to be valid.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="noticeTexts"> the notice texts (at least 1 required) </param>
+        /// <returns> a valid object </returns>
+        private Notice GetInstance(string message, List<NoticeText> noticeTexts)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            Notice component = null;
+            try
+            {
+                component = new Notice(noticeTexts, SecurityAttributesTest.Fixture, NoticeAttributesTest.Fixture);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-		/// <summary>
-		/// Returns the expected XML output for this unit test
-		/// </summary>
-		private string ExpectedXMLOutput {
-			get {
-				StringBuilder xml = new StringBuilder();
-				xml.Append("<ISM:Notice ").Append(XmlnsISM).Append(" ");
-				xml.Append("ISM:noticeType=\"DoD-Dist-B\" ISM:noticeReason=\"noticeReason\" ISM:noticeDate=\"2011-09-15\" ");
-				xml.Append("ISM:unregisteredNoticeType=\"unregisteredNoticeType\"");
-				if (DDMSVersion.CurrentVersion.isAtLeast("4.1")) {
-					xml.Append(" ISM:externalNotice=\"false\"");
-				}
-				xml.Append(" ISM:classification=\"U\" ISM:ownerProducer=\"USA\">");
-				xml.Append("<ISM:NoticeText ISM:classification=\"U\" ISM:ownerProducer=\"USA\" ISM:pocType=\"DoD-Dist-B\">noticeText</ISM:NoticeText></ISM:Notice>");
-				return (xml.ToString());
-			}
-		}
+        /// <summary>
+        /// Returns the expected HTML or Text output for this unit test
+        /// </summary>
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        private string GetExpectedOutput(bool isHTML)
+        {
+            StringBuilder text = new StringBuilder();
+            text.Append(BuildOutput(isHTML, "notice.noticeText", "noticeText"));
+            text.Append(BuildOutput(isHTML, "notice.noticeText.pocType", "DoD-Dist-B"));
+            text.Append(BuildOutput(isHTML, "notice.noticeText.classification", "U"));
+            text.Append(BuildOutput(isHTML, "notice.noticeText.ownerProducer", "USA"));
+            text.Append(BuildOutput(isHTML, "notice.classification", "U"));
+            text.Append(BuildOutput(isHTML, "notice.ownerProducer", "USA"));
+            text.Append(BuildOutput(isHTML, "notice.noticeType", "DoD-Dist-B"));
+            text.Append(BuildOutput(isHTML, "notice.noticeReason", "noticeReason"));
+            text.Append(BuildOutput(isHTML, "notice.noticeDate", "2011-09-15"));
+            text.Append(BuildOutput(isHTML, "notice.unregisteredNoticeType", "unregisteredNoticeType"));
+            if (DDMSVersion.CurrentVersion.IsAtLeast("4.1"))
+            {
+                text.Append(BuildOutput(isHTML, "notice.externalNotice", "false"));
+            }
+            return (text.ToString());
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestNameAndNamespace() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        /// <summary>
+        /// Returns the expected XML output for this unit test
+        /// </summary>
+        private string ExpectedXMLOutput
+        {
+            get
+            {
+                StringBuilder xml = new StringBuilder();
+                xml.Append("<ISM:Notice ").Append(XmlnsISM).Append(" ");
+                xml.Append("ISM:noticeType=\"DoD-Dist-B\" ISM:noticeReason=\"noticeReason\" ISM:noticeDate=\"2011-09-15\" ");
+                xml.Append("ISM:unregisteredNoticeType=\"unregisteredNoticeType\"");
+                if (DDMSVersion.CurrentVersion.IsAtLeast("4.1"))
+                {
+                    xml.Append(" ISM:externalNotice=\"false\"");
+                }
+                xml.Append(" ISM:classification=\"U\" ISM:ownerProducer=\"USA\">");
+                xml.Append("<ISM:NoticeText ISM:classification=\"U\" ISM:ownerProducer=\"USA\" ISM:pocType=\"DoD-Dist-B\">noticeText</ISM:NoticeText></ISM:Notice>");
+                return (xml.ToString());
+            }
+        }
 
-				AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_ISM_PREFIX, Notice.getName(version));
-				GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
-			}
-		}
+        [TestMethod]
+        public virtual void TestNameAndNamespace()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestElementConstructorValid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_ISM_PREFIX, Notice.GetName(version));
+                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
+            }
+        }
 
-				// All fields
-				GetInstance(SUCCESS, FixtureElement);
-			}
-		}
+        [TestMethod]
+        public virtual void TestElementConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestDataConstructorValid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                // All fields
+                GetInstance(SUCCESS, FixtureElement);
+            }
+        }
 
-				// All fields
-				GetInstance(SUCCESS, NoticeTextTest.FixtureList);
+        [TestMethod]
+        public virtual void TestDataConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				// No attributes
-				try {
-					new Notice(NoticeTextTest.FixtureList, null, null);
-				} catch (InvalidDDMSException) {
-					fail("Prevented valid data.");
-				}
-			}
-		}
+                // All fields
+                GetInstance(SUCCESS, NoticeTextTest.FixtureList);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestElementConstructorInvalid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                // No attributes
+                try
+                {
+                    new Notice(NoticeTextTest.FixtureList, null, null);
+                }
+                catch (InvalidDDMSException)
+                {
+                    Assert.Fail("Prevented valid data.");
+                }
+            }
+        }
 
-				// No NoticeTexts
-				XElement element = new XElement(FixtureElement);
-				element.removeChildren();
-				GetInstance("At least one ISM:NoticeText", element);
-			}
-		}
+        [TestMethod]
+        public virtual void TestElementConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestDataConstructorInvalid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                // No NoticeTexts
+                XElement element = new XElement(FixtureElement);
+                element.RemoveNodes();
+                GetInstance("At least one ISM:NoticeText", element);
+            }
+        }
 
-				// No NoticeTexts
-				GetInstance("At least one ISM:NoticeText", (IList) null);
-			}
-		}
+        [TestMethod]
+        public virtual void TestDataConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestWarnings() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+                // No NoticeTexts
+                GetInstance("At least one ISM:NoticeText", (List<NoticeText>)null);
+            }
+        }
 
-				Notice component = GetInstance(SUCCESS, FixtureElement);
+        [TestMethod]
+        public virtual void TestWarnings()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				// 4.1 ism:Notice used
-				if (version.isAtLeast("4.1")) {
-					assertEquals(1, component.ValidationWarnings.size());
-					string text = "The ISM:externalNotice attribute in this DDMS component";
-					string locator = "ISM:Notice";
-					AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
-				}
-				// No warnings 
-				else {
-					assertEquals(0, component.ValidationWarnings.size());
-				}
-			}
-		}
+                Notice component = GetInstance(SUCCESS, FixtureElement);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestConstructorEquality() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                // 4.1 ism:Notice used
+                if (version.IsAtLeast("4.1"))
+                {
+                    Assert.Equals(1, component.ValidationWarnings.Count);
+                    string text = "The ISM:externalNotice attribute in this DDMS component";
+                    string locator = "ISM:Notice";
+                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
+                }
+                // No warnings 
+                else
+                {
+                    Assert.Equals(0, component.ValidationWarnings.Count);
+                }
+            }
+        }
 
-				Notice elementComponent = GetInstance(SUCCESS, FixtureElement);
-				Notice dataComponent = GetInstance(SUCCESS, NoticeTextTest.FixtureList);
+        [TestMethod]
+        public virtual void TestConstructorEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				assertEquals(elementComponent, dataComponent);
-				assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
-			}
-		}
+                Notice elementComponent = GetInstance(SUCCESS, FixtureElement);
+                Notice dataComponent = GetInstance(SUCCESS, NoticeTextTest.FixtureList);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestConstructorInequalityDifferentValues() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                Assert.Equals(elementComponent, dataComponent);
+                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+            }
+        }
 
-				IList<NoticeText> list = NoticeTextTest.FixtureList;
-				list.Add(new NoticeText(NoticeTextTest.FixtureElement));
-				Notice elementComponent = GetInstance(SUCCESS, FixtureElement);
-				Notice dataComponent = GetInstance(SUCCESS, list);
-				assertFalse(elementComponent.Equals(dataComponent));
-			}
-		}
+        [TestMethod]
+        public virtual void TestConstructorInequalityDifferentValues()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestHTMLTextOutput() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                List<NoticeText> list = NoticeTextTest.FixtureList;
+                list.Add(new NoticeText(NoticeTextTest.FixtureElement));
+                Notice elementComponent = GetInstance(SUCCESS, FixtureElement);
+                Notice dataComponent = GetInstance(SUCCESS, list);
+                Assert.IsFalse(elementComponent.Equals(dataComponent));
+            }
+        }
 
-				Notice component = GetInstance(SUCCESS, FixtureElement);
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+        [TestMethod]
+        public virtual void TestHTMLTextOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				component = GetInstance(SUCCESS, NoticeTextTest.FixtureList);
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
-			}
-		}
+                Notice component = GetInstance(SUCCESS, FixtureElement);
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestXMLOutput() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                component = GetInstance(SUCCESS, NoticeTextTest.FixtureList);
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
+            }
+        }
 
-				Notice component = GetInstance(SUCCESS, FixtureElement);
-				assertEquals(ExpectedXMLOutput, component.toXML());
+        [TestMethod]
+        public virtual void TestXMLOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				component = GetInstance(SUCCESS, NoticeTextTest.FixtureList);
-				assertEquals(ExpectedXMLOutput, component.toXML());
-			}
-		}
+                Notice component = GetInstance(SUCCESS, FixtureElement);
+                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
-		public virtual void TestWrongVersion() {
-			// Implicit, since 1 NoticeText is required and that requires DDMS 4.0.1 or greater.
-		}
+                component = GetInstance(SUCCESS, NoticeTextTest.FixtureList);
+                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderEquality() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        [TestMethod]
+        public virtual void TestWrongVersion()
+        {
+            // Implicit, since 1 NoticeText is required and that requires DDMS 4.0.1 or greater.
+        }
 
-				Notice component = GetInstance(SUCCESS, FixtureElement);
-				Notice.Builder builder = new Notice.Builder(component);
-				assertEquals(component, builder.commit());
-			}
-		}
+        [TestMethod]
+        public virtual void TestBuilderEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderIsEmpty() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                Notice component = GetInstance(SUCCESS, FixtureElement);
+                Notice.Builder builder = new Notice.Builder(component);
+                Assert.Equals(component, builder.Commit());
+            }
+        }
 
-				Notice.Builder builder = new Notice.Builder();
-				assertNull(builder.commit());
-				assertTrue(builder.Empty);
-				builder.NoticeTexts.get(1).Value = "TEST";
-				assertFalse(builder.Empty);
-			}
-		}
+        [TestMethod]
+        public virtual void TestBuilderIsEmpty()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderValidation() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+                Notice.Builder builder = new Notice.Builder();
+                Assert.IsNull(builder.Commit());
+                Assert.IsTrue(builder.Empty);
+                builder.NoticeTexts[1].Value = "TEST";
+                Assert.IsFalse(builder.Empty);
+            }
+        }
 
-				Notice.Builder builder = new Notice.Builder();
-				builder.SecurityAttributes.Classification = "U";
-				builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-				try {
-					builder.commit();
-					fail("Allowed invalid data.");
-				} catch (InvalidDDMSException e) {
-					ExpectMessage(e, "At least one ISM:NoticeText");
-				}
-				builder.NoticeTexts.get(0).Value = "TEST";
-				builder.NoticeTexts.get(0).SecurityAttributes.Classification = "U";
-				builder.NoticeTexts.get(0).SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-				builder.commit();
-			}
-		}
+        [TestMethod]
+        public virtual void TestBuilderValidation()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderLazyList() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderLazyList() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Notice.Builder builder = new Notice.Builder();
-				assertNotNull(builder.NoticeTexts.get(1));
-			}
-		}
-	}
+                Notice.Builder builder = new Notice.Builder();
+                builder.SecurityAttributes.Classification = "U";
+                builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+                try
+                {
+                    builder.Commit();
+                    Assert.Fail("Allowed invalid data.");
+                }
+                catch (InvalidDDMSException e)
+                {
+                    ExpectMessage(e, "At least one ISM:NoticeText");
+                }
+                builder.NoticeTexts[0].Value = "TEST";
+                builder.NoticeTexts[0].SecurityAttributes.Classification = "U";
+                builder.NoticeTexts[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+                builder.Commit();
+            }
+        }
+
+        [TestMethod]
+        public virtual void TestBuilderLazyList()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Notice.Builder builder = new Notice.Builder();
+                Assert.IsNotNull(builder.NoticeTexts[1]);
+            }
+        }
+    }
 
 }

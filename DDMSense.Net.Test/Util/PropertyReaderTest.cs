@@ -1,3 +1,5 @@
+using DDMSense.Util;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 /* Copyright 2010 - 2013 by Brian Uri!
@@ -39,7 +41,7 @@ namespace DDMSense.Test.Util {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: protected void setUp() throws Exception
 		protected internal override void SetUp() {
-			PropertyReader.setProperty("ddms.prefix", "ddms");
+			PropertyReader.SetProperty("ddms.prefix", "ddms");
 		}
 
 		/// <summary>
@@ -48,36 +50,43 @@ namespace DDMSense.Test.Util {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: protected void tearDown() throws Exception
 		protected internal override void TearDown() {
-			PropertyReader.setProperty("ddms.prefix", "ddms");
+			PropertyReader.SetProperty("ddms.prefix", "ddms");
 		}
 
+        [TestMethod]
 		public virtual void TestGetPropertyInvalid() {
 			try {
-				PropertyReader.getProperty("unknown.property");
-				fail("Did not prevent invalid property.");
+				PropertyReader.GetProperty("unknown.property");
+				Assert.Fail("Did not prevent invalid property.");
 			} catch (System.ArgumentException e) {
 				ExpectMessage(e, "Undefined Property");
 			}
 		}
 
-		public virtual void TestGetListPropertyValid() {
-			IList<string> properties = PropertyReader.getListProperty("ddms.supportedVersions");
-			assertEquals(4, properties.Count);
+        [TestMethod]
+        public virtual void TestGetListPropertyValid()
+        {
+			List<string> properties = PropertyReader.GetListProperty("ddms.supportedVersions");
+			Assert.Equals(4, properties.Count);
 		}
 
-		public virtual void TestSetPropertyInvalidName() {
+        [TestMethod]
+        public virtual void TestSetPropertyInvalidName()
+        {
 			// This also handles unconfigurable properties.
 			try {
-				PropertyReader.setProperty("unknown.property", "value");
-				fail("Did not prevent invalid property name.");
+				PropertyReader.SetProperty("unknown.property", "value");
+				Assert.Fail("Did not prevent invalid property name.");
 			} catch (System.ArgumentException e) {
 				ExpectMessage(e, "unknown.property is not a configurable property.");
 			}
 		}
 
-		public virtual void TestSetPropertyValid() {
-			PropertyReader.setProperty("ddms.prefix", "DDMS");
-			assertEquals("DDMS", PropertyReader.getPrefix("ddms"));
+        [TestMethod]
+        public virtual void TestSetPropertyValid()
+        {
+			PropertyReader.SetProperty("ddms.prefix", "DDMS");
+			Assert.Equals("DDMS", PropertyReader.GetPrefix("ddms"));
 		}
 	}
 

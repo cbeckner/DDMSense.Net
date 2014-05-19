@@ -134,12 +134,10 @@
     <Compile Include="DDMS\ValidationMessageTest.cs" />
     <Compile Include="Util\DDMSReaderTest.cs" />
     <Compile Include="Util\DDMSVersionTest.cs" />
-    <Compile Include="Util\LazyListTest.cs" />
     <Compile Include="Util\PropertyReaderTest.cs" />
     <Compile Include="Util\UtilTest.cs" />
     <Compile Include="Extensions\HashMapGetHelperClass.cs" />
     <Compile Include="Extensions\StringHelperClass.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

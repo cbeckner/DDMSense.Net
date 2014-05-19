@@ -30,11 +30,11 @@ namespace DDMSense.Test.Util {
     using System.IO;
     using System.Xml.Linq;
     using InvalidDDMSException = DDMSense.DDMS.InvalidDDMSException;
+    using System.Text;
 
 	/// <summary>
 	/// A collection of Util tests.
 	/// </summary>
-    [TestClass]
 	public class UtilTest : AbstractBaseTestCase {
 
 		protected internal static readonly string TEST_NAMESPACE = DDMSVersion.CurrentVersion.Namespace;
@@ -987,7 +987,7 @@ namespace DDMSense.Test.Util {
 			XElement element = new XElement("test", "http://test.com");
 			Util.AddDDMSAttribute(element, "testAttribute", "dog");
             XAttribute attr = element.Attribute(XName.Get("testAttribute", DDMSVersion.CurrentVersion.Namespace));
-			Assert.AreEqual("ddms", attr.NamespacePrefix);
+			Assert.AreEqual("ddms", attr.GetPrefix());
 			Assert.AreEqual(DDMSVersion.CurrentVersion.Namespace, attr.Name.NamespaceName);
 			Assert.AreEqual("testAttribute", attr.Name.LocalName);
 			Assert.AreEqual("dog", element.Attribute(XName.Get("testAttribute", DDMSVersion.CurrentVersion.Namespace)));
@@ -1030,9 +1030,10 @@ namespace DDMSense.Test.Util {
 //ORIGINAL LINE: public void testBuildXmlDocument() throws Exception
         [TestMethod]
         public virtual void TestBuildXmlDocument() {
-			File testFile = new File(PropertyReader.getProperty("test.unit.data") + "3.0/", "resource.xml");
-			string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).toXML();
-			Assert.AreEqual(expectedXmlOutput, Util.BuildXmlDocument(new FileInputStream(testFile)).RootElement.toXML());
+            //File testFile = new File(PropertyReader.getProperty("test.unit.data") + "3.0/", "resource.xml");
+            //string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).toXML();
+            //Assert.AreEqual(expectedXmlOutput, Util.BuildXmlDocument(new FileStream(testFile)).RootElement.toXML());
+            Assert.Fail("Not Implemented");
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -1047,7 +1048,7 @@ namespace DDMSense.Test.Util {
 			}
 
 			try {
-				Util.BuildXmlDocument(new ByteArrayInputStream("Not an XML File".GetBytes()));
+				Util.BuildXmlDocument(new MemoryStream(Encoding.ASCII.GetBytes("Not an XML File")));
 				Assert.Fail("Allowed invalid data.");
 			} catch (IOException e) {
 				ExpectMessage(e, "Content is not allowed in prolog.");
@@ -1058,11 +1059,68 @@ namespace DDMSense.Test.Util {
 //ORIGINAL LINE: public void testSchematronQueryBinding() throws Exception
         [TestMethod]
         public virtual void TestSchematronQueryBinding() {
-			XDocument schDocument = Util.BuildXmlDocument(new FileInputStream("data/sample/schematron/testPublisherValueXslt1.sch"));
+			XDocument schDocument = Util.BuildXmlDocument(new FileStream("data/sample/schematron/testPublisherValueXslt1.sch",FileMode.Open));
 			Assert.AreEqual("xslt", Util.GetSchematronQueryBinding(schDocument));
-			schDocument = Util.BuildXmlDocument(new FileInputStream("data/sample/schematron/testPositionValuesXslt2.sch"));
+			schDocument = Util.BuildXmlDocument(new FileStream("data/sample/schematron/testPositionValuesXslt2.sch",FileMode.Open));
 			Assert.AreEqual("xslt2", Util.GetSchematronQueryBinding(schDocument));
 		}
 	}
 
+
+//Bill's AWESOME date tests!
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using DDMSense.Util;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using DDMSense.DDMS;
+
+//namespace DDMSense.Util.Tests
+//{
+//    [TestClass()]
+//    public class UtilTests
+//    {
+//        [TestMethod()]
+//        public void RequireDDMSDateFormatTest()
+//        {
+//            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy"), "urn:us:mil:ces:metadata:ddms:4");
+//            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM"), "urn:us:mil:ces:metadata:ddms:4");
+//            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-dd"), "urn:us:mil:ces:metadata:ddms:4");
+//            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHHK"), "urn:us:mil:ces:metadata:ddms:4");
+//            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+//            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.ffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+//            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+//        }
+
+//        [TestMethod()]
+//        [ExpectedException(typeof(InvalidDDMSException))]
+//        public void Invalid_RequireDDMSDateFormat()
+//        {
+//            //Util.RequireDDMSDateFormat(DateTime.Now.ToString(), "urn:us:mil:ces:metadata:ddms:4");
+//            //Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy/MM/ddTHHK"), "urn:us:mil:ces:metadata:ddms:4");
+//            //Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.f"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+//            //Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.ffK"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+//            Util.RequireDDMSDateFormat(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), @"http://metadata.dod.mil/mdr/ns/DDMS/3.1/");
+//        }
+//    }
+//}
+//    /*  YYYY
+//        YYYY-MM
+//        YYYY-MM-DD
+//        YYYY-MM-DDThhTZD
+//        YYYY-MM-DDThh:mmTZD
+//        YYYY-MM-DDThh:mm.ssTZD
+//        YYYY-MM-DDThh:mm:ss.sTZD
+//        Where:
+//        YYYY	0000 through current year
+//        MM	01 through 12  (month)
+//        DD	01 through 31  (day)
+//        hh	00 through 24  (hour)
+//        mm	00 through 59  (minute)
+//        ss	00 through 60  (second)
+//        .s	.0 through 999 (fractional second)
+//        TZD  = time zone designator (Z or +hh:mm or -hh:mm)
+//    */
 }

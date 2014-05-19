@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -20,322 +20,386 @@ using System.Text;
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
-namespace DDMSense.Test.DDMS.ResourceElements {
+namespace DDMSense.Test.DDMS.ResourceElements
+{
 
-	
-	using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
-	using DDMSVersion = DDMSense.Util.DDMSVersion;
-	using PropertyReader = DDMSense.Util.PropertyReader;
-	using Util = DDMSense.Util.Util;
+
+    using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using PropertyReader = DDMSense.Util.PropertyReader;
+    using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.ResourceElements;
     using DDMSense.DDMS.ResourceElements;
     using DDMSense.DDMS;
     using System.Xml.Linq;
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-	/// <summary>
-	/// <para> Tests related to ddms:contributor elements </para>
-	/// 
-	/// @author Brian Uri!
-	/// @since 2.0.0
-	/// </summary>
-	public class ContributorTest : AbstractBaseTestCase {
+    /// <summary>
+    /// <para> Tests related to ddms:contributor elements </para>
+    /// 
+    /// @author Brian Uri!
+    /// @since 2.0.0
+    /// </summary>
+    public class ContributorTest : AbstractBaseTestCase
+    {
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public ContributorTest() : base("contributor.xml") {
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public ContributorTest()
+            : base("contributor.xml")
+        {
+        }
 
-		/// <summary>
-		/// Returns a fixture object for testing.
-		/// </summary>
-		public static Contributor Fixture {
-			get {
-				try {
-					return (new Contributor(ServiceTest.Fixture, null, null));
-				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
-				}
-				return (null);
-			}
-		}
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
+        public static Contributor Fixture
+        {
+            get
+            {
+                try
+                {
+                    return (new Contributor(ServiceTest.Fixture, null, null));
+                }
+                catch (InvalidDDMSException e)
+                {
+                    Assert.Fail("Could not create fixture: " + e.Message);
+                }
+                return (null);
+            }
+        }
 
-		/// <summary>
-		/// Attempts to build a component from a XOM element.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="element"> the element to build from
-		/// </param>
-		/// <returns> a valid object </returns>
-		private Contributor GetInstance(string message, XElement element) {
-			bool expectFailure = !Util.isEmpty(message);
-			Contributor component = null;
-			try {
-				SecurityAttributesTest.Fixture.addTo(element);
-				component = new Contributor(element);
-				CheckConstructorSuccess(expectFailure);
-			} catch (InvalidDDMSException e) {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (component);
-		}
+        /// <summary>
+        /// Attempts to build a component from a XOM element.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="element"> the element to build from
+        /// </param>
+        /// <returns> a valid object </returns>
+        private Contributor GetInstance(string message, XElement element)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            Contributor component = null;
+            try
+            {
+                SecurityAttributesTest.Fixture.AddTo(element);
+                component = new Contributor(element);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-		/// <summary>
-		/// Helper method to create an object which is expected to be valid.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="entity"> the producer entity </param>
-		/// <param name="pocTypes"> the pocType (DDMS 4.0.1 or later) </param>
-		private Contributor GetInstance(string message, IRoleEntity entity, IList<string> pocTypes) {
-			bool expectFailure = !Util.isEmpty(message);
-			Contributor component = null;
-			try {
-				component = new Contributor(entity, pocTypes, SecurityAttributesTest.Fixture);
-				CheckConstructorSuccess(expectFailure);
-			} catch (InvalidDDMSException e) {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (component);
-		}
+        /// <summary>
+        /// Helper method to create an object which is expected to be valid.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="entity"> the producer entity </param>
+        /// <param name="pocTypes"> the pocType (DDMS 4.0.1 or later) </param>
+        private Contributor GetInstance(string message, IRoleEntity entity, List<string> pocTypes)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            Contributor component = null;
+            try
+            {
+                component = new Contributor(entity, pocTypes, SecurityAttributesTest.Fixture);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-		/// <summary>
-		/// Returns the expected HTML or Text output for this unit test
-		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		private string GetExpectedOutput(bool isHTML) {
-			DDMSVersion version = DDMSVersion.CurrentVersion;
-			StringBuilder text = new StringBuilder();
-			text.Append(OrganizationTest.Fixture.getOutput(isHTML, "contributor.", ""));
-			if (version.isAtLeast("4.0.1")) {
-				text.Append(BuildOutput(isHTML, "contributor.pocType", "DoD-Dist-B"));
-			}
-			text.Append(BuildOutput(isHTML, "contributor.classification", "U"));
-			text.Append(BuildOutput(isHTML, "contributor.ownerProducer", "USA"));
-			return (text.ToString());
-		}
+        /// <summary>
+        /// Returns the expected HTML or Text output for this unit test
+        /// </summary>
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        private string GetExpectedOutput(bool isHTML)
+        {
+            DDMSVersion version = DDMSVersion.CurrentVersion;
+            StringBuilder text = new StringBuilder();
+            text.Append(OrganizationTest.Fixture.GetOutput(isHTML, "contributor.", ""));
+            if (version.IsAtLeast("4.0.1"))
+            {
+                text.Append(BuildOutput(isHTML, "contributor.pocType", "DoD-Dist-B"));
+            }
+            text.Append(BuildOutput(isHTML, "contributor.classification", "U"));
+            text.Append(BuildOutput(isHTML, "contributor.ownerProducer", "USA"));
+            return (text.ToString());
+        }
 
-		/// <summary>
-		/// Returns the expected XML output for this unit test
-		/// </summary>
-		/// <param name="preserveFormatting"> if true, include line breaks and tabs. </param>
-		private string GetExpectedXMLOutput(bool preserveFormatting) {
-			DDMSVersion version = DDMSVersion.CurrentVersion;
-			StringBuilder xml = new StringBuilder();
-			xml.Append("<ddms:contributor ").Append(XmlnsDDMS).Append(" ").Append(XmlnsISM);
-			if (version.isAtLeast("4.0.1")) {
-				xml.Append(" ISM:pocType=\"DoD-Dist-B\"");
-			}
-			xml.Append(" ISM:classification=\"U\" ISM:ownerProducer=\"USA\">\n\t<ddms:").Append(Organization.getName(version)).Append(">\n");
-			xml.Append("\t\t<ddms:name>DISA</ddms:name>\n");
-			xml.Append("\t</ddms:").Append(Organization.getName(version)).Append(">\n</ddms:contributor>");
-			return (FormatXml(xml.ToString(), preserveFormatting));
-		}
+        /// <summary>
+        /// Returns the expected XML output for this unit test
+        /// </summary>
+        /// <param name="preserveFormatting"> if true, include line breaks and tabs. </param>
+        private string GetExpectedXMLOutput(bool preserveFormatting)
+        {
+            DDMSVersion version = DDMSVersion.CurrentVersion;
+            StringBuilder xml = new StringBuilder();
+            xml.Append("<ddms:contributor ").Append(XmlnsDDMS).Append(" ").Append(XmlnsISM);
+            if (version.IsAtLeast("4.0.1"))
+            {
+                xml.Append(" ISM:pocType=\"DoD-Dist-B\"");
+            }
+            xml.Append(" ISM:classification=\"U\" ISM:ownerProducer=\"USA\">\n\t<ddms:").Append(Organization.GetName(version)).Append(">\n");
+            xml.Append("\t\t<ddms:name>DISA</ddms:name>\n");
+            xml.Append("\t</ddms:").Append(Organization.GetName(version)).Append(">\n</ddms:contributor>");
+            return (FormatXml(xml.ToString(), preserveFormatting));
+        }
 
-		public virtual void TestNameAndNamespace() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        [TestMethod]
+        public virtual void TestNameAndNamespace()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Contributor.getName(version));
-				GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
-			}
-		}
+                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Contributor.GetName(version));
+                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
+            }
+        }
 
-		public virtual void TestElementConstructorValid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-				// All fields
-				GetInstance(SUCCESS, GetValidElement(sVersion));
+        [TestMethod]
+        public virtual void TestElementConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+                // All fields
+                GetInstance(SUCCESS, GetValidElement(sVersion));
 
-				// No optional fields
-				XElement element = Util.buildDDMSElement(Contributor.getName(version), null);
-				element.appendChild(OrganizationTest.Fixture.XOMElementCopy);
-				GetInstance(SUCCESS, element);
-			}
-		}
+                // No optional fields
+                XElement element = Util.BuildDDMSElement(Contributor.GetName(version), null);
+                element.Add(OrganizationTest.Fixture.ElementCopy);
+                GetInstance(SUCCESS, element);
+            }
+        }
 
-		public virtual void TestDataConstructorValid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				// All fields
-				GetInstance(SUCCESS, OrganizationTest.Fixture, null);
-			}
-		}
+        [TestMethod]
+        public virtual void TestDataConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                // All fields
+                GetInstance(SUCCESS, OrganizationTest.Fixture, null);
+            }
+        }
 
-		public virtual void TestElementConstructorInvalid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-				string ismPrefix = PropertyReader.getPrefix("ism");
+        [TestMethod]
+        public virtual void TestElementConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+                string ismPrefix = PropertyReader.GetPrefix("ism");
 
-				// Missing entity
-				XElement element = Util.buildDDMSElement(Contributor.getName(version), null);
-				GetInstance("entity is required.", element);
+                // Missing entity
+                XElement element = Util.BuildDDMSElement(Contributor.GetName(version), null);
+                GetInstance("entity is required.", element);
 
-				if (version.isAtLeast("4.0.1")) {
-					// Invalid pocType
-					element = Util.buildDDMSElement(Contributor.getName(version), null);
-					element.appendChild(OrganizationTest.Fixture.XOMElementCopy);
-					Util.addAttribute(element, ismPrefix, "pocType", version.IsmNamespace, "Unknown");
-					GetInstance("Unknown is not a valid enumeration token", element);
+                if (version.IsAtLeast("4.0.1"))
+                {
+                    // Invalid pocType
+                    element = Util.BuildDDMSElement(Contributor.GetName(version), null);
+                    element.Add(OrganizationTest.Fixture.ElementCopy);
+                    Util.AddAttribute(element, ismPrefix, "pocType", version.IsmNamespace, "Unknown");
+                    GetInstance("Unknown is not a valid enumeration token", element);
 
-					// Partial Invalid pocType
-					element = Util.buildDDMSElement(Contributor.getName(version), null);
-					element.appendChild(OrganizationTest.Fixture.XOMElementCopy);
-					Util.addAttribute(element, ismPrefix, "pocType", version.IsmNamespace, "DoD-Dist-B Unknown");
-					GetInstance("Unknown is not a valid enumeration token", element);
-				}
-			}
-		}
+                    // Partial Invalid pocType
+                    element = Util.BuildDDMSElement(Contributor.GetName(version), null);
+                    element.Add(OrganizationTest.Fixture.ElementCopy);
+                    Util.AddAttribute(element, ismPrefix, "pocType", version.IsmNamespace, "DoD-Dist-B Unknown");
+                    GetInstance("Unknown is not a valid enumeration token", element);
+                }
+            }
+        }
 
-		public virtual void TestDataConstructorInvalid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        [TestMethod]
+        public virtual void TestDataConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				// Missing entity
-				GetInstance("entity is required.", (IRoleEntity) null, null);
+                // Missing entity
+                GetInstance("entity is required.", (IRoleEntity)null, null);
 
-				if (version.isAtLeast("4.0.1")) {
-					// Invalid pocType
-					GetInstance("Unknown is not a valid enumeration token", OrganizationTest.Fixture, Util.getXsListAsList("Unknown"));
+                if (version.IsAtLeast("4.0.1"))
+                {
+                    // Invalid pocType
+                    GetInstance("Unknown is not a valid enumeration token", OrganizationTest.Fixture, Util.GetXsListAsList("Unknown"));
 
-					// Partial Invalid pocType
-					GetInstance("Unknown is not a valid enumeration token", OrganizationTest.Fixture, Util.getXsListAsList("DoD-Dist-B Unknown"));
-				}
-			}
-		}
+                    // Partial Invalid pocType
+                    GetInstance("Unknown is not a valid enumeration token", OrganizationTest.Fixture, Util.GetXsListAsList("DoD-Dist-B Unknown"));
+                }
+            }
+        }
 
-		public virtual void TestWarnings() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				// No warnings
-				Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(0, component.ValidationWarnings.size());
-			}
-		}
+        [TestMethod]
+        public virtual void TestWarnings()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                // No warnings
+                Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Assert.Equals(0, component.ValidationWarnings.Count());
+            }
+        }
 
-		public virtual void TestConstructorEquality() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Contributor elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Contributor dataComponent = GetInstance(SUCCESS, OrganizationTest.Fixture, RoleEntityTest.PocTypes);
-				assertEquals(elementComponent, dataComponent);
-				assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
-			}
-		}
+        [TestMethod]
+        public virtual void TestConstructorEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Contributor elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Contributor dataComponent = GetInstance(SUCCESS, OrganizationTest.Fixture, RoleEntityTest.PocTypes);
+                Assert.Equals(elementComponent, dataComponent);
+                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestConstructorInequalityDifferentValues() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Contributor elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Contributor dataComponent = GetInstance(SUCCESS, new Service(Util.getXsListAsList("DISA PEO-GES"), Util.getXsListAsList("703-882-1000 703-885-1000"), Util.getXsListAsList("ddms@fgm.com")), null);
-				assertFalse(elementComponent.Equals(dataComponent));
-			}
-		}
+        [TestMethod]
+        public virtual void TestConstructorInequalityDifferentValues()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Contributor elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Contributor dataComponent = GetInstance(SUCCESS, new Service(Util.GetXsListAsList("DISA PEO-GES"), Util.GetXsListAsList("703-882-1000 703-885-1000"), Util.GetXsListAsList("ddms@fgm.com")), null);
+                Assert.IsFalse(elementComponent.Equals(dataComponent));
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestHTMLTextOutput() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+        [TestMethod]
+        public virtual void TestHTMLTextOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
-				component = GetInstance(SUCCESS, OrganizationTest.Fixture, RoleEntityTest.PocTypes);
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
-			}
-		}
+                component = GetInstance(SUCCESS, OrganizationTest.Fixture, RoleEntityTest.PocTypes);
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
+            }
+        }
 
-		public virtual void TestXMLOutput() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(GetExpectedXMLOutput(true), component.toXML());
+        [TestMethod]
+        public virtual void TestXMLOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
-				component = GetInstance(SUCCESS, OrganizationTest.Fixture, RoleEntityTest.PocTypes);
-				assertEquals(GetExpectedXMLOutput(false), component.toXML());
-			}
-		}
+                component = GetInstance(SUCCESS, OrganizationTest.Fixture, RoleEntityTest.PocTypes);
+                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testSecurityAttributes() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestSecurityAttributes() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Contributor component = new Contributor(OrganizationTest.Fixture, null, SecurityAttributesTest.Fixture);
-				assertEquals(SecurityAttributesTest.Fixture, component.SecurityAttributes);
-			}
-		}
+        [TestMethod]
+        public virtual void TestSecurityAttributes()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Contributor component = new Contributor(OrganizationTest.Fixture, null, SecurityAttributesTest.Fixture);
+                Assert.Equals(SecurityAttributesTest.Fixture, component.SecurityAttributes);
+            }
+        }
 
-		public virtual void TestWrongVersionPocType() {
-			DDMSVersion.CurrentVersion = "3.1";
-			try {
-				new Contributor(OrganizationTest.Fixture, Util.getXsListAsList("DoD-Dist-B"), SecurityAttributesTest.Fixture);
-				fail("Allowed invalid data.");
-			} catch (InvalidDDMSException e) {
-				ExpectMessage(e, "This component cannot have a pocType");
-			}
-		}
+        [TestMethod]
+        public virtual void TestWrongVersionPocType()
+        {
+            DDMSVersion.SetCurrentVersion("3.1");
+            try
+            {
+                new Contributor(OrganizationTest.Fixture, Util.GetXsListAsList("DoD-Dist-B"), SecurityAttributesTest.Fixture);
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "This component cannot have a pocType");
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderEquality() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        [TestMethod]
+        public virtual void TestBuilderEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Contributor.Builder builder = new Contributor.Builder(component);
-				assertEquals(component, builder.commit());
-			}
-		}
+                Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Contributor.Builder builder = new Contributor.Builder(component);
+                Assert.Equals(component, builder.Commit());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderIsEmpty() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        [TestMethod]
+        public virtual void TestBuilderIsEmpty()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				Contributor.Builder builder = new Contributor.Builder();
-				assertNull(builder.commit());
-				assertTrue(builder.Empty);
-				builder.PocTypes = Util.getXsListAsList("DoD-Dist-B");
-				assertFalse(builder.Empty);
+                Contributor.Builder builder = new Contributor.Builder();
+                Assert.IsNull(builder.Commit());
+                Assert.IsTrue(builder.Empty);
+                builder.PocTypes = Util.GetXsListAsList("DoD-Dist-B");
+                Assert.IsFalse(builder.Empty);
 
-			}
-		}
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderValidation() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-			}
-		}
+        [TestMethod]
+        public virtual void TestBuilderValidation()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilder() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilder() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        [TestMethod]
+        public virtual void TestBuilder()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				Contributor.Builder builder = new Contributor.Builder();
-				builder.EntityType = Organization.getName(version);
-				builder.Organization.Phones = Util.getXsListAsList("703-885-1000");
-				try {
-					builder.commit();
-					fail("Builder allowed invalid data.");
-				} catch (InvalidDDMSException e) {
-					ExpectMessage(e, "At least 1 name element must exist.");
-				}
-				builder.Organization.Names = Util.getXsListAsList("DISA");
-				builder.commit();
-			}
-		}
-	}
+                Contributor.Builder builder = new Contributor.Builder();
+                builder.EntityType = Organization.GetName(version);
+                builder.Organization.Phones = Util.GetXsListAsList("703-885-1000");
+                try
+                {
+                    builder.Commit();
+                    Assert.Fail("Builder allowed invalid data.");
+                }
+                catch (InvalidDDMSException e)
+                {
+                    ExpectMessage(e, "At least 1 name element must exist.");
+                }
+                builder.Organization.Names = Util.GetXsListAsList("DISA");
+                builder.Commit();
+            }
+        }
+    }
 
 }

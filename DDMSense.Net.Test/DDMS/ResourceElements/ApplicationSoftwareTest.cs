@@ -1,5 +1,5 @@
 using System.Text;
-
+using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
    
    This file is part of DDMSence.
@@ -19,332 +19,396 @@ using System.Text;
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
-namespace DDMSense.Test.DDMS.ResourceElements {
+namespace DDMSense.Test.DDMS.ResourceElements
+{
 
-	
-	using SecurityAttributes = DDMSense.DDMS.SecurityElements.Ism.SecurityAttributes;
-	using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
-	using DDMSVersion = DDMSense.Util.DDMSVersion;
-	using PropertyReader = DDMSense.Util.PropertyReader;
-	using Util = DDMSense.Util.Util;
+
+    using SecurityAttributes = DDMSense.DDMS.SecurityElements.Ism.SecurityAttributes;
+    using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using PropertyReader = DDMSense.Util.PropertyReader;
+    using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.ResourceElements;
     using DDMSense.DDMS.ResourceElements;
     using System.Xml.Linq;
+    using DDMSense.DDMS;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
 
-	/// <summary>
-	/// <para> Tests related to ddms:applicationSoftware elements </para>
-	/// 
-	/// <para> Because a ddms:applicationSoftware is a local component, we cannot load a valid document from a unit test data
-	/// file. We have to build the well-formed XElement ourselves. </para>
-	/// 
-	/// @author Brian Uri!
-	/// @since 2.0.0
-	/// </summary>
-	public class ApplicationSoftwareTest : AbstractBaseTestCase {
+    /// <summary>
+    /// <para> Tests related to ddms:applicationSoftware elements </para>
+    /// 
+    /// <para> Because a ddms:applicationSoftware is a local component, we cannot load a valid document from a unit test data
+    /// file. We have to build the well-formed XElement ourselves. </para>
+    /// 
+    /// @author Brian Uri!
+    /// @since 2.0.0
+    /// </summary>
+    public class ApplicationSoftwareTest : AbstractBaseTestCase
+    {
 
-		private const string TEST_VALUE = "IRM Generator 2L-9";
+        private const string TEST_VALUE = "IRM Generator 2L-9";
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public ApplicationSoftwareTest() : base(null) {
-			RemoveSupportedVersions("2.0 3.0 3.1");
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public ApplicationSoftwareTest()
+            : base(null)
+        {
+            RemoveSupportedVersions("2.0 3.0 3.1");
+        }
 
-		/// <summary>
-		/// Returns a fixture object for testing.
-		/// </summary>
-		public static XElement FixtureElement {
-			get {
-				try {
-					DDMSVersion version = DDMSVersion.CurrentVersion;
-					XElement element = Util.buildDDMSElement(ApplicationSoftware.getName(version), TEST_VALUE);
-					element.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
-					element.addNamespaceDeclaration(PropertyReader.getPrefix("ism"), version.IsmNamespace);
-					SecurityAttributesTest.Fixture.addTo(element);
-					return (element);
-				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
-				}
-				return (null);
-			}
-		}
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
+        public static XElement FixtureElement
+        {
+            get
+            {
+                try
+                {
+                    DDMSVersion version = DDMSVersion.CurrentVersion;
+                    XElement element = Util.BuildDDMSElement(ApplicationSoftware.GetName(version), TEST_VALUE);
+                    element.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + element.Name.LocalName;
+                    element.Name = XName.Get(PropertyReader.GetPrefix("ism"), version.IsmNamespace) + element.Name.LocalName; 
+                    SecurityAttributesTest.Fixture.addTo(element);
+                    return (element);
+                }
+                catch (InvalidDDMSException e)
+                {
+                    Assert.Fail("Could not create fixture: " + e.Message);
+                }
+                return (null);
+            }
+        }
 
-		/// <summary>
-		/// Returns a fixture object for testing.
-		/// </summary>
-		public static ApplicationSoftware Fixture {
-			get {
-				try {
-					return (new ApplicationSoftware(FixtureElement));
-				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
-				}
-				return (null);
-			}
-		}
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
+        public static ApplicationSoftware Fixture
+        {
+            get
+            {
+                try
+                {
+                    return (new ApplicationSoftware(FixtureElement));
+                }
+                catch (InvalidDDMSException e)
+                {
+                    Assert.Fail("Could not create fixture: " + e.Message);
+                }
+                return (null);
+            }
+        }
 
-		/// <summary>
-		/// Attempts to build a component from a XOM element.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="element"> the element to build from
-		/// </param>
-		/// <returns> a valid object </returns>
-		private ApplicationSoftware GetInstance(string message, XElement element) {
-			bool expectFailure = !Util.isEmpty(message);
-			ApplicationSoftware component = null;
-			try {
-				component = new ApplicationSoftware(element);
-				CheckConstructorSuccess(expectFailure);
-			} catch (InvalidDDMSException e) {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (component);
-		}
+        /// <summary>
+        /// Attempts to build a component from a XOM element.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="element"> the element to build from
+        /// </param>
+        /// <returns> a valid object </returns>
+        private ApplicationSoftware GetInstance(string message, XElement element)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            ApplicationSoftware component = null;
+            try
+            {
+                component = new ApplicationSoftware(element);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-		/// <summary>
-		/// Helper method to create an object which is expected to be valid.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="value"> the child text </param>
-		/// <returns> a valid object </returns>
-		private ApplicationSoftware GetInstance(string message, string value) {
-			bool expectFailure = !Util.isEmpty(message);
-			ApplicationSoftware component = null;
-			try {
-				component = new ApplicationSoftware(value, SecurityAttributesTest.Fixture);
-				CheckConstructorSuccess(expectFailure);
-			} catch (InvalidDDMSException e) {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (component);
-		}
+        /// <summary>
+        /// Helper method to create an object which is expected to be valid.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="value"> the child text </param>
+        /// <returns> a valid object </returns>
+        private ApplicationSoftware GetInstance(string message, string value)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            ApplicationSoftware component = null;
+            try
+            {
+                component = new ApplicationSoftware(value, SecurityAttributesTest.Fixture);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-		/// <summary>
-		/// Returns the expected HTML or Text output for this unit test
-		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		private string GetExpectedOutput(bool isHTML) {
-			StringBuilder text = new StringBuilder();
-			text.Append(BuildOutput(isHTML, "applicationSoftware", TEST_VALUE));
-			text.Append(BuildOutput(isHTML, "applicationSoftware.classification", "U"));
-			text.Append(BuildOutput(isHTML, "applicationSoftware.ownerProducer", "USA"));
-			return (text.ToString());
-		}
+        /// <summary>
+        /// Returns the expected HTML or Text output for this unit test
+        /// </summary>
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        private string GetExpectedOutput(bool isHTML)
+        {
+            StringBuilder text = new StringBuilder();
+            text.Append(BuildOutput(isHTML, "applicationSoftware", TEST_VALUE));
+            text.Append(BuildOutput(isHTML, "applicationSoftware.classification", "U"));
+            text.Append(BuildOutput(isHTML, "applicationSoftware.ownerProducer", "USA"));
+            return (text.ToString());
+        }
 
-		/// <summary>
-		/// Returns the expected XML output for this unit test
-		/// </summary>
-		private string ExpectedXMLOutput {
-			get {
-				StringBuilder xml = new StringBuilder();
-				xml.Append("<ddms:applicationSoftware ").Append(XmlnsDDMS).Append(" ").Append(XmlnsISM).Append(" ISM:classification=\"U\" ISM:ownerProducer=\"USA\">");
-				xml.Append(TEST_VALUE).Append("</ddms:applicationSoftware>");
-				return (xml.ToString());
-			}
-		}
+        /// <summary>
+        /// Returns the expected XML output for this unit test
+        /// </summary>
+        private string ExpectedXMLOutput
+        {
+            get
+            {
+                StringBuilder xml = new StringBuilder();
+                xml.Append("<ddms:applicationSoftware ").Append(XmlnsDDMS).Append(" ").Append(XmlnsISM).Append(" ISM:classification=\"U\" ISM:ownerProducer=\"USA\">");
+                xml.Append(TEST_VALUE).Append("</ddms:applicationSoftware>");
+                return (xml.ToString());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestNameAndNamespace() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestNameAndNamespace()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, ApplicationSoftware.getName(version));
-				GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
-			}
-		}
+                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, ApplicationSoftware.GetName(version));
+                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestElementConstructorValid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestElementConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				// All fields
-				GetInstance(SUCCESS, FixtureElement);
+                // All fields
+                GetInstance(SUCCESS, FixtureElement);
 
-				// No optional fields
-				XElement element = Util.buildDDMSElement(ApplicationSoftware.getName(version), null);
-				SecurityAttributesTest.Fixture.addTo(element);
-				GetInstance(SUCCESS, element);
-			}
-		}
+                // No optional fields
+                XElement element = Util.BuildDDMSElement(ApplicationSoftware.GetName(version), null);
+                SecurityAttributesTest.Fixture.addTo(element);
+                GetInstance(SUCCESS, element);
+            }
+        }
 
-		public virtual void TestDataConstructorValid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        public virtual void TestDataConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				// All fields
-				GetInstance(SUCCESS, TEST_VALUE);
+                // All fields
+                GetInstance(SUCCESS, TEST_VALUE);
 
-				// No optional fields
-				GetInstance(SUCCESS, "");
-			}
-		}
+                // No optional fields
+                GetInstance(SUCCESS, "");
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestElementConstructorInvalid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestElementConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				// Bad security attributes
-				XElement element = Util.buildDDMSElement(ApplicationSoftware.getName(version), null);
-				GetInstance("classification is required.", element);
-			}
-		}
+                // Bad security attributes
+                XElement element = Util.BuildDDMSElement(ApplicationSoftware.GetName(version), null);
+                GetInstance("classification is required.", element);
+            }
+        }
 
-		public virtual void TestDataConstructorInvalid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        public virtual void TestDataConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				// Bad security attributes
-				try {
-					new ApplicationSoftware(TEST_VALUE, (SecurityAttributes) null);
-					fail("Allowed invalid data.");
-				} catch (InvalidDDMSException e) {
-					ExpectMessage(e, "classification is required.");
-				}
-			}
-		}
+                // Bad security attributes
+                try
+                {
+                    new ApplicationSoftware(TEST_VALUE, (SecurityAttributes)null);
+                    Assert.Fail("Allowed invalid data.");
+                }
+                catch (InvalidDDMSException e)
+                {
+                    ExpectMessage(e, "classification is required.");
+                }
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestWarnings() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestWarnings()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				// No warnings
-				ApplicationSoftware component = GetInstance(SUCCESS, FixtureElement);
-				assertEquals(0, component.ValidationWarnings.size());
+                // No warnings
+                ApplicationSoftware component = GetInstance(SUCCESS, FixtureElement);
+                Assert.Equals(0, component.ValidationWarnings.Count());
 
-				// No value
-				XElement element = Util.buildDDMSElement(ApplicationSoftware.getName(version), null);
-				SecurityAttributesTest.Fixture.addTo(element);
-				component = GetInstance(SUCCESS, element);
-				assertEquals(1, component.ValidationWarnings.size());
-				string text = "A ddms:applicationSoftware element was found with no value.";
-				string locator = "ddms:applicationSoftware";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
-			}
-		}
+                // No value
+                XElement element = Util.BuildDDMSElement(ApplicationSoftware.GetName(version), null);
+                SecurityAttributesTest.Fixture.addTo(element);
+                component = GetInstance(SUCCESS, element);
+                Assert.Equals(1, component.ValidationWarnings.Count());
+                string text = "A ddms:applicationSoftware element was found with no value.";
+                string locator = "ddms:applicationSoftware";
+                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestConstructorEquality() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestConstructorEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				ApplicationSoftware elementComponent = GetInstance(SUCCESS, FixtureElement);
-				ApplicationSoftware dataComponent = GetInstance(SUCCESS, TEST_VALUE);
-				assertEquals(elementComponent, dataComponent);
-				assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
-			}
-		}
+                ApplicationSoftware elementComponent = GetInstance(SUCCESS, FixtureElement);
+                ApplicationSoftware dataComponent = GetInstance(SUCCESS, TEST_VALUE);
+                Assert.Equals(elementComponent, dataComponent);
+                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestConstructorInequalityDifferentValues() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestConstructorInequalityDifferentValues()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				ApplicationSoftware elementComponent = GetInstance(SUCCESS, FixtureElement);
-				ApplicationSoftware dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE);
-				assertFalse(elementComponent.Equals(dataComponent));
-			}
-		}
+                ApplicationSoftware elementComponent = GetInstance(SUCCESS, FixtureElement);
+                ApplicationSoftware dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE);
+                Assert.IsFalse(elementComponent.Equals(dataComponent));
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestHTMLTextOutput() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestHTMLTextOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				ApplicationSoftware component = GetInstance(SUCCESS, FixtureElement);
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+                ApplicationSoftware component = GetInstance(SUCCESS, FixtureElement);
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
-				component = GetInstance(SUCCESS, TEST_VALUE);
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
-			}
-		}
+                component = GetInstance(SUCCESS, TEST_VALUE);
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestXMLOutput() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestXMLOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				ApplicationSoftware component = GetInstance(SUCCESS, FixtureElement);
-				assertEquals(ExpectedXMLOutput, component.toXML());
+                ApplicationSoftware component = GetInstance(SUCCESS, FixtureElement);
+                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
-				component = GetInstance(SUCCESS, TEST_VALUE);
-				assertEquals(ExpectedXMLOutput, component.toXML());
-			}
-		}
+                component = GetInstance(SUCCESS, TEST_VALUE);
+                Assert.Equals(ExpectedXMLOutput, component.toXML());
+            }
+        }
 
-		public virtual void TestWrongVersion() {
-			try {
-				DDMSVersion.CurrentVersion = "2.0";
-				new ApplicationSoftware(TEST_VALUE, SecurityAttributesTest.Fixture);
-				fail("Allowed invalid data.");
-			} catch (InvalidDDMSException e) {
-				ExpectMessage(e, "The applicationSoftware element cannot be used");
-			}
-		}
+        public virtual void TestWrongVersion()
+        {
+            try
+            {
+                DDMSVersion.SetCurrentVersion("2.0");
+                new ApplicationSoftware(TEST_VALUE, SecurityAttributesTest.Fixture);
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "The applicationSoftware element cannot be used");
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderEquality() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestBuilderEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				ApplicationSoftware component = GetInstance(SUCCESS, FixtureElement);
-				ApplicationSoftware.Builder builder = new ApplicationSoftware.Builder(component);
-				assertEquals(component, builder.commit());
-			}
-		}
+                ApplicationSoftware component = GetInstance(SUCCESS, FixtureElement);
+                ApplicationSoftware.Builder builder = new ApplicationSoftware.Builder(component);
+                Assert.Equals(component, builder.Commit());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderIsEmpty() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestBuilderIsEmpty()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				ApplicationSoftware.Builder builder = new ApplicationSoftware.Builder();
-				assertNull(builder.commit());
-				assertTrue(builder.Empty);
-				builder.Value = TEST_VALUE;
-				assertFalse(builder.Empty);
+                ApplicationSoftware.Builder builder = new ApplicationSoftware.Builder();
+                Assert.IsNull(builder.Commit());
+                Assert.IsTrue(builder.Empty);
+                builder.Value = TEST_VALUE;
+                Assert.IsFalse(builder.Empty);
 
-			}
-		}
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderValidation() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void TestBuilderValidation()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				ApplicationSoftware.Builder builder = new ApplicationSoftware.Builder();
-				builder.Value = TEST_VALUE;
-				try {
-					builder.commit();
-					fail("Builder allowed invalid data.");
-				} catch (InvalidDDMSException e) {
-					ExpectMessage(e, "classification is required.");
-				}
-				builder.SecurityAttributes.Classification = "U";
-				builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-				builder.commit();
-			}
-		}
-	}
+                ApplicationSoftware.Builder builder = new ApplicationSoftware.Builder();
+                builder.Value = TEST_VALUE;
+                try
+                {
+                    builder.Commit();
+                    Assert.Fail("Builder allowed invalid data.");
+                }
+                catch (InvalidDDMSException e)
+                {
+                    ExpectMessage(e, "classification is required.");
+                }
+                builder.SecurityAttributes.Classification = "U";
+                builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+                builder.Commit();
+            }
+        }
+    }
 
 }

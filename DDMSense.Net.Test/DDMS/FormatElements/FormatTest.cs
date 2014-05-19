@@ -19,419 +19,477 @@ using System.Text;
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
-namespace DDMSense.Test.DDMS.FormatElements {
+namespace DDMSense.Test.DDMS.FormatElements
+{
 
 
     using DDMSense.DDMS.FormatElements;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using DDMSense.DDMS;
+    using System;
 
-	/// <summary>
-	/// <para> Tests related to ddms:format elements </para>
-	/// 
-	/// @author Brian Uri!
-	/// @since 0.9.b
-	/// </summary>
-	public class FormatTest : AbstractBaseTestCase {
+    /// <summary>
+    /// <para> Tests related to ddms:format elements </para>
+    /// 
+    /// @author Brian Uri!
+    /// @since 0.9.b
+    /// </summary>
+    public class FormatTest : AbstractBaseTestCase
+    {
 
-		private const string TEST_MIME_TYPE = "text/xml";
-		private const string TEST_MEDIUM = "digital";
+        private const string TEST_MIME_TYPE = "text/xml";
+        private const string TEST_MEDIUM = "digital";
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public FormatTest() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public FormatTest() : base("format.xml") {
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public FormatTest()
+            : base("format.xml")
+        {
+        }
 
-		/// <summary>
-		/// Returns a fixture object for testing.
-		/// </summary>
-		public static Format Fixture {
-			get {
-				try {
-					return (new Format("text/xml", null, null));
-				} catch (InvalidDDMSException e) {
-					fail("Could not create fixture: " + e.Message);
-				}
-				return (null);
-			}
-		}
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
+        public static Format Fixture
+        {
+            get
+            {
+                try
+                {
+                    return (new Format("text/xml", null, null));
+                }
+                catch (InvalidDDMSException e)
+                {
+                    Assert.Fail("Could not create fixture: " + e.Message);
+                }
+                return (null);
+            }
+        }
 
-		/// <summary>
-		/// Attempts to build a component from a XOM element.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="element"> the element to build from
-		/// </param>
-		/// <returns> a valid object </returns>
-		private Format GetInstance(string message, XElement element) {
-			bool expectFailure = !Util.isEmpty(message);
-			Format component = null;
-			try {
-				component = new Format(element);
-				CheckConstructorSuccess(expectFailure);
-			} catch (InvalidDDMSException e) {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (component);
-		}
+        /// <summary>
+        /// Attempts to build a component from a XOM element.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="element"> the element to build from
+        /// </param>
+        /// <returns> a valid object </returns>
+        private Format GetInstance(string message, XElement element)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            Format component = null;
+            try
+            {
+                component = new Format(element);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-		/// <summary>
-		/// Helper method to create an object which is expected to be valid.
-		/// </summary>
-		/// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-		/// <param name="mimeType"> the mimeType element (required) </param>
-		/// <param name="extent"> the extent element (may be null) </param>
-		/// <param name="medium"> the medium element (may be null) </param>
-		/// <returns> a valid object </returns>
-		private Format GetInstance(string message, string mimeType, Extent extent, string medium) {
-			bool expectFailure = !Util.isEmpty(message);
-			Format component = null;
-			try {
-				component = new Format(mimeType, extent, medium);
-				CheckConstructorSuccess(expectFailure);
-			} catch (InvalidDDMSException e) {
-				CheckConstructorFailure(expectFailure, e);
-				ExpectMessage(e, message);
-			}
-			return (component);
-		}
+        /// <summary>
+        /// Helper method to create an object which is expected to be valid.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="mimeType"> the mimeType element (required) </param>
+        /// <param name="extent"> the extent element (may be null) </param>
+        /// <param name="medium"> the medium element (may be null) </param>
+        /// <returns> a valid object </returns>
+        private Format GetInstance(string message, string mimeType, Extent extent, string medium)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            Format component = null;
+            try
+            {
+                component = new Format(mimeType, extent, medium);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-		/// <summary>
-		/// Helper method to manage the deprecated Media wrapper element
-		/// </summary>
-		/// <param name="innerElement"> the element containing the guts of this component </param>
-		/// <returns> the element itself in DDMS 4.0.1 or later, or the element wrapped in another element </returns>
-		private XElement WrapInnerElement(XElement innerElement) {
-			DDMSVersion version = DDMSVersion.CurrentVersion;
-			string name = Format.getName(version);
-			if (version.isAtLeast("4.0.1")) {
-				innerElement.LocalName = name;
-				return (innerElement);
-			}
-			XElement element = Util.buildDDMSElement(name, null);
-			element.appendChild(innerElement);
-			return (element);
-		}
+        /// <summary>
+        /// Helper method to manage the deprecated Media wrapper element
+        /// </summary>
+        /// <param name="innerElement"> the element containing the guts of this component </param>
+        /// <returns> the element itself in DDMS 4.0.1 or later, or the element wrapped in another element </returns>
+        private XElement WrapInnerElement(XElement innerElement)
+        {
+            DDMSVersion version = DDMSVersion.CurrentVersion;
+            string name = Format.GetName(version);
+            if (version.IsAtLeast("4.0.1"))
+            {
+                innerElement.Name = XName.Get(name);
+                return (innerElement);
+            }
+            XElement element = Util.BuildDDMSElement(name, null);
+            element.Add(innerElement);
+            return (element);
+        }
 
-		/// <summary>
-		/// Returns the expected HTML or Text output for this unit test
-		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		private string GetExpectedOutput(bool isHTML) {
-			DDMSVersion version = DDMSVersion.CurrentVersion;
-			string prefix = version.isAtLeast("4.0.1") ? "format." : "format.Media.";
-			StringBuilder text = new StringBuilder();
-			text.Append(BuildOutput(isHTML, prefix + "mimeType", TEST_MIME_TYPE));
-			text.Append(ExtentTest.Fixture.getOutput(isHTML, prefix, ""));
-			text.Append(BuildOutput(isHTML, prefix + "medium", TEST_MEDIUM));
-			return (text.ToString());
-		}
+        /// <summary>
+        /// Returns the expected HTML or Text output for this unit test
+        /// </summary>
+        private string GetExpectedOutput(bool isHTML)
+        {
+            DDMSVersion version = DDMSVersion.CurrentVersion;
+            string prefix = version.IsAtLeast("4.0.1") ? "format." : "format.Media.";
+            StringBuilder text = new StringBuilder();
+            text.Append(BuildOutput(isHTML, prefix + "mimeType", TEST_MIME_TYPE));
+            text.Append(ExtentTest.Fixture.GetOutput(isHTML, prefix, ""));
+            text.Append(BuildOutput(isHTML, prefix + "medium", TEST_MEDIUM));
+            return (text.ToString());
+        }
 
-		/// <summary>
-		/// Returns the expected XML output for this unit test
-		/// </summary>
-		/// <param name="preserveFormatting"> if true, include line breaks and tabs. </param>
-		private string GetExpectedXMLOutput(bool preserveFormatting) {
-			StringBuilder xml = new StringBuilder();
-			xml.Append("<ddms:format ").Append(XmlnsDDMS).Append(">\n\t");
-			if (DDMSVersion.CurrentVersion.isAtLeast("4.0.1")) {
-				xml.Append("<ddms:mimeType>text/xml</ddms:mimeType>\n\t");
-				xml.Append("<ddms:extent ddms:qualifier=\"sizeBytes\" ddms:value=\"75000\" />\n\t");
-				xml.Append("<ddms:medium>digital</ddms:medium>\n");
-			} else {
-				xml.Append("<ddms:Media>\n\t\t");
-				xml.Append("<ddms:mimeType>text/xml</ddms:mimeType>\n\t\t");
-				xml.Append("<ddms:extent ddms:qualifier=\"sizeBytes\" ddms:value=\"75000\" />\n\t\t");
-				xml.Append("<ddms:medium>digital</ddms:medium>\n\t");
-				xml.Append("</ddms:Media>\n");
-			}
-			xml.Append("</ddms:format>");
-			return (FormatXml(xml.ToString(), preserveFormatting));
-		}
+        /// <summary>
+        /// Returns the expected XML output for this unit test
+        /// </summary>
+        /// <param name="preserveFormatting"> if true, include line breaks and tabs. </param>
+        private string GetExpectedXMLOutput(bool preserveFormatting)
+        {
+            StringBuilder xml = new StringBuilder();
+            xml.Append("<ddms:format ").Append(XmlnsDDMS).Append(">\n\t");
+            if (DDMSVersion.CurrentVersion.IsAtLeast("4.0.1"))
+            {
+                xml.Append("<ddms:mimeType>text/xml</ddms:mimeType>\n\t");
+                xml.Append("<ddms:extent ddms:qualifier=\"sizeBytes\" ddms:value=\"75000\" />\n\t");
+                xml.Append("<ddms:medium>digital</ddms:medium>\n");
+            }
+            else
+            {
+                xml.Append("<ddms:Media>\n\t\t");
+                xml.Append("<ddms:mimeType>text/xml</ddms:mimeType>\n\t\t");
+                xml.Append("<ddms:extent ddms:qualifier=\"sizeBytes\" ddms:value=\"75000\" />\n\t\t");
+                xml.Append("<ddms:medium>digital</ddms:medium>\n\t");
+                xml.Append("</ddms:Media>\n");
+            }
+            xml.Append("</ddms:format>");
+            return (FormatXml(xml.ToString(), preserveFormatting));
+        }
 
-		public virtual void TestNameAndNamespace() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        [TestMethod]
+        public virtual void TestNameAndNamespace()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Format.getName(version));
-				GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
-			}
-		}
+                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Format.GetName(version));
+                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
+            }
+        }
 
-		public virtual void TestElementConstructorValid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				// All fields
-				GetInstance(SUCCESS, GetValidElement(sVersion));
+        [TestMethod]
+        public virtual void TestElementConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                // All fields
+                GetInstance(SUCCESS, GetValidElement(sVersion));
 
-				// No optional fields
-				XElement mediaElement = Util.buildDDMSElement("Media", null);
-				Util.addDDMSChildElement(mediaElement, "mimeType", "text/html");
-				GetInstance(SUCCESS, WrapInnerElement(mediaElement));
-			}
-		}
+                // No optional fields
+                XElement mediaElement = Util.BuildDDMSElement("Media", null);
+                Util.AddDDMSChildElement(mediaElement, "mimeType", "text/html");
+                GetInstance(SUCCESS, WrapInnerElement(mediaElement));
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestDataConstructorValid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				// All fields
-				GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
+        [TestMethod]
+        public virtual void TestDataConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                // All fields
+                GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
 
-				// No optional fields
-				GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
-			}
-		}
+                // No optional fields
+                GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
+            }
+        }
 
-		public virtual void TestElementConstructorInvalid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-				string extentName = Extent.getName(version);
+        [TestMethod]
+        public virtual void TestElementConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+                string extentName = Extent.GetName(version);
 
-				// Missing mimeType
-				XElement mediaElement = Util.buildDDMSElement("Media", null);
-				GetInstance("mimeType is required.", WrapInnerElement(mediaElement));
+                // Missing mimeType
+                XElement mediaElement = Util.BuildDDMSElement("Media", null);
+                GetInstance("mimeType is required.", WrapInnerElement(mediaElement));
 
-				// Empty mimeType
-				mediaElement = Util.buildDDMSElement("Media", null);
-				mediaElement.appendChild(Util.buildDDMSElement("mimeType", ""));
-				GetInstance("mimeType is required.", WrapInnerElement(mediaElement));
+                // Empty mimeType
+                mediaElement = Util.BuildDDMSElement("Media", null);
+                mediaElement.Add(Util.BuildDDMSElement("mimeType", ""));
+                GetInstance("mimeType is required.", WrapInnerElement(mediaElement));
 
-				// Too many mimeTypes
-				mediaElement = Util.buildDDMSElement("Media", null);
-				mediaElement.appendChild(Util.buildDDMSElement("mimeType", TEST_MIME_TYPE));
-				mediaElement.appendChild(Util.buildDDMSElement("mimeType", TEST_MIME_TYPE));
-				GetInstance("Exactly 1 mimeType element must exist.", WrapInnerElement(mediaElement));
+                // Too many mimeTypes
+                mediaElement = Util.BuildDDMSElement("Media", null);
+                mediaElement.Add(Util.BuildDDMSElement("mimeType", TEST_MIME_TYPE));
+                mediaElement.Add(Util.BuildDDMSElement("mimeType", TEST_MIME_TYPE));
+                GetInstance("Exactly 1 mimeType element must exist.", WrapInnerElement(mediaElement));
 
-				// Too many extents
-				mediaElement = Util.buildDDMSElement("Media", null);
-				mediaElement.appendChild(Util.buildDDMSElement("mimeType", TEST_MIME_TYPE));
-				mediaElement.appendChild(Util.buildDDMSElement(extentName, null));
-				mediaElement.appendChild(Util.buildDDMSElement(extentName, null));
-				GetInstance("No more than 1 extent element can exist.", WrapInnerElement(mediaElement));
+                // Too many extents
+                mediaElement = Util.BuildDDMSElement("Media", null);
+                mediaElement.Add(Util.BuildDDMSElement("mimeType", TEST_MIME_TYPE));
+                mediaElement.Add(Util.BuildDDMSElement(extentName, null));
+                mediaElement.Add(Util.BuildDDMSElement(extentName, null));
+                GetInstance("No more than 1 extent element can exist.", WrapInnerElement(mediaElement));
 
-				// Too many mediums
-				mediaElement = Util.buildDDMSElement("Media", null);
-				mediaElement.appendChild(Util.buildDDMSElement("mimeType", TEST_MIME_TYPE));
-				mediaElement.appendChild(Util.buildDDMSElement("medium", TEST_MEDIUM));
-				mediaElement.appendChild(Util.buildDDMSElement("medium", TEST_MEDIUM));
-				GetInstance("No more than 1 medium element can exist.", WrapInnerElement(mediaElement));
+                // Too many mediums
+                mediaElement = Util.BuildDDMSElement("Media", null);
+                mediaElement.Add(Util.BuildDDMSElement("mimeType", TEST_MIME_TYPE));
+                mediaElement.Add(Util.BuildDDMSElement("medium", TEST_MEDIUM));
+                mediaElement.Add(Util.BuildDDMSElement("medium", TEST_MEDIUM));
+                GetInstance("No more than 1 medium element can exist.", WrapInnerElement(mediaElement));
 
-				// Invalid Extent
-				XElement extentElement = Util.buildDDMSElement(extentName, null);
-				Util.addDDMSAttribute(extentElement, "value", "test");
-				mediaElement = Util.buildDDMSElement("Media", null);
-				Util.addDDMSChildElement(mediaElement, "mimeType", "text/html");
-				mediaElement.appendChild(extentElement);
-				GetInstance("qualifier attribute is required.", WrapInnerElement(mediaElement));
-			}
-		}
+                // Invalid Extent
+                XElement extentElement = Util.BuildDDMSElement(extentName, null);
+                Util.AddDDMSAttribute(extentElement, "value", "test");
+                mediaElement = Util.BuildDDMSElement("Media", null);
+                Util.AddDDMSChildElement(mediaElement, "mimeType", "text/html");
+                mediaElement.Add(extentElement);
+                GetInstance("qualifier attribute is required.", WrapInnerElement(mediaElement));
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestDataConstructorInvalid() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				// Missing mimeType
-				GetInstance("mimeType is required.", null, ExtentTest.Fixture, TEST_MEDIUM);
+        [TestMethod]
+        public virtual void TestDataConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                // Missing mimeType
+                GetInstance("mimeType is required.", null, ExtentTest.Fixture, TEST_MEDIUM);
 
-				// Empty mimeType
-				GetInstance("mimeType is required.", "", ExtentTest.Fixture, TEST_MEDIUM);
-			}
-		}
+                // Empty mimeType
+                GetInstance("mimeType is required.", "", ExtentTest.Fixture, TEST_MEDIUM);
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestWarnings() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        [TestMethod]
+        public virtual void TestWarnings()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-				// No warnings
-				Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(0, component.ValidationWarnings.size());
+                // No warnings
+                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Assert.Equals(0, component.ValidationWarnings.Count);
 
-				// Medium element with no value or empty value
-				XElement mediaElement = Util.buildDDMSElement("Media", null);
-				mediaElement.appendChild(Util.buildDDMSElement("mimeType", TEST_MIME_TYPE));
-				mediaElement.appendChild(Util.buildDDMSElement("medium", null));
-				component = GetInstance(SUCCESS, WrapInnerElement(mediaElement));
-				assertEquals(1, component.ValidationWarnings.size());
-				string text = "A ddms:medium element was found with no value.";
-				string locator = version.isAtLeast("4.0.1") ? "ddms:format" : "ddms:format/ddms:Media";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
+                // Medium element with no value or empty value
+                XElement mediaElement = Util.BuildDDMSElement("Media", null);
+                mediaElement.Add(Util.BuildDDMSElement("mimeType", TEST_MIME_TYPE));
+                mediaElement.Add(Util.BuildDDMSElement("medium", null));
+                component = GetInstance(SUCCESS, WrapInnerElement(mediaElement));
+                Assert.Equals(1, component.ValidationWarnings.Count);
+                string text = "A ddms:medium element was found with no value.";
+                string locator = version.IsAtLeast("4.0.1") ? "ddms:format" : "ddms:format/ddms:Media";
+                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
-				// Nested warnings
-				component = GetInstance(SUCCESS, TEST_MIME_TYPE, new Extent("sizeBytes", ""), TEST_MEDIUM);
-				assertEquals(1, component.ValidationWarnings.size());
-				text = "A qualifier has been set without an accompanying value attribute.";
-				locator = (version.isAtLeast("4.0.1")) ? "ddms:format/ddms:extent" : "ddms:format/ddms:Media/ddms:extent";
-				AssertWarningEquality(text, locator, component.ValidationWarnings.get(0));
-			}
-		}
+                // Nested warnings
+                component = GetInstance(SUCCESS, TEST_MIME_TYPE, new Extent("sizeBytes", ""), TEST_MEDIUM);
+                Assert.Equals(1, component.ValidationWarnings.Count);
+                text = "A qualifier has been set without an accompanying value attribute.";
+                locator = (version.IsAtLeast("4.0.1")) ? "ddms:format/ddms:extent" : "ddms:format/ddms:Media/ddms:extent";
+                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestConstructorEquality() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Format elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Format dataComponent = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-				assertEquals(elementComponent, dataComponent);
-				assertEquals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
-			}
-		}
+        [TestMethod]
+        public virtual void TestConstructorEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Format elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Format dataComponent = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
+                Assert.Equals(elementComponent, dataComponent);
+                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestConstructorInequalityDifferentValues() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        [TestMethod]
+        public virtual void TestConstructorInequalityDifferentValues()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				Format elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Format dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, ExtentTest.Fixture, TEST_MEDIUM);
-				assertFalse(elementComponent.Equals(dataComponent));
+                Format elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Format dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, ExtentTest.Fixture, TEST_MEDIUM);
+                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-				dataComponent = GetInstance(SUCCESS, TEST_MIME_TYPE, null, TEST_MEDIUM);
-				assertFalse(elementComponent.Equals(dataComponent));
+                dataComponent = GetInstance(SUCCESS, TEST_MIME_TYPE, null, TEST_MEDIUM);
+                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-				dataComponent = GetInstance(SUCCESS, "TEST_MIME_TYPE", ExtentTest.Fixture, null);
-				assertFalse(elementComponent.Equals(dataComponent));
-			}
-		}
+                dataComponent = GetInstance(SUCCESS, "TEST_MIME_TYPE", ExtentTest.Fixture, null);
+                Assert.IsFalse(elementComponent.Equals(dataComponent));
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestHTMLTextOutput() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
+        [TestMethod]
+        public virtual void TestHTMLTextOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
-				component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-				assertEquals(GetExpectedOutput(true), component.toHTML());
-				assertEquals(GetExpectedOutput(false), component.toText());
-			}
-		}
+                component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestXMLOutput() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(GetExpectedXMLOutput(true), component.toXML());
+        [TestMethod]
+        public virtual void TestXMLOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
-				component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-				assertEquals(GetExpectedXMLOutput(false), component.toXML());
-			}
-		}
+                component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
+                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testExtentReuse() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestExtentReuse() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Extent extent = ExtentTest.Fixture;
-				GetInstance(SUCCESS, TEST_MIME_TYPE, extent, TEST_MEDIUM);
-				GetInstance(SUCCESS, TEST_MIME_TYPE, extent, TEST_MEDIUM);
-			}
-		}
+        [TestMethod]
+        public virtual void TestExtentReuse()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Extent extent = ExtentTest.Fixture;
+                GetInstance(SUCCESS, TEST_MIME_TYPE, extent, TEST_MEDIUM);
+                GetInstance(SUCCESS, TEST_MIME_TYPE, extent, TEST_MEDIUM);
+            }
+        }
 
-		public virtual void TestGetExtentQualifier() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(component.ExtentQualifier, component.Extent.Qualifier);
-			}
-		}
+        [TestMethod]
+        public virtual void TestGetExtentQualifier()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Assert.Equals(component.ExtentQualifier, component.Extent.Qualifier);
+            }
+        }
 
-		public virtual void TestGetExtentQualifierNoExtent() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Format component = GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
-				assertEquals("", component.ExtentQualifier);
-			}
-		}
+        [TestMethod]
+        public virtual void TestGetExtentQualifierNoExtent()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Format component = GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
+                Assert.Equals("", component.ExtentQualifier);
+            }
+        }
 
-		public virtual void TestGetExtentValue() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				assertEquals(component.ExtentValue, component.Extent.Value);
-			}
-		}
+        [TestMethod]
+        public virtual void TestGetExtentValue()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Assert.Equals(component.ExtentValue, component.Extent.Value);
+            }
+        }
 
-		public virtual void TestGetExtentValueNoExtent() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
-				Format component = GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
-				assertEquals("", component.ExtentValue);
-			}
-		}
+        [TestMethod]
+        public virtual void TestGetExtentValueNoExtent()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
+                Format component = GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
+                Assert.Equals("", component.ExtentValue);
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderEquality() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        [TestMethod]
+        public virtual void TestBuilderEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Format.Builder builder = new Format.Builder(component);
-				assertEquals(component, builder.commit());
-			}
-		}
+                Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
+                Format.Builder builder = new Format.Builder(component);
+                Assert.Equals(component, builder.Commit());
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderIsEmpty() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        [TestMethod]
+        public virtual void TestBuilderIsEmpty()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				Format.Builder builder = new Format.Builder();
-				assertNull(builder.commit());
-				assertTrue(builder.Empty);
-				builder.MimeType = TEST_MIME_TYPE;
-				assertFalse(builder.Empty);
+                Format.Builder builder = new Format.Builder();
+                Assert.IsNull(builder.Commit());
+                Assert.IsTrue(builder.Empty);
+                builder.MimeType = TEST_MIME_TYPE;
+                Assert.IsFalse(builder.Empty);
 
-			}
-		}
+            }
+        }
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-		public virtual void TestBuilderValidation() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+        [TestMethod]
+        public virtual void TestBuilderValidation()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-				Format.Builder builder = new Format.Builder();
-				builder.Medium = TEST_MEDIUM;
-				try {
-					builder.commit();
-					fail("Builder allowed invalid data.");
-				} catch (InvalidDDMSException e) {
-					ExpectMessage(e, "mimeType is required.");
-				}
-				builder.MimeType = TEST_MIME_TYPE;
-				builder.commit();
+                Format.Builder builder = new Format.Builder();
+                builder.Medium = TEST_MEDIUM;
+                try
+                {
+                    builder.Commit();
+                    Assert.Fail("Builder allowed invalid data.");
+                }
+                catch (InvalidDDMSException e)
+                {
+                    ExpectMessage(e, "mimeType is required.");
+                }
+                builder.MimeType = TEST_MIME_TYPE;
+                builder.Commit();
 
-				// No extent vs. empty extent
-				builder = new Format.Builder();
-				builder.MimeType = TEST_MIME_TYPE;
-				builder.Medium = TEST_MEDIUM;
-				assertNotNull(builder.Extent);
-				assertNull(builder.commit().Extent);
-				builder.Extent.Qualifier = "sizeBytes";
-				builder.Extent.Value = "75000";
-				assertNotNull(builder.commit().Extent);
-			}
-		}
-	}
+                // No extent vs. empty extent
+                builder = new Format.Builder();
+                builder.MimeType = TEST_MIME_TYPE;
+                builder.Medium = TEST_MEDIUM;
+                Assert.IsNotNull(builder.Extent);
+                Assert.IsNull(builder.Commit().Extent);
+                builder.Extent.Qualifier = "sizeBytes";
+                builder.Extent.Value = "75000";
+                Assert.IsNotNull(builder.Commit().Extent);
+            }
+        }
+    }
 
 }

@@ -19,98 +19,109 @@ using System.Collections.Generic;
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
-namespace DDMSense.Test.DDMS {
+namespace DDMSense.Test.DDMS
+{
 
 
-	
-	using ExtensibleAttributes = DDMSense.DDMS.Extensible.ExtensibleAttributes;
-	using ExtensibleAttributesTest = DDMSense.Test.DDMS.Extensible.ExtensibleAttributesTest;
-	using DDMSVersion = DDMSense.Util.DDMSVersion;
-	using PropertyReader = DDMSense.Util.PropertyReader;
-	using Util = DDMSense.Util.Util;
 
-	/// <summary>
-	/// <para> Tests related to underlying methods in the base class for DDMS producer entities </para>
-	/// 
-	/// @author Brian Uri!
-	/// @since 2.0.0
-	/// </summary>
-	public class RoleEntityTest : AbstractBaseTestCase {
+    using ExtensibleAttributes = DDMSense.DDMS.Extensible.ExtensibleAttributes;
+    using ExtensibleAttributesTest = DDMSense.Test.DDMS.Extensible.ExtensibleAttributesTest;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using PropertyReader = DDMSense.Util.PropertyReader;
+    using Util = DDMSense.Util.Util;
+    using System.Xml.Linq;
+    using DDMSense.DDMS.ResourceElements;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using DDMSense.DDMS;
 
-		public RoleEntityTest() : base(null) {
-		}
+    /// <summary>
+    /// <para> Tests related to underlying methods in the base class for DDMS producer entities </para>
+    /// 
+    /// @author Brian Uri!
+    /// @since 2.0.0
+    /// </summary>
+    public class RoleEntityTest : AbstractBaseTestCase
+    {
 
-		private const string TEST_POC_TYPE = "DoD-Dist-B";
+        public RoleEntityTest()
+            : base(null)
+        {
+        }
 
-		/// <summary>
-		/// Helper method to generate a pocType for producers
-		/// </summary>
-		public static IList<string> PocTypes {
-			get {
-				return (DDMSVersion.CurrentVersion.isAtLeast("4.0.1") ? Util.getXsListAsList(TEST_POC_TYPE) : Util.getXsListAsList(""));
-			}
-		}
+        private const string TEST_POC_TYPE = "DoD-Dist-B";
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testSharedWarnings() throws InvalidDDMSException
-		public virtual void TestSharedWarnings() {
-			DDMSVersion version = DDMSVersion.CurrentVersion;
+        /// <summary>
+        /// Helper method to generate a pocType for producers
+        /// </summary>
+        public static List<string> PocTypes
+        {
+            get
+            {
+                return (DDMSVersion.CurrentVersion.IsAtLeast("4.0.1") ? Util.GetXsListAsList(TEST_POC_TYPE) : Util.GetXsListAsList(""));
+            }
+        }
 
-			// Empty phone
-			XElement entityElement = Util.buildDDMSElement(Organization.getName(version), null);
-			entityElement.appendChild(Util.buildDDMSElement("name", "name"));
-			entityElement.appendChild(Util.buildDDMSElement("phone", ""));
-			Organization component = new Organization(entityElement);
-			assertEquals(1, component.ValidationWarnings.size());
-			assertEquals(ValidationMessage.WARNING_TYPE, component.ValidationWarnings.get(0).Type);
-			assertEquals("A ddms:phone element was found with no value.", component.ValidationWarnings.get(0).Text);
+        [TestMethod]
+        public virtual void TestSharedWarnings()
+        {
+            DDMSVersion version = DDMSVersion.CurrentVersion;
 
-			// Empty email
-			entityElement = Util.buildDDMSElement(Organization.getName(version), null);
-			entityElement.appendChild(Util.buildDDMSElement("name", "name"));
-			entityElement.appendChild(Util.buildDDMSElement("email", ""));
-			component = new Organization(entityElement);
-			assertEquals(1, component.ValidationWarnings.size());
-			assertEquals(ValidationMessage.WARNING_TYPE, component.ValidationWarnings.get(0).Type);
-			assertEquals("A ddms:email element was found with no value.", component.ValidationWarnings.get(0).Text);
-		}
+            // Empty phone
+            XElement entityElement = Util.BuildDDMSElement(Organization.GetName(version), null);
+            entityElement.Add(Util.BuildDDMSElement("name", "name"));
+            entityElement.Add(Util.BuildDDMSElement("phone", ""));
+            Organization component = new Organization(entityElement);
+            Assert.Equals(1, component.ValidationWarnings.Count);
+            Assert.Equals(ValidationMessage.WarningType, component.ValidationWarnings[0].Type);
+            Assert.Equals("A ddms:phone element was found with no value.", component.ValidationWarnings[0].Text);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testIndexLevelsStringLists() throws InvalidDDMSException
-		public virtual void TestIndexLevelsStringLists() {
-			IList<string> names = Util.getXsListAsList("Brian BU");
-			IList<string> phones = Util.getXsListAsList("703-885-1000");
-			Person person = new Person(names, "Uri", phones, null, null, null);
+            // Empty email
+            entityElement = Util.BuildDDMSElement(Organization.GetName(version), null);
+            entityElement.Add(Util.BuildDDMSElement("name", "name"));
+            entityElement.Add(Util.BuildDDMSElement("email", ""));
+            component = new Organization(entityElement);
+            Assert.Equals(1, component.ValidationWarnings.Count);
+            Assert.Equals(ValidationMessage.WarningType, component.ValidationWarnings[0].Type);
+            Assert.Equals("A ddms:email element was found with no value.", component.ValidationWarnings[0].Text);
+        }
 
-			PropertyReader.setProperty("output.indexLevel", "0");
-			assertEquals("entityType: person\nname: Brian\nname: BU\nphone: 703-885-1000\nsurname: Uri\n", person.toText());
+        [TestMethod]
+        public virtual void TestIndexLevelsStringLists()
+        {
+            List<string> names = Util.GetXsListAsList("Brian BU");
+            List<string> phones = Util.GetXsListAsList("703-885-1000");
+            Person person = new Person(names, "Uri", phones, null, null, null);
 
-			PropertyReader.setProperty("output.indexLevel", "1");
-			assertEquals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone: 703-885-1000\nsurname: Uri\n", person.toText());
+            PropertyReader.SetProperty("output.indexLevel", "0");
+            Assert.Equals("entityType: person\nname: Brian\nname: BU\nphone: 703-885-1000\nsurname: Uri\n", person.ToText());
 
-			PropertyReader.setProperty("output.indexLevel", "2");
-			assertEquals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone[1]: 703-885-1000\nsurname: Uri\n", person.toText());
-		}
+            PropertyReader.SetProperty("output.indexLevel", "1");
+            Assert.Equals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone: 703-885-1000\nsurname: Uri\n", person.ToText());
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testExtensibleSuccess() throws InvalidDDMSException
-		public virtual void TestExtensibleSuccess() {
-			foreach (string sVersion in DDMSVersion.SupportedVersions) {
-				DDMSVersion.CurrentVersion = sVersion;
+            PropertyReader.SetProperty("output.indexLevel", "2");
+            Assert.Equals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone[1]: 703-885-1000\nsurname: Uri\n", person.ToText());
+        }
 
-				ExtensibleAttributes attr = ExtensibleAttributesTest.Fixture;
-				IList<string> names = new List<string>();
-				names.Add("DISA");
-				new Organization(names, null, null, null, null, attr);
-			}
-		}
+        [TestMethod]
+        public virtual void TestExtensibleSuccess()
+        {
+            foreach (string sVersion in DDMSVersion.SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testExtensibleFailure() throws InvalidDDMSException
-		public virtual void TestExtensibleFailure() {
-			// No failure cases to test right now.
-			// ISM attributes are at creator/contributor level, so they never clash with extensibles on the entity level.
-		}
-	}
+                ExtensibleAttributes attr = ExtensibleAttributesTest.Fixture;
+                List<string> names = new List<string>();
+                names.Add("DISA");
+                new Organization(names, null, null, null, null, attr);
+            }
+        }
+
+        [TestMethod]
+        public virtual void TestExtensibleFailure()
+        {
+            // No failure cases to test right now.
+            // ISM attributes are at creator/contributor level, so they never clash with extensibles on the entity level.
+        }
+    }
 
 }
