@@ -78,16 +78,12 @@ namespace DDMSense.Test.DDMS {
 		/// <summary>
 		/// Constructor
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public ResourceTest() throws InvalidDDMSException
 		public ResourceTest() : base("resource.xml") {
 		}
 
 		/// <summary>
 		/// Regenerates all the components needed in a Resource
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private void createComponents() throws InvalidDDMSException
 		private void CreateComponents() {
 			TEST_TOP_LEVEL_COMPONENTS = new List<IDDMSComponent>();
 			TEST_TOP_LEVEL_COMPONENTS.Add(SecurityTest.Fixture);
@@ -128,8 +124,7 @@ namespace DDMSense.Test.DDMS {
 		/// </summary>
 		/// <returns> the element </returns>
 		/// <exception cref="InvalidDDMSException"> </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private nu.xom.XElement getResourceWithoutHeaderElement() throws InvalidDDMSException
+		[TestMethod]
 		private XElement ResourceWithoutHeaderElement {
 			get {
 				XElement element = Util.BuildDDMSElement(Resource.GetName(DDMSVersion.CurrentVersion), null);
@@ -150,8 +145,7 @@ namespace DDMSense.Test.DDMS {
 		/// </summary>
 		/// <returns> the element </returns>
 		/// <exception cref="InvalidDDMSException"> </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private nu.xom.XElement getResourceWithoutBodyElement() throws InvalidDDMSException
+		[TestMethod]
 		private XElement ResourceWithoutBodyElement {
 			get {
 				DDMSVersion version = DDMSVersion.CurrentVersion;
@@ -178,8 +172,6 @@ namespace DDMSense.Test.DDMS {
 		/// </summary>
 		/// <returns> the element </returns>
 		/// <exception cref="InvalidDDMSException"> </exception>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private nu.xom.XElement getResourceWithMultipleRelated() throws InvalidDDMSException
 		private XElement ResourceWithMultipleRelated {
 			get {
 				DDMSVersion version = DDMSVersion.CurrentVersion;
@@ -256,6 +248,7 @@ namespace DDMSense.Test.DDMS {
 		/// Returns an acceptable DESVersion for the version of DDMS
 		/// </summary>
 		/// <returns> a DESVersion </returns>
+		[TestMethod]
 		private int? NtkDESVersion {
 			get {
 				if (!DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")) {
@@ -315,8 +308,6 @@ namespace DDMSense.Test.DDMS {
 		/// <summary>
 		/// Returns the expected HTML or Text output for this unit test
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws InvalidDDMSException
 		private string GetExpectedOutput(bool isHTML) {
 			DDMSVersion version = DDMSVersion.CurrentVersion;
 			StringBuilder text = new StringBuilder();
@@ -591,6 +582,7 @@ namespace DDMSense.Test.DDMS {
 			return (FormatXml(xml.ToString(), preserveFormatting));
 		}
 
+		[TestMethod]
 		public virtual void TestNameAndNamespace() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -599,8 +591,6 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testElementConstructorValid() throws InvalidDDMSException
 		public virtual void TestElementConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -636,8 +626,6 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testDataConstructorValid() throws InvalidDDMSException
 		public virtual void TestDataConstructorValid() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion.SetCurrentVersion(sVersion);
@@ -651,8 +639,6 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testElementConstructorInvalid() throws InvalidDDMSException
 		public virtual void TestElementConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -874,8 +860,6 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testDataConstructorInvalid() throws InvalidDDMSException
 		public virtual void TestDataConstructorInvalid() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -900,7 +884,7 @@ namespace DDMSense.Test.DDMS {
 				}
 
 				// At least 1 producer
-				IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+				List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Remove(CreatorTest.Fixture);
 				GetInstance("At least 1 producer", components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 
@@ -934,9 +918,8 @@ namespace DDMSense.Test.DDMS {
 				GetInstance("keyword is not a valid top-level component in a resource.", components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 			}
 		}
-
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testWarnings() throws InvalidDDMSException
+		
+		[TestMethod]
 		public virtual void TestWarnings() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -961,7 +944,7 @@ namespace DDMSense.Test.DDMS {
 				int countIndex = version.IsAtLeast("4.1") ? 1 : 0;
 
 				// Nested warnings
-				IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+				List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Add(new Format("test", new Extent("test", ""), "test"));
 				component = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 				Assert.Equals(countIndex + 1, component.ValidationWarnings.Count);
@@ -994,9 +977,8 @@ namespace DDMSense.Test.DDMS {
 				AssertWarningEquality(text, locator, component.ValidationWarnings[countIndex]);
 			}
 		}
-
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorEquality() throws InvalidDDMSException
+		
+		[TestMethod]
 		public virtual void TestConstructorEquality() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1009,8 +991,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestConstructorInequalityDifferentValues() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1038,8 +1019,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testHTMLTextOutput() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestHTMLTextOutput() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1054,8 +1034,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testXMLOutput() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestXMLOutput() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1070,8 +1049,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testWrongVersionCompliesWith() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestWrongVersionCompliesWith() {
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
@@ -1079,8 +1057,6 @@ namespace DDMSense.Test.DDMS {
 			GetInstance("The compliesWith XAttribute cannot be used", TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, NtkDESVersion);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testWrongVersionSecurityAttributes() throws InvalidDDMSException
 		public virtual void TestWrongVersionSecurityAttributes() {
 			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
@@ -1091,8 +1067,7 @@ namespace DDMSense.Test.DDMS {
 			new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, null, SecurityAttributesTest.Fixture, null, null);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testExtensibleSuccess() throws InvalidDDMSException
+
 		public virtual void TestExtensibleSuccess() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1108,8 +1083,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void test20ExtensibleElementSize() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void Test20ExtensibleElementSize() {
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
@@ -1138,8 +1112,7 @@ namespace DDMSense.Test.DDMS {
 			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void test20ExtensibleDataSizes() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void Test20ExtensibleDataSizes() {
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
@@ -1229,8 +1202,7 @@ namespace DDMSense.Test.DDMS {
 			Assert.Equals(3, component.ExtensibleAttributes.Attributes.Count);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testExtensibleDataDuplicates() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestExtensibleDataDuplicates() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1238,7 +1210,7 @@ namespace DDMSense.Test.DDMS {
 
 				// IsmDESVersion in parameter AND extensible.
 				try {
-					IList<XAttribute> exAttr = new List<XAttribute>();
+					List<XAttribute> exAttr = new List<XAttribute>();
 					exAttr.Add(new XAttribute(XName.Get("ISM:DESVersion", version.IsmNamespace), "2"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 					Assert.Fail("Allowed invalid data.");
@@ -1249,7 +1221,7 @@ namespace DDMSense.Test.DDMS {
 				// NtkDESVersion in parameter AND extensible.
 				if (version.IsAtLeast("4.0.1")) {
 					try {
-						IList<XAttribute> exAttr = new List<XAttribute>();
+						List<XAttribute> exAttr = new List<XAttribute>();
 						exAttr.Add(new XAttribute(XName.Get("ntk:DESVersion", version.NtkNamespace), "2"));
 						new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 						Assert.Fail("Allowed invalid data.");
@@ -1260,7 +1232,7 @@ namespace DDMSense.Test.DDMS {
 
 				// classification in securityAttributes AND extensible.
 				try {
-					IList<XAttribute> exAttr = new List<XAttribute>();
+					List<XAttribute> exAttr = new List<XAttribute>();
 					exAttr.Add(new XAttribute(XName.Get("ISM:classification", version.IsmNamespace,) "U"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 					Assert.Fail("Allowed invalid data.");
@@ -1270,8 +1242,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testExtensibleElementElementConstructor() throws InvalidDDMSException
+
 		public virtual void TestExtensibleElementElementConstructor() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1292,59 +1263,54 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testExtensibleElementOutput() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestExtensibleElementOutput() {
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 			ExtensibleElement component = new ExtensibleElement(ExtensibleElementTest.FixtureElement);
 
-			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+			List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(component);
 			Resource resource = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 			Assert.IsTrue(resource.ToHTML().IndexOf(BuildOutput(true, "extensible.layer", "true")) != -1);
 			Assert.IsTrue(resource.ToText().IndexOf(BuildOutput(false, "extensible.layer", "true")) != -1);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testWrongVersionExtensibleElementAllowed() throws InvalidDDMSException
+
 		public virtual void TestWrongVersionExtensibleElementAllowed() {
 			DDMSVersion.SetCurrentVersion("2.0");
 			ExtensibleElement component = new ExtensibleElement(ExtensibleElementTest.FixtureElement);
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 
-			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+			List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(component);
 			GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void test20TooManyExtensibleElements() throws InvalidDDMSException
+
 		public virtual void Test20TooManyExtensibleElements() {
 			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
 
-			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+			List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(new ExtensibleElement(ExtensibleElementTest.FixtureElement));
 			components.Add(new ExtensibleElement(ExtensibleElementTest.FixtureElement));
 			GetInstance("Only 1 extensible element is allowed in DDMS 2.0.", components, null, null, null, null, null);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testAfter20TooManyExtensibleElements() throws InvalidDDMSException
+
 		public virtual void TestAfter20TooManyExtensibleElements() {
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 
-			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+			List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(new ExtensibleElement(ExtensibleElementTest.FixtureElement));
 			components.Add(new ExtensibleElement(ExtensibleElementTest.FixtureElement));
 			GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void test20DeclassManualReviewAttribute() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void Test20DeclassManualReviewAttribute() {
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
@@ -1359,8 +1325,7 @@ namespace DDMSense.Test.DDMS {
 			Assert.Equals(0, resource.ExtensibleAttributes.Attributes.Count);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRelatedResourcesMediation() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestRelatedResourcesMediation() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1379,8 +1344,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testOrderConstraints() throws InvalidDDMSException
+
 		public virtual void TestOrderConstraints() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1390,7 +1354,7 @@ namespace DDMSense.Test.DDMS {
 				}
 
 				// Valid orders
-				IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_TOP_LEVEL_COMPONENTS);
+				List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_TOP_LEVEL_COMPONENTS);
 				components.Add(SubjectCoverageTest.GetFixture(1));
 				components.Add(GeospatialCoverageTest.GetFixture(2));
 				components.Add(SubjectCoverageTest.GetFixture(3));
@@ -1413,8 +1377,7 @@ namespace DDMSense.Test.DDMS {
 
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testConstructorChaining() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestConstructorChaining() {
 			// DDMS 2.0
 			DDMSVersion.SetCurrentVersion("2.0");
@@ -1438,8 +1401,7 @@ namespace DDMSense.Test.DDMS {
 			Assert.Equals(resource, fullResource);
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderEquality() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestBuilderEquality() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion.SetCurrentVersion(sVersion);
@@ -1456,8 +1418,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderIsEmpty() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestBuilderIsEmpty() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion.SetCurrentVersion(sVersion);
@@ -1502,8 +1463,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderValidation() throws InvalidDDMSException
+
 		public virtual void TestBuilderValidation() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion.SetCurrentVersion(sVersion);
@@ -1520,8 +1480,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderLazyList() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestBuilderLazyList() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion.SetCurrentVersion(sVersion);
@@ -1544,8 +1503,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuild20Commit30() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestBuild20Commit30() {
 			// Version during building should be 100% irrelevant
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
@@ -1580,8 +1538,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuild30Commit20() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestBuild30Commit20() {
 			// Version during building should be 100% irrelevant
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
@@ -1617,8 +1574,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testLoad30Commit20() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestLoad30Commit20() {
 			Resource.Builder builder = new Resource.Builder(new Resource(GetValidElement("3.0")));
 
@@ -1640,8 +1596,7 @@ namespace DDMSense.Test.DDMS {
 			builder.Commit();
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testLoad20Commit30() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestLoad20Commit30() {
 			Resource.Builder builder = new Resource.Builder(new Resource(GetValidElement("2.0")));
 
@@ -1667,8 +1622,7 @@ namespace DDMSense.Test.DDMS {
 			builder.Commit();
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testLoad30Commit31() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestLoad30Commit31() {
 			Resource.Builder builder = new Resource.Builder(new Resource(GetValidElement("3.0")));
 
@@ -1690,8 +1644,7 @@ namespace DDMSense.Test.DDMS {
 			builder.Commit();
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testLoad31Commit40() throws InvalidDDMSException
+		[TestMethod]
 		public virtual void TestLoad31Commit40() {
 			Resource.Builder builder = new Resource.Builder(new Resource(GetValidElement("3.1")));
 
@@ -1719,8 +1672,7 @@ namespace DDMSense.Test.DDMS {
 			builder.Commit();
 		}
 
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuilderSerialization() throws Exception
+		[TestMethod]
 		public virtual void TestBuilderSerialization() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion.SetCurrentVersion(sVersion);
