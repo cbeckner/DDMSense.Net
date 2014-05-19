@@ -319,6 +319,7 @@
     <Content Include="TestData\4.1\virtualCoverage.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="TestData\2.0\testSchematronXslt1.sch" />
     <None Include="TestData\2.0\testSchematronXslt2.sch" />
     <None Include="TestData\3.0\testSchematronXslt1.sch" />
