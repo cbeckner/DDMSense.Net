@@ -42,9 +42,10 @@ namespace DDMSense.Test
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class BaseComponentTest : AbstractBaseTestCase
     {
-        [TestClass]
+        
         public BaseComponentTest()
             : base(null)
         {
