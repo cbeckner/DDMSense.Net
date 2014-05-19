@@ -25,9 +25,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
  */
 namespace DDMSense.Test.DDMS.Summary
 {
-
-
-
     using SecurityAttributes = DDMSense.DDMS.SecurityElements.Ism.SecurityAttributes;
     using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
     using PointTest = DDMSense.Test.DDMS.Summary.Gml.PointTest;
