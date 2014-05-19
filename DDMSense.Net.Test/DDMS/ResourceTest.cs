@@ -124,7 +124,6 @@ namespace DDMSense.Test.DDMS {
 		/// </summary>
 		/// <returns> the element </returns>
 		/// <exception cref="InvalidDDMSException"> </exception>
-		[TestMethod]
 		private XElement ResourceWithoutHeaderElement {
 			get {
 				XElement element = Util.BuildDDMSElement(Resource.GetName(DDMSVersion.CurrentVersion), null);
@@ -145,7 +144,6 @@ namespace DDMSense.Test.DDMS {
 		/// </summary>
 		/// <returns> the element </returns>
 		/// <exception cref="InvalidDDMSException"> </exception>
-		[TestMethod]
 		private XElement ResourceWithoutBodyElement {
 			get {
 				DDMSVersion version = DDMSVersion.CurrentVersion;
@@ -155,6 +153,7 @@ namespace DDMSense.Test.DDMS {
 				string ntkNamespace = version.NtkNamespace;
 	
 				XElement element = Util.BuildDDMSElement(Resource.GetName(version), null);
+
 				Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
 				Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
 				Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
@@ -248,7 +247,6 @@ namespace DDMSense.Test.DDMS {
 		/// Returns an acceptable DESVersion for the version of DDMS
 		/// </summary>
 		/// <returns> a DESVersion </returns>
-		[TestMethod]
 		private int? NtkDESVersion {
 			get {
 				if (!DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")) {
@@ -1412,7 +1410,7 @@ namespace DDMSense.Test.DDMS {
 				// Equality with ExtensibleElement
 				builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
 				builder.ExtensibleElements[0].Xml = "<ddmsence:extension xmlns:ddmsence=\"http://ddmsence.urizone.net/\">" + "This is an extensible element.</ddmsence:extension>";
-				component = builder.Commit();
+				component = (Resource)builder.Commit();
 				builder = new Resource.Builder(component);
 				Assert.Equals(component, builder.Commit());
 			}
