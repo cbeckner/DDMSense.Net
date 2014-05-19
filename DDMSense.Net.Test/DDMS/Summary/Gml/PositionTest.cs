@@ -294,7 +294,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -306,8 +306,8 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Position elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Position dataComponent = GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -324,8 +324,8 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 Position positionEqualWhitespace = new Position(Util.BuildElement(gmlPrefix, Position.GetName(version), gmlNamespace, TEST_XS_LIST + "   "));
                 Position positionUnequal2d = new Position(Util.BuildElement(gmlPrefix, Position.GetName(version), gmlNamespace, "32.1 40.0"));
                 Position positionUnequal3d = new Position(Util.BuildElement(gmlPrefix, Position.GetName(version), gmlNamespace, TEST_XS_LIST + " 40.0"));
-                Assert.Equals(position, positionEqual);
-                Assert.Equals(position, positionEqualWhitespace);
+                Assert.AreEqual(position, positionEqual);
+                Assert.AreEqual(position, positionEqualWhitespace);
                 Assert.IsFalse(position.Equals(positionUnequal2d));
                 Assert.IsFalse(position.Equals(positionUnequal3d));
             }
@@ -367,12 +367,12 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -383,10 +383,10 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -399,7 +399,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
 
                 Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Position.Builder builder = new Position.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 
@@ -446,7 +446,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 builder.Coordinates[1].Value = Convert.ToDouble(0);
                 builder.Coordinates[2].Value = Convert.ToDouble(1);
                 builder.Commit();
-                Assert.Equals(2, builder.Coordinates.Count());
+                Assert.AreEqual(2, builder.Coordinates.Count());
             }
         }
 

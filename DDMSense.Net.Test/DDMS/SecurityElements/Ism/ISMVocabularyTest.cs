@@ -160,7 +160,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         [TestMethod]
         public virtual void SecurityElements_Ism_ISMVocabulary_InvalidMessage()
         {
-            Assert.Equals("Dog is not a valid enumeration token for this attribute, as specified in Cat.", ISMVocabulary.GetInvalidMessage("Cat", "Dog"));
+            Assert.AreEqual("Dog is not a valid enumeration token for this attribute, as specified in Cat.", ISMVocabulary.GetInvalidMessage("Cat", "Dog"));
         }
     }
 

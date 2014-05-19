@@ -269,7 +269,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 // No warnings
                 Profile component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -282,8 +282,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 Profile elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Profile dataComponent = GetInstance(SUCCESS, SystemNameTest.Fixture, ProfileValueTest.FixtureList);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -313,12 +313,12 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Profile component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, SystemNameTest.Fixture, ProfileValueTest.FixtureList);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -330,10 +330,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Profile component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
 
                 component = GetInstance(SUCCESS, SystemNameTest.Fixture, ProfileValueTest.FixtureList);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -352,7 +352,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 Profile component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Profile.Builder builder = new Profile.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

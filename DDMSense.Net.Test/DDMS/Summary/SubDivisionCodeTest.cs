@@ -238,7 +238,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 // No warnings
                 SubDivisionCode component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -251,8 +251,8 @@ namespace DDMSense.Test.DDMS.Summary
 
                 SubDivisionCode elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 SubDivisionCode dataComponent = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -280,12 +280,12 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 SubDivisionCode component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -297,10 +297,10 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 SubDivisionCode component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -328,7 +328,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 SubDivisionCode component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 SubDivisionCode.Builder builder = new SubDivisionCode.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

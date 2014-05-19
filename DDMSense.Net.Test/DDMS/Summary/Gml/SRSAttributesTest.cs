@@ -279,7 +279,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 XElement element = Util.BuildElement(PropertyReader.GetPrefix("gml"), Position.GetName(version), version.GmlNamespace, null);
                 AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.GetXsList(TEST_AXIS_LABELS), Util.GetXsList(TEST_UOM_LABELS));
                 SRSAttributes component = GetInstance(SUCCESS, element);
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -294,8 +294,8 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 SRSAttributes elementAttributes = GetInstance(SUCCESS, element);
                 SRSAttributes dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, TEST_UOM_LABELS);
 
-                Assert.Equals(elementAttributes, dataAttributes);
-                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+                Assert.AreEqual(elementAttributes, dataAttributes);
+                Assert.AreEqual(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
             }
         }
 
@@ -348,12 +348,12 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 XElement element = Util.BuildElement(PropertyReader.GetPrefix("gml"), Position.GetName(version), version.GmlNamespace, null);
                 AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.GetXsList(TEST_AXIS_LABELS), Util.GetXsList(TEST_UOM_LABELS));
                 SRSAttributes attributes = new SRSAttributes(element);
-                Assert.Equals(GetExpectedOutput(true), attributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false), attributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true), attributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false), attributes.GetOutput(false, ""));
 
                 SRSAttributes dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, TEST_UOM_LABELS);
-                Assert.Equals(GetExpectedOutput(true), dataAttributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false), dataAttributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true), dataAttributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false), dataAttributes.GetOutput(false, ""));
             }
         }
 
@@ -368,7 +368,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 XElement element = Util.BuildElement(PropertyReader.GetPrefix("gml"), "sample", version.GmlNamespace, null);
                 component.AddTo(element);
                 SRSAttributes output = new SRSAttributes(element);
-                Assert.Equals(component, output);
+                Assert.AreEqual(component, output);
             }
         }
 
@@ -377,10 +377,10 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         {
             SRSAttributes component = new SRSAttributes(null, null, null, null);
             SRSAttributes output = SRSAttributes.GetNonNullInstance(null);
-            Assert.Equals(component, output);
+            Assert.AreEqual(component, output);
 
             output = SRSAttributes.GetNonNullInstance(Fixture);
-            Assert.Equals(Fixture, output);
+            Assert.AreEqual(Fixture, output);
         }
 
         [TestMethod]
@@ -409,7 +409,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
 
                 SRSAttributes component = Fixture;
                 SRSAttributes.Builder builder = new SRSAttributes.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

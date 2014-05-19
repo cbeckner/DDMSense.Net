@@ -347,7 +347,7 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -359,8 +359,8 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 VerticalExtent elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 VerticalExtent dataComponent = GetInstance(SUCCESS, TEST_MIN, TEST_MAX, TEST_UOM, TEST_DATUM);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -404,12 +404,12 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_MIN, TEST_MAX, TEST_UOM, TEST_DATUM);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -420,10 +420,10 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_MIN, TEST_MAX, TEST_UOM, TEST_DATUM);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -434,8 +434,8 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(component.MinVerticalExtent, Convert.ToDouble(TEST_MIN));
-                Assert.Equals(component.MaxVerticalExtent, Convert.ToDouble(TEST_MAX));
+                Assert.AreEqual(component.MinVerticalExtent, Convert.ToDouble(TEST_MIN));
+                Assert.AreEqual(component.MaxVerticalExtent, Convert.ToDouble(TEST_MAX));
             }
         }
 
@@ -448,7 +448,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 VerticalExtent component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 VerticalExtent.Builder builder = new VerticalExtent.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

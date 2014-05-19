@@ -272,7 +272,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No warnings
                 RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -285,8 +285,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 RequesterInfo elementComponent = GetInstance(SUCCESS, GetFixtureElement(true));
                 RequesterInfo dataComponent = GetInstance(SUCCESS, OrganizationTest.Fixture);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -324,12 +324,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, OrganizationTest.Fixture);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -341,10 +341,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, OrganizationTest.Fixture);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -373,12 +373,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 // Equality after Building, organization
                 RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
                 RequesterInfo.Builder builder = new RequesterInfo.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 // Equality after Building, person
                 component = GetInstance(SUCCESS, GetFixtureElement(false));
                 builder = new RequesterInfo.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

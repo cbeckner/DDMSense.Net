@@ -461,7 +461,7 @@ namespace DDMSense.Test.DDMS.Metacard
                 // 4.1 ntk:Access element used
                 if (version.IsAtLeast("4.1"))
                 {
-                    Assert.Equals(2, component.ValidationWarnings.Count());
+                    Assert.AreEqual(2, component.ValidationWarnings.Count());
                     string text = "The ntk:Access element in this DDMS component";
                     string locator = "ddms:metacardInfo";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -474,7 +474,7 @@ namespace DDMSense.Test.DDMS.Metacard
                 // No warnings 
                 else
                 {
-                    Assert.Equals(0, component.ValidationWarnings.Count());
+                    Assert.AreEqual(0, component.ValidationWarnings.Count());
                 }
             }
         }
@@ -488,8 +488,8 @@ namespace DDMSense.Test.DDMS.Metacard
 
                 MetacardInfo elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 MetacardInfo dataComponent = GetInstance(SUCCESS, ChildComponents);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -568,12 +568,12 @@ namespace DDMSense.Test.DDMS.Metacard
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 MetacardInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, ChildComponents);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -585,10 +585,10 @@ namespace DDMSense.Test.DDMS.Metacard
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 MetacardInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, ChildComponents);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -601,7 +601,7 @@ namespace DDMSense.Test.DDMS.Metacard
 
                 MetacardInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 MetacardInfo.Builder builder = new MetacardInfo.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

@@ -255,7 +255,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
 
                 Fixture.AddTo(element);
                 NoticeAttributes attr = GetInstance(SUCCESS, element);
-                Assert.Equals(0, attr.ValidationWarnings.Count());
+                Assert.AreEqual(0, attr.ValidationWarnings.Count());
             }
         }
 
@@ -285,9 +285,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 NoticeAttributes elementAttributes = GetInstance(SUCCESS, element);
                 NoticeAttributes dataAttributes = GetInstance(SUCCESS, TEST_NOTICE_TYPE, TEST_NOTICE_REASON, TEST_NOTICE_DATE, TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
 
-                Assert.Equals(elementAttributes, elementAttributes);
-                Assert.Equals(elementAttributes, dataAttributes);
-                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+                Assert.AreEqual(elementAttributes, elementAttributes);
+                Assert.AreEqual(elementAttributes, dataAttributes);
+                Assert.AreEqual(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
             }
         }
 
@@ -346,7 +346,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 XElement element = Util.BuildDDMSElement("sample", null);
                 component.AddTo(element);
                 NoticeAttributes output = new NoticeAttributes(element);
-                Assert.Equals(component, output);
+                Assert.AreEqual(component, output);
             }
         }
 
@@ -355,11 +355,11 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         {
             NoticeAttributes component = new NoticeAttributes(null, null, null, null);
             NoticeAttributes output = NoticeAttributes.GetNonNullInstance(null);
-            Assert.Equals(component, output);
+            Assert.AreEqual(component, output);
             Assert.IsTrue(output.Empty);
 
             output = NoticeAttributes.GetNonNullInstance(Fixture);
-            Assert.Equals(Fixture, output);
+            Assert.AreEqual(Fixture, output);
         }
 
         [TestMethod]
@@ -405,8 +405,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 NoticeAttributes dataAttributes = GetInstance(SUCCESS, null, null, "2005-10-10", null, null);
-                Assert.Equals(BuildOutput(true, "noticeDate", "2005-10-10"), dataAttributes.GetOutput(true, ""));
-                Assert.Equals(BuildOutput(false, "noticeDate", "2005-10-10"), dataAttributes.GetOutput(false, ""));
+                Assert.AreEqual(BuildOutput(true, "noticeDate", "2005-10-10"), dataAttributes.GetOutput(true, ""));
+                Assert.AreEqual(BuildOutput(false, "noticeDate", "2005-10-10"), dataAttributes.GetOutput(false, ""));
             }
         }
 
@@ -419,7 +419,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
 
                 NoticeAttributes component = Fixture;
                 NoticeAttributes.Builder builder = new NoticeAttributes.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

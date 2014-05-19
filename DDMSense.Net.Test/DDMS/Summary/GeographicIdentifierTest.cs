@@ -324,7 +324,7 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 GeographicIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -338,15 +338,15 @@ namespace DDMSense.Test.DDMS.Summary
 
                 GeographicIdentifier elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 GeographicIdentifier dataComponent = GetInstance(SUCCESS, TEST_NAMES, TEST_REGIONS, CountryCodeTest.Fixture, subCode, null);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
                 XElement element = Util.BuildDDMSElement(GeographicIdentifier.GetName(version), null);
                 element.Add(FacilityIdentifierTest.Fixture.ElementCopy);
                 elementComponent = GetInstance(SUCCESS, element);
                 dataComponent = GetInstance(SUCCESS, null, null, null, null, FacilityIdentifierTest.Fixture);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -388,12 +388,12 @@ namespace DDMSense.Test.DDMS.Summary
                 SubDivisionCode subCode = SubDivisionCodeTest.Fixture;
 
                 GeographicIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_NAMES, TEST_REGIONS, CountryCodeTest.Fixture, subCode, null);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -407,7 +407,7 @@ namespace DDMSense.Test.DDMS.Summary
                 StringBuilder facIdOutput = new StringBuilder();
                 facIdOutput.Append("<meta name=\"geographicIdentifier.facilityIdentifier.beNumber\" content=\"1234DD56789\" />\n");
                 facIdOutput.Append("<meta name=\"geographicIdentifier.facilityIdentifier.osuffix\" content=\"DD123\" />\n");
-                Assert.Equals(facIdOutput.ToString(), component.ToHTML());
+                Assert.AreEqual(facIdOutput.ToString(), component.ToHTML());
             }
         }
 
@@ -421,7 +421,7 @@ namespace DDMSense.Test.DDMS.Summary
                 StringBuilder facIdOutput = new StringBuilder();
                 facIdOutput.Append("geographicIdentifier.facilityIdentifier.beNumber: 1234DD56789\n");
                 facIdOutput.Append("geographicIdentifier.facilityIdentifier.osuffix: DD123\n");
-                Assert.Equals(facIdOutput.ToString(), component.ToText());
+                Assert.AreEqual(facIdOutput.ToString(), component.ToText());
             }
         }
 
@@ -434,10 +434,10 @@ namespace DDMSense.Test.DDMS.Summary
                 SubDivisionCode subCode = SubDivisionCodeTest.Fixture;
 
                 GeographicIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_NAMES, TEST_REGIONS, CountryCodeTest.Fixture, subCode, null);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -494,13 +494,13 @@ namespace DDMSense.Test.DDMS.Summary
 
                 // Equality after Building (CountryCode-based)
                 GeographicIdentifier.Builder builder = new GeographicIdentifier.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 // Equality after Building (FacID-based)
                 FacilityIdentifier facId = FacilityIdentifierTest.Fixture;
                 component = new GeographicIdentifier(facId);
                 builder = new GeographicIdentifier.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

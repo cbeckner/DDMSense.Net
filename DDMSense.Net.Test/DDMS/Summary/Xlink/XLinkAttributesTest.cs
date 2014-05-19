@@ -439,7 +439,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
                 XElement element = Util.BuildDDMSElement("link", null);
                 AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
                 XLinkAttributes component = GetInstance(SUCCESS, element);
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -455,24 +455,24 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
                 AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
                 XLinkAttributes elementAttributes = GetInstance(SUCCESS, element);
                 XLinkAttributes dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-                Assert.Equals(elementAttributes, dataAttributes);
-                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+                Assert.AreEqual(elementAttributes, dataAttributes);
+                Assert.AreEqual(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 
                 // simple version
                 element = Util.BuildDDMSElement("link", null);
                 AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
                 elementAttributes = GetInstance(SUCCESS, element);
                 dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
-                Assert.Equals(elementAttributes, dataAttributes);
-                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+                Assert.AreEqual(elementAttributes, dataAttributes);
+                Assert.AreEqual(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 
                 // resource version
                 element = Util.BuildDDMSElement("link", null);
                 AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
                 elementAttributes = GetInstance(SUCCESS, element);
                 dataAttributes = GetInstance(SUCCESS, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-                Assert.Equals(elementAttributes, dataAttributes);
-                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+                Assert.AreEqual(elementAttributes, dataAttributes);
+                Assert.AreEqual(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
             }
         }
 
@@ -560,32 +560,32 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
                 XElement element = Util.BuildDDMSElement("link", null);
                 AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
                 XLinkAttributes attributes = new XLinkAttributes(element);
-                Assert.Equals(GetExpectedOutput(true, "locator"), attributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false, "locator"), attributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true, "locator"), attributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false, "locator"), attributes.GetOutput(false, ""));
 
                 XLinkAttributes dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-                Assert.Equals(GetExpectedOutput(true, "locator"), dataAttributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false, "locator"), dataAttributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true, "locator"), dataAttributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false, "locator"), dataAttributes.GetOutput(false, ""));
 
                 element = Util.BuildDDMSElement("link", null);
                 AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
                 attributes = new XLinkAttributes(element);
-                Assert.Equals(GetExpectedOutput(true, "simple"), attributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false, "simple"), attributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true, "simple"), attributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false, "simple"), attributes.GetOutput(false, ""));
 
                 dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
-                Assert.Equals(GetExpectedOutput(true, "simple"), dataAttributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false, "simple"), dataAttributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true, "simple"), dataAttributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false, "simple"), dataAttributes.GetOutput(false, ""));
 
                 element = Util.BuildDDMSElement("link", null);
                 AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
                 attributes = new XLinkAttributes(element);
-                Assert.Equals(GetExpectedOutput(true, "resource"), attributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false, "resource"), attributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true, "resource"), attributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false, "resource"), attributes.GetOutput(false, ""));
 
                 dataAttributes = GetInstance(SUCCESS, TEST_ROLE, TEST_TITLE, TEST_LABEL);
-                Assert.Equals(GetExpectedOutput(true, "resource"), dataAttributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false, "resource"), dataAttributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true, "resource"), dataAttributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false, "resource"), dataAttributes.GetOutput(false, ""));
             }
         }
 
@@ -600,7 +600,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
                 XElement element = Util.BuildDDMSElement("sample", null);
                 component.AddTo(element);
                 XLinkAttributes output = new XLinkAttributes(element);
-                Assert.Equals(component, output);
+                Assert.AreEqual(component, output);
             }
         }
 
@@ -609,10 +609,10 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         {
             XLinkAttributes component = new XLinkAttributes();
             XLinkAttributes output = XLinkAttributes.GetNonNullInstance(null);
-            Assert.Equals(component, output);
+            Assert.AreEqual(component, output);
 
             output = XLinkAttributes.GetNonNullInstance(LocatorFixture);
-            Assert.Equals(LocatorFixture, output);
+            Assert.AreEqual(LocatorFixture, output);
         }
 
         [TestMethod]
@@ -624,7 +624,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
 
                 XLinkAttributes component = LocatorFixture;
                 XLinkAttributes.Builder builder = new XLinkAttributes.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

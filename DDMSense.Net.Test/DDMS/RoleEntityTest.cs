@@ -73,18 +73,18 @@ namespace DDMSense.Test.DDMS
             entityElement.Add(Util.BuildDDMSElement("name", "name"));
             entityElement.Add(Util.BuildDDMSElement("phone", ""));
             Organization component = new Organization(entityElement);
-            Assert.Equals(1, component.ValidationWarnings.Count());
-            Assert.Equals(ValidationMessage.WarningType, component.ValidationWarnings[0].Type);
-            Assert.Equals("A ddms:phone element was found with no value.", component.ValidationWarnings[0].Text);
+            Assert.AreEqual(1, component.ValidationWarnings.Count());
+            Assert.AreEqual(ValidationMessage.WarningType, component.ValidationWarnings[0].Type);
+            Assert.AreEqual("A ddms:phone element was found with no value.", component.ValidationWarnings[0].Text);
 
             // Empty email
             entityElement = Util.BuildDDMSElement(Organization.GetName(version), null);
             entityElement.Add(Util.BuildDDMSElement("name", "name"));
             entityElement.Add(Util.BuildDDMSElement("email", ""));
             component = new Organization(entityElement);
-            Assert.Equals(1, component.ValidationWarnings.Count());
-            Assert.Equals(ValidationMessage.WarningType, component.ValidationWarnings[0].Type);
-            Assert.Equals("A ddms:email element was found with no value.", component.ValidationWarnings[0].Text);
+            Assert.AreEqual(1, component.ValidationWarnings.Count());
+            Assert.AreEqual(ValidationMessage.WarningType, component.ValidationWarnings[0].Type);
+            Assert.AreEqual("A ddms:email element was found with no value.", component.ValidationWarnings[0].Text);
         }
 
         [TestMethod]
@@ -95,13 +95,13 @@ namespace DDMSense.Test.DDMS
             Person person = new Person(names, "Uri", phones, null, null, null);
 
             PropertyReader.SetProperty("output.indexLevel", "0");
-            Assert.Equals("entityType: person\nname: Brian\nname: BU\nphone: 703-885-1000\nsurname: Uri\n", person.ToText());
+            Assert.AreEqual("entityType: person\nname: Brian\nname: BU\nphone: 703-885-1000\nsurname: Uri\n", person.ToText());
 
             PropertyReader.SetProperty("output.indexLevel", "1");
-            Assert.Equals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone: 703-885-1000\nsurname: Uri\n", person.ToText());
+            Assert.AreEqual("entityType: person\nname[1]: Brian\nname[2]: BU\nphone: 703-885-1000\nsurname: Uri\n", person.ToText());
 
             PropertyReader.SetProperty("output.indexLevel", "2");
-            Assert.Equals("entityType: person\nname[1]: Brian\nname[2]: BU\nphone[1]: 703-885-1000\nsurname: Uri\n", person.ToText());
+            Assert.AreEqual("entityType: person\nname[1]: Brian\nname[2]: BU\nphone[1]: 703-885-1000\nsurname: Uri\n", person.ToText());
         }
 
         [TestMethod]

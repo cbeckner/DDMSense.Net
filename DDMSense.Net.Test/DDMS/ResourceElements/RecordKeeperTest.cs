@@ -255,7 +255,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No warnings
                 RecordKeeper component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -268,8 +268,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 RecordKeeper elementComponent = GetInstance(SUCCESS, FixtureElement);
                 RecordKeeper dataComponent = GetInstance(SUCCESS, TEST_ID, OrganizationTest.Fixture);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -297,12 +297,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 RecordKeeper component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_ID, OrganizationTest.Fixture);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -314,10 +314,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 RecordKeeper component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_ID, OrganizationTest.Fixture);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -345,7 +345,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 RecordKeeper component = GetInstance(SUCCESS, FixtureElement);
                 RecordKeeper.Builder builder = new RecordKeeper.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

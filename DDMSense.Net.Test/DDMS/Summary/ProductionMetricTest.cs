@@ -241,7 +241,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 // No warnings
                 ProductionMetric component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -254,8 +254,8 @@ namespace DDMSense.Test.DDMS.Summary
 
                 ProductionMetric elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 ProductionMetric dataComponent = GetInstance(SUCCESS, TEST_SUBJECT, TEST_COVERAGE);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -296,12 +296,12 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 ProductionMetric component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_SUBJECT, TEST_COVERAGE);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -313,10 +313,10 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 ProductionMetric component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_SUBJECT, TEST_COVERAGE);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -344,7 +344,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 ProductionMetric component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 ProductionMetric.Builder builder = new ProductionMetric.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

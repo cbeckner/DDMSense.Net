@@ -300,7 +300,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 				// 4.1 ISM:externalNotice used
 				if (version.IsAtLeast("4.1"))
 				{
-					Assert.Equals(1, component.ValidationWarnings.Count());
+					Assert.AreEqual(1, component.ValidationWarnings.Count());
 					string text = "The ISM:externalNotice attribute in this DDMS component";
 					string locator = "ddms:security/ddms:noticeList/ISM:Notice";
 					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -308,7 +308,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 				// No warnings 
 				else
 				{
-					Assert.Equals(0, component.ValidationWarnings.Count());
+					Assert.AreEqual(0, component.ValidationWarnings.Count());
 				}
 
 				// Nested warnings
@@ -321,7 +321,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 					element.Add(accessElement);
 					SecurityAttributesTest.Fixture.AddTo(element);
 					component = GetInstance(SUCCESS, element);
-					Assert.Equals(1, component.ValidationWarnings.Count());
+					Assert.AreEqual(1, component.ValidationWarnings.Count());
 					string text = "An ntk:Access element was found with no";
 					string locator = "ddms:security/ntk:Access";
 					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -337,8 +337,8 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 				DDMSVersion.SetCurrentVersion(sVersion);
 				Security elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 				Security dataComponent = GetInstance(SUCCESS, NoticeListTest.Fixture, AccessTest.Fixture);
-				Assert.Equals(elementComponent, dataComponent);
-				Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+				Assert.AreEqual(elementComponent, dataComponent);
+				Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 			}
 		}
 
@@ -368,12 +368,12 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 			{
 				DDMSVersion.SetCurrentVersion(sVersion);
 				Security component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-				Assert.Equals(GetExpectedOutput(false), component.ToText());
+				Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+				Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
 				component = GetInstance(SUCCESS, NoticeListTest.Fixture, AccessTest.Fixture);
-				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-				Assert.Equals(GetExpectedOutput(false), component.ToText());
+				Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+				Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 			}
 		}
 
@@ -384,10 +384,10 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 			{
 				DDMSVersion.SetCurrentVersion(sVersion);
 				Security component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+				Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
 				component = GetInstance(SUCCESS, NoticeListTest.Fixture, AccessTest.Fixture);
-				Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+				Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
 			}
 		}
 
@@ -422,7 +422,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 
 				Security component = GetInstance(SUCCESS, GetValidElement(sVersion));
 				Security.Builder builder = new Security.Builder(component);
-				Assert.Equals(component, builder.Commit());
+				Assert.AreEqual(component, builder.Commit());
 			}
 		}
 

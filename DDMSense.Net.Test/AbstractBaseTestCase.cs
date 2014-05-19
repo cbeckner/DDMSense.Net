@@ -201,9 +201,9 @@ namespace DDMSense.Test {
 		/// <param name="name"> the expected XML local name </param>
 		
         protected internal virtual void AssertNameAndNamespace(IDDMSComponent component, string prefix, string name) {
-			Assert.Equals(name, component.Name);
-			Assert.Equals(prefix, component.Prefix);
-			Assert.Equals(prefix + ":" + name, component.QualifiedName);
+			Assert.AreEqual(name, component.Name);
+			Assert.AreEqual(prefix, component.Prefix);
+			Assert.AreEqual(prefix + ":" + name, component.QualifiedName);
 		}
 
 		/// <summary>

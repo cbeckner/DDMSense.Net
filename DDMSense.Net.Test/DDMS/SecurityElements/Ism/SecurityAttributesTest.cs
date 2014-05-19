@@ -397,7 +397,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
                 FullFixture.AddTo(element);
                 SecurityAttributes attr = GetInstance(SUCCESS, element);
-                Assert.Equals(0, attr.ValidationWarnings.Count());
+                Assert.AreEqual(0, attr.ValidationWarnings.Count());
             }
         }
 
@@ -415,9 +415,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 SecurityAttributes elementAttributes = GetInstance(SUCCESS, element);
                 SecurityAttributes dataAttributes = GetInstance(SUCCESS, TEST_CLASS, TEST_OWNERS, OtherAttributes);
 
-                Assert.Equals(elementAttributes, elementAttributes);
-                Assert.Equals(elementAttributes, dataAttributes);
-                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+                Assert.AreEqual(elementAttributes, elementAttributes);
+                Assert.AreEqual(elementAttributes, dataAttributes);
+                Assert.AreEqual(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
             }
         }
 
@@ -503,7 +503,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 XElement element = Util.BuildDDMSElement("sample", null);
                 component.AddTo(element);
                 SecurityAttributes output = new SecurityAttributes(element);
-                Assert.Equals(component, output);
+                Assert.AreEqual(component, output);
             }
         }
 
@@ -512,10 +512,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         {
             SecurityAttributes component = new SecurityAttributes(null, null, null);
             SecurityAttributes output = SecurityAttributes.GetNonNullInstance(null);
-            Assert.Equals(component, output);
+            Assert.AreEqual(component, output);
 
             output = SecurityAttributes.GetNonNullInstance(Fixture);
-            Assert.Equals(Fixture, output);
+            Assert.AreEqual(Fixture, output);
         }
 
         [TestMethod]
@@ -677,16 +677,16 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 Dictionary<string, string> others = new Dictionary<string, string>();
                 others[SecurityAttributes.DECLASS_DATE_NAME] = "2005-10-10";
                 SecurityAttributes dataAttributes = GetInstance(SUCCESS, null, null, others);
-                Assert.Equals(BuildOutput(true, "declassDate", "2005-10-10"), dataAttributes.GetOutput(true, ""));
-                Assert.Equals(BuildOutput(false, "declassDate", "2005-10-10"), dataAttributes.GetOutput(false, ""));
+                Assert.AreEqual(BuildOutput(true, "declassDate", "2005-10-10"), dataAttributes.GetOutput(true, ""));
+                Assert.AreEqual(BuildOutput(false, "declassDate", "2005-10-10"), dataAttributes.GetOutput(false, ""));
 
                 if (!version.IsAtLeast("3.1"))
                 {
                     others = new Dictionary<string, string>();
                     others[SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME] = "2005-10-10";
                     dataAttributes = GetInstance(SUCCESS, null, null, others);
-                    Assert.Equals(BuildOutput(true, "dateOfExemptedSource", "2005-10-10"), dataAttributes.GetOutput(true, ""));
-                    Assert.Equals(BuildOutput(false, "dateOfExemptedSource", "2005-10-10"), dataAttributes.GetOutput(false, ""));
+                    Assert.AreEqual(BuildOutput(true, "dateOfExemptedSource", "2005-10-10"), dataAttributes.GetOutput(true, ""));
+                    Assert.AreEqual(BuildOutput(false, "dateOfExemptedSource", "2005-10-10"), dataAttributes.GetOutput(false, ""));
                 }
             }
         }
@@ -765,7 +765,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
             IDictionary<string, string> map = new Dictionary<string, string>();
             map[SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME] = "true";
             SecurityAttributes attributes = new SecurityAttributes(TEST_CLASS, TEST_OWNERS, map);
-            Assert.Equals(BuildOutput(true, "classification", "U") + BuildOutput(true, "declassManualReview", "true") + BuildOutput(true, "ownerProducer", "USA"), attributes.GetOutput(true, ""));
+            Assert.AreEqual(BuildOutput(true, "classification", "U") + BuildOutput(true, "declassManualReview", "true") + BuildOutput(true, "ownerProducer", "USA"), attributes.GetOutput(true, ""));
         }
 
         [TestMethod]
@@ -793,7 +793,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
 
                 SecurityAttributes component = FullFixture;
                 SecurityAttributes.Builder builder = new SecurityAttributes.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

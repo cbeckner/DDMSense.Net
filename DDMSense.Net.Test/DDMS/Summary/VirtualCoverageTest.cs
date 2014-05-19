@@ -239,12 +239,12 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 VirtualCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Empty element
                 XElement element = Util.BuildDDMSElement(VirtualCoverage.GetName(version), null);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 string text = "A completely empty ddms:virtualCoverage element was found.";
                 string locator = "ddms:virtualCoverage";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -259,8 +259,8 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 VirtualCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 VirtualCoverage dataComponent = GetInstance(SUCCESS, TEST_ADDRESS, TEST_PROTOCOL);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -298,12 +298,12 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 VirtualCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_ADDRESS, TEST_PROTOCOL);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -314,10 +314,10 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 VirtualCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_ADDRESS, TEST_PROTOCOL);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -335,7 +335,7 @@ namespace DDMSense.Test.DDMS.Summary
                 }
                 else
                 {
-                    Assert.Equals(attr, component.SecurityAttributes);
+                    Assert.AreEqual(attr, component.SecurityAttributes);
                 }
             }
         }
@@ -364,7 +364,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 VirtualCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 VirtualCoverage.Builder builder = new VirtualCoverage.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

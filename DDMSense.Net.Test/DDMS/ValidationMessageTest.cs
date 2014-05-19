@@ -37,14 +37,14 @@ namespace DDMSense.Test.DDMS
         public virtual void ValidationMessage_Factory()
         {
             ValidationMessage message = ValidationMessage.NewWarning("Test", "ddms:test");
-            Assert.Equals(ValidationMessage.WarningType, message.Type);
-            Assert.Equals("Test", message.Text);
-            Assert.Equals("/ddms:test", message.Locator);
+            Assert.AreEqual(ValidationMessage.WarningType, message.Type);
+            Assert.AreEqual("Test", message.Text);
+            Assert.AreEqual("/ddms:test", message.Locator);
 
             message = ValidationMessage.NewError("Test", "ddms:test");
-            Assert.Equals(ValidationMessage.ErrorType, message.Type);
-            Assert.Equals("Test", message.Text);
-            Assert.Equals("/ddms:test", message.Locator);
+            Assert.AreEqual(ValidationMessage.ErrorType, message.Type);
+            Assert.AreEqual("Test", message.Text);
+            Assert.AreEqual("/ddms:test", message.Locator);
         }
 
         [TestMethod]
@@ -52,10 +52,10 @@ namespace DDMSense.Test.DDMS
         {
             ValidationMessage message1 = ValidationMessage.NewWarning("Test", "ddms:test");
             ValidationMessage message2 = ValidationMessage.NewWarning("Test", "ddms:test");
-            Assert.Equals(message1, message1);
-            Assert.Equals(message1, message2);
-            Assert.Equals(message1.GetHashCode(), message2.GetHashCode());
-            Assert.Equals(message1.ToString(), message2.ToString());
+            Assert.AreEqual(message1, message1);
+            Assert.AreEqual(message1, message2);
+            Assert.AreEqual(message1.GetHashCode(), message2.GetHashCode());
+            Assert.AreEqual(message1.ToString(), message2.ToString());
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace DDMSense.Test.DDMS
         {
             InvalidDDMSException e = new InvalidDDMSException("test");
             e.Locator = "test";
-            Assert.Equals("/test", e.Locator);
+            Assert.AreEqual("/test", e.Locator);
         }
     }
 

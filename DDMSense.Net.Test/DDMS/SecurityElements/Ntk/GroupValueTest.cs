@@ -277,11 +277,11 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 // No warnings
                 GroupValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // No value
                 component = GetInstance(SUCCESS, null, null, null, null);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 string text = "A ntk:AccessGroupValue element was found with no value.";
                 string locator = "ntk:AccessGroupValue";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -297,8 +297,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 GroupValue elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 GroupValue dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -332,12 +332,12 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 GroupValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -349,10 +349,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 GroupValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -371,7 +371,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 GroupValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 GroupValue.Builder builder = new GroupValue.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

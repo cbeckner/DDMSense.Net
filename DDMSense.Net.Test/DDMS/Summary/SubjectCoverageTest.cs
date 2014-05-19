@@ -320,7 +320,7 @@ namespace DDMSense.Test.DDMS.Summary
                 // 4.1 ddms:qualifier element used
                 if (version.IsAtLeast("4.1"))
                 {
-                    Assert.Equals(1, component.ValidationWarnings.Count());
+                    Assert.AreEqual(1, component.ValidationWarnings.Count());
                     text = "The ddms:qualifier attribute in this DDMS component";
                     locator = "ddms:subjectCoverage/ddms:nonStateActor";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -328,7 +328,7 @@ namespace DDMSense.Test.DDMS.Summary
                 // No warnings 
                 else
                 {
-                    Assert.Equals(0, component.ValidationWarnings.Count());
+                    Assert.AreEqual(0, component.ValidationWarnings.Count());
                 }
 
                 // Identical keywords
@@ -336,7 +336,7 @@ namespace DDMSense.Test.DDMS.Summary
                 subjectElement.Add(KeywordTest.FixtureList[0].ElementCopy);
                 subjectElement.Add(KeywordTest.FixtureList[0].ElementCopy);
                 component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 text = "1 or more keywords have the same value.";
                 locator = version.IsAtLeast("4.0.1") ? "ddms:subjectCoverage" : "ddms:subjectCoverage/ddms:Subject";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -346,7 +346,7 @@ namespace DDMSense.Test.DDMS.Summary
                 subjectElement.Add(CategoryTest.FixtureList[0].ElementCopy);
                 subjectElement.Add(CategoryTest.FixtureList[0].ElementCopy);
                 component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 text = "1 or more categories have the same value.";
                 locator = version.IsAtLeast("4.0.1") ? "ddms:subjectCoverage" : "ddms:subjectCoverage/ddms:Subject";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -359,7 +359,7 @@ namespace DDMSense.Test.DDMS.Summary
                     subjectElement.Add(ProductionMetricTest.FixtureList[0].ElementCopy);
                     subjectElement.Add(ProductionMetricTest.FixtureList[0].ElementCopy);
                     component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
-                    Assert.Equals(1, component.ValidationWarnings.Count());
+                    Assert.AreEqual(1, component.ValidationWarnings.Count());
                     text = "1 or more productionMetrics have the same value.";
                     locator = "ddms:subjectCoverage";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -375,8 +375,8 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 SubjectCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 SubjectCoverage dataComponent = GetInstance(SUCCESS, KeywordTest.FixtureList, CategoryTest.FixtureList, ProductionMetricTest.FixtureList, NonStateActorTest.FixtureList);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -412,12 +412,12 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 SubjectCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, KeywordTest.FixtureList, CategoryTest.FixtureList, ProductionMetricTest.FixtureList, NonStateActorTest.FixtureList);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -428,10 +428,10 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 SubjectCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, KeywordTest.FixtureList, CategoryTest.FixtureList, ProductionMetricTest.FixtureList, NonStateActorTest.FixtureList);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -497,7 +497,7 @@ namespace DDMSense.Test.DDMS.Summary
                 }
                 else
                 {
-                    Assert.Equals(attr, component.SecurityAttributes);
+                    Assert.AreEqual(attr, component.SecurityAttributes);
                 }
             }
         }
@@ -556,7 +556,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 SubjectCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 SubjectCoverage.Builder builder = new SubjectCoverage.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 
@@ -605,7 +605,7 @@ namespace DDMSense.Test.DDMS.Summary
                 fullBuilder.Value = "keyword";
                 builder.Keywords.Add(emptyBuilder);
                 builder.Keywords.Add(fullBuilder);
-                Assert.Equals(1, ((SubjectCoverage)builder.Commit()).Keywords.Count());
+                Assert.AreEqual(1, ((SubjectCoverage)builder.Commit()).Keywords.Count());
 
                 // Skip empty Categories
                 builder = new SubjectCoverage.Builder();
@@ -614,7 +614,7 @@ namespace DDMSense.Test.DDMS.Summary
                 fullCategoryBuilder.Label = "label";
                 builder.Categories.Add(emptyCategoryBuilder);
                 builder.Categories.Add(fullCategoryBuilder);
-                Assert.Equals(1, ((SubjectCoverage)builder.Commit()).Categories.Count());
+                Assert.AreEqual(1, ((SubjectCoverage)builder.Commit()).Categories.Count());
 
                 if (version.IsAtLeast("4.0.1"))
                 {
@@ -627,7 +627,7 @@ namespace DDMSense.Test.DDMS.Summary
                     builder.Keywords[0].Value = "test";
                     builder.ProductionMetrics.Add(emptyProductionMetricBuilder);
                     builder.ProductionMetrics.Add(fullProductionMetricBuilder);
-                    Assert.Equals(1, ((SubjectCoverage)builder.Commit()).ProductionMetrics.Count());
+                    Assert.AreEqual(1, ((SubjectCoverage)builder.Commit()).ProductionMetrics.Count());
 
                     // Skip empty actors
                     builder = new SubjectCoverage.Builder();
@@ -637,7 +637,7 @@ namespace DDMSense.Test.DDMS.Summary
                     builder.Keywords[0].Value = "test";
                     builder.NonStateActors.Add(emptyNonStateActorBuilder);
                     builder.NonStateActors.Add(fullNonStateActorBuilder);
-                    Assert.Equals(1, ((SubjectCoverage)builder.Commit()).NonStateActors.Count());
+                    Assert.AreEqual(1, ((SubjectCoverage)builder.Commit()).NonStateActors.Count());
                 }
             }
         }

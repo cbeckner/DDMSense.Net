@@ -376,7 +376,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 // No warnings, exact-exact
                 TemporalCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Empty name element
                 XElement periodElement = Util.BuildDDMSElement("TimePeriod", null);
@@ -384,7 +384,7 @@ namespace DDMSense.Test.DDMS.Summary
                 periodElement.Add(Util.BuildDDMSElement("start", TEST_START));
                 periodElement.Add(Util.BuildDDMSElement("end", TEST_END));
                 component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 string text = "A ddms:name element was found with no value.";
                 string locator = version.IsAtLeast("4.0.1") ? "ddms:temporalCoverage" : "ddms:temporalCoverage/ddms:TimePeriod";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -396,7 +396,7 @@ namespace DDMSense.Test.DDMS.Summary
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableStart", true));
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
                     component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-                    Assert.Equals(1, component.ValidationWarnings.Count());
+                    Assert.AreEqual(1, component.ValidationWarnings.Count());
                     text = "The ddms:approximableStart or ddms:approximableEnd element";
                     locator = "ddms:temporalCoverage";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -414,8 +414,8 @@ namespace DDMSense.Test.DDMS.Summary
                 // exact-exact
                 TemporalCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 TemporalCoverage dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_START, null, TEST_END, null);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
                 // approx-approx
                 if (version.IsAtLeast("4.1"))
@@ -425,8 +425,8 @@ namespace DDMSense.Test.DDMS.Summary
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableEnd", false));
                     elementComponent = GetInstance(SUCCESS, WrapInnerElement(periodElement));
                     dataComponent = GetInstance(SUCCESS, null, null, GetApproximableStart(false), null, GetApproximableEnd(false));
-                    Assert.Equals(elementComponent, dataComponent);
-                    Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                    Assert.AreEqual(elementComponent, dataComponent);
+                    Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
                 }
             }
         }
@@ -484,12 +484,12 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 TemporalCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true, false), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false, false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true, false), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false, false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_NAME, TEST_START, null, TEST_END, null);
-                Assert.Equals(GetExpectedOutput(true, false), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false, false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true, false), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false, false), component.ToText());
 
                 if (version.IsAtLeast("4.1"))
                 {
@@ -498,12 +498,12 @@ namespace DDMSense.Test.DDMS.Summary
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableStart", true));
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
                     component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-                    Assert.Equals(GetExpectedOutput(true, true), component.ToHTML());
-                    Assert.Equals(GetExpectedOutput(false, true), component.ToText());
+                    Assert.AreEqual(GetExpectedOutput(true, true), component.ToHTML());
+                    Assert.AreEqual(GetExpectedOutput(false, true), component.ToText());
 
                     component = GetInstance(SUCCESS, TEST_NAME, null, GetApproximableStart(true), null, GetApproximableEnd(true));
-                    Assert.Equals(GetExpectedOutput(true, true), component.ToHTML());
-                    Assert.Equals(GetExpectedOutput(false, true), component.ToText());
+                    Assert.AreEqual(GetExpectedOutput(true, true), component.ToHTML());
+                    Assert.AreEqual(GetExpectedOutput(false, true), component.ToText());
                 }
             }
         }
@@ -515,10 +515,10 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 TemporalCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_NAME, TEST_START, null, TEST_END, null);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
 
                 if (version.IsAtLeast("4.1"))
                 {
@@ -527,10 +527,10 @@ namespace DDMSense.Test.DDMS.Summary
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableStart", true));
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
                     component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-                    Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                    Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                     component = GetInstance(SUCCESS, TEST_NAME, null, GetApproximableStart(true), null, GetApproximableEnd(true));
-                    Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                    Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
                 }
             }
         }
@@ -546,13 +546,13 @@ namespace DDMSense.Test.DDMS.Summary
                 periodElement.Add(Util.BuildDDMSElement("start", ""));
                 periodElement.Add(Util.BuildDDMSElement("end", ""));
                 TemporalCoverage component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
-                Assert.Equals("Unknown", component.StartString);
-                Assert.Equals("Unknown", component.EndString);
+                Assert.AreEqual("Unknown", component.StartString);
+                Assert.AreEqual("Unknown", component.EndString);
 
                 component = GetInstance(SUCCESS, "", "", null, "", null);
-                Assert.Equals("Unknown", component.TimePeriodName);
-                Assert.Equals("Unknown", component.StartString);
-                Assert.Equals("Unknown", component.EndString);
+                Assert.AreEqual("Unknown", component.TimePeriodName);
+                Assert.AreEqual("Unknown", component.StartString);
+                Assert.AreEqual("Unknown", component.EndString);
 
             }
         }
@@ -572,8 +572,8 @@ namespace DDMSense.Test.DDMS.Summary
                 Assert.IsNull(component.End);
 
                 component = GetInstance(SUCCESS, "", TEST_START, null, TEST_START, null);
-                Assert.Equals(TEST_START, component.Start.GetValueOrDefault().ToString("o"));
-                Assert.Equals(TEST_START, component.End.GetValueOrDefault().ToString("o"));
+                Assert.AreEqual(TEST_START, component.Start.GetValueOrDefault().ToString("o"));
+                Assert.AreEqual(TEST_START, component.End.GetValueOrDefault().ToString("o"));
             }
         }
 
@@ -591,7 +591,7 @@ namespace DDMSense.Test.DDMS.Summary
                 }
                 else
                 {
-                    Assert.Equals(attr, component.SecurityAttributes);
+                    Assert.AreEqual(attr, component.SecurityAttributes);
                 }
             }
         }
@@ -637,7 +637,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 TemporalCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 TemporalCoverage.Builder builder = new TemporalCoverage.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 if (version.IsAtLeast("4.1"))
                 {
@@ -647,7 +647,7 @@ namespace DDMSense.Test.DDMS.Summary
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
                     component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
                     builder = new TemporalCoverage.Builder(component);
-                    Assert.Equals(component, builder.Commit());
+                    Assert.AreEqual(component, builder.Commit());
                 }
             }
         }

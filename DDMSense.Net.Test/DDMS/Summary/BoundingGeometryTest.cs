@@ -231,7 +231,7 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -243,8 +243,8 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 BoundingGeometry elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 BoundingGeometry dataComponent = GetInstance(SUCCESS, null, PointTest.FixtureList);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -272,16 +272,16 @@ namespace DDMSense.Test.DDMS.Summary
 
 
                 BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, null, PointTest.FixtureList);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, PolygonTest.FixtureList, null);
-                Assert.Equals(PolygonTest.FixtureList[0].GetOutput(true, "boundingGeometry.", ""), component.ToHTML());
-                Assert.Equals(PolygonTest.FixtureList[0].GetOutput(false, "boundingGeometry.", ""), component.ToText());
+                Assert.AreEqual(PolygonTest.FixtureList[0].GetOutput(true, "boundingGeometry.", ""), component.ToHTML());
+                Assert.AreEqual(PolygonTest.FixtureList[0].GetOutput(false, "boundingGeometry.", ""), component.ToText());
             }
         }
 
@@ -292,10 +292,10 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, null, PointTest.FixtureList);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -310,12 +310,12 @@ namespace DDMSense.Test.DDMS.Summary
 
                 // Equality after Building (Point-based)
                 BoundingGeometry.Builder builder = new BoundingGeometry.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 // Equality after Building (Polygon-based)
                 component = new BoundingGeometry(PolygonTest.FixtureList, null);
                 builder = new BoundingGeometry.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 
@@ -375,7 +375,7 @@ namespace DDMSense.Test.DDMS.Summary
                 builder.Points.Add(emptyBuilder);
                 builder.Points.Add(fullBuilder);
                 builder.Commit();
-                Assert.Equals(1, builder.Points.Count());
+                Assert.AreEqual(1, builder.Points.Count());
 
                 // Skip empty Polygons
                 builder = new BoundingGeometry.Builder();
@@ -402,7 +402,7 @@ namespace DDMSense.Test.DDMS.Summary
                 builder.Polygons.Add(emptyPolygonBuilder);
                 builder.Polygons.Add(fullPolygonBuilder);
                 builder.Commit();
-                Assert.Equals(1, builder.Polygons.Count());
+                Assert.AreEqual(1, builder.Polygons.Count());
             }
         }
 

@@ -75,7 +75,7 @@ namespace DDMSense.Test.DDMS
                     string ddmsNamespace = resource.Namespace;
                     string resourceName = Resource.GetName(version);
                     List<ValidationMessage> messages = resource.ValidateWithSchematron(new FileInfo("data/test/" + sVersion + "/testSchematronXslt1.sch").FullName);
-                    Assert.Equals(version.IsAtLeast("4.0.1") ? 3 : 2, messages.Count);
+                    Assert.AreEqual(version.IsAtLeast("4.0.1") ? 3 : 2, messages.Count);
 
                     string text = "A DDMS Resource must have an unknownElement child.";
                     string locator = "/*[local-name()='" + resourceName + "' and namespace-uri()='" + ddmsNamespace + "']";
@@ -111,7 +111,7 @@ namespace DDMSense.Test.DDMS
                     string ddmsNamespace = resource.Namespace;
                     string gmlNamespace = version.GmlNamespace;
                     List<ValidationMessage> messages = resource.ValidateWithSchematron(new FileInfo("data/test/" + sVersion + "/testSchematronXslt2.sch").FullName);
-                    Assert.Equals(1, messages.Count);
+                    Assert.AreEqual(1, messages.Count);
 
                     string text = "The second coordinate in a gml:pos element must be 40.2 degrees.";
                     string extent = version.IsAtLeast("4.0.1") ? "" : "/*:GeospatialExtent[namespace-uri()='" + ddmsNamespace + "'][1]";

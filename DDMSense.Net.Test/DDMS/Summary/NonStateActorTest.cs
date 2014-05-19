@@ -287,7 +287,7 @@ namespace DDMSense.Test.DDMS.Summary
                 // 4.1 ddms:qualifier element used
                 if (version.IsAtLeast("4.1"))
                 {
-                    Assert.Equals(1, component.ValidationWarnings.Count());
+                    Assert.AreEqual(1, component.ValidationWarnings.Count());
                     text = "The ddms:qualifier attribute in this DDMS component";
                     locator = "ddms:nonStateActor";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -295,13 +295,13 @@ namespace DDMSense.Test.DDMS.Summary
                 // No warnings 
                 else
                 {
-                    Assert.Equals(0, component.ValidationWarnings.Count());
+                    Assert.AreEqual(0, component.ValidationWarnings.Count());
                 }
 
                 // Empty value
                 XElement element = Util.BuildDDMSElement(NonStateActor.GetName(version), null);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 text = "A ddms:nonStateActor element was found with no value.";
                 locator = "ddms:nonStateActor";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -330,8 +330,8 @@ namespace DDMSense.Test.DDMS.Summary
                 NonStateActor elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 NonStateActor dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
 
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -365,12 +365,12 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -382,10 +382,10 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_ORDER, Qualifier);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -413,7 +413,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 NonStateActor component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 NonStateActor.Builder builder = new NonStateActor.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

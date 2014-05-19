@@ -246,13 +246,13 @@ namespace DDMSense.Test.DDMS.ResourceElements
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				// No warnings
 				DDMSense.DDMS.ResourceElements.Type component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Assert.Equals(0, component.ValidationWarnings.Count());
+				Assert.AreEqual(0, component.ValidationWarnings.Count());
 
 				// Qualifier without value
 				XElement element = Util.BuildDDMSElement(DDMSense.DDMS.ResourceElements.Type.GetName(version), null);
 				Util.AddDDMSAttribute(element, "qualifier", TEST_QUALIFIER);
 				component = GetInstance(SUCCESS, element);
-				Assert.Equals(1, component.ValidationWarnings.Count());
+				Assert.AreEqual(1, component.ValidationWarnings.Count());
 				string text = "A qualifier has been set without an accompanying value attribute.";
 				string locator = "ddms:type";
 				AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -260,7 +260,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 				// Neither attribute
 				element = Util.BuildDDMSElement(DDMSense.DDMS.ResourceElements.Type.GetName(version), null);
 				component = GetInstance(SUCCESS, element);
-				Assert.Equals(1, component.ValidationWarnings.Count());
+				Assert.AreEqual(1, component.ValidationWarnings.Count());
 				text = "Neither a qualifier nor a value was set on this type.";
 				locator = "ddms:type";
 				AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -275,8 +275,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				DDMSense.DDMS.ResourceElements.Type elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 				DDMSense.DDMS.ResourceElements.Type dataComponent = GetInstance(SUCCESS, version.IsAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
-				Assert.Equals(elementComponent, dataComponent);
-				Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+				Assert.AreEqual(elementComponent, dataComponent);
+				Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 			}
 		}
 
@@ -304,12 +304,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
 			{
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				DDMSense.DDMS.ResourceElements.Type component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-				Assert.Equals(GetExpectedOutput(false), component.ToText());
+				Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+				Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
 				component = GetInstance(SUCCESS, version.IsAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
-				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-				Assert.Equals(GetExpectedOutput(false), component.ToText());
+				Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+				Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 			}
 		}
 
@@ -320,10 +320,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
 			{
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				DDMSense.DDMS.ResourceElements.Type component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Assert.Equals(ExpectedXMLOutput, component.ToXML());
+				Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
 				component = GetInstance(SUCCESS, version.IsAtLeast("4.0.1") ? TEST_DESCRIPTION : "", TEST_QUALIFIER, TEST_VALUE);
-				Assert.Equals(ExpectedXMLOutput, component.ToXML());
+				Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 			}
 		}
 
@@ -366,7 +366,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
 				DDMSense.DDMS.ResourceElements.Type component = GetInstance(SUCCESS, GetValidElement(sVersion));
 				DDMSense.DDMS.ResourceElements.Type.Builder builder = new DDMSense.DDMS.ResourceElements.Type.Builder(component);
-				Assert.Equals(component, builder.Commit());
+				Assert.AreEqual(component, builder.Commit());
 			}
 		}
 

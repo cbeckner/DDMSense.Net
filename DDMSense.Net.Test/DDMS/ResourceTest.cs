@@ -931,14 +931,14 @@ namespace DDMSense.Test.DDMS {
 
 				// 4.1 ism:Notice used
 				if (version.IsAtLeast("4.1")) {
-					Assert.Equals(1, component.ValidationWarnings.Count);
+					Assert.AreEqual(1, component.ValidationWarnings.Count);
 					text = "The ISM:externalNotice XAttribute in this DDMS component";
 					locator = "ddms:resource";
 					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 				}
 				// No warnings 
 				else {
-					Assert.Equals(0, component.ValidationWarnings.Count);
+					Assert.AreEqual(0, component.ValidationWarnings.Count);
 				}
 
 				int countIndex = version.IsAtLeast("4.1") ? 1 : 0;
@@ -947,7 +947,7 @@ namespace DDMSense.Test.DDMS {
 				List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Add(new Format("test", new Extent("test", ""), "test"));
 				component = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
-				Assert.Equals(countIndex + 1, component.ValidationWarnings.Count);
+				Assert.AreEqual(countIndex + 1, component.ValidationWarnings.Count);
 
 				if (version.IsAtLeast("4.1")) {
 					text = "The ISM:externalNotice XAttribute";
@@ -965,7 +965,7 @@ namespace DDMSense.Test.DDMS {
 				components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Add(new GeospatialCoverage(null, null, null, address, null, null, null, null));
 				component = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
-				Assert.Equals(countIndex + 1, component.ValidationWarnings.Count);
+				Assert.AreEqual(countIndex + 1, component.ValidationWarnings.Count);
 
 				if (version.IsAtLeast("4.1")) {
 					text = "The ISM:externalNotice XAttribute";
@@ -986,8 +986,8 @@ namespace DDMSense.Test.DDMS {
 
 				Resource elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
 				Resource dataComponent = (!version.IsAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
-				Assert.Equals(elementComponent, dataComponent);
-				Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+				Assert.AreEqual(elementComponent, dataComponent);
+				Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 			}
 		}
 
@@ -1025,12 +1025,12 @@ namespace DDMSense.Test.DDMS {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				CreateComponents();
 				Resource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-				Assert.Equals(GetExpectedOutput(false), component.ToText());
+				Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+				Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
 				component = (!version.IsAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
-				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-				Assert.Equals(GetExpectedOutput(false), component.ToText());
+				Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+				Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 			}
 		}
 
@@ -1042,10 +1042,10 @@ namespace DDMSense.Test.DDMS {
 
 				Resource component = GetInstance(SUCCESS, GetValidElement(sVersion));
 
-				Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+				Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
 				component = (!version.IsAtLeast("3.0") ? GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion) : GetInstance(SUCCESS, TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion));
-				Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+				Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
 			}
 		}
 
@@ -1094,23 +1094,23 @@ namespace DDMSense.Test.DDMS {
 			XElement element = ResourceWithoutHeaderElement;
 			Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, version.IsmNamespace, Convert.ToString(IsmDESVersion));
 			Resource component = new Resource(element);
-			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
+			Assert.AreEqual(IsmDESVersion, component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
-			Assert.Equals(0, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(0, component.ExtensibleAttributes.Attributes.Count);
 
 			// ISM:classification in element
 			element = ResourceWithoutHeaderElement;
 			Util.AddAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, version.IsmNamespace, "U");
 			component = new Resource(element);
 			Assert.IsFalse(component.SecurityAttributes.Empty);
-			Assert.Equals(0, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(0, component.ExtensibleAttributes.Attributes.Count);
 
 			// ddmsence:confidence in element
 			element = ResourceWithoutHeaderElement;
 			Util.AddAttribute(element, "ddmsence", "confidence", "http://ddmsence.urizone.net/", "95");
 			component = new Resource(element);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
-			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(1, component.ExtensibleAttributes.Attributes.Count);
 		}
 
 		[TestMethod]
@@ -1130,15 +1130,15 @@ namespace DDMSense.Test.DDMS {
 			Resource component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
-			Assert.Equals(0, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(0, component.ExtensibleAttributes.Attributes.Count);
 
 			// icAttribute as parameter, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
 			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, null, null, new ExtensibleAttributes(exAttr));
-			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
+			Assert.AreEqual(IsmDESVersion, component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
-			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(1, component.ExtensibleAttributes.Attributes.Count);
 
 			// icAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
@@ -1147,7 +1147,7 @@ namespace DDMSense.Test.DDMS {
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
-			Assert.Equals(2, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(2, component.ExtensibleAttributes.Attributes.Count);
 
 			// secAttribute as securityAttribute, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
@@ -1155,7 +1155,7 @@ namespace DDMSense.Test.DDMS {
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsFalse(component.SecurityAttributes.Empty);
-			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(1, component.ExtensibleAttributes.Attributes.Count);
 
 			// secAttribute and uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
@@ -1164,24 +1164,24 @@ namespace DDMSense.Test.DDMS {
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
-			Assert.Equals(2, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(2, component.ExtensibleAttributes.Attributes.Count);
 
 			// icAttribute as parameter, secAttribute as securityAttribute, uniqueAttribute as extensibleAttribute
 			exAttr.Clear();
 			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
-			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
+			Assert.AreEqual(IsmDESVersion, component.IsmDESVersion);
 			Assert.IsFalse(component.SecurityAttributes.Empty);
-			Assert.Equals(1, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(1, component.ExtensibleAttributes.Attributes.Count);
 
 			// icAttribute as parameter, secAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
 			exAttr.Add(new XAttribute(secAttribute));
 			exAttr.Add(new XAttribute(uniqueAttribute));
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, null, null, new ExtensibleAttributes(exAttr));
-			Assert.Equals(IsmDESVersion, component.IsmDESVersion);
+			Assert.AreEqual(IsmDESVersion, component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
-			Assert.Equals(2, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(2, component.ExtensibleAttributes.Attributes.Count);
 
 			// secAttribute as securityAttribute, icAttribute and uniqueAttribute as extensibleAttributes
 			exAttr.Clear();
@@ -1190,7 +1190,7 @@ namespace DDMSense.Test.DDMS {
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsFalse(component.SecurityAttributes.Empty);
-			Assert.Equals(2, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(2, component.ExtensibleAttributes.Attributes.Count);
 
 			// all three as extensibleAttributes
 			exAttr.Clear();
@@ -1200,7 +1200,7 @@ namespace DDMSense.Test.DDMS {
 			component = new Resource(TEST_TOP_LEVEL_COMPONENTS, new ExtensibleAttributes(exAttr));
 			Assert.IsNull(component.IsmDESVersion);
 			Assert.IsTrue(component.SecurityAttributes.Empty);
-			Assert.Equals(3, component.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(3, component.ExtensibleAttributes.Attributes.Count);
 		}
 
 		[TestMethod]
@@ -1323,7 +1323,7 @@ namespace DDMSense.Test.DDMS {
 			Resource resource = GetInstance(SUCCESS, element);
 
 			// ISM:declassManualReview should not get picked up as an extensible XAttribute
-			Assert.Equals(0, resource.ExtensibleAttributes.Attributes.Count);
+			Assert.AreEqual(0, resource.ExtensibleAttributes.Attributes.Count);
 		}
 
 		[TestMethod]
@@ -1337,11 +1337,11 @@ namespace DDMSense.Test.DDMS {
 
 				XElement element = ResourceWithMultipleRelated;
 				Resource resource = GetInstance(SUCCESS, element);
-				Assert.Equals(4, resource.RelatedResources.Count);
-				Assert.Equals("http://en.wikipedia.org/wiki/Tank1", resource.RelatedResources[0].Value);
-				Assert.Equals("http://en.wikipedia.org/wiki/Tank2", resource.RelatedResources[1].Value);
-				Assert.Equals("http://en.wikipedia.org/wiki/Tank3", resource.RelatedResources[2].Value);
-				Assert.Equals("http://en.wikipedia.org/wiki/Tank4", resource.RelatedResources[3].Value);
+				Assert.AreEqual(4, resource.RelatedResources.Count);
+				Assert.AreEqual("http://en.wikipedia.org/wiki/Tank1", resource.RelatedResources[0].Value);
+				Assert.AreEqual("http://en.wikipedia.org/wiki/Tank2", resource.RelatedResources[1].Value);
+				Assert.AreEqual("http://en.wikipedia.org/wiki/Tank3", resource.RelatedResources[2].Value);
+				Assert.AreEqual("http://en.wikipedia.org/wiki/Tank4", resource.RelatedResources[3].Value);
 			}
 		}
 
@@ -1385,21 +1385,21 @@ namespace DDMSense.Test.DDMS {
 			CreateComponents();
 			Resource resource = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
 			Resource fullResource = new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, null, null, null);
-			Assert.Equals(resource, fullResource);
+			Assert.AreEqual(resource, fullResource);
 
 			// DDMS 3.0
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 			resource = new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, IsmDESVersion, SecurityAttributesTest.Fixture, null);
 			fullResource = new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, null, SecurityAttributesTest.Fixture, null, null);
-			Assert.Equals(resource, fullResource);
+			Assert.AreEqual(resource, fullResource);
 
 			// DDMS 3.1
 			DDMSVersion.SetCurrentVersion("3.1");
 			CreateComponents();
 			resource = new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, SecurityAttributesTest.Fixture, null);
 			fullResource = new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, null, SecurityAttributesTest.Fixture, null, null);
-			Assert.Equals(resource, fullResource);
+			Assert.AreEqual(resource, fullResource);
 		}
 
 		[TestMethod]
@@ -1408,14 +1408,14 @@ namespace DDMSense.Test.DDMS {
 				DDMSVersion.SetCurrentVersion(sVersion);
 				Resource component = GetInstance(SUCCESS, GetValidElement(sVersion));
 				Resource.Builder builder = new Resource.Builder(component);
-				Assert.Equals(component, builder.Commit());
+				Assert.AreEqual(component, builder.Commit());
 
 				// Equality with ExtensibleElement
 				builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
 				builder.ExtensibleElements[0].Xml = "<ddmsence:extension xmlns:ddmsence=\"http://ddmsence.urizone.net/\">" + "This is an extensible element.</ddmsence:extension>";
 				component = (Resource)builder.Commit();
 				builder = new Resource.Builder(component);
-				Assert.Equals(component, builder.Commit());
+				Assert.AreEqual(component, builder.Commit());
 			}
 		}
 
@@ -1447,7 +1447,7 @@ namespace DDMSense.Test.DDMS {
 				Assert.IsTrue(builder.Empty);
 				builder.PointOfContacts.Add(new PointOfContact.Builder());
 				Assert.IsTrue(builder.Empty);
-				Assert.Equals(4, builder.Producers.Count);
+				Assert.AreEqual(4, builder.Producers.Count);
 				builder.VirtualCoverages.Add(new VirtualCoverage.Builder());
 				Assert.IsTrue(builder.Empty);
 				builder.TemporalCoverages.Add(new TemporalCoverage.Builder());
@@ -1690,7 +1690,7 @@ namespace DDMSense.Test.DDMS {
 
 				//ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(serialized));
 				//Resource.Builder unserializedBuilder = (Resource.Builder) ois.readObject();
-				//Assert.Equals(component, unserializedBuilder.Commit());
+				//Assert.AreEqual(component, unserializedBuilder.Commit());
 			}
 		}
 

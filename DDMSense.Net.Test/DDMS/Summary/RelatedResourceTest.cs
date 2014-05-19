@@ -399,7 +399,7 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Pre-DDMS 4.0.1, too many relatedResource children
                 if (!version.IsAtLeast("4.0.1"))
@@ -411,7 +411,7 @@ namespace DDMSense.Test.DDMS.Summary
                     child.Add(new XElement(LinkTest.FixtureElement));
                     element.Add(child);
                     component = GetInstance(SUCCESS, element);
-                    Assert.Equals(1, component.ValidationWarnings.Count());
+                    Assert.AreEqual(1, component.ValidationWarnings.Count());
                     string text = "A ddms:RelatedResources element contains more than 1";
                     string locator = "ddms:relatedResources";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -427,8 +427,8 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 RelatedResource elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 RelatedResource dataComponent = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(false), TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -466,12 +466,12 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(false), TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -482,10 +482,10 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
 
                 component = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(false), TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
 
             }
         }
@@ -511,7 +511,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 RelatedResource.Builder builder = new RelatedResource.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 
@@ -570,7 +570,7 @@ namespace DDMSense.Test.DDMS.Summary
                 fullBuilder.XLinkAttributes.Role = "role";
                 builder.Links.Add(emptyBuilder);
                 builder.Links.Add(fullBuilder);
-                Assert.Equals(1, ((RelatedResource)builder.Commit()).Links.Count());
+                Assert.AreEqual(1, ((RelatedResource)builder.Commit()).Links.Count());
             }
         }
 

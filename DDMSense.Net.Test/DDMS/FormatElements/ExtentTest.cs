@@ -231,13 +231,13 @@ namespace DDMSense.Test.DDMS.FormatElements
 
                 // No warnings
                 Extent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Qualifier without value
                 XElement element = Util.BuildDDMSElement(extentName, null);
                 Util.AddDDMSAttribute(element, "qualifier", TEST_QUALIFIER);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
 
                 string text = "A qualifier has been set without an accompanying value attribute.";
                 string locator = "ddms:extent";
@@ -246,7 +246,7 @@ namespace DDMSense.Test.DDMS.FormatElements
                 // Neither attribute
                 element = Util.BuildDDMSElement(extentName, null);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 text = "A completely empty ddms:extent element was found.";
                 locator = "ddms:extent";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -262,8 +262,8 @@ namespace DDMSense.Test.DDMS.FormatElements
 
                 Extent elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Extent dataComponent = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -291,12 +291,12 @@ namespace DDMSense.Test.DDMS.FormatElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Extent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -308,10 +308,10 @@ namespace DDMSense.Test.DDMS.FormatElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Extent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -324,7 +324,7 @@ namespace DDMSense.Test.DDMS.FormatElements
 
                 Extent component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Extent.Builder builder = new Extent.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

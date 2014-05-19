@@ -290,21 +290,21 @@ namespace DDMSense.Test.DDMS.FormatElements
 
                 // No warnings
                 Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Medium element with no value or empty value
                 XElement mediaElement = Util.BuildDDMSElement("Media", null);
                 mediaElement.Add(Util.BuildDDMSElement("mimeType", TEST_MIME_TYPE));
                 mediaElement.Add(Util.BuildDDMSElement("medium", null));
                 component = GetInstance(SUCCESS, WrapInnerElement(mediaElement));
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 string text = "A ddms:medium element was found with no value.";
                 string locator = version.IsAtLeast("4.0.1") ? "ddms:format" : "ddms:format/ddms:Media";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
                 // Nested warnings
                 component = GetInstance(SUCCESS, TEST_MIME_TYPE, new Extent("sizeBytes", ""), TEST_MEDIUM);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 text = "A qualifier has been set without an accompanying value attribute.";
                 locator = (version.IsAtLeast("4.0.1")) ? "ddms:format/ddms:extent" : "ddms:format/ddms:Media/ddms:extent";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -319,8 +319,8 @@ namespace DDMSense.Test.DDMS.FormatElements
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Format elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Format dataComponent = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -350,12 +350,12 @@ namespace DDMSense.Test.DDMS.FormatElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -366,10 +366,10 @@ namespace DDMSense.Test.DDMS.FormatElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -392,7 +392,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(component.ExtentQualifier, component.Extent.Qualifier);
+                Assert.AreEqual(component.ExtentQualifier, component.Extent.Qualifier);
             }
         }
 
@@ -403,7 +403,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Format component = GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
-                Assert.Equals("", component.ExtentQualifier);
+                Assert.AreEqual("", component.ExtentQualifier);
             }
         }
 
@@ -414,7 +414,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(component.ExtentValue, component.Extent.Value);
+                Assert.AreEqual(component.ExtentValue, component.Extent.Value);
             }
         }
 
@@ -425,7 +425,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Format component = GetInstance(SUCCESS, TEST_MIME_TYPE, null, null);
-                Assert.Equals("", component.ExtentValue);
+                Assert.AreEqual("", component.ExtentValue);
             }
         }
 
@@ -438,7 +438,7 @@ namespace DDMSense.Test.DDMS.FormatElements
 
                 Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Format.Builder builder = new Format.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

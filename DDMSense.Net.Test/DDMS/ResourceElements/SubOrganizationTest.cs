@@ -260,7 +260,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No warnings
                 SubOrganization component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -273,8 +273,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 SubOrganization elementComponent = GetInstance(SUCCESS, FixtureElement);
                 SubOrganization dataComponent = GetInstance(SUCCESS, TEST_VALUE);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -299,12 +299,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 SubOrganization component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_VALUE);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -316,10 +316,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 SubOrganization component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_VALUE);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -347,7 +347,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 SubOrganization component = GetInstance(SUCCESS, FixtureElement);
                 SubOrganization.Builder builder = new SubOrganization.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

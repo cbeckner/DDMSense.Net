@@ -282,11 +282,11 @@ namespace DDMSense.Test.DDMS
                 // No warnings
                 ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
 
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Empty element
                 component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, false));
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 string text = "A completely empty ddms:acquiredOn";
                 string locator = "ddms:acquiredOn";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -297,7 +297,7 @@ namespace DDMSense.Test.DDMS
                 Util.AddDDMSChildElement(element, "description", null);
                 Util.AddDDMSChildElement(element, "approximableDate", TEST_APPROXIMABLE_DATE);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 text = "A completely empty ddms:description";
                 locator = "ddms:acquiredOn";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -313,8 +313,8 @@ namespace DDMSense.Test.DDMS
 
                 ApproximableDate elementComponent = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
                 ApproximableDate dataComponent = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -354,12 +354,12 @@ namespace DDMSense.Test.DDMS
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -371,10 +371,10 @@ namespace DDMSense.Test.DDMS
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -402,7 +402,7 @@ namespace DDMSense.Test.DDMS
 
                 ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
                 ApproximableDate.Builder builder = new ApproximableDate.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

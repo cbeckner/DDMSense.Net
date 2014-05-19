@@ -297,7 +297,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Empty acronym in DDMS 4.0.1
                 if (version.IsAtLeast("4.0.1"))
@@ -306,7 +306,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                     element.Add(Util.BuildDDMSElement("name", TEST_NAMES[0]));
                     element.Add(new XAttribute(XName.Get("ddms:acronym", version.Namespace), ""));
                     component = GetInstance(SUCCESS, element);
-                    Assert.Equals(1, component.ValidationWarnings.Count());
+                    Assert.AreEqual(1, component.ValidationWarnings.Count());
                     string text = "A ddms:acronym attribute was found with no value.";
                     string locator = "ddms:organization";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -322,8 +322,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Organization elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Organization dataComponent = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -358,12 +358,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -374,10 +374,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_NAMES, TEST_PHONES, TEST_EMAILS, SubOrganizationTest.FixtureList, Acronym);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -425,13 +425,13 @@ namespace DDMSense.Test.DDMS.ResourceElements
             Organization org = new Organization(names, null, null, SubOrganizationTest.FixtureList, null, null);
 
             PropertyReader.SetProperty("output.indexLevel", "0");
-            Assert.Equals("entityType: organization\nname: DISA\n" + "subOrganization: sub1\nsubOrganization.classification: U\nsubOrganization.ownerProducer: USA\n" + "subOrganization: sub2\nsubOrganization.classification: U\nsubOrganization.ownerProducer: USA\n", org.ToText());
+            Assert.AreEqual("entityType: organization\nname: DISA\n" + "subOrganization: sub1\nsubOrganization.classification: U\nsubOrganization.ownerProducer: USA\n" + "subOrganization: sub2\nsubOrganization.classification: U\nsubOrganization.ownerProducer: USA\n", org.ToText());
 
             PropertyReader.SetProperty("output.indexLevel", "1");
-            Assert.Equals("entityType: organization\nname: DISA\n" + "subOrganization[1]: sub1\nsubOrganization[1].classification: U\nsubOrganization[1].ownerProducer: USA\n" + "subOrganization[2]: sub2\nsubOrganization[2].classification: U\nsubOrganization[2].ownerProducer: USA\n", org.ToText());
+            Assert.AreEqual("entityType: organization\nname: DISA\n" + "subOrganization[1]: sub1\nsubOrganization[1].classification: U\nsubOrganization[1].ownerProducer: USA\n" + "subOrganization[2]: sub2\nsubOrganization[2].classification: U\nsubOrganization[2].ownerProducer: USA\n", org.ToText());
 
             PropertyReader.SetProperty("output.indexLevel", "2");
-            Assert.Equals("entityType: organization\nname[1]: DISA\n" + "subOrganization[1]: sub1\nsubOrganization[1].classification: U\nsubOrganization[1].ownerProducer: USA\n" + "subOrganization[2]: sub2\nsubOrganization[2].classification: U\nsubOrganization[2].ownerProducer: USA\n", org.ToText());
+            Assert.AreEqual("entityType: organization\nname[1]: DISA\n" + "subOrganization[1]: sub1\nsubOrganization[1].classification: U\nsubOrganization[1].ownerProducer: USA\n" + "subOrganization[2]: sub2\nsubOrganization[2].classification: U\nsubOrganization[2].ownerProducer: USA\n", org.ToText());
         }
 
         [TestMethod]
@@ -443,7 +443,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Organization.Builder builder = new Organization.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

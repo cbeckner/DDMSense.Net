@@ -311,7 +311,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No warnings
                 TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -324,8 +324,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 TaskingInfo elementComponent = GetInstance(SUCCESS, FixtureElement);
                 TaskingInfo dataComponent = GetInstance(SUCCESS, RequesterInfoTest.FixtureList, AddresseeTest.FixtureList, DescriptionTest.Fixture, TaskIDTest.Fixture);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -360,12 +360,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, RequesterInfoTest.FixtureList, AddresseeTest.FixtureList, DescriptionTest.Fixture, TaskIDTest.Fixture);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -377,10 +377,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, RequesterInfoTest.FixtureList, AddresseeTest.FixtureList, DescriptionTest.Fixture, TaskIDTest.Fixture);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -410,7 +410,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
                 TaskingInfo.Builder builder = new TaskingInfo.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

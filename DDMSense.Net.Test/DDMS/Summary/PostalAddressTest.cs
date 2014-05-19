@@ -314,12 +314,12 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Empty element
                 XElement element = Util.BuildDDMSElement(PostalAddress.GetName(version), null);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 string text = "A completely empty ddms:postalAddress element was found.";
                 string locator = "ddms:postalAddress";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -334,8 +334,8 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 PostalAddress elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 PostalAddress dataComponent = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -375,16 +375,16 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true, true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false, true), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true, true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false, true), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-                Assert.Equals(GetExpectedOutput(true, true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false, true), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true, true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false, true), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_PROVINCE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, false);
-                Assert.Equals(GetExpectedOutput(true, false), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false, false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true, false), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false, false), component.ToText());
             }
         }
 
@@ -396,13 +396,13 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true, true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true, true), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-                Assert.Equals(GetExpectedXMLOutput(false, true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false, true), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_PROVINCE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, false);
-                Assert.Equals(GetExpectedXMLOutput(false, false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false, false), component.ToXML());
             }
         }
 
@@ -427,7 +427,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 PostalAddress.Builder builder = new PostalAddress.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 // No country code
                 builder = new PostalAddress.Builder(component);
@@ -442,7 +442,7 @@ namespace DDMSense.Test.DDMS.Summary
                 builder.CountryCode.Value = countryCode.Value;
                 builder.Streets.Add("1600 Pennsylvania Avenue, NW");
                 address = builder.Commit() as PostalAddress;
-                Assert.Equals(countryCode, address.CountryCode);
+                Assert.AreEqual(countryCode, address.CountryCode);
             }
         }
 

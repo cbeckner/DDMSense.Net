@@ -284,7 +284,7 @@ namespace DDMSense.Test.DDMS.SecurityElements
 				// 4.1 ISM:externalNotice used
 				if (version.IsAtLeast("4.1"))
 				{
-					Assert.Equals(1, component.ValidationWarnings.Count());
+					Assert.AreEqual(1, component.ValidationWarnings.Count());
 					string text = "The ISM:externalNotice attribute in this DDMS component";
 					string locator = "ddms:noticeList/ISM:Notice";
 					AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -292,7 +292,7 @@ namespace DDMSense.Test.DDMS.SecurityElements
 				// No warnings 
 				else
 				{
-					Assert.Equals(0, component.ValidationWarnings.Count());
+					Assert.AreEqual(0, component.ValidationWarnings.Count());
 				}
 			}
 		}
@@ -307,8 +307,8 @@ namespace DDMSense.Test.DDMS.SecurityElements
 				NoticeList elementComponent = GetInstance(SUCCESS, FixtureElement);
 				NoticeList dataComponent = GetInstance(SUCCESS, NoticeTest.FixtureList);
 
-				Assert.Equals(elementComponent, dataComponent);
-				Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+				Assert.AreEqual(elementComponent, dataComponent);
+				Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 			}
 		}
 
@@ -335,12 +335,12 @@ namespace DDMSense.Test.DDMS.SecurityElements
 				DDMSVersion.SetCurrentVersion(sVersion);
 
 				NoticeList component = GetInstance(SUCCESS, FixtureElement);
-				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-				Assert.Equals(GetExpectedOutput(false), component.ToText());
+				Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+				Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
 				component = GetInstance(SUCCESS, NoticeTest.FixtureList);
-				Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-				Assert.Equals(GetExpectedOutput(false), component.ToText());
+				Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+				Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 			}
 		}
 
@@ -352,10 +352,10 @@ namespace DDMSense.Test.DDMS.SecurityElements
 				DDMSVersion.SetCurrentVersion(sVersion);
 
 				NoticeList component = GetInstance(SUCCESS, FixtureElement);
-				Assert.Equals(ExpectedXMLOutput, component.ToXML());
+				Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
 				component = GetInstance(SUCCESS, NoticeTest.FixtureList);
-				Assert.Equals(ExpectedXMLOutput, component.ToXML());
+				Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 			}
 		}
 
@@ -373,7 +373,7 @@ namespace DDMSense.Test.DDMS.SecurityElements
 
 				NoticeList component = GetInstance(SUCCESS, FixtureElement);
 				NoticeList.Builder builder = new NoticeList.Builder(component);
-				Assert.Equals(component, builder.Commit());
+				Assert.AreEqual(component, builder.Commit());
 			}
 		}
 

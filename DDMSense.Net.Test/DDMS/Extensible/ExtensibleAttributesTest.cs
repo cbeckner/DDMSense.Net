@@ -202,7 +202,7 @@ namespace DDMSense.Test.DDMS.Extensible
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
                 GetInstance(SUCCESS, element);
                 ExtensibleAttributes component = GetInstance(SUCCESS, element);
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -221,8 +221,8 @@ namespace DDMSense.Test.DDMS.Extensible
                 attributes.Add(new XAttribute(TEST_ATTRIBUTE));
                 ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, attributes);
 
-                Assert.Equals(elementAttributes, dataAttributes);
-                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
+                Assert.AreEqual(elementAttributes, dataAttributes);
+                Assert.AreEqual(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
             }
         }
 
@@ -268,14 +268,14 @@ namespace DDMSense.Test.DDMS.Extensible
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
                 ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
-                Assert.Equals(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false), elementAttributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false), elementAttributes.GetOutput(false, ""));
 
                 List<XAttribute> attributes = new List<XAttribute>();
                 attributes.Add(new XAttribute(TEST_ATTRIBUTE));
                 elementAttributes = GetInstance(SUCCESS, attributes);
-                Assert.Equals(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
-                Assert.Equals(GetExpectedOutput(false), elementAttributes.GetOutput(false, ""));
+                Assert.AreEqual(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
+                Assert.AreEqual(GetExpectedOutput(false), elementAttributes.GetOutput(false, ""));
             }
         }
 
@@ -290,7 +290,7 @@ namespace DDMSense.Test.DDMS.Extensible
                 XElement element = Util.BuildDDMSElement("sample", null);
                 component.AddTo(element);
                 ExtensibleAttributes output = new ExtensibleAttributes(element);
-                Assert.Equals(component, output);
+                Assert.AreEqual(component, output);
             }
         }
 
@@ -299,10 +299,10 @@ namespace DDMSense.Test.DDMS.Extensible
         {
             ExtensibleAttributes component = new ExtensibleAttributes((List<XAttribute>)null);
             ExtensibleAttributes output = ExtensibleAttributes.GetNonNullInstance(null);
-            Assert.Equals(component, output);
+            Assert.AreEqual(component, output);
 
             output = ExtensibleAttributes.GetNonNullInstance(Fixture);
-            Assert.Equals(Fixture, output);
+            Assert.AreEqual(Fixture, output);
         }
 
         [TestMethod]
@@ -332,7 +332,7 @@ namespace DDMSense.Test.DDMS.Extensible
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
                 ExtensibleAttributes component = GetInstance(SUCCESS, element);
                 ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

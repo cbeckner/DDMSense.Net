@@ -316,7 +316,7 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -328,8 +328,8 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 BoundingBox elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 BoundingBox dataComponent = GetInstance(SUCCESS, TEST_WEST, TEST_EAST, TEST_SOUTH, TEST_NORTH);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -373,12 +373,12 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_WEST, TEST_EAST, TEST_SOUTH, TEST_NORTH);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -389,10 +389,10 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_WEST, TEST_EAST, TEST_SOUTH, TEST_NORTH);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -403,10 +403,10 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(component.WestBL, Convert.ToDouble(TEST_WEST));
-                Assert.Equals(component.EastBL, Convert.ToDouble(TEST_EAST));
-                Assert.Equals(component.SouthBL, Convert.ToDouble(TEST_SOUTH));
-                Assert.Equals(component.NorthBL, Convert.ToDouble(TEST_NORTH));
+                Assert.AreEqual(component.WestBL, Convert.ToDouble(TEST_WEST));
+                Assert.AreEqual(component.EastBL, Convert.ToDouble(TEST_EAST));
+                Assert.AreEqual(component.SouthBL, Convert.ToDouble(TEST_SOUTH));
+                Assert.AreEqual(component.NorthBL, Convert.ToDouble(TEST_NORTH));
             }
         }
 
@@ -419,7 +419,7 @@ namespace DDMSense.Test.DDMS.Summary
 
                 BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 BoundingBox.Builder builder = new BoundingBox.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

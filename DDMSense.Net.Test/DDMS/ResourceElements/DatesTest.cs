@@ -325,7 +325,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 // 4.1 ddms:acquiredOn element used
                 if (version.IsAtLeast("4.1"))
                 {
-                    Assert.Equals(1, component.ValidationWarnings.Count());
+                    Assert.AreEqual(1, component.ValidationWarnings.Count());
                     text = "The ddms:acquiredOn element in this DDMS component";
                     locator = "ddms:dates";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -333,13 +333,13 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 // No warnings 
                 else
                 {
-                    Assert.Equals(0, component.ValidationWarnings.Count());
+                    Assert.AreEqual(0, component.ValidationWarnings.Count());
                 }
 
                 // Empty element
                 XElement element = Util.BuildDDMSElement(Dates.GetName(version), null);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 text = "A completely empty ddms:dates element was found.";
                 locator = "ddms:dates";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -366,17 +366,17 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
                 Dates component = new Dates(TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-                Assert.Equals(TEST_CREATED, component.Created.GetValueOrDefault().ToString("o"));
-                Assert.Equals(TEST_POSTED, component.Posted.GetValueOrDefault().ToString("o"));
-                Assert.Equals(TEST_VALID, component.ValidTil.GetValueOrDefault().ToString("o"));
-                Assert.Equals(TEST_CUTOFF, component.InfoCutOff.GetValueOrDefault().ToString("o"));
+                Assert.AreEqual(TEST_CREATED, component.Created.GetValueOrDefault().ToString("o"));
+                Assert.AreEqual(TEST_POSTED, component.Posted.GetValueOrDefault().ToString("o"));
+                Assert.AreEqual(TEST_VALID, component.ValidTil.GetValueOrDefault().ToString("o"));
+                Assert.AreEqual(TEST_CUTOFF, component.InfoCutOff.GetValueOrDefault().ToString("o"));
                 if (version.IsAtLeast("3.1"))
                 {
-                    Assert.Equals(TEST_APPROVED, component.ApprovedOn.GetValueOrDefault().ToString("o"));
+                    Assert.AreEqual(TEST_APPROVED, component.ApprovedOn.GetValueOrDefault().ToString("o"));
                 }
                 if (version.IsAtLeast("4.0.1"))
                 {
-                    Assert.Equals(TEST_RECEIVED, component.ReceivedOn.GetValueOrDefault().ToString("o"));
+                    Assert.AreEqual(TEST_RECEIVED, component.ReceivedOn.GetValueOrDefault().ToString("o"));
                 }
 
                 // Not compatible with XMLGregorianCalendar
@@ -402,8 +402,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 Dates elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Dates dataComponent = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -468,12 +468,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Dates component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -485,10 +485,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Dates component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -548,7 +548,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 Dates component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Dates.Builder builder = new Dates.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

@@ -151,9 +151,9 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(Rights.GetName(version), component.Name);
-                Assert.Equals(PropertyReader.GetPrefix("ddms"), component.Prefix);
-                Assert.Equals(PropertyReader.GetPrefix("ddms") + ":" + Rights.GetName(version), component.QualifiedName);
+                Assert.AreEqual(Rights.GetName(version), component.Name);
+                Assert.AreEqual(PropertyReader.GetPrefix("ddms"), component.Prefix);
+                Assert.AreEqual(PropertyReader.GetPrefix("ddms") + ":" + Rights.GetName(version), component.QualifiedName);
 
                 // Wrong name/namespace
                 XElement element = Util.BuildDDMSElement("wrongName", null);
@@ -195,7 +195,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -207,8 +207,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Rights elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Rights dataComponent = GetInstance(SUCCESS, true, true, false);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -249,12 +249,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, true, true, false);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -265,10 +265,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, true, true, false);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -295,7 +295,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 Rights component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Rights.Builder builder = new Rights.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

@@ -272,7 +272,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No warnings
                 Addressee component = GetInstance(SUCCESS, GetFixtureElement(true));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -285,8 +285,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 Addressee elementComponent = GetInstance(SUCCESS, GetFixtureElement(true));
                 Addressee dataComponent = GetInstance(SUCCESS, OrganizationTest.Fixture);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -311,12 +311,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Addressee component = GetInstance(SUCCESS, GetFixtureElement(true));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, OrganizationTest.Fixture);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -328,10 +328,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Addressee component = GetInstance(SUCCESS, GetFixtureElement(true));
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, OrganizationTest.Fixture);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -360,12 +360,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 // Equality after Building, organization
                 Addressee component = GetInstance(SUCCESS, GetFixtureElement(true));
                 Addressee.Builder builder = new Addressee.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 // Equality after Building, person
                 component = GetInstance(SUCCESS, GetFixtureElement(false));
                 builder = new Addressee.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

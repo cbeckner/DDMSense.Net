@@ -180,7 +180,7 @@ namespace DDMSense.Test.Util {
         [TestMethod]
 		public virtual void Util_DDMSReaderTest_GetExternalSchemaLocation() {
 			string externalLocations = Reader.ExternalSchemaLocations;
-			Assert.Equals(14, externalLocations.Split(" ", true).Length);
+			Assert.AreEqual(14, externalLocations.Split(" ", true).Length);
 			Assert.IsTrue(externalLocations.Contains("http://metadata.dod.mil/mdr/ns/DDMS/2.0/"));
 			Assert.IsTrue(externalLocations.Contains("http://metadata.dod.mil/mdr/ns/DDMS/3.0/"));
 			Assert.IsTrue(externalLocations.Contains("http://www.opengis.net/gml"));

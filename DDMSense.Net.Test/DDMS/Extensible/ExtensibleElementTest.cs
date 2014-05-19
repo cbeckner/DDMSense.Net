@@ -144,7 +144,7 @@ namespace DDMSense.Test.DDMS.Extensible
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 ExtensibleElement component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -158,8 +158,8 @@ namespace DDMSense.Test.DDMS.Extensible
 
                 XElement element = Util.BuildElement(TEST_PREFIX, TEST_NAME, TEST_NAMESPACE, "This is an extensible element.");
                 ExtensibleElement dataComponent = GetInstance(SUCCESS, element);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -183,8 +183,8 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 ExtensibleElement component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals("", component.ToHTML());
-                Assert.Equals("", component.ToText());
+                Assert.AreEqual("", component.ToHTML());
+                Assert.AreEqual("", component.ToText());
             }
         }
 
@@ -195,7 +195,7 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 ExtensibleElement component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -208,11 +208,11 @@ namespace DDMSense.Test.DDMS.Extensible
 
                 ExtensibleElement component = GetInstance(SUCCESS, FixtureElement);
                 ExtensibleElement.Builder builder = new ExtensibleElement.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 builder = new ExtensibleElement.Builder();
                 builder.Xml = FixtureElement.ToString();
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

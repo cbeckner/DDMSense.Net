@@ -276,13 +276,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
 
                 // No warnings
                 NoticeText component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
 
                 // Empty value
                 XElement element = Util.BuildElement(ismPrefix, NoticeText.GetName(version), version.IsmNamespace, null);
                 SecurityAttributesTest.Fixture.AddTo(element);
                 component = GetInstance(SUCCESS, element);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 string text = "An ISM:NoticeText element was found with no value.";
                 string locator = "ISM:NoticeText";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -299,8 +299,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 NoticeText elementComponent = GetInstance(SUCCESS, FixtureElement);
                 NoticeText dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_POC_TYPES);
 
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -328,12 +328,12 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 NoticeText component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_POC_TYPES);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -345,10 +345,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 NoticeText component = GetInstance(SUCCESS, FixtureElement);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_POC_TYPES);
-                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
             }
         }
 
@@ -376,7 +376,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
 
                 NoticeText component = GetInstance(SUCCESS, FixtureElement);
                 NoticeText.Builder builder = new NoticeText.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

@@ -115,20 +115,20 @@ namespace DDMSense.Test
 
             index = (string)po.Invoke("BuildIndex", new object[] { 0, 1 });
             //string index = rights.BuildIndex(0, 1);
-            Assert.Equals("", index);
+            Assert.AreEqual("", index);
 
             index = (string)po.Invoke("BuildIndex", new object[] { 2, 4 });
             //index = rights.BuildIndex(2, 4);
-            Assert.Equals("", index);
+            Assert.AreEqual("", index);
 
             PropertyReader.SetProperty("output.indexLevel", "unknown");
             index = (string)po.Invoke("BuildIndex", new object[] { 0, 1 });
             //index = rights.BuildIndex(0, 1);
-            Assert.Equals("", index);
+            Assert.AreEqual("", index);
 
             index = (string)po.Invoke("BuildIndex", new object[] { 2, 4 });
             //index = rights.BuildIndex(2, 4);
-            Assert.Equals("", index);
+            Assert.AreEqual("", index);
         }
 
         [TestMethod()]
@@ -141,11 +141,11 @@ namespace DDMSense.Test
             PropertyReader.SetProperty("output.indexLevel", "1");
             index = (string)po.Invoke("BuildIndex", new object[] { 0, 1 });
             //string index = rights.BuildIndex(0, 1);
-            Assert.Equals("", index);
+            Assert.AreEqual("", index);
 
             index = (string)po.Invoke("BuildIndex", new object[] { 2, 4 });
             //index = rights.BuildIndex(2, 4);
-            Assert.Equals("[3]", index);
+            Assert.AreEqual("[3]", index);
         }
 
         [TestMethod()]
@@ -158,12 +158,12 @@ namespace DDMSense.Test
             PropertyReader.SetProperty("output.indexLevel", "2");
             //index = rights.BuildIndex(0, 1);
             index = (string)po.Invoke("BuildIndex", new object[] { 0, 1 });
-            Assert.Equals("[1]", index);
+            Assert.AreEqual("[1]", index);
 
 
             //index = rights.BuildIndex(2, 4);
             index = (string)po.Invoke("BuildIndex", new object[] { 2, 4 });
-            Assert.Equals("[3]", index);
+            Assert.AreEqual("[3]", index);
         }
 
         [TestMethod()]
@@ -174,17 +174,17 @@ namespace DDMSense.Test
             List<IDDMSComponent> objectList = new List<IDDMSComponent>();
             objectList.Add(rights);
             
-            Assert.Equals("rights.privacyAct: true\nrights.intellectualProperty: true\nrights.copyright: true\n", (string)po.Invoke("BuildOutput", new object[] { false, string.Empty, objectList }));
+            Assert.AreEqual("rights.privacyAct: true\nrights.intellectualProperty: true\nrights.copyright: true\n", (string)po.Invoke("BuildOutput", new object[] { false, string.Empty, objectList }));
                 //rights.BuildOutput(false, "", objectList));
 
             List<string> stringList = new List<string>();
             stringList.Add("Text");
-            Assert.Equals("name: Text\n", (string)po.Invoke("BuildOutput", new object[] { false, "name", stringList }));
+            Assert.AreEqual("name: Text\n", (string)po.Invoke("BuildOutput", new object[] { false, "name", stringList }));
                 //rights.BuildOutput(false, "name", stringList));
 
             List<double?> otherList = new List<double?>();
             otherList.Add(Convert.ToDouble(2.0));
-            Assert.Equals("name: 2.0\n", (string)po.Invoke("BuildOutput", new object[] { false, "name", otherList }));
+            Assert.AreEqual("name: 2.0\n", (string)po.Invoke("BuildOutput", new object[] { false, "name", otherList }));
                 //rights.BuildOutput(false, "name", otherList));
         }
 
@@ -192,21 +192,21 @@ namespace DDMSense.Test
         public virtual void TestSelfEquality()
         {
             Rights rights = new Rights(true, true, true);
-            Assert.Equals(rights, rights);
+            Assert.AreEqual(rights, rights);
         }
 
         [TestMethod()]
         public virtual void TestToString()
         {
             Rights rights = new Rights(true, true, true);
-            Assert.Equals(rights.ToString(), rights.ToXML());
+            Assert.AreEqual(rights.ToString(), rights.ToXML());
         }
 
         [TestMethod()]
         public virtual void TestVersion()
         {
             Rights rights = new Rights(true, true, true);
-            Assert.Equals(DDMSVersion.CurrentVersion.Namespace, rights.Namespace);
+            Assert.AreEqual(DDMSVersion.CurrentVersion.Namespace, rights.Namespace);
         }
 
         [TestMethod()]
@@ -223,10 +223,10 @@ namespace DDMSense.Test
         public virtual void TestNullChecks()
         {
             AbstractBaseComponent component = new AbstractBaseComponentAnonymousInnerClassHelper(this);
-            Assert.Equals("", component.Name);
-            Assert.Equals("", component.Namespace);
-            Assert.Equals("", component.Prefix);
-            Assert.Equals("", component.ToXML());
+            Assert.AreEqual("", component.Name);
+            Assert.AreEqual("", component.Namespace);
+            Assert.AreEqual("", component.Prefix);
+            Assert.AreEqual("", component.ToXML());
         }
 
         private class AbstractBaseComponentAnonymousInnerClassHelper : AbstractBaseComponent
@@ -253,7 +253,7 @@ namespace DDMSense.Test
             warnings.Add(ValidationMessage.NewWarning("test", "locator"));
             po.Invoke("AddWarnings",new object[] { warnings, true });
             //component.AddWarnings(warnings, true);
-            Assert.Equals("//locator", component.ValidationWarnings[0].Locator);
+            Assert.AreEqual("//locator", component.ValidationWarnings[0].Locator);
         }
 
         private class AbstractBaseComponentAnonymousInnerClassHelper2 : AbstractBaseComponent

@@ -66,7 +66,7 @@ namespace DDMSense.Test.Util {
         public virtual void Util_PropertyReader_GetListPropertyValid()
         {
 			List<string> properties = PropertyReader.GetListProperty("ddms.supportedVersions");
-			Assert.Equals(4, properties.Count());
+			Assert.AreEqual(4, properties.Count());
 		}
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace DDMSense.Test.Util {
         public virtual void Util_PropertyReader_SetPropertyValid()
         {
 			PropertyReader.SetProperty("ddms.prefix", "DDMS");
-			Assert.Equals("DDMS", PropertyReader.GetPrefix("ddms"));
+			Assert.AreEqual("DDMS", PropertyReader.GetPrefix("ddms"));
 		}
 	}
 

@@ -50,10 +50,10 @@ namespace DDMSense.Test.Util {
         [TestMethod]
         public virtual void Util_DDMSVersion_GetVersionForDDMSNamespace()
         {
-			Assert.Equals(DDMSVersion.GetVersionFor("2.0"), DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/2.0/"));
-			Assert.Equals(DDMSVersion.GetVersionFor("3.0"), DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/3.0/"));
-			Assert.Equals(DDMSVersion.GetVersionFor("3.1"), DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/3.1/"));
-			Assert.Equals(DDMSVersion.GetVersionFor("4.1"), DDMSVersion.GetVersionForNamespace("urn:us:mil:ces:metadata:ddms:4"));
+			Assert.AreEqual(DDMSVersion.GetVersionFor("2.0"), DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/2.0/"));
+			Assert.AreEqual(DDMSVersion.GetVersionFor("3.0"), DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/3.0/"));
+			Assert.AreEqual(DDMSVersion.GetVersionFor("3.1"), DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/3.1/"));
+			Assert.AreEqual(DDMSVersion.GetVersionFor("4.1"), DDMSVersion.GetVersionForNamespace("urn:us:mil:ces:metadata:ddms:4"));
 			try {
 				DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/1.4/");
 				Assert.Fail("Allowed unsupported version.");
@@ -65,8 +65,8 @@ namespace DDMSense.Test.Util {
         [TestMethod]
         public virtual void Util_DDMSVersion_GetVersionForGMLNamespace()
         {
-			Assert.Equals(DDMSVersion.GetVersionFor("2.0"), DDMSVersion.GetVersionForNamespace("http://www.opengis.net/gml"));
-			Assert.Equals(DDMSVersion.GetVersionFor("4.1"), DDMSVersion.GetVersionForNamespace("http://www.opengis.net/gml/3.2"));
+			Assert.AreEqual(DDMSVersion.GetVersionFor("2.0"), DDMSVersion.GetVersionForNamespace("http://www.opengis.net/gml"));
+			Assert.AreEqual(DDMSVersion.GetVersionFor("4.1"), DDMSVersion.GetVersionForNamespace("http://www.opengis.net/gml/3.2"));
 			try {
 				DDMSVersion.GetVersionForNamespace("http://www.opengis.net/gml/3.2.1");
 				Assert.Fail("Allowed unsupported version.");
@@ -78,7 +78,7 @@ namespace DDMSense.Test.Util {
         [TestMethod]
         public virtual void Util_DDMSVersion_GetVersionForNTKNamespace()
         {
-			Assert.Equals(DDMSVersion.GetVersionFor("4.1"), DDMSVersion.GetVersionForNamespace("urn:us:gov:ic:ntk"));
+			Assert.AreEqual(DDMSVersion.GetVersionFor("4.1"), DDMSVersion.GetVersionForNamespace("urn:us:gov:ic:ntk"));
 			try {
 				DDMSVersion.GetVersionForNamespace("urn:us:gov:ic:ntk:v2");
 				Assert.Fail("Allowed unsupported version.");
@@ -104,20 +104,20 @@ namespace DDMSense.Test.Util {
         [TestMethod]
         public virtual void Util_DDMSVersion_GetCurrentSchema()
         {
-			Assert.Equals("/schemas/4.1/DDMS/ddms.xsd", DDMSVersion.CurrentVersion.Schema);
+			Assert.AreEqual("/schemas/4.1/DDMS/ddms.xsd", DDMSVersion.CurrentVersion.Schema);
 		}
 
         [TestMethod]
         public virtual void Util_DDMSVersion_GetCurrentNamespace()
         {
-			Assert.Equals("urn:us:mil:ces:metadata:ddms:4", DDMSVersion.CurrentVersion.Namespace);
+			Assert.AreEqual("urn:us:mil:ces:metadata:ddms:4", DDMSVersion.CurrentVersion.Namespace);
 		}
 
         [TestMethod]
         public virtual void Util_DDMSVersion_GetNamespaceForValid()
         {
             DDMSVersion.SetCurrentVersion("2.0");
-			Assert.Equals("http://metadata.dod.mil/mdr/ns/DDMS/2.0/", DDMSVersion.CurrentVersion.Namespace);
+			Assert.AreEqual("http://metadata.dod.mil/mdr/ns/DDMS/2.0/", DDMSVersion.CurrentVersion.Namespace);
 		}
 
         [TestMethod]
@@ -135,14 +135,14 @@ namespace DDMSense.Test.Util {
         public virtual void Util_DDMSVersion_GetSchemaForValid()
         {
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
-			Assert.Equals("/schemas/2.0/DDMS/ddms.xsd", DDMSVersion.CurrentVersion.Schema);
-			Assert.Equals("2.0", version.Version);
+			Assert.AreEqual("/schemas/2.0/DDMS/ddms.xsd", DDMSVersion.CurrentVersion.Schema);
+			Assert.AreEqual("2.0", version.Version);
 		}
 
         [TestMethod]
         public virtual void Util_DDMSVersion_ToString()
         {
-			Assert.Equals(DDMSVersion.CurrentVersion.Version, DDMSVersion.CurrentVersion.ToString());
+			Assert.AreEqual(DDMSVersion.CurrentVersion.Version, DDMSVersion.CurrentVersion.ToString());
 		}
 
         [TestMethod]
@@ -150,25 +150,25 @@ namespace DDMSense.Test.Util {
         {
 			DDMSVersion.SetCurrentVersion("3.0");
 			DDMSVersion version = DDMSVersion.CurrentVersion;
-			Assert.Equals("3.0", version.Version);
-			Assert.Equals("http://metadata.dod.mil/mdr/ns/DDMS/3.0/", version.Namespace);
-			Assert.Equals("/schemas/3.0/DDMS/ddms.xsd", version.Schema);
-			Assert.Equals("http://www.opengis.net/gml/3.2", version.GmlNamespace);
-			Assert.Equals("/schemas/3.0/DDMS/gml.xsd", version.GmlSchema);
-			Assert.Equals("urn:us:gov:ic:ism", version.IsmNamespace);
-			Assert.Equals("/schemas/3.0/ISM/CVE/", version.IsmCveLocation);
+			Assert.AreEqual("3.0", version.Version);
+			Assert.AreEqual("http://metadata.dod.mil/mdr/ns/DDMS/3.0/", version.Namespace);
+			Assert.AreEqual("/schemas/3.0/DDMS/ddms.xsd", version.Schema);
+			Assert.AreEqual("http://www.opengis.net/gml/3.2", version.GmlNamespace);
+			Assert.AreEqual("/schemas/3.0/DDMS/gml.xsd", version.GmlSchema);
+			Assert.AreEqual("urn:us:gov:ic:ism", version.IsmNamespace);
+			Assert.AreEqual("/schemas/3.0/ISM/CVE/", version.IsmCveLocation);
 
 			version = DDMSVersion.SetCurrentVersion("4.1");
-			Assert.Equals("urn:us:gov:ic:ntk", version.NtkNamespace);
-			Assert.Equals("/schemas/4.1/NTK/IC-NTK.xsd", version.NtkSchema);
+			Assert.AreEqual("urn:us:gov:ic:ntk", version.NtkNamespace);
+			Assert.AreEqual("/schemas/4.1/NTK/IC-NTK.xsd", version.NtkSchema);
 		}
 
         [TestMethod]
         public virtual void Util_DDMSVersion_AliasVersion()
         {
 			DDMSVersion.SetCurrentVersion("3.0.1");
-			Assert.Equals("3.0", DDMSVersion.CurrentVersion.Version);
-			Assert.Equals("3.0", DDMSVersion.GetVersionFor("3.0.1").Version);
+			Assert.AreEqual("3.0", DDMSVersion.CurrentVersion.Version);
+			Assert.AreEqual("3.0", DDMSVersion.GetVersionFor("3.0.1").Version);
 			Assert.IsTrue(DDMSVersion.CurrentVersion.Version.Equals("3.0"));
 		}
 

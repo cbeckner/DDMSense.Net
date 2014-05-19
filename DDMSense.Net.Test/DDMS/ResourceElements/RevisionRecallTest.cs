@@ -416,7 +416,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No warnings
                 RevisionRecall component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -430,14 +430,14 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 // links
                 RevisionRecall elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 RevisionRecall dataComponent = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(true), DetailsTest.FixtureList, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
                 // text
                 elementComponent = GetInstance(SUCCESS, TextFixtureElement);
                 dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -516,21 +516,21 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // links
                 RevisionRecall component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true, true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(true, false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true, true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(true, false), component.ToText());
 
                 component = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(true), DetailsTest.FixtureList, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.Equals(GetExpectedOutput(true, true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(true, false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true, true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(true, false), component.ToText());
 
                 // text
                 component = GetInstance(SUCCESS, TextFixtureElement);
-                Assert.Equals(GetExpectedOutput(false, true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false, false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(false, true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false, false), component.ToText());
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.Equals(GetExpectedOutput(false, true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false, false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(false, true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false, false), component.ToText());
             }
         }
 
@@ -543,17 +543,17 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // links
                 RevisionRecall component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(true), DetailsTest.FixtureList, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 // text
                 component = GetInstance(SUCCESS, TextFixtureElement);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -584,12 +584,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 // Equality after Building (links)
                 RevisionRecall component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 RevisionRecall.Builder builder = new RevisionRecall.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 // Equality after Building (text)
                 component = GetInstance(SUCCESS, TextFixtureElement);
                 builder = new RevisionRecall.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

@@ -289,7 +289,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 // 4.1 ntk:externalReference used
                 if (version.IsAtLeast("4.1"))
                 {
-                    Assert.Equals(1, component.ValidationWarnings.Count());
+                    Assert.AreEqual(1, component.ValidationWarnings.Count());
                     text = "The ntk:externalReference attribute in this DDMS component";
                     locator = "ntk:Access";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -297,12 +297,12 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 // No warnings 
                 else
                 {
-                    Assert.Equals(0, component.ValidationWarnings.Count());
+                    Assert.AreEqual(0, component.ValidationWarnings.Count());
                 }
 
                 // Empty
                 component = GetInstance(SUCCESS, null, null, null, null);
-                Assert.Equals(1, component.ValidationWarnings.Count());
+                Assert.AreEqual(1, component.ValidationWarnings.Count());
                 text = "An ntk:Access element was found with no";
                 locator = "ntk:Access";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -332,8 +332,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 Access elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Access dataComponent = GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, ProfileListTest.Fixture, ExternalReference);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -372,12 +372,12 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Access component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, ProfileListTest.Fixture, ExternalReference);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -390,10 +390,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Access component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, IndividualTest.FixtureList, GroupTest.FixtureList, ProfileListTest.Fixture, ExternalReference);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -407,7 +407,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
 
                 Access component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Access.Builder builder = new Access.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

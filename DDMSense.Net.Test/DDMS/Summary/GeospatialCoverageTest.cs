@@ -436,7 +436,7 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -451,36 +451,36 @@ namespace DDMSense.Test.DDMS.Summary
 
                 GeospatialCoverage elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 GeospatialCoverage dataComponent = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, precedence, order);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
                 // boundingBox
                 XElement element = BuildComponentElement(BoundingBoxTest.Fixture);
                 elementComponent = GetInstance(SUCCESS, element);
                 dataComponent = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
                 // boundingGeometry
                 element = BuildComponentElement(BoundingGeometryTest.Fixture);
                 elementComponent = GetInstance(SUCCESS, element);
                 dataComponent = GetInstance(SUCCESS, null, null, BoundingGeometryTest.Fixture, null, null, null, null);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
                 // postalAddress
                 element = BuildComponentElement(PostalAddressTest.Fixture);
                 elementComponent = GetInstance(SUCCESS, element);
                 dataComponent = GetInstance(SUCCESS, null, null, null, PostalAddressTest.Fixture, null, null, null);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
                 // verticalExtent
                 element = BuildComponentElement(VerticalExtentTest.Fixture);
                 elementComponent = GetInstance(SUCCESS, element);
                 dataComponent = GetInstance(SUCCESS, null, null, null, null, VerticalExtentTest.Fixture, null, null);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -536,28 +536,28 @@ namespace DDMSense.Test.DDMS.Summary
                 int? order = version.IsAtLeast("4.0.1") ? TEST_ORDER : null;
 
                 GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, precedence, order);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
-                Assert.Equals(BoundingBoxTest.Fixture.GetOutput(true, prefix, "") + HtmlIcism, component.ToHTML());
-                Assert.Equals(BoundingBoxTest.Fixture.GetOutput(false, prefix, "") + TextIcism, component.ToText());
+                Assert.AreEqual(BoundingBoxTest.Fixture.GetOutput(true, prefix, "") + HtmlIcism, component.ToHTML());
+                Assert.AreEqual(BoundingBoxTest.Fixture.GetOutput(false, prefix, "") + TextIcism, component.ToText());
 
                 component = GetInstance(SUCCESS, null, null, BoundingGeometryTest.Fixture, null, null, null, null);
-                Assert.Equals(BoundingGeometryTest.Fixture.GetOutput(true, prefix, "") + HtmlIcism, component.ToHTML());
-                Assert.Equals(BoundingGeometryTest.Fixture.GetOutput(false, prefix, "") + TextIcism, component.ToText());
+                Assert.AreEqual(BoundingGeometryTest.Fixture.GetOutput(true, prefix, "") + HtmlIcism, component.ToHTML());
+                Assert.AreEqual(BoundingGeometryTest.Fixture.GetOutput(false, prefix, "") + TextIcism, component.ToText());
 
                 component = GetInstance(SUCCESS, null, null, null, PostalAddressTest.Fixture, null, null, null);
-                Assert.Equals(PostalAddressTest.Fixture.GetOutput(true, prefix, "") + HtmlIcism, component.ToHTML());
-                Assert.Equals(PostalAddressTest.Fixture.GetOutput(false, prefix, "") + TextIcism, component.ToText());
+                Assert.AreEqual(PostalAddressTest.Fixture.GetOutput(true, prefix, "") + HtmlIcism, component.ToHTML());
+                Assert.AreEqual(PostalAddressTest.Fixture.GetOutput(false, prefix, "") + TextIcism, component.ToText());
 
                 component = GetInstance(SUCCESS, null, null, null, null, VerticalExtentTest.Fixture, null, null);
-                Assert.Equals(VerticalExtentTest.Fixture.GetOutput(true, prefix, "") + HtmlIcism, component.ToHTML());
-                Assert.Equals(VerticalExtentTest.Fixture.GetOutput(false, prefix, "") + TextIcism, component.ToText());
+                Assert.AreEqual(VerticalExtentTest.Fixture.GetOutput(true, prefix, "") + HtmlIcism, component.ToHTML());
+                Assert.AreEqual(VerticalExtentTest.Fixture.GetOutput(false, prefix, "") + TextIcism, component.ToText());
             }
         }
 
@@ -571,10 +571,10 @@ namespace DDMSense.Test.DDMS.Summary
                 int? order = version.IsAtLeast("4.0.1") ? TEST_ORDER : null;
 
                 GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, precedence, order);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -652,7 +652,7 @@ namespace DDMSense.Test.DDMS.Summary
                 }
                 else
                 {
-                    Assert.Equals(attr, component.SecurityAttributes);
+                    Assert.AreEqual(attr, component.SecurityAttributes);
                 }
             }
         }
@@ -730,7 +730,7 @@ namespace DDMSense.Test.DDMS.Summary
                 string suffix = version.IsAtLeast("4.0.1") ? "" : "/ddms:GeospatialExtent";
 
                 PrivateObject po = new PrivateObject(component, new PrivateType(typeof(GeospatialCoverage))); 
-                Assert.Equals(suffix, po.GetFieldOrProperty("LocatorSuffix").ToString());
+                Assert.AreEqual(suffix, po.GetFieldOrProperty("LocatorSuffix").ToString());
             }
         }
 
@@ -743,23 +743,23 @@ namespace DDMSense.Test.DDMS.Summary
 
                 GeospatialCoverage component = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, null, null);
                 GeospatialCoverage.Builder builder = new GeospatialCoverage.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 component = GetInstance(SUCCESS, null, BoundingBoxTest.Fixture, null, null, null, null, null);
                 builder = new GeospatialCoverage.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 component = GetInstance(SUCCESS, null, null, BoundingGeometryTest.Fixture, null, null, null, null);
                 builder = new GeospatialCoverage.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 component = GetInstance(SUCCESS, null, null, null, PostalAddressTest.Fixture, null, null, null);
                 builder = new GeospatialCoverage.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
 
                 component = GetInstance(SUCCESS, null, null, null, null, VerticalExtentTest.Fixture, null, null);
                 builder = new GeospatialCoverage.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 

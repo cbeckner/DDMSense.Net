@@ -298,7 +298,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 Point component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count());
+                Assert.AreEqual(0, component.ValidationWarnings.Count());
             }
         }
 
@@ -310,8 +310,8 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Point elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Point dataComponent = GetInstance(SUCCESS, PositionTest.Fixture, SRSAttributesTest.Fixture, TEST_ID);
-                Assert.Equals(elementComponent, dataComponent);
-                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+                Assert.AreEqual(elementComponent, dataComponent);
+                Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
 
@@ -359,12 +359,12 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Point component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
 
                 component = GetInstance(SUCCESS, PositionTest.Fixture, SRSAttributesTest.Fixture, TEST_ID);
-                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
-                Assert.Equals(GetExpectedOutput(false), component.ToText());
+                Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
+                Assert.AreEqual(GetExpectedOutput(false), component.ToText());
             }
         }
 
@@ -375,10 +375,10 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Point component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
 
                 component = GetInstance(SUCCESS, PositionTest.Fixture, SRSAttributesTest.Fixture, TEST_ID);
-                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
             }
         }
 
@@ -403,7 +403,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
 
                 Point component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Point.Builder builder = new Point.Builder(component);
-                Assert.Equals(component, builder.Commit());
+                Assert.AreEqual(component, builder.Commit());
             }
         }
 
