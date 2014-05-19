@@ -351,7 +351,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <param name="value"> the test value </param>
         /// <returns> true if the value exists in the enumeration, false otherwise </returns>
         /// <exception cref="ArgumentException"> on an invalid key </exception>
-        internal static bool EnumContains(string enumerationKey, string value)
+        public static bool EnumContains(string enumerationKey, string value)
         {
             Util.Util.RequireValue("key", enumerationKey);
             bool isValidToken = GetEnumerationTokens(enumerationKey).Contains(value);

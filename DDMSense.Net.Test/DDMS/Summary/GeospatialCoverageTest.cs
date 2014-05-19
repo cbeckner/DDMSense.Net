@@ -65,7 +65,7 @@ namespace DDMSense.Test.DDMS.Summary
             try
             {
                 DDMSVersion version = DDMSVersion.CurrentVersion;
-                return (new GeospatialCoverage(null, null, null, PostalAddressTest.Fixture, null, null, version.IsAtLeast("4.0.1") ? Convert.ToInt32(order) : null, null));
+                return (new GeospatialCoverage(null, null, null, PostalAddressTest.Fixture, null, null, version.IsAtLeast("4.0.1") ? Convert.ToInt32(order) : (int?)null, null));
             }
             catch (InvalidDDMSException e)
             {

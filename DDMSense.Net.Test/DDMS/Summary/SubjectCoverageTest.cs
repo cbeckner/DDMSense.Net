@@ -66,7 +66,7 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 List<NonStateActor> actors = new List<NonStateActor>();
                 actors.Add(NonStateActorTest.GetFixture(order));
-                return (new SubjectCoverage(KeywordTest.FixtureList, null, null, DDMSVersion.CurrentVersion.isAtLeast("4.0.1") ? actors : null, null));
+                return (new SubjectCoverage(KeywordTest.FixtureList, null, null, DDMSVersion.CurrentVersion.IsAtLeast("4.0.1") ? actors : null, null));
             }
             catch (InvalidDDMSException e)
             {

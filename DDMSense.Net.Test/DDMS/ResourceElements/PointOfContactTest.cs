@@ -60,7 +60,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 try
                 {
-                    return (new PointOfContact(DDMSVersion.CurrentVersion.IsAtLeast("3.0") ? UnknownTest.Fixture : PersonTest.Fixture, null, null));
+                    return (new PointOfContact(DDMSVersion.CurrentVersion.IsAtLeast("3.0") ? (IRoleEntity)UnknownTest.Fixture : (IRoleEntity)PersonTest.Fixture, null, null));
                 }
                 catch (InvalidDDMSException e)
                 {

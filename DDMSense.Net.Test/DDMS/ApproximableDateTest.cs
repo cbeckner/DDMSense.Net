@@ -60,7 +60,7 @@ namespace DDMSense.Test.DDMS {
 		/// <param name="name"> the element name </param>
 		/// <param name="includeAllFields"> true to include optional fields </param>
 		public static XElement GetFixtureElement(string name, bool includeAllFields) {
-			DDMSVersion version = DDMSVersion.GetCurrentVersion();
+			DDMSVersion version = DDMSVersion.CurrentVersion;
 			XElement element = Util.BuildDDMSElement(name, null);
 			element.Add(PropertyReader.GetPrefix("ddms"), version.Namespace);//TODO - Verify this logic/code is correct
 			if (includeAllFields) {

@@ -218,7 +218,7 @@ namespace DDMSense.Test
                 this.OuterInstance = outerInstance;
             }
 
-            public virtual string GetOutput(bool isHTML, string prefix, string suffix)
+            public override string GetOutput(bool isHTML, string prefix, string suffix)
             {
                 return null;
             }
@@ -243,12 +243,12 @@ namespace DDMSense.Test
                 this.OuterInstance = outerInstance;
             }
 
-            public virtual string GetOutput(bool isHTML, string prefix, string suffix)
+            public override string GetOutput(bool isHTML, string prefix, string suffix)
             {
                 return null;
             }
 
-            protected internal virtual string LocatorSuffix
+            protected override string LocatorSuffix
             {
                 get
                 {
