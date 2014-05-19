@@ -57,7 +57,7 @@
 //        public static RelatedResource Fixture {
 //            get {
 //                try {
-//                    IList<Link> links = new List<Link>();
+//                    List<Link> links = new List<Link>();
 //                    links.Add(new Link(new XLinkAttributes("http://en.wikipedia.org/wiki/Tank", "role", null, null)));
 //                    return (new RelatedResource(links, "http://purl.org/dc/terms/references", "outbound", "http://purl.org/dc/terms/URI", "http://en.wikipedia.org/wiki/Tank", null));
 //                } catch (InvalidDDMSException e) {
@@ -95,7 +95,7 @@
 //        /// <param name="qualifier"> the qualifier value </param>
 //        /// <param name="value"> the value </param>
 //        /// <returns> a valid object </returns>
-//        private RelatedResource GetInstance(string message, IList<Link> links, string relationship, string direction, string qualifier, string value) {
+//        private RelatedResource GetInstance(string message, List<Link> links, string relationship, string direction, string qualifier, string value) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RelatedResource component = null;
 //            try {
@@ -339,7 +339,7 @@
 //                // Security Attributes
 //                try {
 //                    Link link = new Link(XLinkAttributesTest.LocatorFixture, SecurityAttributesTest.Fixture);
-//                    IList<Link> links = new List<Link>();
+//                    List<Link> links = new List<Link>();
 //                    links.Add(link);
 //                    new RelatedResource(links, TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE, null);
 //                    fail("Allowed invalid data.");
@@ -405,7 +405,7 @@
 //                dataComponent = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(false), TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, DIFFERENT_VALUE);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<Link> differentLinks = new List<Link>();
+//                List<Link> differentLinks = new List<Link>();
 //                differentLinks.Add(new Link(XLinkAttributesTest.LocatorFixture));
 //                differentLinks.Add(new Link(XLinkAttributesTest.LocatorFixture));
 //                dataComponent = GetInstance(SUCCESS, differentLinks, TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
@@ -447,7 +447,7 @@
 //        public virtual void TestLinkReuse() {
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
-//                IList<Link> links = LinkTest.GetLocatorFixtureList(false);
+//                List<Link> links = LinkTest.GetLocatorFixtureList(false);
 //                GetInstance(SUCCESS, links, TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
 //                GetInstance(SUCCESS, links, TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
 //            }

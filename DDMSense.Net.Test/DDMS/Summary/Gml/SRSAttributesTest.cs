@@ -41,7 +41,7 @@
 
 //        protected internal const string TEST_SRS_NAME = "http://metadata.dod.mil/mdr/ns/GSIP/crs/WGS84E_2D";
 //        protected internal const int TEST_SRS_DIMENSION = 10;
-//        protected internal static readonly IList<string> TEST_AXIS_LABELS = new List<string>();
+//        protected internal static readonly List<string> TEST_AXIS_LABELS = new List<string>();
 //        static SRSAttributesTest() {
 //            TEST_AXIS_LABELS.Add("A");
 //            TEST_AXIS_LABELS.Add("B");
@@ -50,7 +50,7 @@
 //            TEST_UOM_LABELS.Add("Meter");
 //            TEST_UOM_LABELS.Add("Meter");
 //        }
-//        protected internal static readonly IList<string> TEST_UOM_LABELS = new List<string>();
+//        protected internal static readonly List<string> TEST_UOM_LABELS = new List<string>();
 
 //        /// <summary>
 //        /// Constructor
@@ -101,7 +101,7 @@
 //        /// <param name="axisLabels"> the axis labels (optional, but should be omitted if no srsName is set) </param>
 //        /// <param name="uomLabels"> the labels for UOM (required when axisLabels is set) </param>
 //        /// <returns> a valid object </returns>
-//        private SRSAttributes GetInstance(string message, string srsName, int? srsDimension, IList<string> axisLabels, IList<string> uomLabels) {
+//        private SRSAttributes GetInstance(string message, string srsName, int? srsDimension, List<string> axisLabels, List<string> uomLabels) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SRSAttributes attributes = null;
 //            try {
@@ -187,7 +187,7 @@
 //                GetInstance("The uomLabels attribute can only be used", element);
 
 //                // Non-NCNames in axisLabels
-//                IList<string> newLabels = new List<string>(TEST_AXIS_LABELS);
+//                List<string> newLabels = new List<string>(TEST_AXIS_LABELS);
 //                newLabels.Add("1TEST");
 //                element = Util.buildDDMSElement(Position.getName(version), null);
 //                AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.getXsList(newLabels), Util.getXsList(TEST_UOM_LABELS));
@@ -220,7 +220,7 @@
 //                GetInstance("The uomLabels attribute can only be used", TEST_SRS_NAME, TEST_SRS_DIMENSION, null, TEST_UOM_LABELS);
 
 //                // Non-NCNames in axisLabels
-//                IList<string> newLabels = new List<string>(TEST_AXIS_LABELS);
+//                List<string> newLabels = new List<string>(TEST_AXIS_LABELS);
 //                newLabels.Add("TEST:TEST");
 //                GetInstance("\"TEST:TEST\" is not a valid NCName.", TEST_SRS_NAME, TEST_SRS_DIMENSION, newLabels, TEST_UOM_LABELS);
 
@@ -270,7 +270,7 @@
 //                dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, null, TEST_AXIS_LABELS, TEST_UOM_LABELS);
 //                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
-//                IList<string> newLabels = new List<string>(TEST_AXIS_LABELS);
+//                List<string> newLabels = new List<string>(TEST_AXIS_LABELS);
 //                newLabels.Add("NewLabel");
 //                dataAttributes = GetInstance(SUCCESS, TEST_SRS_NAME, TEST_SRS_DIMENSION, newLabels, TEST_UOM_LABELS);
 //                Assert.IsFalse(elementAttributes.Equals(dataAttributes));

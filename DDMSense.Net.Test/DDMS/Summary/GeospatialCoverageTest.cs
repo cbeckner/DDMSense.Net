@@ -214,7 +214,7 @@
 //        /// <param name="component"> the child of the GeospatialExtent </param>
 //        /// <returns> XElement </returns>
 //        private XElement BuildComponentElement(IDDMSComponent component) {
-//            IList<IDDMSComponent> list = new List<IDDMSComponent>();
+//            List<IDDMSComponent> list = new List<IDDMSComponent>();
 //            if (component != null) {
 //                list.Add(component);
 //            }
@@ -226,7 +226,7 @@
 //        /// </summary>
 //        /// <param name="components"> the children of the GeospatialExtent </param>
 //        /// <returns> XElement </returns>
-//        private XElement BuildComponentElement(IList<IDDMSComponent> components) {
+//        private XElement BuildComponentElement(List<IDDMSComponent> components) {
 //            DDMSVersion version = DDMSVersion.CurrentVersion;
 //            XElement element = Util.buildDDMSElement(GeospatialCoverage.getName(DDMSVersion.CurrentVersion), null);
 //            XElement extElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("GeospatialExtent", null);
@@ -275,7 +275,7 @@
 //                GetInstance(SUCCESS, element);
 
 //                // everything
-//                IList<IDDMSComponent> list = new List<IDDMSComponent>();
+//                List<IDDMSComponent> list = new List<IDDMSComponent>();
 //                list.Add(BoundingBoxTest.Fixture);
 //                list.Add(BoundingGeometryTest.Fixture);
 //                list.Add(PostalAddressTest.Fixture);
@@ -326,7 +326,7 @@
 //                GetInstance("At least 1 of ", element);
 
 //                // Too many geographicIdentifier
-//                IList<IDDMSComponent> list = new List<IDDMSComponent>();
+//                List<IDDMSComponent> list = new List<IDDMSComponent>();
 //                list.Add(GeographicIdentifierTest.CountryCodeBasedFixture);
 //                list.Add(GeographicIdentifierTest.CountryCodeBasedFixture);
 //                element = BuildComponentElement(list);

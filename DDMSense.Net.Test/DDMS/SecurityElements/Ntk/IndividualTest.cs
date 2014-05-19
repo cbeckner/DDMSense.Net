@@ -113,7 +113,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
         /// <param name="systemName"> the system (required) </param>
         /// <param name="values"> the values (1 required) </param>
-        private Individual GetInstance(string message, SystemName systemName, IList<IndividualValue> values)
+        private Individual GetInstance(string message, SystemName systemName, List<IndividualValue> values)
         {
             bool expectFailure = !String.IsNullOrEmpty(message);
             Individual component = null;
@@ -294,7 +294,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 Individual dataComponent = GetInstance(SUCCESS, new SystemName("MDR", null, null, null, SecurityAttributesTest.Fixture), IndividualValueTest.FixtureList);
                 Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-                IList<IndividualValue> list = new List<IndividualValue>();
+                List<IndividualValue> list = new List<IndividualValue>();
                 list.Add(IndividualValueTest.Fixture);
                 list.Add(IndividualValueTest.Fixture);
                 dataComponent = GetInstance(SUCCESS, SystemNameTest.Fixture, list);

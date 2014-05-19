@@ -38,13 +38,13 @@
 //    /// </summary>
 //    public class GeographicIdentifierTest : AbstractBaseTestCase {
 
-//        private static readonly IList<string> TEST_NAMES = new List<string>();
+//        private static readonly List<string> TEST_NAMES = new List<string>();
 //        static GeographicIdentifierTest() {
 //            TEST_NAMES.Add("The White House");
 //            TEST_REGIONS.Add("Mid-Atlantic States");
 //        }
 
-//        private static readonly IList<string> TEST_REGIONS = new List<string>();
+//        private static readonly List<string> TEST_REGIONS = new List<string>();
 
 //        /// <summary>
 //        /// Constructor
@@ -116,7 +116,7 @@
 //        /// <param name="subDivisionCode"> the subdivision code (optional, starting in DDMS 4.0.1) </param>
 //        /// <param name="facilityIdentifier"> the facility identifier (optional) </param>
 //        /// <returns> a valid object </returns>
-//        private GeographicIdentifier GetInstance(string message, IList<string> names, IList<string> regions, CountryCode countryCode, SubDivisionCode subDivisionCode, FacilityIdentifier facilityIdentifier) {
+//        private GeographicIdentifier GetInstance(string message, List<string> names, List<string> regions, CountryCode countryCode, SubDivisionCode subDivisionCode, FacilityIdentifier facilityIdentifier) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            GeographicIdentifier component = null;
 //            try {

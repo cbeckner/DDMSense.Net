@@ -76,11 +76,11 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<NonStateActor> FixtureList {
+//        public static List<NonStateActor> FixtureList {
 //            get {
 //                try {
 //                    DDMSVersion version = DDMSVersion.CurrentVersion;
-//                    IList<NonStateActor> actors = new List<NonStateActor>();
+//                    List<NonStateActor> actors = new List<NonStateActor>();
 //                    if (version.isAtLeast("4.0.1")) {
 //                        actors.Add(new NonStateActor(TEST_VALUE, TEST_ORDER, Qualifier, SecurityAttributesTest.Fixture));
 //                    }

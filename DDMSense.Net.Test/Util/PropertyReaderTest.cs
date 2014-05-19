@@ -67,7 +67,7 @@ namespace DDMSense.Test.Util {
         [TestMethod]
         public virtual void TestGetListPropertyValid()
         {
-			IList<string> properties = PropertyReader.GetListProperty("ddms.supportedVersions");
+			List<string> properties = PropertyReader.GetListProperty("ddms.supportedVersions");
 			Assert.Equals(4, properties.Count());
 		}
 

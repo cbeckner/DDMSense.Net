@@ -93,7 +93,7 @@
 //        /// <param name="polygons"> an ordered list of the polygons used in this geometry </param>
 //        /// <param name="points"> an ordered list of the points used in this geometry </param>
 //        /// <returns> a valid object </returns>
-//        private BoundingGeometry GetInstance(string message, IList<Polygon> polygons, IList<Point> points) {
+//        private BoundingGeometry GetInstance(string message, List<Polygon> polygons, List<Point> points) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            BoundingGeometry component = null;
 //            try {

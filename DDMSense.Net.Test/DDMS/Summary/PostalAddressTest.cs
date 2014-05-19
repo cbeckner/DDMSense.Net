@@ -38,7 +38,7 @@
 //    /// </summary>
 //    public class PostalAddressTest : AbstractBaseTestCase {
 
-//        private static readonly IList<string> TEST_STREETS = new List<string>();
+//        private static readonly List<string> TEST_STREETS = new List<string>();
 //        static PostalAddressTest() {
 //            TEST_STREETS.Add("1600 Pennsylvania Avenue, NW");
 //        }
@@ -101,7 +101,7 @@
 //        /// <param name="hasState"> true if the stateOrProvince is a state, false if it is a province (only 1 of state or province
 //        /// can exist in a postalAddress) </param>
 //        /// <returns> a valid object </returns>
-//        private PostalAddress GetInstance(string message, IList<string> streets, string city, string stateOrProvince, string postalCode, CountryCode countryCode, bool hasState) {
+//        private PostalAddress GetInstance(string message, List<string> streets, string city, string stateOrProvince, string postalCode, CountryCode countryCode, bool hasState) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            PostalAddress component = null;
 //            try {
@@ -255,7 +255,7 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // Too many streets
-//                IList<string> streets = new List<string>();
+//                List<string> streets = new List<string>();
 //                for (int i = 0; i < 7; i++) {
 //                    streets.Add("Street" + i);
 //                }
