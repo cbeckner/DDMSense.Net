@@ -60,13 +60,13 @@
 //            get {
 //                try {
 //                    DDMSVersion version = DDMSVersion.CurrentVersion;
-//                    XElement element = Util.buildDDMSElement(TaskingInfo.getName(version), null);
-//                    element.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
-//                    element.addNamespaceDeclaration(PropertyReader.getPrefix("ism"), version.IsmNamespace);
+//                    XElement element = Util.BuildDDMSElement(TaskingInfo.GetName(version), null);
+//                    element.addNamespaceDeclaration(PropertyReader.GetPrefix("ddms"), version.Namespace);
+//                    element.addNamespaceDeclaration(PropertyReader.GetPrefix("ism"), version.IsmNamespace);
 //                    SecurityAttributesTest.Fixture.addTo(element);
 //                    element.appendChild(RequesterInfoTest.GetFixtureElement(true));
 //                    element.appendChild(AddresseeTest.GetFixtureElement(true));
-//                    element.appendChild(DescriptionTest.Fixture.XOMElementCopy);
+//                    element.appendChild(DescriptionTest.Fixture.ElementCopy);
 //                    element.appendChild(TaskIDTest.FixtureElement);
 //                    return (element);
 //                } catch (InvalidDDMSException e) {
@@ -79,10 +79,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<TaskingInfo> FixtureList {
+//        public static List<TaskingInfo> FixtureList {
 //            get {
 //                try {
-//                    IList<TaskingInfo> infos = new List<TaskingInfo>();
+//                    List<TaskingInfo> infos = new List<TaskingInfo>();
 //                    infos.Add(new TaskingInfo(FixtureElement));
 //                    return (infos);
 //                } catch (InvalidDDMSException e) {
@@ -120,7 +120,7 @@
 //        /// <param name="addressees"> list of addressee (optional) </param>
 //        /// <param name="description"> description of tasking (optional) </param>
 //        /// <param name="taskID"> taskID for tasking (required) </param>
-//        private TaskingInfo GetInstance(string message, IList<RequesterInfo> requesterInfos, IList<Addressee> addressees, Description description, TaskID taskID) {
+//        private TaskingInfo GetInstance(string message, List<RequesterInfo> requesterInfos, List<Addressee> addressees, Description description, TaskID taskID) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            TaskingInfo component = null;
 //            try {
@@ -193,9 +193,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, TaskingInfo.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, TaskingInfo.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -204,15 +204,15 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, FixtureElement);
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(TaskingInfo.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(TaskingInfo.GetName(version), null);
 //                SecurityAttributesTest.Fixture.addTo(element);
-//                element.appendChild(TaskIDTest.Fixture.XOMElementCopy);
+//                element.appendChild(TaskIDTest.Fixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -235,16 +235,16 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Missing taskID
-//                XElement element = Util.buildDDMSElement(TaskingInfo.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(TaskingInfo.GetName(version), null);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                GetInstance("taskID is required.", element);
 
 //                // Missing security attributes
-//                element = Util.buildDDMSElement(TaskingInfo.getName(version), null);
-//                element.appendChild(TaskIDTest.Fixture.XOMElementCopy);
+//                element = Util.BuildDDMSElement(TaskingInfo.GetName(version), null);
+//                element.appendChild(TaskIDTest.Fixture.ElementCopy);
 //                GetInstance("classification is required.", element);
 //            }
 //        }
@@ -276,7 +276,7 @@
 
 //                // No warnings
 //                TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -322,12 +322,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, RequesterInfoTest.FixtureList, AddresseeTest.FixtureList, DescriptionTest.Fixture, TaskIDTest.Fixture);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -338,10 +338,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, RequesterInfoTest.FixtureList, AddresseeTest.FixtureList, DescriptionTest.Fixture, TaskIDTest.Fixture);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -365,7 +365,7 @@
 
 //                TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
 //                TaskingInfo.Builder builder = new TaskingInfo.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -376,7 +376,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                TaskingInfo.Builder builder = new TaskingInfo.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.RequesterInfos.get(1).SecurityAttributes.Classification = "U";
 //                Assert.IsFalse(builder.Empty);
@@ -395,14 +395,14 @@
 //                TaskingInfo.Builder builder = new TaskingInfo.Builder();
 //                builder.SecurityAttributes.Classification = "U";
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "taskID is required.");
 //                }
 //                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
 //                builder.TaskID.Value = "test";
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

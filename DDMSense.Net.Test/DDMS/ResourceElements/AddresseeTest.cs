@@ -69,7 +69,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 XElement element = Util.BuildDDMSElement(Addressee.GetName(version), null);
                 element.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + element.Name.LocalName;
                 element.Add(useOrg ? OrganizationTest.Fixture.ElementCopy : PersonTest.Fixture.ElementCopy);
-                SecurityAttributesTest.Fixture.addTo(element);
+                SecurityAttributesTest.Fixture.AddTo(element);
                 return (element);
             }
             catch (InvalidDDMSException e)
@@ -82,13 +82,13 @@ namespace DDMSense.Test.DDMS.ResourceElements
         /// <summary>
         /// Returns a fixture object for testing.
         /// </summary>
-        public static IList<Addressee> FixtureList
+        public static List<Addressee> FixtureList
         {
             get
             {
                 try
                 {
-                    IList<Addressee> list = new List<Addressee>();
+                    List<Addressee> list = new List<Addressee>();
                     list.Add(new Addressee(GetFixtureElement(true)));
                     return (list);
                 }
@@ -183,7 +183,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-                AssertNameAndNamespace(GetInstance(SUCCESS, GetFixtureElement(true)), DEFAULT_DDMS_PREFIX, Addressee.getName(version));
+                AssertNameAndNamespace(GetInstance(SUCCESS, GetFixtureElement(true)), DEFAULT_DDMS_PREFIX, Addressee.GetName(version));
                 GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
             }
         }
@@ -227,7 +227,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // Missing entity
                 XElement element = Util.BuildDDMSElement(Addressee.GetName(version), null);
-                SecurityAttributesTest.Fixture.addTo(element);
+                SecurityAttributesTest.Fixture.AddTo(element);
                 GetInstance("entity is required.", element);
 
                 // Missing security attributes

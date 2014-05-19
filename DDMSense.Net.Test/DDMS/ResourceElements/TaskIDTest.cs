@@ -61,9 +61,9 @@
 //                try {
 //                    DDMSVersion version = DDMSVersion.CurrentVersion;
     
-//                    XElement element = Util.buildDDMSElement(TaskID.getName(version), TEST_VALUE);
-//                    element.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
-//                    element.addNamespaceDeclaration(PropertyReader.getPrefix("xlink"), version.XlinkNamespace);
+//                    XElement element = Util.BuildDDMSElement(TaskID.GetName(version), TEST_VALUE);
+//                    element.addNamespaceDeclaration(PropertyReader.GetPrefix("ddms"), version.Namespace);
+//                    element.addNamespaceDeclaration(PropertyReader.GetPrefix("xlink"), version.XlinkNamespace);
 //                    Util.addDDMSAttribute(element, "taskingSystem", TEST_TASKING_SYSTEM);
 //                    Util.addAttribute(element, "", "network", "", TEST_NETWORK);
 //                    Util.addAttribute(element, "", "otherNetwork", "", TEST_OTHER_NETWORK);
@@ -166,9 +166,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, TaskID.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, TaskID.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -177,13 +177,13 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, FixtureElement);
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(TaskID.getName(version), TEST_VALUE);
+//                XElement element = Util.BuildDDMSElement(TaskID.GetName(version), TEST_VALUE);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -206,19 +206,19 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Wrong type of XLinkAttributes (locator)
-//                XElement element = Util.buildDDMSElement(TaskID.getName(version), TEST_VALUE);
+//                XElement element = Util.BuildDDMSElement(TaskID.GetName(version), TEST_VALUE);
 //                XLinkAttributesTest.LocatorFixture.addTo(element);
 //                GetInstance("The type attribute must have a fixed value", element);
 
 //                // Missing value
-//                element = Util.buildDDMSElement(TaskID.getName(version), null);
+//                element = Util.BuildDDMSElement(TaskID.GetName(version), null);
 //                GetInstance("value is required.", element);
 
 //                // Bad network
-//                element = Util.buildDDMSElement(TaskID.getName(version), TEST_VALUE);
+//                element = Util.BuildDDMSElement(TaskID.GetName(version), TEST_VALUE);
 //                Util.addAttribute(element, "", "network", "", "PBS");
 //                GetInstance("The network attribute must be one of", element);
 
@@ -250,7 +250,7 @@
 
 //                // No warnings
 //                TaskID component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -310,12 +310,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                TaskID component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_TASKING_SYSTEM, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.SimpleFixture);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -326,10 +326,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                TaskID component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_TASKING_SYSTEM, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.SimpleFixture);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -353,7 +353,7 @@
 
 //                TaskID component = GetInstance(SUCCESS, FixtureElement);
 //                TaskID.Builder builder = new TaskID.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -364,7 +364,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                TaskID.Builder builder = new TaskID.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
 //                Assert.IsFalse(builder.Empty);
@@ -381,13 +381,13 @@
 //                TaskID.Builder builder = new TaskID.Builder();
 //                builder.TaskingSystem = TEST_TASKING_SYSTEM;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "value is required.");
 //                }
 //                builder.Value = TEST_VALUE;
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

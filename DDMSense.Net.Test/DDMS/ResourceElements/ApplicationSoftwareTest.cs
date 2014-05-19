@@ -336,7 +336,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
                 component = GetInstance(SUCCESS, TEST_VALUE);
-                Assert.Equals(ExpectedXMLOutput, component.toXML());
+                Assert.Equals(ExpectedXMLOutput, component.ToXML());
             }
         }
 

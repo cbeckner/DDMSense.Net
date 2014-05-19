@@ -1,377 +1,426 @@
-//using System.Collections.Generic;
-//using System.Text;
-
-///* Copyright 2010 - 2013 by Brian Uri!
+using System.Collections.Generic;
+using System.Text;
+using System;
+using System.Linq;
+/* Copyright 2010 - 2013 by Brian Uri!
    
-//   This file is part of DDMSence.
+   This file is part of DDMSence.
    
-//   This library is free software; you can redistribute it and/or modify
-//   it under the terms of version 3.0 of the GNU Lesser General Public 
-//   License as published by the Free Software Foundation.
+   This library is free software; you can redistribute it and/or modify
+   it under the terms of version 3.0 of the GNU Lesser General Public 
+   License as published by the Free Software Foundation.
    
-//   This library is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-//   GNU Lesser General Public License for more details.
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   GNU Lesser General Public License for more details.
    
-//   You should have received a copy of the GNU Lesser General Public 
-//   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU Lesser General Public 
+   License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
-//   You can contact the author at ddmsence@urizone.net. The DDMSence
-//   home page is located at http://ddmsence.urizone.net/
-// */
-//namespace DDMSense.Test.DDMS.ResourceElements {
+   You can contact the author at ddmsence@urizone.net. The DDMSence
+   home page is located at http://ddmsence.urizone.net/
+ */
+namespace DDMSense.Test.DDMS.ResourceElements
+{
 
 
-	
-//    using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
-//    using DDMSVersion = DDMSense.Util.DDMSVersion;
-//    using PropertyReader = DDMSense.Util.PropertyReader;
-//    using Util = DDMSense.Util.Util;
-//    using DDMSense.DDMS.ResourceElements;
-//    using DDMSense.DDMS;
-//    using System.Xml.Linq;
 
-//    /// <summary>
-//    /// <para> Tests related to ddms:requesterInfo elements </para>
-//    /// 
-//    /// <para> Because a ddms:requesterInfo is a local component, we cannot load a valid document from a unit test data file. We
-//    /// have to build the well-formed XElement ourselves. </para>
-//    /// 
-//    /// @author Brian Uri!
-//    /// @since 2.0.0
-//    /// </summary>
-//    public class RequesterInfoTest : AbstractBaseTestCase {
+    using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using PropertyReader = DDMSense.Util.PropertyReader;
+    using Util = DDMSense.Util.Util;
+    using DDMSense.DDMS.ResourceElements;
+    using DDMSense.DDMS;
+    using System.Xml.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-//        /// <summary>
-//        /// Constructor
-//        /// </summary>
-//        public RequesterInfoTest() : base(null) {
-//            RemoveSupportedVersions("2.0 3.0 3.1");
-//        }
+    /// <summary>
+    /// <para> Tests related to ddms:requesterInfo elements </para>
+    /// 
+    /// <para> Because a ddms:requesterInfo is a local component, we cannot load a valid document from a unit test data file. We
+    /// have to build the well-formed XElement ourselves. </para>
+    /// 
+    /// @author Brian Uri!
+    /// @since 2.0.0
+    /// </summary>
+    public class RequesterInfoTest : AbstractBaseTestCase
+    {
 
-//        /// <summary>
-//        /// Returns a fixture object for testing.
-//        /// </summary>
-//        /// <param name="useOrg"> true to put an organization in, false for a person </param>
-//        public static XElement GetFixtureElement(bool useOrg) {
-//            try {
-//                DDMSVersion version = DDMSVersion.CurrentVersion;
-//                XElement element = Util.buildDDMSElement(RequesterInfo.getName(version), null);
-//                element.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
-//                element.appendChild(useOrg ? OrganizationTest.Fixture.XOMElementCopy : PersonTest.Fixture.XOMElementCopy);
-//                SecurityAttributesTest.Fixture.addTo(element);
-//                return (element);
-//            } catch (InvalidDDMSException e) {
-//                fail("Could not create fixture: " + e.Message);
-//            }
-//            return (null);
-//        }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public RequesterInfoTest()
+            : base(null)
+        {
+            RemoveSupportedVersions("2.0 3.0 3.1");
+        }
 
-//        /// <summary>
-//        /// Returns a fixture object for testing.
-//        /// </summary>
-//        public static IList<RequesterInfo> FixtureList {
-//            get {
-//                try {
-//                    IList<RequesterInfo> list = new List<RequesterInfo>();
-//                    list.Add(new RequesterInfo(RequesterInfoTest.GetFixtureElement(true)));
-//                    return (list);
-//                } catch (InvalidDDMSException e) {
-//                    fail("Could not create fixture: " + e.Message);
-//                }
-//                return (null);
-//            }
-//        }
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
+        /// <param name="useOrg"> true to put an organization in, false for a person </param>
+        public static XElement GetFixtureElement(bool useOrg)
+        {
+            try
+            {
+                DDMSVersion version = DDMSVersion.CurrentVersion;
+                XElement element = Util.BuildDDMSElement(RequesterInfo.GetName(version), null);
+                element.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + element.Name.LocalName;
+                element.Add(useOrg ? OrganizationTest.Fixture.ElementCopy : PersonTest.Fixture.ElementCopy);
+                SecurityAttributesTest.Fixture.AddTo(element);
+                return (element);
+            }
+            catch (InvalidDDMSException e)
+            {
+                Assert.Fail("Could not create fixture: " + e.Message);
+            }
+            return (null);
+        }
 
-//        /// <summary>
-//        /// Attempts to build a component from a XOM element.
-//        /// </summary>
-//        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-//        /// <param name="element"> the element to build from
-//        /// </param>
-//        /// <returns> a valid object </returns>
-//        private RequesterInfo GetInstance(string message, XElement element) {
-//            bool expectFailure = !String.IsNullOrEmpty(message);
-//            RequesterInfo component = null;
-//            try {
-//                component = new RequesterInfo(element);
-//                CheckConstructorSuccess(expectFailure);
-//            } catch (InvalidDDMSException e) {
-//                CheckConstructorFailure(expectFailure, e);
-//                ExpectMessage(e, message);
-//            }
-//            return (component);
-//        }
+        /// <summary>
+        /// Returns a fixture object for testing.
+        /// </summary>
+        public static List<RequesterInfo> FixtureList
+        {
+            get
+            {
+                try
+                {
+                    List<RequesterInfo> list = new List<RequesterInfo>();
+                    list.Add(new RequesterInfo(RequesterInfoTest.GetFixtureElement(true)));
+                    return (list);
+                }
+                catch (InvalidDDMSException e)
+                {
+                    Assert.Fail("Could not create fixture: " + e.Message);
+                }
+                return (null);
+            }
+        }
 
-//        /// <summary>
-//        /// Helper method to create an object which is expected to be valid.
-//        /// </summary>
-//        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
-//        /// <param name="entity"> the person or organization in this role </param>
-//        /// <param name="org"> the organization </param>
-//        private RequesterInfo GetInstance(string message, IRoleEntity entity) {
-//            bool expectFailure = !String.IsNullOrEmpty(message);
-//            RequesterInfo component = null;
-//            try {
-//                component = new RequesterInfo(entity, SecurityAttributesTest.Fixture);
-//                CheckConstructorSuccess(expectFailure);
-//            } catch (InvalidDDMSException e) {
-//                CheckConstructorFailure(expectFailure, e);
-//                ExpectMessage(e, message);
-//            }
-//            return (component);
-//        }
+        /// <summary>
+        /// Attempts to build a component from a XOM element.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="element"> the element to build from
+        /// </param>
+        /// <returns> a valid object </returns>
+        private RequesterInfo GetInstance(string message, XElement element)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            RequesterInfo component = null;
+            try
+            {
+                component = new RequesterInfo(element);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-//        /// <summary>
-//        /// Returns the expected HTML or Text output for this unit test
-//        /// </summary>
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        private string GetExpectedOutput(bool isHTML) {
-//            StringBuilder text = new StringBuilder();
-//            text.Append(BuildOutput(isHTML, "requesterInfo.entityType", "organization"));
-//            text.Append(BuildOutput(isHTML, "requesterInfo.name", "DISA"));
-//            text.Append(BuildOutput(isHTML, "requesterInfo.classification", "U"));
-//            text.Append(BuildOutput(isHTML, "requesterInfo.ownerProducer", "USA"));
-//            return (text.ToString());
-//        }
+        /// <summary>
+        /// Helper method to create an object which is expected to be valid.
+        /// </summary>
+        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
+        /// <param name="entity"> the person or organization in this role </param>
+        /// <param name="org"> the organization </param>
+        private RequesterInfo GetInstance(string message, IRoleEntity entity)
+        {
+            bool expectFailure = !String.IsNullOrEmpty(message);
+            RequesterInfo component = null;
+            try
+            {
+                component = new RequesterInfo(entity, SecurityAttributesTest.Fixture);
+                CheckConstructorSuccess(expectFailure);
+            }
+            catch (InvalidDDMSException e)
+            {
+                CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            return (component);
+        }
 
-//        /// <summary>
-//        /// Returns the expected XML output for this unit test
-//        /// </summary>
-//        private string ExpectedXMLOutput {
-//            get {
-//                StringBuilder xml = new StringBuilder();
-//                xml.Append("<ddms:requesterInfo ").Append(XmlnsDDMS).Append(" ").Append(XmlnsISM).Append(" ");
-//                xml.Append("ISM:classification=\"U\" ISM:ownerProducer=\"USA\">");
-//                xml.Append("<ddms:organization><ddms:name>DISA</ddms:name></ddms:organization>");
-//                xml.Append("</ddms:requesterInfo>");
-//                return (xml.ToString());
-//            }
-//        }
+        /// <summary>
+        /// Returns the expected HTML or Text output for this unit test
+        /// </summary>
+        private string GetExpectedOutput(bool isHTML)
+        {
+            StringBuilder text = new StringBuilder();
+            text.Append(BuildOutput(isHTML, "requesterInfo.entityType", "organization"));
+            text.Append(BuildOutput(isHTML, "requesterInfo.name", "DISA"));
+            text.Append(BuildOutput(isHTML, "requesterInfo.classification", "U"));
+            text.Append(BuildOutput(isHTML, "requesterInfo.ownerProducer", "USA"));
+            return (text.ToString());
+        }
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestNameAndNamespace() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+        /// <summary>
+        /// Returns the expected XML output for this unit test
+        /// </summary>
+        private string ExpectedXMLOutput
+        {
+            get
+            {
+                StringBuilder xml = new StringBuilder();
+                xml.Append("<ddms:requesterInfo ").Append(XmlnsDDMS).Append(" ").Append(XmlnsISM).Append(" ");
+                xml.Append("ISM:classification=\"U\" ISM:ownerProducer=\"USA\">");
+                xml.Append("<ddms:organization><ddms:name>DISA</ddms:name></ddms:organization>");
+                xml.Append("</ddms:requesterInfo>");
+                return (xml.ToString());
+            }
+        }
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetFixtureElement(true)), DEFAULT_DDMS_PREFIX, RequesterInfo.getName(version));
-//                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
-//            }
-//        }
+        [TestMethod]
+        public virtual void TestNameAndNamespace()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestElementConstructorValid() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                AssertNameAndNamespace(GetInstance(SUCCESS, GetFixtureElement(true)), DEFAULT_DDMS_PREFIX, RequesterInfo.GetName(version));
+                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
+            }
+        }
 
-//                // All fields, organization
-//                GetInstance(SUCCESS, GetFixtureElement(true));
+        [TestMethod]
+        public virtual void TestElementConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//                // All fields, person
-//                GetInstance(SUCCESS, GetFixtureElement(false));
-//            }
-//        }
+                // All fields, organization
+                GetInstance(SUCCESS, GetFixtureElement(true));
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testDataConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestDataConstructorValid() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                // All fields, person
+                GetInstance(SUCCESS, GetFixtureElement(false));
+            }
+        }
 
-//                // All fields, organization
-//                GetInstance(SUCCESS, OrganizationTest.Fixture);
+        [TestMethod]
+        public virtual void TestDataConstructorValid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//                // All fields, person
-//                GetInstance(SUCCESS, PersonTest.Fixture);
-//            }
-//        }
+                // All fields, organization
+                GetInstance(SUCCESS, OrganizationTest.Fixture);
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestElementConstructorInvalid() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+                // All fields, person
+                GetInstance(SUCCESS, PersonTest.Fixture);
+            }
+        }
 
-//                // Missing entity
-//                XElement element = Util.buildDDMSElement(RequesterInfo.getName(version), null);
-//                SecurityAttributesTest.Fixture.addTo(element);
-//                GetInstance("entity is required.", element);
+        [TestMethod]
+        public virtual void TestElementConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                // Missing security attributes
-//                element = Util.buildDDMSElement(RequesterInfo.getName(version), null);
-//                element.appendChild(OrganizationTest.Fixture.XOMElementCopy);
-//                GetInstance("classification is required.", element);
-//            }
-//        }
+                // Missing entity
+                XElement element = Util.BuildDDMSElement(RequesterInfo.GetName(version), null);
+                SecurityAttributesTest.Fixture.AddTo(element);
+                GetInstance("entity is required.", element);
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestDataConstructorInvalid() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                // Missing security attributes
+                element = Util.BuildDDMSElement(RequesterInfo.GetName(version), null);
+                element.Add(OrganizationTest.Fixture.ElementCopy);
+                GetInstance("classification is required.", element);
+            }
+        }
 
-//                // Missing entity
-//                GetInstance("entity is required.", (IRoleEntity) null);
+        [TestMethod]
+        public virtual void TestDataConstructorInvalid()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//                // Wrong entity
-//                GetInstance("The entity must be a person or an organization.", new Service(Util.getXsListAsList("Service"), null, null));
+                // Missing entity
+                GetInstance("entity is required.", (IRoleEntity)null);
 
-//                // Missing security attributes
-//                try {
-//                    new RequesterInfo(OrganizationTest.Fixture, null);
-//                    fail("Allowed invalid data.");
-//                } catch (InvalidDDMSException e) {
-//                    ExpectMessage(e, "classification is required.");
-//                }
-//            }
-//        }
+                // Wrong entity
+                GetInstance("The entity must be a person or an organization.", new Service(Util.GetXsListAsList("Service"), null, null));
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestWarnings() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                // Missing security attributes
+                try
+                {
+                    new RequesterInfo(OrganizationTest.Fixture, null);
+                    Assert.Fail("Allowed invalid data.");
+                }
+                catch (InvalidDDMSException e)
+                {
+                    ExpectMessage(e, "classification is required.");
+                }
+            }
+        }
 
-//                // No warnings
-//                RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
-//                Assert.Equals(0, component.ValidationWarnings.size());
-//            }
-//        }
+        [TestMethod]
+        public virtual void TestWarnings()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestConstructorEquality() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                // No warnings
+                RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
+                Assert.Equals(0, component.ValidationWarnings.Count());
+            }
+        }
 
-//                RequesterInfo elementComponent = GetInstance(SUCCESS, GetFixtureElement(true));
-//                RequesterInfo dataComponent = GetInstance(SUCCESS, OrganizationTest.Fixture);
-//                Assert.Equals(elementComponent, dataComponent);
-//                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
-//            }
-//        }
+        [TestMethod]
+        public virtual void TestConstructorEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestConstructorInequalityDifferentValues() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                RequesterInfo elementComponent = GetInstance(SUCCESS, GetFixtureElement(true));
+                RequesterInfo dataComponent = GetInstance(SUCCESS, OrganizationTest.Fixture);
+                Assert.Equals(elementComponent, dataComponent);
+                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
+            }
+        }
 
-//                RequesterInfo elementComponent = GetInstance(SUCCESS, GetFixtureElement(true));
-//                RequesterInfo dataComponent = GetInstance(SUCCESS, PersonTest.Fixture);
-//                Assert.IsFalse(elementComponent.Equals(dataComponent));
-//            }
-//        }
+        [TestMethod]
+        public virtual void TestConstructorInequalityDifferentValues()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testConstructorInequalityWrongClass() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestConstructorInequalityWrongClass() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                RequesterInfo elementComponent = GetInstance(SUCCESS, GetFixtureElement(true));
+                RequesterInfo dataComponent = GetInstance(SUCCESS, PersonTest.Fixture);
+                Assert.IsFalse(elementComponent.Equals(dataComponent));
+            }
+        }
 
-//                RequesterInfo elementComponent = GetInstance(SUCCESS, GetFixtureElement(true));
-//                Rights wrongComponent = new Rights(true, true, true);
-//                Assert.IsFalse(elementComponent.Equals(wrongComponent));
-//            }
-//        }
+        [TestMethod]
+        public virtual void TestConstructorInequalityWrongClass()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestHTMLTextOutput() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                RequesterInfo elementComponent = GetInstance(SUCCESS, GetFixtureElement(true));
+                Rights wrongComponent = new Rights(true, true, true);
+                Assert.IsFalse(elementComponent.Equals(wrongComponent));
+            }
+        }
 
-//                RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+        [TestMethod]
+        public virtual void TestHTMLTextOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//                component = GetInstance(SUCCESS, OrganizationTest.Fixture);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
-//            }
-//        }
+                RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestXMLOutput() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                component = GetInstance(SUCCESS, OrganizationTest.Fixture);
+                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+                Assert.Equals(GetExpectedOutput(false), component.ToText());
+            }
+        }
 
-//                RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+        [TestMethod]
+        public virtual void TestXMLOutput()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//                component = GetInstance(SUCCESS, OrganizationTest.Fixture);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
-//            }
-//        }
+                RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
+                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
-//        public virtual void TestWrongVersion() {
-//            try {
-//                DDMSVersion.SetCurrentVersion("2.0");
-//                new RequesterInfo(OrganizationTest.Fixture, SecurityAttributesTest.Fixture);
-//                fail("Allowed invalid data.");
-//            } catch (InvalidDDMSException e) {
-//                ExpectMessage(e, "The requesterInfo element cannot be used");
-//            }
-//        }
+                component = GetInstance(SUCCESS, OrganizationTest.Fixture);
+                Assert.Equals(ExpectedXMLOutput, component.ToXML());
+            }
+        }
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestBuilderEquality() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+        [TestMethod]
+        public virtual void TestWrongVersion()
+        {
+            try
+            {
+                DDMSVersion.SetCurrentVersion("2.0");
+                new RequesterInfo(OrganizationTest.Fixture, SecurityAttributesTest.Fixture);
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "The requesterInfo element cannot be used");
+            }
+        }
 
-//                // Equality after Building, organization
-//                RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
-//                RequesterInfo.Builder builder = new RequesterInfo.Builder(component);
-//                Assert.Equals(component, builder.commit());
+        [TestMethod]
+        public virtual void TestBuilderEquality()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//                // Equality after Building, person
-//                component = GetInstance(SUCCESS, GetFixtureElement(false));
-//                builder = new RequesterInfo.Builder(component);
-//                Assert.Equals(component, builder.commit());
-//            }
-//        }
+                // Equality after Building, organization
+                RequesterInfo component = GetInstance(SUCCESS, GetFixtureElement(true));
+                RequesterInfo.Builder builder = new RequesterInfo.Builder(component);
+                Assert.Equals(component, builder.Commit());
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestBuilderIsEmpty() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+                // Equality after Building, person
+                component = GetInstance(SUCCESS, GetFixtureElement(false));
+                builder = new RequesterInfo.Builder(component);
+                Assert.Equals(component, builder.Commit());
+            }
+        }
 
-//                RequesterInfo.Builder builder = new RequesterInfo.Builder();
-//                Assert.IsNull(builder.commit());
-//                Assert.IsTrue(builder.Empty);
-//                builder.Person.Surname = "surname";
-//                Assert.IsFalse(builder.Empty);
+        [TestMethod]
+        public virtual void TestBuilderIsEmpty()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//            }
-//        }
+                RequesterInfo.Builder builder = new RequesterInfo.Builder();
+                Assert.IsNull(builder.Commit());
+                Assert.IsTrue(builder.Empty);
+                builder.Person.Surname = "surname";
+                Assert.IsFalse(builder.Empty);
 
-////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-////ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-//        public virtual void TestBuilderValidation() {
-//            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion.SetCurrentVersion(sVersion);
+            }
+        }
 
-//                RequesterInfo.Builder builder = new RequesterInfo.Builder();
-//                builder.Person.Names = Util.getXsListAsList("Brian");
-//                builder.Person.Surname = "Uri";
-//                try {
-//                    builder.commit();
-//                    fail("Builder allowed invalid data.");
-//                } catch (InvalidDDMSException e) {
-//                    ExpectMessage(e, "classification is required.");
-//                }
-//                builder.SecurityAttributes.Classification = "U";
-//                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.commit();
-//            }
-//        }
-//    }
+        [TestMethod]
+        public virtual void TestBuilderValidation()
+        {
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-//}
+                RequesterInfo.Builder builder = new RequesterInfo.Builder();
+                builder.Person.Names = Util.GetXsListAsList("Brian");
+                builder.Person.Surname = "Uri";
+                try
+                {
+                    builder.Commit();
+                    Assert.Fail("Builder allowed invalid data.");
+                }
+                catch (InvalidDDMSException e)
+                {
+                    ExpectMessage(e, "classification is required.");
+                }
+                builder.SecurityAttributes.Classification = "U";
+                builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+                builder.Commit();
+            }
+        }
+    }
+
+}
