@@ -39,6 +39,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class SRSAttributesTest : AbstractBaseTestCase
     {
 
@@ -165,6 +166,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             Util.AddAttribute(element, SRSAttributes.NO_PREFIX, "uomLabels", SRSAttributes.NO_NAMESPACE, uomLabels);
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -181,6 +183,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -194,6 +197,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -235,6 +239,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)

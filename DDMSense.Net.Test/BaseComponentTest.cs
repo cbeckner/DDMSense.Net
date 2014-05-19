@@ -42,16 +42,16 @@ namespace DDMSense.Test
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class BaseComponentTest : AbstractBaseTestCase
     {
-
+        
         public BaseComponentTest()
             : base(null)
         {
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuildIndexInvalidInputBounds() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuildIndexInvalidInputBounds()
         {
             Rights rights = new Rights(true, true, true);

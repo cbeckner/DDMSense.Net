@@ -41,6 +41,7 @@ namespace DDMSense.Test.DDMS.Summary
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
+    [TestClass]
     public class ProductionMetricTest : AbstractBaseTestCase
     {
 

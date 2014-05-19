@@ -39,6 +39,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
+    [TestClass]
     public class XLinkAttributesTest : AbstractBaseTestCase
     {
 

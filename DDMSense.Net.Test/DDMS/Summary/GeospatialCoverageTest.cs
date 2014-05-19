@@ -40,6 +40,7 @@ namespace DDMSense.Test.DDMS.Summary
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class GeospatialCoverageTest : AbstractBaseTestCase
     {
         private const string TEST_PRECEDENCE = "Primary";
@@ -277,6 +278,7 @@ namespace DDMSense.Test.DDMS.Summary
             return (element);
         }
 
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -288,7 +290,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -324,7 +326,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -356,7 +358,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -411,7 +413,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -426,6 +428,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestWarnings()
         {
             foreach (string sVersion in SupportedVersions)
@@ -437,7 +440,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
+        [TestMethod]
         public virtual void TestConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)

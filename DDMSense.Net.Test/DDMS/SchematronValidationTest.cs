@@ -37,6 +37,7 @@ namespace DDMSense.Test.DDMS
     /// @author Brian Uri!
     /// @since 1.3.1
     /// </summary>
+    [TestClass]
     public class SchematronValidationTest : AbstractBaseTestCase
     {
 

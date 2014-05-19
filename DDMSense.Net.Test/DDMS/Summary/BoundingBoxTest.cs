@@ -39,6 +39,7 @@ namespace DDMSense.Test.DDMS.Summary
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class BoundingBoxTest : AbstractBaseTestCase
     {
 
@@ -215,6 +216,7 @@ namespace DDMSense.Test.DDMS.Summary
             return (element);
         }
 
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -226,6 +228,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -235,6 +238,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -244,6 +248,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -275,6 +280,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestNorthboundLatitudeValiation()
         {
             // Issue #65
@@ -282,6 +288,7 @@ namespace DDMSense.Test.DDMS.Summary
             GetInstance("A latitude value must be between", TEST_WEST, TEST_EAST, TEST_SOUTH, 91);
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)

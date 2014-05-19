@@ -29,7 +29,9 @@ namespace DDMSense.Test.Util {
 	/// @author Brian Uri!
 	/// @since 0.9.b
 	/// </summary>
-	public class DDMSVersionTest : AbstractBaseTestCase {
+    [TestClass]
+    public class DDMSVersionTest : AbstractBaseTestCase
+    {
 
 		public DDMSVersionTest() : base(null) {
 		}

@@ -31,7 +31,9 @@ namespace DDMSense.Test.Util {
 	/// @author Brian Uri!
 	/// @since 0.9.b
 	/// </summary>
-	public class PropertyReaderTest : AbstractBaseTestCase {
+    [TestClass]
+    public class PropertyReaderTest : AbstractBaseTestCase
+    {
 
 		public PropertyReaderTest() : base(null) {
 		}
@@ -39,8 +41,6 @@ namespace DDMSense.Test.Util {
 		/// <summary>
 		/// Resets the in-use prefix for DDMS.
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void setUp() throws Exception
 		protected internal override void SetUp() {
 			PropertyReader.SetProperty("ddms.prefix", "ddms");
 		}
@@ -48,8 +48,6 @@ namespace DDMSense.Test.Util {
 		/// <summary>
 		/// Resets the in-use prefix for DDMS.
 		/// </summary>
-//JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: protected void tearDown() throws Exception
 		protected internal override void TearDown() {
 			PropertyReader.SetProperty("ddms.prefix", "ddms");
 		}

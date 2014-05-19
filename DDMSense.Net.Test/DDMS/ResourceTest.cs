@@ -67,7 +67,9 @@ namespace DDMSense.Test.DDMS {
 	/// @author Brian Uri!
 	/// @since 0.9.b
 	/// </summary>
-	public class ResourceTest : AbstractBaseTestCase {
+    [TestClass]
+    public class ResourceTest : AbstractBaseTestCase
+    {
 		private List<IDDMSComponent> TEST_TOP_LEVEL_COMPONENTS;
 		private List<IDDMSComponent> TEST_NO_OPTIONAL_COMPONENTS;
 
@@ -1055,6 +1057,7 @@ namespace DDMSense.Test.DDMS {
 			GetInstance("The compliesWith XAttribute cannot be used", TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, TEST_COMPLIES_WITH, IsmDESVersion, NtkDESVersion);
 		}
 
+        [TestMethod]
 		public virtual void TestWrongVersionSecurityAttributes() {
 			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
@@ -1065,7 +1068,7 @@ namespace DDMSense.Test.DDMS {
 			new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, null, SecurityAttributesTest.Fixture, null, null);
 		}
 
-
+        [TestMethod]
 		public virtual void TestExtensibleSuccess() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1240,7 +1243,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-
+        [TestMethod]
 		public virtual void TestExtensibleElementElementConstructor() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1274,7 +1277,7 @@ namespace DDMSense.Test.DDMS {
 			Assert.IsTrue(resource.ToText().IndexOf(BuildOutput(false, "extensible.layer", "true")) != -1);
 		}
 
-
+        [TestMethod]
 		public virtual void TestWrongVersionExtensibleElementAllowed() {
 			DDMSVersion.SetCurrentVersion("2.0");
 			ExtensibleElement component = new ExtensibleElement(ExtensibleElementTest.FixtureElement);
@@ -1286,7 +1289,7 @@ namespace DDMSense.Test.DDMS {
 			GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 		}
 
-
+        [TestMethod]
 		public virtual void Test20TooManyExtensibleElements() {
 			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
@@ -1297,7 +1300,7 @@ namespace DDMSense.Test.DDMS {
 			GetInstance("Only 1 extensible element is allowed in DDMS 2.0.", components, null, null, null, null, null);
 		}
 
-
+        [TestMethod]
 		public virtual void TestAfter20TooManyExtensibleElements() {
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
@@ -1342,7 +1345,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-
+        [TestMethod]
 		public virtual void TestOrderConstraints() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -1461,7 +1464,7 @@ namespace DDMSense.Test.DDMS {
 			}
 		}
 
-
+        [TestMethod]
 		public virtual void TestBuilderValidation() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion.SetCurrentVersion(sVersion);
