@@ -176,7 +176,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void ResourceElements_Source_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -188,7 +188,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void ResourceElements_Source_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -203,7 +203,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void ResourceElements_Source_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -217,7 +217,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void ResourceElements_Source_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -230,7 +230,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalidHrefNotURI()
+        public virtual void ResourceElements_Source_DataConstructorInvalidHrefNotURI()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -241,7 +241,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void ResourceElements_Source_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -260,7 +260,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void ResourceElements_Source_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -273,7 +273,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void ResourceElements_Source_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -297,7 +297,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void ResourceElements_Source_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -313,7 +313,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void ResourceElements_Source_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -327,7 +327,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestSecurityAttributes()
+        public virtual void ResourceElements_Source_SecurityAttributes()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -346,7 +346,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionSecurityAttributes()
+        public virtual void ResourceElements_Source_WrongVersionSecurityAttributes()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             try
@@ -361,7 +361,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void ResourceElements_Source_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -374,7 +374,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void ResourceElements_Source_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -390,7 +390,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void ResourceElements_Source_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

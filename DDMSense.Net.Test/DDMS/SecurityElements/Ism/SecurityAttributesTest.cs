@@ -292,7 +292,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void SecurityElements_Ism_SecurityAttributes_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -316,7 +316,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void SecurityElements_Ism_SecurityAttributes_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -334,7 +334,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void SecurityElements_Ism_SecurityAttributes_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -363,7 +363,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void SecurityElements_Ism_SecurityAttributes_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -385,7 +385,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void SecurityElements_Ism_SecurityAttributes_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -402,7 +402,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void SecurityElements_Ism_SecurityAttributes_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -422,7 +422,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void SecurityElements_Ism_SecurityAttributes_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -481,7 +481,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void SecurityElements_Ism_SecurityAttributes_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -493,7 +493,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestAddTo()
+        public virtual void SecurityElements_Ism_SecurityAttributes_AddTo()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -508,7 +508,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestGetNonNull()
+        public virtual void SecurityElements_Ism_SecurityAttributes_GetNonNull()
         {
             SecurityAttributes component = new SecurityAttributes(null, null, null);
             SecurityAttributes output = SecurityAttributes.GetNonNullInstance(null);
@@ -519,7 +519,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestIsEmpty()
+        public virtual void SecurityElements_Ism_SecurityAttributes_IsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -533,7 +533,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionAttributes()
+        public virtual void SecurityElements_Ism_SecurityAttributes_WrongVersionAttributes()
         {
             DDMSVersion.SetCurrentVersion("3.0");
             SecurityAttributes attr = GetInstance(SUCCESS, TEST_CLASS, TEST_OWNERS, OtherAttributes);
@@ -550,7 +550,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void Test30AttributesIn31()
+        public virtual void SecurityElements_Ism_SecurityAttributes_30AttributesIn31()
         {
             DDMSVersion.SetCurrentVersion("3.1");
             IDictionary<string, string> others = GetOtherAttributes(SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME, "OADR");
@@ -577,7 +577,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void Test31AttributesIn30()
+        public virtual void SecurityElements_Ism_SecurityAttributes_31AttributesIn30()
         {
             DDMSVersion.SetCurrentVersion("3.0");
             IDictionary<string, string> others = GetOtherAttributes(SecurityAttributes.ATOMIC_ENERGY_MARKINGS_NAME, "RD");
@@ -615,7 +615,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestClassificationValidation()
+        public virtual void SecurityElements_Ism_SecurityAttributes_ClassificationValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -669,7 +669,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestDateOutput()
+        public virtual void SecurityElements_Ism_SecurityAttributes_DateOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -692,7 +692,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestOldClassifications()
+        public virtual void SecurityElements_Ism_SecurityAttributes_OldClassifications()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             GetInstance(SUCCESS, "NS-S", TEST_OWNERS, null);
@@ -703,7 +703,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void Test30AttributesIn20()
+        public virtual void SecurityElements_Ism_SecurityAttributes_30AttributesIn20()
         {
             try
             {
@@ -720,7 +720,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void Test20AttributesIn30()
+        public virtual void SecurityElements_Ism_SecurityAttributes_20AttributesIn30()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             IDictionary<string, string> map = GetOtherAttributes(SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME, "true");
@@ -743,7 +743,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestMultipleDeclassException()
+        public virtual void SecurityElements_Ism_SecurityAttributes_MultipleDeclassException()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             IDictionary<string, string> map = GetOtherAttributes(SecurityAttributes.DECLASS_EXCEPTION_NAME, "25X1 25X2");
@@ -751,7 +751,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestMultipleTypeExempted()
+        public virtual void SecurityElements_Ism_SecurityAttributes_MultipleTypeExempted()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             IDictionary<string, string> map = GetOtherAttributes(SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME, "X1 X2");
@@ -759,7 +759,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestDeclassManualReviewHtmlOutput()
+        public virtual void SecurityElements_Ism_SecurityAttributes_DeclassManualReviewHtmlOutput()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             IDictionary<string, string> map = new Dictionary<string, string>();
@@ -769,7 +769,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestCVEErrorsByDefault()
+        public virtual void SecurityElements_Ism_SecurityAttributes_CVEErrorsByDefault()
         {
             IDictionary<string, string> map = new Dictionary<string, string>();
             map[SecurityAttributes.DECLASS_EXCEPTION_NAME] = "UnknownValue";
@@ -785,7 +785,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void SecurityElements_Ism_SecurityAttributes_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -798,7 +798,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void SecurityElements_Ism_SecurityAttributes_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -815,7 +815,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void SecurityElements_Ism_SecurityAttributes_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -838,7 +838,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void SecurityElements_Ism_SecurityAttributes_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

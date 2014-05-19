@@ -43,7 +43,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestBadKey()
+        public virtual void SecurityElements_Ism_ISMVocabulary_BadKey()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestEnumerationTokens()
+        public virtual void SecurityElements_Ism_ISMVocabulary_EnumerationTokens()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -123,7 +123,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestEnumerationPatterns()
+        public virtual void SecurityElements_Ism_ISMVocabulary_EnumerationPatterns()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -150,7 +150,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestIsUSMarking()
+        public virtual void SecurityElements_Ism_ISMVocabulary_IsUSMarking()
         {
             ISMVocabulary.DDMSVersion = DDMSVersion.GetVersionFor("2.0");
             Assert.IsTrue(ISMVocabulary.EnumContains(ISMVocabulary.CVE_US_CLASSIFICATIONS, "TS"));
@@ -158,7 +158,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestInvalidMessage()
+        public virtual void SecurityElements_Ism_ISMVocabulary_InvalidMessage()
         {
             Assert.Equals("Dog is not a valid enumeration token for this attribute, as specified in Cat.", ISMVocabulary.GetInvalidMessage("Cat", "Dog"));
         }

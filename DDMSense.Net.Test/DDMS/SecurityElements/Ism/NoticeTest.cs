@@ -201,7 +201,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void SecurityElements_Ism_Notice_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -213,7 +213,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void SecurityElements_Ism_Notice_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -225,7 +225,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void SecurityElements_Ism_Notice_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -247,7 +247,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void SecurityElements_Ism_Notice_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -261,7 +261,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void SecurityElements_Ism_Notice_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -273,7 +273,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void SecurityElements_Ism_Notice_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -298,7 +298,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void SecurityElements_Ism_Notice_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -313,7 +313,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void SecurityElements_Ism_Notice_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -328,7 +328,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void SecurityElements_Ism_Notice_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -345,7 +345,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void SecurityElements_Ism_Notice_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -360,13 +360,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestWrongVersion()
+        public virtual void SecurityElements_Ism_Notice_WrongVersion()
         {
             // Implicit, since 1 NoticeText is required and that requires DDMS 4.0.1 or greater.
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void SecurityElements_Ism_Notice_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -379,7 +379,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void SecurityElements_Ism_Notice_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -394,7 +394,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void SecurityElements_Ism_Notice_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -420,7 +420,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void SecurityElements_Ism_Notice_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

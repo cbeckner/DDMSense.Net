@@ -137,7 +137,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod] 
-        public virtual void TestElementConstructorValid()
+        public virtual void Extensible_ExtensibleAttributes_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -155,7 +155,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Extensible_ExtensibleAttributes_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -172,7 +172,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Extensible_ExtensibleAttributes_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -182,7 +182,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Extensible_ExtensibleAttributes_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -192,7 +192,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Extensible_ExtensibleAttributes_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -207,7 +207,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Extensible_ExtensibleAttributes_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -227,7 +227,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Extensible_ExtensibleAttributes_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -246,7 +246,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Extensible_ExtensibleAttributes_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -260,7 +260,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Extensible_ExtensibleAttributes_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -280,7 +280,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestAddTo()
+        public virtual void Extensible_ExtensibleAttributes_AddTo()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -295,7 +295,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestGetNonNull()
+        public virtual void Extensible_ExtensibleAttributes_GetNonNull()
         {
             ExtensibleAttributes component = new ExtensibleAttributes((List<XAttribute>)null);
             ExtensibleAttributes output = ExtensibleAttributes.GetNonNullInstance(null);
@@ -306,7 +306,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestIsEmpty()
+        public virtual void Extensible_ExtensibleAttributes_IsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -322,7 +322,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Extensible_ExtensibleAttributes_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -337,7 +337,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Extensible_ExtensibleAttributes_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -353,7 +353,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Extensible_ExtensibleAttributes_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -364,7 +364,7 @@ namespace DDMSense.Test.DDMS.Extensible
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void Extensible_ExtensibleAttributes_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

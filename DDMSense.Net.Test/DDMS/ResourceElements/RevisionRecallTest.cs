@@ -240,7 +240,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void ResourceElements_RevisionRecall_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -252,7 +252,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void ResourceElements_RevisionRecall_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -282,7 +282,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void ResourceElements_RevisionRecall_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -303,7 +303,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void ResourceElements_RevisionRecall_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -377,7 +377,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void ResourceElements_RevisionRecall_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -407,8 +407,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestWarnings()
+        //ORIGINAL LINE: public void ResourceElements_RevisionRecall_Warnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void ResourceElements_RevisionRecall_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -421,7 +421,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void ResourceElements_RevisionRecall_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -442,7 +442,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void ResourceElements_RevisionRecall_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -495,7 +495,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void ResourceElements_RevisionRecall_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -508,7 +508,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void ResourceElements_RevisionRecall_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -535,7 +535,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void ResourceElements_RevisionRecall_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -558,7 +558,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWrongVersion()
+        public virtual void ResourceElements_RevisionRecall_WrongVersion()
         {
             try
             {
@@ -575,7 +575,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void ResourceElements_RevisionRecall_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -594,7 +594,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
        [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void ResourceElements_RevisionRecall_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -614,7 +614,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void ResourceElements_RevisionRecall_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

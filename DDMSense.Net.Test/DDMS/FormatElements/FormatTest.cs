@@ -179,7 +179,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void FormatElements_Format_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -191,7 +191,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void FormatElements_Format_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -207,7 +207,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void FormatElements_Format_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -221,7 +221,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void FormatElements_Format_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -268,7 +268,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void FormatElements_Format_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -282,7 +282,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void FormatElements_Format_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -312,7 +312,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void FormatElements_Format_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -325,7 +325,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void FormatElements_Format_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -344,7 +344,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void FormatElements_Format_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -360,7 +360,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void FormatElements_Format_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -374,7 +374,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestExtentReuse()
+        public virtual void FormatElements_Format_ExtentReuse()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -386,7 +386,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestGetExtentQualifier()
+        public virtual void FormatElements_Format_GetExtentQualifier()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -397,7 +397,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestGetExtentQualifierNoExtent()
+        public virtual void FormatElements_Format_GetExtentQualifierNoExtent()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -408,7 +408,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestGetExtentValue()
+        public virtual void FormatElements_Format_GetExtentValue()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -419,7 +419,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestGetExtentValueNoExtent()
+        public virtual void FormatElements_Format_GetExtentValueNoExtent()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -430,7 +430,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void FormatElements_Format_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -443,7 +443,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void FormatElements_Format_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -459,7 +459,7 @@ namespace DDMSense.Test.DDMS.FormatElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void FormatElements_Format_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

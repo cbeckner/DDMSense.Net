@@ -235,7 +235,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void ResourceElements_Dates_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -247,7 +247,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void ResourceElements_Dates_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -262,7 +262,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void ResourceElements_Dates_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -277,7 +277,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void ResourceElements_Dates_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -290,7 +290,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void ResourceElements_Dates_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -313,7 +313,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void ResourceElements_Dates_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -347,7 +347,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDeprecatedConstructor()
+        public virtual void ResourceElements_Dates_DeprecatedConstructor()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -359,7 +359,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDeprecatedAccessors()
+        public virtual void ResourceElements_Dates_DeprecatedAccessors()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -394,7 +394,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void ResourceElements_Dates_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -408,7 +408,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void ResourceElements_Dates_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -448,7 +448,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void ResourceElements_Dates_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -461,7 +461,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void ResourceElements_Dates_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -478,7 +478,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void ResourceElements_Dates_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -493,7 +493,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionApprovedOn()
+        public virtual void ResourceElements_Dates_WrongVersionApprovedOn()
         {
             DDMSVersion.SetCurrentVersion("3.0");
             try
@@ -508,7 +508,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionReceivedOn()
+        public virtual void ResourceElements_Dates_WrongVersionReceivedOn()
         {
             DDMSVersion.SetCurrentVersion("3.0");
             try
@@ -523,7 +523,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionAcquiredOn()
+        public virtual void ResourceElements_Dates_WrongVersionAcquiredOn()
         {
             try
             {
@@ -540,7 +540,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void ResourceElements_Dates_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -553,7 +553,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void ResourceElements_Dates_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -571,7 +571,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void ResourceElements_Dates_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -594,7 +594,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void ResourceElements_Dates_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

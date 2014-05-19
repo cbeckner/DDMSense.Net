@@ -146,7 +146,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void ResourceElements_Language_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -158,7 +158,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void ResourceElements_Language_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -173,7 +173,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void ResourceElements_Language_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -187,7 +187,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void ResourceElements_Language_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -200,7 +200,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void ResourceElements_Language_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -211,7 +211,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void ResourceElements_Language_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -240,7 +240,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void ResourceElements_Language_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -253,7 +253,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void ResourceElements_Language_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -268,7 +268,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void ResourceElements_Language_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -284,7 +284,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void ResourceElements_Language_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -298,7 +298,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void ResourceElements_Language_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -311,7 +311,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void ResourceElements_Language_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -327,7 +327,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void ResourceElements_Language_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

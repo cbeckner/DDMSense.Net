@@ -215,7 +215,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void ResourceElements_Organization_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -227,7 +227,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void ResourceElements_Organization_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -243,7 +243,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void ResourceElements_Organization_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -257,7 +257,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void ResourceElements_Organization_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -274,7 +274,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void ResourceElements_Organization_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -290,7 +290,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void ResourceElements_Organization_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -315,7 +315,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void ResourceElements_Organization_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -328,7 +328,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void ResourceElements_Organization_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -352,7 +352,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void ResourceElements_Organization_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -368,7 +368,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void ResourceElements_Organization_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -382,7 +382,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestSubOrganizationReuse()
+        public virtual void ResourceElements_Organization_SubOrganizationReuse()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -394,7 +394,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionAcronym()
+        public virtual void ResourceElements_Organization_WrongVersionAcronym()
         {
             DDMSVersion.SetCurrentVersion("4.1");
             Organization component = GetInstance(SUCCESS, GetValidElement("4.1"));
@@ -413,13 +413,13 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWrongVersion()
+        public virtual void ResourceElements_Organization_WrongVersion()
         {
             // This test is implicit -- SubOrganization cannot even be instantiated except in DDMS 4.0.1 or later.
         }
 
         [TestMethod]
-        public virtual void TestIndexLevelsObjectLists()
+        public virtual void ResourceElements_Organization_IndexLevelsObjectLists()
         {
             List<string> names = Util.GetXsListAsList("DISA");
             Organization org = new Organization(names, null, null, SubOrganizationTest.FixtureList, null, null);
@@ -435,7 +435,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void ResourceElements_Organization_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -448,7 +448,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void ResourceElements_Organization_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -477,7 +477,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void ResourceElements_Organization_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -500,7 +500,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
        [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void ResourceElements_Organization_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

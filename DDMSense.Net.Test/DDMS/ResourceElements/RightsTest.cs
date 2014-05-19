@@ -145,7 +145,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void ResourceElements_Rights_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -162,7 +162,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void ResourceElements_Rights_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -177,7 +177,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void ResourceElements_Rights_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -188,7 +188,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void ResourceElements_Rights_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -200,7 +200,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void ResourceElements_Rights_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -213,7 +213,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void ResourceElements_Rights_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -231,7 +231,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void ResourceElements_Rights_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -243,7 +243,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void ResourceElements_Rights_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -259,7 +259,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void ResourceElements_Rights_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -273,7 +273,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestDefaultValues()
+        public virtual void ResourceElements_Rights_DefaultValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -287,7 +287,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void ResourceElements_Rights_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -300,7 +300,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void ResourceElements_Rights_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -315,7 +315,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void ResourceElements_Rights_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
