@@ -36,6 +36,7 @@ namespace DDMSense.Test.DDMS.Summary
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class FacilityIdentifierTest : AbstractBaseTestCase
     {
         private const string TEST_BENUMBER = "1234DD56789";
@@ -140,6 +141,7 @@ namespace DDMSense.Test.DDMS.Summary
             return (FormatXml(xml.ToString(), preserveFormatting));
         }
 
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -151,6 +153,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -160,6 +163,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -169,6 +173,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -198,6 +203,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)

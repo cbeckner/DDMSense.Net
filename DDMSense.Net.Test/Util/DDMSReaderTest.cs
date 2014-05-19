@@ -33,7 +33,9 @@ namespace DDMSense.Test.Util {
 	/// @author Brian Uri!
 	/// @since 0.9.b
 	/// </summary>
-	public class DDMSReaderTest : AbstractBaseTestCase {
+    [TestClass]
+    public class DDMSReaderTest : AbstractBaseTestCase
+    {
 
 		private DDMSReader _reader;
 

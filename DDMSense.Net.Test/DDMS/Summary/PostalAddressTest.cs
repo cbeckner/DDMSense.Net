@@ -39,6 +39,7 @@ namespace DDMSense.Test.DDMS.Summary
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class PostalAddressTest : AbstractBaseTestCase
     {
 

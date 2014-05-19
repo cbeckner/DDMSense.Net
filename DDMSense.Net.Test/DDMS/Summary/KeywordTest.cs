@@ -30,8 +30,8 @@ namespace DDMSense.Test.DDMS.Summary
     using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.Summary;
     using System.Xml.Linq;
-using DDMSense.DDMS;
-using System;
+    using DDMSense.DDMS;
+    using System;
     using DDMSense.DDMS.ResourceElements;
 
     /// <summary>
@@ -40,6 +40,7 @@ using System;
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class KeywordTest : AbstractBaseTestCase
     {
 
@@ -163,6 +164,7 @@ using System;
             }
         }
 
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -174,6 +176,7 @@ using System;
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -183,6 +186,7 @@ using System;
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -192,6 +196,7 @@ using System;
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -207,6 +212,7 @@ using System;
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -220,6 +226,7 @@ using System;
             }
         }
 
+        [TestMethod]
         public virtual void TestWarnings()
         {
             foreach (string sVersion in SupportedVersions)
@@ -298,7 +305,7 @@ using System;
             }
         }
 
-        
+
         public virtual void TestExtensibleSuccess()
         {
             // Extensible attribute added
@@ -385,7 +392,7 @@ using System;
             //}
         }
 
-        
+
         public virtual void TestBuilderValidation()
         {
             Assert.Inconclusive("No invalid cases that span all versions of DDMS. The only field is \"value\" and if that is missing, the builder is empty");

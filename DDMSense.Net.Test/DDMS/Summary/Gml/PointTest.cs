@@ -156,6 +156,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             return (FormatXml(xml.ToString(), preserveFormatting));
         }
 
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -167,6 +168,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -184,6 +186,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -194,6 +197,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
 
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -254,7 +258,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
 
-
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)

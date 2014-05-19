@@ -29,6 +29,7 @@ namespace DDMSense.Test.DDMS
     /// @author Brian Uri!
     /// @since 0.9.c
     /// </summary>
+    [TestClass]
     public class ValidationMessageTest
     {
 
