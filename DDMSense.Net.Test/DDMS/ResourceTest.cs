@@ -1233,7 +1233,7 @@ namespace DDMSense.Test.DDMS {
 				// classification in securityAttributes AND extensible.
 				try {
 					List<XAttribute> exAttr = new List<XAttribute>();
-					exAttr.Add(new XAttribute(XName.Get("ISM:classification", version.IsmNamespace,) "U"));
+					exAttr.Add(new XAttribute(XName.Get("ISM:classification", version.IsmNamespace), "U"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 					Assert.Fail("Allowed invalid data.");
 				} catch (InvalidDDMSException e) {
