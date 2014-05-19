@@ -197,17 +197,17 @@
 //                GetInstance(SUCCESS, element);
 
 //                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(CountryCodeTest.Fixture.XOMElementCopy);
+//                element.appendChild(CountryCodeTest.Fixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 
 //                if (version.isAtLeast("4.0.1")) {
 //                    element = Util.buildDDMSElement(geoIdName, null);
-//                    element.appendChild(SubDivisionCodeTest.Fixture.XOMElementCopy);
+//                    element.appendChild(SubDivisionCodeTest.Fixture.ElementCopy);
 //                    GetInstance(SUCCESS, element);
 //                }
 
 //                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -246,28 +246,28 @@
 
 //                // No more than 1 countryCode
 //                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(CountryCodeTest.Fixture.XOMElementCopy);
-//                element.appendChild(CountryCodeTest.Fixture.XOMElementCopy);
+//                element.appendChild(CountryCodeTest.Fixture.ElementCopy);
+//                element.appendChild(CountryCodeTest.Fixture.ElementCopy);
 //                GetInstance("No more than 1 countryCode", element);
 
 //                // No more than 1 subDivisionCode
 //                if (version.isAtLeast("4.0.1")) {
 //                    element = Util.buildDDMSElement(geoIdName, null);
-//                    element.appendChild(SubDivisionCodeTest.Fixture.XOMElementCopy);
-//                    element.appendChild(SubDivisionCodeTest.Fixture.XOMElementCopy);
+//                    element.appendChild(SubDivisionCodeTest.Fixture.ElementCopy);
+//                    element.appendChild(SubDivisionCodeTest.Fixture.ElementCopy);
 //                    GetInstance("No more than 1 subDivisionCode", element);
 //                }
 
 //                // No more than 1 facilityIdentifier
 //                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
 //                GetInstance("No more than 1 facilityIdentifier", element);
 
 //                // facilityIdentifier must be alone
 //                element = Util.buildDDMSElement(geoIdName, null);
-//                element.appendChild(CountryCodeTest.Fixture.XOMElementCopy);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
+//                element.appendChild(CountryCodeTest.Fixture.ElementCopy);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
 //                GetInstance("facilityIdentifier cannot be used", element);
 //            }
 //        }
@@ -302,7 +302,7 @@
 //                Assert.Equals(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
 //                XElement element = Util.buildDDMSElement(GeographicIdentifier.getName(version), null);
-//                element.appendChild(FacilityIdentifierTest.Fixture.XOMElementCopy);
+//                element.appendChild(FacilityIdentifierTest.Fixture.ElementCopy);
 //                elementComponent = GetInstance(SUCCESS, element);
 //                dataComponent = GetInstance(SUCCESS, null, null, null, null, FacilityIdentifierTest.Fixture);
 //                Assert.Equals(elementComponent, dataComponent);

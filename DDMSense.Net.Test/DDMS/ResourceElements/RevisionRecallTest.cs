@@ -234,7 +234,7 @@
 //                Util.addDDMSAttribute(element, "revisionID", TEST_REVISION_ID.ToString());
 //                Util.addDDMSAttribute(element, "revisionType", TEST_REVISION_TYPE);
 //                SecurityAttributesTest.Fixture.addTo(element);
-//                element.appendChild(LinkTest.GetLocatorFixture(true).XOMElementCopy);
+//                element.appendChild(LinkTest.GetLocatorFixture(true).ElementCopy);
 //                GetInstance(SUCCESS, element);
 
 //                // No optional fields (text)
@@ -282,7 +282,7 @@
 //                Util.addDDMSAttribute(element, "revisionID", TEST_REVISION_ID.ToString());
 //                Util.addDDMSAttribute(element, "revisionType", TEST_REVISION_TYPE);
 //                SecurityAttributesTest.Fixture.addTo(element);
-//                element.appendChild(LinkTest.GetLocatorFixture(true).XOMElementCopy);
+//                element.appendChild(LinkTest.GetLocatorFixture(true).ElementCopy);
 //                GetInstance("A ddms:revisionRecall element cannot have both child text and nested elements.", element);
 
 //                // Both text AND links/details, text last
@@ -290,7 +290,7 @@
 //                Util.addDDMSAttribute(element, "revisionID", TEST_REVISION_ID.ToString());
 //                Util.addDDMSAttribute(element, "revisionType", TEST_REVISION_TYPE);
 //                SecurityAttributesTest.Fixture.addTo(element);
-//                element.appendChild(LinkTest.GetLocatorFixture(true).XOMElementCopy);
+//                element.appendChild(LinkTest.GetLocatorFixture(true).ElementCopy);
 //                element.appendChild(TEST_VALUE);
 //                GetInstance("A ddms:revisionRecall element cannot have both child text and nested elements.", element);
 
@@ -300,7 +300,7 @@
 //                Util.addDDMSAttribute(element, "revisionType", TEST_REVISION_TYPE);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                Link link = new Link(XLinkAttributesTest.LocatorFixture, null);
-//                element.appendChild(link.XOMElementCopy);
+//                element.appendChild(link.ElementCopy);
 //                GetInstance("classification is required.", element);
 
 //                // Bad revisionID

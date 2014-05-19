@@ -165,7 +165,7 @@
 //                XElement element = Util.buildElement(PropertyReader.getPrefix("gml"), Point.getName(version), version.GmlNamespace, null);
 //                Util.addAttribute(element, SRSAttributes.NO_PREFIX, "srsName", SRSAttributes.NO_NAMESPACE, SRSAttributesTest.Fixture.SrsName);
 //                Util.addAttribute(element, PropertyReader.getPrefix("gml"), "id", version.GmlNamespace, TEST_ID);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -193,7 +193,7 @@
 //                SRSAttributes attr = new SRSAttributes(null, SRSAttributesTest.Fixture.SrsDimension, null, null);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("srsName is required.", element);
 
 //                // Empty SRS Name
@@ -201,7 +201,7 @@
 //                attr = new SRSAttributes("", SRSAttributesTest.Fixture.SrsDimension, null, null);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("srsName is required.", element);
 
 //                // Point SRS Name doesn't match pos SRS Name
@@ -209,27 +209,27 @@
 //                attr = new SRSAttributes(DIFFERENT_VALUE, SRSAttributesTest.Fixture.SrsDimension, SRSAttributesTest.Fixture.AxisLabels, SRSAttributesTest.Fixture.UomLabels);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("The srsName of the position must match", element);
 
 //                // Missing ID
 //                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("id is required.", element);
 
 //                // Empty ID
 //                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, "");
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("id is required.", element);
 
 //                // ID not NCName
 //                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, "1TEST");
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("\"1TEST\" is not a valid NCName.", element);
 
 //                // Missing position

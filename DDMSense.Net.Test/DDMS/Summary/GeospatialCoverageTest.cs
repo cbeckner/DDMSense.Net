@@ -232,7 +232,7 @@
 //            XElement extElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("GeospatialExtent", null);
 //            foreach (IDDMSComponent component in components) {
 //                if (component != null) {
-//                    extElement.appendChild(component.XOMElementCopy);
+//                    extElement.appendChild(component.ElementCopy);
 //                }
 //            }
 //            if (!version.isAtLeast("4.0.1")) {

@@ -222,7 +222,7 @@
 
 //                // No optional fields
 //                XElement subjectElement = Util.buildDDMSElement("Subject", null);
-//                subjectElement.appendChild(KeywordTest.FixtureList[0].XOMElementCopy);
+//                subjectElement.appendChild(KeywordTest.FixtureList[0].ElementCopy);
 //                GetInstance(SUCCESS, WrapInnerElement(subjectElement));
 //            }
 //        }
@@ -281,8 +281,8 @@
 
 //                // Identical keywords
 //                XElement subjectElement = Util.buildDDMSElement("Subject", null);
-//                subjectElement.appendChild(KeywordTest.FixtureList[0].XOMElementCopy);
-//                subjectElement.appendChild(KeywordTest.FixtureList[0].XOMElementCopy);
+//                subjectElement.appendChild(KeywordTest.FixtureList[0].ElementCopy);
+//                subjectElement.appendChild(KeywordTest.FixtureList[0].ElementCopy);
 //                component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
 //                Assert.Equals(1, component.ValidationWarnings.size());
 //                string text = "1 or more keywords have the same value.";
@@ -291,8 +291,8 @@
 
 //                // Identical categories
 //                subjectElement = Util.buildDDMSElement("Subject", null);
-//                subjectElement.appendChild(CategoryTest.FixtureList[0].XOMElementCopy);
-//                subjectElement.appendChild(CategoryTest.FixtureList[0].XOMElementCopy);
+//                subjectElement.appendChild(CategoryTest.FixtureList[0].ElementCopy);
+//                subjectElement.appendChild(CategoryTest.FixtureList[0].ElementCopy);
 //                component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
 //                Assert.Equals(1, component.ValidationWarnings.size());
 //                text = "1 or more categories have the same value.";
@@ -302,9 +302,9 @@
 //                // Identical productionMetrics
 //                if (version.isAtLeast("4.0.1")) {
 //                    subjectElement = Util.buildDDMSElement("Subject", null);
-//                    subjectElement.appendChild(CategoryTest.FixtureList[0].XOMElementCopy);
-//                    subjectElement.appendChild(ProductionMetricTest.FixtureList[0].XOMElementCopy);
-//                    subjectElement.appendChild(ProductionMetricTest.FixtureList[0].XOMElementCopy);
+//                    subjectElement.appendChild(CategoryTest.FixtureList[0].ElementCopy);
+//                    subjectElement.appendChild(ProductionMetricTest.FixtureList[0].ElementCopy);
+//                    subjectElement.appendChild(ProductionMetricTest.FixtureList[0].ElementCopy);
 //                    component = GetInstance(SUCCESS, WrapInnerElement(subjectElement));
 //                    Assert.Equals(1, component.ValidationWarnings.size());
 //                    text = "1 or more productionMetrics have the same value.";

@@ -113,7 +113,7 @@
 //            string gmlNamespace = DDMSVersion.CurrentVersion.GmlNamespace;
 //            XElement ringElement = Util.buildElement(PropertyReader.getPrefix("gml"), "LinearRing", gmlNamespace, null);
 //            foreach (Position pos in positions) {
-//                ringElement.appendChild(pos.XOMElementCopy);
+//                ringElement.appendChild(pos.ElementCopy);
 //            }
 //            XElement extElement = Util.buildElement(PropertyReader.getPrefix("gml"), "exterior", gmlNamespace, null);
 //            extElement.appendChild(ringElement);

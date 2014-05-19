@@ -170,7 +170,7 @@
 
 //                // No optional fields
 //                XElement element = Util.buildDDMSElement(PointOfContact.getName(version), null);
-//                element.appendChild(EntityFixture.XOMElementCopy);
+//                element.appendChild(EntityFixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -195,13 +195,13 @@
 //                if (version.isAtLeast("4.0.1")) {
 //                    // Invalid pocType
 //                    element = Util.buildDDMSElement(PointOfContact.getName(version), null);
-//                    element.appendChild(EntityFixture.XOMElementCopy);
+//                    element.appendChild(EntityFixture.ElementCopy);
 //                    Util.addAttribute(element, ismPrefix, "pocType", version.IsmNamespace, "Unknown");
 //                    GetInstance("Unknown is not a valid enumeration token", element);
 
 //                    // Partial Invalid pocType
 //                    element = Util.buildDDMSElement(PointOfContact.getName(version), null);
-//                    element.appendChild(EntityFixture.XOMElementCopy);
+//                    element.appendChild(EntityFixture.ElementCopy);
 //                    Util.addAttribute(element, ismPrefix, "pocType", version.IsmNamespace, "DoD-Dist-B Unknown");
 //                    GetInstance("Unknown is not a valid enumeration token", element);
 //                }

@@ -151,13 +151,13 @@
 
 //                // Polygon
 //                XElement element = Util.buildDDMSElement(BoundingGeometry.getName(version), null);
-//                element.appendChild(PolygonTest.FixtureList[0].XOMElementCopy);
+//                element.appendChild(PolygonTest.FixtureList[0].ElementCopy);
 //                GetInstance(SUCCESS, element);
 
 //                // Both
 //                element = Util.buildDDMSElement(BoundingGeometry.getName(version), null);
-//                element.appendChild(PolygonTest.FixtureList[0].XOMElementCopy);
-//                element.appendChild(PointTest.FixtureList[0].XOMElementCopy);
+//                element.appendChild(PolygonTest.FixtureList[0].ElementCopy);
+//                element.appendChild(PointTest.FixtureList[0].ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }

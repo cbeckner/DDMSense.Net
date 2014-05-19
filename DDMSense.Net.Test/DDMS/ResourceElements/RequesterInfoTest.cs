@@ -59,7 +59,7 @@
 //                DDMSVersion version = DDMSVersion.CurrentVersion;
 //                XElement element = Util.buildDDMSElement(RequesterInfo.getName(version), null);
 //                element.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
-//                element.appendChild(useOrg ? OrganizationTest.Fixture.XOMElementCopy : PersonTest.Fixture.XOMElementCopy);
+//                element.appendChild(useOrg ? OrganizationTest.Fixture.ElementCopy : PersonTest.Fixture.ElementCopy);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                return (element);
 //            } catch (InvalidDDMSException e) {
@@ -203,7 +203,7 @@
 
 //                // Missing security attributes
 //                element = Util.buildDDMSElement(RequesterInfo.getName(version), null);
-//                element.appendChild(OrganizationTest.Fixture.XOMElementCopy);
+//                element.appendChild(OrganizationTest.Fixture.ElementCopy);
 //                GetInstance("classification is required.", element);
 //            }
 //        }

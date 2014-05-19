@@ -176,7 +176,7 @@
 //                // Missing security attributes
 //                element = Util.buildElement(ntkPrefix, ProfileList.getName(version), version.NtkNamespace, null);
 //                foreach (Profile profile in ProfileTest.FixtureList) {
-//                    element.appendChild(profile.XOMElementCopy);
+//                    element.appendChild(profile.ElementCopy);
 //                }
 //                GetInstance("classification is required.", element);
 //            }

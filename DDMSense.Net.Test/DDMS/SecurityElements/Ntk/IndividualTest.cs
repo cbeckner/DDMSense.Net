@@ -181,22 +181,22 @@
 //                // Missing systemName
 //                XElement element = Util.buildElement(ntkPrefix, Individual.getName(version), version.NtkNamespace, null);
 //                foreach (IndividualValue value in IndividualValueTest.FixtureList) {
-//                    element.appendChild(value.XOMElementCopy);
+//                    element.appendChild(value.ElementCopy);
 //                }
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                GetInstance("systemName is required.", element);
 
 //                // Missing individualValue
 //                element = Util.buildElement(ntkPrefix, Individual.getName(version), version.NtkNamespace, null);
-//                element.appendChild(SystemNameTest.Fixture.XOMElementCopy);
+//                element.appendChild(SystemNameTest.Fixture.ElementCopy);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                GetInstance("At least one individual value is required.", element);
 
 //                // Missing security attributes
 //                element = Util.buildElement(ntkPrefix, Individual.getName(version), version.NtkNamespace, null);
-//                element.appendChild(SystemNameTest.Fixture.XOMElementCopy);
+//                element.appendChild(SystemNameTest.Fixture.ElementCopy);
 //                foreach (IndividualValue value in IndividualValueTest.FixtureList) {
-//                    element.appendChild(value.XOMElementCopy);
+//                    element.appendChild(value.ElementCopy);
 //                }
 //                GetInstance("classification is required.", element);
 //            }

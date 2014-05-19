@@ -66,7 +66,7 @@
 //                    SecurityAttributesTest.Fixture.addTo(element);
 //                    element.appendChild(RequesterInfoTest.GetFixtureElement(true));
 //                    element.appendChild(AddresseeTest.GetFixtureElement(true));
-//                    element.appendChild(DescriptionTest.Fixture.XOMElementCopy);
+//                    element.appendChild(DescriptionTest.Fixture.ElementCopy);
 //                    element.appendChild(TaskIDTest.FixtureElement);
 //                    return (element);
 //                } catch (InvalidDDMSException e) {
@@ -212,7 +212,7 @@
 //                // No optional fields
 //                XElement element = Util.buildDDMSElement(TaskingInfo.getName(version), null);
 //                SecurityAttributesTest.Fixture.addTo(element);
-//                element.appendChild(TaskIDTest.Fixture.XOMElementCopy);
+//                element.appendChild(TaskIDTest.Fixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -244,7 +244,7 @@
 
 //                // Missing security attributes
 //                element = Util.buildDDMSElement(TaskingInfo.getName(version), null);
-//                element.appendChild(TaskIDTest.Fixture.XOMElementCopy);
+//                element.appendChild(TaskIDTest.Fixture.ElementCopy);
 //                GetInstance("classification is required.", element);
 //            }
 //        }

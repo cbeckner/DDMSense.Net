@@ -59,7 +59,7 @@
 //                element.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
 //                XElement idElement = Util.buildDDMSElement("recordKeeperID", TEST_ID);
 //                element.appendChild(idElement);
-//                element.appendChild(OrganizationTest.Fixture.XOMElementCopy);
+//                element.appendChild(OrganizationTest.Fixture.ElementCopy);
 //                return (element);
 //            }
 //        }
@@ -187,13 +187,13 @@
 
 //                // Missing recordKeeperID
 //                XElement element = Util.buildDDMSElement(RecordKeeper.getName(version), null);
-//                element.appendChild(OrganizationTest.Fixture.XOMElementCopy);
+//                element.appendChild(OrganizationTest.Fixture.ElementCopy);
 //                GetInstance("record keeper ID is required.", element);
 
 //                // Empty recordKeeperID
 //                element = Util.buildDDMSElement(RecordKeeper.getName(version), null);
 //                element.appendChild(Util.buildDDMSElement("recordKeeperID", null));
-//                element.appendChild(OrganizationTest.Fixture.XOMElementCopy);
+//                element.appendChild(OrganizationTest.Fixture.ElementCopy);
 //                GetInstance("record keeper ID is required.", element);
 
 //                // Missing organization

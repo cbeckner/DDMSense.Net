@@ -304,7 +304,7 @@
 //                Util.addDDMSAttribute(innerElement, "qualifier", TEST_QUALIFIER);
 //                Util.addDDMSAttribute(innerElement, "value", TEST_VALUE);
 //                Link link = new Link(XLinkAttributesTest.LocatorFixture, SecurityAttributesTest.Fixture);
-//                innerElement.appendChild(link.XOMElementCopy);
+//                innerElement.appendChild(link.ElementCopy);
 //                GetInstance("Security attributes cannot be applied", element);
 //            }
 //        }

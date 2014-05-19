@@ -243,7 +243,7 @@
 //                // Too many country codes
 //                element = Util.buildDDMSElement(postalName, null);
 //                for (int i = 0; i < 2; i++) {
-//                    element.appendChild((new CountryCode("ISO-123" + i, "US" + i)).XOMElementCopy);
+//                    element.appendChild((new CountryCode("ISO-123" + i, "US" + i)).ElementCopy);
 //                }
 //                GetInstance("No more than 1 countryCode element can exist.", element);
 //            }

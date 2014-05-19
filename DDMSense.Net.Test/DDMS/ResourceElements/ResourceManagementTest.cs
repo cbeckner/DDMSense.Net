@@ -199,8 +199,8 @@
 
 //                // Too many recordsManagementInfo elements
 //                XElement element = Util.buildDDMSElement(ResourceManagement.getName(version), null);
-//                element.appendChild(RecordsManagementInfoTest.Fixture.XOMElementCopy);
-//                element.appendChild(RecordsManagementInfoTest.Fixture.XOMElementCopy);
+//                element.appendChild(RecordsManagementInfoTest.Fixture.ElementCopy);
+//                element.appendChild(RecordsManagementInfoTest.Fixture.ElementCopy);
 //                GetInstance("No more than 1 recordsManagementInfo", element);
 
 //                // Too many revisionRecall elements
