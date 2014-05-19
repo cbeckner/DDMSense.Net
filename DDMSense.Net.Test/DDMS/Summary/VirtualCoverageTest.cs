@@ -394,7 +394,7 @@ namespace DDMSense.Test.DDMS.Summary
                 try
                 {
                     builder.Commit();
-                    Assert.fail("Builder allowed invalid data.");
+                    Assert.Fail("Builder allowed invalid data.");
                 }
                 catch (InvalidDDMSException e)
                 {
