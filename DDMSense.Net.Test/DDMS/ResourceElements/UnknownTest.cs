@@ -132,8 +132,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
         /// <summary>
         /// Returns the expected HTML or Text output for this unit test
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         private string GetExpectedOutput(bool isHTML)
         {
             DDMSVersion version = DDMSVersion.CurrentVersion;

@@ -204,7 +204,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 text.Append(BuildOutput(isHTML, "revisionRecall.details.classification", "U"));
                 text.Append(BuildOutput(isHTML, "revisionRecall.details.ownerProducer", "USA"));
             }
-            text.Append(XLinkAttributesTest.ResourceFixture.getOutput(isHTML, "revisionRecall."));
+            text.Append(XLinkAttributesTest.ResourceFixture.GetOutput(isHTML, "revisionRecall."));
             text.Append(SecurityAttributesTest.Fixture.GetOutput(isHTML, "revisionRecall."));
             return (text.ToString());
         }
