@@ -213,7 +213,7 @@ namespace DDMSense.DDMS.Summary.Gml
         /// </summary>
         /// <param name="element"> the element to decorate </param>
         /// <exception cref="InvalidDDMSException"> if the DDMS version of the element is different </exception>
-        protected internal void AddTo(Element element)
+        public void AddTo(Element element)
         {
             DDMSVersion elementVersion = DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName);
             ValidateSameVersion(elementVersion);

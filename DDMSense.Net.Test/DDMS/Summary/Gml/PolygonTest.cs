@@ -484,7 +484,8 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 DDMSVersion.SetCurrentVersion(sVersion);
                 // Because Positions don't have any ValidationWarnings, no existing code uses this locator method right now.
                 Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals("/gml:exterior/gml:LinearRing", component.LocatorSuffix);
+                PrivateObject po = new PrivateObject(component, new PrivateType(typeof(Polygon))); //Required to access protected internal properties
+                Assert.Equals("/gml:exterior/gml:LinearRing", po.GetFieldOrProperty("LocatorSuffix").ToString());
             }
         }
 

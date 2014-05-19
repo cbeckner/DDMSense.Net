@@ -125,7 +125,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
             catch (InvalidDDMSException e)
             {
-                CheckConstructorAssert.Failure(expectAssert, e);
+                CheckConstructorFailure(expectAssert, e);
                 ExpectMessage(e, message);
             }
             return (component);
@@ -149,7 +149,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
             catch (InvalidDDMSException e)
             {
-                CheckConstructorAssert.Failure(expectAssert, e);
+                CheckConstructorFailure(expectAssert, e);
                 ExpectMessage(e, message);
             }
             return (component);
