@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDMSSense.Net", "DDMSSense.Net\DDMSSense.Net.csproj", "{4754A927-98C9-4208-8F68-6B384D691685}"
 EndProject
@@ -24,6 +24,7 @@ Global
 		{8B0CE58B-BE17-4839-8C8A-3273CF79DEED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B0CE58B-BE17-4839-8C8A-3273CF79DEED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7696A2D-C97F-4A62-82E5-215C1BEFB71D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

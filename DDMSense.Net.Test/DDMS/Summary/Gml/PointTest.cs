@@ -38,6 +38,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class PointTest : AbstractBaseTestCase
     {
 
