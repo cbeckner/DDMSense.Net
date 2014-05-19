@@ -157,7 +157,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void Summary_Gml_Point_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -169,7 +169,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_Gml_Point_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -187,7 +187,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_Gml_Point_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -198,7 +198,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_Gml_Point_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -259,7 +259,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_Gml_Point_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -291,7 +291,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
          [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_Gml_Point_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -303,7 +303,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
          [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_Gml_Point_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -316,7 +316,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
          [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_Gml_Point_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -341,7 +341,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
          [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Summary_Gml_Point_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -353,7 +353,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_Gml_Point_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -369,7 +369,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
          [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void Summary_Gml_Point_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -383,7 +383,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         
-        public virtual void TestPositionReuse()
+        public virtual void Summary_Gml_Point_PositionReuse()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -395,7 +395,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_Gml_Point_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -408,7 +408,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_Gml_Point_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -423,7 +423,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_Gml_Point_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

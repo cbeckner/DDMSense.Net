@@ -1458,7 +1458,7 @@ namespace DDMSense.Test.DDMS {
 				Assert.IsTrue(builder.Empty);
 				builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
 				Assert.IsTrue(builder.Empty);
-				builder.ExtensibleElements[0].Xml = "InvalidXml";
+				builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
 				Assert.IsFalse(builder.Empty);
 
 			}

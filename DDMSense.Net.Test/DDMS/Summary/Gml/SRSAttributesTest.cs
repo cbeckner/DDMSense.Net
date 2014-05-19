@@ -167,7 +167,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_Gml_SRSAttributes_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -184,7 +184,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_Gml_SRSAttributes_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -198,7 +198,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_Gml_SRSAttributes_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -240,7 +240,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_Gml_SRSAttributes_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -270,7 +270,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_Gml_SRSAttributes_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -284,7 +284,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_Gml_SRSAttributes_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -300,7 +300,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_Gml_SRSAttributes_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -325,7 +325,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Summary_Gml_SRSAttributes_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -339,7 +339,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_Gml_SRSAttributes_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -358,7 +358,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestAddTo()
+        public virtual void Summary_Gml_SRSAttributes_AddTo()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -373,7 +373,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestGetNonNull()
+        public virtual void Summary_Gml_SRSAttributes_GetNonNull()
         {
             SRSAttributes component = new SRSAttributes(null, null, null, null);
             SRSAttributes output = SRSAttributes.GetNonNullInstance(null);
@@ -384,7 +384,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionAttributes()
+        public virtual void Summary_Gml_SRSAttributes_WrongVersionAttributes()
         {
             DDMSVersion.SetCurrentVersion("3.0");
             SRSAttributes attr = Fixture;
@@ -401,7 +401,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_Gml_SRSAttributes_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -414,7 +414,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_Gml_SRSAttributes_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -443,7 +443,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_Gml_SRSAttributes_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -466,7 +466,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void Summary_Gml_SRSAttributes_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

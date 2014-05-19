@@ -64,7 +64,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestSharedWarnings()
+        public virtual void RoleEntity_SharedWarnings()
         {
             DDMSVersion version = DDMSVersion.CurrentVersion;
 
@@ -88,7 +88,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestIndexLevelsStringLists()
+        public virtual void RoleEntity_IndexLevelsStringLists()
         {
             List<string> names = Util.GetXsListAsList("Brian BU");
             List<string> phones = Util.GetXsListAsList("703-885-1000");
@@ -105,7 +105,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestExtensibleSuccess()
+        public virtual void RoleEntity_ExtensibleSuccess()
         {
             foreach (string sVersion in DDMSVersion.SupportedVersions)
             {
@@ -119,7 +119,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestExtensibleFailure()
+        public virtual void RoleEntity_ExtensibleFailure()
         {
             // No failure cases to test right now.
             // ISM attributes are at creator/contributor level, so they never clash with extensibles on the entity level.

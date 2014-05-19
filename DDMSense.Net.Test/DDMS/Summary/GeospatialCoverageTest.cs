@@ -279,7 +279,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void Summary_GeospatialCoverage_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -291,7 +291,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_GeospatialCoverage_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -327,7 +327,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_GeospatialCoverage_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -359,7 +359,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_GeospatialCoverage_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -414,7 +414,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_GeospatialCoverage_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -429,7 +429,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_GeospatialCoverage_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -441,7 +441,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_GeospatialCoverage_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -485,7 +485,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_GeospatialCoverage_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -522,7 +522,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_GeospatialCoverage_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -562,7 +562,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void Summary_GeospatialCoverage_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -579,7 +579,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         
-        public virtual void TestGeographicIdentifierReuse()
+        public virtual void Summary_GeospatialCoverage_GeographicIdentifierReuse()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -591,7 +591,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         
-        public virtual void TestBoundingBoxReuse()
+        public virtual void Summary_GeospatialCoverage_BoundingBoxReuse()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -603,7 +603,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         
-        public virtual void TestBoundingGeometryReuse()
+        public virtual void Summary_GeospatialCoverage_BoundingGeometryReuse()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -615,7 +615,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         
-        public virtual void TestPostalAddressReuse()
+        public virtual void Summary_GeospatialCoverage_PostalAddressReuse()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -627,7 +627,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         
-        public virtual void TestVerticalExtentReuse()
+        public virtual void Summary_GeospatialCoverage_VerticalExtentReuse()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -639,7 +639,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         
-        public virtual void TestSecurityAttributes()
+        public virtual void Summary_GeospatialCoverage_SecurityAttributes()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -658,7 +658,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionSecurityAttributes()
+        public virtual void Summary_GeospatialCoverage_WrongVersionSecurityAttributes()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             try
@@ -673,7 +673,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionPrecedenceOrder()
+        public virtual void Summary_GeospatialCoverage_WrongVersionPrecedenceOrder()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             try
@@ -697,7 +697,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestPrecedenceRestrictions()
+        public virtual void Summary_GeospatialCoverage_PrecedenceRestrictions()
         {
             DDMSVersion.SetCurrentVersion("4.0.1");
             try
@@ -721,7 +721,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestGetLocatorSuffix()
+        public virtual void Summary_GeospatialCoverage_GetLocatorSuffix()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -735,7 +735,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_GeospatialCoverage_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -764,7 +764,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_GeospatialCoverage_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -780,7 +780,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_GeospatialCoverage_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

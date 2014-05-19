@@ -142,7 +142,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void Summary_FacilityIdentifier_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -154,7 +154,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_FacilityIdentifier_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -164,7 +164,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_FacilityIdentifier_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -174,7 +174,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_FacilityIdentifier_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -204,7 +204,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_FacilityIdentifier_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -224,7 +224,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_FacilityIdentifier_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -236,7 +236,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_FacilityIdentifier_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -249,7 +249,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_FacilityIdentifier_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -264,7 +264,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Summary_FacilityIdentifier_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -276,7 +276,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_FacilityIdentifier_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -292,7 +292,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void Summary_FacilityIdentifier_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -306,7 +306,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_FacilityIdentifier_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -320,7 +320,7 @@ namespace DDMSense.Test.DDMS.Summary
 
         //TODO - Find out how to run this test
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_FacilityIdentifier_BuilderIsEmpty()
         {
             //foreach (string sVersion in SupportedVersions)
             //{
@@ -336,7 +336,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         //TODO - Find out how to run this test
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_FacilityIdentifier_BuilderValidation()
         {
             //foreach (string sVersion in SupportedVersions)
             //{

@@ -153,7 +153,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void SecurityElements_Ntk_ProfileList_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -165,7 +165,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void SecurityElements_Ntk_ProfileList_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -177,7 +177,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void SecurityElements_Ntk_ProfileList_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -189,7 +189,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void SecurityElements_Ntk_ProfileList_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -212,7 +212,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void SecurityElements_Ntk_ProfileList_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -235,7 +235,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void SecurityElements_Ntk_ProfileList_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -248,7 +248,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void SecurityElements_Ntk_ProfileList_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -262,7 +262,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void SecurityElements_Ntk_ProfileList_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -279,8 +279,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestHTMLTextOutput()
+        //ORIGINAL LINE: public void SecurityElements_Ntk_ProfileList_HTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityElements_Ntk_ProfileList_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -297,7 +297,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void SecurityElements_Ntk_ProfileList_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -312,14 +312,14 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestWrongVersion()
+        public virtual void SecurityElements_Ntk_ProfileList_WrongVersion()
         {
             // Implicit, since the NTK namespace does not exist before DDMS 4.0.1.
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestBuilderEquality()
+        //ORIGINAL LINE: public void SecurityElements_Ntk_ProfileList_BuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityElements_Ntk_ProfileList_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -332,7 +332,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void SecurityElements_Ntk_ProfileList_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -352,7 +352,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void SecurityElements_Ntk_ProfileList_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -385,7 +385,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void SecurityElements_Ntk_ProfileList_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

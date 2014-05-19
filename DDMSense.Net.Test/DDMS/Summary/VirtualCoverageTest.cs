@@ -167,7 +167,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void Summary_VirtualCoverage_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -179,7 +179,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_VirtualCoverage_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -194,7 +194,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_VirtualCoverage_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -208,7 +208,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_VirtualCoverage_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -221,7 +221,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_VirtualCoverage_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -232,7 +232,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_VirtualCoverage_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -252,7 +252,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_VirtualCoverage_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -265,7 +265,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_VirtualCoverage_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -280,7 +280,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Summary_VirtualCoverage_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -292,7 +292,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_VirtualCoverage_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -308,7 +308,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void Summary_VirtualCoverage_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -322,7 +322,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestSecurityAttributes()
+        public virtual void Summary_VirtualCoverage_SecurityAttributes()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -341,7 +341,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionSecurityAttributes()
+        public virtual void Summary_VirtualCoverage_WrongVersionSecurityAttributes()
         {
             DDMSVersion.SetCurrentVersion("2.0");
             try
@@ -356,7 +356,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_VirtualCoverage_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -369,7 +369,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_VirtualCoverage_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -384,7 +384,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_VirtualCoverage_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

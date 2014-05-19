@@ -145,7 +145,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void Summary_Description_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -158,7 +158,7 @@ namespace DDMSense.Test.DDMS.Summary
 
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_Description_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -174,7 +174,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_Description_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -189,7 +189,7 @@ namespace DDMSense.Test.DDMS.Summary
 
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_Description_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -202,7 +202,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_Description_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -221,7 +221,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_Description_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -242,7 +242,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_Description_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -255,7 +255,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_Description_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -267,7 +267,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_Description_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -283,7 +283,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void Summary_Description_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -297,7 +297,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_Description_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -310,7 +310,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_Description_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -325,7 +325,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_Description_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

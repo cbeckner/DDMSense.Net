@@ -198,7 +198,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 			return (FormatXml(xml.ToString(), preserveFormatting));
 		}
 
-		public virtual void TestNameAndNamespace()
+		public virtual void SecurityElements_Security_NameAndNamespace()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -210,7 +210,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 
-		public virtual void TestElementConstructorValid()
+		public virtual void SecurityElements_Security_ElementConstructorValid()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -230,7 +230,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 
-		public virtual void TestDataConstructorValid()
+		public virtual void SecurityElements_Security_DataConstructorValid()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -244,7 +244,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 
-		public virtual void TestElementConstructorInvalid()
+		public virtual void SecurityElements_Security_ElementConstructorInvalid()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -270,7 +270,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestDataConstructorInvalid()
+		public virtual void SecurityElements_Security_DataConstructorInvalid()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -289,7 +289,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestWarnings()
+		public virtual void SecurityElements_Security_Warnings()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -330,7 +330,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestConstructorEquality()
+		public virtual void SecurityElements_Security_ConstructorEquality()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -343,7 +343,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestConstructorInequalityDifferentValues()
+		public virtual void SecurityElements_Security_ConstructorInequalityDifferentValues()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -362,7 +362,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestHTMLTextOutput()
+		public virtual void SecurityElements_Security_HTMLTextOutput()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -378,7 +378,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestXMLOutput()
+		public virtual void SecurityElements_Security_XMLOutput()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -392,7 +392,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestWrongVersionExcludeFromRollup()
+		public virtual void SecurityElements_Security_WrongVersionExcludeFromRollup()
 		{
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			string icPrefix = PropertyReader.GetPrefix("ism");
@@ -414,7 +414,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestBuilderEquality()
+		public virtual void SecurityElements_Security_BuilderEquality()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -427,7 +427,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestBuilderIsEmpty()
+		public virtual void SecurityElements_Security_BuilderIsEmpty()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{
@@ -442,7 +442,7 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 		}
 
 		[TestMethod]
-		public virtual void TestBuilderValidation()
+		public virtual void SecurityElements_Security_BuilderValidation()
 		{
 			foreach (string sVersion in SupportedVersions)
 			{

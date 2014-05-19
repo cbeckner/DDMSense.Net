@@ -165,7 +165,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void Summary_Keyword_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -177,7 +177,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_Keyword_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -187,7 +187,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_Keyword_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -197,7 +197,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_Keyword_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -213,7 +213,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_Keyword_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -227,7 +227,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_Keyword_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -239,7 +239,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_Keyword_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -252,7 +252,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_Keyword_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -264,7 +264,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Summary_Keyword_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -276,7 +276,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_Keyword_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -292,7 +292,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void Summary_Keyword_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -306,7 +306,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
 
-        public virtual void TestExtensibleSuccess()
+        public virtual void Summary_Keyword_ExtensibleSuccess()
         {
             // Extensible attribute added
             DDMSVersion.SetCurrentVersion("3.0");
@@ -315,7 +315,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestExtensibleAssert_Failure()
+        public virtual void Summary_Keyword_ExtensibleAssert_Failure()
         {
             // Wrong DDMS Version
             DDMSVersion.SetCurrentVersion("2.0");
@@ -349,7 +349,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWrongVersionSecurityAttributes()
+        public virtual void Summary_Keyword_WrongVersionSecurityAttributes()
         {
             DDMSVersion.SetCurrentVersion("3.1");
             try
@@ -364,7 +364,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_Keyword_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -378,7 +378,7 @@ namespace DDMSense.Test.DDMS.Summary
 
         //TODO - Figure out how to run this test
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_Keyword_BuilderIsEmpty()
         {
             //foreach (string sVersion in SupportedVersions)
             //{
@@ -393,7 +393,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
 
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_Keyword_BuilderValidation()
         {
             Assert.Inconclusive("No invalid cases that span all versions of DDMS. The only field is \"value\" and if that is missing, the builder is empty");
             foreach (string sVersion in SupportedVersions)
