@@ -259,6 +259,7 @@ namespace DDMSense.DDMS.Summary
             public virtual string Subject
             {
                 get { return _subject; }
+                set { _subject = value; }
             }
 
 
@@ -268,6 +269,7 @@ namespace DDMSense.DDMS.Summary
             public virtual string Coverage
             {
                 get { return _coverage; }
+                set { _coverage = value; }
             }
 
 
