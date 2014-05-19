@@ -423,7 +423,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
                 //TODO: Not sure what to do here
-                builder.Individuals[0];
+                //builder.Individuals[0];
+                Assert.Fail("TODO: builder.Individuals[0];");
                 Assert.IsTrue(builder.Empty);
                 builder.Groups[1].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
