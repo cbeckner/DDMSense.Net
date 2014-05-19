@@ -32,6 +32,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ddms:organization elements </para>
@@ -295,7 +296,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 // No warnings
                 Organization component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.Equals(0, component.ValidationWarnings.Count);
+                Assert.Equals(0, component.ValidationWarnings.Count());
 
                 // Empty acronym in DDMS 4.0.1
                 if (version.IsAtLeast("4.0.1"))
@@ -304,7 +305,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                     element.Add(Util.BuildDDMSElement("name", TEST_NAMES[0]));
                     element.Add(new XAttribute(XName.Get("ddms:acronym", version.Namespace), ""));
                     component = GetInstance(SUCCESS, element);
-                    Assert.Equals(1, component.ValidationWarnings.Count);
+                    Assert.Equals(1, component.ValidationWarnings.Count());
                     string text = "A ddms:acronym attribute was found with no value.";
                     string locator = "ddms:organization";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);

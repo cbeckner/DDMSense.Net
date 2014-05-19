@@ -1,6 +1,7 @@
 using DDMSense.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 /* Copyright 2010 - 2013 by Brian Uri!
    
@@ -67,7 +68,7 @@ namespace DDMSense.Test.Util {
         public virtual void TestGetListPropertyValid()
         {
 			IList<string> properties = PropertyReader.GetListProperty("ddms.supportedVersions");
-			Assert.Equals(4, properties.Count);
+			Assert.Equals(4, properties.Count());
 		}
 
         [TestMethod]

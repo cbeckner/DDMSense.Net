@@ -35,6 +35,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to the ISM attributes </para>
@@ -391,7 +392,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 Util.AddAttribute(element, PropertyReader.GetPrefix("ism"), Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
                 FullFixture.AddTo(element);
                 SecurityAttributes attr = GetInstance(SUCCESS, element);
-                Assert.Equals(0, attr.ValidationWarnings.Count);
+                Assert.Equals(0, attr.ValidationWarnings.Count());
             }
         }
 

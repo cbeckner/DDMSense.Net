@@ -24,8 +24,6 @@ using System.Text;
 namespace DDMSense.Test.DDMS.Extensible
 {
 
-
-
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.Extensible;
@@ -35,6 +33,7 @@ namespace DDMSense.Test.DDMS.Extensible
     using System;
     using DDMSense.DDMS.Summary;
     using DDMSense.DDMS.ResourceElements;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to the extensible attributes themselves. How they interact with parent classes is tested in those
@@ -202,7 +201,7 @@ namespace DDMSense.Test.DDMS.Extensible
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
                 GetInstance(SUCCESS, element);
                 ExtensibleAttributes component = GetInstance(SUCCESS, element);
-                Assert.Equals(0, component.ValidationWarnings.Count);
+                Assert.Equals(0, component.ValidationWarnings.Count());
             }
         }
 

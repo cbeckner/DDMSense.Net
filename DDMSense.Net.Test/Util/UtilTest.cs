@@ -195,7 +195,7 @@ namespace DDMSense.Test.Util {
 			DDMSVersion.SetCurrentVersion("2.0");
 			List<string> values = Util.GetDDMSChildValues(element, "child");
 			Assert.IsNotNull(values);
-			Assert.AreEqual(2, values.Count);
+			Assert.AreEqual(2, values.Count());
 			Assert.AreEqual("child1", values[0]);
 			Assert.AreEqual("child2", values[1]);
 		}
@@ -205,7 +205,7 @@ namespace DDMSense.Test.Util {
 			XElement element = Util.BuildDDMSElement("test", null);
 			List<string> values = Util.GetDDMSChildValues(element, "unknown");
 			Assert.IsNotNull(values);
-			Assert.IsTrue(values.Count == 0);
+			Assert.IsTrue(values.Count() == 0);
 		}
 
         [TestMethod]
@@ -214,7 +214,7 @@ namespace DDMSense.Test.Util {
 			element.Add(Util.BuildDDMSElement("child", ""));
 			List<string> values = Util.GetDDMSChildValues(element, "child");
 			Assert.IsNotNull(values);
-			Assert.AreEqual(1, values.Count);
+			Assert.AreEqual(1, values.Count());
 			Assert.AreEqual("", values[0]);
 		}
 
@@ -225,7 +225,7 @@ namespace DDMSense.Test.Util {
 			element.Add(Util.BuildDDMSElement("child", "child2"));
 			List<string> values = Util.GetDDMSChildValues(element, "child");
 			Assert.IsNotNull(values);
-			Assert.AreEqual(2, values.Count);
+			Assert.AreEqual(2, values.Count());
 			Assert.AreEqual("child1", values[0]);
 			Assert.AreEqual("child2", values[1]);
 		}
@@ -1017,11 +1017,11 @@ namespace DDMSense.Test.Util {
 			Assert.IsTrue(!Util.GetXsListAsList(null).Any());
 			Assert.IsTrue(!Util.GetXsListAsList("").Any());
 			List<string> list = Util.GetXsListAsList("a b");
-			Assert.AreEqual(2, list.Count);
+			Assert.AreEqual(2, list.Count());
 			Assert.AreEqual("a", list[0]);
 			Assert.AreEqual("b", list[1]);
 			list = Util.GetXsListAsList("a      b");
-			Assert.AreEqual(2, list.Count);
+			Assert.AreEqual(2, list.Count());
 			Assert.AreEqual("a", list[0]);
 			Assert.AreEqual("b", list[1]);
 		}

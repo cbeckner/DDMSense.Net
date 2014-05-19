@@ -33,6 +33,7 @@ namespace DDMSense.Test.DDMS
     using DDMSense.DDMS.ResourceElements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using DDMSense.DDMS;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to underlying methods in the base class for DDMS producer entities </para>
@@ -71,7 +72,7 @@ namespace DDMSense.Test.DDMS
             entityElement.Add(Util.BuildDDMSElement("name", "name"));
             entityElement.Add(Util.BuildDDMSElement("phone", ""));
             Organization component = new Organization(entityElement);
-            Assert.Equals(1, component.ValidationWarnings.Count);
+            Assert.Equals(1, component.ValidationWarnings.Count());
             Assert.Equals(ValidationMessage.WarningType, component.ValidationWarnings[0].Type);
             Assert.Equals("A ddms:phone element was found with no value.", component.ValidationWarnings[0].Text);
 
@@ -80,7 +81,7 @@ namespace DDMSense.Test.DDMS
             entityElement.Add(Util.BuildDDMSElement("name", "name"));
             entityElement.Add(Util.BuildDDMSElement("email", ""));
             component = new Organization(entityElement);
-            Assert.Equals(1, component.ValidationWarnings.Count);
+            Assert.Equals(1, component.ValidationWarnings.Count());
             Assert.Equals(ValidationMessage.WarningType, component.ValidationWarnings[0].Type);
             Assert.Equals("A ddms:email element was found with no value.", component.ValidationWarnings[0].Text);
         }

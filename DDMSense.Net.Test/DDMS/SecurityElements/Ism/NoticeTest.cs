@@ -34,6 +34,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using DDMSense.DDMS;
     using System;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ISM:Notice elements </para>
@@ -282,7 +283,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 // 4.1 ism:Notice used
                 if (version.IsAtLeast("4.1"))
                 {
-                    Assert.Equals(1, component.ValidationWarnings.Count);
+                    Assert.Equals(1, component.ValidationWarnings.Count());
                     string text = "The ISM:externalNotice attribute in this DDMS component";
                     string locator = "ISM:Notice";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -290,7 +291,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 // No warnings 
                 else
                 {
-                    Assert.Equals(0, component.ValidationWarnings.Count);
+                    Assert.Equals(0, component.ValidationWarnings.Count());
                 }
             }
         }

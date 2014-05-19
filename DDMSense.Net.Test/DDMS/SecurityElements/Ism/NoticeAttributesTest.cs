@@ -33,6 +33,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
     using System;
     using DDMSense.DDMS.SecurityElements;
     using DDMSense.DDMS.ResourceElements;
+    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to the ISM notice attributes </para>
@@ -253,7 +254,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
 
                 Fixture.AddTo(element);
                 NoticeAttributes attr = GetInstance(SUCCESS, element);
-                Assert.Equals(0, attr.ValidationWarnings.Count);
+                Assert.Equals(0, attr.ValidationWarnings.Count());
             }
         }
 
