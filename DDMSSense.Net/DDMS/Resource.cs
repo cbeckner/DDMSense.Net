@@ -129,12 +129,12 @@ namespace DDMSense.DDMS
         /// <summary>
         ///     The attribute name for resource element flag
         /// </summary>
-        protected internal const string RESOURCE_ELEMENT_NAME = "resourceElement";
+        public const string RESOURCE_ELEMENT_NAME = "resourceElement";
 
         /// <summary>
         ///     The attribute name for create date
         /// </summary>
-        protected internal const string CREATE_DATE_NAME = "createDate";
+        public const string CREATE_DATE_NAME = "createDate";
 
         /// <summary>
         ///     The attribute name for the compliesWith attribute
