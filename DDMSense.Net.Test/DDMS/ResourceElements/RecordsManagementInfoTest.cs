@@ -161,7 +161,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, RecordsManagementInfo.getName(version));
+                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, RecordsManagementInfo.GetName(version));
                 GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
             }
         }
@@ -304,7 +304,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion.SetCurrentVersion("2.0");
                 new RecordsManagementInfo(null, null, TEST_VITAL);
-                fail("Allowed invalid data.");
+                Assert.Fail("Allowed invalid data.");
             }
             catch (InvalidDDMSException e)
             {
