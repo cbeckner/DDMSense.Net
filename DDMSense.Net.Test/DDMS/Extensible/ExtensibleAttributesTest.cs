@@ -42,6 +42,7 @@ namespace DDMSense.Test.DDMS.Extensible
     /// @author Brian Uri!
     /// @since 1.1.0
     /// </summary>
+    [TestClass]
     public class ExtensibleAttributesTest : AbstractBaseTestCase
     {
 

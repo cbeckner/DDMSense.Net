@@ -37,6 +37,7 @@ namespace DDMSense.Test.DDMS.FormatElements
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class ExtentTest : AbstractBaseTestCase
     {
 

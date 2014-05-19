@@ -50,6 +50,7 @@ namespace DDMSense.Test.DDMS.Metacard
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
+    [TestClass]
     public class MetacardInfoTest : AbstractBaseTestCase
     {
 

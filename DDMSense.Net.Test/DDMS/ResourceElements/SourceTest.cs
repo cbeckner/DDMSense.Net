@@ -39,6 +39,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class SourceTest : AbstractBaseTestCase
     {
 
@@ -388,7 +389,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
 
-        [TestMethod]public virtual void TestBuilderValidation()
+        [TestMethod]
+        public virtual void TestBuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

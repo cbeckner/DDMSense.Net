@@ -40,7 +40,9 @@ namespace DDMSense.Test.DDMS.SecurityElements {
 //    /// @author Brian Uri!
 //    /// @since 0.9.b
 //    /// </summary>
-	public class SecurityTest : AbstractBaseTestCase {
+    [TestClass]
+    public class SecurityTest : AbstractBaseTestCase
+    {
 
 		/// <summary>
 		/// Constructor

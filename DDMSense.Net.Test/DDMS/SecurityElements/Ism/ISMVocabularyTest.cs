@@ -30,6 +30,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
     /// @author Brian Uri!
     /// @since 0.9.d
     /// </summary>
+    [TestClass]
     public class ISMVocabularyTest : AbstractBaseTestCase
     {
 

@@ -43,6 +43,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
+    [TestClass]
     public class GroupValueTest : AbstractBaseTestCase
     {
 
