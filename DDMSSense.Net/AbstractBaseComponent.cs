@@ -339,7 +339,7 @@ namespace DDMSense
         /// <param name="token"> an optional second part to the prefix </param>
         /// <param name="suffix"> an optional third part to the prefix </param>
         /// <returns> a String containing the concatenated values </returns>
-        protected internal virtual string BuildPrefix(string prefix, string token, string suffix)
+        public virtual string BuildPrefix(string prefix, string token, string suffix)
         {
             return (Util.Util.GetNonNullString(prefix) + Util.Util.GetNonNullString(token) + Util.Util.GetNonNullString(suffix));
         }
@@ -353,7 +353,7 @@ namespace DDMSense
         /// <param name="index"> the 0-based index of an item in a list </param>
         /// <param name="total"> the total number of items in that list </param>
         /// <returns> a String containing the index text, if applicable </returns>
-        protected internal virtual string BuildIndex(int index, int total)
+        public virtual string BuildIndex(int index, int total)
         {
             if (total < 1)
                 throw new ArgumentException("The total must be at least 1.");
