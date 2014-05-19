@@ -25,9 +25,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
  */
 namespace DDMSense.Test.DDMS.Summary
 {
-
-
-
     using SecurityAttributes = DDMSense.DDMS.SecurityElements.Ism.SecurityAttributes;
     using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
     using PointTest = DDMSense.Test.DDMS.Summary.Gml.PointTest;
@@ -65,7 +62,7 @@ namespace DDMSense.Test.DDMS.Summary
             try
             {
                 DDMSVersion version = DDMSVersion.CurrentVersion;
-                return (new GeospatialCoverage(null, null, null, PostalAddressTest.Fixture, null, null, version.IsAtLeast("4.0.1") ? Convert.ToInt32(order) : null, null));
+                return (new GeospatialCoverage(null, null, null, PostalAddressTest.Fixture, null, null, version.IsAtLeast("4.0.1") ? order : (int?)null, null));
             }
             catch (InvalidDDMSException e)
             {
