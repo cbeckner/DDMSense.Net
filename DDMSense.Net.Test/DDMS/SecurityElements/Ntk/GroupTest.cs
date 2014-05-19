@@ -160,7 +160,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void SecurityELements_Ntk_Group_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -172,7 +172,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void SecurityELements_Ntk_Group_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -184,7 +184,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void SecurityELements_Ntk_Group_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -196,7 +196,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void SecurityELements_Ntk_Group_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -230,7 +230,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void SecurityELements_Ntk_Group_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -256,7 +256,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void SecurityELements_Ntk_Group_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -269,7 +269,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void SecurityELements_Ntk_Group_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -283,7 +283,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void SecurityELements_Ntk_Group_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -301,7 +301,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void SecurityELements_Ntk_Group_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -318,7 +318,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void SecurityELements_Ntk_Group_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -333,13 +333,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestWrongVersion()
+        public virtual void SecurityELements_Ntk_Group_WrongVersion()
         {
             // Implicit, since the NTK namespace does not exist before DDMS 4.0.1.
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void SecurityELements_Ntk_Group_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -352,7 +352,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void SecurityELements_Ntk_Group_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -367,7 +367,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void SecurityELements_Ntk_Group_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -398,7 +398,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void SecurityELements_Ntk_Group_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

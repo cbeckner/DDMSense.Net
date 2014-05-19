@@ -194,7 +194,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void SecurityELements_Ntk_Access_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -206,7 +206,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void SecurityELements_Ntk_Access_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -224,7 +224,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void SecurityELements_Ntk_Access_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -239,8 +239,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestElementConstructorInvalid()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_ElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -254,8 +254,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testDataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestDataConstructorInvalid()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_DataConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -275,8 +275,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestWarnings()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_Warnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -310,8 +310,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testDeprecatedConstructor() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestDeprecatedConstructor()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_DeprecatedConstructor() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_DeprecatedConstructor()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -323,8 +323,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestConstructorEquality()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_ConstructorEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -338,8 +338,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestConstructorInequalityDifferentValues()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_ConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -364,8 +364,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestHTMLTextOutput()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_HTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -382,8 +382,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testXMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestXMLOutput()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_XMLOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -398,8 +398,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestBuilderEquality()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_BuilderEquality() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -412,8 +412,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
-        public virtual void TestBuilderIsEmpty()
+        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_BuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        public virtual void SecurityELements_Ntk_Access_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -432,7 +432,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void SecurityELements_Ntk_Access_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -455,13 +455,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         }
 
         [TestMethod]
-        public virtual void TestWrongVersion()
+        public virtual void SecurityELements_Ntk_Access_WrongVersion()
         {
             // Implicit, since the NTK namespace does not exist before DDMS 4.0.1.
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void SecurityELements_Ntk_Access_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

@@ -217,7 +217,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void Summary_BoundingBox_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -229,7 +229,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_BoundingBox_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -239,7 +239,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_BoundingBox_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -249,7 +249,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_BoundingBox_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -281,7 +281,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestNorthboundLatitudeValiation()
+        public virtual void Summary_BoundingBox_NorthboundLatitudeValiation()
         {
             // Issue #65
             GetInstance("A latitude value must be between", TEST_WEST, TEST_EAST, TEST_SOUTH, -91);
@@ -289,7 +289,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_BoundingBox_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -309,7 +309,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_BoundingBox_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -321,7 +321,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_BoundingBox_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -334,7 +334,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_BoundingBox_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -355,7 +355,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Summary_BoundingBox_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -367,7 +367,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_BoundingBox_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -383,7 +383,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void Summary_BoundingBox_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -397,7 +397,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestDoubleEquality()
+        public virtual void Summary_BoundingBox_DoubleEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -411,7 +411,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_BoundingBox_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -424,7 +424,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_BoundingBox_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -441,7 +441,7 @@ namespace DDMSense.Test.DDMS.Summary
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_BoundingBox_BuilderValidation()
         {
             //TODO - Figure out how to test this
             //foreach (string sVersion in SupportedVersions)

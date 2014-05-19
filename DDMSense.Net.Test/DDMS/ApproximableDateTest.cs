@@ -172,7 +172,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void ApproximableDate_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -184,7 +184,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void ApproximableDate_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -199,7 +199,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void ApproximableDate_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -214,7 +214,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void ApproximableDate_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -252,7 +252,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void ApproximableDate_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -273,7 +273,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void ApproximableDate_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -305,7 +305,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void ApproximableDate_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -319,7 +319,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void ApproximableDate_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -347,7 +347,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void ApproximableDate_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -364,7 +364,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void ApproximableDate_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -379,7 +379,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestWrongVersion()
+        public virtual void ApproximableDate_WrongVersion()
         {
             try
             {
@@ -394,7 +394,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void ApproximableDate_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -407,7 +407,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void ApproximableDate_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -422,7 +422,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void ApproximableDate_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

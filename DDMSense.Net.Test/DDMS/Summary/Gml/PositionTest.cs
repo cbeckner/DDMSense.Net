@@ -184,7 +184,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestNameAndNamespace()
+        public virtual void Summary_Gml_Position_NameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -196,7 +196,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_Gml_Position_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -219,7 +219,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_Gml_Position_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -233,7 +233,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_Gml_Position_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -263,7 +263,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_Gml_Position_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -287,7 +287,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_Gml_Position_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -299,7 +299,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_Gml_Position_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -312,7 +312,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestEqualityWhitespace()
+        public virtual void Summary_Gml_Position_EqualityWhitespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -332,7 +332,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_Gml_Position_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -349,7 +349,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Summary_Gml_Position_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -361,7 +361,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_Gml_Position_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -377,7 +377,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestXMLOutput()
+        public virtual void Summary_Gml_Position_XMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -391,7 +391,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_Gml_Position_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -404,7 +404,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_Gml_Position_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -413,13 +413,13 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 Position.Builder builder = new Position.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                builder.Coordinates[0].Value = Convert.ToDouble(0);
+                builder.Coordinates.Add(new Position.DoubleBuilder(0));
                 Assert.IsFalse(builder.Empty);
             }
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_Gml_Position_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -451,7 +451,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         }
 
         [TestMethod]
-        public virtual void TestBuilderLazyList()
+        public virtual void Summary_Gml_Position_BuilderLazyList()
         {
             foreach (string sVersion in SupportedVersions)
             {

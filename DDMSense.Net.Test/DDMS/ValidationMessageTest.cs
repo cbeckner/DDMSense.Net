@@ -34,7 +34,7 @@ namespace DDMSense.Test.DDMS
     {
 
         [TestMethod]
-        public virtual void TestFactory()
+        public virtual void ValidationMessage_Factory()
         {
             ValidationMessage message = ValidationMessage.NewWarning("Test", "ddms:test");
             Assert.Equals(ValidationMessage.WarningType, message.Type);
@@ -48,7 +48,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestEquality()
+        public virtual void ValidationMessage_Equality()
         {
             ValidationMessage message1 = ValidationMessage.NewWarning("Test", "ddms:test");
             ValidationMessage message2 = ValidationMessage.NewWarning("Test", "ddms:test");
@@ -59,7 +59,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestInequalityDifferentValues()
+        public virtual void ValidationMessage_InequalityDifferentValues()
         {
             ValidationMessage message1 = ValidationMessage.NewWarning("Test", "ddms:test");
             ValidationMessage message2 = ValidationMessage.NewError("Test", "ddms:test");
@@ -73,7 +73,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestInequalityWrongClass()
+        public virtual void ValidationMessage_InequalityWrongClass()
         {
             ValidationMessage message = ValidationMessage.NewWarning("Test", "ddms:test");
             Rights wrongComponent = new Rights(true, true, true);
@@ -81,7 +81,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestLocatorEquality()
+        public virtual void ValidationMessage_LocatorEquality()
         {
             InvalidDDMSException e = new InvalidDDMSException("test");
             e.Locator = "test";

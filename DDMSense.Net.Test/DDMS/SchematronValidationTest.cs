@@ -57,7 +57,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestSchematronValidationXslt1()
+        public virtual void SchematronValidation_SchematronValidationXslt1()
         {
             List<string> supportedXslt1Processors = new List<string>();
             //if (System.getProperty("java.version").IndexOf("1.5.0") == -1)
@@ -98,7 +98,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
-        public virtual void TestSchematronValidationXslt2()
+        public virtual void SchematronValidation_SchematronValidationXslt2()
         {
             string[] supportedXslt1Processors = new string[] { "net.sf.saxon.TransformerFactoryImpl" };
             foreach (string processor in supportedXslt1Processors)
@@ -122,7 +122,7 @@ namespace DDMSense.Test.DDMS
             }
         }
 
-        //	public void testIsmXmlV5SchematronValidation() throws SAXException, InvalidDDMSException, IOException, XSLException {
+        //	public void SchematronValidation_IsmXmlV5SchematronValidation() throws SAXException, InvalidDDMSException, IOException, XSLException {
         //		// For this test to work, the ISM.XML V5 distribution must be unpacked in the data directory.
         //		File schematronFile = new File("ISM_XML.sch");
         //		Resource resource = new DDMSReader().getDDMSResource(new File("data/sample/DDMSence_Example_v3_1.xml"));

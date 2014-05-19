@@ -53,7 +53,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetPropertyInvalid() {
+		public virtual void Util_PropertyReader_GetPropertyInvalid() {
 			try {
 				PropertyReader.GetProperty("unknown.property");
 				Assert.Fail("Did not prevent invalid property.");
@@ -63,14 +63,14 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestGetListPropertyValid()
+        public virtual void Util_PropertyReader_GetListPropertyValid()
         {
 			List<string> properties = PropertyReader.GetListProperty("ddms.supportedVersions");
 			Assert.Equals(4, properties.Count());
 		}
 
         [TestMethod]
-        public virtual void TestSetPropertyInvalidName()
+        public virtual void Util_PropertyReader_SetPropertyInvalidName()
         {
 			// This also handles unconfigurable properties.
 			try {
@@ -82,7 +82,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestSetPropertyValid()
+        public virtual void Util_PropertyReader_SetPropertyValid()
         {
 			PropertyReader.SetProperty("ddms.prefix", "DDMS");
 			Assert.Equals("DDMS", PropertyReader.GetPrefix("ddms"));

@@ -37,7 +37,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestGetVersionForInvalid()
+        public virtual void Util_DDMSVersion_GetVersionForInvalid()
         {
 			try {
 				DDMSVersion.GetVersionFor("1.4");
@@ -48,7 +48,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestGetVersionForDDMSNamespace()
+        public virtual void Util_DDMSVersion_GetVersionForDDMSNamespace()
         {
 			Assert.Equals(DDMSVersion.GetVersionFor("2.0"), DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/2.0/"));
 			Assert.Equals(DDMSVersion.GetVersionFor("3.0"), DDMSVersion.GetVersionForNamespace("http://metadata.dod.mil/mdr/ns/DDMS/3.0/"));
@@ -63,7 +63,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestGetVersionForGMLNamespace()
+        public virtual void Util_DDMSVersion_GetVersionForGMLNamespace()
         {
 			Assert.Equals(DDMSVersion.GetVersionFor("2.0"), DDMSVersion.GetVersionForNamespace("http://www.opengis.net/gml"));
 			Assert.Equals(DDMSVersion.GetVersionFor("4.1"), DDMSVersion.GetVersionForNamespace("http://www.opengis.net/gml/3.2"));
@@ -76,7 +76,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestGetVersionForNTKNamespace()
+        public virtual void Util_DDMSVersion_GetVersionForNTKNamespace()
         {
 			Assert.Equals(DDMSVersion.GetVersionFor("4.1"), DDMSVersion.GetVersionForNamespace("urn:us:gov:ic:ntk"));
 			try {
@@ -88,40 +88,40 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestGetSupportedVersions()
+        public virtual void Util_DDMSVersion_GetSupportedVersions()
         {
 			Assert.IsFalse(!DDMSVersion.SupportedVersions.Any());
 			Assert.IsTrue(DDMSVersion.SupportedVersions.Contains("3.0"));
 		}
 
         [TestMethod]
-        public virtual void TestIsSupportedXmlNamespace()
+        public virtual void Util_DDMSVersion_IsSupportedXmlNamespace()
         {
 			Assert.IsTrue(DDMSVersion.IsSupportedDDMSNamespace("http://metadata.dod.mil/mdr/ns/DDMS/3.0/"));
 			Assert.IsFalse(DDMSVersion.IsSupportedDDMSNamespace("http://metadata.dod.mil/mdr/ns/DDMS/1.4/"));
 		}
 
         [TestMethod]
-        public virtual void TestGetCurrentSchema()
+        public virtual void Util_DDMSVersion_GetCurrentSchema()
         {
 			Assert.Equals("/schemas/4.1/DDMS/ddms.xsd", DDMSVersion.CurrentVersion.Schema);
 		}
 
         [TestMethod]
-        public virtual void TestGetCurrentNamespace()
+        public virtual void Util_DDMSVersion_GetCurrentNamespace()
         {
 			Assert.Equals("urn:us:mil:ces:metadata:ddms:4", DDMSVersion.CurrentVersion.Namespace);
 		}
 
         [TestMethod]
-        public virtual void TestGetNamespaceForValid()
+        public virtual void Util_DDMSVersion_GetNamespaceForValid()
         {
             DDMSVersion.SetCurrentVersion("2.0");
 			Assert.Equals("http://metadata.dod.mil/mdr/ns/DDMS/2.0/", DDMSVersion.CurrentVersion.Namespace);
 		}
 
         [TestMethod]
-        public virtual void TestSetCurrentVersionInvalid()
+        public virtual void Util_DDMSVersion_SetCurrentVersionInvalid()
         {
 			try {
 				DDMSVersion.SetCurrentVersion( "1.4");
@@ -132,7 +132,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestGetSchemaForValid()
+        public virtual void Util_DDMSVersion_GetSchemaForValid()
         {
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
 			Assert.Equals("/schemas/2.0/DDMS/ddms.xsd", DDMSVersion.CurrentVersion.Schema);
@@ -140,13 +140,13 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestToString()
+        public virtual void Util_DDMSVersion_ToString()
         {
 			Assert.Equals(DDMSVersion.CurrentVersion.Version, DDMSVersion.CurrentVersion.ToString());
 		}
 
         [TestMethod]
-        public virtual void TestAccessors()
+        public virtual void Util_DDMSVersion_Accessors()
         {
 			DDMSVersion.SetCurrentVersion("3.0");
 			DDMSVersion version = DDMSVersion.CurrentVersion;
@@ -164,7 +164,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestAliasVersion()
+        public virtual void Util_DDMSVersion_AliasVersion()
         {
 			DDMSVersion.SetCurrentVersion("3.0.1");
 			Assert.Equals("3.0", DDMSVersion.CurrentVersion.Version);
@@ -173,7 +173,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestIsNewerThan()
+        public virtual void Util_DDMSVersion_IsNewerThan()
         {
 			Assert.IsTrue(DDMSVersion.GetVersionFor("2.0").IsAtLeast("2.0"));
 			Assert.IsFalse(DDMSVersion.GetVersionFor("2.0").IsAtLeast("3.0"));

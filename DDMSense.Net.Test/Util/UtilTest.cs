@@ -44,17 +44,17 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetNonNullStringNull() {
+		public virtual void Util_Util_GetNonNullStringNull() {
             Assert.AreEqual("",Util.GetNonNullString(null));
 		}
 
         [TestMethod]
-		public virtual void TestGetNonNullStringValue() {
+		public virtual void Util_Util_GetNonNullStringValue() {
 			Assert.AreEqual("Test", Util.GetNonNullString("Test"));
 		}
 
         [TestMethod]
-		public virtual void TestGetXsList() {
+		public virtual void Util_Util_GetXsList() {
 			List<string> list = new List<string>();
 			list.Add("Test");
 			list.Add("Dog");
@@ -62,22 +62,22 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetXsListNull() {
+		public virtual void Util_Util_GetXsListNull() {
 			Assert.AreEqual("", Util.GetXsList((List<string>)null));
 		}
 
         [TestMethod]
-		public virtual void TestBooleanHashCodeTrue() {
+		public virtual void Util_Util_BooleanHashCodeTrue() {
 			Assert.AreEqual(1, Util.BooleanHashCode(true));
 		}
 
         [TestMethod]
-		public virtual void TestBooleanHashCodeFalse() {
+		public virtual void Util_Util_BooleanHashCodeFalse() {
 			Assert.AreEqual(0, Util.BooleanHashCode(false));
 		}
 
         [TestMethod]
-		public virtual void TestContainsEmptyStringFalse() {
+		public virtual void Util_Util_ContainsEmptyStringFalse() {
 			Assert.IsFalse(Util.ContainsOnlyEmptyValues(null));
 			List<string> list = new List<string>();
 			list.Add("dog");
@@ -87,7 +87,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestContainsEmptyStringTrue() {
+		public virtual void Util_Util_ContainsEmptyStringTrue() {
 			List<string> list = new List<string>();
 			Assert.IsTrue(Util.ContainsOnlyEmptyValues(list));
 			list.Add("");
@@ -98,7 +98,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetFirstDDMSChildValueNullParent() {
+		public virtual void Util_Util_GetFirstDDMSChildValueNullParent() {
 			try {
 				Util.GetFirstDDMSChildValue(null, "test");
 				Assert.Fail("Allowed invalid data.");
@@ -108,7 +108,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetFirstDDMSChildValueNullChild() {
+		public virtual void Util_Util_GetFirstDDMSChildValueNullChild() {
 			try {
 				Util.GetFirstDDMSChildValue(Util.BuildDDMSElement("test", null), null);
 				Assert.Fail("Allowed invalid data.");
@@ -118,7 +118,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetFirstDDMSChildValueWrongNamespace() {
+		public virtual void Util_Util_GetFirstDDMSChildValueWrongNamespace() {
 			XElement element = Util.BuildElement("ddmsence", "test", "http://ddmsence.urizone.net/", null);
 			try {
 				Util.GetFirstDDMSChildValue(element, "child");
@@ -129,7 +129,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetFirstDDMSChildValueIndependentOfCurrentVersion() {
+		public virtual void Util_Util_GetFirstDDMSChildValueIndependentOfCurrentVersion() {
             DDMSVersion.SetCurrentVersion("3.0");
 			XElement element = Util.BuildDDMSElement("test", null);
             element.Add(Util.BuildDDMSElement("child", "childText1"));
@@ -140,13 +140,13 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetFirstDDMSChildValueNoValue() {
+		public virtual void Util_Util_GetFirstDDMSChildValueNoValue() {
 			string value = Util.GetFirstDDMSChildValue(Util.BuildDDMSElement("test", null), "unknown");
 			Assert.AreEqual("", value);
 		}
 
         [TestMethod]
-		public virtual void TestGetFirstDDMSChildValueWithValue() {
+		public virtual void Util_Util_GetFirstDDMSChildValueWithValue() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("child", "childText1"));
 			element.Add(Util.BuildDDMSElement("child", "childText2"));
@@ -155,7 +155,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetDDMSChildValuesNullParent() {
+		public virtual void Util_Util_GetDDMSChildValuesNullParent() {
 			try {
 				Util.GetDDMSChildValues(null, "test");
 				Assert.Fail("Allowed invalid data.");
@@ -165,7 +165,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetDDMSChildValuesNullChild() {
+		public virtual void Util_Util_GetDDMSChildValuesNullChild() {
 			try {
 				Util.GetDDMSChildValues(Util.BuildDDMSElement("test", null), null);
 				Assert.Fail("Allowed invalid data.");
@@ -175,7 +175,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetDDMSChildValuesWrongNamespace() {
+		public virtual void Util_Util_GetDDMSChildValuesWrongNamespace() {
 			XElement element = Util.BuildElement("ddmsence", "test", "http://ddmsence.urizone.net/", null);
 			element.Add(Util.BuildDDMSElement("child", "child1"));
 			element.Add(Util.BuildDDMSElement("child", "child2"));
@@ -188,7 +188,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetDDMSChildValuesIndependentOfCurrentVersion() {
+		public virtual void Util_Util_GetDDMSChildValuesIndependentOfCurrentVersion() {
 			DDMSVersion.SetCurrentVersion("3.0");
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("child", "child1"));
@@ -202,7 +202,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetDDMSChildValuesNoValues() {
+		public virtual void Util_Util_GetDDMSChildValuesNoValues() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			List<string> values = Util.GetDDMSChildValues(element, "unknown");
 			Assert.IsNotNull(values);
@@ -210,7 +210,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetDDMSChildValuesEmptyValues() {
+		public virtual void Util_Util_GetDDMSChildValuesEmptyValues() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("child", ""));
 			List<string> values = Util.GetDDMSChildValues(element, "child");
@@ -220,7 +220,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestGetDDMSChildValuesWithValues() {
+		public virtual void Util_Util_GetDDMSChildValuesWithValues() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("child", "child1"));
 			element.Add(Util.BuildDDMSElement("child", "child2"));
@@ -232,7 +232,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireDDMSValueNull() {
+		public virtual void Util_Util_RequireDDMSValueNull() {
 			try {
 				Util.RequireDDMSValue("description", null);
 				Assert.Fail("Allowed invalid data.");
@@ -242,7 +242,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireDDMSValueEmpty() {
+		public virtual void Util_Util_RequireDDMSValueEmpty() {
 			try {
 				Util.RequireDDMSValue("description", "");
 				Assert.Fail("Allowed invalid data.");
@@ -252,7 +252,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireDDMSValueNotEmpty() {
+		public virtual void Util_Util_RequireDDMSValueNotEmpty() {
 			try {
 				Util.RequireDDMSValue("description", "DDMSence");
 			} catch (InvalidDDMSException) {
@@ -261,7 +261,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireDDMSDateFormatSuccess() {
+		public virtual void Util_Util_RequireDDMSDateFormatSuccess() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 				try {
@@ -283,7 +283,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireDDMSDateFormatFailure() {
+		public virtual void Util_Util_RequireDDMSDateFormatFailure() {
 			foreach (string sVersion in SupportedVersions) {
 				DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
@@ -322,7 +322,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireDDMSQNameSuccess() {
+		public virtual void Util_Util_RequireDDMSQNameSuccess() {
 			try {
 				XElement element = Util.BuildDDMSElement("name", null);
 				Util.RequireDDMSQualifiedName(element, "name");
@@ -332,7 +332,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireDDMSQNameFailure() {
+		public virtual void Util_Util_RequireDDMSQNameFailure() {
 			// Bad URI
 			try {
 				XElement element = Util.BuildElement("ic", "name", "urn:us:gov:ic:ism", null);
@@ -353,7 +353,7 @@ namespace DDMSense.Test.Util {
 		}
         
         [TestMethod]
-		public virtual void TestRequireQNameSuccess() {
+		public virtual void Util_Util_RequireQNameSuccess() {
 			try {
 				XElement element = Util.BuildDDMSElement("name", null);
 				Util.RequireQualifiedName(element, DDMSVersion.CurrentVersion.Namespace, "name");
@@ -371,7 +371,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireQNameFailure() {
+		public virtual void Util_Util_RequireQNameFailure() {
 			// Bad URI
 			try {
 				XElement element = Util.BuildElement("ic", "name", "urn:us:gov:ic:ism", null);
@@ -392,7 +392,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireValueNull() {
+		public virtual void Util_Util_RequireValueNull() {
 			try {
 				Util.RequireValue("description", null);
 				Assert.Fail("Allowed invalid data.");
@@ -402,7 +402,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireValueEmpty() {
+		public virtual void Util_Util_RequireValueEmpty() {
 			try {
 				Util.RequireValue("description", "");
 				Assert.Fail("Allowed invalid data.");
@@ -412,7 +412,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireValueNotEmpty() {
+		public virtual void Util_Util_RequireValueNotEmpty() {
 			try {
 				Util.RequireValue("description", "DDMSence");
 			} catch (System.ArgumentException) {
@@ -421,7 +421,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireBoundedDDMSChildCountNullParent() {
+		public virtual void Util_Util_RequireBoundedDDMSChildCountNullParent() {
 			try {
 				Util.RequireBoundedChildCount(null, "test", 0, 1);
 				Assert.Fail("Allowed illegal argument data.");
@@ -433,7 +433,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireBoundedDDMSChildCountNullChild() {
+		public virtual void Util_Util_RequireBoundedDDMSChildCountNullChild() {
 			try {
 				Util.RequireBoundedChildCount(Util.BuildDDMSElement("test", null), null, 0, 1);
 				Assert.Fail("Allowed illegal argument data.");
@@ -445,7 +445,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireBoundedDDMSChildCountBounded() {
+		public virtual void Util_Util_RequireBoundedDDMSChildCountBounded() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("name", "nameValue"));
 			try {
@@ -456,7 +456,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireBoundedDDMSChildCountExactly1() {
+		public virtual void Util_Util_RequireBoundedDDMSChildCountExactly1() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("name", "nameValue"));
 			try {
@@ -468,7 +468,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireBoundedDDMSChildCountExactlyX() {
+		public virtual void Util_Util_RequireBoundedDDMSChildCountExactlyX() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("name", "nameValue"));
 			try {
@@ -480,7 +480,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireBoundedDDMSChildCountNoMoreThan1() {
+		public virtual void Util_Util_RequireBoundedDDMSChildCountNoMoreThan1() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("phone", "phoneValue"));
 			element.Add(Util.BuildDDMSElement("phone", "phoneValue"));
@@ -493,7 +493,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireBoundedDDMSChildCountNoMoreThanX() {
+		public virtual void Util_Util_RequireBoundedDDMSChildCountNoMoreThanX() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("phone", "phoneValue"));
 			element.Add(Util.BuildDDMSElement("phone", "phoneValue"));
@@ -507,7 +507,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireBoundedDDMSChildCountGenericUnbounded() {
+		public virtual void Util_Util_RequireBoundedDDMSChildCountGenericUnbounded() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			try {
 				Util.RequireBoundedChildCount(element, "phone", 1, 5);
@@ -518,9 +518,9 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireBoundedChildCountIndependentOfCurrentVersion() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireBoundedChildCountIndependentOfCurrentVersion() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireBoundedChildCountIndependentOfCurrentVersion() {
+        public virtual void Util_Util_RequireBoundedChildCountIndependentOfCurrentVersion() {
 			DDMSVersion.SetCurrentVersion("3.0");
 			XElement element = Util.BuildDDMSElement("test", null);
 			element.Add(Util.BuildDDMSElement("phone", "phoneValue"));
@@ -529,25 +529,25 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidNCNamesNull() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidNCNamesNull() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidNCNamesNull() {
+        public virtual void Util_Util_RequireValidNCNamesNull() {
 			Util.RequireValidNCNames(null);
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidNCNamesValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidNCNamesValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidNCNamesValid() {
+        public virtual void Util_Util_RequireValidNCNamesValid() {
 			List<string> names = new List<string>();
 			names.Add("test");
 			Util.RequireValidNCNames(names);
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidNCNamesInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidNCNamesInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidNCNamesInvalid() {
+        public virtual void Util_Util_RequireValidNCNamesInvalid() {
 			List<string> names = new List<string>();
 			names.Add("1test");
 			try {
@@ -559,7 +559,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireValidNCNameNull() {
+		public virtual void Util_Util_RequireValidNCNameNull() {
 			try {
 				Util.RequireValidNCName(null);
 				Assert.Fail("Allowed invalid data.");
@@ -569,7 +569,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireValidNCNameInvalidName() {
+		public virtual void Util_Util_RequireValidNCNameInvalidName() {
 			try {
 				Util.RequireValidNCName("1TEST");
 				Assert.Fail("Allowed invalid data.");
@@ -579,7 +579,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireValidNCNameInvalidNamespace() {
+		public virtual void Util_Util_RequireValidNCNameInvalidNamespace() {
 			try {
 				Util.RequireValidNCName("xmlns:TEST");
 				Assert.Fail("Allowed invalid data.");
@@ -589,14 +589,14 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidNCNameValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidNCNameValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidNCNameValid() {
+        public virtual void Util_Util_RequireValidNCNameValid() {
 			Util.RequireValidNCName("name");
 		}
 
         [TestMethod]
-		public virtual void TestRequireValidNMTokenNull() {
+		public virtual void Util_Util_RequireValidNMTokenNull() {
 			try {
 				Util.RequireValidNMToken(null);
 				Assert.Fail("Allowed invalid data.");
@@ -606,35 +606,35 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidNMTokenValidName() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidNMTokenValidName() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidNMTokenValidName() {
+        public virtual void Util_Util_RequireValidNMTokenValidName() {
 			Util.RequireValidNMToken("1TEST");
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidNMTokenValidNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidNMTokenValidNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidNMTokenValidNamespace() {
+        public virtual void Util_Util_RequireValidNMTokenValidNamespace() {
 			Util.RequireValidNMToken("xmlns:TEST");
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidNMTokenValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidNMTokenValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidNMTokenValid() {
+        public virtual void Util_Util_RequireValidNMTokenValid() {
 			Util.RequireValidNMToken("name");
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireDDMSValidURIValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireDDMSValidURIValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireDDMSValidURIValid() {
+        public virtual void Util_Util_RequireDDMSValidURIValid() {
 			Util.RequireDDMSValidUri("test");
 		}
 
         [TestMethod]
-		public virtual void TestRequireDDMSValidURIInvalid() {
+		public virtual void Util_Util_RequireDDMSValidURIInvalid() {
 			try {
 				Util.RequireDDMSValidUri(":::::");
 				Assert.Fail("Allowed invalid data.");
@@ -644,9 +644,9 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireDDMSValidURINull() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireDDMSValidURINull() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireDDMSValidURINull() {
+        public virtual void Util_Util_RequireDDMSValidURINull() {
 			try {
 				Util.RequireDDMSValidUri(null);
 				Assert.Fail("Allowed invalid data.");
@@ -656,7 +656,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-        public virtual void TestRequireValidLongitudeNull() {
+        public virtual void Util_Util_RequireValidLongitudeNull() {
 			try {
 				Util.RequireValidLongitude(null);
 				Assert.Fail("Allowed invalid data.");
@@ -666,7 +666,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireValidLongitudeOutOfBounds() {
+		public virtual void Util_Util_RequireValidLongitudeOutOfBounds() {
 			try {
 				Util.RequireValidLongitude(new double?(-181));
 				Assert.Fail("Allowed invalid data.");
@@ -682,14 +682,14 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidLongitudeValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidLongitudeValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidLongitudeValid() {
+        public virtual void Util_Util_RequireValidLongitudeValid() {
 			Util.RequireValidLongitude(new double?(0));
 		}
 
         [TestMethod]
-		public virtual void TestRequireValidLatitudeNull() {
+		public virtual void Util_Util_RequireValidLatitudeNull() {
 			try {
 				Util.RequireValidLatitude(null);
 				Assert.Fail("Allowed invalid data.");
@@ -699,7 +699,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireValidLatitudeOutOfBounds() {
+		public virtual void Util_Util_RequireValidLatitudeOutOfBounds() {
 			try {
 				Util.RequireValidLatitude(new double?(-91));
 				Assert.Fail("Allowed invalid data.");
@@ -715,14 +715,14 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireValidLatitudeValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireValidLatitudeValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireValidLatitudeValid() {
+        public virtual void Util_Util_RequireValidLatitudeValid() {
 			Util.RequireValidLatitude(new double?(0));
 		}
 
         [TestMethod]
-        public virtual void TestIsBoundedBadRange() {
+        public virtual void Util_Util_IsBoundedBadRange() {
 			try {
 				Util.IsBounded(0, 10, 0);
 				Assert.Fail("Did not stop on bad range.");
@@ -732,37 +732,37 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestIsBoundedLow() {
+		public virtual void Util_Util_IsBoundedLow() {
 			Assert.IsFalse(Util.IsBounded(0, 1, 3));
 		}
 
         [TestMethod]
-		public virtual void TestIsBoundedHigh() {
+		public virtual void Util_Util_IsBoundedHigh() {
 			Assert.IsFalse(Util.IsBounded(4, 1, 3));
 		}
 
         [TestMethod]
-		public virtual void TestIsBoundedMiddle() {
+		public virtual void Util_Util_IsBoundedMiddle() {
 			Assert.IsTrue(Util.IsBounded(1, 0, 2));
 		}
 
         [TestMethod]
-		public virtual void TestIsBoundedLowEdge() {
+		public virtual void Util_Util_IsBoundedLowEdge() {
 			Assert.IsTrue(Util.IsBounded(1, 1, 3));
 		}
 
         [TestMethod]
-		public virtual void TestIsBoundedHighEdge() {
+		public virtual void Util_Util_IsBoundedHighEdge() {
 			Assert.IsTrue(Util.IsBounded(3, 1, 3));
 		}
 
         [TestMethod]
-		public virtual void TestIsBoundedOnlyOne() {
+		public virtual void Util_Util_IsBoundedOnlyOne() {
 			Assert.IsTrue(Util.IsBounded(1, 1, 1));
 		}
 
         [TestMethod]
-		public virtual void TestListEqualsNullLists() {
+		public virtual void Util_Util_ListEqualsNullLists() {
 			try {
                 Util.ListEquals((List<object>)null, (List<object>)null);
 				Assert.Fail("Did not stop on bad data.");
@@ -772,21 +772,21 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestListEqualsSameList() {
+		public virtual void Util_Util_ListEqualsSameList() {
 			List<string> list = new List<string>();
 			list.Add("Test");
 			Assert.IsTrue(Util.ListEquals(list, list));
 		}
 
         [TestMethod]
-		public virtual void TestListEqualsEmptyLists() {
+		public virtual void Util_Util_ListEqualsEmptyLists() {
 			List<string> list1 = new List<string>();
 			List<string> list2 = new List<string>();
 			Assert.IsTrue(Util.ListEquals(list1, list2));
 		}
 
         [TestMethod]
-		public virtual void TestListEqualsSizes() {
+		public virtual void Util_Util_ListEqualsSizes() {
 			List<string> list1 = new List<string>();
 			list1.Add("Test");
 			List<string> list2 = new List<string>();
@@ -796,7 +796,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestListEqualsNullValues() {
+		public virtual void Util_Util_ListEqualsNullValues() {
 			List<string> list1 = new List<string>();
 			list1.Add(null);
 			list1.Add("Test2");
@@ -807,7 +807,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestListEqualsNullValue() {
+		public virtual void Util_Util_ListEqualsNullValue() {
 			List<string> list1 = new List<string>();
 			list1.Add(null);
 			list1.Add("Test2");
@@ -818,7 +818,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestListEqualsDifferentValue() {
+		public virtual void Util_Util_ListEqualsDifferentValue() {
 			List<string> list1 = new List<string>();
 			list1.Add("Test1");
 			List<string> list2 = new List<string>();
@@ -827,33 +827,33 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestXmlEscape() {
+		public virtual void Util_Util_XmlEscape() {
 			string testString = "<test>\"Brian's DDMSense & DDMS\"</test>";
 			Assert.AreEqual("&lt;test&gt;&quot;Brian&apos;s DDMSense &amp; DDMS&quot;&lt;/test&gt;", Util.XmlEscape(testString));
 		}
 
         [TestMethod]
-		public virtual void TestCapitalizeEmpty() {
+		public virtual void Util_Util_CapitalizeEmpty() {
 			Assert.AreEqual(null, Util.Capitalize(null));
 		}
 
         [TestMethod]
-		public virtual void TestCapitalizeOneChar() {
+		public virtual void Util_Util_CapitalizeOneChar() {
 			Assert.AreEqual("A", Util.Capitalize("a"));
 		}
 
         [TestMethod]
-		public virtual void TestCapitalizeNotLetter() {
+		public virtual void Util_Util_CapitalizeNotLetter() {
 			Assert.AreEqual("123", Util.Capitalize("123"));
 		}
 
         [TestMethod]
-		public virtual void TestCapitalizeSuccess() {
+		public virtual void Util_Util_CapitalizeSuccess() {
 			Assert.AreEqual("Ddms", Util.Capitalize("ddms"));
 		}
 
         [TestMethod]
-		public virtual void TestBuildElementEmptyPrefix() {
+		public virtual void Util_Util_BuildElementEmptyPrefix() {
 			XElement element = Util.BuildElement(null, "test", "", null);
 			Assert.IsNotNull(element);
 			Assert.AreEqual("test", element.Name.LocalName);
@@ -864,7 +864,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildDDMSElement() {
+		public virtual void Util_Util_BuildDDMSElement() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			Assert.IsNotNull(element);
 			Assert.AreEqual("test", element.Name.LocalName);
@@ -873,7 +873,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildDDMSElementNullName() {
+		public virtual void Util_Util_BuildDDMSElementNullName() {
 			try {
 				Util.BuildDDMSElement(null, null);
 				Assert.Fail("Method allowed invalid data.");
@@ -883,7 +883,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildDDMSElementChildText() {
+		public virtual void Util_Util_BuildDDMSElementChildText() {
 			XElement element = Util.BuildDDMSElement("test", "testValue");
 			Assert.IsNotNull(element);
 			Assert.AreEqual("test", element.Name.LocalName);
@@ -893,7 +893,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildDDMSElementNoChildText() {
+		public virtual void Util_Util_BuildDDMSElementNoChildText() {
 			XElement element = Util.BuildDDMSElement("test", null);
 			Assert.IsNotNull(element);
 			Assert.AreEqual("test", element.Name.LocalName);
@@ -903,7 +903,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildAttribute() {
+		public virtual void Util_Util_BuildAttribute() {
 			XAttribute attribute = Util.BuildAttribute("ddms", "test", DDMSVersion.CurrentVersion.Namespace, "testValue");
 			Assert.IsNotNull(attribute);
 			Assert.AreEqual("test", attribute.Name.LocalName);
@@ -913,7 +913,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildAttributeEmptyValues() {
+		public virtual void Util_Util_BuildAttributeEmptyValues() {
 			XAttribute attribute = Util.BuildAttribute(null, "test", null, "testValue");
 			Assert.IsNotNull(attribute);
 			Assert.AreEqual("test", attribute.Name.LocalName);
@@ -923,7 +923,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildDDMSAttribute() {
+		public virtual void Util_Util_BuildDDMSAttribute() {
 			XAttribute attribute = Util.BuildDDMSAttribute("test", "testValue");
 			Assert.IsNotNull(attribute);
 			Assert.AreEqual("test", attribute.Name.LocalName);
@@ -933,7 +933,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildDDMSAttributeNullName() {
+		public virtual void Util_Util_BuildDDMSAttributeNullName() {
 			try {
 				Util.BuildDDMSAttribute(null, "testValue");
 				Assert.Fail("Method allowed invalid data.");
@@ -943,7 +943,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestBuildDDMSAttributeNullValue() {
+		public virtual void Util_Util_BuildDDMSAttributeNullValue() {
 			try {
 				Util.BuildDDMSAttribute("test", null);
 				Assert.Fail("Method allowed invalid data.");
@@ -953,9 +953,9 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testRequireSameVersionSuccess() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+//ORIGINAL LINE: public void Util_Util_RequireSameVersionSuccess() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        public virtual void TestRequireSameVersionSuccess() {
+        public virtual void Util_Util_RequireSameVersionSuccess() {
 			DDMSVersion.SetCurrentVersion("2.0");
 			Identifier identifier = new Identifier("Test", "Value");
 			Identifier identifier2 = new Identifier("Test", "Value");
@@ -963,7 +963,7 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestRequireSameVersionFailure() {
+		public virtual void Util_Util_RequireSameVersionFailure() {
 			try {
 				DDMSVersion.SetCurrentVersion("2.0");
 				Identifier identifier = new Identifier("Test", "Value");
@@ -977,14 +977,14 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestAddDdmsAttributeEmptyValue() {
+		public virtual void Util_Util_AddDdmsAttributeEmptyValue() {
 			XElement element = new XElement("test", "http://test.com");
 			Util.AddDDMSAttribute(element, "testAttribute", null);
 			Assert.IsNull(element.Attribute(XName.Get("testAttribute", DDMSVersion.CurrentVersion.Namespace)));
 		}
 
         [TestMethod]
-		public virtual void TestAddDdmsAttributeValue() {
+		public virtual void Util_Util_AddDdmsAttributeValue() {
 			XElement element = new XElement("test", "http://test.com");
 			Util.AddDDMSAttribute(element, "testAttribute", "dog");
             XAttribute attr = element.Attribute(XName.Get("testAttribute", DDMSVersion.CurrentVersion.Namespace));
@@ -995,14 +995,14 @@ namespace DDMSense.Test.Util {
 		}
 
         [TestMethod]
-		public virtual void TestAddDdmsChildElementEmptyValue() {
+		public virtual void Util_Util_AddDdmsChildElementEmptyValue() {
 			XElement element = new XElement("test", "http://test.com");
 			Util.AddDDMSChildElement(element, "child", null);
 			Assert.AreEqual(0, element.Elements().Count());
 		}
 
         [TestMethod]
-		public virtual void TestAddDdmsChildElementValue() {
+		public virtual void Util_Util_AddDdmsChildElementValue() {
 			XElement element = new XElement("test", "http://test.com");
 			Util.AddDDMSChildElement(element, "child", "dog");
 			Assert.AreEqual(1, element.Elements().Count());
@@ -1014,7 +1014,7 @@ namespace DDMSense.Test.Util {
 		}
         
         [TestMethod]
-		public virtual void TestGetAsList() {
+		public virtual void Util_Util_GetAsList() {
 			Assert.IsTrue(!Util.GetXsListAsList(null).Any());
 			Assert.IsTrue(!Util.GetXsListAsList("").Any());
 			List<string> list = Util.GetXsListAsList("a b");
@@ -1028,9 +1028,9 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuildXmlDocument() throws Exception
+//ORIGINAL LINE: public void Util_Util_BuildXmlDocument() throws Exception
         [TestMethod]
-        public virtual void TestBuildXmlDocument() {
+        public virtual void Util_Util_BuildXmlDocument() {
             //File testFile = new File(PropertyReader.getProperty("test.unit.data") + "3.0/", "resource.xml");
             //string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).ToXML();
             //Assert.AreEqual(expectedXmlOutput, Util.BuildXmlDocument(new FileStream(testFile)).RootElement.ToXML());
@@ -1038,9 +1038,9 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testBuildXmlDocumentBadFile() throws Exception
+//ORIGINAL LINE: public void Util_Util_BuildXmlDocumentBadFile() throws Exception
         [TestMethod]
-        public virtual void TestBuildXmlDocumentBadFile() {
+        public virtual void Util_Util_BuildXmlDocumentBadFile() {
 			try {
 				Util.BuildXmlDocument(null);
 				Assert.Fail("Allowed invalid data.");
@@ -1057,9 +1057,9 @@ namespace DDMSense.Test.Util {
 		}
 
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-//ORIGINAL LINE: public void testSchematronQueryBinding() throws Exception
+//ORIGINAL LINE: public void Util_Util_SchematronQueryBinding() throws Exception
         [TestMethod]
-        public virtual void TestSchematronQueryBinding() {
+        public virtual void Util_Util_SchematronQueryBinding() {
 			XDocument schDocument = Util.BuildXmlDocument(new FileStream("data/sample/schematron/testPublisherValueXslt1.sch",FileMode.Open));
 			Assert.AreEqual("xslt", Util.GetSchematronQueryBinding(schDocument));
 			schDocument = Util.BuildXmlDocument(new FileStream("data/sample/schematron/testPositionValuesXslt2.sch",FileMode.Open));

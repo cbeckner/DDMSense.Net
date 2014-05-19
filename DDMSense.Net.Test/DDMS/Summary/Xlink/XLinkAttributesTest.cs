@@ -306,7 +306,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorValid()
+        public virtual void Summary_Xlink_XLinkAttributes_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -334,7 +334,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorValid()
+        public virtual void Summary_Xlink_XLinkAttributes_DataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -354,7 +354,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+        public virtual void Summary_Xlink_XLinkAttributes_ElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -396,7 +396,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestDataConstructorInvalid()
+        public virtual void Summary_Xlink_XLinkAttributes_DataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -429,7 +429,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestWarnings()
+        public virtual void Summary_Xlink_XLinkAttributes_Warnings()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -444,7 +444,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestConstructorEquality()
+        public virtual void Summary_Xlink_XLinkAttributes_ConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -477,7 +477,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityDifferentValues()
+        public virtual void Summary_Xlink_XLinkAttributes_ConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -537,7 +537,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestConstructorInequalityWrongClass()
+        public virtual void Summary_Xlink_XLinkAttributes_ConstructorInequalityWrongClass()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -551,7 +551,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestHTMLTextOutput()
+        public virtual void Summary_Xlink_XLinkAttributes_HTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -590,7 +590,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestAddTo()
+        public virtual void Summary_Xlink_XLinkAttributes_AddTo()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -605,7 +605,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestGetNonNull()
+        public virtual void Summary_Xlink_XLinkAttributes_GetNonNull()
         {
             XLinkAttributes component = new XLinkAttributes();
             XLinkAttributes output = XLinkAttributes.GetNonNullInstance(null);
@@ -616,7 +616,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestBuilderEquality()
+        public virtual void Summary_Xlink_XLinkAttributes_BuilderEquality()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -629,7 +629,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestBuilderIsEmpty()
+        public virtual void Summary_Xlink_XLinkAttributes_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -648,7 +648,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
         }
 
         [TestMethod]
-        public virtual void TestBuilderValidation()
+        public virtual void Summary_Xlink_XLinkAttributes_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
             {

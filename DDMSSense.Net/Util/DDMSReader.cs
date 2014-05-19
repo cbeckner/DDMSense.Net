@@ -176,8 +176,9 @@ namespace DDMSense.Util
         {
             Util.RequireValue("XML string", xml);
 
-            //var reader = new MemoryStream(
-            return (GetElement(xml));
+            byte[] byteArray = Encoding.UTF8.GetBytes(xml);
+            MemoryStream stream = new MemoryStream(byteArray);
+            return (GetElement(stream));
         }
 
         /// <summary>
