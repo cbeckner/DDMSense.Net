@@ -125,9 +125,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Subtitle.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Subtitle.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -136,12 +136,12 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(Subtitle.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(Subtitle.GetName(version), null);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                GetInstance(SUCCESS, element);
 //            }
@@ -162,10 +162,10 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Bad security attributes
-//                XElement element = Util.buildDDMSElement(Subtitle.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(Subtitle.GetName(version), null);
 //                GetInstance("classification is required.", element);
 //            }
 //        }
@@ -187,16 +187,16 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Subtitle component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 
 //                // No value
-//                XElement element = Util.buildDDMSElement(Subtitle.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(Subtitle.GetName(version), null);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                component = GetInstance(SUCCESS, element);
-//                Assert.Equals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.Count());
 //                string text = "A ddms:subtitle element was found with no subtitle value.";
 //                string locator = "ddms:subtitle";
 //                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -228,12 +228,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Subtitle component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -241,10 +241,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Subtitle component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -256,7 +256,7 @@
 
 //                Subtitle component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Subtitle.Builder builder = new Subtitle.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -267,7 +267,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Subtitle.Builder builder = new Subtitle.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
 //                Assert.IsFalse(builder.Empty);
@@ -284,14 +284,14 @@
 //                Subtitle.Builder builder = new Subtitle.Builder();
 //                builder.Value = TEST_VALUE;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "classification is required.");
 //                }
 //                builder.SecurityAttributes.Classification = "U";
 //                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

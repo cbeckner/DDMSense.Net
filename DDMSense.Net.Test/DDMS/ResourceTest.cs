@@ -1689,7 +1689,7 @@ namespace DDMSense.Test.DDMS {
 
 				//ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(serialized));
 				//Resource.Builder unserializedBuilder = (Resource.Builder) ois.readObject();
-				//Assert.Equals(component, unserializedBuilder.commit());
+				//Assert.Equals(component, unserializedBuilder.Commit());
 			}
 		}
 

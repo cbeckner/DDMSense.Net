@@ -165,9 +165,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_GML_PREFIX, Position.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_GML_PREFIX, Position.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -176,19 +176,19 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string gmlPrefix = PropertyReader.getPrefix("gml");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string gmlPrefix = PropertyReader.GetPrefix("gml");
 //                string gmlNamespace = version.GmlNamespace;
 
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, TEST_XS_LIST);
+//                XElement element = Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, TEST_XS_LIST);
 //                GetInstance(SUCCESS, element);
 
 //                // Empty coordinate
-//                element = Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, "25.0    26.0");
+//                element = Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, "25.0    26.0");
 //                GetInstance(SUCCESS, element);
 
 //            }
@@ -211,26 +211,26 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string gmlPrefix = PropertyReader.getPrefix("gml");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string gmlPrefix = PropertyReader.GetPrefix("gml");
 //                string gmlNamespace = version.GmlNamespace;
 //                // Missing coordinates
-//                XElement element = Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, null);
+//                XElement element = Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                GetInstance("A position must be represented by", element);
 
 //                // At least 2 coordinates
-//                element = Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, "25.0");
+//                element = Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, "25.0");
 //                SRSAttributesTest.Fixture.addTo(element);
 //                GetInstance("A position must be represented by", element);
 
 //                // No more than 3 coordinates
-//                element = Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, TEST_XS_LIST + " 25.0 35.0");
+//                element = Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, TEST_XS_LIST + " 25.0 35.0");
 //                SRSAttributesTest.Fixture.addTo(element);
 //                GetInstance("A position must be represented by", element);
 
 //                // Each coordinate is a Double
-//                element = Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, "25.0 Dog");
+//                element = Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, "25.0 Dog");
 //                SRSAttributesTest.Fixture.addTo(element);
 //                GetInstance("coordinate is required.", element);
 //            }
@@ -264,7 +264,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -284,14 +284,14 @@
 ////ORIGINAL LINE: public void testEqualityWhitespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestEqualityWhitespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string gmlPrefix = PropertyReader.getPrefix("gml");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string gmlPrefix = PropertyReader.GetPrefix("gml");
 //                string gmlNamespace = version.GmlNamespace;
-//                Position position = new Position(Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, TEST_XS_LIST));
-//                Position positionEqual = new Position(Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, TEST_XS_LIST));
-//                Position positionEqualWhitespace = new Position(Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, TEST_XS_LIST + "   "));
-//                Position positionUnequal2d = new Position(Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, "32.1 40.0"));
-//                Position positionUnequal3d = new Position(Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, TEST_XS_LIST + " 40.0"));
+//                Position position = new Position(Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, TEST_XS_LIST));
+//                Position positionEqual = new Position(Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, TEST_XS_LIST));
+//                Position positionEqualWhitespace = new Position(Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, TEST_XS_LIST + "   "));
+//                Position positionUnequal2d = new Position(Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, "32.1 40.0"));
+//                Position positionUnequal3d = new Position(Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, TEST_XS_LIST + " 40.0"));
 //                Assert.Equals(position, positionEqual);
 //                Assert.Equals(position, positionEqualWhitespace);
 //                Assert.IsFalse(position.Equals(positionUnequal2d));
@@ -332,12 +332,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -347,10 +347,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_COORDS, SRSAttributesTest.Fixture);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -362,7 +362,7 @@
 
 //                Position component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Position.Builder builder = new Position.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -373,7 +373,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Position.Builder builder = new Position.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Coordinates[0].Value = Convert.ToDouble(0);
 //                Assert.IsFalse(builder.Empty);
@@ -389,13 +389,13 @@
 //                Position.Builder builder = new Position.Builder();
 //                builder.Coordinates[0].Value = Convert.ToDouble(0);
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "A position must be represented by");
 //                }
 //                builder.Coordinates.get(1).Value = Convert.ToDouble(0);
-//                builder.commit();
+//                builder.Commit();
 
 //                // Skip empty Coordinates
 //                builder = new Position.Builder();
@@ -403,7 +403,7 @@
 //                builder.Coordinates[0].Value = null;
 //                builder.Coordinates.get(1).Value = Convert.ToDouble(0);
 //                builder.Coordinates.get(2).Value = Convert.ToDouble(1);
-//                Assert.Equals(2, builder.commit().Coordinates.size());
+//                Assert.Equals(2, builder.Commit().Coordinates.Count());
 //            }
 //        }
 

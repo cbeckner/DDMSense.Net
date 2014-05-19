@@ -132,9 +132,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_NTK_PREFIX, ProfileList.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_NTK_PREFIX, ProfileList.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -165,16 +165,16 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string ntkPrefix = PropertyReader.getPrefix("ntk");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string ntkPrefix = PropertyReader.GetPrefix("ntk");
 
 //                // Missing profile
-//                XElement element = Util.buildElement(ntkPrefix, ProfileList.getName(version), version.NtkNamespace, null);
+//                XElement element = Util.buildElement(ntkPrefix, ProfileList.GetName(version), version.NtkNamespace, null);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                GetInstance("At least one profile is required.", element);
 
 //                // Missing security attributes
-//                element = Util.buildElement(ntkPrefix, ProfileList.getName(version), version.NtkNamespace, null);
+//                element = Util.buildElement(ntkPrefix, ProfileList.GetName(version), version.NtkNamespace, null);
 //                foreach (Profile profile in ProfileTest.FixtureList) {
 //                    element.appendChild(profile.ElementCopy);
 //                }
@@ -209,7 +209,7 @@
 
 //                // No warnings
 //                ProfileList component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -249,12 +249,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, ProfileTest.FixtureList);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -265,10 +265,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 
 //                component = GetInstance(SUCCESS, ProfileTest.FixtureList);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -284,7 +284,7 @@
 
 //                ProfileList component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                ProfileList.Builder builder = new ProfileList.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -295,7 +295,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList.Builder builder = new ProfileList.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Profiles[0];
 //                Assert.IsTrue(builder.Empty);
@@ -314,7 +314,7 @@
 //                ProfileList.Builder builder = new ProfileList.Builder();
 //                builder.SecurityAttributes.Classification = "U";
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "At least one profile is required.");
@@ -330,7 +330,7 @@
 //                builder.Profiles[0].SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
 //                builder.SecurityAttributes.Classification = "U";
 //                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 

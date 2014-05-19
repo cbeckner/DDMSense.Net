@@ -150,9 +150,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_NTK_PREFIX, IndividualValue.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_NTK_PREFIX, IndividualValue.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -161,14 +161,14 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string ntkPrefix = PropertyReader.getPrefix("ntk");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string ntkPrefix = PropertyReader.GetPrefix("ntk");
 
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildElement(ntkPrefix, IndividualValue.getName(version), version.NtkNamespace, TEST_VALUE);
+//                XElement element = Util.buildElement(ntkPrefix, IndividualValue.GetName(version), version.NtkNamespace, TEST_VALUE);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                GetInstance(SUCCESS, element);
 //            }
@@ -190,11 +190,11 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string ntkPrefix = PropertyReader.getPrefix("ntk");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string ntkPrefix = PropertyReader.GetPrefix("ntk");
 
 //                // Missing security attributes
-//                XElement element = Util.buildElement(ntkPrefix, IndividualValue.getName(version), version.NtkNamespace, TEST_VALUE);
+//                XElement element = Util.buildElement(ntkPrefix, IndividualValue.GetName(version), version.NtkNamespace, TEST_VALUE);
 //                GetInstance("classification is required.", element);
 //            }
 //        }
@@ -221,11 +221,11 @@
 
 //                // No warnings
 //                IndividualValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 
 //                // No value
 //                component = GetInstance(SUCCESS, null, null, null, null);
-//                Assert.Equals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.Count());
 //                string text = "A ntk:AccessIndividualValue element was found with no value.";
 //                string locator = "ntk:AccessIndividualValue";
 //                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -269,12 +269,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                IndividualValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -283,10 +283,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                IndividualValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -302,7 +302,7 @@
 
 //                IndividualValue component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                IndividualValue.Builder builder = new IndividualValue.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -313,7 +313,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                IndividualValue.Builder builder = new IndividualValue.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
 //                Assert.IsFalse(builder.Empty);
@@ -330,14 +330,14 @@
 //                IndividualValue.Builder builder = new IndividualValue.Builder();
 //                builder.Value = TEST_VALUE;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "classification is required.");
 //                }
 //                builder.SecurityAttributes.Classification = "U";
 //                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

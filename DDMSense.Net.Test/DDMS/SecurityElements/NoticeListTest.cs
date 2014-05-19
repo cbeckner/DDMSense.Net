@@ -59,8 +59,8 @@
 //                try {
 //                    DDMSVersion version = DDMSVersion.CurrentVersion;
     
-//                    XElement element = Util.buildDDMSElement(NoticeList.getName(version), null);
-//                    element.addNamespaceDeclaration(PropertyReader.getPrefix("ddms"), version.Namespace);
+//                    XElement element = Util.BuildDDMSElement(NoticeList.GetName(version), null);
+//                    element.addNamespaceDeclaration(PropertyReader.GetPrefix("ddms"), version.Namespace);
 //                    SecurityAttributesTest.Fixture.addTo(element);
 //                    element.appendChild(NoticeTest.FixtureElement);
 //                    return (element);
@@ -174,9 +174,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, NoticeList.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, FixtureElement), DEFAULT_DDMS_PREFIX, NoticeList.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -239,20 +239,20 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeList component = GetInstance(SUCCESS, FixtureElement);
 
 //                // 4.1 ISM:externalNotice used
 //                if (version.isAtLeast("4.1")) {
-//                    Assert.Equals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.Count());
 //                    string text = "The ISM:externalNotice attribute in this DDMS component";
 //                    string locator = "ddms:noticeList/ISM:Notice";
 //                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //                // No warnings 
 //                else {
-//                    Assert.Equals(0, component.ValidationWarnings.size());
+//                    Assert.Equals(0, component.ValidationWarnings.Count());
 //                }
 //            }
 //        }
@@ -292,12 +292,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeList component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, NoticeTest.FixtureList);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -308,10 +308,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeList component = GetInstance(SUCCESS, FixtureElement);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, NoticeTest.FixtureList);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -327,7 +327,7 @@
 
 //                NoticeList component = GetInstance(SUCCESS, FixtureElement);
 //                NoticeList.Builder builder = new NoticeList.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -338,7 +338,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                NoticeList.Builder builder = new NoticeList.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Notices.get(1).NoticeTexts.get(1).Value = "TEST";
 //                Assert.IsFalse(builder.Empty);
@@ -356,7 +356,7 @@
 //                builder.SecurityAttributes.Classification = "U";
 //                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "At least one ISM:Notice");
@@ -366,7 +366,7 @@
 //                builder.Notices[0].SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
 //                builder.Notices[0].NoticeTexts[0].SecurityAttributes.Classification = "U";
 //                builder.Notices[0].NoticeTexts[0].SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 

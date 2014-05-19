@@ -174,9 +174,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Security.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Security.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -185,14 +185,14 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
 //                if (version.isAtLeast("4.0.1")) {
-//                    XElement element = Util.buildDDMSElement(Security.getName(version), null);
-//                    Util.addAttribute(element, PropertyReader.getPrefix("ism"), "excludeFromRollup", version.IsmNamespace, "true");
+//                    XElement element = Util.BuildDDMSElement(Security.GetName(version), null);
+//                    Util.addAttribute(element, PropertyReader.GetPrefix("ism"), "excludeFromRollup", version.IsmNamespace, "true");
 //                    SecurityAttributesTest.Fixture.addTo(element);
 //                    GetInstance(SUCCESS, element);
 //                }
@@ -216,21 +216,21 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing excludeFromRollup
 //                if (version.isAtLeast("3.0")) {
-//                    XElement element = Util.buildDDMSElement(Security.getName(version), null);
+//                    XElement element = Util.BuildDDMSElement(Security.GetName(version), null);
 //                    SecurityAttributesTest.Fixture.addTo(element);
 //                    GetInstance("The excludeFromRollup attribute is required.", element);
 
 //                    // Incorrect excludeFromRollup
-//                    element = Util.buildDDMSElement(Security.getName(version), null);
-//                    Util.addAttribute(element, PropertyReader.getPrefix("ism"), "excludeFromRollup", version.IsmNamespace, "false");
+//                    element = Util.BuildDDMSElement(Security.GetName(version), null);
+//                    Util.addAttribute(element, PropertyReader.GetPrefix("ism"), "excludeFromRollup", version.IsmNamespace, "false");
 //                    GetInstance("The excludeFromRollup attribute must have a fixed value", element);
 
 //                    // Invalid excludeFromRollup
-//                    element = Util.buildDDMSElement(Security.getName(version), null);
-//                    Util.addAttribute(element, PropertyReader.getPrefix("ism"), "excludeFromRollup", version.IsmNamespace, "aardvark");
+//                    element = Util.BuildDDMSElement(Security.GetName(version), null);
+//                    Util.addAttribute(element, PropertyReader.GetPrefix("ism"), "excludeFromRollup", version.IsmNamespace, "aardvark");
 //                    GetInstance("The excludeFromRollup attribute is required.", element);
 //                }
 //            }
@@ -253,32 +253,32 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Security component = GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // 4.1 ISM:externalNotice used
 //                if (version.isAtLeast("4.1")) {
-//                    Assert.Equals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.Count());
 //                    string text = "The ISM:externalNotice attribute in this DDMS component";
 //                    string locator = "ddms:security/ddms:noticeList/ISM:Notice";
 //                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 //                }
 //                // No warnings 
 //                else {
-//                    Assert.Equals(0, component.ValidationWarnings.size());
+//                    Assert.Equals(0, component.ValidationWarnings.Count());
 //                }
 
 //                // Nested warnings
 //                if (version.isAtLeast("4.0.1")) {
-//                    XElement element = Util.buildDDMSElement(Security.getName(version), null);
-//                    Util.addAttribute(element, PropertyReader.getPrefix("ism"), "excludeFromRollup", version.IsmNamespace, "true");
-//                    XElement accessElement = Util.buildElement(PropertyReader.getPrefix("ntk"), Access.getName(version), version.NtkNamespace, null);
+//                    XElement element = Util.BuildDDMSElement(Security.GetName(version), null);
+//                    Util.addAttribute(element, PropertyReader.GetPrefix("ism"), "excludeFromRollup", version.IsmNamespace, "true");
+//                    XElement accessElement = Util.buildElement(PropertyReader.GetPrefix("ntk"), Access.GetName(version), version.NtkNamespace, null);
 //                    SecurityAttributesTest.Fixture.addTo(accessElement);
 //                    element.appendChild(accessElement);
 //                    SecurityAttributesTest.Fixture.addTo(element);
 //                    component = GetInstance(SUCCESS, element);
-//                    Assert.Equals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.Count());
 //                    string text = "An ntk:Access element was found with no";
 //                    string locator = "ddms:security/ntk:Access";
 //                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -302,7 +302,7 @@
 ////ORIGINAL LINE: public void testConstructorInequalityDifferentValues() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestConstructorInequalityDifferentValues() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                if (version.isAtLeast("4.0.1")) {
 //                    Security elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
@@ -321,12 +321,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Security component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, NoticeListTest.Fixture, AccessTest.Fixture);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -336,21 +336,21 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Security component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, NoticeListTest.Fixture, AccessTest.Fixture);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 ////ORIGINAL LINE: public void testWrongVersionExcludeFromRollup() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWrongVersionExcludeFromRollup() {
-//            DDMSVersion version = DDMSVersion.setCurrentVersion("2.0");
-//            string icPrefix = PropertyReader.getPrefix("ism");
+//            DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
+//            string icPrefix = PropertyReader.GetPrefix("ism");
 //            string icNamespace = version.IsmNamespace;
 
-//            XElement element = Util.buildDDMSElement("security", null);
+//            XElement element = Util.BuildDDMSElement("security", null);
 //            Util.addAttribute(element, icPrefix, "classification", icNamespace, "U");
 //            Util.addAttribute(element, icPrefix, "ownerProducer", icNamespace, "USA");
 //            Util.addAttribute(element, icPrefix, "excludeFromRollup", icNamespace, "true");
@@ -370,7 +370,7 @@
 
 //                Security component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Security.Builder builder = new Security.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -381,7 +381,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Security.Builder builder = new Security.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.SecurityAttributes.Classification = "U";
 //                Assert.IsFalse(builder.Empty);
@@ -398,14 +398,14 @@
 //                Security.Builder builder = new Security.Builder();
 //                builder.SecurityAttributes.Classification = "SuperSecret";
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "SuperSecret is not a valid enumeration token");
 //                }
 //                builder.SecurityAttributes.Classification = "U";
 //                builder.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

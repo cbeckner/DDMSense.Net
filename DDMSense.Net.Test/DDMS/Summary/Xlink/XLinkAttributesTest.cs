@@ -212,7 +212,7 @@
 //        /// <param name="show"> the show token (optional) </param>
 //        /// <param name="actuate"> the actuate token (optional) </param>
 //        private void AddAttributes(XElement element, string href, string role, string title, string arcrole, string show, string actuate) {
-//            string xlinkPrefix = PropertyReader.getPrefix("xlink");
+//            string xlinkPrefix = PropertyReader.GetPrefix("xlink");
 //            string xlinkNamespace = DDMSVersion.CurrentVersion.XlinkNamespace;
 //            Util.addAttribute(element, xlinkPrefix, "type", xlinkNamespace, "simple");
 //            Util.addAttribute(element, xlinkPrefix, "href", xlinkNamespace, href);
@@ -232,7 +232,7 @@
 //        /// <param name="title"> the link title (optional) </param>
 //        /// <param name="label"> the name of the link (optional) </param>
 //        private void AddAttributes(XElement element, string href, string role, string title, string label) {
-//            string xlinkPrefix = PropertyReader.getPrefix("xlink");
+//            string xlinkPrefix = PropertyReader.GetPrefix("xlink");
 //            string xlinkNamespace = DDMSVersion.CurrentVersion.XlinkNamespace;
 //            Util.addAttribute(element, xlinkPrefix, "type", xlinkNamespace, "locator");
 //            Util.addAttribute(element, xlinkPrefix, "href", xlinkNamespace, href);
@@ -250,7 +250,7 @@
 //        /// <param name="title"> the link title (optional) </param>
 //        /// <param name="label"> the name of the link (optional) </param>
 //        private void AddAttributes(XElement element, string role, string title, string label) {
-//            string xlinkPrefix = PropertyReader.getPrefix("xlink");
+//            string xlinkPrefix = PropertyReader.GetPrefix("xlink");
 //            string xlinkNamespace = DDMSVersion.CurrentVersion.XlinkNamespace;
 //            Util.addAttribute(element, xlinkPrefix, "type", xlinkNamespace, "resource");
 //            Util.addAttribute(element, xlinkPrefix, "role", xlinkNamespace, role);
@@ -263,22 +263,22 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields (locator)
-//                XElement element = Util.buildDDMSElement("link", null);
+//                XElement element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                GetInstance(SUCCESS, element);
 
 //                // All fields (simple)
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
 //                GetInstance(SUCCESS, element);
 
 //                // All fields (resource)
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                GetInstance(SUCCESS, element);
 
 //                // No optional fields (all)
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -302,44 +302,44 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // href is not valid URI
-//                XElement element = Util.buildDDMSElement("link", null);
+//                XElement element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, INVALID_URI, null, null, null);
 //                GetInstance("Invalid URI", element);
 
 //                // role is not valid URI
 //                if (version.isAtLeast("4.0.1")) {
-//                    element = Util.buildDDMSElement("link", null);
+//                    element = Util.BuildDDMSElement("link", null);
 //                    AddAttributes(element, null, INVALID_URI, null, null);
 //                    GetInstance("Invalid URI", element);
 //                }
 
 //                // label is not valid NCName
 //                if (version.isAtLeast("4.0.1")) {
-//                    element = Util.buildDDMSElement("link", null);
+//                    element = Util.BuildDDMSElement("link", null);
 //                    AddAttributes(element, null, null, null, "ddms:prefix& GML");
 //                    GetInstance("\"ddms:prefix& GML\" is not a valid NCName.", element);
 //                }
 
 //                // invalid arcrole
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, null, null, null, INVALID_URI, null, null);
 
 //                // invalid show
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, null, null, null, null, "notInTheTokenList", null);
 
 //                // invalid actuate
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, null, null, null, null, null, "notInTheTokenList");
 //            }
 //        }
 
 //        public virtual void TestDataConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // href is not valid URI
 //                GetInstance("Invalid URI", INVALID_URI, null, null, null);
@@ -370,10 +370,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // No warnings
-//                XElement element = Util.buildDDMSElement("link", null);
+//                XElement element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes component = GetInstance(SUCCESS, element);
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -382,7 +382,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // locator version
-//                XElement element = Util.buildDDMSElement("link", null);
+//                XElement element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                XLinkAttributes dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
@@ -390,7 +390,7 @@
 //                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 
 //                // simple version
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
 //                elementAttributes = GetInstance(SUCCESS, element);
 //                dataAttributes = GetInstance(SUCCESS, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
@@ -398,7 +398,7 @@
 //                Assert.Equals(elementAttributes.GetHashCode(), dataAttributes.GetHashCode());
 
 //                // resource version
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                elementAttributes = GetInstance(SUCCESS, element);
 //                dataAttributes = GetInstance(SUCCESS, TEST_ROLE, TEST_TITLE, TEST_LABEL);
@@ -412,7 +412,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // locator version
-//                XElement element = Util.buildDDMSElement("link", null);
+//                XElement element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes elementAttributes = GetInstance(SUCCESS, element);
 //                XLinkAttributes dataAttributes = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_ROLE, TEST_TITLE, TEST_LABEL);
@@ -428,7 +428,7 @@
 //                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                // simple version
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
 
 //                dataAttributes = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
@@ -450,7 +450,7 @@
 //                Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
 //                // resource version
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                elementAttributes = GetInstance(SUCCESS, element);
 //                dataAttributes = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_TITLE, TEST_LABEL);
@@ -469,7 +469,7 @@
 //        public virtual void TestConstructorInequalityWrongClass() {
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
-//                XElement element = Util.buildDDMSElement("link", null);
+//                XElement element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes attributes = new XLinkAttributes(element);
 //                Rights wrongComponent = new Rights(true, true, true);
@@ -483,7 +483,7 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
-//                XElement element = Util.buildDDMSElement("link", null);
+//                XElement element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                XLinkAttributes attributes = new XLinkAttributes(element);
 //                Assert.Equals(GetExpectedOutput(true, "locator"), attributes.getOutput(true, ""));
@@ -493,7 +493,7 @@
 //                Assert.Equals(GetExpectedOutput(true, "locator"), dataAttributes.getOutput(true, ""));
 //                Assert.Equals(GetExpectedOutput(false, "locator"), dataAttributes.getOutput(false, ""));
 
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_HREF, TEST_ROLE, TEST_TITLE, TEST_ARCROLE, TEST_SHOW, TEST_ACTUATE);
 //                attributes = new XLinkAttributes(element);
 //                Assert.Equals(GetExpectedOutput(true, "simple"), attributes.getOutput(true, ""));
@@ -503,7 +503,7 @@
 //                Assert.Equals(GetExpectedOutput(true, "simple"), dataAttributes.getOutput(true, ""));
 //                Assert.Equals(GetExpectedOutput(false, "simple"), dataAttributes.getOutput(false, ""));
 
-//                element = Util.buildDDMSElement("link", null);
+//                element = Util.BuildDDMSElement("link", null);
 //                AddAttributes(element, TEST_ROLE, TEST_TITLE, TEST_LABEL);
 //                attributes = new XLinkAttributes(element);
 //                Assert.Equals(GetExpectedOutput(true, "resource"), attributes.getOutput(true, ""));
@@ -522,7 +522,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                XLinkAttributes component = LocatorFixture;
 
-//                XElement element = Util.buildDDMSElement("sample", null);
+//                XElement element = Util.BuildDDMSElement("sample", null);
 //                component.addTo(element);
 //                XLinkAttributes output = new XLinkAttributes(element);
 //                Assert.Equals(component, output);
@@ -548,7 +548,7 @@
 
 //                XLinkAttributes component = LocatorFixture;
 //                XLinkAttributes.Builder builder = new XLinkAttributes.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -559,13 +559,13 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                XLinkAttributes.Builder builder = new XLinkAttributes.Builder();
-//                assertNotNull(builder.commit());
+//                assertNotNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Label = TEST_LABEL;
 //                Assert.IsFalse(builder.Empty);
 
 //                // An untyped instance
-//                XLinkAttributes output = builder.commit();
+//                XLinkAttributes output = builder.Commit();
 //                Assert.IsTrue(String.IsNullOrEmpty(output.Type));
 //            }
 //        }
@@ -580,18 +580,18 @@
 //                builder.Type = "locator";
 //                builder.Href = INVALID_URI;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "Invalid URI");
 //                }
 //                builder.Type = "locator";
 //                builder.Href = TEST_HREF;
-//                builder.commit();
+//                builder.Commit();
 //                builder.Type = "simple";
-//                builder.commit();
+//                builder.Commit();
 //                builder.Type = "resource";
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

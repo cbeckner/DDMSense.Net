@@ -142,9 +142,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_NTK_PREFIX, Group.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_NTK_PREFIX, Group.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -175,11 +175,11 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string ntkPrefix = PropertyReader.getPrefix("ntk");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string ntkPrefix = PropertyReader.GetPrefix("ntk");
 
 //                // Missing systemName
-//                XElement element = Util.buildElement(ntkPrefix, Group.getName(version), version.NtkNamespace, null);
+//                XElement element = Util.buildElement(ntkPrefix, Group.GetName(version), version.NtkNamespace, null);
 //                foreach (GroupValue value in GroupValueTest.FixtureList) {
 //                    element.appendChild(value.ElementCopy);
 //                }
@@ -187,13 +187,13 @@
 //                GetInstance("systemName is required.", element);
 
 //                // Missing groupValue
-//                element = Util.buildElement(ntkPrefix, Group.getName(version), version.NtkNamespace, null);
+//                element = Util.buildElement(ntkPrefix, Group.GetName(version), version.NtkNamespace, null);
 //                element.appendChild(SystemNameTest.Fixture.ElementCopy);
 //                SecurityAttributesTest.Fixture.addTo(element);
 //                GetInstance("At least one group value is required.", element);
 
 //                // Missing security attributes
-//                element = Util.buildElement(ntkPrefix, Group.getName(version), version.NtkNamespace, null);
+//                element = Util.buildElement(ntkPrefix, Group.GetName(version), version.NtkNamespace, null);
 //                element.appendChild(SystemNameTest.Fixture.ElementCopy);
 //                foreach (GroupValue value in GroupValueTest.FixtureList) {
 //                    element.appendChild(value.ElementCopy);
@@ -232,7 +232,7 @@
 
 //                // No warnings
 //                Group component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -273,12 +273,12 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Group component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, SystemNameTest.Fixture, GroupValueTest.FixtureList);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -289,10 +289,10 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Group component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 
 //                component = GetInstance(SUCCESS, SystemNameTest.Fixture, GroupValueTest.FixtureList);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -308,7 +308,7 @@
 
 //                Group component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Group.Builder builder = new Group.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -319,7 +319,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Group.Builder builder = new Group.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.GroupValues[0];
 //                Assert.IsTrue(builder.Empty);
@@ -342,7 +342,7 @@
 //                builder.SystemName.SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
 
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "At least one group value is required.");
@@ -351,7 +351,7 @@
 //                builder.GroupValues[0].Value = "test";
 //                builder.GroupValues[0].SecurityAttributes.Classification = "U";
 //                builder.GroupValues[0].SecurityAttributes.OwnerProducers = Util.getXsListAsList("USA");
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 

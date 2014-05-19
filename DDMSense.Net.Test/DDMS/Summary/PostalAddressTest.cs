@@ -157,21 +157,21 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, PostalAddress.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, PostalAddress.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
 
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(PostalAddress.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(PostalAddress.GetName(version), null);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -196,52 +196,52 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string postalName = PostalAddress.getName(version);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string postalName = PostalAddress.GetName(version);
 
 //                // Either a state or a province but not both.
-//                XElement element = Util.buildDDMSElement(postalName, null);
-//                element.appendChild(Util.buildDDMSElement("state", TEST_STATE));
-//                element.appendChild(Util.buildDDMSElement("province", TEST_PROVINCE));
+//                XElement element = Util.BuildDDMSElement(postalName, null);
+//                element.appendChild(Util.BuildDDMSElement("state", TEST_STATE));
+//                element.appendChild(Util.BuildDDMSElement("province", TEST_PROVINCE));
 //                GetInstance("Only 1 of state or province can be used.", element);
 
 //                // Too many streets
-//                element = Util.buildDDMSElement(postalName, null);
+//                element = Util.BuildDDMSElement(postalName, null);
 //                for (int i = 0; i < 7; i++) {
-//                    element.appendChild(Util.buildDDMSElement("street", "street" + i));
+//                    element.appendChild(Util.BuildDDMSElement("street", "street" + i));
 //                }
 //                GetInstance("No more than 6 street elements can exist.", element);
 
 //                // Too many cities
-//                element = Util.buildDDMSElement(postalName, null);
+//                element = Util.BuildDDMSElement(postalName, null);
 //                for (int i = 0; i < 2; i++) {
-//                    element.appendChild(Util.buildDDMSElement("city", "city" + i));
+//                    element.appendChild(Util.BuildDDMSElement("city", "city" + i));
 //                }
 //                GetInstance("No more than 1 city element can exist.", element);
 
 //                // Too many states
-//                element = Util.buildDDMSElement(postalName, null);
+//                element = Util.BuildDDMSElement(postalName, null);
 //                for (int i = 0; i < 2; i++) {
-//                    element.appendChild(Util.buildDDMSElement("state", "state" + i));
+//                    element.appendChild(Util.BuildDDMSElement("state", "state" + i));
 //                }
 //                GetInstance("No more than 1 state element can exist.", element);
 
 //                // Too many provinces
-//                element = Util.buildDDMSElement(postalName, null);
+//                element = Util.BuildDDMSElement(postalName, null);
 //                for (int i = 0; i < 2; i++) {
-//                    element.appendChild(Util.buildDDMSElement("province", "province" + i));
+//                    element.appendChild(Util.BuildDDMSElement("province", "province" + i));
 //                }
 //                GetInstance("No more than 1 province element can exist.", element);
 
 //                // Too many postalCodes
-//                element = Util.buildDDMSElement(postalName, null);
+//                element = Util.BuildDDMSElement(postalName, null);
 //                for (int i = 0; i < 2; i++) {
-//                    element.appendChild(Util.buildDDMSElement("postalCode", "postalCode" + i));
+//                    element.appendChild(Util.BuildDDMSElement("postalCode", "postalCode" + i));
 //                }
 //                GetInstance("No more than 1 postalCode element can exist.", element);
 
 //                // Too many country codes
-//                element = Util.buildDDMSElement(postalName, null);
+//                element = Util.BuildDDMSElement(postalName, null);
 //                for (int i = 0; i < 2; i++) {
 //                    element.appendChild((new CountryCode("ISO-123" + i, "US" + i)).ElementCopy);
 //                }
@@ -265,15 +265,15 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 
 //                // Empty element
-//                XElement element = Util.buildDDMSElement(PostalAddress.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(PostalAddress.GetName(version), null);
 //                component = GetInstance(SUCCESS, element);
-//                Assert.Equals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.Count());
 //                string text = "A completely empty ddms:postalAddress element was found.";
 //                string locator = "ddms:postalAddress";
 //                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -326,16 +326,16 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true, true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false, true), component.toText());
+//                Assert.Equals(GetExpectedOutput(true, true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false, true), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-//                Assert.Equals(GetExpectedOutput(true, true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false, true), component.toText());
+//                Assert.Equals(GetExpectedOutput(true, true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false, true), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_PROVINCE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, false);
-//                Assert.Equals(GetExpectedOutput(true, false), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false, false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true, false), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false, false), component.ToText());
 //            }
 //        }
 
@@ -346,13 +346,13 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true, true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true, true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_STATE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, true);
-//                Assert.Equals(GetExpectedXMLOutput(false, true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false, true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_STREETS, TEST_CITY, TEST_PROVINCE, TEST_POSTAL_CODE, CountryCodeTest.Fixture, false);
-//                Assert.Equals(GetExpectedXMLOutput(false, false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false, false), component.ToXML());
 //            }
 //        }
 
@@ -375,12 +375,12 @@
 
 //                PostalAddress component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                PostalAddress.Builder builder = new PostalAddress.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 
 //                // No country code
 //                builder = new PostalAddress.Builder(component);
 //                builder.CountryCode = new CountryCode.Builder();
-//                PostalAddress address = builder.commit();
+//                PostalAddress address = builder.Commit();
 //                Assert.IsNull(address.CountryCode);
 
 //                // Country code
@@ -389,7 +389,7 @@
 //                builder.CountryCode.Qualifier = countryCode.Qualifier;
 //                builder.CountryCode.Value = countryCode.Value;
 //                builder.Streets.add("1600 Pennsylvania Avenue, NW");
-//                address = builder.commit();
+//                address = builder.Commit();
 //                Assert.Equals(countryCode, address.CountryCode);
 //            }
 //        }
@@ -401,7 +401,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                PostalAddress.Builder builder = new PostalAddress.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.City = TEST_CITY;
 //                Assert.IsFalse(builder.Empty);
@@ -418,13 +418,13 @@
 //                builder.State = TEST_STATE;
 //                builder.Province = TEST_PROVINCE;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "Only 1 of state or province can be used.");
 //                }
 //                builder.Province = "";
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 

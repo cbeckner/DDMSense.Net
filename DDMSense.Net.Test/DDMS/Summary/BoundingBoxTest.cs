@@ -178,19 +178,19 @@
 //        /// <param name="north"> northBL </param>
 //        /// <returns> XElement </returns>
 //        private XElement BuildComponentElement(string west, string east, string south, string north) {
-//            XElement element = Util.buildDDMSElement(BoundingBox.getName(DDMSVersion.CurrentVersion), null);
-//            element.appendChild(Util.buildDDMSElement(WestBLName, Convert.ToString(west)));
-//            element.appendChild(Util.buildDDMSElement(EastBLName, Convert.ToString(east)));
-//            element.appendChild(Util.buildDDMSElement(SouthBLName, Convert.ToString(south)));
-//            element.appendChild(Util.buildDDMSElement(NorthBLName, Convert.ToString(north)));
+//            XElement element = Util.BuildDDMSElement(BoundingBox.GetName(DDMSVersion.CurrentVersion), null);
+//            element.appendChild(Util.BuildDDMSElement(WestBLName, Convert.ToString(west)));
+//            element.appendChild(Util.BuildDDMSElement(EastBLName, Convert.ToString(east)));
+//            element.appendChild(Util.BuildDDMSElement(SouthBLName, Convert.ToString(south)));
+//            element.appendChild(Util.BuildDDMSElement(NorthBLName, Convert.ToString(north)));
 //            return (element);
 //        }
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, BoundingBox.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, BoundingBox.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -211,9 +211,9 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing values
-//                XElement element = Util.buildDDMSElement(BoundingBox.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(BoundingBox.GetName(version), null);
 //                GetInstance("westbound longitude is required.", element);
 
 //                // Not Double
@@ -266,7 +266,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -315,12 +315,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_WEST, TEST_EAST, TEST_SOUTH, TEST_NORTH);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -328,10 +328,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_WEST, TEST_EAST, TEST_SOUTH, TEST_NORTH);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -354,7 +354,7 @@
 
 //                BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                BoundingBox.Builder builder = new BoundingBox.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -365,7 +365,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                BoundingBox.Builder builder = new BoundingBox.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.WestBL = TEST_WEST;
 //                Assert.IsFalse(builder.Empty);
@@ -382,7 +382,7 @@
 //                BoundingBox.Builder builder = new BoundingBox.Builder();
 //                builder.EastBL = Convert.ToDouble(TEST_EAST);
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "A ddms:boundingBox requires");
@@ -390,7 +390,7 @@
 //                builder.WestBL = Convert.ToDouble(TEST_WEST);
 //                builder.NorthBL = Convert.ToDouble(TEST_NORTH);
 //                builder.SouthBL = Convert.ToDouble(TEST_SOUTH);
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

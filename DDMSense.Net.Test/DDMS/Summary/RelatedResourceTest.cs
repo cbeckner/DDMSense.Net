@@ -163,9 +163,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, RelatedResource.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, RelatedResource.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -174,15 +174,15 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(RelatedResource.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
 //                Util.addDDMSAttribute(element, "relationship", TEST_RELATIONSHIP);
-//                XElement innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                XElement innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -211,11 +211,11 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
 //                // Missing relationship
-//                XElement element = Util.buildDDMSElement(RelatedResource.getName(version), null);
-//                XElement innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                XElement element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
+//                XElement innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -225,10 +225,10 @@
 //                GetInstance("relationship attribute is required.", element);
 
 //                // Invalid direction
-//                element = Util.buildDDMSElement(RelatedResource.getName(version), null);
+//                element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
 //                Util.addDDMSAttribute(element, "relationship", TEST_RELATIONSHIP);
 //                Util.addDDMSAttribute(element, "direction", "veeringLeft");
-//                innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -238,9 +238,9 @@
 //                GetInstance("The direction attribute must be one of", element);
 
 //                // Relationship not URI
-//                element = Util.buildDDMSElement(RelatedResource.getName(version), null);
+//                element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
 //                Util.addDDMSAttribute(element, "relationship", INVALID_URI);
-//                innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -250,9 +250,9 @@
 //                GetInstance("Invalid URI", element);
 
 //                // Missing qualifier
-//                element = Util.buildDDMSElement(RelatedResource.getName(version), null);
+//                element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
 //                Util.addDDMSAttribute(element, "relationship", TEST_RELATIONSHIP);
-//                innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -261,9 +261,9 @@
 //                GetInstance("qualifier attribute is required.", element);
 
 //                // qualifier not URI
-//                element = Util.buildDDMSElement(RelatedResource.getName(version), null);
+//                element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
 //                Util.addDDMSAttribute(element, "relationship", TEST_RELATIONSHIP);
-//                innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -273,9 +273,9 @@
 //                GetInstance("Invalid URI", element);
 
 //                // Missing value
-//                element = Util.buildDDMSElement(RelatedResource.getName(version), null);
+//                element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
 //                Util.addDDMSAttribute(element, "relationship", TEST_RELATIONSHIP);
-//                innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -284,9 +284,9 @@
 //                GetInstance("value attribute is required.", element);
 
 //                // Missing link
-//                element = Util.buildDDMSElement(RelatedResource.getName(version), null);
+//                element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
 //                Util.addDDMSAttribute(element, "relationship", TEST_RELATIONSHIP);
-//                innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -295,9 +295,9 @@
 //                GetInstance("At least 1 link must exist.", element);
 
 //                // Security Attributes
-//                element = Util.buildDDMSElement(RelatedResource.getName(version), null);
+//                element = Util.BuildDDMSElement(RelatedResource.GetName(version), null);
 //                Util.addDDMSAttribute(element, "relationship", TEST_RELATIONSHIP);
-//                innerElement = version.isAtLeast("4.0.1") ? element : Util.buildDDMSElement("RelatedResource", null);
+//                innerElement = version.isAtLeast("4.0.1") ? element : Util.BuildDDMSElement("RelatedResource", null);
 //                if (!version.isAtLeast("4.0.1")) {
 //                    element.appendChild(innerElement);
 //                }
@@ -353,21 +353,21 @@
 ////ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 
 //                // Pre-DDMS 4.0.1, too many relatedResource children
 //                if (!version.isAtLeast("4.0.1")) {
 //                    XElement element = new XElement(GetValidElement(sVersion));
-//                    XElement child = Util.buildDDMSElement("RelatedResource", null);
+//                    XElement child = Util.BuildDDMSElement("RelatedResource", null);
 //                    child.addAttribute(Util.buildDDMSAttribute("qualifier", "ignoreMe"));
 //                    child.addAttribute(Util.buildDDMSAttribute("value", "ignoreMe"));
 //                    child.appendChild(new XElement(LinkTest.FixtureElement));
 //                    element.appendChild(child);
 //                    component = GetInstance(SUCCESS, element);
-//                    Assert.Equals(1, component.ValidationWarnings.size());
+//                    Assert.Equals(1, component.ValidationWarnings.Count());
 //                    string text = "A ddms:RelatedResources element contains more than 1";
 //                    string locator = "ddms:relatedResources";
 //                    AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -419,12 +419,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(false), TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -434,10 +434,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 
 //                component = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(false), TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 
 //            }
 //        }
@@ -461,7 +461,7 @@
 
 //                RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                RelatedResource.Builder builder = new RelatedResource.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -472,7 +472,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                RelatedResource.Builder builder = new RelatedResource.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Qualifier = TEST_QUALIFIER;
 //                Assert.IsFalse(builder.Empty);
@@ -489,7 +489,7 @@
 //                RelatedResource.Builder builder = new RelatedResource.Builder();
 //                builder.Qualifier = TEST_QUALIFIER;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "relationship attribute is required.");
@@ -500,7 +500,7 @@
 //                builder.Links[0].XLinkAttributes.Type = "locator";
 //                builder.Links[0].XLinkAttributes.Href = "http://ddmsence.urizone.net/";
 //                builder.Links[0].XLinkAttributes.Role = "role";
-//                builder.commit();
+//                builder.Commit();
 
 //                // Skip empty Links
 //                builder = new RelatedResource.Builder();
@@ -515,7 +515,7 @@
 //                fullBuilder.XLinkAttributes.Role = "role";
 //                builder.Links.add(emptyBuilder);
 //                builder.Links.add(fullBuilder);
-//                Assert.Equals(1, builder.commit().Links.size());
+//                Assert.Equals(1, builder.Commit().Links.Count());
 //            }
 //        }
 

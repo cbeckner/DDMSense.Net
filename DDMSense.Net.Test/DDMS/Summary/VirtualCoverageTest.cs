@@ -139,21 +139,21 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, VirtualCoverage.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, VirtualCoverage.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
 
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(VirtualCoverage.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(VirtualCoverage.GetName(version), null);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -171,9 +171,9 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // address without protocol
-//                XElement element = Util.buildDDMSElement(VirtualCoverage.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(VirtualCoverage.GetName(version), null);
 //                Util.addDDMSAttribute(element, "address", TEST_ADDRESS);
 //                GetInstance("protocol is required.", element);
 //            }
@@ -189,15 +189,15 @@
 
 //        public virtual void TestWarnings() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                VirtualCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 
 //                // Empty element
-//                XElement element = Util.buildDDMSElement(VirtualCoverage.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(VirtualCoverage.GetName(version), null);
 //                component = GetInstance(SUCCESS, element);
-//                Assert.Equals(1, component.ValidationWarnings.size());
+//                Assert.Equals(1, component.ValidationWarnings.Count());
 //                string text = "A completely empty ddms:virtualCoverage element was found.";
 //                string locator = "ddms:virtualCoverage";
 //                AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
@@ -243,12 +243,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                VirtualCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_ADDRESS, TEST_PROTOCOL);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -256,10 +256,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                VirtualCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_ADDRESS, TEST_PROTOCOL);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -267,7 +267,7 @@
 ////ORIGINAL LINE: public void testSecurityAttributes() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestSecurityAttributes() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                SecurityAttributes attr = (!version.isAtLeast("3.0") ? null : SecurityAttributesTest.Fixture);
 //                VirtualCoverage component = new VirtualCoverage(TEST_ADDRESS, TEST_PROTOCOL, attr);
 //                if (!version.isAtLeast("3.0")) {
@@ -298,7 +298,7 @@
 
 //                VirtualCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                VirtualCoverage.Builder builder = new VirtualCoverage.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -309,7 +309,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                VirtualCoverage.Builder builder = new VirtualCoverage.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Address = TEST_ADDRESS;
 //                Assert.IsFalse(builder.Empty);
@@ -325,13 +325,13 @@
 //                VirtualCoverage.Builder builder = new VirtualCoverage.Builder();
 //                builder.Address = TEST_ADDRESS;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "protocol is required.");
 //                }
 //                builder.Protocol = TEST_PROTOCOL;
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

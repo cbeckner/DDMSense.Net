@@ -62,7 +62,7 @@
 //                    DDMSVersion version = DDMSVersion.getVersionFor(sVersion);
 //                    Resource resource = VersionToResourceMap.GetValueOrNull(sVersion);
 //                    string ddmsNamespace = resource.Namespace;
-//                    string resourceName = Resource.getName(version);
+//                    string resourceName = Resource.GetName(version);
 //                    List<ValidationMessage> messages = resource.validateWithSchematron(new File("data/test/" + sVersion + "/testSchematronXslt1.sch"));
 //                    Assert.Equals(version.isAtLeast("4.0.1") ? 3 : 2, messages.Count);
 
@@ -73,12 +73,12 @@
 //                    int originalWarningIndex = version.isAtLeast("4.0.1") ? 2 : 1;
 
 //                    text = "Members of the Uri family cannot be publishers.";
-//                    locator = "/*[local-name()='" + resourceName + "' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='publisher' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='" + Person.getName(version) + "' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='surname' and namespace-uri()='" + ddmsNamespace + "']";
+//                    locator = "/*[local-name()='" + resourceName + "' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='publisher' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='" + Person.GetName(version) + "' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='surname' and namespace-uri()='" + ddmsNamespace + "']";
 //                    AssertWarningEquality(text, locator, messages[originalWarningIndex]);
 
 //                    if (version.isAtLeast("4.0.1")) {
 //                        text = "Members of the Uri family cannot be publishers.";
-//                        locator = "/*[local-name()='" + resourceName + "' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='metacardInfo' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='publisher' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='" + Person.getName(version) + "' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='surname' and namespace-uri()='" + ddmsNamespace + "']";
+//                        locator = "/*[local-name()='" + resourceName + "' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='metacardInfo' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='publisher' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='" + Person.GetName(version) + "' and namespace-uri()='" + ddmsNamespace + "']" + "/*[local-name()='surname' and namespace-uri()='" + ddmsNamespace + "']";
 //                        AssertWarningEquality(text, locator, messages[1]);
 //                    }
 //                }
@@ -101,7 +101,7 @@
 
 //                    string text = "The second coordinate in a gml:pos element must be 40.2 degrees.";
 //                    string extent = version.isAtLeast("4.0.1") ? "" : "/*:GeospatialExtent[namespace-uri()='" + ddmsNamespace + "'][1]";
-//                    string resourceName = Resource.getName(version);
+//                    string resourceName = Resource.GetName(version);
 //                    string locator = "/*:" + resourceName + "[namespace-uri()='" + ddmsNamespace + "'][1]" + "/*:geospatialCoverage[namespace-uri()='" + ddmsNamespace + "'][1]" + extent + "/*:boundingGeometry[namespace-uri()='" + ddmsNamespace + "'][1]" + "/*:Point[namespace-uri()='" + gmlNamespace + "'][1]" + "/*:pos[namespace-uri()='" + gmlNamespace + "'][1]";
 //                    AssertErrorEquality(text, locator, messages[0]);
 //                }
