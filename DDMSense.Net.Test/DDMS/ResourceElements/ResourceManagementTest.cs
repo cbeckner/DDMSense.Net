@@ -130,8 +130,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
         {
             StringBuilder text = new StringBuilder();
             text.Append(RecordsManagementInfoTest.Fixture.GetOutput(isHTML, "resourceManagement.", ""));
-            text.Append(RevisionRecallTest.TextFixture.getOutput(isHTML, "resourceManagement.", ""));
-            text.Append(TaskingInfoTest.FixtureList[0].getOutput(isHTML, "resourceManagement.", ""));
+            text.Append(RevisionRecallTest.TextFixture.GetOutput(isHTML, "resourceManagement.", ""));
+            text.Append(TaskingInfoTest.FixtureList[0].GetOutput(isHTML, "resourceManagement.", ""));
             text.Append(ProcessingInfoTest.FixtureList[0].GetOutput(isHTML, "resourceManagement.", ""));
             text.Append(BuildOutput(isHTML, "resourceManagement.classification", "U"));
             text.Append(BuildOutput(isHTML, "resourceManagement.ownerProducer", "USA"));

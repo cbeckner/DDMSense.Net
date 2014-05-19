@@ -322,11 +322,11 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 // Default values (at least 1 value must be explicit to prevent a null commit)
                 Rights.Builder builder = new Rights.Builder();
                 builder.PrivacyAct = true;
-                Assert.IsFalse(builder.Commit().IntellectualProperty);
-                Assert.IsFalse(builder.Commit().Copyright);
+                Assert.IsFalse(((Rights)builder.Commit()).IntellectualProperty);
+                Assert.IsFalse(((Rights)builder.Commit()).Copyright);
                 builder = new Rights.Builder();
                 builder.IntellectualProperty = true;
-                Assert.IsFalse(builder.Commit().PrivacyAct);
+                Assert.IsFalse(((Rights)builder.Commit()).PrivacyAct);
             }
         }
     }

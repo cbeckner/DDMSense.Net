@@ -463,7 +463,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                     Assert.IsTrue(builder.Empty);
                     //TODO: Not sure what to do here (MAM).
                     //Original Java: builder.getSubOrganizations().get(0);
-                    builder.SubOrganizations[0];
+                    var suborgs = builder.SubOrganizations[0];
                     Assert.IsTrue(builder.Empty);
                     builder.SubOrganizations[0].Value = "TEST";
                     Assert.IsFalse(builder.Empty);

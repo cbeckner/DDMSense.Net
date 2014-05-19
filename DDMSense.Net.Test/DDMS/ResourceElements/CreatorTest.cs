@@ -122,13 +122,11 @@ namespace DDMSense.Test.DDMS.ResourceElements
         /// <summary>
         /// Returns the expected HTML or Text output for this unit test
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         private string GetExpectedOutput(bool isHTML)
         {
             DDMSVersion version = DDMSVersion.CurrentVersion;
             StringBuilder text = new StringBuilder();
-            text.Append(PersonTest.Fixture.getOutput(isHTML, "creator.", ""));
+            text.Append(PersonTest.Fixture.GetOutput(isHTML, "creator.", ""));
             if (version.IsAtLeast("4.0.1"))
             {
                 text.Append(BuildOutput(isHTML, "creator.pocType", "DoD-Dist-B"));

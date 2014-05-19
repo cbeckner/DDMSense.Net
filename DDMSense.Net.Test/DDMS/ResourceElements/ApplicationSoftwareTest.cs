@@ -29,7 +29,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.ResourceElements;
-    using DDMSense.DDMS.ResourceElements;
     using System.Xml.Linq;
     using DDMSense.DDMS;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -71,7 +70,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                     XElement element = Util.BuildDDMSElement(ApplicationSoftware.GetName(version), TEST_VALUE);
                     element.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + element.Name.LocalName;
                     element.Name = XName.Get(PropertyReader.GetPrefix("ism"), version.IsmNamespace) + element.Name.LocalName; 
-                    SecurityAttributesTest.Fixture.addTo(element);
+                    SecurityAttributesTest.Fixture.AddTo(element);
                     return (element);
                 }
                 catch (InvalidDDMSException e)
@@ -202,7 +201,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No optional fields
                 XElement element = Util.BuildDDMSElement(ApplicationSoftware.GetName(version), null);
-                SecurityAttributesTest.Fixture.addTo(element);
+                SecurityAttributesTest.Fixture.AddTo(element);
                 GetInstance(SUCCESS, element);
             }
         }
@@ -268,7 +267,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 // No value
                 XElement element = Util.BuildDDMSElement(ApplicationSoftware.GetName(version), null);
-                SecurityAttributesTest.Fixture.addTo(element);
+                SecurityAttributesTest.Fixture.AddTo(element);
                 component = GetInstance(SUCCESS, element);
                 Assert.Equals(1, component.ValidationWarnings.Count());
                 string text = "A ddms:applicationSoftware element was found with no value.";

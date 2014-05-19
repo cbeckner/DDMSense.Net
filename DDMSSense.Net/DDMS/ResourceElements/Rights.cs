@@ -173,17 +173,17 @@ namespace DDMSense.DDMS.ResourceElements
             /// <summary>
             ///     Builder accessor for the privacyAct attribute.
             /// </summary>
-            public virtual bool? PrivacyAct { get; private set; }
+            public virtual bool? PrivacyAct { get;  set; }
 
             /// <summary>
             ///     Builder accessor for the intellectualProperty attribute.
             /// </summary>
-            public virtual bool? IntellectualProperty { get; private set; }
+            public virtual bool? IntellectualProperty { get;  set; }
 
             /// <summary>
             ///     Builder accessor for the copyright attribute.
             /// </summary>
-            public virtual bool? Copyright { get; private set; }
+            public virtual bool? Copyright { get;  set; }
 
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
