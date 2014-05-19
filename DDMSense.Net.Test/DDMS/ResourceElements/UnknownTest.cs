@@ -37,9 +37,9 @@
 //    /// </summary>
 //    public class UnknownTest : AbstractBaseTestCase {
 
-//        private static readonly IList<string> TEST_NAMES = new List<string>();
-//        private static readonly IList<string> TEST_PHONES = new List<string>();
-//        private static readonly IList<string> TEST_EMAILS = new List<string>();
+//        private static readonly List<string> TEST_NAMES = new List<string>();
+//        private static readonly List<string> TEST_PHONES = new List<string>();
+//        private static readonly List<string> TEST_EMAILS = new List<string>();
 //        static UnknownTest() {
 //            TEST_NAMES.Add("Unknown Entity");
 //            TEST_PHONES.Add("703-882-1000");
@@ -94,7 +94,7 @@
 //        /// <param name="names"> an ordered list of names </param>
 //        /// <param name="phones"> an ordered list of phone numbers </param>
 //        /// <param name="emails"> an ordered list of email addresses </param>
-//        private Unknown GetInstance(string message, IList<string> names, IList<string> phones, IList<string> emails) {
+//        private Unknown GetInstance(string message, List<string> names, List<string> phones, List<string> emails) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Unknown component = null;
 //            try {
@@ -195,7 +195,7 @@
 //                GetInstance("At least 1 name element must exist.", null, TEST_PHONES, TEST_EMAILS);
 
 //                // Empty name
-//                IList<string> names = new List<string>();
+//                List<string> names = new List<string>();
 //                names.Add("");
 //                GetInstance("At least 1 name element must have a non-empty value.", names, TEST_PHONES, TEST_EMAILS);
 //            }

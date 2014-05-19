@@ -51,11 +51,11 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<ProductionMetric> FixtureList {
+//        public static List<ProductionMetric> FixtureList {
 //            get {
 //                try {
 //                    DDMSVersion version = DDMSVersion.CurrentVersion;
-//                    IList<ProductionMetric> metrics = new List<ProductionMetric>();
+//                    List<ProductionMetric> metrics = new List<ProductionMetric>();
 //                    if (version.isAtLeast("4.0.1")) {
 //                        metrics.Add(new ProductionMetric("FOOD", "AFG", SecurityAttributesTest.Fixture));
 //                    }

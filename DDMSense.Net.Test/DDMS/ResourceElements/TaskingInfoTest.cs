@@ -79,10 +79,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<TaskingInfo> FixtureList {
+//        public static List<TaskingInfo> FixtureList {
 //            get {
 //                try {
-//                    IList<TaskingInfo> infos = new List<TaskingInfo>();
+//                    List<TaskingInfo> infos = new List<TaskingInfo>();
 //                    infos.Add(new TaskingInfo(FixtureElement));
 //                    return (infos);
 //                } catch (InvalidDDMSException e) {
@@ -120,7 +120,7 @@
 //        /// <param name="addressees"> list of addressee (optional) </param>
 //        /// <param name="description"> description of tasking (optional) </param>
 //        /// <param name="taskID"> taskID for tasking (required) </param>
-//        private TaskingInfo GetInstance(string message, IList<RequesterInfo> requesterInfos, IList<Addressee> addressees, Description description, TaskID taskID) {
+//        private TaskingInfo GetInstance(string message, List<RequesterInfo> requesterInfos, List<Addressee> addressees, Description description, TaskID taskID) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            TaskingInfo component = null;
 //            try {

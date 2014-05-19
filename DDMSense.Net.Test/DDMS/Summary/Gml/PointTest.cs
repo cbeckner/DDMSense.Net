@@ -50,10 +50,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Point> FixtureList {
+//        public static List<Point> FixtureList {
 //            get {
 //                try {
-//                    IList<Point> points = new List<Point>();
+//                    List<Point> points = new List<Point>();
 //                    points.Add(new Point(new Position(PositionTest.TEST_COORDS, null), SRSAttributesTest.Fixture, TEST_ID));
 //                    return (points);
 //                } catch (InvalidDDMSException e) {
@@ -302,7 +302,7 @@
 //                Point dataComponent = GetInstance(SUCCESS, PositionTest.Fixture, attr, TEST_ID);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<double?> newCoords = new List<double?>();
+//                List<double?> newCoords = new List<double?>();
 //                newCoords.Add(new double?(56.0));
 //                newCoords.Add(new double?(150.0));
 //                Position newPosition = new Position(newCoords, SRSAttributesTest.Fixture);

@@ -50,10 +50,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Polygon> FixtureList {
+//        public static List<Polygon> FixtureList {
 //            get {
 //                try {
-//                    IList<Polygon> polygons = new List<Polygon>();
+//                    List<Polygon> polygons = new List<Polygon>();
 //                    polygons.Add(new Polygon(PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID));
 //                    return (polygons);
 //                } catch (InvalidDDMSException e) {
@@ -91,7 +91,7 @@
 //        /// <param name="srsAttributes"> the srs attributes (required) </param>
 //        /// <param name="id"> the id (required) </param>
 //        /// <returns> a valid object </returns>
-//        private Polygon GetInstance(string message, IList<Position> positions, SRSAttributes srsAttributes, string id) {
+//        private Polygon GetInstance(string message, List<Position> positions, SRSAttributes srsAttributes, string id) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Polygon component = null;
 //            try {
@@ -109,7 +109,7 @@
 //        /// </summary>
 //        /// <param name="positions"> the positions </param>
 //        /// <returns> an exterior element containing a LinearRing element containing the positions </returns>
-//        private XElement WrapPositions(IList<Position> positions) {
+//        private XElement WrapPositions(List<Position> positions) {
 //            string gmlNamespace = DDMSVersion.CurrentVersion.GmlNamespace;
 //            XElement ringElement = Util.buildElement(PropertyReader.getPrefix("gml"), "LinearRing", gmlNamespace, null);
 //            foreach (Position pos in positions) {
@@ -215,7 +215,7 @@
 //                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
+//                List<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
 //                XElement posElement = Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, "32.1         40.1");
 //                SRSAttributesTest.Fixture.addTo(posElement);
@@ -298,7 +298,7 @@
 //                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
+//                List<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
 //                element.appendChild(WrapPositions(newPositions));
 //                GetInstance("The first and last position", element);
@@ -346,7 +346,7 @@
 //                GetInstance("At least 4 positions are required", null, SRSAttributesTest.Fixture, TEST_ID);
 
 //                // First position doesn't match last position.
-//                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
+//                List<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
 //                GetInstance("The first and last position", newPositions, SRSAttributesTest.Fixture, TEST_ID);
 
@@ -388,7 +388,7 @@
 //                Polygon dataComponent = GetInstance(SUCCESS, PositionTest.FixtureList, attr, TEST_ID);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
+//                List<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
 //                newPositions.Add(PositionTest.FixtureList[0]);
 //                dataComponent = GetInstance(SUCCESS, newPositions, SRSAttributesTest.Fixture, TEST_ID);
@@ -444,7 +444,7 @@
 //        public virtual void TestPositionReuse() {
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
-//                IList<Position> positions = PositionTest.FixtureList;
+//                List<Position> positions = PositionTest.FixtureList;
 //                GetInstance(SUCCESS, positions, SRSAttributesTest.Fixture, TEST_ID);
 //                GetInstance(SUCCESS, positions, SRSAttributesTest.Fixture, TEST_ID);
 //            }

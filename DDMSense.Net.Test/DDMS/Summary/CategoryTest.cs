@@ -53,10 +53,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Category> FixtureList {
+//        public static List<Category> FixtureList {
 //            get {
 //                try {
-//                    IList<Category> categories = new List<Category>();
+//                    List<Category> categories = new List<Category>();
 //                    categories.Add(new Category("urn:buri:ddmsence:categories", "DDMS", "DDMS", null));
 //                    return (categories);
 //                } catch (InvalidDDMSException e) {
@@ -299,7 +299,7 @@
 //            DDMSVersion version = DDMSVersion.setCurrentVersion("3.0");
 
 //            // Using ddms:qualifier as the extension (data)
-//            IList<Attribute> extAttributes = new List<Attribute>();
+//            List<Attribute> extAttributes = new List<Attribute>();
 //            extAttributes.Add(new Attribute("ddms:qualifier", version.Namespace, "dog"));
 //            attributes = new ExtensibleAttributes(extAttributes);
 //            try {

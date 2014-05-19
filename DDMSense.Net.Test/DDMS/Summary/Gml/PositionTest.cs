@@ -39,7 +39,7 @@
 //    /// </summary>
 //    public class PositionTest : AbstractBaseTestCase {
 
-//        public static readonly IList<double?> TEST_COORDS = new List<double?>();
+//        public static readonly List<double?> TEST_COORDS = new List<double?>();
 //        static PositionTest() {
 //            TEST_COORDS.Add(new double?(32.1));
 //            TEST_COORDS.Add(new double?(40.1));
@@ -50,8 +50,8 @@
 //        }
 //        protected internal static readonly string TEST_XS_LIST = Util.getXsList(TEST_COORDS);
 
-//        public static readonly IList<double?> TEST_COORDS_2 = new List<double?>();
-//        public static readonly IList<double?> TEST_COORDS_3 = new List<double?>();
+//        public static readonly List<double?> TEST_COORDS_2 = new List<double?>();
+//        public static readonly List<double?> TEST_COORDS_3 = new List<double?>();
 
 //        /// <summary>
 //        /// Constructor
@@ -78,10 +78,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing. This list of positions represents a closed polygon.
 //        /// </summary>
-//        public static IList<Position> FixtureList {
+//        public static List<Position> FixtureList {
 //            get {
 //                try {
-//                    IList<Position> positions = new List<Position>();
+//                    List<Position> positions = new List<Position>();
 //                    positions.Add(new Position(TEST_COORDS, SRSAttributesTest.Fixture));
 //                    positions.Add(new Position(TEST_COORDS_2, SRSAttributesTest.Fixture));
 //                    positions.Add(new Position(TEST_COORDS_3, SRSAttributesTest.Fixture));
@@ -121,7 +121,7 @@
 //        /// <param name="coordinates"> the coordinates </param>
 //        /// <param name="srsAttributes"> the srs attributes (optional) </param>
 //        /// <returns> a valid object </returns>
-//        private Position GetInstance(string message, IList<double?> coordinates, SRSAttributes srsAttributes) {
+//        private Position GetInstance(string message, List<double?> coordinates, SRSAttributes srsAttributes) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Position component = null;
 //            try {
@@ -245,7 +245,7 @@
 //                GetInstance("A position must be represented by", null, SRSAttributesTest.Fixture);
 
 //                // At least 2 coordinates
-//                IList<double?> newCoords = new List<double?>();
+//                List<double?> newCoords = new List<double?>();
 //                newCoords.Add(new double?(12.3));
 //                GetInstance("A position must be represented by", newCoords, SRSAttributesTest.Fixture);
 
@@ -308,7 +308,7 @@
 //                Position dataComponent = GetInstance(SUCCESS, TEST_COORDS, null);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<double?> newCoords = new List<double?>(TEST_COORDS);
+//                List<double?> newCoords = new List<double?>(TEST_COORDS);
 //                newCoords.Add(new double?(100.0));
 //                dataComponent = GetInstance(SUCCESS, newCoords, SRSAttributesTest.Fixture);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));

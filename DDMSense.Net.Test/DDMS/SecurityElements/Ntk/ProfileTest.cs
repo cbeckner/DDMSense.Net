@@ -63,9 +63,9 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Profile> FixtureList {
+//        public static List<Profile> FixtureList {
 //            get {
-//                IList<Profile> profiles = new List<Profile>();
+//                List<Profile> profiles = new List<Profile>();
 //                profiles.Add(ProfileTest.Fixture);
 //                return (profiles);
 //            }
@@ -97,7 +97,7 @@
 //        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
 //        /// <param name="systemName"> the system (required) </param>
 //        /// <param name="values"> the values (1 required) </param>
-//        private Profile GetInstance(string message, SystemName systemName, IList<ProfileValue> values) {
+//        private Profile GetInstance(string message, SystemName systemName, List<ProfileValue> values) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Profile component = null;
 //            try {
@@ -259,7 +259,7 @@
 //                Profile dataComponent = GetInstance(SUCCESS, new SystemName("MDR", null, null, null, SecurityAttributesTest.Fixture), ProfileValueTest.FixtureList);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<ProfileValue> list = new List<ProfileValue>();
+//                List<ProfileValue> list = new List<ProfileValue>();
 //                list.Add(ProfileValueTest.GetFixture("newProfile"));
 //                dataComponent = GetInstance(SUCCESS, SystemNameTest.Fixture, list);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));

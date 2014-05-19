@@ -68,9 +68,9 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<GroupValue> FixtureList {
+//        public static List<GroupValue> FixtureList {
 //            get {
-//                IList<GroupValue> list = new List<GroupValue>();
+//                List<GroupValue> list = new List<GroupValue>();
 //                list.Add(GroupValueTest.Fixture);
 //                return (list);
 //            }

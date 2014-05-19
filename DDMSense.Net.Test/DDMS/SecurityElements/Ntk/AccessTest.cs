@@ -100,7 +100,7 @@
 //        /// <param name="groups"> the groups </param>
 //        /// <param name="profileList"> the profilesprofiles the profiles in this list (required) </param>
 //        /// <param name="externalReference"> the external reference attribute </param>
-//        private Access GetInstance(string message, IList<Individual> individuals, IList<Group> groups, ProfileList profileList, bool? externalReference) {
+//        private Access GetInstance(string message, List<Individual> individuals, List<Group> groups, ProfileList profileList, bool? externalReference) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Access component = null;
 //            try {

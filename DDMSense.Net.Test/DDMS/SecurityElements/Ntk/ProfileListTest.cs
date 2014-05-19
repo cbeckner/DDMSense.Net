@@ -86,7 +86,7 @@
 //        /// </summary>
 //        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
 //        /// <param name="profiles"> the profiles in this list (required) </param>
-//        private ProfileList GetInstance(string message, IList<Profile> profiles) {
+//        private ProfileList GetInstance(string message, List<Profile> profiles) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ProfileList component = null;
 //            try {
@@ -233,8 +233,8 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                ProfileList elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                IList<Profile> profiles = ProfileTest.FixtureList;
-//                IList<ProfileValue> valueList = new List<ProfileValue>();
+//                List<Profile> profiles = ProfileTest.FixtureList;
+//                List<ProfileValue> valueList = new List<ProfileValue>();
 //                valueList.Add(ProfileValueTest.GetFixture("profile2"));
 //                profiles.Add(new Profile(SystemNameTest.Fixture, valueList, SecurityAttributesTest.Fixture));
 //                ProfileList dataComponent = GetInstance(SUCCESS, profiles);

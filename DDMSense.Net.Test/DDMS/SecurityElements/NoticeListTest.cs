@@ -111,7 +111,7 @@
 //        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
 //        /// <param name="notices"> the notices (at least 1 required) </param>
 //        /// <returns> a valid object </returns>
-//        private NoticeList GetInstance(string message, IList<Notice> notices) {
+//        private NoticeList GetInstance(string message, List<Notice> notices) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            NoticeList component = null;
 //            try {
@@ -277,7 +277,7 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
-//                IList<Notice> list = NoticeTest.FixtureList;
+//                List<Notice> list = NoticeTest.FixtureList;
 //                list.Add(new Notice(NoticeTest.FixtureElement));
 //                NoticeList elementComponent = GetInstance(SUCCESS, FixtureElement);
 //                NoticeList dataComponent = GetInstance(SUCCESS, list);

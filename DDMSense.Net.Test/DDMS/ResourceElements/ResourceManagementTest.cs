@@ -87,7 +87,7 @@
 //        /// <param name="revisionRecall"> information about revision recalls (optional) </param>
 //        /// <param name="taskingInfos"> list of tasking info (optional) </param>
 //        /// <param name="processingInfos"> list of processing info (optional) </param>
-//        private ResourceManagement GetInstance(string message, RecordsManagementInfo recordsManagementInfo, RevisionRecall revisionRecall, IList<TaskingInfo> taskingInfos, IList<ProcessingInfo> processingInfos) {
+//        private ResourceManagement GetInstance(string message, RecordsManagementInfo recordsManagementInfo, RevisionRecall revisionRecall, List<TaskingInfo> taskingInfos, List<ProcessingInfo> processingInfos) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            ResourceManagement component = null;
 //            try {

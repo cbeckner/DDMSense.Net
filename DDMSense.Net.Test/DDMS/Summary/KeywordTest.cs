@@ -50,10 +50,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Keyword> FixtureList {
+//        public static List<Keyword> FixtureList {
 //            get {
 //                try {
-//                    IList<Keyword> keywords = new List<Keyword>();
+//                    List<Keyword> keywords = new List<Keyword>();
 //                    keywords.Add(new Keyword("DDMSence", null));
 //                    keywords.Add(new Keyword("Uri", null));
 //                    return (keywords);
@@ -280,7 +280,7 @@
 //            Attribute attr = new Attribute("ddms:value", version.Namespace, "dog");
 
 //            // Using ddms:value as the extension (data)
-//            IList<Attribute> extAttributes = new List<Attribute>();
+//            List<Attribute> extAttributes = new List<Attribute>();
 //            extAttributes.Add(attr);
 //            attributes = new ExtensibleAttributes(extAttributes);
 //            try {

@@ -71,10 +71,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<RequesterInfo> FixtureList {
+//        public static List<RequesterInfo> FixtureList {
 //            get {
 //                try {
-//                    IList<RequesterInfo> list = new List<RequesterInfo>();
+//                    List<RequesterInfo> list = new List<RequesterInfo>();
 //                    list.Add(new RequesterInfo(RequesterInfoTest.GetFixtureElement(true)));
 //                    return (list);
 //                } catch (InvalidDDMSException e) {

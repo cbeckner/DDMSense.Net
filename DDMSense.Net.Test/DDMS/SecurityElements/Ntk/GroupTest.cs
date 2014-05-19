@@ -63,9 +63,9 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Group> FixtureList {
+//        public static List<Group> FixtureList {
 //            get {
-//                IList<Group> list = new List<Group>();
+//                List<Group> list = new List<Group>();
 //                list.Add(GroupTest.Fixture);
 //                return (list);
 //            }
@@ -97,7 +97,7 @@
 //        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
 //        /// <param name="systemName"> the system (required) </param>
 //        /// <param name="values"> the values (1 required) </param>
-//        private Group GetInstance(string message, SystemName systemName, IList<GroupValue> values) {
+//        private Group GetInstance(string message, SystemName systemName, List<GroupValue> values) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Group component = null;
 //            try {
@@ -259,7 +259,7 @@
 //                Group dataComponent = GetInstance(SUCCESS, new SystemName("MDR", null, null, null, SecurityAttributesTest.Fixture), GroupValueTest.FixtureList);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<GroupValue> list = new List<GroupValue>();
+//                List<GroupValue> list = new List<GroupValue>();
 //                list.Add(new GroupValue("newUser", null, null, null, SecurityAttributesTest.Fixture));
 //                dataComponent = GetInstance(SUCCESS, SystemNameTest.Fixture, list);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));

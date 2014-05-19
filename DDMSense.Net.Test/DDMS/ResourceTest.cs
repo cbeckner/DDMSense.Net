@@ -68,12 +68,12 @@ namespace DDMSense.Test.DDMS {
 	/// @since 0.9.b
 	/// </summary>
 	public class ResourceTest : AbstractBaseTestCase {
-		private IList<IDDMSComponent> TEST_TOP_LEVEL_COMPONENTS;
-		private IList<IDDMSComponent> TEST_NO_OPTIONAL_COMPONENTS;
+		private List<IDDMSComponent> TEST_TOP_LEVEL_COMPONENTS;
+		private List<IDDMSComponent> TEST_NO_OPTIONAL_COMPONENTS;
 
 		private static readonly bool? TEST_RESOURCE_ELEMENT = true;
 		private const string TEST_CREATE_DATE = "2010-01-21";
-		private static readonly IList<string> TEST_COMPLIES_WITH = Util.GetXsListAsList("DoD5230.24");
+		private static readonly List<string> TEST_COMPLIES_WITH = Util.GetXsListAsList("DoD5230.24");
 
 		/// <summary>
 		/// Constructor
@@ -296,7 +296,7 @@ namespace DDMSense.Test.DDMS {
 		/// <param name="ismDESVersion"> the ISM DES Version as an Integer (required) </param>
 		/// <param name="ntkDESVersion"> the NTK DES Version as an Integer (required, starting in DDMS 4.0.1) </param>
 		/// <returns> a valid object </returns>
-		private Resource GetInstance(string message, IList<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, IList<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion) {
+		private Resource GetInstance(string message, List<IDDMSComponent> topLevelComponents, bool? resourceElement, string createDate, List<string> compliesWiths, int? ismDESVersion, int? ntkDESVersion) {
 			bool expectFailure = !string.IsNullOrEmpty(message);
 			DDMSVersion version = DDMSVersion.GetCurrentVersion();
 			Resource component = null;
@@ -900,7 +900,7 @@ namespace DDMSense.Test.DDMS {
 				}
 
 				// At least 1 producer
-				IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+				List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Remove(CreatorTest.Fixture);
 				GetInstance("At least 1 producer", components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 
@@ -961,7 +961,7 @@ namespace DDMSense.Test.DDMS {
 				int countIndex = version.IsAtLeast("4.1") ? 1 : 0;
 
 				// Nested warnings
-				IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+				List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 				components.Add(new Format("test", new Extent("test", ""), "test"));
 				component = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 				Assert.Equals(countIndex + 1, component.ValidationWarnings.Count);
@@ -1150,7 +1150,7 @@ namespace DDMSense.Test.DDMS {
 			Attribute secAttribute = new Attribute("ISM:classification", version.IsmNamespace, "U");
 			// This can be an extensible.
 			Attribute uniqueAttribute = new Attribute("ddmsence:confidence", "http://ddmsence.urizone.net/", "95");
-			IList<Attribute> exAttr = new List<Attribute>();
+			List<Attribute> exAttr = new List<Attribute>();
 
 			// Base Case
 			Resource component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
@@ -1238,7 +1238,7 @@ namespace DDMSense.Test.DDMS {
 
 				// IsmDESVersion in parameter AND extensible.
 				try {
-					IList<Attribute> exAttr = new List<Attribute>();
+					List<Attribute> exAttr = new List<Attribute>();
 					exAttr.Add(new Attribute("ISM:DESVersion", version.IsmNamespace, "2"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 					Assert.Fail("Allowed invalid data.");
@@ -1249,7 +1249,7 @@ namespace DDMSense.Test.DDMS {
 				// NtkDESVersion in parameter AND extensible.
 				if (version.IsAtLeast("4.0.1")) {
 					try {
-						IList<Attribute> exAttr = new List<Attribute>();
+						List<Attribute> exAttr = new List<Attribute>();
 						exAttr.Add(new Attribute("ntk:DESVersion", version.NtkNamespace, "2"));
 						new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 						Assert.Fail("Allowed invalid data.");
@@ -1260,7 +1260,7 @@ namespace DDMSense.Test.DDMS {
 
 				// classification in securityAttributes AND extensible.
 				try {
-					IList<Attribute> exAttr = new List<Attribute>();
+					List<Attribute> exAttr = new List<Attribute>();
 					exAttr.Add(new Attribute("ISM:classification", version.IsmNamespace, "U"));
 					new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
 					Assert.Fail("Allowed invalid data.");
@@ -1299,7 +1299,7 @@ namespace DDMSense.Test.DDMS {
 			CreateComponents();
 			ExtensibleElement component = new ExtensibleElement(ExtensibleElementTest.FixtureElement);
 
-			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+			List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(component);
 			Resource resource = GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 			Assert.IsTrue(resource.ToHTML().IndexOf(BuildOutput(true, "extensible.layer", "true")) != -1);
@@ -1314,7 +1314,7 @@ namespace DDMSense.Test.DDMS {
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 
-			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+			List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(component);
 			GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
 		}
@@ -1325,7 +1325,7 @@ namespace DDMSense.Test.DDMS {
 			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
 
-			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+			List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(new ExtensibleElement(ExtensibleElementTest.FixtureElement));
 			components.Add(new ExtensibleElement(ExtensibleElementTest.FixtureElement));
 			GetInstance("Only 1 extensible element is allowed in DDMS 2.0.", components, null, null, null, null, null);
@@ -1337,7 +1337,7 @@ namespace DDMSense.Test.DDMS {
 			DDMSVersion.SetCurrentVersion("3.0");
 			CreateComponents();
 
-			IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
+			List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_NO_OPTIONAL_COMPONENTS);
 			components.Add(new ExtensibleElement(ExtensibleElementTest.FixtureElement));
 			components.Add(new ExtensibleElement(ExtensibleElementTest.FixtureElement));
 			GetInstance(SUCCESS, components, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, NtkDESVersion);
@@ -1390,7 +1390,7 @@ namespace DDMSense.Test.DDMS {
 				}
 
 				// Valid orders
-				IList<IDDMSComponent> components = new List<IDDMSComponent>(TEST_TOP_LEVEL_COMPONENTS);
+				List<IDDMSComponent> components = new List<IDDMSComponent>(TEST_TOP_LEVEL_COMPONENTS);
 				components.Add(SubjectCoverageTest.GetFixture(1));
 				components.Add(GeospatialCoverageTest.GetFixture(2));
 				components.Add(SubjectCoverageTest.GetFixture(3));

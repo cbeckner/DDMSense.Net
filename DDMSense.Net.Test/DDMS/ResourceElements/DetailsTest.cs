@@ -74,9 +74,9 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Details> FixtureList {
+//        public static List<Details> FixtureList {
 //            get {
-//                IList<Details> links = new List<Details>();
+//                List<Details> links = new List<Details>();
 //                links.Add(Fixture);
 //                return (links);
 //            }

@@ -82,13 +82,13 @@ namespace DDMSense.Test.DDMS.ResourceElements
         /// <summary>
         /// Returns a fixture object for testing.
         /// </summary>
-        public static IList<Addressee> FixtureList
+        public static List<Addressee> FixtureList
         {
             get
             {
                 try
                 {
-                    IList<Addressee> list = new List<Addressee>();
+                    List<Addressee> list = new List<Addressee>();
                     list.Add(new Addressee(GetFixtureElement(true)));
                     return (list);
                 }

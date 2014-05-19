@@ -68,9 +68,9 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<ProfileValue> FixtureList {
+//        public static List<ProfileValue> FixtureList {
 //            get {
-//                IList<ProfileValue> list = new List<ProfileValue>();
+//                List<ProfileValue> list = new List<ProfileValue>();
 //                list.Add(ProfileValueTest.GetFixture("profile"));
 //                return (list);
 //            }

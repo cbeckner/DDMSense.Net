@@ -65,9 +65,9 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<ProcessingInfo> FixtureList {
+//        public static List<ProcessingInfo> FixtureList {
 //            get {
-//                IList<ProcessingInfo> infos = new List<ProcessingInfo>();
+//                List<ProcessingInfo> infos = new List<ProcessingInfo>();
 //                infos.Add(Fixture);
 //                return (infos);
 //            }

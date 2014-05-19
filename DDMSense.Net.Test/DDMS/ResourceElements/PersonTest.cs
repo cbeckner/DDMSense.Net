@@ -40,9 +40,9 @@
 //        private const string TEST_SURNAME = "Uri";
 //        private const string TEST_USERID = "123";
 //        private const string TEST_AFFILIATION = "DISA";
-//        private static readonly IList<string> TEST_NAMES = new List<string>();
-//        private static readonly IList<string> TEST_PHONES = new List<string>();
-//        private static readonly IList<string> TEST_EMAILS = new List<string>();
+//        private static readonly List<string> TEST_NAMES = new List<string>();
+//        private static readonly List<string> TEST_PHONES = new List<string>();
+//        private static readonly List<string> TEST_EMAILS = new List<string>();
 //        static PersonTest() {
 //            TEST_NAMES.Add("Brian");
 //            TEST_NAMES.Add("BU");
@@ -100,7 +100,7 @@
 //        /// <param name="affiliation"> organizational affiliation of the person </param>
 //        /// <param name="phones"> an ordered list of phone numbers </param>
 //        /// <param name="emails"> an ordered list of email addresses </param>
-//        private Person GetInstance(string message, string surname, IList<string> names, string userID, string affiliation, IList<string> phones, IList<string> emails) {
+//        private Person GetInstance(string message, string surname, List<string> names, string userID, string affiliation, List<string> phones, List<string> emails) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Person component = null;
 //            try {
@@ -263,7 +263,7 @@
 //                GetInstance("At least 1 name element must exist.", TEST_SURNAME, null, TEST_USERID, TEST_AFFILIATION, TEST_PHONES, TEST_EMAILS);
 
 //                // Empty name
-//                IList<string> names = new List<string>();
+//                List<string> names = new List<string>();
 //                names.Add("");
 //                GetInstance("At least 1 name element must have a non-empty value.", TEST_SURNAME, names, TEST_USERID, TEST_AFFILIATION, TEST_PHONES, TEST_EMAILS);
 
@@ -325,7 +325,7 @@
 //                Person dataComponent = GetInstance(SUCCESS, DIFFERENT_VALUE, TEST_NAMES, TEST_USERID, TEST_AFFILIATION, TEST_PHONES, TEST_EMAILS);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<string> differentNames = new List<string>();
+//                List<string> differentNames = new List<string>();
 //                differentNames.Add("Brian");
 //                dataComponent = GetInstance(SUCCESS, TEST_SURNAME, differentNames, TEST_USERID, TEST_AFFILIATION, TEST_PHONES, TEST_EMAILS);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));

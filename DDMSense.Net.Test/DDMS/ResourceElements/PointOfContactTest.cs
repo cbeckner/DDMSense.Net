@@ -98,7 +98,7 @@
 //        /// <param name="message"> an expected error message. If empty, the constructor is expected to succeed. </param>
 //        /// <param name="entity"> the producer entity </param>
 //        /// <param name="pocTypes"> the pocType (DDMS 4.0.1 or later) </param>
-//        private PointOfContact GetInstance(string message, IRoleEntity entity, IList<string> pocTypes) {
+//        private PointOfContact GetInstance(string message, IRoleEntity entity, List<string> pocTypes) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            PointOfContact component = null;
 //            try {

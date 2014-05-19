@@ -87,13 +87,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         /// <summary>
         /// Returns a fixture object for testing.
         /// </summary>
-        public static IList<Notice> FixtureList
+        public static List<Notice> FixtureList
         {
             get
             {
                 try
                 {
-                    IList<Notice> list = new List<Notice>();
+                    List<Notice> list = new List<Notice>();
                     list.Add(new Notice(NoticeTest.FixtureElement));
                     return (list);
                 }

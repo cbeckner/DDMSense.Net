@@ -114,7 +114,7 @@
 //        /// <param name="network"> the network (optional) </param>
 //        /// <param name="otherNetwork"> another network (optional) </param>
 //        /// <param name="xlinkAttributes"> simple xlink attributes (optional) </param>
-//        private RevisionRecall GetInstance(string message, IList<Link> links, IList<Details> details, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes) {
+//        private RevisionRecall GetInstance(string message, List<Link> links, List<Details> details, int? revisionID, string revisionType, string network, string otherNetwork, XLinkAttributes xlinkAttributes) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            RevisionRecall component = null;
 //            try {
@@ -350,7 +350,7 @@
 
 //                // Links without security attributes
 //                Link link = new Link(XLinkAttributesTest.LocatorFixture, null);
-//                IList<Link> linkList = new List<Link>();
+//                List<Link> linkList = new List<Link>();
 //                linkList.Add(link);
 //                GetInstance("classification is required.", linkList, DetailsTest.FixtureList, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.LocatorFixture);
 

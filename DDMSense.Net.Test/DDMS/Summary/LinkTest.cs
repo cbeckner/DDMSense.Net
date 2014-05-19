@@ -78,8 +78,8 @@
 //        /// Returns a fixture object for testing.
 //        /// </summary>
 //        /// <param name="hasSecurity"> true for security attributes </param>
-//        public static IList<Link> GetLocatorFixtureList(bool hasSecurity) {
-//            IList<Link> links = new List<Link>();
+//        public static List<Link> GetLocatorFixtureList(bool hasSecurity) {
+//            List<Link> links = new List<Link>();
 //            links.Add(GetLocatorFixture(hasSecurity));
 //            return (links);
 //        }

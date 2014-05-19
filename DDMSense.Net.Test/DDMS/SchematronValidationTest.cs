@@ -51,7 +51,7 @@
 ////JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 ////ORIGINAL LINE: public void testSchematronValidationXslt1() throws InvalidDDMSException, java.io.IOException, nu.xom.xslt.XSLException
 //        public virtual void TestSchematronValidationXslt1() {
-//            IList<string> supportedXslt1Processors = new List<string>();
+//            List<string> supportedXslt1Processors = new List<string>();
 //            if (System.getProperty("java.version").IndexOf("1.5.0") == -1) {
 //                supportedXslt1Processors.Add("com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
 //            }
@@ -63,7 +63,7 @@
 //                    Resource resource = VersionToResourceMap.GetValueOrNull(sVersion);
 //                    string ddmsNamespace = resource.Namespace;
 //                    string resourceName = Resource.getName(version);
-//                    IList<ValidationMessage> messages = resource.validateWithSchematron(new File("data/test/" + sVersion + "/testSchematronXslt1.sch"));
+//                    List<ValidationMessage> messages = resource.validateWithSchematron(new File("data/test/" + sVersion + "/testSchematronXslt1.sch"));
 //                    Assert.Equals(version.isAtLeast("4.0.1") ? 3 : 2, messages.Count);
 
 //                    string text = "A DDMS Resource must have an unknownElement child.";
@@ -96,7 +96,7 @@
 //                    Resource resource = VersionToResourceMap.GetValueOrNull(sVersion);
 //                    string ddmsNamespace = resource.Namespace;
 //                    string gmlNamespace = version.GmlNamespace;
-//                    IList<ValidationMessage> messages = resource.validateWithSchematron(new File("data/test/" + sVersion + "/testSchematronXslt2.sch"));
+//                    List<ValidationMessage> messages = resource.validateWithSchematron(new File("data/test/" + sVersion + "/testSchematronXslt2.sch"));
 //                    Assert.Equals(1, messages.Count);
 
 //                    string text = "The second coordinate in a gml:pos element must be 40.2 degrees.";

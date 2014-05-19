@@ -54,7 +54,7 @@
 //        /// <param name="order"> an order value for a nonstate actor inside </param>
 //        public static SubjectCoverage GetFixture(int order) {
 //            try {
-//                IList<NonStateActor> actors = new List<NonStateActor>();
+//                List<NonStateActor> actors = new List<NonStateActor>();
 //                actors.Add(NonStateActorTest.GetFixture(order));
 //                return (new SubjectCoverage(KeywordTest.FixtureList, null, null, DDMSVersion.CurrentVersion.isAtLeast("4.0.1") ? actors : null, null));
 //            } catch (InvalidDDMSException e) {
@@ -69,7 +69,7 @@
 //        public static SubjectCoverage Fixture {
 //            get {
 //                try {
-//                    IList<Keyword> keywords = new List<Keyword>();
+//                    List<Keyword> keywords = new List<Keyword>();
 //                    keywords.Add(new Keyword("DDMSence", null));
 //                    return (new SubjectCoverage(keywords, null, null, null, null));
 //                } catch (InvalidDDMSException e) {
@@ -109,7 +109,7 @@
 //        /// <param name="metrics"> list of production metrics </param>
 //        /// <param name="actors"> list of non-state actors </param>
 //        /// <returns> a valid object </returns>
-//        private SubjectCoverage GetInstance(string message, IList<Keyword> keywords, IList<Category> categories, IList<ProductionMetric> metrics, IList<NonStateActor> actors) {
+//        private SubjectCoverage GetInstance(string message, List<Keyword> keywords, List<Category> categories, List<ProductionMetric> metrics, List<NonStateActor> actors) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            SubjectCoverage component = null;
 //            try {
@@ -382,7 +382,7 @@
 //        public virtual void TestCategoryReuse() {
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
-//                IList<Category> categories = CategoryTest.FixtureList;
+//                List<Category> categories = CategoryTest.FixtureList;
 //                GetInstance(SUCCESS, null, categories, null, null);
 //                GetInstance(SUCCESS, null, categories, null, null);
 //            }
@@ -393,7 +393,7 @@
 //        public virtual void TestKeywordReuse() {
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
-//                IList<Keyword> keywords = KeywordTest.FixtureList;
+//                List<Keyword> keywords = KeywordTest.FixtureList;
 //                GetInstance(SUCCESS, keywords, null, null, null);
 //                GetInstance(SUCCESS, keywords, null, null, null);
 //            }
@@ -404,7 +404,7 @@
 //        public virtual void TestMetricReuse() {
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
-//                IList<ProductionMetric> metrics = ProductionMetricTest.FixtureList;
+//                List<ProductionMetric> metrics = ProductionMetricTest.FixtureList;
 //                GetInstance(SUCCESS, KeywordTest.FixtureList, null, metrics, null);
 //                GetInstance(SUCCESS, KeywordTest.FixtureList, null, metrics, null);
 //            }
@@ -415,7 +415,7 @@
 //        public virtual void TestActorReuse() {
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
-//                IList<NonStateActor> actors = NonStateActorTest.FixtureList;
+//                List<NonStateActor> actors = NonStateActorTest.FixtureList;
 //                GetInstance(SUCCESS, KeywordTest.FixtureList, null, null, actors);
 //                GetInstance(SUCCESS, KeywordTest.FixtureList, null, null, actors);
 //            }
@@ -452,7 +452,7 @@
 ////ORIGINAL LINE: public void testWrongVersions() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestWrongVersions() {
 //            DDMSVersion.SetCurrentVersion("2.0");
-//            IList<Keyword> keywords = KeywordTest.FixtureList;
+//            List<Keyword> keywords = KeywordTest.FixtureList;
 //            DDMSVersion.CurrentVersion = "3.0";
 //            try {
 //                new SubjectCoverage(keywords, null, null, null, SecurityAttributesTest.Fixture);
@@ -462,7 +462,7 @@
 //            }
 
 //            DDMSVersion.SetCurrentVersion("2.0");
-//            IList<Category> categories = CategoryTest.FixtureList;
+//            List<Category> categories = CategoryTest.FixtureList;
 //            DDMSVersion.CurrentVersion = "3.0";
 //            try {
 //                new SubjectCoverage(null, categories, null, null, SecurityAttributesTest.Fixture);
