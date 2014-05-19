@@ -43,6 +43,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
+    [TestClass]
     public class TaskIDTest : AbstractBaseTestCase
     {
 

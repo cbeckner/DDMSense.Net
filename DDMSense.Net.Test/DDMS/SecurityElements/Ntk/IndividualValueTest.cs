@@ -42,7 +42,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
-    public class IndividualValueTest : AbstractBaseTestCase
+    [TestClass]
+    class IndividualValueTest : AbstractBaseTestCase
     {
 
         private const string TEST_VALUE = "user_2321889:Doe_John_H";
@@ -144,8 +145,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         /// <summary>
         /// Returns the expected HTML or Text output for this unit test
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: private String getExpectedOutput(boolean isHTML) throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         private string GetExpectedOutput(bool isHTML)
         {
             StringBuilder text = new StringBuilder();
@@ -174,6 +173,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
+        [TestMethod]
         public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
@@ -185,8 +185,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -204,6 +203,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -218,8 +218,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -233,6 +232,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -252,8 +252,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testWarnings() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestWarnings()
         {
             foreach (string sVersion in SupportedVersions)
@@ -273,6 +272,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
+        [TestMethod]
         public virtual void TestConstructorEquality()
         {
             foreach (string sVersion in SupportedVersions)
@@ -286,6 +286,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
+        [TestMethod]
         public virtual void TestConstructorInequalityDifferentValues()
         {
             foreach (string sVersion in SupportedVersions)
@@ -307,8 +308,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testHTMLTextOutput() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestHTMLTextOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -325,6 +325,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
+        [TestMethod]
         public virtual void TestXMLOutput()
         {
             foreach (string sVersion in SupportedVersions)
@@ -339,6 +340,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
+        [TestMethod]
         public virtual void TestWrongVersion()
         {
             // Implicit, since the NTK namespace does not exist before DDMS 4.0.1.
@@ -358,8 +360,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
@@ -375,8 +376,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testBuilderValidation() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void TestBuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)

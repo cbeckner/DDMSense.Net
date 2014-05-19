@@ -46,7 +46,8 @@ namespace DDMSense.Test.DDMS.SecurityElements
 	/// @author Brian Uri!
 	/// @since 2.0.0
 	/// </summary>
-	public class NoticeListTest : AbstractBaseTestCase
+    [TestClass]
+    public class NoticeListTest : AbstractBaseTestCase
 	{
 
 		/// <summary>

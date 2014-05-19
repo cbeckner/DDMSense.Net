@@ -43,6 +43,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
+    [TestClass]
     public class ApplicationSoftwareTest : AbstractBaseTestCase
     {
 
@@ -173,7 +174,9 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
 
-        [TestMethod]public virtual void TestNameAndNamespace()
+
+        [TestMethod]
+        public virtual void TestNameAndNamespace()
         {
             foreach (string sVersion in SupportedVersions)
             {
@@ -201,6 +204,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
 
+        [TestMethod]
         public virtual void TestDataConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -215,8 +219,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
 
-        [TestMethod]
-        public virtual void TestElementConstructorInvalid()
+       [TestMethod]
+       public virtual void TestElementConstructorInvalid()
         {
             foreach (string sVersion in SupportedVersions)
             {

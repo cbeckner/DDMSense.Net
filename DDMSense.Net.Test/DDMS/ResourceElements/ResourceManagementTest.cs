@@ -41,6 +41,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
+    [TestClass]
     public class ResourceManagementTest : AbstractBaseTestCase
     {
 
@@ -341,6 +342,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
 
+        [TestMethod]
         public virtual void TestWrongVersion()
         {
             try
@@ -354,7 +356,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 ExpectMessage(e, "The resourceManagement element cannot be used");
             }
         }
-        
+       
         [TestMethod]
         public virtual void TestBuilderEquality()
         {

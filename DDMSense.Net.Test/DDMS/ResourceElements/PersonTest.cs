@@ -40,6 +40,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
+    [TestClass]
     public class PersonTest : AbstractBaseTestCase
     {
 
