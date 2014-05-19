@@ -32,6 +32,7 @@ namespace DDMSense.Test.DDMS
     public class ValidationMessageTest
     {
 
+        [TestMethod]
         public virtual void TestFactory()
         {
             ValidationMessage message = ValidationMessage.NewWarning("Test", "ddms:test");
@@ -45,6 +46,7 @@ namespace DDMSense.Test.DDMS
             Assert.Equals("/ddms:test", message.Locator);
         }
 
+        [TestMethod]
         public virtual void TestEquality()
         {
             ValidationMessage message1 = ValidationMessage.NewWarning("Test", "ddms:test");
@@ -55,8 +57,7 @@ namespace DDMSense.Test.DDMS
             Assert.Equals(message1.ToString(), message2.ToString());
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testInequalityDifferentValues() throws InvalidDDMSException
+        [TestMethod]
         public virtual void TestInequalityDifferentValues()
         {
             ValidationMessage message1 = ValidationMessage.NewWarning("Test", "ddms:test");
@@ -70,8 +71,7 @@ namespace DDMSense.Test.DDMS
             Assert.IsFalse(message1.Equals(message2));
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testInequalityWrongClass() throws InvalidDDMSException
+        [TestMethod]
         public virtual void TestInequalityWrongClass()
         {
             ValidationMessage message = ValidationMessage.NewWarning("Test", "ddms:test");
@@ -79,8 +79,7 @@ namespace DDMSense.Test.DDMS
             Assert.IsFalse(message.Equals(wrongComponent));
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void testLocatorEquality() throws InvalidDDMSException
+        [TestMethod]
         public virtual void TestLocatorEquality()
         {
             InvalidDDMSException e = new InvalidDDMSException("test");
