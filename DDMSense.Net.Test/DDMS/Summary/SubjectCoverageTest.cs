@@ -178,7 +178,7 @@ namespace DDMSense.Test.DDMS.Summary
             StringBuilder text = new StringBuilder();
             foreach (Keyword keyword in KeywordTest.FixtureList)
             {
-                text.Append(keyword.getOutput(isHTML, prefix, ""));
+                text.Append(keyword.GetOutput(isHTML, prefix, ""));
             }
             foreach (Category category in CategoryTest.FixtureList)
             {
@@ -189,11 +189,11 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 foreach (ProductionMetric metric in ProductionMetricTest.FixtureList)
                 {
-                    text.Append(metric.getOutput(isHTML, prefix, ""));
+                    text.Append(metric.GetOutput(isHTML, prefix, ""));
                 }
                 foreach (NonStateActor actor in NonStateActorTest.FixtureList)
                 {
-                    text.Append(actor.getOutput(isHTML, prefix, ""));
+                    text.Append(actor.GetOutput(isHTML, prefix, ""));
                 }
             }
             if (version.IsAtLeast("3.0"))
@@ -605,7 +605,7 @@ namespace DDMSense.Test.DDMS.Summary
                 fullBuilder.Value = "keyword";
                 builder.Keywords.Add(emptyBuilder);
                 builder.Keywords.Add(fullBuilder);
-                Assert.Equals(1, builder.Commit().Keywords.Count());
+                Assert.Equals(1, ((SubjectCoverage)builder.Commit()).Keywords.Count());
 
                 // Skip empty Categories
                 builder = new SubjectCoverage.Builder();
@@ -614,7 +614,7 @@ namespace DDMSense.Test.DDMS.Summary
                 fullCategoryBuilder.Label = "label";
                 builder.Categories.Add(emptyCategoryBuilder);
                 builder.Categories.Add(fullCategoryBuilder);
-                Assert.Equals(1, builder.Commit().Categories.Count());
+                Assert.Equals(1, ((SubjectCoverage)builder.Commit()).Categories.Count());
 
                 if (version.IsAtLeast("4.0.1"))
                 {
@@ -627,7 +627,7 @@ namespace DDMSense.Test.DDMS.Summary
                     builder.Keywords[0].Value = "test";
                     builder.ProductionMetrics.Add(emptyProductionMetricBuilder);
                     builder.ProductionMetrics.Add(fullProductionMetricBuilder);
-                    Assert.Equals(1, builder.Commit().ProductionMetrics.Count());
+                    Assert.Equals(1, ((SubjectCoverage)builder.Commit()).ProductionMetrics.Count());
 
                     // Skip empty actors
                     builder = new SubjectCoverage.Builder();
@@ -637,7 +637,7 @@ namespace DDMSense.Test.DDMS.Summary
                     builder.Keywords[0].Value = "test";
                     builder.NonStateActors.Add(emptyNonStateActorBuilder);
                     builder.NonStateActors.Add(fullNonStateActorBuilder);
-                    Assert.Equals(1, builder.Commit().NonStateActors.Count());
+                    Assert.Equals(1, ((SubjectCoverage)builder.Commit()).NonStateActors.Count());
                 }
             }
         }

@@ -287,6 +287,7 @@ namespace DDMSense.DDMS.Summary
             public virtual string Address
             {
                 get { return _address; }
+                set { _address = value; }
             }
 
 
@@ -296,6 +297,7 @@ namespace DDMSense.DDMS.Summary
             public virtual string Protocol
             {
                 get { return _protocol; }
+                set { _protocol = value; }
             }
 
 

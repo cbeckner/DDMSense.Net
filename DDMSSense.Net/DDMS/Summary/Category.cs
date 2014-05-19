@@ -327,6 +327,7 @@ namespace DDMSense.DDMS.Summary
             public virtual string Qualifier
             {
                 get { return _qualifier; }
+                set { _qualifier = value; }
             }
 
 
@@ -336,6 +337,7 @@ namespace DDMSense.DDMS.Summary
             public virtual string Code
             {
                 get { return _code; }
+                set { _code = value; }
             }
 
 
@@ -345,6 +347,7 @@ namespace DDMSense.DDMS.Summary
             public virtual string Label
             {
                 get { return _label; }
+                set { _label = value; }
             }
 
 

@@ -487,6 +487,10 @@ namespace DDMSense.DDMS.Summary
                     }
                     return _keywords;
                 }
+                set
+                {
+                    _keywords = value;
+                }
             }
 
             /// <summary>
@@ -502,6 +506,7 @@ namespace DDMSense.DDMS.Summary
                     }
                     return _categories;
                 }
+                set { _categories = value; }
             }
 
             /// <summary>
@@ -516,6 +521,10 @@ namespace DDMSense.DDMS.Summary
                         _productionMetrics = new List<ProductionMetric.Builder>();
                     }
                     return _productionMetrics;
+                }
+                set
+                {
+                    _productionMetrics = value;
                 }
             }
 

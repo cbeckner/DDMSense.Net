@@ -281,6 +281,7 @@ namespace DDMSense.DDMS.Summary
             public virtual string Value
             {
                 get { return _value; }
+                set { _value = value; }
             }
 
 
