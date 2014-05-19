@@ -50,10 +50,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Point> FixtureList {
+//        public static List<Point> FixtureList {
 //            get {
 //                try {
-//                    IList<Point> points = new List<Point>();
+//                    List<Point> points = new List<Point>();
 //                    points.Add(new Point(new Position(PositionTest.TEST_COORDS, null), SRSAttributesTest.Fixture, TEST_ID));
 //                    return (points);
 //                } catch (InvalidDDMSException e) {
@@ -146,9 +146,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_GML_PREFIX, Point.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_GML_PREFIX, Point.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -157,15 +157,15 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildElement(PropertyReader.getPrefix("gml"), Point.getName(version), version.GmlNamespace, null);
+//                XElement element = Util.buildElement(PropertyReader.GetPrefix("gml"), Point.GetName(version), version.GmlNamespace, null);
 //                Util.addAttribute(element, SRSAttributes.NO_PREFIX, "srsName", SRSAttributes.NO_NAMESPACE, SRSAttributesTest.Fixture.SrsName);
-//                Util.addAttribute(element, PropertyReader.getPrefix("gml"), "id", version.GmlNamespace, TEST_ID);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                Util.addAttribute(element, PropertyReader.GetPrefix("gml"), "id", version.GmlNamespace, TEST_ID);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -184,56 +184,56 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string gmlPrefix = PropertyReader.getPrefix("gml");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string gmlPrefix = PropertyReader.GetPrefix("gml");
 //                string gmlNamespace = version.GmlNamespace;
 
 //                // Missing SRS Name
-//                XElement element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
+//                XElement element = Util.buildElement(gmlPrefix, Point.GetName(version), gmlNamespace, null);
 //                SRSAttributes attr = new SRSAttributes(null, SRSAttributesTest.Fixture.SrsDimension, null, null);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("srsName is required.", element);
 
 //                // Empty SRS Name
-//                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Point.GetName(version), gmlNamespace, null);
 //                attr = new SRSAttributes("", SRSAttributesTest.Fixture.SrsDimension, null, null);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("srsName is required.", element);
 
 //                // Point SRS Name doesn't match pos SRS Name
-//                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Point.GetName(version), gmlNamespace, null);
 //                attr = new SRSAttributes(DIFFERENT_VALUE, SRSAttributesTest.Fixture.SrsDimension, SRSAttributesTest.Fixture.AxisLabels, SRSAttributesTest.Fixture.UomLabels);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("The srsName of the position must match", element);
 
 //                // Missing ID
-//                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Point.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("id is required.", element);
 
 //                // Empty ID
-//                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Point.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, "");
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("id is required.", element);
 
 //                // ID not NCName
-//                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Point.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, "1TEST");
-//                element.appendChild(PositionTest.Fixture.XOMElementCopy);
+//                element.appendChild(PositionTest.Fixture.ElementCopy);
 //                GetInstance("\"1TEST\" is not a valid NCName.", element);
 
 //                // Missing position
-//                element = Util.buildElement(gmlPrefix, Point.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Point.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
 //                GetInstance("position is required.", element);
@@ -276,7 +276,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Point component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -302,7 +302,7 @@
 //                Point dataComponent = GetInstance(SUCCESS, PositionTest.Fixture, attr, TEST_ID);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<double?> newCoords = new List<double?>();
+//                List<double?> newCoords = new List<double?>();
 //                newCoords.Add(new double?(56.0));
 //                newCoords.Add(new double?(150.0));
 //                Position newPosition = new Position(newCoords, SRSAttributesTest.Fixture);
@@ -333,12 +333,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Point component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, PositionTest.Fixture, SRSAttributesTest.Fixture, TEST_ID);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -348,10 +348,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Point component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, PositionTest.Fixture, SRSAttributesTest.Fixture, TEST_ID);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -374,7 +374,7 @@
 
 //                Point component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Point.Builder builder = new Point.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -385,7 +385,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Point.Builder builder = new Point.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Id = TEST_ID;
 //                Assert.IsFalse(builder.Empty);
@@ -401,7 +401,7 @@
 //                Point.Builder builder = new Point.Builder();
 //                builder.Id = TEST_ID;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "srsName is required.");
@@ -410,7 +410,7 @@
 //                builder.Position.Coordinates.get(1).Value = new double?(42.1);
 //                builder.Id = "IDValue";
 //                builder.SrsAttributes.SrsName = "http://metadata.dod.mil/mdr/ns/GSIP/crs/WGS84E_2D";
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

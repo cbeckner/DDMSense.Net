@@ -50,10 +50,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Polygon> FixtureList {
+//        public static List<Polygon> FixtureList {
 //            get {
 //                try {
-//                    IList<Polygon> polygons = new List<Polygon>();
+//                    List<Polygon> polygons = new List<Polygon>();
 //                    polygons.Add(new Polygon(PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID));
 //                    return (polygons);
 //                } catch (InvalidDDMSException e) {
@@ -91,7 +91,7 @@
 //        /// <param name="srsAttributes"> the srs attributes (required) </param>
 //        /// <param name="id"> the id (required) </param>
 //        /// <returns> a valid object </returns>
-//        private Polygon GetInstance(string message, IList<Position> positions, SRSAttributes srsAttributes, string id) {
+//        private Polygon GetInstance(string message, List<Position> positions, SRSAttributes srsAttributes, string id) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            Polygon component = null;
 //            try {
@@ -109,13 +109,13 @@
 //        /// </summary>
 //        /// <param name="positions"> the positions </param>
 //        /// <returns> an exterior element containing a LinearRing element containing the positions </returns>
-//        private XElement WrapPositions(IList<Position> positions) {
+//        private XElement WrapPositions(List<Position> positions) {
 //            string gmlNamespace = DDMSVersion.CurrentVersion.GmlNamespace;
-//            XElement ringElement = Util.buildElement(PropertyReader.getPrefix("gml"), "LinearRing", gmlNamespace, null);
+//            XElement ringElement = Util.buildElement(PropertyReader.GetPrefix("gml"), "LinearRing", gmlNamespace, null);
 //            foreach (Position pos in positions) {
-//                ringElement.appendChild(pos.XOMElementCopy);
+//                ringElement.appendChild(pos.ElementCopy);
 //            }
-//            XElement extElement = Util.buildElement(PropertyReader.getPrefix("gml"), "exterior", gmlNamespace, null);
+//            XElement extElement = Util.buildElement(PropertyReader.GetPrefix("gml"), "exterior", gmlNamespace, null);
 //            extElement.appendChild(ringElement);
 //            return (extElement);
 //        }
@@ -186,9 +186,9 @@
 ////ORIGINAL LINE: public void testNameAndNamespace() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_GML_PREFIX, Polygon.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_GML_PREFIX, Polygon.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -197,27 +197,27 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string gmlPrefix = PropertyReader.getPrefix("gml");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string gmlPrefix = PropertyReader.GetPrefix("gml");
 //                string gmlNamespace = version.GmlNamespace;
 
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                XElement element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                Util.addAttribute(element, SRSAttributes.NO_PREFIX, "srsName", SRSAttributes.NO_NAMESPACE, SRSAttributesTest.Fixture.SrsName);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
 //                element.appendChild(WrapPositions(PositionTest.FixtureList));
 //                GetInstance(SUCCESS, element);
 
 //                // First position matches last position but has extra whitespace.
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
+//                List<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
-//                XElement posElement = Util.buildElement(gmlPrefix, Position.getName(version), gmlNamespace, "32.1         40.1");
+//                XElement posElement = Util.buildElement(gmlPrefix, Position.GetName(version), gmlNamespace, "32.1         40.1");
 //                SRSAttributesTest.Fixture.addTo(posElement);
 //                Position positionWhitespace = new Position(posElement);
 //                newPositions.Add(positionWhitespace);
@@ -240,11 +240,11 @@
 ////ORIGINAL LINE: public void testElementConstructorInvalid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
-//                string gmlPrefix = PropertyReader.getPrefix("gml");
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
+//                string gmlPrefix = PropertyReader.GetPrefix("gml");
 //                string gmlNamespace = version.GmlNamespace;
 //                // Missing SRS Name
-//                XElement element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                XElement element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                SRSAttributes attr = new SRSAttributes(null, SRSAttributesTest.Fixture.SrsDimension, null, null);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
@@ -252,7 +252,7 @@
 //                GetInstance("srsName is required.", element);
 
 //                // Empty SRS Name
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                attr = new SRSAttributes("", SRSAttributesTest.Fixture.SrsDimension, null, null);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
@@ -260,7 +260,7 @@
 //                GetInstance("srsName is required.", element);
 
 //                // Polygon SRS Name doesn't match pos SRS Name
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                attr = new SRSAttributes(DIFFERENT_VALUE, SRSAttributesTest.Fixture.SrsDimension, SRSAttributesTest.Fixture.AxisLabels, SRSAttributesTest.Fixture.UomLabels);
 //                attr.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
@@ -268,43 +268,43 @@
 //                GetInstance("The srsName of each position", element);
 
 //                // Missing ID
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                element.appendChild(WrapPositions(PositionTest.FixtureList));
 //                GetInstance("id is required.", element);
 
 //                // Empty ID
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, "");
 //                element.appendChild(WrapPositions(PositionTest.FixtureList));
 //                GetInstance("id is required.", element);
 
 //                // ID not NCName
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, "1TEST");
 //                element.appendChild(WrapPositions(PositionTest.FixtureList));
 //                GetInstance("\"1TEST\" is not a valid NCName.", element);
 
 //                // Missing Positions
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
 //                element.appendChild(WrapPositions(new List<Position>()));
 //                GetInstance("At least 4 positions are required", element);
 
 //                // First position doesn't match last position.
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
-//                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
+//                List<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
 //                element.appendChild(WrapPositions(newPositions));
 //                GetInstance("The first and last position", element);
 
 //                // Not enough positions
-//                element = Util.buildElement(gmlPrefix, Polygon.getName(version), gmlNamespace, null);
+//                element = Util.buildElement(gmlPrefix, Polygon.GetName(version), gmlNamespace, null);
 //                SRSAttributesTest.Fixture.addTo(element);
 //                Util.addAttribute(element, gmlPrefix, "id", gmlNamespace, TEST_ID);
 //                newPositions = new List<Position>();
@@ -346,7 +346,7 @@
 //                GetInstance("At least 4 positions are required", null, SRSAttributesTest.Fixture, TEST_ID);
 
 //                // First position doesn't match last position.
-//                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
+//                List<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
 //                GetInstance("The first and last position", newPositions, SRSAttributesTest.Fixture, TEST_ID);
 
@@ -362,7 +362,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -388,7 +388,7 @@
 //                Polygon dataComponent = GetInstance(SUCCESS, PositionTest.FixtureList, attr, TEST_ID);
 //                Assert.IsFalse(elementComponent.Equals(dataComponent));
 
-//                IList<Position> newPositions = new List<Position>(PositionTest.FixtureList);
+//                List<Position> newPositions = new List<Position>(PositionTest.FixtureList);
 //                newPositions.Add(PositionTest.FixtureList[1]);
 //                newPositions.Add(PositionTest.FixtureList[0]);
 //                dataComponent = GetInstance(SUCCESS, newPositions, SRSAttributesTest.Fixture, TEST_ID);
@@ -417,12 +417,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -432,10 +432,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -444,7 +444,7 @@
 //        public virtual void TestPositionReuse() {
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
-//                IList<Position> positions = PositionTest.FixtureList;
+//                List<Position> positions = PositionTest.FixtureList;
 //                GetInstance(SUCCESS, positions, SRSAttributesTest.Fixture, TEST_ID);
 //                GetInstance(SUCCESS, positions, SRSAttributesTest.Fixture, TEST_ID);
 //            }
@@ -467,7 +467,7 @@
 
 //                Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Polygon.Builder builder = new Polygon.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -478,7 +478,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Polygon.Builder builder = new Polygon.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Id = TEST_ID;
 //                Assert.IsFalse(builder.Empty);
@@ -494,7 +494,7 @@
 //                Polygon.Builder builder = new Polygon.Builder();
 //                builder.Id = TEST_ID;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "srsName is required.");
@@ -508,7 +508,7 @@
 //                builder.Positions.get(2).Coordinates.get(1).Value = Convert.ToDouble(3);
 //                builder.Positions.get(3).Coordinates[0].Value = Convert.ToDouble(1);
 //                builder.Positions.get(3).Coordinates.get(1).Value = Convert.ToDouble(1);
-//                builder.commit();
+//                builder.Commit();
 
 //                // Skip empty Positions
 //                builder = new Polygon.Builder();
@@ -529,7 +529,7 @@
 //                builder.Positions.add(fullBuilder3);
 //                builder.Positions.add(fullBuilder1);
 //                builder.SrsAttributes = new SRSAttributes.Builder(SRSAttributesTest.Fixture);
-//                Assert.Equals(4, builder.commit().Positions.size());
+//                Assert.Equals(4, builder.Commit().Positions.Count());
 //            }
 //        }
 

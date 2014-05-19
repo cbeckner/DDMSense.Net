@@ -50,10 +50,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Keyword> FixtureList {
+//        public static List<Keyword> FixtureList {
 //            get {
 //                try {
-//                    IList<Keyword> keywords = new List<Keyword>();
+//                    List<Keyword> keywords = new List<Keyword>();
 //                    keywords.Add(new Keyword("DDMSence", null));
 //                    keywords.Add(new Keyword("Uri", null));
 //                    return (keywords);
@@ -142,9 +142,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Keyword.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Keyword.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -165,13 +165,13 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing value
-//                XElement element = Util.buildDDMSElement(Keyword.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(Keyword.GetName(version), null);
 //                GetInstance("value attribute is required.", element);
 
 //                // Empty value
-//                element = Util.buildDDMSElement(Keyword.getName(version), "");
+//                element = Util.BuildDDMSElement(Keyword.GetName(version), "");
 //                GetInstance("value attribute is required.", element);
 //            }
 //        }
@@ -192,7 +192,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Keyword component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -234,12 +234,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Keyword component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -247,10 +247,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Keyword component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_VALUE);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -276,11 +276,11 @@
 //                ExpectMessage(e, "xs:anyAttribute cannot be applied");
 //            }
 
-//            DDMSVersion version = DDMSVersion.setCurrentVersion("3.0");
+//            DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
 //            Attribute attr = new Attribute("ddms:value", version.Namespace, "dog");
 
 //            // Using ddms:value as the extension (data)
-//            IList<Attribute> extAttributes = new List<Attribute>();
+//            List<Attribute> extAttributes = new List<Attribute>();
 //            extAttributes.Add(attr);
 //            attributes = new ExtensibleAttributes(extAttributes);
 //            try {
@@ -311,7 +311,7 @@
 
 //                Keyword component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Keyword.Builder builder = new Keyword.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -322,7 +322,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Keyword.Builder builder = new Keyword.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Value = TEST_VALUE;
 //                Assert.IsFalse(builder.Empty);

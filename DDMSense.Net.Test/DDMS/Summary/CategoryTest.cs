@@ -53,10 +53,10 @@
 //        /// <summary>
 //        /// Returns a fixture object for testing.
 //        /// </summary>
-//        public static IList<Category> FixtureList {
+//        public static List<Category> FixtureList {
 //            get {
 //                try {
-//                    IList<Category> categories = new List<Category>();
+//                    List<Category> categories = new List<Category>();
 //                    categories.Add(new Category("urn:buri:ddmsence:categories", "DDMS", "DDMS", null));
 //                    return (categories);
 //                } catch (InvalidDDMSException e) {
@@ -150,21 +150,21 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Category.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, Category.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
 
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // All fields
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // No optional fields
-//                XElement element = Util.buildDDMSElement(Category.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(Category.GetName(version), null);
 //                Util.addDDMSAttribute(element, "label", TEST_LABEL);
 //                GetInstance(SUCCESS, element);
 //            }
@@ -183,9 +183,9 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing label
-//                XElement element = Util.buildDDMSElement(Category.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(Category.GetName(version), null);
 //                GetInstance("label attribute is required.", element);
 //            }
 //        }
@@ -206,7 +206,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                Category component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -254,12 +254,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Category component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_CODE, TEST_LABEL);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -267,10 +267,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                Category component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_CODE, TEST_LABEL);
-//                Assert.Equals(ExpectedXMLOutput, component.toXML());
+//                Assert.Equals(ExpectedXMLOutput, component.ToXML());
 //            }
 //        }
 
@@ -296,10 +296,10 @@
 //                ExpectMessage(e, "xs:anyAttribute cannot be applied");
 //            }
 
-//            DDMSVersion version = DDMSVersion.setCurrentVersion("3.0");
+//            DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
 
 //            // Using ddms:qualifier as the extension (data)
-//            IList<Attribute> extAttributes = new List<Attribute>();
+//            List<Attribute> extAttributes = new List<Attribute>();
 //            extAttributes.Add(new Attribute("ddms:qualifier", version.Namespace, "dog"));
 //            attributes = new ExtensibleAttributes(extAttributes);
 //            try {
@@ -362,7 +362,7 @@
 
 //                Category component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                Category.Builder builder = new Category.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -373,7 +373,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                Category.Builder builder = new Category.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Label = TEST_LABEL;
 //                Assert.IsFalse(builder.Empty);
@@ -390,13 +390,13 @@
 //                Category.Builder builder = new Category.Builder();
 //                builder.Qualifier = TEST_QUALIFIER;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "label attribute is required.");
 //                }
 //                builder.Label = TEST_LABEL;
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

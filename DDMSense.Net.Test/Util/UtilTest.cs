@@ -1031,8 +1031,8 @@ namespace DDMSense.Test.Util {
         [TestMethod]
         public virtual void TestBuildXmlDocument() {
             //File testFile = new File(PropertyReader.getProperty("test.unit.data") + "3.0/", "resource.xml");
-            //string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).toXML();
-            //Assert.AreEqual(expectedXmlOutput, Util.BuildXmlDocument(new FileStream(testFile)).RootElement.toXML());
+            //string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).ToXML();
+            //Assert.AreEqual(expectedXmlOutput, Util.BuildXmlDocument(new FileStream(testFile)).RootElement.ToXML());
             Assert.Fail("Not Implemented");
 		}
 

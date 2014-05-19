@@ -123,9 +123,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, FacilityIdentifier.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, FacilityIdentifier.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -146,25 +146,25 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // Missing beNumber
-//                XElement element = Util.buildDDMSElement(FacilityIdentifier.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(FacilityIdentifier.GetName(version), null);
 //                Util.addDDMSAttribute(element, "osuffix", TEST_OSUFFIX);
 //                GetInstance("beNumber is required.", element);
 
 //                // Empty beNumber
-//                element = Util.buildDDMSElement(FacilityIdentifier.getName(version), null);
+//                element = Util.BuildDDMSElement(FacilityIdentifier.GetName(version), null);
 //                Util.addDDMSAttribute(element, "beNumber", "");
 //                Util.addDDMSAttribute(element, "osuffix", TEST_OSUFFIX);
 //                GetInstance("beNumber is required.", element);
 
 //                // Missing osuffix
-//                element = Util.buildDDMSElement(FacilityIdentifier.getName(version), null);
+//                element = Util.BuildDDMSElement(FacilityIdentifier.GetName(version), null);
 //                Util.addDDMSAttribute(element, "beNumber", TEST_BENUMBER);
 //                GetInstance("osuffix is required.", element);
 
 //                // Empty osuffix
-//                element = Util.buildDDMSElement(FacilityIdentifier.getName(version), null);
+//                element = Util.BuildDDMSElement(FacilityIdentifier.GetName(version), null);
 //                Util.addDDMSAttribute(element, "beNumber", TEST_BENUMBER);
 //                Util.addDDMSAttribute(element, "osuffix", "");
 //                GetInstance("osuffix is required.", element);
@@ -193,7 +193,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                FacilityIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -236,12 +236,12 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                FacilityIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, TEST_BENUMBER, TEST_OSUFFIX);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 //            }
 //        }
 
@@ -249,10 +249,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                FacilityIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, TEST_BENUMBER, TEST_OSUFFIX);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -264,7 +264,7 @@
 
 //                FacilityIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
 //                FacilityIdentifier.Builder builder = new FacilityIdentifier.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -275,7 +275,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                FacilityIdentifier.Builder builder = new FacilityIdentifier.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.BeNumber = TEST_BENUMBER;
 //                Assert.IsFalse(builder.Empty);
@@ -292,13 +292,13 @@
 //                FacilityIdentifier.Builder builder = new FacilityIdentifier.Builder();
 //                builder.BeNumber = TEST_BENUMBER;
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "osuffix is required.");
 //                }
 //                builder.Osuffix = TEST_OSUFFIX;
-//                builder.commit();
+//                builder.Commit();
 //            }
 //        }
 //    }

@@ -93,7 +93,7 @@
 //        /// <param name="polygons"> an ordered list of the polygons used in this geometry </param>
 //        /// <param name="points"> an ordered list of the points used in this geometry </param>
 //        /// <returns> a valid object </returns>
-//        private BoundingGeometry GetInstance(string message, IList<Polygon> polygons, IList<Point> points) {
+//        private BoundingGeometry GetInstance(string message, List<Polygon> polygons, List<Point> points) {
 //            bool expectFailure = !String.IsNullOrEmpty(message);
 //            BoundingGeometry component = null;
 //            try {
@@ -134,9 +134,9 @@
 
 //        public virtual void TestNameAndNamespace() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
-//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, BoundingGeometry.getName(version));
+//                AssertNameAndNamespace(GetInstance(SUCCESS, GetValidElement(sVersion)), DEFAULT_DDMS_PREFIX, BoundingGeometry.GetName(version));
 //                GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
 //            }
 //        }
@@ -145,19 +145,19 @@
 ////ORIGINAL LINE: public void testElementConstructorValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
 //        public virtual void TestElementConstructorValid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // Point
 //                GetInstance(SUCCESS, GetValidElement(sVersion));
 
 //                // Polygon
-//                XElement element = Util.buildDDMSElement(BoundingGeometry.getName(version), null);
-//                element.appendChild(PolygonTest.FixtureList[0].XOMElementCopy);
+//                XElement element = Util.BuildDDMSElement(BoundingGeometry.GetName(version), null);
+//                element.appendChild(PolygonTest.FixtureList[0].ElementCopy);
 //                GetInstance(SUCCESS, element);
 
 //                // Both
-//                element = Util.buildDDMSElement(BoundingGeometry.getName(version), null);
-//                element.appendChild(PolygonTest.FixtureList[0].XOMElementCopy);
-//                element.appendChild(PointTest.FixtureList[0].XOMElementCopy);
+//                element = Util.BuildDDMSElement(BoundingGeometry.GetName(version), null);
+//                element.appendChild(PolygonTest.FixtureList[0].ElementCopy);
+//                element.appendChild(PointTest.FixtureList[0].ElementCopy);
 //                GetInstance(SUCCESS, element);
 //            }
 //        }
@@ -180,9 +180,9 @@
 
 //        public virtual void TestElementConstructorInvalid() {
 //            foreach (string sVersion in SupportedVersions) {
-//                DDMSVersion version = DDMSVersion.setCurrentVersion(sVersion);
+//                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 //                // No polygons or points
-//                XElement element = Util.buildDDMSElement(BoundingGeometry.getName(version), null);
+//                XElement element = Util.BuildDDMSElement(BoundingGeometry.GetName(version), null);
 //                GetInstance("At least 1 of ", element);
 //            }
 //        }
@@ -200,7 +200,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                // No warnings
 //                BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(0, component.ValidationWarnings.size());
+//                Assert.Equals(0, component.ValidationWarnings.Count());
 //            }
 //        }
 
@@ -238,16 +238,16 @@
 
 
 //                BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, null, PointTest.FixtureList);
-//                Assert.Equals(GetExpectedOutput(true), component.toHTML());
-//                Assert.Equals(GetExpectedOutput(false), component.toText());
+//                Assert.Equals(GetExpectedOutput(true), component.ToHTML());
+//                Assert.Equals(GetExpectedOutput(false), component.ToText());
 
 //                component = GetInstance(SUCCESS, PolygonTest.FixtureList, null);
-//                Assert.Equals(PolygonTest.FixtureList[0].getOutput(true, "boundingGeometry.", ""), component.toHTML());
-//                Assert.Equals(PolygonTest.FixtureList[0].getOutput(false, "boundingGeometry.", ""), component.toText());
+//                Assert.Equals(PolygonTest.FixtureList[0].getOutput(true, "boundingGeometry.", ""), component.ToHTML());
+//                Assert.Equals(PolygonTest.FixtureList[0].getOutput(false, "boundingGeometry.", ""), component.ToText());
 //            }
 //        }
 
@@ -257,10 +257,10 @@
 //            foreach (string sVersion in SupportedVersions) {
 //                DDMSVersion.SetCurrentVersion(sVersion);
 //                BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-//                Assert.Equals(GetExpectedXMLOutput(true), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(true), component.ToXML());
 
 //                component = GetInstance(SUCCESS, null, PointTest.FixtureList);
-//                Assert.Equals(GetExpectedXMLOutput(false), component.toXML());
+//                Assert.Equals(GetExpectedXMLOutput(false), component.ToXML());
 //            }
 //        }
 
@@ -274,12 +274,12 @@
 
 //                // Equality after Building (Point-based)
 //                BoundingGeometry.Builder builder = new BoundingGeometry.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 
 //                // Equality after Building (Polygon-based)
 //                component = new BoundingGeometry(PolygonTest.FixtureList, null);
 //                builder = new BoundingGeometry.Builder(component);
-//                Assert.Equals(component, builder.commit());
+//                Assert.Equals(component, builder.Commit());
 //            }
 //        }
 
@@ -290,7 +290,7 @@
 //                DDMSVersion.SetCurrentVersion(sVersion);
 
 //                BoundingGeometry.Builder builder = new BoundingGeometry.Builder();
-//                Assert.IsNull(builder.commit());
+//                Assert.IsNull(builder.Commit());
 //                Assert.IsTrue(builder.Empty);
 //                builder.Points[0].Id = TEST_ID;
 //                Assert.IsFalse(builder.Empty);
@@ -310,7 +310,7 @@
 //                    builder.Points.add(pointBuilder);
 //                }
 //                try {
-//                    builder.commit();
+//                    builder.Commit();
 //                    fail("Builder allowed invalid data.");
 //                } catch (InvalidDDMSException e) {
 //                    ExpectMessage(e, "id is required.");
@@ -319,7 +319,7 @@
 //                foreach (Polygon polygon in PolygonTest.FixtureList) {
 //                    builder.Polygons.add(new Polygon.Builder(polygon));
 //                }
-//                builder.commit();
+//                builder.Commit();
 
 //                // Skip empty Points
 //                builder = new BoundingGeometry.Builder();
@@ -331,7 +331,7 @@
 //                fullBuilder.Position.Coordinates.get(1).Value = Convert.ToDouble(0);
 //                builder.Points.add(emptyBuilder);
 //                builder.Points.add(fullBuilder);
-//                Assert.Equals(1, builder.commit().Points.size());
+//                Assert.Equals(1, builder.Commit().Points.Count());
 
 //                // Skip empty Polygons
 //                builder = new BoundingGeometry.Builder();
@@ -357,7 +357,7 @@
 
 //                builder.Polygons.add(emptyPolygonBuilder);
 //                builder.Polygons.add(fullPolygonBuilder);
-//                Assert.Equals(1, builder.commit().Polygons.size());
+//                Assert.Equals(1, builder.Commit().Polygons.Count());
 //            }
 //        }
 
