@@ -1085,7 +1085,7 @@ namespace DDMSense.Test.DDMS {
 			DDMSVersion.SetCurrentVersion("2.0");
 			CreateComponents();
 			// Security attributes do not exist in 2.0
-			new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
+			new Resource(TEST_TOP_LEVEL_COMPONENTS, ExtensibleAttributesTest.Fixture);
 
 			// But attributes can still be used.
 			new Resource(TEST_TOP_LEVEL_COMPONENTS, TEST_RESOURCE_ELEMENT, TEST_CREATE_DATE, null, IsmDESVersion, null, SecurityAttributesTest.Fixture, null, null);
@@ -1563,7 +1563,7 @@ namespace DDMSense.Test.DDMS {
 			builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 			builder.Creators[0].EntityType = Organization.GetName(version);
 			builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
-            //TODO - Figure out how to implement the assignment below
+			//TODO - Figure out how to implement the assignment below
 			//builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
 			builder.Security.SecurityAttributes.Classification = "U";
 			builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
@@ -1598,7 +1598,7 @@ namespace DDMSense.Test.DDMS {
 			builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 			builder.Creators[0].EntityType = Organization.GetName(version);
 			builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
-            //TODO - Figure out how to implement the assignment below
+			//TODO - Figure out how to implement the assignment below
 			//builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
 			builder.Security.SecurityAttributes.Classification = "U";
 			builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
