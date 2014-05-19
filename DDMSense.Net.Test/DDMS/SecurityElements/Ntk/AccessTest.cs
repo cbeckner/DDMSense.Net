@@ -30,7 +30,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
     using DDMSense.DDMS.SecurityElements.Ntk;
-    using DDMSense.DDMS.SecurityElements.Ntk;
     using System.Xml.Linq;
     using DDMSense.DDMS;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

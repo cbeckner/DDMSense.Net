@@ -725,7 +725,9 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 string suffix = version.IsAtLeast("4.0.1") ? "" : "/ddms:GeospatialExtent";
-                Assert.Equals(suffix, component.LocatorSuffix);
+
+                PrivateObject po = new PrivateObject(component, new PrivateType(typeof(GeospatialCoverage))); 
+                Assert.Equals(suffix, po.GetFieldOrProperty("LocatorSuffix").ToString());
             }
         }
 

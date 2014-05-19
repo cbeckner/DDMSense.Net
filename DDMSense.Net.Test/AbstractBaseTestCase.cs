@@ -97,9 +97,14 @@ namespace DDMSense.Test {
 						if (reader == null) {
 							reader = new DDMSReader();
 						}
-						FileInfo file = new FileInfo(PropertyReader.GetProperty("test.unit.data") + sVersion, validDocumentFile);
-						if (file.Exists()) {
-							XElement element = reader.GetElement(file);
+						FileInfo file = new FileInfo(Path.Combine(PropertyReader.GetProperty("test.unit.data") + sVersion, validDocumentFile));
+						if (file.Exists) {
+                            string text;
+                            using (StreamReader streamReader = new StreamReader(file.ToString(), Encoding.UTF8))
+                            {
+                                text = streamReader.ReadToEnd();
+                            }
+							XElement element = reader.GetElement(text);
 							lock (_elementMap) {
 								_elementMap[Type + ":" + sVersion] = element;
 							}
@@ -122,7 +127,7 @@ namespace DDMSense.Test {
 			if (!e.Message.StartsWith(message)) {
 				Console.WriteLine(DDMSVersion.CurrentVersion);
 				Console.WriteLine(e.Message);
-				fail("Test failed for the wrong reason.");
+				Assert.Fail("Test failed for the wrong reason.");
 			}
 		}
 
@@ -131,7 +136,7 @@ namespace DDMSense.Test {
 		/// </summary>
 		protected internal static XElement WrongNameElementFixture {
 			get {
-				return (Util.BuildDDMSElement("wrongName", null));
+				return (DDMSense.Util.Util.BuildDDMSElement("wrongName", null));
 			}
 		}
 
@@ -168,7 +173,7 @@ namespace DDMSense.Test {
 			if (locator != "") {
 				locator = "/" + locator;
 			}
-			Assert.IsTrue(ValidationMessage.WARNING_TYPE.Equals(message.Type));
+			Assert.IsTrue(ValidationMessage.WarningType.Equals(message.Type));
 			Assert.IsTrue(locator.Equals(message.Locator));
 			Assert.IsTrue(message.Text.StartsWith(text));
 		}
@@ -183,7 +188,7 @@ namespace DDMSense.Test {
 			if (locator != "") {
 				locator = "/" + locator;
 			}
-			Assert.IsTrue(ValidationMessage.ERROR_TYPE.Equals(message.Type));
+			Assert.IsTrue(ValidationMessage.ErrorType.Equals(message.Type));
 			Assert.IsTrue(locator.Equals(message.Locator));
 			Assert.IsTrue(message.Text.StartsWith(text));
 		}
@@ -211,9 +216,9 @@ namespace DDMSense.Test {
 		public static string BuildOutput(bool isHTML, string name, string content) {
 			StringBuilder tag = new StringBuilder();
 			tag.Append(isHTML ? "<meta name=\"" : "");
-			tag.Append(isHTML ? Util.XmlEscape(name) : name);
+			tag.Append(isHTML ? DDMSense.Util.Util.XmlEscape(name) : name);
 			tag.Append(isHTML ? "\" content=\"" : ": ");
-			tag.Append(isHTML ? Util.XmlEscape(content) : content);
+            tag.Append(isHTML ? DDMSense.Util.Util.XmlEscape(content) : content);
 			tag.Append(isHTML ? "\" />\n" : "\n");
 			return (tag.ToString());
 		}
@@ -282,7 +287,7 @@ namespace DDMSense.Test {
 		/// </summary>
 		/// <param name="xsList"> an xs:list containing the unsupported version numbers </param>
 		protected internal virtual void RemoveSupportedVersions(string xsList) {
-			List<string> unsupportedVersions = Util.GetXsListAsList(xsList);
+			List<string> unsupportedVersions = DDMSense.Util.Util.GetXsListAsList(xsList);
             unsupportedVersions.ForEach(x => SupportedVersions.Remove(x));
 		}
 
