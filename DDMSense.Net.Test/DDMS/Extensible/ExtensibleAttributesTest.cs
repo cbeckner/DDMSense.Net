@@ -3,52 +3,51 @@ using System.Collections.Generic;
 using System.Text;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Extensible
 {
-
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
-    using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS.Extensible;
-    using System.Xml.Linq;
     using DDMSense.DDMS;
+    using DDMSense.DDMS.Extensible;
+    using DDMSense.DDMS.ResourceElements;
+    using DDMSense.DDMS.Summary;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
-    using DDMSense.DDMS.Summary;
-    using DDMSense.DDMS.ResourceElements;
     using System.Linq;
+    using System.Xml.Linq;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using Util = DDMSense.Util.Util;
 
     /// <summary>
     /// <para> Tests related to the extensible attributes themselves. How they interact with parent classes is tested in those
     /// classes. </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 1.1.0
     /// </summary>
     [TestClass]
     public class ExtensibleAttributesTest : AbstractBaseTestCase
     {
-
         private const string TEST_NAMESPACE = "http://ddmsence.urizone.net/";
 
-        private static readonly XAttribute TEST_ATTRIBUTE = new XAttribute(XName.Get("ddmsence:relevance", TEST_NAMESPACE), "95");
+        private static readonly XAttribute TEST_ATTRIBUTE = new XAttribute(XNamespace.Get(TEST_NAMESPACE) + "relevance", "95");
 
         /// <summary>
         /// Constructor
@@ -136,7 +135,7 @@ namespace DDMSense.Test.DDMS.Extensible
             return (text.ToString());
         }
 
-        [TestMethod] 
+        [TestMethod]
         public virtual void Extensible_ExtensibleAttributes_ElementConstructorValid()
         {
             foreach (string sVersion in SupportedVersions)
@@ -348,7 +347,6 @@ namespace DDMSense.Test.DDMS.Extensible
                 Assert.IsTrue(builder.Empty);
                 builder.Attributes.Add(new ExtensibleAttributes.AttributeBuilder(TEST_ATTRIBUTE));
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
@@ -375,5 +373,4 @@ namespace DDMSense.Test.DDMS.Extensible
             }
         }
     }
-
 }

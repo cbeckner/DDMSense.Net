@@ -1,47 +1,45 @@
 using System.Text;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Extensible
 {
-
-
+    using DDMSense.DDMS;
     using DDMSense.DDMS.Extensible;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
+    using System.Linq;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System;
-    using DDMSense.DDMS;
-    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to extensible layer elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 1.1.0
     /// </summary>
     [TestClass]
     public class ExtensibleElementTest : AbstractBaseTestCase
     {
-
         private const string TEST_NAME = "extension";
         private const string TEST_PREFIX = "ddmsence";
         private const string TEST_NAMESPACE = "http://ddmsence.urizone.net/";
@@ -231,7 +229,8 @@ namespace DDMSense.Test.DDMS.Extensible
             }
         }
 
-       [TestMethod]
+        [TestMethod]
+        [ExpectedException(typeof(InvalidDDMSException), "Could not create a valid element")]
         public virtual void Extensible_ExtensibleElement_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
@@ -240,19 +239,11 @@ namespace DDMSense.Test.DDMS.Extensible
 
                 ExtensibleElement.Builder builder = new ExtensibleElement.Builder();
                 builder.Xml = "InvalidXml";
-                try
-                {
-                    builder.Commit();
-                    Assert.Fail("Builder allowed invalid data.");
-                }
-                catch (InvalidDDMSException e)
-                {
-                    ExpectMessage(e, "Could not create a valid element");
-                }
+                builder.Commit();
+
                 builder.Xml = ExpectedXMLOutput;
                 builder.Commit();
             }
         }
     }
-
 }
