@@ -45,17 +45,8 @@ namespace DDMSense.Test.DDMS.Summary.Gml
 
         protected internal const string TEST_SRS_NAME = "http://metadata.dod.mil/mdr/ns/GSIP/crs/WGS84E_2D";
         protected internal const int TEST_SRS_DIMENSION = 10;
-        protected internal static readonly List<string> TEST_AXIS_LABELS = new List<string>();
-        static SRSAttributesTest()
-        {
-            TEST_AXIS_LABELS.Add("A");
-            TEST_AXIS_LABELS.Add("B");
-            TEST_AXIS_LABELS.Add("C");
-            TEST_UOM_LABELS.Add("Meter");
-            TEST_UOM_LABELS.Add("Meter");
-            TEST_UOM_LABELS.Add("Meter");
-        }
-        protected internal static readonly List<string> TEST_UOM_LABELS = new List<string>();
+        protected internal static readonly List<string> TEST_AXIS_LABELS = new List<string>() {"A","B","C"};
+        protected internal static readonly List<string> TEST_UOM_LABELS = new List<string>() {"Meter","Meter","Meter"};
 
         /// <summary>
         /// Constructor

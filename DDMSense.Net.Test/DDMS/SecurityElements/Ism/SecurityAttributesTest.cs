@@ -50,83 +50,82 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         private const string TEST_CLASS = "U";
         private static readonly List<string> TEST_OWNERS = Util.GetXsListAsList("USA");
 
-        private static readonly Dictionary<string, string> TEST_OTHERS_41 = new Dictionary<string, string>();
-        static SecurityAttributesTest()
-        {
-            TEST_OTHERS_41[SecurityAttributes.ATOMIC_ENERGY_MARKINGS_NAME] = "RD";
-            TEST_OTHERS_41[SecurityAttributes.CLASSIFICATION_REASON_NAME] = "PQ";
-            TEST_OTHERS_41[SecurityAttributes.CLASSIFIED_BY_NAME] = " MN";
-            TEST_OTHERS_41[SecurityAttributes.COMPILATION_REASON_NAME] = "NO";
-            TEST_OTHERS_41[SecurityAttributes.DECLASS_DATE_NAME] = "2005-10-10";
-            TEST_OTHERS_41[SecurityAttributes.DECLASS_EVENT_NAME] = "RS";
-            TEST_OTHERS_41[SecurityAttributes.DECLASS_EXCEPTION_NAME] = "25X1";
-            TEST_OTHERS_41[SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME] = "OP";
-            TEST_OTHERS_41[SecurityAttributes.DERIVED_FROM_NAME] = "QR";
-            TEST_OTHERS_41[SecurityAttributes.DISPLAY_ONLY_TO_NAME] = "AIA";
-            TEST_OTHERS_41[SecurityAttributes.DISSEMINATION_CONTROLS_NAME] = "FOUO";
-            TEST_OTHERS_41[SecurityAttributes.FGI_SOURCE_OPEN_NAME] = "ALA";
-            TEST_OTHERS_41[SecurityAttributes.FGI_SOURCE_PROTECTED_NAME] = "FGI";
-            TEST_OTHERS_41[SecurityAttributes.NON_IC_MARKINGS_NAME] = "DS";
-            TEST_OTHERS_41[SecurityAttributes.NON_US_CONTROLS_NAME] = "ATOMAL";
-            TEST_OTHERS_41[SecurityAttributes.RELEASABLE_TO_NAME] = "AIA";
-            TEST_OTHERS_41[SecurityAttributes.SAR_IDENTIFIER_NAME] = "SAR-USA";
-            TEST_OTHERS_41[SecurityAttributes.SCI_CONTROLS_NAME] = "HCS";
-            TEST_OTHERS_31[SecurityAttributes.ATOMIC_ENERGY_MARKINGS_NAME] = "RD";
-            TEST_OTHERS_31[SecurityAttributes.CLASSIFICATION_REASON_NAME] = "PQ";
-            TEST_OTHERS_31[SecurityAttributes.CLASSIFIED_BY_NAME] = " MN";
-            TEST_OTHERS_31[SecurityAttributes.COMPILATION_REASON_NAME] = "NO";
-            TEST_OTHERS_31[SecurityAttributes.DECLASS_DATE_NAME] = "2005-10-10";
-            TEST_OTHERS_31[SecurityAttributes.DECLASS_EVENT_NAME] = "RS";
-            TEST_OTHERS_31[SecurityAttributes.DECLASS_EXCEPTION_NAME] = "25X1";
-            TEST_OTHERS_31[SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME] = "OP";
-            TEST_OTHERS_31[SecurityAttributes.DERIVED_FROM_NAME] = "QR";
-            TEST_OTHERS_31[SecurityAttributes.DISPLAY_ONLY_TO_NAME] = "AIA";
-            TEST_OTHERS_31[SecurityAttributes.DISSEMINATION_CONTROLS_NAME] = "FOUO";
-            TEST_OTHERS_31[SecurityAttributes.FGI_SOURCE_OPEN_NAME] = "ALA";
-            TEST_OTHERS_31[SecurityAttributes.FGI_SOURCE_PROTECTED_NAME] = "FGI";
-            TEST_OTHERS_31[SecurityAttributes.NON_IC_MARKINGS_NAME] = "SINFO";
-            TEST_OTHERS_31[SecurityAttributes.NON_US_CONTROLS_NAME] = "ATOMAL";
-            TEST_OTHERS_31[SecurityAttributes.RELEASABLE_TO_NAME] = "AIA";
-            TEST_OTHERS_31[SecurityAttributes.SAR_IDENTIFIER_NAME] = "SAR-USA";
-            TEST_OTHERS_31[SecurityAttributes.SCI_CONTROLS_NAME] = "HCS";
-            TEST_OTHERS_30[SecurityAttributes.CLASSIFICATION_REASON_NAME] = "PQ";
-            TEST_OTHERS_30[SecurityAttributes.CLASSIFIED_BY_NAME] = " MN";
-            TEST_OTHERS_30[SecurityAttributes.COMPILATION_REASON_NAME] = "NO";
-            TEST_OTHERS_30[SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME] = "2005-10-11";
-            TEST_OTHERS_30[SecurityAttributes.DECLASS_DATE_NAME] = "2005-10-10";
-            TEST_OTHERS_30[SecurityAttributes.DECLASS_EVENT_NAME] = "RS";
-            TEST_OTHERS_30[SecurityAttributes.DECLASS_EXCEPTION_NAME] = "25X1";
-            TEST_OTHERS_30[SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME] = "OP";
-            TEST_OTHERS_30[SecurityAttributes.DERIVED_FROM_NAME] = "QR";
-            TEST_OTHERS_30[SecurityAttributes.DISSEMINATION_CONTROLS_NAME] = "FOUO";
-            TEST_OTHERS_30[SecurityAttributes.FGI_SOURCE_OPEN_NAME] = "ALA";
-            TEST_OTHERS_30[SecurityAttributes.FGI_SOURCE_PROTECTED_NAME] = "FGI";
-            TEST_OTHERS_30[SecurityAttributes.NON_IC_MARKINGS_NAME] = "SINFO";
-            TEST_OTHERS_30[SecurityAttributes.RELEASABLE_TO_NAME] = "AIA";
-            TEST_OTHERS_30[SecurityAttributes.SAR_IDENTIFIER_NAME] = "SAR-USA";
-            TEST_OTHERS_30[SecurityAttributes.SCI_CONTROLS_NAME] = "HCS";
-            TEST_OTHERS_30[SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME] = "OADR";
-            TEST_OTHERS_20[SecurityAttributes.CLASSIFICATION_REASON_NAME] = "PQ";
-            TEST_OTHERS_20[SecurityAttributes.CLASSIFIED_BY_NAME] = " MN";
-            TEST_OTHERS_20[SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME] = "2005-10-11";
-            TEST_OTHERS_20[SecurityAttributes.DECLASS_DATE_NAME] = "2005-10-10";
-            TEST_OTHERS_20[SecurityAttributes.DECLASS_EVENT_NAME] = "RS";
-            TEST_OTHERS_20[SecurityAttributes.DECLASS_EXCEPTION_NAME] = "25X1";
-            TEST_OTHERS_20[SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME] = "true";
-            TEST_OTHERS_20[SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME] = "OP";
-            TEST_OTHERS_20[SecurityAttributes.DERIVED_FROM_NAME] = "QR";
-            TEST_OTHERS_20[SecurityAttributes.DISSEMINATION_CONTROLS_NAME] = "FOUO";
-            TEST_OTHERS_20[SecurityAttributes.FGI_SOURCE_OPEN_NAME] = "ALA";
-            TEST_OTHERS_20[SecurityAttributes.FGI_SOURCE_PROTECTED_NAME] = "FGI";
-            TEST_OTHERS_20[SecurityAttributes.NON_IC_MARKINGS_NAME] = "SINFO";
-            TEST_OTHERS_20[SecurityAttributes.RELEASABLE_TO_NAME] = "AIA";
-            TEST_OTHERS_20[SecurityAttributes.SAR_IDENTIFIER_NAME] = "SAR-USA";
-            TEST_OTHERS_20[SecurityAttributes.SCI_CONTROLS_NAME] = "HCS";
-            TEST_OTHERS_20[SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME] = "OADR";
-        }
-        private static readonly IDictionary<string, string> TEST_OTHERS_31 = new Dictionary<string, string>();
-        private static readonly IDictionary<string, string> TEST_OTHERS_30 = new Dictionary<string, string>();
-        private static readonly IDictionary<string, string> TEST_OTHERS_20 = new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> TEST_OTHERS_41 = new Dictionary<string, string>() {
+        
+            {SecurityAttributes.ATOMIC_ENERGY_MARKINGS_NAME,"RD"}
+            ,{SecurityAttributes.CLASSIFICATION_REASON_NAME,"PQ"}
+            ,{SecurityAttributes.CLASSIFIED_BY_NAME," MN"}
+            ,{SecurityAttributes.COMPILATION_REASON_NAME,"NO"}
+            ,{SecurityAttributes.DECLASS_DATE_NAME,"2005-10-10"}
+            ,{SecurityAttributes.DECLASS_EVENT_NAME,"RS"}
+            ,{SecurityAttributes.DECLASS_EXCEPTION_NAME,"25X1"}
+            ,{SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME,"OP"}
+            ,{SecurityAttributes.DERIVED_FROM_NAME,"QR"}
+            ,{SecurityAttributes.DISPLAY_ONLY_TO_NAME,"AIA"}
+            ,{SecurityAttributes.DISSEMINATION_CONTROLS_NAME,"FOUO"}
+            ,{SecurityAttributes.FGI_SOURCE_OPEN_NAME,"ALA"}
+            ,{SecurityAttributes.FGI_SOURCE_PROTECTED_NAME,"FGI"}
+            ,{SecurityAttributes.NON_IC_MARKINGS_NAME,"DS"}
+            ,{SecurityAttributes.NON_US_CONTROLS_NAME,"ATOMAL"}
+            ,{SecurityAttributes.RELEASABLE_TO_NAME,"AIA"}
+            ,{SecurityAttributes.SAR_IDENTIFIER_NAME,"SAR-USA"}
+            ,{SecurityAttributes.SCI_CONTROLS_NAME,"HCS"}};
+
+        private static readonly IDictionary<string, string> TEST_OTHERS_31 = new Dictionary<string, string>(){
+            {SecurityAttributes.ATOMIC_ENERGY_MARKINGS_NAME,"RD"}
+            ,{SecurityAttributes.CLASSIFICATION_REASON_NAME,"PQ"}
+            ,{SecurityAttributes.CLASSIFIED_BY_NAME," MN"}
+            ,{SecurityAttributes.COMPILATION_REASON_NAME,"NO"}
+            ,{SecurityAttributes.DECLASS_DATE_NAME,"2005-10-10"}
+            ,{SecurityAttributes.DECLASS_EVENT_NAME,"RS"}
+            ,{SecurityAttributes.DECLASS_EXCEPTION_NAME,"25X1"}
+            ,{SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME,"OP"}
+            ,{SecurityAttributes.DERIVED_FROM_NAME,"QR"}
+            ,{SecurityAttributes.DISPLAY_ONLY_TO_NAME,"AIA"}
+            ,{SecurityAttributes.DISSEMINATION_CONTROLS_NAME,"FOUO"}
+            ,{SecurityAttributes.FGI_SOURCE_OPEN_NAME,"ALA"}
+            ,{SecurityAttributes.FGI_SOURCE_PROTECTED_NAME,"FGI"}
+            ,{SecurityAttributes.NON_IC_MARKINGS_NAME,"SINFO"}
+            ,{SecurityAttributes.NON_US_CONTROLS_NAME,"ATOMAL"}
+            ,{SecurityAttributes.RELEASABLE_TO_NAME,"AIA"}
+            ,{SecurityAttributes.SAR_IDENTIFIER_NAME,"SAR-USA"}
+            ,{SecurityAttributes.SCI_CONTROLS_NAME,"HCS"}};
+        private static readonly IDictionary<string, string> TEST_OTHERS_30 = new Dictionary<string, string>(){
+           {SecurityAttributes.CLASSIFICATION_REASON_NAME,"PQ"}
+            ,{SecurityAttributes.CLASSIFIED_BY_NAME," MN"}
+            ,{SecurityAttributes.COMPILATION_REASON_NAME,"NO"}
+            ,{SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME,"2005-10-11"}
+            ,{SecurityAttributes.DECLASS_DATE_NAME,"2005-10-10"}
+            ,{SecurityAttributes.DECLASS_EVENT_NAME,"RS"}
+            ,{SecurityAttributes.DECLASS_EXCEPTION_NAME,"25X1"}
+            ,{SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME,"OP"}
+            ,{SecurityAttributes.DERIVED_FROM_NAME,"QR"}
+            ,{SecurityAttributes.DISSEMINATION_CONTROLS_NAME,"FOUO"}
+            ,{SecurityAttributes.FGI_SOURCE_OPEN_NAME,"ALA"}
+            ,{SecurityAttributes.FGI_SOURCE_PROTECTED_NAME,"FGI"}
+            ,{SecurityAttributes.NON_IC_MARKINGS_NAME,"SINFO"}
+            ,{SecurityAttributes.RELEASABLE_TO_NAME,"AIA"}
+            ,{SecurityAttributes.SAR_IDENTIFIER_NAME,"SAR-USA"}
+            ,{SecurityAttributes.SCI_CONTROLS_NAME,"HCS"}
+            ,{SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME,"OADR"}};
+        private static readonly IDictionary<string, string> TEST_OTHERS_20 = new Dictionary<string, string>(){
+            {SecurityAttributes.CLASSIFICATION_REASON_NAME,"PQ"}
+            ,{SecurityAttributes.CLASSIFIED_BY_NAME," MN"}
+            ,{SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME,"2005-10-11"}
+            ,{SecurityAttributes.DECLASS_DATE_NAME,"2005-10-10"}
+            ,{SecurityAttributes.DECLASS_EVENT_NAME,"RS"}
+            ,{SecurityAttributes.DECLASS_EXCEPTION_NAME,"25X1"}
+            ,{SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME,"true"}
+            ,{SecurityAttributes.DERIVATIVELY_CLASSIFIED_BY_NAME,"OP"}
+            ,{SecurityAttributes.DERIVED_FROM_NAME,"QR"}
+            ,{SecurityAttributes.DISSEMINATION_CONTROLS_NAME,"FOUO"}
+            ,{SecurityAttributes.FGI_SOURCE_OPEN_NAME,"ALA"}
+            ,{SecurityAttributes.FGI_SOURCE_PROTECTED_NAME,"FGI"}
+            ,{SecurityAttributes.NON_IC_MARKINGS_NAME,"SINFO"}
+            ,{SecurityAttributes.RELEASABLE_TO_NAME,"AIA"}
+            ,{SecurityAttributes.SAR_IDENTIFIER_NAME,"SAR-USA"}
+            ,{SecurityAttributes.SCI_CONTROLS_NAME,"HCS"}
+            ,{SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME,"OADR"}};
 
         /// <summary>
         /// Constructor

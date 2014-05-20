@@ -40,12 +40,7 @@ namespace DDMSense.Test.DDMS.Summary
     public class GeographicIdentifierTest : AbstractBaseTestCase
     {
 
-        private static readonly List<string> TEST_NAMES = new List<string>();
-        static GeographicIdentifierTest()
-        {
-            TEST_NAMES.Add("The White House");
-            TEST_REGIONS.Add("Mid-Atlantic States");
-        }
+        private static readonly List<string> TEST_NAMES = new List<string>() { "The White House", "Mid-Atlantic States"};
 
         private static readonly List<string> TEST_REGIONS = new List<string>();
 

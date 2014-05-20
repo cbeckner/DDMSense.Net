@@ -83,29 +83,25 @@ namespace DDMSense.DDMS
         private const string SearchableDateName = "searchableDate";
         private const string StartName = "start";
         private const string EndName = "end";
-        private static readonly List<string> ApproximationTypes = new List<string>();
-        private static readonly List<string> NameTypes = new List<string>();
+        private static readonly List<string> ApproximationTypes = new List<string>(){
+                "1st qtr",
+                "2nd qtr",
+                "3rd qtr",
+                "4th qtr",
+                "circa",
+                "early",
+                "mid",
+                "late"
+            };
+        private static readonly List<string> NameTypes = new List<string>(){
+                "acquiredOn",
+                "approximableStart",
+                "approximableEnd"
+            };
 
         public ApproximableDate()
         {
-            if (ApproximationTypes.Count().Equals(0))
-            {
-                ApproximationTypes.Add("1st qtr");
-                ApproximationTypes.Add("2nd qtr");
-                ApproximationTypes.Add("3rd qtr");
-                ApproximationTypes.Add("4th qtr");
-                ApproximationTypes.Add("circa");
-                ApproximationTypes.Add("early");
-                ApproximationTypes.Add("mid");
-                ApproximationTypes.Add("late");
-            }
-
-            if (NameTypes.Count().Equals(0))
-            {
-                NameTypes.Add("acquiredOn");
-                NameTypes.Add("approximableStart");
-                NameTypes.Add("approximableEnd");
-            }
+            
         }
 
         /// <summary>

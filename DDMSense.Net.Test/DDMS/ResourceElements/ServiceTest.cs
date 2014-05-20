@@ -45,15 +45,9 @@ namespace DDMSense.Test.DDMS.ResourceElements
     public class ServiceTest : AbstractBaseTestCase
     {
 
-        private static readonly List<string> TEST_NAMES = new List<string>();
-        private static readonly List<string> TEST_PHONES = new List<string>();
-        private static readonly List<string> TEST_EMAILS = new List<string>();
-        static ServiceTest()
-        {
-            TEST_NAMES.Add("https://metadata.dod.mil/ebxmlquery/soap");
-            TEST_PHONES.Add("703-882-1000");
-            TEST_EMAILS.Add("ddms@fgm.com");
-        }
+        private static readonly List<string> TEST_NAMES = new List<string>() {"https://metadata.dod.mil/ebxmlquery/soap"};
+        private static readonly List<string> TEST_PHONES = new List<string>() {"703-882-1000"};
+        private static readonly List<string> TEST_EMAILS = new List<string>() {"ddms@fgm.com"};
 
         /// <summary>
         /// Constructor

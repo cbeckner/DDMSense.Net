@@ -47,16 +47,9 @@ namespace DDMSense.Test.DDMS.ResourceElements
         private const string TEST_SURNAME = "Uri";
         private const string TEST_USERID = "123";
         private const string TEST_AFFILIATION = "DISA";
-        private static readonly List<string> TEST_NAMES = new List<string>();
-        private static readonly List<string> TEST_PHONES = new List<string>();
-        private static readonly List<string> TEST_EMAILS = new List<string>();
-        static PersonTest()
-        {
-            TEST_NAMES.Add("Brian");
-            TEST_NAMES.Add("BU");
-            TEST_PHONES.Add("703-885-1000");
-            TEST_EMAILS.Add("ddms@fgm.com");
-        }
+        private static readonly List<string> TEST_NAMES = new List<string>() {"Brian", "BU"};
+        private static readonly List<string> TEST_PHONES = new List<string>() {"703-885-1000"};
+        private static readonly List<string> TEST_EMAILS = new List<string>() {"ddms@fgm.com"};
 
         /// <summary>
         /// Constructor
