@@ -602,9 +602,12 @@ namespace DDMSense.Util
 		public static void RequireDDMSValidUri(string uri)
 		{
 			RequireValue("uri", uri);
+            Uri createdURI;
 			try
 			{
-                new Uri(uri, UriKind.RelativeOrAbsolute);
+                Uri.TryCreate(uri, UriKind.RelativeOrAbsolute, out createdURI);
+                if (!createdURI.IsWellFormedOriginalString())
+                    throw new UriFormatException("Invalid URI");
 			}
 			catch (UriFormatException e)
 			{
