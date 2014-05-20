@@ -34,6 +34,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
     #region usings
 
     using Element = XElement;
+    using System.Xml;
 
     #endregion
 
@@ -214,7 +215,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
                 if (externalReference != null)
                 {
                     Util.Util.AddAttribute(element, ntkPrefix, EXTERNAL_REFERENCE_NAME, ntkNamespace,
-                        Convert.ToString(externalReference));
+                        XmlConvert.ToString(externalReference.Value));
                 }
 
                 _individuals = individuals;
@@ -365,7 +366,7 @@ namespace DDMSense.DDMS.SecurityElements.Ntk
             if (ExternalReference != null)
             {
                 text.Append(BuildOutput(isHtml, localPrefix + EXTERNAL_REFERENCE_NAME,
-                    Convert.ToString(ExternalReference)));
+                    XmlConvert.ToString(ExternalReference.Value)));
             }
             text.Append(SecurityAttributes.GetOutput(isHtml, localPrefix));
             return (text.ToString());

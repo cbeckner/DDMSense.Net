@@ -17,6 +17,7 @@ using DDMSense.DDMS.SecurityElements.Ism;
 using DDMSense.DDMS.Summary;
 using DDMSense.Util;
 using Type = DDMSense.DDMS.ResourceElements.Type;
+using System.Xml;
 
 #endregion
 
@@ -501,7 +502,7 @@ namespace DDMSense.DDMS
                 }
 
                 if (resourceElement != null)
-                    Util.Util.AddAttribute(element, ismPrefix, RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(resourceElement));
+                    Util.Util.AddAttribute(element, ismPrefix, RESOURCE_ELEMENT_NAME, ismNamespace, XmlConvert.ToString(resourceElement.Value));
 
                 if (ismDESVersion != null)
                 {
@@ -1077,7 +1078,7 @@ namespace DDMSense.DDMS
             string localPrefix = BuildPrefix(prefix, Name, suffix + ".");
             var text = new StringBuilder();
             if (ResourceElement != null)
-                text.Append(BuildOutput(isHtml, localPrefix + RESOURCE_ELEMENT_NAME, Convert.ToString(ResourceElement)));
+                text.Append(BuildOutput(isHtml, localPrefix + RESOURCE_ELEMENT_NAME, XmlConvert.ToString(ResourceElement.Value)));
 
             if (CreateDate.HasValue)
                 text.Append(BuildOutput(isHtml, localPrefix + CREATE_DATE_NAME, CreateDate.Value.ToString("o")));

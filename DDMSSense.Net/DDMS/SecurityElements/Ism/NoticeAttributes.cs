@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Linq;
 using DDMSense.Extensions;
 using DDMSense.Util;
+using System.Xml;
 
 #endregion
 
@@ -239,7 +240,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             
             Util.Util.AddAttribute(element, icPrefix, UNREGISTERED_NOTICE_TYPE_NAME, icNamespace, UnregisteredNoticeType);
             if (ExternalReference != null)
-                Util.Util.AddAttribute(element, icPrefix, EXTERNAL_NOTICE_NAME, icNamespace,                    Convert.ToString(ExternalReference));
+                Util.Util.AddAttribute(element, icPrefix, EXTERNAL_NOTICE_NAME, icNamespace, XmlConvert.ToString(ExternalReference.Value));
             
         }
 
@@ -298,7 +299,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + UNREGISTERED_NOTICE_TYPE_NAME,                UnregisteredNoticeType));
             if (ExternalReference != null)
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + EXTERNAL_NOTICE_NAME,                    Convert.ToString(ExternalReference)));
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + EXTERNAL_NOTICE_NAME, XmlConvert.ToString(ExternalReference.Value)));
             
             return (text.ToString());
         }

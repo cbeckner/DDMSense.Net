@@ -60,6 +60,7 @@ namespace DDMSense.Test.DDMS {
 	using System.Xml.Linq;
 	using DDMSense.Test.DDMS.ResourceElements;
 	using DDMSense.DDMS.ResourceElements;
+    using System.Xml;
 
 	/// <summary>
 	/// <para> Tests related to ddms:resource elements </para>
@@ -156,7 +157,7 @@ namespace DDMSense.Test.DDMS {
 	
 				XElement element = Util.BuildDDMSElement(Resource.GetName(version), null);
 
-				Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+                Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, XmlConvert.ToString(TEST_RESOURCE_ELEMENT.Value));
 				Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
 				Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
 				if (version.IsAtLeast("4.0.1")) {
@@ -183,7 +184,7 @@ namespace DDMSense.Test.DDMS {
 				string ismNamespace = version.IsmNamespace;
 	
 				XElement element = Util.BuildDDMSElement(Resource.GetName(version), null);
-				Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+                Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, XmlConvert.ToString(TEST_RESOURCE_ELEMENT.Value));
 				Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
 				Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
 				SecurityAttributesTest.Fixture.AddTo(element);
@@ -683,7 +684,7 @@ namespace DDMSense.Test.DDMS {
 
 					// Missing createDate
 					element = ResourceWithoutHeaderElement;
-					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+                    Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, XmlConvert.ToString(TEST_RESOURCE_ELEMENT.Value));
 					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
 					if (version.IsAtLeast("4.0.1")) {
 						Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, Convert.ToString(NtkDESVersion));
@@ -693,7 +694,7 @@ namespace DDMSense.Test.DDMS {
 
 					// Invalid createDate
 					element = ResourceWithoutHeaderElement;
-					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+                    Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, XmlConvert.ToString(TEST_RESOURCE_ELEMENT.Value));
 					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, "2004");
 					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
 					if (version.IsAtLeast("4.0.1")) {
@@ -714,7 +715,7 @@ namespace DDMSense.Test.DDMS {
 
 					// desVersion not an integer
 					element = ResourceWithoutHeaderElement;
-					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+                    Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, XmlConvert.ToString(TEST_RESOURCE_ELEMENT.Value));
 					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
 					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, "one");
 					if (version.IsAtLeast("4.0.1")) {
@@ -726,7 +727,7 @@ namespace DDMSense.Test.DDMS {
 				if (version.IsAtLeast("4.0.1")) {
 					// NTK desVersion not an integer
 					element = ResourceWithoutHeaderElement;
-					Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, Convert.ToString(TEST_RESOURCE_ELEMENT));
+                    Util.AddAttribute(element, ismPrefix, Resource.RESOURCE_ELEMENT_NAME, ismNamespace, XmlConvert.ToString(TEST_RESOURCE_ELEMENT.Value));
 					Util.AddAttribute(element, ismPrefix, Resource.DES_VERSION_NAME, ismNamespace, Convert.ToString(IsmDESVersion));
 					Util.AddAttribute(element, ismPrefix, Resource.CREATE_DATE_NAME, ismNamespace, TEST_CREATE_DATE);
 					Util.AddAttribute(element, ntkPrefix, Resource.DES_VERSION_NAME, ntkNamespace, "one");

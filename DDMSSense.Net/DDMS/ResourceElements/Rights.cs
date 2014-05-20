@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using System.Xml.Linq;
 using DDMSense.Util;
+using System.Xml;
 
 #endregion
 
@@ -51,9 +52,9 @@ namespace DDMSense.DDMS.ResourceElements
         public Rights(bool privacyAct, bool intellectualProperty, bool copyright)
         {
             XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
-            Util.Util.AddDDMSAttribute(element, PRIVACY_ACT_NAME, Convert.ToString(privacyAct));
-            Util.Util.AddDDMSAttribute(element, INTELLECTUAL_PROPERY_NAME, Convert.ToString(intellectualProperty));
-            Util.Util.AddDDMSAttribute(element, COPYRIGHT_NAME, Convert.ToString(copyright));
+            Util.Util.AddDDMSAttribute(element, PRIVACY_ACT_NAME, XmlConvert.ToString(privacyAct));
+            Util.Util.AddDDMSAttribute(element, INTELLECTUAL_PROPERY_NAME, XmlConvert.ToString(intellectualProperty));
+            Util.Util.AddDDMSAttribute(element, COPYRIGHT_NAME, XmlConvert.ToString(copyright));
             SetElement(element, true);
             // This cannot actually throw an exception, so locator information is not inserted in a catch statement.
         }
@@ -108,10 +109,10 @@ namespace DDMSense.DDMS.ResourceElements
         {
             string localPrefix = BuildPrefix(prefix, Name, suffix + ".");
             var text = new StringBuilder();
-            text.Append(BuildOutput(isHtml, localPrefix + PRIVACY_ACT_NAME, Convert.ToString(PrivacyAct)));
+            text.Append(BuildOutput(isHtml, localPrefix + PRIVACY_ACT_NAME, XmlConvert.ToString(PrivacyAct)));
             text.Append(BuildOutput(isHtml, localPrefix + INTELLECTUAL_PROPERY_NAME,
-                Convert.ToString(IntellectualProperty)));
-            text.Append(BuildOutput(isHtml, localPrefix + COPYRIGHT_NAME, Convert.ToString(Copyright)));
+                XmlConvert.ToString(IntellectualProperty)));
+            text.Append(BuildOutput(isHtml, localPrefix + COPYRIGHT_NAME, XmlConvert.ToString(Copyright)));
             return (text.ToString());
         }
 

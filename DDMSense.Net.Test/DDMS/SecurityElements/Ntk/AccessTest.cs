@@ -34,6 +34,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
     using DDMSense.DDMS;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Linq;
+    using System.Xml;
 
     /// <summary>
     /// <para> Tests related to ntk:Access elements </para>
@@ -149,7 +150,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             text.Append(ProfileListTest.Fixture.GetOutput(isHTML, "access.", ""));
             if (version.IsAtLeast("4.1"))
             {
-                text.Append(BuildOutput(isHTML, "access.externalReference", Convert.ToString(TEST_EXTERNAL)));
+                text.Append(BuildOutput(isHTML, "access.externalReference", XmlConvert.ToString(TEST_EXTERNAL.Value)));
             }
             text.Append(BuildOutput(isHTML, "access.classification", "U"));
             text.Append(BuildOutput(isHTML, "access.ownerProducer", "USA"));

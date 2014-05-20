@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using DDMSense.Util;
+using System.Xml;
 
 #endregion
 
@@ -96,7 +97,7 @@ namespace DDMSense.DDMS.ResourceElements
                 if (applicationSoftware != null)
                     element.Add(applicationSoftware.ElementCopy);
 
-                Util.Util.AddDDMSAttribute(element, VITAL_RECORD_INDICATOR_NAME, Convert.ToString(vitalRecordIndicator));
+                Util.Util.AddDDMSAttribute(element, VITAL_RECORD_INDICATOR_NAME, XmlConvert.ToString(vitalRecordIndicator.Value));
                 RecordKeeper = recordKeeper;
                 ApplicationSoftware = applicationSoftware;
                 Validate();
@@ -186,7 +187,7 @@ namespace DDMSense.DDMS.ResourceElements
                 text.Append(ApplicationSoftware.GetOutput(isHtml, localPrefix, ""));
 
             text.Append(BuildOutput(isHtml, localPrefix + VITAL_RECORD_INDICATOR_NAME,
-                Convert.ToString(VitalRecordIndicator)));
+                XmlConvert.ToString(VitalRecordIndicator.Value)));
             return (text.ToString());
         }
 

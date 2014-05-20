@@ -157,11 +157,13 @@ namespace DDMSense.Util
 		{
 			RequireValue("name", name);
 			RequireValue("value", value);
-			prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix + ":");
+			prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix);
 			if (namespaceUri == null)
 				namespaceUri = "";
 
-			return (new XAttribute(XName.Get(prefix + name, namespaceUri), value));
+            XNamespace ns = namespaceUri;
+
+			return (new XAttribute(ns + name, value));
 		}
 
 		/// <summary>
@@ -198,8 +200,9 @@ namespace DDMSense.Util
 		{
 			if (namespaceUri == null) throw new ArgumentNullException("namespaceUri");
 			RequireValue("name", name);
-			prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix + ":");
-			var element = new XElement(prefix + name, namespaceUri);
+			prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix);
+            XNamespace ns = namespaceUri;
+            var element = new XElement(ns + name, new XAttribute(XNamespace.Xmlns + prefix, ns));
 			if (!String.IsNullOrEmpty(childText))
 				element.Add(childText);
 

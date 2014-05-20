@@ -150,7 +150,7 @@ namespace DDMSense
         /// <see cref="IDDMSComponent#getQualifiedName()"></see>
         public virtual string QualifiedName
         {
-            get { return (Element == null ? "" : Element.Name.LocalName); }
+            get { return (Element == null ? "" : Element.GetPrefixOfNamespace(Element.Name.Namespace) + ":" + Element.Name.LocalName); }
         }
 
         /// <summary>

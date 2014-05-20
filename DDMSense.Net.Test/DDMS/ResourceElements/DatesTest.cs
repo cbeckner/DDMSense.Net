@@ -562,7 +562,9 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 Dates.Builder builder = new Dates.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                builder.AcquiredOns[0].Description = "";
+                var db = new ApproximableDate.Builder();
+                db.Description = String.Empty;
+                builder.AcquiredOns.Add(db);
                 Assert.IsTrue(builder.Empty);
                 builder.AcquiredOns[0].Description = "test";
                 Assert.IsFalse(builder.Empty);

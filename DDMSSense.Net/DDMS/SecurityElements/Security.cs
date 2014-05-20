@@ -35,6 +35,7 @@ namespace DDMSense.DDMS.SecurityElements
     #region usings
 
     using Element = XElement;
+    using System.Xml;
 
     #endregion
 
@@ -248,7 +249,7 @@ namespace DDMSense.DDMS.SecurityElements
                 {
                     throw new InvalidDDMSException("The excludeFromRollup attribute is required.");
                 }
-                if (!FIXED_ROLLUP.ToLower().Equals(Convert.ToString(ExcludeFromRollup).ToLower()))
+                if (!FIXED_ROLLUP.ToLower().Equals(XmlConvert.ToString(ExcludeFromRollup.Value)))
                 {
                     throw new InvalidDDMSException("The excludeFromRollup attribute must have a fixed value of \"" +
                                                    FIXED_ROLLUP + "\".");
@@ -273,7 +274,7 @@ namespace DDMSense.DDMS.SecurityElements
             if (ExcludeFromRollup != null)
             {
                 text.Append(BuildOutput(isHtml, localPrefix + EXCLUDE_FROM_ROLLUP_NAME,
-                    Convert.ToString(ExcludeFromRollup)));
+                    XmlConvert.ToString(ExcludeFromRollup.Value)));
             }
             if (NoticeList != null)
             {

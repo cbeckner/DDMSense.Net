@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
+using System.Linq;
 
 #endregion
 
@@ -85,25 +86,36 @@ namespace DDMSense.DDMS
         private static readonly List<string> ApproximationTypes = new List<string>();
         private static readonly List<string> NameTypes = new List<string>();
 
+        public ApproximableDate()
+        {
+            if (ApproximationTypes.Count().Equals(0))
+            {
+                ApproximationTypes.Add("1st qtr");
+                ApproximationTypes.Add("2nd qtr");
+                ApproximationTypes.Add("3rd qtr");
+                ApproximationTypes.Add("4th qtr");
+                ApproximationTypes.Add("circa");
+                ApproximationTypes.Add("early");
+                ApproximationTypes.Add("mid");
+                ApproximationTypes.Add("late");
+            }
+
+            if (NameTypes.Count().Equals(0))
+            {
+                NameTypes.Add("acquiredOn");
+                NameTypes.Add("approximableStart");
+                NameTypes.Add("approximableEnd");
+            }
+        }
+
         /// <summary>
         ///     Constructor for creating a component from a XOM Element
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ApproximableDate(XElement element)
+        public ApproximableDate(XElement element) 
+            : this()
         {
-            ApproximationTypes.Add("1st qtr");
-            ApproximationTypes.Add("2nd qtr");
-            ApproximationTypes.Add("3rd qtr");
-            ApproximationTypes.Add("4th qtr");
-            ApproximationTypes.Add("circa");
-            ApproximationTypes.Add("early");
-            ApproximationTypes.Add("mid");
-            ApproximationTypes.Add("late");
-            NameTypes.Add("acquiredOn");
-            NameTypes.Add("approximableStart");
-            NameTypes.Add("approximableEnd");
-
             SetElement(element, true);
         }
 
@@ -118,6 +130,7 @@ namespace DDMSense.DDMS
         /// <param name="searchableEndDate"> the upper bound for this approximable date (optional) </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public ApproximableDate(string name, string description, string approximableDate, string approximation, string searchableStartDate, string searchableEndDate)
+            : this()
         {
             try
             {
@@ -183,7 +196,7 @@ namespace DDMSense.DDMS
                 string approximation = null;
                 XElement approximableDateElement = GetChild(ApproximableDateName);
                 if (approximableDateElement != null)
-                    approximation = approximableDateElement.Attribute(XName.Get(ApproximationName, Namespace)).Value;
+                    approximation = (string)approximableDateElement.Attribute(XName.Get(ApproximationName, Namespace));
 
                 return (Util.Util.GetNonNullString(approximation));
             }
