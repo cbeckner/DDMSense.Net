@@ -261,7 +261,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <param name="enumerationKey"> the key for the enumeration, which doubles as the filename. </param>
         private static void LoadEnumeration(string enumLocation, string enumerationKey)
         {
-            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), enumLocation.Substring(1, enumLocation.Length - 1));
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, enumLocation);
             path = Path.Combine(path.Replace("/", "\\"), enumerationKey);
 
             XDocument doc = XDocument.Load(path);
