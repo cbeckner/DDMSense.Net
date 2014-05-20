@@ -42,20 +42,11 @@ namespace DDMSense.Test.DDMS.Summary.Gml
     public class PositionTest : AbstractBaseTestCase
     {
 
-        public static readonly List<double?> TEST_COORDS = new List<double?>();
-        static PositionTest()
-        {
-            TEST_COORDS.Add(new double?(32.1));
-            TEST_COORDS.Add(new double?(40.1));
-            TEST_COORDS_2.Add(new double?(42.1));
-            TEST_COORDS_2.Add(new double?(40.1));
-            TEST_COORDS_3.Add(new double?(42.1));
-            TEST_COORDS_3.Add(new double?(50.1));
-        }
+        public static readonly List<double?> TEST_COORDS = new List<double?>() {32.1,40.1};
+        public static readonly List<double?> TEST_COORDS_2 = new List<double?>() {42.1,40.1};
+        public static readonly List<double?> TEST_COORDS_3 = new List<double?>() {42.1,50.1};
+        
         protected internal static readonly string TEST_XS_LIST = Util.GetXsList(TEST_COORDS);
-
-        public static readonly List<double?> TEST_COORDS_2 = new List<double?>();
-        public static readonly List<double?> TEST_COORDS_3 = new List<double?>();
 
         /// <summary>
         /// Constructor

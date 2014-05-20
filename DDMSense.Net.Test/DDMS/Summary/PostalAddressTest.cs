@@ -43,11 +43,7 @@ namespace DDMSense.Test.DDMS.Summary
     public class PostalAddressTest : AbstractBaseTestCase
     {
 
-        private static readonly List<string> TEST_STREETS = new List<string>();
-        static PostalAddressTest()
-        {
-            TEST_STREETS.Add("1600 Pennsylvania Avenue, NW");
-        }
+        private static readonly List<string> TEST_STREETS = new List<string>() {"1600 Pennsylvania Avenue, NW"};
         private const string TEST_CITY = "Washington";
         private const string TEST_STATE = "DC";
         private const string TEST_PROVINCE = "Alberta";

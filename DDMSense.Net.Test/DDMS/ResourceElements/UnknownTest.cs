@@ -44,15 +44,9 @@ namespace DDMSense.Test.DDMS.ResourceElements
     public class UnknownTest : AbstractBaseTestCase
     {
 
-        private static readonly List<string> TEST_NAMES = new List<string>();
-        private static readonly List<string> TEST_PHONES = new List<string>();
-        private static readonly List<string> TEST_EMAILS = new List<string>();
-        static UnknownTest()
-        {
-            TEST_NAMES.Add("Unknown Entity");
-            TEST_PHONES.Add("703-882-1000");
-            TEST_EMAILS.Add("ddms@fgm.com");
-        }
+        private static readonly List<string> TEST_NAMES = new List<string>() {"Unknown Entity"};
+        private static readonly List<string> TEST_PHONES = new List<string>() {"703-882-1000"};
+        private static readonly List<string> TEST_EMAILS = new List<string>() {"ddms@fgm.com"};
 
         /// <summary>
         /// Constructor

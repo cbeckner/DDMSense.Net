@@ -44,17 +44,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
     public class OrganizationTest : AbstractBaseTestCase
     {
 
-        private static readonly List<string> TEST_NAMES = new List<string>();
-        private static readonly List<string> TEST_PHONES = new List<string>();
-        private static readonly List<string> TEST_EMAILS = new List<string>();
-        static OrganizationTest()
-        {
-            TEST_NAMES.Add("DISA");
-            TEST_NAMES.Add("PEO-GES");
-            TEST_PHONES.Add("703-882-1000");
-            TEST_PHONES.Add("703-885-1000");
-            TEST_EMAILS.Add("ddms@fgm.com");
-        }
+        private static readonly List<string> TEST_NAMES = new List<string>() {"DISA","PEO-GES"};
+        private static readonly List<string> TEST_PHONES = new List<string>() {"703-882-1000","703-885-1000"};
+        private static readonly List<string> TEST_EMAILS = new List<string>() {"ddms@fgm.com"};
+        
 
         /// <summary>
         /// Constructor
