@@ -31,9 +31,9 @@ namespace DDMSense.Test {
 	using DDMSVersion = DDMSense.Util.DDMSVersion;
 	using PropertyReader = DDMSense.Util.PropertyReader;
 	using Util = DDMSense.Util.Util;
-    using System.Xml.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.IO;
+	using System.Xml.Linq;
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using System.IO;
 
 	/// <summary>
 	/// Base class for DDMSence test cases.
@@ -41,7 +41,7 @@ namespace DDMSense.Test {
 	/// @author Brian Uri!
 	/// @since 0.9.b
 	/// </summary>
-    [TestClass]
+	[TestClass]
 	public abstract class AbstractBaseTestCase {
 
 		private string _type;
@@ -66,7 +66,7 @@ namespace DDMSense.Test {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: protected void setUp() throws Exception
 		[TestInitialize]
-        protected internal virtual void SetUp() {
+		protected internal virtual void SetUp() {
 			DDMSVersion.ClearCurrentVersion();
 		}
 
@@ -76,7 +76,7 @@ namespace DDMSense.Test {
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
 //ORIGINAL LINE: protected void tearDown() throws Exception
 		[TestCleanup]
-        protected internal virtual void TearDown() {
+		protected internal virtual void TearDown() {
 			DDMSVersion.ClearCurrentVersion();
 			PropertyReader.SetProperty("output.indexLevel", "0");
 		}
@@ -99,11 +99,11 @@ namespace DDMSense.Test {
 						}
 						FileInfo file = new FileInfo(Path.Combine(PropertyReader.GetProperty("test.unit.data") + sVersion, validDocumentFile));
 						if (file.Exists) {
-                            string text;
-                            using (StreamReader streamReader = new StreamReader(file.ToString(), Encoding.UTF8))
-                            {
-                                text = streamReader.ReadToEnd();
-                            }
+							string text;
+							using (StreamReader streamReader = new StreamReader(file.ToString(), Encoding.UTF8))
+							{
+								text = streamReader.ReadToEnd();
+							}
 							XElement element = reader.GetElement(text);
 							lock (_elementMap) {
 								_elementMap[Type + ":" + sVersion] = element;
@@ -145,7 +145,7 @@ namespace DDMSense.Test {
 		/// succeeded, the test will fail.
 		/// </summary>
 		/// <param name="expectFailure"> true if the constructor was expected to fail. </param>
-        protected internal static void CheckConstructorSuccess(bool expectFailure) {
+		protected internal static void CheckConstructorSuccess(bool expectFailure) {
 			if (expectFailure) {
 				Assert.Fail("Constructor allowed invalid data.");
 			}
@@ -157,7 +157,7 @@ namespace DDMSense.Test {
 		/// </summary>
 		/// <param name="expectFailure"> true if the constructor was expected to fail. </param>
 		/// <param name="exception"> the exception that occurred </param>
-        protected internal static void CheckConstructorFailure(bool expectFailure, InvalidDDMSException exception) {
+		protected internal static void CheckConstructorFailure(bool expectFailure, InvalidDDMSException exception) {
 			if (!expectFailure) {
 				Assert.Fail("Constructor failed on valid data: " + exception.Message);
 			}
@@ -169,7 +169,7 @@ namespace DDMSense.Test {
 		/// <param name="text"> the text of the message </param>
 		/// <param name="locator"> the locator text of the message </param>
 		/// <param name="message"> the ValidationMessage to test </param>
-        protected internal virtual void AssertWarningEquality(string text, string locator, ValidationMessage message) {
+		protected internal virtual void AssertWarningEquality(string text, string locator, ValidationMessage message) {
 			if (locator != "") {
 				locator = "/" + locator;
 			}
@@ -184,7 +184,7 @@ namespace DDMSense.Test {
 		/// <param name="text"> the text of the message </param>
 		/// <param name="locator"> the locator text of the message </param>
 		/// <param name="message"> the ValidationMessage to test </param>
-        protected internal virtual void AssertErrorEquality(string text, string locator, ValidationMessage message) {
+		protected internal virtual void AssertErrorEquality(string text, string locator, ValidationMessage message) {
 			if (locator != "") {
 				locator = "/" + locator;
 			}
@@ -200,7 +200,7 @@ namespace DDMSense.Test {
 		/// <param name="prefix"> the expected XML prefix </param>
 		/// <param name="name"> the expected XML local name </param>
 		
-        protected internal virtual void AssertNameAndNamespace(IDDMSComponent component, string prefix, string name) {
+		protected internal virtual void AssertNameAndNamespace(IDDMSComponent component, string prefix, string name) {
 			Assert.AreEqual(name, component.Name);
 			Assert.AreEqual(prefix, component.Prefix);
 			Assert.AreEqual(prefix + ":" + name, component.QualifiedName);
@@ -218,7 +218,7 @@ namespace DDMSense.Test {
 			tag.Append(isHTML ? "<meta name=\"" : "");
 			tag.Append(isHTML ? DDMSense.Util.Util.XmlEscape(name) : name);
 			tag.Append(isHTML ? "\" content=\"" : ": ");
-            tag.Append(isHTML ? DDMSense.Util.Util.XmlEscape(content) : content);
+			tag.Append(isHTML ? DDMSense.Util.Util.XmlEscape(content) : content);
 			tag.Append(isHTML ? "\" />\n" : "\n");
 			return (tag.ToString());
 		}
@@ -288,7 +288,7 @@ namespace DDMSense.Test {
 		/// <param name="xsList"> an xs:list containing the unsupported version numbers </param>
 		protected internal virtual void RemoveSupportedVersions(string xsList) {
 			List<string> unsupportedVersions = DDMSense.Util.Util.GetXsListAsList(xsList);
-            unsupportedVersions.ForEach(x => SupportedVersions.Remove(x));
+			unsupportedVersions.ForEach(x => SupportedVersions.Remove(x));
 		}
 
 		/// <summary>
