@@ -1,45 +1,45 @@
 using System.Text;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.FormatElements
 {
+    using DDMSense.DDMS;
     using DDMSense.DDMS.FormatElements;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
+    using System.Linq;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using DDMSense.DDMS;
-    using System;
-    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to ddms:format elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class FormatTest : AbstractBaseTestCase
     {
-
         private const string TEST_MIME_TYPE = "text/xml";
         private const string TEST_MEDIUM = "digital";
 
@@ -454,7 +454,6 @@ namespace DDMSense.Test.DDMS.FormatElements
                 Assert.IsTrue(builder.Empty);
                 builder.MimeType = TEST_MIME_TYPE;
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
@@ -484,8 +483,7 @@ namespace DDMSense.Test.DDMS.FormatElements
                 builder.MimeType = TEST_MIME_TYPE;
                 builder.Medium = TEST_MEDIUM;
                 Assert.IsNotNull(builder.Extent);
-                builder.Commit();
-                Assert.IsNull(builder.Extent);
+                Assert.IsNull(((Format)builder.Commit()).Extent);
                 builder.Extent.Qualifier = "sizeBytes";
                 builder.Extent.Value = "75000";
                 builder.Commit();
@@ -493,5 +491,4 @@ namespace DDMSense.Test.DDMS.FormatElements
             }
         }
     }
-
 }
