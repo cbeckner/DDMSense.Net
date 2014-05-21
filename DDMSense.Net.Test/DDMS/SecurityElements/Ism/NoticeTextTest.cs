@@ -74,7 +74,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                     string ismNs = version.IsmNamespace;
 
                     XElement element = Util.BuildElement(ismPrefix, NoticeText.GetName(version), ismNs, TEST_VALUE);
-                    element.Add(ismPrefix, version.IsmNamespace);
                     SecurityAttributesTest.Fixture.AddTo(element);
                     Util.AddAttribute(element, ismPrefix, "pocType", ismNs, "DoD-Dist-B");
                     return (element);

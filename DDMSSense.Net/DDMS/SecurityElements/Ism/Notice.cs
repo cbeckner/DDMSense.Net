@@ -54,7 +54,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 SetElement(element, false);
                 NoticeTexts = new List<NoticeText>();
-                IEnumerable<XElement> noticeTexts =                    element.Elements(XName.Get(NoticeText.GetName(DDMSVersion), DDMSVersion.IsmNamespace));
+                IEnumerable<XElement> noticeTexts = element.Elements(XName.Get(NoticeText.GetName(DDMSVersion), DDMSVersion.IsmNamespace));
                 noticeTexts.ToList().ForEach(n => NoticeTexts.Add(new NoticeText(n)));
                 NoticeAttributes = new NoticeAttributes(element);
                 SecurityAttributes = new SecurityAttributes(element);

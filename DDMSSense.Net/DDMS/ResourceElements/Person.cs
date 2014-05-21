@@ -160,7 +160,7 @@ namespace DDMSense.DDMS.ResourceElements
             XElement element = Element;
             if (DDMSVersion.IsAtLeast("4.0.1"))
             {
-                element.AddFirst(Util.Util.BuildDDMSElement(SURNAME_NAME, surname), insertIndex);
+                element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
                 if (!String.IsNullOrEmpty(userID))
                     element.Add(Util.Util.BuildDDMSElement(USERID_NAME, userID));
 
@@ -172,12 +172,12 @@ namespace DDMSense.DDMS.ResourceElements
                 // 	Inserting in reverse order allow the same index to be reused. Later inserts will "push" the early ones
                 // 	forward.
                 if (!String.IsNullOrEmpty(affiliation))
-                    element.AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation), element.Nodes().ToList()[insertIndex]);
+                    element.AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
 
                 if (!String.IsNullOrEmpty(userID))
-                    element.AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID), element.Nodes().ToList()[insertIndex]);
+                    element.AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
 
-                element.AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname), element.Nodes().ToList()[insertIndex]);
+                element.AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
             }
         }
 

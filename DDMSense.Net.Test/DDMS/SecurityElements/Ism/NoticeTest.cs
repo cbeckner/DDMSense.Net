@@ -72,7 +72,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                     string ismNs = version.IsmNamespace;
 
                     XElement element = Util.BuildElement(ismPrefix, Notice.GetName(version), ismNs, null);
-                    element.Add(ismPrefix, version.IsmNamespace);
                     NoticeAttributesTest.Fixture.AddTo(element);
                     SecurityAttributesTest.Fixture.AddTo(element);
                     element.Add(NoticeTextTest.FixtureElement);
