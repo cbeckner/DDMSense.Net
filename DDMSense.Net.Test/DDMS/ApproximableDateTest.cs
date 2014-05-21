@@ -67,7 +67,7 @@ namespace DDMSense.Test.DDMS
         {
             DDMSVersion version = DDMSVersion.CurrentVersion;
             XElement element = Util.BuildDDMSElement(name, null);
-            element.Add(PropertyReader.GetPrefix("ddms"), version.Namespace);//TODO - Verify this logic/code is correct
+            //element.Add(PropertyReader.GetPrefix("ddms"), version.Namespace);//TODO - Verify this logic/code is correct
             if (includeAllFields)
             {
                 Util.AddDDMSChildElement(element, "description", TEST_DESCRIPTION);

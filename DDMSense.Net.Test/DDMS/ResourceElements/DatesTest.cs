@@ -1,46 +1,46 @@
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
+
 /* Copyright 2010 - 2013 by Brian Uri!
 
    This file is part of DDMSence.
 
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
 
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
 
-   You should have received a copy of the GNU Lesser General Public 
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.ResourceElements
 {
-
     using DDMSense.DDMS;
     using DDMSense.DDMS.ResourceElements;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
-    using Util = DDMSense.Util.Util;
-    using System.Xml.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
+    using System.Xml.Linq;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using Util = DDMSense.Util.Util;
 
     /// <summary>
     /// <para> Tests related to ddms:source elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class DatesTest : AbstractBaseTestCase
     {
-
         private const string TEST_CREATED = "2003";
         private const string TEST_POSTED = "2003-02";
         private const string TEST_VALID = "2003-02-15";
@@ -330,7 +330,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                     locator = "ddms:dates";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
                 }
-                // No warnings 
+                // No warnings
                 else
                 {
                     Assert.AreEqual(0, component.ValidationWarnings.Count());
@@ -485,10 +485,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Dates component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML(SaveOptions.DisableFormatting));
 
                 component = GetInstance(SUCCESS, AcquiredOns, TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML(SaveOptions.DisableFormatting));
             }
         }
 
@@ -568,7 +568,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 Assert.IsTrue(builder.Empty);
                 builder.AcquiredOns[0].Description = "test";
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
