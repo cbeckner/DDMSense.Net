@@ -779,20 +779,44 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidDDMSException), "A valid longitude value must be passed")]
         public virtual void Util_Util_RequireValidLongitudeNull()
         {
-            Util.RequireValidLongitude(null);
+            try
+            {
+                Util.RequireValidLongitude(null);
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "A longitude value must be between");
+            }
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidDDMSException), "A valid longitude value must be passed")]
         public virtual void Util_Util_RequireValidLongitudeOutOfBounds()
         {
-            Util.RequireValidLongitude(new double?(-181));
-            Util.RequireValidLongitude(new double?(181));
+            try
+            {
+                Util.RequireValidLongitude(new double?(-181));
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "A longitude value must be between");
+            }
+            try
+            {
+                Util.RequireValidLongitude(new double?(181));
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "A longitude value must be between");
+            }
         }
 
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void Util_Util_RequireValidLongitudeValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
         public virtual void Util_Util_RequireValidLongitudeValid()
         {
@@ -800,20 +824,44 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidDDMSException), "A valid latitude value must be passed")]
         public virtual void Util_Util_RequireValidLatitudeNull()
         {
-            Util.RequireValidLatitude(null);
+            try
+            {
+                Util.RequireValidLatitude(null);
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "A latitude value must be between");
+            }
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidDDMSException), "A valid latitude value must be passed")]
         public virtual void Util_Util_RequireValidLatitudeOutOfBounds()
         {
-            Util.RequireValidLatitude(new double?(-91));
-            Util.RequireValidLatitude(new double?(91));
+            try
+            {
+                Util.RequireValidLatitude(new double?(-91));
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "A latitude value must be between");
+            }
+            try
+            {
+                Util.RequireValidLatitude(new double?(91));
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "A latitude value must be between");
+            }
         }
 
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void Util_Util_RequireValidLatitudeValid() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
         public virtual void Util_Util_RequireValidLatitudeValid()
         {
@@ -821,10 +869,17 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Invalid number range: 0 to 10")]
         public virtual void Util_Util_IsBoundedBadRange()
         {
-            Util.IsBounded(0, 10, 0);
+            try
+            {
+                Util.IsBounded(0, 10, 0);
+                Assert.Fail("Did not stop on bad range.");
+            }
+            catch (System.ArgumentException e)
+            {
+                ExpectMessage(e, "Invalid number range: 10 to 0");
+            }
         }
 
         [TestMethod]
@@ -864,10 +919,17 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Null lists cannot be compared")]
         public virtual void Util_Util_ListEqualsNullLists()
         {
-            Util.ListEquals((List<object>)null, (List<object>)null);
+            try
+            {
+                Util.ListEquals((List<object>)null, (List<object>)null);
+                Assert.Fail("Did not stop on bad data.");
+            }
+            catch (System.ArgumentException e)
+            {
+                ExpectMessage(e, "Null lists cannot be compared.");
+            }
         }
 
         [TestMethod]
@@ -984,10 +1046,17 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "name is required")]
         public virtual void Util_Util_BuildDDMSElementNullName()
         {
-            Util.BuildDDMSElement(null, null);
+            try
+            {
+                Util.BuildDDMSElement(null, null);
+                Assert.Fail("Method allowed invalid data.");
+            }
+            catch (System.ArgumentException e)
+            {
+                ExpectMessage(e, "name is required.");
+            }
         }
 
         [TestMethod]
@@ -1046,17 +1115,31 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "name is required")]
         public virtual void Util_Util_BuildDDMSAttributeNullName()
         {
-            Util.BuildDDMSAttribute(null, "testValue");
+            try
+            {
+                Util.BuildDDMSAttribute(null, "testValue");
+                Assert.Fail("Method allowed invalid data.");
+            }
+            catch (System.ArgumentException e)
+            {
+                ExpectMessage(e, "name is required.");
+            }
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "value is required")]
         public virtual void Util_Util_BuildDDMSAttributeNullValue()
         {
-            Util.BuildDDMSAttribute("test", null);
+            try
+            {
+                Util.BuildDDMSAttribute("test", null);
+                Assert.Fail("Method allowed invalid data.");
+            }
+            catch (System.ArgumentException e)
+            {
+                ExpectMessage(e, "value is required.");
+            }
         }
 
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
@@ -1071,15 +1154,21 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidDDMSException), "A child component, ddms:identifier")]
         public virtual void Util_Util_RequireSameVersionFailure()
         {
-            DDMSVersion.SetCurrentVersion("2.0");
-            Identifier identifier = new Identifier("Test", "Value");
-            DDMSVersion.SetCurrentVersion("3.0");
-            Identifier identifier2 = new Identifier("Test", "Value");
-            Util.RequireCompatibleVersion(identifier, identifier2);
-            Assert.Fail("Allowed different versions.");
+            try
+            {
+                DDMSVersion.SetCurrentVersion("2.0");
+                Identifier identifier = new Identifier("Test", "Value");
+                DDMSVersion.SetCurrentVersion("3.0");
+                Identifier identifier2 = new Identifier("Test", "Value");
+                Util.RequireCompatibleVersion(identifier, identifier2);
+                Assert.Fail("Allowed different versions.");
+            }
+            catch (InvalidDDMSException e)
+            {
+                ExpectMessage(e, "A child component, ddms:identifier");
+            }
         }
 
         [TestMethod]
@@ -1138,6 +1227,8 @@ namespace DDMSense.Test.Util
             Assert.AreEqual("b", list[1]);
         }
 
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void Util_Util_BuildXmlDocument() throws Exception
         [TestMethod]
         public virtual void Util_Util_BuildXmlDocument()
         {
@@ -1147,20 +1238,34 @@ namespace DDMSense.Test.Util
             Assert.Fail("Not Implemented");
         }
 
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void Util_Util_BuildXmlDocumentBadFile() throws Exception
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "input stream is required")]
         public virtual void Util_Util_BuildXmlDocumentBadFile()
         {
-            Util.BuildXmlDocument(null);
+            try
+            {
+                Util.BuildXmlDocument(null);
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (System.ArgumentException e)
+            {
+                ExpectMessage(e, "input stream is required.");
+            }
+
+            try
+            {
+                Util.BuildXmlDocument(new MemoryStream(Encoding.ASCII.GetBytes("Not an XML File")));
+                Assert.Fail("Allowed invalid data.");
+            }
+            catch (IOException e)
+            {
+                ExpectMessage(e, "Content is not allowed in prolog.");
+            }
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(IOException), "Content is not allowed in the prolog")]
-        public virtual void Util_Util_BuildXmlDocumentBadFile2()
-        {
-            Util.BuildXmlDocument(new MemoryStream(Encoding.ASCII.GetBytes("Not an XML File")));
-        }
-
+        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
+        //ORIGINAL LINE: public void Util_Util_SchematronQueryBinding() throws Exception
         [TestMethod]
         public virtual void Util_Util_SchematronQueryBinding()
         {

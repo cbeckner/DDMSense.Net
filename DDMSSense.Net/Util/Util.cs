@@ -133,7 +133,7 @@ namespace DDMSense.Util
         public static void AddDDMSChildElement(XElement element, string childName, string childValue)
         {
             if (!String.IsNullOrEmpty(childValue))
-                element.Add(BuildDDMSElement(childName, childValue));
+                element.Add(BuildDDMSElement(childName, childValue, false));
         }
 
         /// <summary>
@@ -157,9 +157,12 @@ namespace DDMSense.Util
         {
             RequireValue("name", name);
             RequireValue("value", value);
-            prefix = (String.IsNullOrEmpty(prefix) ? "" : prefix);
-            if (namespaceUri == null)
-                namespaceUri = "";
+
+            if (String.IsNullOrEmpty(prefix))
+                prefix = String.Empty;
+
+            if (String.IsNullOrEmpty(namespaceUri))
+                namespaceUri = String.Empty;
 
             XNamespace ns = namespaceUri;
 
@@ -183,9 +186,9 @@ namespace DDMSense.Util
         /// </summary>
         /// <param name="name"> the local name of the element </param>
         /// <param name="childText"> the text of the element (optional) </param>
-        public static XElement BuildDDMSElement(string name, string childText)
+        public static XElement BuildDDMSElement(string name, string childText, bool includeXmlNs = true)
         {
-            return (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.CurrentVersion.Namespace, childText));
+            return (BuildElement(PropertyReader.GetPrefix("ddms"), name, DDMSVersion.CurrentVersion.Namespace, childText, includeXmlNs));
         }
 
         /// <summary>
@@ -196,12 +199,22 @@ namespace DDMSense.Util
         /// <param name="name"> the local name of the element </param>
         /// <param name="namespaceUri"> the namespace this element is in </param>
         /// <param name="childText"> the text of the element (optional) </param>
-        public static XElement BuildElement(string prefix, string name, string namespaceUri, string childText)
+        public static XElement BuildElement(string prefix, string name, string namespaceUri, string childText, bool includeXmlNs = true)
         {
             if (namespaceUri == null) throw new ArgumentNullException("namespaceUri");
             RequireValue("name", name);
+
+            if (String.IsNullOrEmpty(prefix))
+                prefix = String.Empty; 
+            
             XNamespace ns = namespaceUri;
-            var element = new XElement(ns + name, new XAttribute(XNamespace.Xmlns + prefix, ns));
+            XElement element;
+
+            if (includeXmlNs)
+                element = new XElement(ns + name, new XAttribute(XNamespace.Xmlns + prefix, ns));
+            else
+                element = new XElement(ns + name);
+
             if (!String.IsNullOrEmpty(childText))
                 element.Add(childText);
 
