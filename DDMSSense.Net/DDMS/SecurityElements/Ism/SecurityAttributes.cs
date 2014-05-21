@@ -622,10 +622,10 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             if (version.IsAtLeast("3.1") && DateOfExemptedSource != null)
                 throw new InvalidDDMSException("The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0.");
 
-            if (DateOfExemptedSource != null && DateOfExemptedSource.Value.TimeOfDay != DateTime.MinValue.TimeOfDay)
+            if (DateOfExemptedSource != null && !DateOfExemptedSource.Value.TimeOfDay.TotalSeconds.Equals(0))
                 throw new InvalidDDMSException("The dateOfExemptedSource attribute must be in the xs:date format (YYYY-MM-DD).");
 
-            if (DeclassDate != null && DeclassDate.Value.TimeOfDay != DateTime.MinValue.TimeOfDay)
+            if (DeclassDate != null && !DeclassDate.Value.TimeOfDay.TotalSeconds.Equals(0))
                 throw new InvalidDDMSException("The declassDate must be in the xs:date format (YYYY-MM-DD).");
 
             if (!String.IsNullOrEmpty(DeclassException))

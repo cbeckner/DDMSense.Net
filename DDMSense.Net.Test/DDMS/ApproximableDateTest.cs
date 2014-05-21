@@ -1,48 +1,47 @@
 using System.Text;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS
 {
-
-
     using DDMSense.DDMS;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Linq;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
     /// <para> Tests related to elements of type ddms:ApproximableDateType (includes ddms:acquiredOn, and the ddms:start / ddms:end values in a ddms:temporalCoverage element.</para>
-    /// 
+    ///
     /// <para> Because these are local components, we cannot load a valid document from a unit test data file. We
     /// have to build the well-formed XElement ourselves. </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 2.1.0
     /// </summary>
     [TestClass]
     public class ApproximableDateTest : AbstractBaseTestCase
     {
-
         private const string TEST_NAME = "acquiredOn";
         private const string TEST_DESCRIPTION = "description";
         private const string TEST_APPROXIMABLE_DATE = "2012";
@@ -379,18 +378,11 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidDDMSException), "the AcquiredOn element cannot be used")]
         public virtual void ApproximableDate_WrongVersion()
         {
-            try
-            {
-                DDMSVersion.SetCurrentVersion("2.0");
-                new ApproximableDate(TEST_NAME, null, null, null, null, null);
-                Assert.Fail("Allowed invalid data.");
-            }
-            catch (InvalidDDMSException e)
-            {
-                ExpectMessage(e, "The acquiredOn element cannot be used");
-            }
+            DDMSVersion.SetCurrentVersion("2.0");
+            new ApproximableDate(TEST_NAME, null, null, null, null, null);
         }
 
         [TestMethod]
@@ -422,6 +414,7 @@ namespace DDMSense.Test.DDMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidDDMSException), "The approximation element cannot be used")]
         public virtual void ApproximableDate_BuilderValidation()
         {
             foreach (string sVersion in SupportedVersions)
@@ -432,19 +425,10 @@ namespace DDMSense.Test.DDMS
                 builder.Name = TEST_NAME;
                 builder.ApproximableDate = TEST_APPROXIMABLE_DATE;
                 builder.Approximation = "almost-nearly";
-                try
-                {
-                    builder.Commit();
-                    Assert.Fail("Builder allowed invalid data.");
-                }
-                catch (InvalidDDMSException e)
-                {
-                    ExpectMessage(e, "The approximation");
-                }
+                builder.Commit();
                 builder.Approximation = TEST_APPROXIMATION;
                 builder.Commit();
             }
         }
     }
-
 }
