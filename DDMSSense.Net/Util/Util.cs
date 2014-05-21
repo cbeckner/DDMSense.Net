@@ -107,7 +107,13 @@ namespace DDMSense.Util
         public static void AddAttribute(XElement element, string prefix, string attributeName, string namespaceUri, string attributeValue)
         {
             if (!String.IsNullOrEmpty(attributeValue))
+            {
+                var namespaces = element.Attributes().Where(a => a.IsNamespaceDeclaration);
+                if (!namespaces.Any(ns => ns.Value.Equals(namespaceUri)))
+                    element.Add(new XAttribute(XNamespace.Xmlns + prefix, namespaceUri));
+
                 element.Add(BuildAttribute(prefix, attributeName, namespaceUri, attributeValue));
+            }
         }
 
         /// <summary>
@@ -205,8 +211,8 @@ namespace DDMSense.Util
             RequireValue("name", name);
 
             if (String.IsNullOrEmpty(prefix))
-                prefix = String.Empty; 
-            
+                prefix = String.Empty;
+
             XNamespace ns = namespaceUri;
             XElement element;
 

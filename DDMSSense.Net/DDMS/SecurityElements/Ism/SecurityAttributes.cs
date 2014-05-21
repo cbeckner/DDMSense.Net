@@ -520,10 +520,6 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             ValidateSameVersion(elementVersion);
             string icNamespace = elementVersion.IsmNamespace;
             string icPrefix = PropertyReader.GetPrefix("ism");
-            if (!element.Name.Namespace.NamespaceName.Equals(icNamespace))
-            {
-                element.Add(new XAttribute(XNamespace.Xmlns + icPrefix, icNamespace));
-            }
 
             Util.Util.AddAttribute(element, icPrefix, ATOMIC_ENERGY_MARKINGS_NAME, icNamespace, Util.Util.GetXsList(AtomicEnergyMarkings));
             Util.Util.AddAttribute(element, icPrefix, CLASSIFICATION_NAME, icNamespace, Classification);
