@@ -88,7 +88,7 @@ namespace DDMSense.Test.Util
         [TestMethod]
         public virtual void Util_Util_ContainsEmptyStringFalse()
         {
-            Assert.IsFalse(Util.ContainsOnlyEmptyValues(null));
+            Assert.IsTrue(Util.ContainsOnlyEmptyValues(new List<string>()));
             List<string> list = new List<string>();
             list.Add("dog");
             list.Add("");
