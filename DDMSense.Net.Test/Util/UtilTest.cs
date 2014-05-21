@@ -454,7 +454,7 @@ namespace DDMSense.Test.Util
             // Empty URI
             try
             {
-                XElement element = Util.BuildElement("", "name", "", null);
+                XElement element = Util.BuildElement("", "name", "", null, false);
                 Util.RequireQualifiedName(element, null, "name");
             }
             catch (InvalidDDMSException)
@@ -1142,8 +1142,7 @@ namespace DDMSense.Test.Util
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void Util_Util_RequireSameVersionSuccess() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        
         [TestMethod]
         public virtual void Util_Util_RequireSameVersionSuccess()
         {
@@ -1154,21 +1153,14 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidDDMSException), "A child component, ddms:identifier, is using a different version of DDMS from its parent.")]
         public virtual void Util_Util_RequireSameVersionFailure()
         {
-            try
-            {
-                DDMSVersion.SetCurrentVersion("2.0");
-                Identifier identifier = new Identifier("Test", "Value");
-                DDMSVersion.SetCurrentVersion("3.0");
-                Identifier identifier2 = new Identifier("Test", "Value");
-                Util.RequireCompatibleVersion(identifier, identifier2);
-                Assert.Fail("Allowed different versions.");
-            }
-            catch (InvalidDDMSException e)
-            {
-                ExpectMessage(e, "A child component, ddms:identifier");
-            }
+            DDMSVersion.SetCurrentVersion("2.0");
+            Identifier identifier = new Identifier("Test", "Value");
+            DDMSVersion.SetCurrentVersion("3.0");
+            Identifier identifier2 = new Identifier("Test", "Value");
+            Util.RequireCompatibleVersion(identifier, identifier2);
         }
 
         [TestMethod]

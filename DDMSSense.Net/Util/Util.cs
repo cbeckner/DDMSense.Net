@@ -526,7 +526,7 @@ namespace DDMSense.Util
                 parentNamespace = DDMSVersion.GetVersionForNamespace(parentNamespace).IsmNamespace;
             string childNamespace = child.Namespace;
             if (!parentNamespace.Equals(childNamespace))
-                throw new InvalidDDMSException("A child component, " + child.Name + ", is using a different version of DDMS from its parent.");
+                throw new InvalidDDMSException("A child component, " + child.QualifiedName + ", is using a different version of DDMS from its parent.");
         }
 
         /// <summary>
