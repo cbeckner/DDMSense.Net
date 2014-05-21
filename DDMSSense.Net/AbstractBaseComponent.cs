@@ -1,16 +1,16 @@
 #region usings
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 using DDMSense.DDMS;
 using DDMSense.DDMS.Extensible;
 using DDMSense.DDMS.SecurityElements.Ism;
 using DDMSense.Extensions;
 using DDMSense.Util;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Xml.Linq;
 
-#endregion
+#endregion usings
 
 namespace DDMSense
 {
@@ -23,8 +23,7 @@ namespace DDMSense
     ///         will be
     ///         well-formed and valid.
     ///     </para>
-    
-    
+
     /// </summary>
     public abstract class AbstractBaseComponent : IDDMSComponent
     {
@@ -187,7 +186,7 @@ namespace DDMSense
         /// <see cref="IDDMSComponent#toXML()"></see>
         public virtual string ToXML()
         {
-            return ToXML(SaveOptions.None);
+            return ToXML(SaveOptions.None | SaveOptions.OmitDuplicateNamespaces);
         }
 
         /// <summary>
@@ -196,7 +195,7 @@ namespace DDMSense
         /// <see cref="IDDMSComponent#toXML()"></see>
         public virtual string ToXML(SaveOptions option)
         {
-            return (Element == null ? "" : Element.ToString(option));
+            return (Element == null ? "" : Element.ToString(option | SaveOptions.OmitDuplicateNamespaces));
         }
 
         /// <summary>
@@ -400,7 +399,7 @@ namespace DDMSense
         {
             Util.Util.RequireValue("name", name);
             string attrValue = null;
-            
+
             if (Element.Attribute(XName.Get(name, Util.Util.GetNonNullString(namespaceURI))) != null)
                 attrValue = Element.Attribute(XName.Get(name, Util.Util.GetNonNullString(namespaceURI))).Value;
 
@@ -477,12 +476,12 @@ namespace DDMSense
         {
             if (obj == this)
                 return (true);
-            
+
             if (!(obj is AbstractBaseComponent) || !(GetType().Equals(obj.GetType())))
                 return (false);
-            
+
             var test = (AbstractBaseComponent)obj;
-            return (Name.Equals(test.Name) && 
+            return (Name.Equals(test.Name) &&
                     Namespace.Equals(test.Namespace) &&
                     Util.Util.ListEquals(NestedComponents, test.NestedComponents) &&
                     Util.Util.NullEquals(SecurityAttributes, test.SecurityAttributes));
@@ -501,13 +500,13 @@ namespace DDMSense
             {
                 if (nested == null)
                     continue;
-                
+
                 result = 7 * result + nested.GetHashCode();
             }
-            
+
             if (SecurityAttributes != null)
                 result = 7 * result + SecurityAttributes.GetHashCode();
-            
+
             return (result);
         }
 

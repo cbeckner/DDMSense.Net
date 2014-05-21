@@ -1,27 +1,27 @@
 #region usings
 
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
@@ -34,7 +34,7 @@ namespace DDMSense.DDMS.Summary
 
     using Element = XElement;
 
-    #endregion
+    #endregion usings
 
     /// <summary>
     ///     An immutable implementation of ddms:geographicIdentifier.
@@ -80,8 +80,7 @@ namespace DDMSense.DDMS.Summary
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class GeographicIdentifier : AbstractBaseComponent
     {
@@ -158,11 +157,13 @@ namespace DDMSense.DDMS.Summary
                 Element element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 foreach (var name in names)
                 {
-                    element.Add(Util.Util.BuildDDMSElement(NAME_NAME, name));
+                    Util.Util.AddDDMSChildElement(element, NAME_NAME, name);
+                    //element.Add(Util.Util.BuildDDMSElement(NAME_NAME, name));
                 }
                 foreach (var region in regions)
                 {
-                    element.Add(Util.Util.BuildDDMSElement(REGION_NAME, region));
+                    Util.Util.AddDDMSChildElement(element, REGION_NAME, region);
+                    //element.Add(Util.Util.BuildDDMSElement(REGION_NAME, region));
                 }
                 if (countryCode != null)
                 {
@@ -322,7 +323,7 @@ namespace DDMSense.DDMS.Summary
             {
                 return (false);
             }
-            var test = (GeographicIdentifier) obj;
+            var test = (GeographicIdentifier)obj;
             return (Util.Util.ListEquals(Names, test.Names) && Util.Util.ListEquals(Regions, test.Regions));
         }
 
@@ -330,8 +331,8 @@ namespace DDMSense.DDMS.Summary
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + Names.GetHashCode();
-            result = 7*result + Regions.GetHashCode();
+            result = 7 * result + Names.GetHashCode();
+            result = 7 * result + Regions.GetHashCode();
             return (result);
         }
 
@@ -363,7 +364,6 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            
             internal CountryCode.Builder _countryCode = null;
             internal FacilityIdentifier.Builder _facilityIdentifier = null;
             internal List<string> _names = null;
@@ -417,7 +417,6 @@ namespace DDMSense.DDMS.Summary
                 set { _names = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the regions
             /// </summary>
@@ -433,7 +432,6 @@ namespace DDMSense.DDMS.Summary
                 }
                 set { _regions = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the country code
@@ -451,7 +449,6 @@ namespace DDMSense.DDMS.Summary
                 set { _countryCode = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the subdivision code
             /// </summary>
@@ -467,7 +464,6 @@ namespace DDMSense.DDMS.Summary
                 }
                 set { _subDivisionCode = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the facility identifier
@@ -492,14 +488,14 @@ namespace DDMSense.DDMS.Summary
                 {
                     return (null);
                 }
-                var identifier = (FacilityIdentifier) FacilityIdentifier.Commit();
+                var identifier = (FacilityIdentifier)FacilityIdentifier.Commit();
                 if (identifier != null)
                 {
                     return (new GeographicIdentifier(identifier));
                 }
                 return
-                    (new GeographicIdentifier(Names, Regions, (CountryCode) CountryCode.Commit(),
-                        (SubDivisionCode) SubDivisionCode.Commit()));
+                    (new GeographicIdentifier(Names, Regions, (CountryCode)CountryCode.Commit(),
+                        (SubDivisionCode)SubDivisionCode.Commit()));
             }
 
             /// <see cref="IBuilder#isEmpty()"></see>
