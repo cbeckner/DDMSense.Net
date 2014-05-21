@@ -325,10 +325,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Addressee component = GetInstance(SUCCESS, GetFixtureElement(true));
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML(SaveOptions.DisableFormatting));
 
                 component = GetInstance(SUCCESS, OrganizationTest.Fixture);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML(SaveOptions.DisableFormatting));
             }
         }
 
