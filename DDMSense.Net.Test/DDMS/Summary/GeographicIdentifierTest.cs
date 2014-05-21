@@ -1,48 +1,49 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Summary
 {
+    using DDMSense.DDMS;
     using DDMSense.DDMS.Summary;
+    using System;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS;
-    using System;
 
     /// <summary>
     /// <para> Tests related to ddms:geographicIdentifier elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class GeographicIdentifierTest : AbstractBaseTestCase
     {
+        private static readonly List<string> TEST_NAMES = new List<string>() { "The White House" };
 
-        private static readonly List<string> TEST_NAMES = new List<string>() { "The White House", "Mid-Atlantic States"};
-
-        private static readonly List<string> TEST_REGIONS = new List<string>();
+        private static readonly List<string> TEST_REGIONS = new List<string>() { "Mid-Atlantic States" };
 
         /// <summary>
         /// Constructor
@@ -234,7 +235,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-
         [TestMethod]
         public virtual void Summary_GeographicIdentifier_DataConstructorValid()
         {
@@ -257,7 +257,6 @@ namespace DDMSense.Test.DDMS.Summary
                 GetInstance(SUCCESS, null, null, null, null, FacilityIdentifierTest.Fixture);
             }
         }
-
 
         [TestMethod]
         public virtual void Summary_GeographicIdentifier_ElementConstructorInvalid()
@@ -429,14 +428,13 @@ namespace DDMSense.Test.DDMS.Summary
                 SubDivisionCode subCode = SubDivisionCodeTest.Fixture;
 
                 GeographicIdentifier component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML(SaveOptions.DisableFormatting));
 
                 component = GetInstance(SUCCESS, TEST_NAMES, TEST_REGIONS, CountryCodeTest.Fixture, subCode, null);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML(SaveOptions.DisableFormatting));
             }
         }
 
-        
         public virtual void Summary_GeographicIdentifier_CountryCodeReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -448,7 +446,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
         public virtual void Summary_GeographicIdentifier_SubDivisionCodeReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -466,7 +463,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
         public virtual void Summary_GeographicIdentifier_FacilityIdentifierReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -511,7 +507,6 @@ namespace DDMSense.Test.DDMS.Summary
                 Assert.IsTrue(builder.Empty);
                 builder.Names = TEST_NAMES;
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
@@ -560,5 +555,4 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
     }
-
 }
