@@ -703,7 +703,7 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Xml.XmlException), "\"null\" is not a valid NCName.")]
+        [ExpectedException(typeof(System.ArgumentNullException), "\"null\" is not a valid NCName.")]
         public virtual void Util_Util_RequireValidNCNameNull()
         {
             Util.RequireValidNCName(null);
@@ -763,7 +763,7 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UriFormatException), "Invalid Uri")]
+        [ExpectedException(typeof(InvalidDDMSException), "Invalid Uri")]
         public virtual void Util_Util_RequireDDMSValidURIInvalid()
         {
             Util.RequireDDMSValidUri(":::::");
@@ -772,7 +772,7 @@ namespace DDMSense.Test.Util
         //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
         //ORIGINAL LINE: public void Util_Util_RequireDDMSValidURINull() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
         [TestMethod]
-        [ExpectedException(typeof(UriFormatException), "Uri is required")]
+        [ExpectedException(typeof(System.ArgumentException), "Uri is required")]
         public virtual void Util_Util_RequireDDMSValidURINull()
         {
             Util.RequireDDMSValidUri(null);

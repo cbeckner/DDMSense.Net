@@ -406,9 +406,13 @@ namespace DDMSense.DDMS.ResourceElements
                 return (false);
 
             var test = (RevisionRecall)obj;
-            return (Value.Equals(test.Value) && Util.Util.NullEquals(RevisionID, test.RevisionID) &&
-                    RevisionType.Equals(test.RevisionType) && Network.Equals(test.Network) &&
-                    OtherNetwork.Equals(test.OtherNetwork) && XLinkAttributes.Equals(test.XLinkAttributes));
+            return (
+                    Util.Util.NullEquals(Value, test.Value)
+                    && Util.Util.NullEquals(RevisionID, test.RevisionID)
+                    && RevisionType.Equals(test.RevisionType)
+                    && Network.Equals(test.Network)
+                    && OtherNetwork.Equals(test.OtherNetwork)
+                    && XLinkAttributes.Equals(test.XLinkAttributes));
         }
 
         /// <see cref="object#hashCode()"></see>

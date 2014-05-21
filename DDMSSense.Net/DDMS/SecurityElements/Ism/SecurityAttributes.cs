@@ -756,18 +756,19 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 return (false);
             
             var test = (SecurityAttributes)obj;
+
             return (Util.Util.ListEquals(AtomicEnergyMarkings, test.AtomicEnergyMarkings) &&
-                    Classification.Equals(test.Classification) && 
-                    ClassificationReason.Equals(test.ClassificationReason) &&
-                    ClassifiedBy.Equals(test.ClassifiedBy) && 
-                    CompilationReason.Equals(test.CompilationReason) &&
+                    Classification == test.Classification &&
+                    ClassificationReason == test.ClassificationReason &&
+                    ClassifiedBy == test.ClassifiedBy &&
+                    CompilationReason == test.CompilationReason &&
                     Util.Util.NullEquals(DateOfExemptedSource, test.DateOfExemptedSource) &&
-                    Util.Util.NullEquals(DeclassDate, test.DeclassDate) && 
-                    DeclassEvent.Equals(test.DeclassEvent) &&
-                    DeclassException.Equals(test.DeclassException) &&
+                    Util.Util.NullEquals(DeclassDate, test.DeclassDate) &&
+                    DeclassEvent == test.DeclassEvent &&
+                    DeclassException == test.DeclassException &&
                     Util.Util.NullEquals(DeclassManualReview, test.DeclassManualReview) &&
-                    DerivativelyClassifiedBy.Equals(test.DerivativelyClassifiedBy) &&
-                    DerivedFrom.Equals(test.DerivedFrom) && 
+                    DerivativelyClassifiedBy == test.DerivativelyClassifiedBy &&
+                    DerivedFrom == test.DerivedFrom &&
                     Util.Util.ListEquals(DisplayOnlyTo, test.DisplayOnlyTo) &&
                     Util.Util.ListEquals(DisseminationControls, test.DisseminationControls) &&
                     Util.Util.ListEquals(FGIsourceOpen, test.FGIsourceOpen) &&
@@ -778,7 +779,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                     Util.Util.ListEquals(ReleasableTo, test.ReleasableTo) &&
                     Util.Util.ListEquals(SARIdentifier, test.SARIdentifier) &&
                     Util.Util.ListEquals(SCIcontrols, test.SCIcontrols) &&
-                    TypeOfExemptedSource.Equals(test.TypeOfExemptedSource));
+                    TypeOfExemptedSource == test.TypeOfExemptedSource);
         }
 
         /// <see cref="Object#hashCode()"></see>
