@@ -67,7 +67,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion version = DDMSVersion.CurrentVersion;
                 XElement element = Util.BuildDDMSElement(RequesterInfo.GetName(version), null);
-                element.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + element.Name.LocalName;
+                //element.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + element.Name.LocalName;
                 element.Add(useOrg ? OrganizationTest.Fixture.ElementCopy : PersonTest.Fixture.ElementCopy);
                 SecurityAttributesTest.Fixture.AddTo(element);
                 return (element);

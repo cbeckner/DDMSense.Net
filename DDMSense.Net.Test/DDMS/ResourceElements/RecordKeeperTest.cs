@@ -66,7 +66,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion version = DDMSVersion.CurrentVersion;
                 XElement element = Util.BuildDDMSElement(RecordKeeper.GetName(version), null);
-                element.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + element.Name.LocalName;
+                //element.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + element.Name.LocalName;
                 XElement idElement = Util.BuildDDMSElement("recordKeeperID", TEST_ID);
                 element.Add(idElement);
                 element.Add(OrganizationTest.Fixture.ElementCopy);
