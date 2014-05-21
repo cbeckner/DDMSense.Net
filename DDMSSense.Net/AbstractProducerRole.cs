@@ -317,8 +317,12 @@ namespace DDMSense
             {
                 get
                 {
-                    return (Organization.Empty && Person.Empty && Service.Empty && Unknown.Empty && PocTypes.Count == 0 &&
-                            SecurityAttributes.Empty);
+                    return ( (Organization != null && Organization.Empty) && 
+                             (Person != null && Person.Empty) &&
+                             (Service != null && Service.Empty) &&
+                             (Unknown != null && Unknown.Empty) &&
+                             (PocTypes != null && PocTypes.Count == 0) &&
+                             (SecurityAttributes != null && SecurityAttributes.Empty));
                 }
             }
 

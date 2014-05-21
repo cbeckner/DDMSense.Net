@@ -485,19 +485,7 @@ namespace DDMSense.DDMS.Metacard
             /// </summary>
             public Builder()
             {
-                Access = new Access.Builder();
-                Contributors = new List<Contributor.Builder>();
-                Creators = new List<Creator.Builder>();
-                Dates = new Dates.Builder();
-                Description = new Description.Builder();
-                Identifiers = new List<Identifier.Builder>();
-                NoticeList = new NoticeList.Builder();
-                PointOfContacts = new List<PointOfContact.Builder>();
-                ProcessingInfos = new List<ProcessingInfo.Builder>();
-                Publishers = new List<Publisher.Builder>();
-                RecordsManagementInfo = new RecordsManagementInfo.Builder();
-                RevisionRecall = new RevisionRecall.Builder();
-                SecurityAttributes = new SecurityAttributes.Builder();
+                Initialize();
             }
 
             /// <summary>
@@ -505,6 +493,7 @@ namespace DDMSense.DDMS.Metacard
             /// </summary>
             public Builder(MetacardInfo metacardInfo)
             {
+                Initialize();
                 foreach (var component in metacardInfo.ChildComponents)
                 {
                     if (component is Identifier)
@@ -533,6 +522,23 @@ namespace DDMSense.DDMS.Metacard
                         Access = new Access.Builder((Access)component);
                 }
                 SecurityAttributes = new SecurityAttributes.Builder(metacardInfo.SecurityAttributes);
+            }
+
+            private void Initialize()
+            {
+                Access = new Access.Builder();
+                Contributors = new List<Contributor.Builder>();
+                Creators = new List<Creator.Builder>();
+                Dates = new Dates.Builder();
+                Description = new Description.Builder();
+                Identifiers = new List<Identifier.Builder>();
+                NoticeList = new NoticeList.Builder();
+                PointOfContacts = new List<PointOfContact.Builder>();
+                ProcessingInfos = new List<ProcessingInfo.Builder>();
+                Publishers = new List<Publisher.Builder>();
+                RecordsManagementInfo = new RecordsManagementInfo.Builder();
+                RevisionRecall = new RevisionRecall.Builder();
+                SecurityAttributes = new SecurityAttributes.Builder();
             }
 
             /// <summary>
