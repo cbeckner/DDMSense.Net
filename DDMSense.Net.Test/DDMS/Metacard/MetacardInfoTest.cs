@@ -585,7 +585,9 @@ namespace DDMSense.Test.DDMS.Metacard
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 MetacardInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                var expected = GetExpectedXMLOutput(true);
+                var actual = component.ToXML(SaveOptions.DisableFormatting);
+                Assert.AreEqual(expected,  actual);
 
                 component = GetInstance(SUCCESS, ChildComponents);
                 Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());

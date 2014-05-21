@@ -187,7 +187,16 @@ namespace DDMSense
         /// <see cref="IDDMSComponent#toXML()"></see>
         public virtual string ToXML()
         {
-            return (Element == null ? "" : Element.ToString());
+            return ToXML(SaveOptions.None);
+        }
+
+        /// <summary>
+        ///     Will return an empty string if the name is not set, but this cannot occur after instantiation.
+        /// </summary>
+        /// <see cref="IDDMSComponent#toXML()"></see>
+        public virtual string ToXML(SaveOptions option)
+        {
+            return (Element == null ? "" : Element.ToString(option));
         }
 
         /// <summary>
