@@ -277,7 +277,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             if (!String.IsNullOrEmpty(UnregisteredNoticeType) && UnregisteredNoticeType.Length > MAX_LENGTH)
                 throw new InvalidDDMSException("The unregisteredNoticeType attribute must be shorter than " + MAX_LENGTH +                                               " characters.");
             
-            if (NoticeDate != null)
+            if (NoticeDate != null && !NoticeDate.Value.TimeOfDay.TotalSeconds.Equals(0))
                 throw new InvalidDDMSException("The noticeDate attribute must be in the xs:date format (YYYY-MM-DD).");
             
             if (!version.IsAtLeast("4.0.1") && !Empty)
