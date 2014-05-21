@@ -108,7 +108,7 @@ namespace DDMSense.DDMS.FormatElements
                 XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
                 XElement mediaElement = DDMSVersion.CurrentVersion.IsAtLeast("4.0.1")
                     ? element
-                    : Util.Util.BuildDDMSElement(MediaName, null);
+                    : Util.Util.BuildDDMSElement(MediaName, null, false);
                 Util.Util.AddDDMSChildElement(mediaElement, MimeTypeName, mimeType);
                 if (extent != null)
                     mediaElement.Add(extent.ElementCopy);

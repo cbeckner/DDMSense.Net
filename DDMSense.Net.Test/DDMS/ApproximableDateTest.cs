@@ -67,12 +67,11 @@ namespace DDMSense.Test.DDMS
         {
             DDMSVersion version = DDMSVersion.CurrentVersion;
             XElement element = Util.BuildDDMSElement(name, null);
-            element.Add(PropertyReader.GetPrefix("ddms"), version.Namespace);//TODO - Verify this logic/code is correct
             if (includeAllFields)
             {
                 Util.AddDDMSChildElement(element, "description", TEST_DESCRIPTION);
 
-                XElement approximableElment = Util.BuildDDMSElement("approximableDate", TEST_APPROXIMABLE_DATE);
+                XElement approximableElment = Util.BuildDDMSElement("approximableDate", TEST_APPROXIMABLE_DATE, false);
                 Util.AddDDMSAttribute(approximableElment, "approximation", TEST_APPROXIMATION);
                 element.Add(approximableElment);
 
@@ -370,10 +369,10 @@ namespace DDMSense.Test.DDMS
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 ApproximableDate component = GetInstance(SUCCESS, GetFixtureElement(TEST_NAME, true));
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML(SaveOptions.DisableFormatting));
 
                 component = GetInstance(SUCCESS, TEST_NAME, TEST_DESCRIPTION, TEST_APPROXIMABLE_DATE, TEST_APPROXIMATION, TEST_START_DATE, TEST_END_DATE);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML(SaveOptions.DisableFormatting));
             }
         }
 

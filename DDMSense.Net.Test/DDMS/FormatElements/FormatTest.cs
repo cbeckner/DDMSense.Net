@@ -159,20 +159,20 @@ namespace DDMSense.Test.DDMS.FormatElements
         private string GetExpectedXMLOutput(bool preserveFormatting)
         {
             StringBuilder xml = new StringBuilder();
-            xml.Append("<ddms:format ").Append(XmlnsDDMS).Append(">\n\t");
+            xml.Append("<ddms:format ").Append(XmlnsDDMS).Append(">");
             if (DDMSVersion.CurrentVersion.IsAtLeast("4.0.1"))
             {
-                xml.Append("<ddms:mimeType>text/xml</ddms:mimeType>\n\t");
-                xml.Append("<ddms:extent ddms:qualifier=\"sizeBytes\" ddms:value=\"75000\" />\n\t");
-                xml.Append("<ddms:medium>digital</ddms:medium>\n");
+                xml.Append("<ddms:mimeType>text/xml</ddms:mimeType>");
+                xml.Append("<ddms:extent ddms:qualifier=\"sizeBytes\" ddms:value=\"75000\" />");
+                xml.Append("<ddms:medium>digital</ddms:medium>");
             }
             else
             {
-                xml.Append("<ddms:Media>\n\t\t");
-                xml.Append("<ddms:mimeType>text/xml</ddms:mimeType>\n\t\t");
-                xml.Append("<ddms:extent ddms:qualifier=\"sizeBytes\" ddms:value=\"75000\" />\n\t\t");
-                xml.Append("<ddms:medium>digital</ddms:medium>\n\t");
-                xml.Append("</ddms:Media>\n");
+                xml.Append("<ddms:Media>");
+                xml.Append("<ddms:mimeType>text/xml</ddms:mimeType>");
+                xml.Append("<ddms:extent ddms:qualifier=\"sizeBytes\" ddms:value=\"75000\" />");
+                xml.Append("<ddms:medium>digital</ddms:medium>");
+                xml.Append("</ddms:Media>");
             }
             xml.Append("</ddms:format>");
             return (FormatXml(xml.ToString(), preserveFormatting));
@@ -366,10 +366,10 @@ namespace DDMSense.Test.DDMS.FormatElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Format component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML(SaveOptions.DisableFormatting));
 
                 component = GetInstance(SUCCESS, TEST_MIME_TYPE, ExtentTest.Fixture, TEST_MEDIUM);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML(SaveOptions.DisableFormatting));
             }
         }
 

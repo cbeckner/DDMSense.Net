@@ -308,10 +308,10 @@ namespace DDMSense.Test.DDMS.FormatElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Extent component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML(SaveOptions.DisableFormatting));
 
                 component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                Assert.AreEqual(ExpectedXMLOutput, component.ToXML(SaveOptions.DisableFormatting));
             }
         }
 
