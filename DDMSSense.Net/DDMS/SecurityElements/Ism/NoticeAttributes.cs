@@ -346,6 +346,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         [Serializable]
         public class Builder
         {
+           
                         /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -358,6 +359,8 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// </summary>
             public Builder(NoticeAttributes attributes)
             {
+                StringAttributes = new Dictionary<string, string>();
+
                 NoticeType = attributes.NoticeType;
                 NoticeReason = attributes.NoticeReason;
                 if (attributes.NoticeDate != null)
@@ -441,7 +444,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
             public virtual NoticeAttributes Commit()
             {
-               return                    (new NoticeAttributes(NoticeType, NoticeReason, NoticeDate, UnregisteredNoticeType, ExternalNotice));
+               return (new NoticeAttributes(NoticeType, NoticeReason, NoticeDate, UnregisteredNoticeType, ExternalNotice));
             }
         }
     }
