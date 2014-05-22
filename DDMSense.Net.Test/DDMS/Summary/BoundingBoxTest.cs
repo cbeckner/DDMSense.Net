@@ -1,48 +1,48 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using System.Text;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Summary
 {
-
-
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
-    using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS.Summary;
-    using System.Xml.Linq;
     using DDMSense.DDMS;
     using DDMSense.DDMS.ResourceElements;
+    using DDMSense.DDMS.Summary;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
+    using System.Xml.Linq;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using Util = DDMSense.Util.Util;
 
     /// <summary>
     /// <para> Tests related to ddms:boundingBox elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class BoundingBoxTest : AbstractBaseTestCase
     {
-
         private const double TEST_WEST = 12.3;
         private const double TEST_EAST = 23.4;
         private const double TEST_SOUTH = 34.5;
@@ -385,14 +385,20 @@ namespace DDMSense.Test.DDMS.Summary
         [TestMethod]
         public virtual void Summary_BoundingBox_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 BoundingBox component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                expected.LoadXml(GetExpectedXMLOutput(false));
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, TEST_WEST, TEST_EAST, TEST_SOUTH, TEST_NORTH);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
@@ -436,7 +442,6 @@ namespace DDMSense.Test.DDMS.Summary
                 //TODO - Figure out how to test this
                 //builder.WestBL = TEST_WEST;
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
@@ -466,5 +471,4 @@ namespace DDMSense.Test.DDMS.Summary
             //}
         }
     }
-
 }

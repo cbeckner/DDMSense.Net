@@ -1,52 +1,51 @@
-using System.Collections.Generic;
-using System.Text;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Summary
 {
-
-
-
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.Summary;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
+    using System.Xml.Linq;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
     using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
+    using Util = DDMSense.Util.Util;
     using XLinkAttributes = DDMSense.DDMS.Summary.Xlink.XLinkAttributes;
     using XLinkAttributesTest = DDMSense.Test.DDMS.Summary.Xlink.XLinkAttributesTest;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
-    using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS.Summary;
-    using System.Xml.Linq;
-    using DDMSense.DDMS;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <para> Tests related to DDMS 2.0, 3.0, 3.1 ddms:RelatedResources elements or DDMS 4.0.1 ddms:relatedResource elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class RelatedResourceTest : AbstractBaseTestCase
     {
-
         private const string TEST_RELATIONSHIP = "http://purl.org/dc/terms/references";
         private const string TEST_DIRECTION = "outbound";
         private const string TEST_QUALIFIER = "http://purl.org/dc/terms/URI";
@@ -478,15 +477,20 @@ namespace DDMSense.Test.DDMS.Summary
         [TestMethod]
         public virtual void Summary_RelatedResource_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 RelatedResource component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                expected.LoadXml(GetExpectedXMLOutput(false));
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(false), TEST_RELATIONSHIP, TEST_DIRECTION, TEST_QUALIFIER, TEST_VALUE);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
-
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
@@ -527,7 +531,6 @@ namespace DDMSense.Test.DDMS.Summary
                 Assert.IsTrue(builder.Empty);
                 builder.Qualifier = TEST_QUALIFIER;
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
@@ -574,5 +577,4 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
     }
-
 }

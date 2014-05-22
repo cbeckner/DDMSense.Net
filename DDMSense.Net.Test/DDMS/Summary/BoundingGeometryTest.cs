@@ -1,30 +1,37 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Summary
 {
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.Summary;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
+    using System.Xml.Linq;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Point = DDMSense.DDMS.Summary.Gml.Point;
     using PointTest = DDMSense.Test.DDMS.Summary.Gml.PointTest;
     using Polygon = DDMSense.DDMS.Summary.Gml.Polygon;
@@ -33,22 +40,17 @@ namespace DDMSense.Test.DDMS.Summary
     using PositionTest = DDMSense.Test.DDMS.Summary.Gml.PositionTest;
     using SRSAttributes = DDMSense.DDMS.Summary.Gml.SRSAttributes;
     using SRSAttributesTest = DDMSense.Test.DDMS.Summary.Gml.SRSAttributesTest;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS.Summary;
-    using System.Xml.Linq;
-    using DDMSense.DDMS;
 
     /// <summary>
     /// <para> Tests related to ddms:subjectCoverage elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class BoundingGeometryTest : AbstractBaseTestCase
     {
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -182,7 +184,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-
         [TestMethod]
         public virtual void Summary_BoundingGeometry_DataConstructorValid()
         {
@@ -270,7 +271,6 @@ namespace DDMSense.Test.DDMS.Summary
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
-
                 BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 Assert.AreEqual(GetExpectedOutput(true), component.ToHTML());
                 Assert.AreEqual(GetExpectedOutput(false), component.ToText());
@@ -288,14 +288,20 @@ namespace DDMSense.Test.DDMS.Summary
         [TestMethod]
         public virtual void Summary_BoundingGeometry_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 BoundingGeometry component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                expected.LoadXml(GetExpectedXMLOutput(false));
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, null, PointTest.FixtureList);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
@@ -406,5 +412,4 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
     }
-
 }

@@ -28,6 +28,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
     using DDMSense.DDMS;
     using DDMSense.DDMS.ResourceElements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Description = DDMSense.DDMS.Summary.Description;
@@ -370,15 +372,21 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_TaskingInfo_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 TaskingInfo component = GetInstance(SUCCESS, FixtureElement);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                expected.LoadXml(ExpectedXMLOutput);
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, RequesterInfoTest.FixtureList, AddresseeTest.FixtureList, DescriptionTest.Fixture, TaskIDTest.Fixture);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
