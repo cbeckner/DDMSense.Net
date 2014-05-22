@@ -1,55 +1,54 @@
-using System.Collections.Generic;
-using System.Text;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.ResourceElements
 {
-
-
-
+    using DDMSense.DDMS;
     using DDMSense.DDMS.ResourceElements;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <para> Tests related to ddms:person elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class PersonTest : AbstractBaseTestCase
     {
-
         private const string TEST_SURNAME = "Uri";
         private const string TEST_USERID = "123";
         private const string TEST_AFFILIATION = "DISA";
-        private static readonly List<string> TEST_NAMES = new List<string>() {"Brian", "BU"};
-        private static readonly List<string> TEST_PHONES = new List<string>() {"703-885-1000"};
-        private static readonly List<string> TEST_EMAILS = new List<string>() {"ddms@fgm.com"};
+        private static readonly List<string> TEST_NAMES = new List<string>() { "Brian", "BU" };
+        private static readonly List<string> TEST_PHONES = new List<string>() { "703-885-1000" };
+        private static readonly List<string> TEST_EMAILS = new List<string>() { "ddms@fgm.com" };
 
         /// <summary>
         /// Constructor
@@ -414,12 +413,19 @@ namespace DDMSense.Test.DDMS.ResourceElements
         {
             foreach (string sVersion in SupportedVersions)
             {
+                XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+                XmlDocument expected = new XmlDocument();
+                XmlDocument actual = new XmlDocument();
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Person component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+
+                expected.LoadXml(GetExpectedXMLOutput(false));
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, TEST_SURNAME, TEST_NAMES, TEST_USERID, TEST_AFFILIATION, TEST_PHONES, TEST_EMAILS);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
@@ -448,7 +454,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 Assert.IsTrue(builder.Empty);
                 builder.Names = TEST_NAMES;
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
@@ -476,5 +481,4 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
     }
-
 }
