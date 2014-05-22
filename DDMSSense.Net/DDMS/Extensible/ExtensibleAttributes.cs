@@ -102,6 +102,11 @@ namespace DDMSense.DDMS.Extensible
                     if (_reservedResourceNames.Contains(testName))
                         continue;
                 }
+
+                //Skip Namespace desclarations
+                if (attribute.IsNamespaceDeclaration)
+                    continue;
+                
                 _attributes.Add(attribute);
             }
             Validate();
