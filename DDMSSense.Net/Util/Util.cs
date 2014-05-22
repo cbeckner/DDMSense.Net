@@ -109,9 +109,12 @@ namespace DDMSense.Util
             if (!String.IsNullOrEmpty(attributeValue) &&
                 !element.Attributes().Any(a => a.Name.LocalName == attributeName))
             {
-                var namespaces = element.Attributes().Where(a => a.IsNamespaceDeclaration);
-                if (!namespaces.Any(ns => ns.Value.Equals(namespaceUri)))
-                    element.Add(new XAttribute(XNamespace.Xmlns + prefix, namespaceUri));
+                if (!string.IsNullOrEmpty(namespaceUri))
+                {
+                    var namespaces = element.Attributes().Where(a => a.IsNamespaceDeclaration);
+                    if (!namespaces.Any(ns => ns.Value.Equals(namespaceUri)))
+                        element.Add(new XAttribute(XNamespace.Xmlns + prefix, namespaceUri));
+                }
 
                 element.Add(BuildAttribute(prefix, attributeName, namespaceUri, attributeValue));
             }
