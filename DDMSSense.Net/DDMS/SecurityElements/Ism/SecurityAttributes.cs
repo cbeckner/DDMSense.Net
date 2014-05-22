@@ -299,7 +299,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
 
             AtomicEnergyMarkings = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(ATOMIC_ENERGY_MARKINGS_NAME));
             Classification = classification;
-            ClassificationReason = otherAttributes.GetValueOrNull(CLASSIFICATION_REASON_NAME);
+            ClassificationReason = otherAttributes.GetValueOrEmpty(CLASSIFICATION_REASON_NAME);
             ClassifiedBy = otherAttributes.GetValueOrNull(CLASSIFIED_BY_NAME);
             CompilationReason = otherAttributes.GetValueOrNull(COMPILATION_REASON_NAME);
             string dateOfExemptedSource = otherAttributes.GetValueOrNull(DATE_OF_EXEMPTED_SOURCE_NAME);

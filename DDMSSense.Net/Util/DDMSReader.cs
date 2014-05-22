@@ -1,5 +1,6 @@
 #region usings
 
+using DDMSense.DDMS;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,9 +8,8 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using DDMSense.DDMS;
 
-#endregion
+#endregion usings
 
 namespace DDMSense.Util
 {
@@ -18,8 +18,7 @@ namespace DDMSense.Util
     ///     <para>
     ///         This parsing performs schema validation against a local set of DDMS/ISM schemas.
     ///     </para>
-    
-    
+
     /// </summary>
     public class DDMSReader
     {
@@ -90,7 +89,7 @@ namespace DDMSense.Util
         /// <param name="schemaLocation"> the schema location </param>
         /// <param name="schemas"> the buffer to add the schema location to </param>
         /// <param name="processedNamespaces"> namespaces which have already been loaded </param>
-        private void LoadSchema(string @namespace, string schemaLocation, StringBuilder schemas,List<string> processedNamespaces)
+        private void LoadSchema(string @namespace, string schemaLocation, StringBuilder schemas, List<string> processedNamespaces)
         {
             if (processedNamespaces.Contains(@namespace)) return;
             if (!String.IsNullOrEmpty(schemaLocation))
@@ -111,7 +110,7 @@ namespace DDMSense.Util
         /// <exception cref="ArgumentException"> if the schema could not be found. </exception>
         private string GetLocalSchemaLocation(string schemaLocation)
         {
-            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), schemaLocation.Substring(1,schemaLocation.Length-1));
+            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), schemaLocation.Substring(1, schemaLocation.Length - 1));
 
             Uri xsd = new Uri(path);
 
@@ -188,7 +187,7 @@ namespace DDMSense.Util
         /// <returns> a XOM element representing the root node in the document </returns>
         public virtual XElement GetElement(Stream reader)
         {
-            Util.RequireValue("reader", reader);
+            Util.RequireValue("input stream", reader);
             try
             {
                 XDocument doc = XDocument.Load(reader);

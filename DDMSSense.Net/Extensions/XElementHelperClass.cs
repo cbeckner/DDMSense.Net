@@ -1,8 +1,6 @@
 ﻿#region usings
 
-
-
-#endregion
+#endregion usings
 
 namespace DDMSense.Extensions
 {
@@ -10,7 +8,7 @@ namespace DDMSense.Extensions
 
     using System.Xml.Linq;
 
-    #endregion
+    #endregion usings
 
     public static class XElementHelperClass
     {
@@ -24,7 +22,9 @@ namespace DDMSense.Extensions
     {
         public static string GetPrefix(this XAttribute attribute)
         {
-            return attribute.Parent.GetPrefixOfNamespace(attribute.Name.Namespace);
+            if (attribute.Parent != null)
+                return attribute.Parent.GetPrefixOfNamespace(attribute.Name.Namespace);
+            return string.Empty;
         }
     }
 }
