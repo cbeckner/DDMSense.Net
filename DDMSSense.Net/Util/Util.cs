@@ -360,16 +360,6 @@ namespace DDMSense.Util
         }
 
         /// <summary>
-        ///     Returns an empty string in place of a null one.
-        /// </summary>
-        /// <param name="string"> the string to convert, if null </param>
-        /// <returns> an empty string if the string is null, or the string untouched </returns>
-        public static string GetNonNullString(string @string)
-        {
-            return (@string == null ? "" : @string);
-        }
-
-        /// <summary>
         ///     Locates the queryBinding attribute in an ISO Schematron file and returns it.
         /// </summary>
         /// <param name="schDocument"> the Schematron file as an XML Document </param>
