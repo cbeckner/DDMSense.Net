@@ -1,15 +1,15 @@
 #region usings
 
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.DDMS.Summary;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using DDMSense.DDMS.SecurityElements.Ism;
-using DDMSense.DDMS.Summary;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 namespace DDMSense.DDMS.Extensible
 {
@@ -80,7 +80,8 @@ namespace DDMSense.DDMS.Extensible
         ///     </para>
         /// </summary>
         /// <param name="element"> the XOM element which is decorated with these attributes. </param>
-        public ExtensibleAttributes(XElement element) : base(element.Name.NamespaceName)
+        public ExtensibleAttributes(XElement element)
+            : base(element.Name.NamespaceName)
         {
             BuildReservedNames(element.Name.NamespaceName);
 
@@ -113,7 +114,8 @@ namespace DDMSense.DDMS.Extensible
         /// </summary>
         /// <param name="attributes"> a list of extensible attributes </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ExtensibleAttributes(List<XAttribute> attributes) : base(DDMSVersion.CurrentVersion.Namespace)
+        public ExtensibleAttributes(List<XAttribute> attributes)
+            : base(DDMSVersion.CurrentVersion.Namespace)
         {
             if (attributes == null)
                 attributes = new List<XAttribute>();
@@ -150,7 +152,7 @@ namespace DDMSense.DDMS.Extensible
         /// <exception cref="InvalidDDMSException"> if there are problems creating the empty attributes instance </exception>
         public static ExtensibleAttributes GetNonNullInstance(ExtensibleAttributes extensibleAttributes)
         {
-            return (extensibleAttributes ?? new ExtensibleAttributes((List<XAttribute>) null));
+            return (extensibleAttributes ?? new ExtensibleAttributes((List<XAttribute>)null));
         }
 
         /// <summary>
@@ -211,7 +213,10 @@ namespace DDMSense.DDMS.Extensible
             string localPrefix = Util.Util.GetNonNullString(prefix);
             var text = new StringBuilder();
             foreach (var attribute in Attributes)
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "." + attribute.Name.LocalName,attribute.Value));
+            {
+                if (attribute.IsNamespaceDeclaration) continue;
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "." + attribute.Name.LocalName, attribute.Value));
+            }
             return (text.ToString());
         }
 
@@ -221,7 +226,7 @@ namespace DDMSense.DDMS.Extensible
             if (!(obj is ExtensibleAttributes))
                 return (false);
             
-            var test = (ExtensibleAttributes) obj;
+            var test = (ExtensibleAttributes)obj;
             // XOM Attribute has no logical equality. Must compare by hand.
             if (Attributes.Count != test.Attributes.Count)
                 return (false);
@@ -243,8 +248,8 @@ namespace DDMSense.DDMS.Extensible
             // Attribute has no logical equality. Must calculate by hand.		
             foreach (var attribute in Attributes)
             {
-                result = 7*result + attribute.Name.LocalName.GetHashCode();
-                result = 7*result + attribute.Name.NamespaceName.GetHashCode();
+                result = 7 * result + attribute.Name.LocalName.GetHashCode();
+                result = 7 * result + attribute.Name.NamespaceName.GetHashCode();
             }
             return (result);
         }
@@ -358,7 +363,7 @@ namespace DDMSense.DDMS.Extensible
             /// <summary>
             ///     Builder accessor for the attributes
             /// </summary>
-            public virtual List<AttributeBuilder> Attributes{get;private set;}
+            public virtual List<AttributeBuilder> Attributes { get; private set; }
 
             /// <summary>
             ///     Finalizes the data gathered for this builder instance. Will always return an empty instance instead of
