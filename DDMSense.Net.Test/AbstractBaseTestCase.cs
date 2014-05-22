@@ -64,7 +64,7 @@ namespace DDMSense.Test
         /// Resets the in-use version of DDMS.
         /// </summary>
         [TestInitialize]
-        protected internal virtual void SetUp()
+        public virtual void SetUp()
         {
             DDMSVersion.ClearCurrentVersion();
         }
@@ -73,7 +73,7 @@ namespace DDMSense.Test
         /// Resets the in-use version of DDMS.
         /// </summary>
         [TestCleanup]
-        protected internal virtual void TearDown()
+        public virtual void TearDown()
         {
             DDMSVersion.ClearCurrentVersion();
             PropertyReader.SetProperty("output.indexLevel", "0");

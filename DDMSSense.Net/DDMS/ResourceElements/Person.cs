@@ -1,14 +1,14 @@
 #region usings
 
+using DDMSense.DDMS.Extensible;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.DDMS.Extensible;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 namespace DDMSense.DDMS.ResourceElements
 {
@@ -63,8 +63,7 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class Person : AbstractRoleEntity
     {
@@ -165,18 +164,18 @@ namespace DDMSense.DDMS.ResourceElements
 
                 if (!String.IsNullOrEmpty(affiliation))
                     element.Add(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
-                }
+            }
             else
             {
                 // 	Inserting in reverse order allow the same index to be reused. Later inserts will "push" the early ones
                 // 	forward.
                 if (!String.IsNullOrEmpty(affiliation))
-                    element.AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
+                    element.Add(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
 
                 if (!String.IsNullOrEmpty(userID))
-                    element.AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
+                    element.Add(Util.Util.BuildDDMSElement(USERID_NAME, userID));
 
-                element.AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
+                element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
             }
         }
 
@@ -226,11 +225,11 @@ namespace DDMSense.DDMS.ResourceElements
         {
             if (String.IsNullOrEmpty(UserID) && Element.Elements(XName.Get(USERID_NAME, Namespace)).Count() == 1)
                 AddWarning("A ddms:userID element was found with no value.");
-            
+
             if (String.IsNullOrEmpty(Affiliation) &&
                 Element.Elements(XName.Get(AFFILIATION_NAME, Namespace)).Count() == 1)
                 AddWarning("A ddms:affiliation element was found with no value.");
-            
+
             base.ValidateWarnings();
         }
 
@@ -250,7 +249,7 @@ namespace DDMSense.DDMS.ResourceElements
         {
             if (!base.Equals(obj) || !(obj is Person))
                 return (false);
-            
+
             var test = (Person)obj;
             return (Surname.Equals(test.Surname) && UserID.Equals(test.UserID) && Affiliation.Equals(test.Affiliation));
         }
@@ -318,12 +317,10 @@ namespace DDMSense.DDMS.ResourceElements
             /// </summary>
             public virtual string Surname { get; set; }
 
-
             /// <summary>
             ///     Builder accessor for the userID
             /// </summary>
             public virtual string UserID { get; set; }
-
 
             /// <summary>
             ///     Builder accessor for the affliation
