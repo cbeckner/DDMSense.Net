@@ -388,7 +388,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// </summary>
             public virtual string NoticeType
             {
-                get { return (StringAttributes.GetValueOrNull(NOTICE_TYPE_NAME)); }
+                get { return (StringAttributes.GetValueOrEmpty(NOTICE_TYPE_NAME)); }
                 set { StringAttributes[NOTICE_TYPE_NAME] = value; }
             }
 
@@ -397,7 +397,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// </summary>
             public virtual string NoticeReason
             {
-                get { return (StringAttributes.GetValueOrNull(NOTICE_REASON_NAME)); }
+                get { return (StringAttributes.GetValueOrEmpty(NOTICE_REASON_NAME)); }
                 set { StringAttributes[NOTICE_REASON_NAME] = value; }
             }
 
@@ -406,7 +406,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// </summary>
             public virtual string NoticeDate
             {
-                get { return (StringAttributes.GetValueOrNull(NOTICE_DATE_NAME)); }
+                get { return (StringAttributes.GetValueOrEmpty(NOTICE_DATE_NAME)); }
                 set { StringAttributes[NOTICE_DATE_NAME] = value; }
             }
 
@@ -415,7 +415,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// </summary>
             public virtual string UnregisteredNoticeType
             {
-                get { return (StringAttributes.GetValueOrNull(UNREGISTERED_NOTICE_TYPE_NAME)); }
+                get { return (StringAttributes.GetValueOrEmpty(UNREGISTERED_NOTICE_TYPE_NAME)); }
                 set { StringAttributes[UNREGISTERED_NOTICE_TYPE_NAME] = value; }
             }
 
