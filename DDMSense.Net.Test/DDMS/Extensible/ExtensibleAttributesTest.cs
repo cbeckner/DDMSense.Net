@@ -46,6 +46,7 @@ namespace DDMSense.Test.DDMS.Extensible
     public class ExtensibleAttributesTest : AbstractBaseTestCase
     {
         private const string TEST_NAMESPACE = "http://ddmsence.urizone.net/";
+        private const string TEST_NAMESPACE_PREFIX = "ddmsence";
 
         private static readonly XAttribute TEST_ATTRIBUTE = new XAttribute(XNamespace.Get(TEST_NAMESPACE) + "relevance", "95");
 
@@ -131,7 +132,7 @@ namespace DDMSense.Test.DDMS.Extensible
         private string GetExpectedOutput(bool isHTML)
         {
             StringBuilder text = new StringBuilder();
-            text.Append(BuildOutput(isHTML, "ddmsence.relevance", "95"));
+            text.Append(BuildOutput(isHTML, TEST_NAMESPACE_PREFIX + ".relevance", "95"));
             return (text.ToString());
         }
 
@@ -286,8 +287,9 @@ namespace DDMSense.Test.DDMS.Extensible
                 DDMSVersion.SetCurrentVersion(sVersion);
                 ExtensibleAttributes component = Fixture;
 
-                XElement element = Util.BuildDDMSElement("sample", null);
+                XElement element = Util.BuildDDMSElement("sample", null, false);
                 component.AddTo(element);
+
                 ExtensibleAttributes output = new ExtensibleAttributes(element);
                 Assert.AreEqual(component, output);
             }

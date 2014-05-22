@@ -189,7 +189,7 @@ namespace DDMSense.DDMS.Extensible
         {
             foreach (var attribute in Attributes)
             {
-                if (element.Attribute(XName.Get(attribute.Name.LocalName, attribute.Name.NamespaceName)).Value != null)
+                if (element.Attribute(XName.Get(attribute.Name.LocalName, attribute.Name.NamespaceName)) != null)
                     throw new InvalidDDMSException("The extensible attribute with the name, " + attribute.Name +" conflicts with a pre-existing attribute on the element.");
                 
                 element.Add(attribute);
