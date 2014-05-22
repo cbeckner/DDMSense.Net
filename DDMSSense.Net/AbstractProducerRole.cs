@@ -1,16 +1,17 @@
 #region usings
 
+using DDMSense.DDMS;
+using DDMSense.DDMS.ResourceElements;
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.DDMS;
-using DDMSense.DDMS.ResourceElements;
-using DDMSense.DDMS.SecurityElements.Ism;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 namespace DDMSense
 {
@@ -208,7 +209,7 @@ namespace DDMSense
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7 * result + PocTypes.GetHashCode();
+            result = 7 * result + PocTypes.GetOrderIndependentHashCode();
             return (result);
         }
 
@@ -234,8 +235,6 @@ namespace DDMSense
         [Serializable]
         public abstract class Builder : IBuilder
         {
-            
-
             /// <summary>
             ///     Base constructor
             /// </summary>
@@ -276,37 +275,37 @@ namespace DDMSense
             ///     Builder accessor for the Security Attributes
             /// </summary>
             public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
-            
+
             /// <summary>
             ///     Builder accessor for the entityType, which determines which of the 4 entity builders are used.
             /// </summary>
             public virtual string EntityType { get; set; }
-            
+
             /// <summary>
             ///     Builder accessor for the organization builder
             /// </summary>
-            public virtual Organization.Builder Organization{ get; set; }
-           
+            public virtual Organization.Builder Organization { get; set; }
+
             /// <summary>
             ///     Builder accessor for the person builder
             /// </summary>
-            public virtual Person.Builder Person{ get; set; }
-            
+            public virtual Person.Builder Person { get; set; }
+
             /// <summary>
             ///     Builder accessor for the service builder
             /// </summary>
-            public virtual Service.Builder Service{ get; set; }
-            
+            public virtual Service.Builder Service { get; set; }
+
             /// <summary>
             ///     Builder accessor for the unknown builder
             /// </summary>
-            public virtual Unknown.Builder Unknown{ get; set; }
-            
+            public virtual Unknown.Builder Unknown { get; set; }
+
             /// <summary>
             ///     Builder accessor for the pocTypes
             /// </summary>
-            public virtual List<string> PocTypes{ get; set; }
-            
+            public virtual List<string> PocTypes { get; set; }
+
             public abstract IDDMSComponent Commit();
 
             /// <summary>
@@ -317,7 +316,7 @@ namespace DDMSense
             {
                 get
                 {
-                    return ( (Organization != null && Organization.Empty) && 
+                    return ((Organization != null && Organization.Empty) &&
                              (Person != null && Person.Empty) &&
                              (Service != null && Service.Empty) &&
                              (Unknown != null && Unknown.Empty) &&

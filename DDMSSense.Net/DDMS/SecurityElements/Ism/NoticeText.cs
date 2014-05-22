@@ -1,12 +1,13 @@
 #region usings
 
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 namespace DDMSense.DDMS.SecurityElements.Ism
 {
@@ -50,7 +51,8 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public NoticeText(XElement element) : base(element, false)
+        public NoticeText(XElement element)
+            : base(element, false)
         {
             try
             {
@@ -79,10 +81,10 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 if (pocTypes == null)
                     pocTypes = new List<string>();
-                
+
                 if (pocTypes.Count > 0)
                     Util.Util.AddAttribute(Element, PropertyReader.GetPrefix("ism"), POC_TYPE_NAME, DDMSVersion.CurrentVersion.IsmNamespace, Util.Util.GetXsList(pocTypes));
-                
+
                 PocTypes = pocTypes;
                 Validate();
             }
@@ -146,7 +148,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         {
             if (String.IsNullOrEmpty(Value))
                 AddWarning("An ISM:" + Name + " element was found with no value.");
-            
+
             base.ValidateWarnings();
         }
 
@@ -166,8 +168,8 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         {
             if (!base.Equals(obj) || !(obj is NoticeText))
                 return (false);
-            
-            var test = (NoticeText) obj;
+
+            var test = (NoticeText)obj;
             return (Util.Util.ListEquals(PocTypes, test.PocTypes));
         }
 
@@ -175,7 +177,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + PocTypes.GetHashCode();
+            result = 7 * result + PocTypes.GetOrderIndependentHashCode();
             return (result);
         }
 
@@ -207,7 +209,8 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
-            public Builder(NoticeText text) : base(text)
+            public Builder(NoticeText text)
+                : base(text)
             {
                 PocTypes = text.PocTypes;
             }

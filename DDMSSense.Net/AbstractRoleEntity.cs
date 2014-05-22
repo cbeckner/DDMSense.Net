@@ -8,7 +8,9 @@ using System.Xml.Linq;
 using DDMSense.DDMS;
 using DDMSense.DDMS.Extensible;
 
-#endregion
+#endregion usings
+
+using DDMSense.Extensions;
 
 namespace DDMSense
 {
@@ -23,8 +25,7 @@ namespace DDMSense
     ///         Extensions of this class are generally expected to be immutable, and the underlying XOM element MUST be set
     ///         before the component is used.
     ///     </para>
-    
-    
+
     /// </summary>
     public abstract class AbstractRoleEntity : AbstractBaseComponent, IRoleEntity
     {
@@ -175,11 +176,11 @@ namespace DDMSense
             var phoneElements = Element.Elements(XName.Get(PHONE_NAME, Namespace));
             if (phoneElements.ToList().Any(element => String.IsNullOrEmpty(element.Value)))
                 AddWarning("A ddms:phone element was found with no value.");
-            
+
             var emailElements = Element.Elements(XName.Get(EMAIL_NAME, Namespace));
-            if (emailElements.ToList().Any(element => String.IsNullOrEmpty(element.Value))) 
+            if (emailElements.ToList().Any(element => String.IsNullOrEmpty(element.Value)))
                 AddWarning("A ddms:email element was found with no value.");
-            
+
             base.ValidateWarnings();
         }
 
@@ -198,9 +199,9 @@ namespace DDMSense
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7 * result + Names.GetHashCode();
-            result = 7 * result + Phones.GetHashCode();
-            result = 7 * result + Emails.GetHashCode();
+            result = 7 * result + Names.GetOrderIndependentHashCode();
+            result = 7 * result + Phones.GetOrderIndependentHashCode();
+            result = 7 * result + Emails.GetOrderIndependentHashCode();
             result = 7 * result + ExtensibleAttributes.GetHashCode();
             return (result);
         }
@@ -269,7 +270,7 @@ namespace DDMSense
             ///     Builder accessor for the Extensible Attributes
             /// </summary>
             public virtual ExtensibleAttributes.Builder ExtensibleAttributes { get; set; }
-            
+
             public abstract IDDMSComponent Commit();
 
             /// <summary>
@@ -280,9 +281,9 @@ namespace DDMSense
             {
                 get
                 {
-                    return (Util.Util.ContainsOnlyEmptyValues(Names) && 
+                    return (Util.Util.ContainsOnlyEmptyValues(Names) &&
                             Util.Util.ContainsOnlyEmptyValues(Phones) &&
-                            Util.Util.ContainsOnlyEmptyValues(Emails) && 
+                            Util.Util.ContainsOnlyEmptyValues(Emails) &&
                             ExtensibleAttributes.Empty);
                 }
             }

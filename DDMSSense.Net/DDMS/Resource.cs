@@ -19,7 +19,9 @@ using DDMSense.Util;
 using Type = DDMSense.DDMS.ResourceElements.Type;
 using System.Xml;
 
-#endregion
+#endregion usings
+
+using DDMSense.Extensions;
 
 namespace DDMSense.DDMS
 {
@@ -123,7 +125,7 @@ namespace DDMSense.DDMS
     ///                 Please see the "Power Tips" on the Extensible Layer (on the DDMSence home page) for details.
     ///             </td>
     ///         </tr>
-    ///     </table>       
+    ///     </table>
     /// </summary>
     public sealed class Resource : AbstractBaseComponent
     {
@@ -206,7 +208,7 @@ namespace DDMSense.DDMS
                     _createDate = DateTime.Parse(createDate);
 
                 CompliesWiths = Util.Util.GetXsListAsList(GetAttributeValue(COMPLIES_WITH_NAME, ismNamespace));
-                
+
                 string ismDESVersion = (string)element.Attribute(XName.Get(DES_VERSION_NAME, ismNamespace));
                 if (!String.IsNullOrEmpty(ismDESVersion))
                 {
@@ -343,7 +345,7 @@ namespace DDMSense.DDMS
                     // to fail validation anyhow, so we skip the extensible layer.
                     //IEnumerable<XElement> allElements = element.Elements();
                     //foreach (var el in allElements)
-                       // ExtensibleElements.Add(new ExtensibleElement(el));
+                    // ExtensibleElements.Add(new ExtensibleElement(el));
                 }
                 PopulatedOrderedList();
                 Validate();
@@ -747,7 +749,8 @@ namespace DDMSense.DDMS
         /// </summary>
         public DateTime? CreateDate
         {
-            get {
+            get
+            {
                 if (_createDate.HasValue)
                     return DateTime.Parse(_createDate.Value.ToString("o"));
                 else
@@ -776,7 +779,7 @@ namespace DDMSense.DDMS
         ///     Accessor for an ordered list of the components in this Resource. Components which are missing are not represented
         ///     in this list (no null entries).
         /// </summary>
-        public List<IDDMSComponent> TopLevelComponents { get {return _orderedList;}  }
+        public List<IDDMSComponent> TopLevelComponents { get { return _orderedList; } }
 
         /// <see cref="AbstractBaseComponent#getNestedComponents()"></see>
         protected internal override List<IDDMSComponent> NestedComponents
@@ -904,7 +907,7 @@ namespace DDMSense.DDMS
             //XmlNamespaceManager ns = new XmlNamespaceManager(reader.NameTable);
             //string svrlNamespace = context.lookup("svrl");
             //IEnumerable<Element> outputNodes = doc.XPathSelectElements("//svrl:failed-assert | //svrl:successful-report", ns);
-            //foreach (var outputElement in outputNodes) { 
+            //foreach (var outputElement in outputNodes) {
             //        bool isAssert = "failed-assert".Equals(outputElement.Name.LocalName);
             //        string text = outputElement.Element(XName.Get("text", svrlNamespace)).Value;
             //        string locator = outputElement.Attribute("location").Value;
@@ -1165,7 +1168,7 @@ namespace DDMSense.DDMS
             if (CreateDate != null)
                 result = 7 * result + CreateDate.GetHashCode();
 
-            result = 7 * result + CompliesWiths.GetHashCode();
+            result = 7 * result + CompliesWiths.GetOrderIndependentHashCode();
             if (IsmDESVersion != null)
                 result = 7 * result + IsmDESVersion.GetHashCode();
 
@@ -1195,8 +1198,6 @@ namespace DDMSense.DDMS
         [Serializable]
         public class Builder : IBuilder
         {
-            
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
