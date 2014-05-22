@@ -1,50 +1,51 @@
-using System.Text;
 using System;
 using System.Linq;
+using System.Text;
+
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.ResourceElements
 {
-
-
+    using DDMSense.DDMS;
     using DDMSense.DDMS.ResourceElements;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <para> Tests related to ddms:recordKeeper elements </para>
-    /// 
+    ///
     /// <para> Because a ddms:recordKeeper is a local component, we cannot load a valid document from a unit test data file. We
     /// have to build the well-formed XElement ourselves. </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
     [TestClass]
     public class RecordKeeperTest : AbstractBaseTestCase
     {
-
         private new const string TEST_ID = "#289-99202.9";
         private const string TEST_NAME = "DISA";
 
@@ -309,15 +310,21 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_RecordKeeper_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 RecordKeeper component = GetInstance(SUCCESS, FixtureElement);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                expected.LoadXml(ExpectedXMLOutput);
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, TEST_ID, OrganizationTest.Fixture);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
@@ -361,7 +368,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 Assert.IsTrue(builder.Empty);
                 builder.RecordKeeperID = TEST_ID;
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
@@ -388,5 +394,4 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
     }
-
 }

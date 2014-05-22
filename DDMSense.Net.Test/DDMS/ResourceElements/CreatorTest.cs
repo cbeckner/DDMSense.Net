@@ -27,7 +27,9 @@ namespace DDMSense.Test.DDMS.ResourceElements
     using DDMSense.DDMS;
     using DDMSense.DDMS.ResourceElements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.XmlDiffPatch;
     using System;
+    using System.Xml;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
@@ -300,14 +302,20 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_Creator_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Creator component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                expected.LoadXml(GetExpectedXMLOutput(false));
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, PersonTest.Fixture, RoleEntityTest.PocTypes);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 

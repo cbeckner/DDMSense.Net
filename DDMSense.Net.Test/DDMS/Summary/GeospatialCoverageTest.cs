@@ -1,42 +1,45 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Summary
 {
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.Summary;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
+    using System.Xml.Linq;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using PointTest = DDMSense.Test.DDMS.Summary.Gml.PointTest;
     using SecurityAttributes = DDMSense.DDMS.SecurityElements.Ism.SecurityAttributes;
     using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
-    using PointTest = DDMSense.Test.DDMS.Summary.Gml.PointTest;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS.Summary;
-    using DDMSense.DDMS;
-    using System.Xml.Linq;
 
     /// <summary>
     /// <para> Tests related to ddms:geospatialCoverage elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
@@ -517,7 +520,6 @@ namespace DDMSense.Test.DDMS.Summary
 
                 dataComponent = GetInstance(SUCCESS, null, null, null, null, VerticalExtentTest.Fixture, null, null);
                 Assert.IsFalse(elementComponent.Equals(dataComponent));
-
             }
         }
 
@@ -564,6 +566,9 @@ namespace DDMSense.Test.DDMS.Summary
         [TestMethod]
         public virtual void Summary_GeospatialCoverage_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
@@ -571,14 +576,16 @@ namespace DDMSense.Test.DDMS.Summary
                 int? order = version.IsAtLeast("4.0.1") ? TEST_ORDER : null;
 
                 GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                expected.LoadXml(GetExpectedXMLOutput(false));
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, GeographicIdentifierTest.CountryCodeBasedFixture, null, null, null, null, precedence, order);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
-        
         public virtual void Summary_GeospatialCoverage_GeographicIdentifierReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -590,7 +597,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
         public virtual void Summary_GeospatialCoverage_BoundingBoxReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -602,7 +608,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
         public virtual void Summary_GeospatialCoverage_BoundingGeometryReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -614,7 +619,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
         public virtual void Summary_GeospatialCoverage_PostalAddressReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -626,7 +630,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
         public virtual void Summary_GeospatialCoverage_VerticalExtentReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -638,7 +641,6 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
 
-        
         public virtual void Summary_GeospatialCoverage_SecurityAttributes()
         {
             foreach (string sVersion in SupportedVersions)
@@ -729,7 +731,7 @@ namespace DDMSense.Test.DDMS.Summary
                 GeospatialCoverage component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 string suffix = version.IsAtLeast("4.0.1") ? "" : "/ddms:GeospatialExtent";
 
-                PrivateObject po = new PrivateObject(component, new PrivateType(typeof(GeospatialCoverage))); 
+                PrivateObject po = new PrivateObject(component, new PrivateType(typeof(GeospatialCoverage)));
                 Assert.AreEqual(suffix, po.GetFieldOrProperty("LocatorSuffix").ToString());
             }
         }
@@ -775,7 +777,6 @@ namespace DDMSense.Test.DDMS.Summary
                 Assert.IsTrue(builder.Empty);
                 builder.Order = TEST_ORDER;
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 
@@ -804,5 +805,4 @@ namespace DDMSense.Test.DDMS.Summary
             }
         }
     }
-
 }

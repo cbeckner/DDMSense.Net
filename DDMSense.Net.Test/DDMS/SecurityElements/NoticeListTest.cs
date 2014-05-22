@@ -28,7 +28,9 @@ namespace DDMSense.Test.DDMS.SecurityElements
 {
     using DDMSense.DDMS;
     using DDMSense.DDMS.SecurityElements;
+    using Microsoft.XmlDiffPatch;
     using System;
+    using System.Xml;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Notice = DDMSense.DDMS.SecurityElements.Ism.Notice;
@@ -342,15 +344,21 @@ namespace DDMSense.Test.DDMS.SecurityElements
         [TestMethod]
         public virtual void SecurityElements_NoticeList_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 NoticeList component = GetInstance(SUCCESS, FixtureElement);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                expected.LoadXml(ExpectedXMLOutput);
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, NoticeTest.FixtureList);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 

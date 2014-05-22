@@ -1,48 +1,49 @@
-using System.Text;
 using System;
 using System.Linq;
+using System.Text;
+
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.ResourceElements
 {
-
-
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.ResourceElements;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
+    using System.Xml.Linq;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
     using SecurityAttributes = DDMSense.DDMS.SecurityElements.Ism.SecurityAttributes;
     using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS.ResourceElements;
-    using System.Xml.Linq;
-    using DDMSense.DDMS;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <para> Tests related to ddms:source elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class SourceTest : AbstractBaseTestCase
     {
-
         private const string TEST_QUALIFIER = "URL";
         private const string TEST_VALUE = "http://www.xmethods.com";
         private const string TEST_SCHEMA_QUALIFIER = "WSDL";
@@ -315,14 +316,20 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_Source_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Source component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                expected.LoadXml(ExpectedXMLOutput);
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, TEST_QUALIFIER, TEST_VALUE, TEST_SCHEMA_QUALIFIER, TEST_SCHEMA_HREF);
-                Assert.AreEqual(ExpectedXMLOutput, component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
@@ -385,7 +392,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 Assert.IsTrue(builder.Empty);
                 builder.Value = TEST_VALUE;
                 Assert.IsFalse(builder.Empty);
-
             }
         }
 

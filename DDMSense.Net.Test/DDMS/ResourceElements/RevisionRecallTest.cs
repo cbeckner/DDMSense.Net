@@ -1,53 +1,53 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
+
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.ResourceElements
 {
-
-
-
-    using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.ResourceElements;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
+    using System.Xml.Linq;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Link = DDMSense.DDMS.Summary.Link;
     using LinkTest = DDMSense.Test.DDMS.Summary.LinkTest;
+    using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
+    using Util = DDMSense.Util.Util;
     using XLinkAttributes = DDMSense.DDMS.Summary.Xlink.XLinkAttributes;
     using XLinkAttributesTest = DDMSense.Test.DDMS.Summary.Xlink.XLinkAttributesTest;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
-    using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS.ResourceElements;
-    using System.Xml.Linq;
-    using DDMSense.DDMS;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <para> Tests related to ddms:revisionRecall elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
     [TestClass]
     public class RevisionRecallTest : AbstractBaseTestCase
     {
-
         private static readonly int? TEST_REVISION_ID = Convert.ToInt32(1);
         private const string TEST_REVISION_TYPE = "ADMINISTRATIVE RECALL";
         private const string TEST_VALUE = "Description of Recall";
@@ -490,7 +490,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
 
                 dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, null);
                 Assert.IsFalse(elementComponent.Equals(dataComponent));
-
             }
         }
 
@@ -537,23 +536,31 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_RevisionRecall_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 // links
                 RevisionRecall component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                expected.LoadXml(GetExpectedXMLOutput(false));
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(true), DetailsTest.FixtureList, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 // text
                 component = GetInstance(SUCCESS, TextFixtureElement);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, TEST_VALUE, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
@@ -593,7 +600,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
 
-       [TestMethod]
+        [TestMethod]
         public virtual void ResourceElements_RevisionRecall_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
@@ -636,5 +643,4 @@ namespace DDMSense.Test.DDMS.ResourceElements
             }
         }
     }
-
 }

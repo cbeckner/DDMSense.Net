@@ -1,47 +1,50 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Text;
+
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Summary.Gml
 {
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.ResourceElements;
+    using DDMSense.DDMS.Summary.Gml;
+    using Microsoft.XmlDiffPatch;
+    using System.Xml;
+    using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS.Summary.Gml;
-    using System.Xml.Linq;
-    using DDMSense.DDMS;
-    using DDMSense.DDMS.ResourceElements;
 
     /// <summary>
     /// <para> Tests related to gml:Polygon elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.0
     /// </summary>
     [TestClass]
     public class PolygonTest : AbstractBaseTestCase
     {
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -199,7 +202,6 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             return (FormatXml(xml.ToString(), preserveFormatting));
         }
 
-
         [TestMethod]
         public virtual void Summary_Gml_Polygon_NameAndNamespace()
         {
@@ -211,7 +213,6 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 GetInstance(WRONG_NAME_MESSAGE, WrongNameElementFixture);
             }
         }
-
 
         [TestMethod]
         public virtual void Summary_Gml_Polygon_ElementConstructorValid()
@@ -425,7 +426,6 @@ namespace DDMSense.Test.DDMS.Summary.Gml
 
                 dataComponent = GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, DIFFERENT_VALUE);
                 Assert.IsFalse(elementComponent.Equals(dataComponent));
-
             }
         }
 
@@ -460,18 +460,23 @@ namespace DDMSense.Test.DDMS.Summary.Gml
         [TestMethod]
         public virtual void Summary_Gml_Polygon_XMLOutput()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Polygon component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                expected.LoadXml(GetExpectedXMLOutput(false));
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 component = GetInstance(SUCCESS, PositionTest.FixtureList, SRSAttributesTest.Fixture, TEST_ID);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                actual.LoadXml(component.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
-        
         public virtual void Summary_Gml_Polygon_PositionReuse()
         {
             foreach (string sVersion in SupportedVersions)
@@ -577,5 +582,4 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
     }
-
 }
