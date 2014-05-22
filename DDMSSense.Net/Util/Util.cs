@@ -214,13 +214,10 @@ namespace DDMSense.Util
             if (namespaceUri == null) throw new ArgumentNullException("namespaceUri");
             RequireValue("name", name);
 
-            if (String.IsNullOrEmpty(prefix))
-                prefix = String.Empty;
-
             XNamespace ns = namespaceUri;
             XElement element;
 
-            if (includeXmlNs)
+            if (includeXmlNs && !string.IsNullOrEmpty(prefix))
                 element = new XElement(ns + name, new XAttribute(XNamespace.Xmlns + prefix, ns));
             else
                 element = new XElement(ns + name);
@@ -360,16 +357,6 @@ namespace DDMSense.Util
 
             XElement child = parent.Element(XName.Get(name, parent.Name.NamespaceName));
             return (child == null ? "" : child.Value);
-        }
-
-        /// <summary>
-        ///     Returns an empty string in place of a null one.
-        /// </summary>
-        /// <param name="string"> the string to convert, if null </param>
-        /// <returns> an empty string if the string is null, or the string untouched </returns>
-        public static string GetNonNullString(string @string)
-        {
-            return (@string == null ? "" : @string);
         }
 
         /// <summary>
@@ -576,7 +563,7 @@ namespace DDMSense.Util
 										"yyyy-MM",
 										"yyyy-MM-dd",
 										"yyyy-MM-ddTHHK",
-										"yyyy-MM-ddTHH:mmK",
+										//"yyyy-MM-ddTHH:mmK",
 										"yyyy-MM-ddTHH:mm:ssK",
 										"yyyy-MM-ddTHH:mm:ss.fK",
 										"yyyy-MM-ddTHH:mm:ss.ffK",
@@ -700,7 +687,14 @@ namespace DDMSense.Util
         /// <exception cref="InvalidDDMSException"> if the name is not an NCName. </exception>
         public static void RequireValidNCName(string name)
         {
-            XmlConvert.VerifyNCName(GetNonNullString(name));
+            try
+            {
+                XmlConvert.VerifyNCName(GetNonNullString(name));
+            }
+            catch (XmlException xmlex)
+            {
+                throw new InvalidDDMSException(xmlex);
+            }
         }
 
         /// <summary>

@@ -558,7 +558,7 @@ namespace DDMSense
         /// <param name="validateNow"> whether to validate the component immediately after setting </param>
         protected internal virtual void SetElement(XElement element, bool validateNow)
         {
-            Util.Util.RequireDDMSValue("XOM Element", element);
+            Util.Util.RequireDDMSValue("Element", element);
             _element = element;
             if (validateNow)
                 Validate();

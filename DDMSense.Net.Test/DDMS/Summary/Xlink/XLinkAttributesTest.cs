@@ -1,48 +1,47 @@
-using System.Text;
 using System;
 using System.Linq;
+using System.Text;
+
 /* Copyright 2010 - 2013 by Brian Uri!
 
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
-   
+
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Summary.Xlink
 {
-
-
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.ResourceElements;
     using DDMSense.DDMS.Summary.Xlink;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using DDMSense.DDMS.ResourceElements;
 
     /// <summary>
     /// <para> Tests related to the XLINK attributes on ddms:link and ddms:taskID elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
     [TestClass]
     public class XLinkAttributesTest : AbstractBaseTestCase
     {
-
         private const string TEST_HREF = "http://en.wikipedia.org/wiki/Tank";
         private const string TEST_ROLE = "tank";
         private const string TEST_TITLE = "Tank Page";
@@ -378,7 +377,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
                 {
                     element = Util.BuildDDMSElement("link", null);
                     AddAttributes(element, null, null, null, "ddms:prefix& GML");
-                    GetInstance("\"ddms:prefix& GML\" is not a valid NCName.", element);
+                    GetInstance("The ':' character, hexadecimal value 0x3A, cannot be included in a name.", element);
                 }
 
                 // invalid arcrole
@@ -676,5 +675,4 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
             }
         }
     }
-
 }

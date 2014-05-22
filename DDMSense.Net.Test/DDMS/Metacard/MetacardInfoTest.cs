@@ -1,59 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Metacard
 {
-
-
-
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.Metacard;
+    using DDMSense.DDMS.ResourceElements;
+    using DDMSense.Test.DDMS.ResourceElements;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
+    using System.Xml.Linq;
+    using AccessTest = DDMSense.Test.DDMS.SecurityElements.Ntk.AccessTest;
+    using DDMSVersion = DDMSense.Util.DDMSVersion;
+    using Description = DDMSense.DDMS.Summary.Description;
+    using DescriptionTest = DDMSense.Test.DDMS.Summary.DescriptionTest;
     using NoticeList = DDMSense.DDMS.SecurityElements.NoticeList;
     using NoticeListTest = DDMSense.Test.DDMS.SecurityElements.NoticeListTest;
     using SecurityAttributes = DDMSense.DDMS.SecurityElements.Ism.SecurityAttributes;
     using SecurityAttributesTest = DDMSense.Test.DDMS.SecurityElements.Ism.SecurityAttributesTest;
-    using AccessTest = DDMSense.Test.DDMS.SecurityElements.Ntk.AccessTest;
-    using Description = DDMSense.DDMS.Summary.Description;
-    using DescriptionTest = DDMSense.Test.DDMS.Summary.DescriptionTest;
-    using DDMSVersion = DDMSense.Util.DDMSVersion;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS;
-    using DDMSense.DDMS.Metacard;
-    using System.Xml.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using DDMSense.DDMS.ResourceElements;
-    using DDMSense.Test.DDMS.ResourceElements;
-    using System;
 
     /// <summary>
     /// <para> Tests related to ddms:metacardInfo elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 2.0.0
     /// </summary>
     [TestClass]
     public class MetacardInfoTest : AbstractBaseTestCase
     {
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -399,7 +396,6 @@ namespace DDMSense.Test.DDMS.Metacard
                     }
                 }
                 GetInstance("No more than 1 noticeList element can exist.", element);
-
             }
         }
 
@@ -411,7 +407,7 @@ namespace DDMSense.Test.DDMS.Metacard
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 // No components
-                GetInstance("At least one ddms:identifier", (XElement)null);
+                GetInstance("Element", (XElement)null);
 
                 // Weird component
                 List<IDDMSComponent> components = ChildComponents;
@@ -469,9 +465,8 @@ namespace DDMSense.Test.DDMS.Metacard
                     text = "The ISM:externalNotice attribute in this DDMS component";
                     locator = "ddms:metacardInfo/ddms:noticeList/ISM:Notice";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[1]);
-
                 }
-                // No warnings 
+                // No warnings
                 else
                 {
                     Assert.AreEqual(0, component.ValidationWarnings.Count());
@@ -587,7 +582,7 @@ namespace DDMSense.Test.DDMS.Metacard
                 MetacardInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 var expected = GetExpectedXMLOutput(true);
                 var actual = component.ToXML(SaveOptions.DisableFormatting);
-                Assert.AreEqual(expected,  actual);
+                Assert.AreEqual(expected, actual);
 
                 component = GetInstance(SUCCESS, ChildComponents);
                 Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML(SaveOptions.DisableFormatting));
@@ -647,5 +642,4 @@ namespace DDMSense.Test.DDMS.Metacard
             }
         }
     }
-
 }

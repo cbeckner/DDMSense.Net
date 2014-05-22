@@ -4,7 +4,7 @@ using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
-#endregion
+#endregion usings
 
 namespace DDMSense.Extensions
 {
@@ -31,6 +31,17 @@ namespace DDMSense.Extensions
             }
 
             return splitArray;
+        }
+
+        /// <summary>
+        ///     Returns an empty string in place of a null one.
+        /// </summary>
+        /// <param name="string"> the string to convert, if null </param>
+        /// <returns> an empty string if the string is null, or the string untouched </returns>
+        public static string ToNonNullString(this string str)
+        {
+            if (String.IsNullOrEmpty(str)) return string.Empty;
+            return str;
         }
     }
 }
