@@ -1,5 +1,6 @@
 #region usings
 
+using DDMSense.Extensions;
 using DDMSense.Util;
 using System;
 using System.Collections.Generic;
@@ -331,8 +332,8 @@ namespace DDMSense.DDMS.Summary
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7 * result + Names.GetHashCode();
-            result = 7 * result + Regions.GetHashCode();
+            result = 7 * result + Names.GetOrderIndependentHashCode();
+            result = 7 * result + Regions.GetOrderIndependentHashCode();
             return (result);
         }
 
