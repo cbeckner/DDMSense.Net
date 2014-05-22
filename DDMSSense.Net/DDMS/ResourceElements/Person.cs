@@ -111,8 +111,7 @@ namespace DDMSense.DDMS.ResourceElements
         {
             try
             {
-                int insertIndex = (names == null ? 0 : names.Count);
-                AddExtraElements(insertIndex, surname, userID, affiliation);
+                AddExtraElements(surname, userID, affiliation);
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -155,7 +154,7 @@ namespace DDMSense.DDMS.ResourceElements
         /// <param name="userID"> optional unique identifier within an organization </param>
         /// <param name="affiliation"> organizational affiliation of the person </param>
         /// <exception cref="InvalidDDMSException"> if the result is an invalid component </exception>
-        private void AddExtraElements(int insertIndex, string surname, string userID, string affiliation)
+        private void AddExtraElements(string surname, string userID, string affiliation)
         {
             XElement element = Element;
             if (DDMSVersion.IsAtLeast("4.0.1"))
