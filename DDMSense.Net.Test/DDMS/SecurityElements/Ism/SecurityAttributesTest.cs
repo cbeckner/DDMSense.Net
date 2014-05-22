@@ -831,30 +831,5 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void SecurityElements_Ism_SecurityAttributes_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
-                SecurityAttributes.Builder builder = new SecurityAttributes.Builder();
-                Assert.IsNotNull(builder.OwnerProducers[1]);
-                Assert.IsNotNull(builder.SCIcontrols[1]);
-                Assert.IsNotNull(builder.SARIdentifier[1]);
-                Assert.IsNotNull(builder.DisseminationControls[1]);
-                Assert.IsNotNull(builder.FGIsourceOpen[1]);
-                Assert.IsNotNull(builder.FGIsourceProtected[1]);
-                Assert.IsNotNull(builder.ReleasableTo[1]);
-                Assert.IsNotNull(builder.NonICmarkings[1]);
-
-                if (version.IsAtLeast("3.1"))
-                {
-                    Assert.IsNotNull(builder.AtomicEnergyMarkings[1]);
-                    Assert.IsNotNull(builder.DisplayOnlyTo[1]);
-                    Assert.IsNotNull(builder.NonUSControls[1]);
-                }
-            }
-        }
     }
 }

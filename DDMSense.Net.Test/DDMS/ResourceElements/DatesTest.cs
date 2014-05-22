@@ -593,16 +593,5 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void ResourceElements_Dates_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                Dates.Builder builder = new Dates.Builder();
-                Assert.IsNotNull(builder.AcquiredOns[1]);
-            }
-        }
     }
 }

@@ -573,17 +573,6 @@ namespace DDMSense.Test.DDMS.Summary
                 Assert.AreEqual(1, ((RelatedResource)builder.Commit()).Links.Count());
             }
         }
-
-        [TestMethod]
-        public virtual void Summary_RelatedResource_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                RelatedResource.Builder builder = new RelatedResource.Builder();
-                Assert.IsNotNull(builder.Links[1]);
-            }
-        }
     }
 
 }

@@ -362,17 +362,5 @@ namespace DDMSense.Test.DDMS.Extensible
                 // No invalid cases right now, because validation cannot occur until these attributes are attached to something.
             }
         }
-
-        [TestMethod]
-        public virtual void Extensible_ExtensibleAttributes_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                ExtensibleAttributes.Builder builder = new ExtensibleAttributes.Builder();
-                Assert.IsNotNull(builder.Attributes[1]);
-                Assert.IsTrue(builder.Commit().Attributes.Count.Equals(0));
-            }
-        }
     }
 }

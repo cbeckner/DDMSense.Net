@@ -417,17 +417,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void SecurityElements_Ism_NoticeText_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                NoticeText.Builder builder = new NoticeText.Builder();
-                Assert.IsNotNull(builder.PocTypes[1]);
-            }
-        }
     }
 
 }

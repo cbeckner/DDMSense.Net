@@ -455,18 +455,6 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void Summary_Gml_SRSAttributes_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                SRSAttributes.Builder builder = new SRSAttributes.Builder();
-                Assert.IsNotNull(builder.UomLabels[1]);
-                Assert.IsNotNull(builder.AxisLabels[1]);
-            }
-        }
     }
 
 }

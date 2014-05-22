@@ -480,17 +480,6 @@ namespace DDMSense.Test.DDMS.Summary
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void Summary_PostalAddress_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                PostalAddress.Builder builder = new PostalAddress.Builder();
-                Assert.IsNotNull(builder.Streets[1]);
-            }
-        }
     }
 
 }

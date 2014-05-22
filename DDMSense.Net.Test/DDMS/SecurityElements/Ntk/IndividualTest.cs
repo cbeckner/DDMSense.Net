@@ -406,17 +406,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void SecurityElements_Ntk_Individual_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                Individual.Builder builder = new Individual.Builder();
-                Assert.IsNotNull(builder.IndividualValues[1]);
-            }
-        }
     }
 
 }
