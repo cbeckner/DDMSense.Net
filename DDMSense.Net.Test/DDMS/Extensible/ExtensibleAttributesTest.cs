@@ -266,6 +266,7 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
+                element.Add(new XAttribute(XNamespace.Xmlns + TEST_NAMESPACE_PREFIX, TEST_NAMESPACE));
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
                 ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
                 Assert.AreEqual(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
