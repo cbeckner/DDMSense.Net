@@ -785,7 +785,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         public override int GetHashCode()
         {
             int result = 0;
-            result = 7 * result + AtomicEnergyMarkings.GetHashCode();
+            result = 7 * result + AtomicEnergyMarkings.GetOrderIndependentHashCode();
             result = 7 * result + Classification.GetHashCode();
             result = 7 * result + ClassificationReason.GetHashCode();
             result = 7 * result + ClassifiedBy.GetHashCode();
@@ -803,16 +803,16 @@ namespace DDMSense.DDMS.SecurityElements.Ism
 
             result = 7 * result + DerivativelyClassifiedBy.GetHashCode();
             result = 7 * result + DerivedFrom.GetHashCode();
-            result = 7 * result + DisplayOnlyTo.GetHashCode();
-            result = 7 * result + DisseminationControls.GetHashCode();
-            result = 7 * result + FGIsourceOpen.GetHashCode();
-            result = 7 * result + FGIsourceProtected.GetHashCode();
-            result = 7 * result + NonICmarkings.GetHashCode();
-            result = 7 * result + NonUSControls.GetHashCode();
-            result = 7 * result + OwnerProducers.GetHashCode();
-            result = 7 * result + ReleasableTo.GetHashCode();
-            result = 7 * result + SARIdentifier.GetHashCode();
-            result = 7 * result + SCIcontrols.GetHashCode();
+            result = 7 * result + DisplayOnlyTo.GetOrderIndependentHashCode();
+            result = 7 * result + DisseminationControls.GetOrderIndependentHashCode();
+            result = 7 * result + FGIsourceOpen.GetOrderIndependentHashCode();
+            result = 7 * result + FGIsourceProtected.GetOrderIndependentHashCode();
+            result = 7 * result + NonICmarkings.GetOrderIndependentHashCode();
+            result = 7 * result + NonUSControls.GetOrderIndependentHashCode();
+            result = 7 * result + OwnerProducers.GetOrderIndependentHashCode();
+            result = 7 * result + ReleasableTo.GetOrderIndependentHashCode();
+            result = 7 * result + SARIdentifier.GetOrderIndependentHashCode();
+            result = 7 * result + SCIcontrols.GetOrderIndependentHashCode();
             result = 7 * result + TypeOfExemptedSource.GetHashCode();
             return (result);
         }

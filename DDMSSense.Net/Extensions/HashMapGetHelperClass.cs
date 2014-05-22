@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 #endregion usings
 
+using System.Linq;
+
 namespace DDMSense.Extensions
 {
     internal static class HashMapGetHelperClass
@@ -20,6 +22,16 @@ namespace DDMSense.Extensions
             string ret = string.Empty;
             dictionary.TryGetValue(key, out ret);
             return ret.ToNonNullString();
+        }
+
+        public static int GetOrderIndependentHashCode<T>(this IEnumerable<T> source)
+        {
+            int hash = 0;
+            foreach (T element in source.OrderBy(x => x, Comparer<T>.Default))
+            {
+                hash += element.GetHashCode();
+            }
+            return hash;
         }
     }
 }
