@@ -47,8 +47,9 @@ namespace DDMSense.Test.DDMS.Extensible
     {
         private const string TEST_NAMESPACE = "http://ddmsence.urizone.net/";
         private const string TEST_NAMESPACE_PREFIX = "ddmsence";
+        private const string TEST_NAME = "relevance";
 
-        private static readonly XAttribute TEST_ATTRIBUTE = new XAttribute(XNamespace.Get(TEST_NAMESPACE) + "relevance", "95");
+        private static readonly XAttribute TEST_ATTRIBUTE = new XAttribute(XNamespace.Get(TEST_NAMESPACE) + TEST_NAME, "95");
 
         /// <summary>
         /// Constructor
@@ -132,7 +133,7 @@ namespace DDMSense.Test.DDMS.Extensible
         private string GetExpectedOutput(bool isHTML)
         {
             StringBuilder text = new StringBuilder();
-            text.Append(BuildOutput(isHTML, TEST_NAMESPACE_PREFIX + ".relevance", "95"));
+            text.Append(BuildOutput(isHTML, TEST_NAMESPACE_PREFIX + "." + TEST_NAME, "95"));
             return (text.ToString());
         }
 
@@ -233,10 +234,23 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
+                element.Add(new XAttribute(XNamespace.Xmlns + TEST_NAMESPACE_PREFIX, TEST_NAMESPACE));
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
                 ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
+
+                //Build an element with our test attribute.
+                //This lets us extract an XAttribute that carries its namespace properties.
+                string essenceNs = "http://essence/";
+                string essenceNsPrefix = "essence";
+                string essenceAttrName = "confidence";
+                XAttribute essence = new XAttribute(XNamespace.Get(essenceNs) + essenceAttrName, "test");
+                element = (new Keyword("testValue", null)).ElementCopy;
+                element.Add(new XAttribute(XNamespace.Xmlns + essenceNsPrefix, essenceNs));
+                element.Add(essence);
+
                 List<XAttribute> attributes = new List<XAttribute>();
-                attributes.Add(new XAttribute(XName.Get("essence:confidence", "http://essence/"), "test"));
+                attributes.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(essenceNs) + essenceAttrName).FirstOrDefault());
+
                 ExtensibleAttributes dataAttributes = GetInstance(SUCCESS, attributes);
                 Assert.IsFalse(elementAttributes.Equals(dataAttributes));
 
@@ -266,13 +280,14 @@ namespace DDMSense.Test.DDMS.Extensible
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 XElement element = (new Keyword("testValue", null)).ElementCopy;
+                element.Add(new XAttribute(XNamespace.Xmlns + TEST_NAMESPACE_PREFIX, TEST_NAMESPACE));
                 element.Add(new XAttribute(TEST_ATTRIBUTE));
                 ExtensibleAttributes elementAttributes = GetInstance(SUCCESS, element);
                 Assert.AreEqual(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
                 Assert.AreEqual(GetExpectedOutput(false), elementAttributes.GetOutput(false, ""));
 
                 List<XAttribute> attributes = new List<XAttribute>();
-                attributes.Add(new XAttribute(TEST_ATTRIBUTE));
+                attributes.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(TEST_NAMESPACE) + TEST_NAME).FirstOrDefault());
                 elementAttributes = GetInstance(SUCCESS, attributes);
                 Assert.AreEqual(GetExpectedOutput(true), elementAttributes.GetOutput(true, ""));
                 Assert.AreEqual(GetExpectedOutput(false), elementAttributes.GetOutput(false, ""));

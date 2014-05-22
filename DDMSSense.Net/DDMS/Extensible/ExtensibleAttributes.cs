@@ -220,7 +220,10 @@ namespace DDMSense.DDMS.Extensible
             foreach (var attribute in Attributes)
             {
                 if (attribute.IsNamespaceDeclaration) continue;
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "." + attribute.Name.LocalName, attribute.Value));
+
+                var namespacePrefix = attribute.Parent != null ? attribute.Parent.GetPrefixOfNamespace(attribute.Name.Namespace) : String.Empty;
+
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + namespacePrefix + "." + attribute.Name.LocalName, attribute.Value));
             }
             return (text.ToString());
         }
