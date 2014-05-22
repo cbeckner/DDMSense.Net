@@ -2,56 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.SecurityElements.Ism
 {
-
-
-
     using DDMSense.DDMS;
     using DDMSense.DDMS.ResourceElements;
     using DDMSense.DDMS.SecurityElements;
     using DDMSense.DDMS.SecurityElements.Ism;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
+    using System.Linq;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
-    using System.Linq;
 
     /// <summary>
     /// <para> Tests related to the ISM attributes </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class SecurityAttributesTest : AbstractBaseTestCase
     {
-
         private const string TEST_CLASS = "U";
         private static readonly List<string> TEST_OWNERS = Util.GetXsListAsList("USA");
 
         private static readonly Dictionary<string, string> TEST_OTHERS_41 = new Dictionary<string, string>() {
-        
             {SecurityAttributes.ATOMIC_ENERGY_MARKINGS_NAME,"RD"}
             ,{SecurityAttributes.CLASSIFICATION_REASON_NAME,"PQ"}
             ,{SecurityAttributes.CLASSIFIED_BY_NAME," MN"}
@@ -90,6 +86,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
             ,{SecurityAttributes.RELEASABLE_TO_NAME,"AIA"}
             ,{SecurityAttributes.SAR_IDENTIFIER_NAME,"SAR-USA"}
             ,{SecurityAttributes.SCI_CONTROLS_NAME,"HCS"}};
+
         private static readonly IDictionary<string, string> TEST_OTHERS_30 = new Dictionary<string, string>(){
            {SecurityAttributes.CLASSIFICATION_REASON_NAME,"PQ"}
             ,{SecurityAttributes.CLASSIFIED_BY_NAME," MN"}
@@ -108,6 +105,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
             ,{SecurityAttributes.SAR_IDENTIFIER_NAME,"SAR-USA"}
             ,{SecurityAttributes.SCI_CONTROLS_NAME,"HCS"}
             ,{SecurityAttributes.TYPE_OF_EXEMPTED_SOURCE_NAME,"OADR"}};
+
         private static readonly IDictionary<string, string> TEST_OTHERS_20 = new Dictionary<string, string>(){
             {SecurityAttributes.CLASSIFICATION_REASON_NAME,"PQ"}
             ,{SecurityAttributes.CLASSIFIED_BY_NAME," MN"}
@@ -138,9 +136,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         /// <summary>
         /// Resets the validation property.
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: protected void tearDown() throws Exception
-        protected internal override void TearDown()
+        [TestCleanup]
+        public override void TearDown()
         {
             base.TearDown();
         }
@@ -155,7 +152,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
             {
                 try
                 {
-
                     return (new SecurityAttributes(TEST_CLASS, TEST_OWNERS, null));
                 }
                 catch (InvalidDDMSException e)
@@ -861,5 +857,4 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
             }
         }
     }
-
 }
