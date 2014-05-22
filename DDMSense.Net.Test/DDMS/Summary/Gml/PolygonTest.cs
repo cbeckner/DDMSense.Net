@@ -576,17 +576,6 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 Assert.AreEqual(4, builder.Positions.Count());
             }
         }
-
-        [TestMethod]
-        public virtual void Summary_Gml_Polygon_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                Polygon.Builder builder = new Polygon.Builder();
-                Assert.IsNotNull(builder.Positions[1]);
-            }
-        }
     }
 
 }

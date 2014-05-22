@@ -641,19 +641,6 @@ namespace DDMSense.Test.DDMS.Summary
                 }
             }
         }
-
-        [TestMethod]
-        public virtual void Summary_SubjectCoverage_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                SubjectCoverage.Builder builder = new SubjectCoverage.Builder();
-                Assert.IsNotNull(builder.Keywords[1]);
-                Assert.IsNotNull(builder.Categories[1]);
-                Assert.IsNotNull(builder.ProductionMetrics[1]);
-            }
-        }
     }
 
 }

@@ -413,16 +413,5 @@ namespace DDMSense.Test.DDMS.SecurityElements
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void SecurityElements_NoticeList_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                NoticeList.Builder builder = new NoticeList.Builder();
-                Assert.IsNotNull(builder.Notices[1]);
-            }
-        }
     }
 }

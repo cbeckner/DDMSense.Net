@@ -460,18 +460,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         {
             // Implicit, since the NTK namespace does not exist before DDMS 4.0.1.
         }
-
-        [TestMethod]
-        public virtual void SecurityELements_Ntk_Access_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                Access.Builder builder = new Access.Builder();
-                Assert.IsNotNull(builder.Individuals[1]);
-                Assert.IsNotNull(builder.Groups[1]);
-            }
-        }
     }
 
 }

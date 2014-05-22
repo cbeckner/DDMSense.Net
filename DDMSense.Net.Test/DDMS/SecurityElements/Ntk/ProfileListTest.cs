@@ -383,17 +383,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void SecurityElements_Ntk_ProfileList_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                ProfileList.Builder builder = new ProfileList.Builder();
-                Assert.IsNotNull(builder.Profiles[1]);
-            }
-        }
     }
 
 }

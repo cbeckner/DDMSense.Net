@@ -405,18 +405,6 @@ namespace DDMSense.Test.DDMS.Summary
                 Assert.AreEqual(1, builder.Polygons.Count());
             }
         }
-
-        [TestMethod]
-        public virtual void Summary_BoundingGeometry_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                BoundingGeometry.Builder builder = new BoundingGeometry.Builder();
-                Assert.IsNotNull(builder.Points[1]);
-                Assert.IsNotNull(builder.Polygons[1]);
-            }
-        }
     }
 
 }

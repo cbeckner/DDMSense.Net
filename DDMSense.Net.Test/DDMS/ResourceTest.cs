@@ -1483,29 +1483,6 @@ namespace DDMSense.Test.DDMS {
 		}
 
 		[TestMethod]
-		public virtual void TestBuilderLazyList() {
-			foreach (string sVersion in SupportedVersions) {
-				DDMSVersion.SetCurrentVersion(sVersion);
-				Resource.Builder builder = new Resource.Builder();
-				Assert.IsNotNull(builder.Identifiers[1]);
-				Assert.IsNotNull(builder.Titles[1]);
-				Assert.IsNotNull(builder.Subtitles[1]);
-				Assert.IsNotNull(builder.Languages[1]);
-				Assert.IsNotNull(builder.Sources[1]);
-				Assert.IsNotNull(builder.Types[1]);
-				Assert.IsNotNull(builder.Creators[1]);
-				Assert.IsNotNull(builder.Contributors[1]);
-				Assert.IsNotNull(builder.Publishers[1]);
-				Assert.IsNotNull(builder.PointOfContacts[1]);
-				Assert.IsNotNull(builder.VirtualCoverages[1]);
-				Assert.IsNotNull(builder.TemporalCoverages[1]);
-				Assert.IsNotNull(builder.GeospatialCoverages[1]);
-				Assert.IsNotNull(builder.RelatedResources[1]);
-				Assert.IsNotNull(builder.ExtensibleElements[1]);
-			}
-		}
-
-		[TestMethod]
 		public virtual void TestBuild20Commit30() {
 			// Version during building should be 100% irrelevant
 			DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");

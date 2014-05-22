@@ -475,19 +475,6 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void ResourceElements_Person_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                Person.Builder builder = new Person.Builder();
-                Assert.IsNotNull(builder.Names[1]);
-                Assert.IsNotNull(builder.Phones[1]);
-                Assert.IsNotNull(builder.Emails[1]);
-            }
-        }
     }
 
 }

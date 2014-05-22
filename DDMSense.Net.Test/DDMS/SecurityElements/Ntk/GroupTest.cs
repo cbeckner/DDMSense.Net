@@ -396,17 +396,6 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 builder.Commit();
             }
         }
-
-        [TestMethod]
-        public virtual void SecurityELements_Ntk_Group_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                Group.Builder builder = new Group.Builder();
-                Assert.IsNotNull(builder.GroupValues[1]);
-            }
-        }
     }
 
 }

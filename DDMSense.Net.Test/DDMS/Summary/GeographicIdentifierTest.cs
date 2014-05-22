@@ -542,17 +542,5 @@ namespace DDMSense.Test.DDMS.Summary
             //    builder.Commit();
             //}
         }
-
-        [TestMethod]
-        public virtual void Summary_GeographicIdentifier_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                GeographicIdentifier.Builder builder = new GeographicIdentifier.Builder();
-                Assert.IsNotNull(builder.Names[1]);
-                Assert.IsNotNull(builder.Regions[1]);
-            }
-        }
     }
 }

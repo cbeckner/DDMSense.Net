@@ -440,16 +440,5 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 Assert.AreEqual(2, builder.Coordinates.Count());
             }
         }
-
-        [TestMethod]
-        public virtual void Summary_Gml_Position_BuilderLazyList()
-        {
-            foreach (string sVersion in SupportedVersions)
-            {
-                DDMSVersion.SetCurrentVersion(sVersion);
-                Position.Builder builder = new Position.Builder();
-                Assert.IsNotNull(builder.Coordinates[1]);
-            }
-        }
     }
 }
