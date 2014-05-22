@@ -3,10 +3,10 @@
 <ddms:contributor
 	xmlns:ddms="urn:us:mil:ces:metadata:ddms:4"
 	xmlns:ISM="urn:us:gov:ic:ism"
+	ISM:pocType="DoD-Dist-B"
 	ISM:classification="U"
-	ISM:ownerProducer="USA"
-	ISM:pocType="DoD-Dist-B">
-	<ddms:organization >
-		<ddms:name>DISA</ddms:name>
-	</ddms:organization>
+	ISM:ownerProducer="USA">
+  <ddms:organization>
+    <ddms:name>DISA</ddms:name>
+  </ddms:organization>
 </ddms:contributor>

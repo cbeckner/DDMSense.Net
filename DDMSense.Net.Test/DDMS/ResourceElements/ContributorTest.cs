@@ -305,10 +305,10 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
                 Contributor component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML(SaveOptions.DisableFormatting));
 
                 component = GetInstance(SUCCESS, OrganizationTest.Fixture, RoleEntityTest.PocTypes);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML());
+                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML(SaveOptions.DisableFormatting));
             }
         }
 
