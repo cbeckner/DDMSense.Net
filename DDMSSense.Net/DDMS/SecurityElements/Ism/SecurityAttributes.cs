@@ -297,12 +297,12 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             if (otherAttributes == null)
                 otherAttributes = new Dictionary<string, string>();
 
-            AtomicEnergyMarkings = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(ATOMIC_ENERGY_MARKINGS_NAME));
+            AtomicEnergyMarkings = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(ATOMIC_ENERGY_MARKINGS_NAME));
             Classification = classification;
-            ClassificationReason = otherAttributes.GetValueOrNull(CLASSIFICATION_REASON_NAME);
-            ClassifiedBy = otherAttributes.GetValueOrNull(CLASSIFIED_BY_NAME);
-            CompilationReason = otherAttributes.GetValueOrNull(COMPILATION_REASON_NAME);
-            string dateOfExemptedSource = otherAttributes.GetValueOrNull(DATE_OF_EXEMPTED_SOURCE_NAME);
+            ClassificationReason = otherAttributes.GetValueOrEmpty(CLASSIFICATION_REASON_NAME);
+            ClassifiedBy = otherAttributes.GetValueOrEmpty(CLASSIFIED_BY_NAME);
+            CompilationReason = otherAttributes.GetValueOrEmpty(COMPILATION_REASON_NAME);
+            string dateOfExemptedSource = otherAttributes.GetValueOrEmpty(DATE_OF_EXEMPTED_SOURCE_NAME);
             if (!String.IsNullOrEmpty(dateOfExemptedSource))
             {
                 try
@@ -314,7 +314,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                     throw new InvalidDDMSException("The ISM:dateOfExemptedSource attribute is not in a valid date format.");
                 }
             }
-            string declassDate = otherAttributes.GetValueOrNull(DECLASS_DATE_NAME);
+            string declassDate = otherAttributes.GetValueOrEmpty(DECLASS_DATE_NAME);
             if (!String.IsNullOrEmpty(declassDate))
             {
                 try
@@ -326,25 +326,25 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                     throw new InvalidDDMSException("The ISM:declassDate attribute is not in a valid date format.");
                 }
             }
-            DeclassEvent = otherAttributes.GetValueOrNull(DECLASS_EVENT_NAME);
-            DeclassException = otherAttributes.GetValueOrNull(DECLASS_EXCEPTION_NAME);
-            string manualReview = otherAttributes.GetValueOrNull(DECLASS_MANUAL_REVIEW_NAME);
+            DeclassEvent = otherAttributes.GetValueOrEmpty(DECLASS_EVENT_NAME);
+            DeclassException = otherAttributes.GetValueOrEmpty(DECLASS_EXCEPTION_NAME);
+            string manualReview = otherAttributes.GetValueOrEmpty(DECLASS_MANUAL_REVIEW_NAME);
             if (!String.IsNullOrEmpty(manualReview))
                 DeclassManualReview = Convert.ToBoolean(manualReview);
 
-            DerivativelyClassifiedBy = otherAttributes.GetValueOrNull(DERIVATIVELY_CLASSIFIED_BY_NAME);
-            DerivedFrom = otherAttributes.GetValueOrNull(DERIVED_FROM_NAME);
-            DisplayOnlyTo = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(DISPLAY_ONLY_TO_NAME));
-            DisseminationControls = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(DISSEMINATION_CONTROLS_NAME));
-            FGIsourceOpen = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(FGI_SOURCE_OPEN_NAME));
-            FGIsourceProtected = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(FGI_SOURCE_PROTECTED_NAME));
-            NonICmarkings = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(NON_IC_MARKINGS_NAME));
-            NonUSControls = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(NON_US_CONTROLS_NAME));
+            DerivativelyClassifiedBy = otherAttributes.GetValueOrEmpty(DERIVATIVELY_CLASSIFIED_BY_NAME);
+            DerivedFrom = otherAttributes.GetValueOrEmpty(DERIVED_FROM_NAME);
+            DisplayOnlyTo = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(DISPLAY_ONLY_TO_NAME));
+            DisseminationControls = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(DISSEMINATION_CONTROLS_NAME));
+            FGIsourceOpen = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(FGI_SOURCE_OPEN_NAME));
+            FGIsourceProtected = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(FGI_SOURCE_PROTECTED_NAME));
+            NonICmarkings = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(NON_IC_MARKINGS_NAME));
+            NonUSControls = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(NON_US_CONTROLS_NAME));
             OwnerProducers = ownerProducers;
-            ReleasableTo = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(RELEASABLE_TO_NAME));
-            SARIdentifier = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(SAR_IDENTIFIER_NAME));
-            SCIcontrols = Util.Util.GetXsListAsList(otherAttributes.GetValueOrNull(SCI_CONTROLS_NAME));
-            TypeOfExemptedSource = otherAttributes.GetValueOrNull(TYPE_OF_EXEMPTED_SOURCE_NAME);
+            ReleasableTo = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(RELEASABLE_TO_NAME));
+            SARIdentifier = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(SAR_IDENTIFIER_NAME));
+            SCIcontrols = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(SCI_CONTROLS_NAME));
+            TypeOfExemptedSource = otherAttributes.GetValueOrEmpty(TYPE_OF_EXEMPTED_SOURCE_NAME);
             Validate();
         }
 
