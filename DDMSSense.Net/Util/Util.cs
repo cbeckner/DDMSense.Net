@@ -106,7 +106,8 @@ namespace DDMSense.Util
         /// <param name="attributeValue"> the value of the attribute </param>
         public static void AddAttribute(XElement element, string prefix, string attributeName, string namespaceUri, string attributeValue)
         {
-            if (!String.IsNullOrEmpty(attributeValue))
+            if (!String.IsNullOrEmpty(attributeValue) &&
+                !element.Attributes().Any(a => a.Name.LocalName == attributeName))
             {
                 var namespaces = element.Attributes().Where(a => a.IsNamespaceDeclaration);
                 if (!namespaces.Any(ns => ns.Value.Equals(namespaceUri)))
