@@ -19,7 +19,7 @@ namespace DDMSense.Extensions
         {
             string ret = string.Empty;
             dictionary.TryGetValue(key, out ret);
-            return Util.Util.GetNonNullString(ret);
+            return ret.ToNonNullString();
         }
     }
 }
