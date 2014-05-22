@@ -1,29 +1,30 @@
 #region usings
 
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.DDMS.SecurityElements.Ism;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
@@ -36,7 +37,7 @@ namespace DDMSense.DDMS.Summary
 
     using Element = XElement;
 
-    #endregion
+    #endregion usings
 
     /// <summary>
     ///     An immutable implementation of the ddms:relatedResource component.
@@ -109,8 +110,7 @@ namespace DDMSense.DDMS.Summary
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class RelatedResource : AbstractQualifierValue
     {
@@ -280,7 +280,7 @@ namespace DDMSense.DDMS.Summary
             {
                 Element innerElement = InnerElement;
                 string attrValue = innerElement.Attribute(XName.Get(QUALIFIER_NAME, Namespace)).Value;
-                return (Util.Util.GetNonNullString(attrValue));
+                return attrValue.ToNonNullString();
             }
         }
 
@@ -293,7 +293,7 @@ namespace DDMSense.DDMS.Summary
             {
                 Element innerElement = InnerElement;
                 string attrValue = innerElement.Attribute(XName.Get(VALUE_NAME, Namespace)).Value;
-                return (Util.Util.GetNonNullString(attrValue));
+                return attrValue.ToNonNullString();
             }
         }
 
@@ -426,7 +426,7 @@ namespace DDMSense.DDMS.Summary
             {
                 return (false);
             }
-            var test = (RelatedResource) obj;
+            var test = (RelatedResource)obj;
             return (Relationship.Equals(test.Relationship) && Direction.Equals(test.Direction));
         }
 
@@ -434,8 +434,8 @@ namespace DDMSense.DDMS.Summary
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + Relationship.GetHashCode();
-            result = 7*result + Direction.GetHashCode();
+            result = 7 * result + Relationship.GetHashCode();
+            result = 7 * result + Direction.GetHashCode();
             return (result);
         }
 
@@ -458,7 +458,6 @@ namespace DDMSense.DDMS.Summary
         /// @since 1.8.0"></see>
         public class Builder : AbstractQualifierValue.Builder
         {
-            
             internal string _direction;
             internal List<Link.Builder> _links;
             internal string _relationship;
@@ -474,7 +473,8 @@ namespace DDMSense.DDMS.Summary
             /// <summary>
             ///     Constructor which starts from an existing component.
             /// </summary>
-            public Builder(RelatedResource resource) : base(resource)
+            public Builder(RelatedResource resource)
+                : base(resource)
             {
                 Relationship = resource.Relationship;
                 Direction = resource.Direction;
@@ -524,7 +524,6 @@ namespace DDMSense.DDMS.Summary
                 set { _relationship = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the direction attribute
             /// </summary>
@@ -533,7 +532,6 @@ namespace DDMSense.DDMS.Summary
                 get { return _direction; }
                 set { _direction = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the Security Attributes
@@ -561,7 +559,7 @@ namespace DDMSense.DDMS.Summary
                 var links = new List<Link>();
                 foreach (var builder in Links)
                 {
-                    var link = (Link) builder.Commit();
+                    var link = (Link)builder.Commit();
                     if (link != null)
                     {
                         links.Add(link);

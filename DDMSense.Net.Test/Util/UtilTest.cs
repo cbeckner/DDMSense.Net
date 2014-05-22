@@ -51,13 +51,13 @@ namespace DDMSense.Test.Util
         [TestMethod]
         public virtual void Util_Util_GetNonNullStringNull()
         {
-            Assert.AreEqual("", Util.GetNonNullString(null));
+            Assert.AreEqual("", string.Empty);
         }
 
         [TestMethod]
         public virtual void Util_Util_GetNonNullStringValue()
         {
-            Assert.AreEqual("Test", Util.GetNonNullString("Test"));
+            Assert.AreEqual("Test", "Test");
         }
 
         [TestMethod]

@@ -714,7 +714,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
         public override string GetOutput(bool isHtml, string prefix)
         {
-            string localPrefix = Util.Util.GetNonNullString(prefix);
+            string localPrefix = prefix.ToNonNullString();
             var text = new StringBuilder();
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + ATOMIC_ENERGY_MARKINGS_NAME, Util.Util.GetXsList(AtomicEnergyMarkings)));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFICATION_NAME, Classification));

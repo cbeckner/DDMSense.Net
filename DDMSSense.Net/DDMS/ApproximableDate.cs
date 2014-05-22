@@ -6,7 +6,9 @@ using System.Text;
 using System.Xml.Linq;
 using System.Linq;
 
-#endregion
+#endregion usings
+
+using DDMSense.Extensions;
 
 namespace DDMSense.DDMS
 {
@@ -83,6 +85,7 @@ namespace DDMSense.DDMS
         private const string SearchableDateName = "searchableDate";
         private const string StartName = "start";
         private const string EndName = "end";
+
         private static readonly List<string> ApproximationTypes = new List<string>(){
                 "1st qtr",
                 "2nd qtr",
@@ -93,6 +96,7 @@ namespace DDMSense.DDMS
                 "mid",
                 "late"
             };
+
         private static readonly List<string> NameTypes = new List<string>(){
                 "acquiredOn",
                 "approximableStart",
@@ -101,7 +105,6 @@ namespace DDMSense.DDMS
 
         public ApproximableDate()
         {
-            
         }
 
         /// <summary>
@@ -109,7 +112,7 @@ namespace DDMSense.DDMS
         /// </summary>
         /// <param name="element"> the XOM element representing this </param>
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
-        public ApproximableDate(XElement element) 
+        public ApproximableDate(XElement element)
             : this()
         {
             SetElement(element, true);
@@ -166,7 +169,7 @@ namespace DDMSense.DDMS
             get
             {
                 XElement descriptionElement = GetChild(DescriptionName);
-                return (descriptionElement == null ? "" : Util.Util.GetNonNullString(descriptionElement.Value));
+                return (descriptionElement == null ? "" : descriptionElement.ToNonNullString());
             }
         }
 
@@ -178,7 +181,7 @@ namespace DDMSense.DDMS
             get
             {
                 XElement dateElement = GetChild(ApproximableDateName);
-                return (dateElement == null ? "" : Util.Util.GetNonNullString(dateElement.Value));
+                return (dateElement == null ? "" : dateElement.ToNonNullString());
             }
         }
 
@@ -194,7 +197,7 @@ namespace DDMSense.DDMS
                 if (approximableDateElement != null)
                     approximation = (string)approximableDateElement.Attribute(XName.Get(ApproximationName, Namespace));
 
-                return (Util.Util.GetNonNullString(approximation));
+                return approximation.ToNonNullString();
             }
         }
 
@@ -211,7 +214,7 @@ namespace DDMSense.DDMS
                 {
                     XElement startElement = dateElement.Element(XName.Get(StartName, Namespace));
                     if (startElement != null)
-                        date = Util.Util.GetNonNullString(startElement.Value);
+                        date = startElement.ToNonNullString();
                 }
                 return (date);
             }
@@ -230,7 +233,7 @@ namespace DDMSense.DDMS
                 {
                     XElement endElement = dateElement.Element(XName.Get(EndName, Namespace));
                     if (endElement != null)
-                        date = Util.Util.GetNonNullString(endElement.Value);
+                        date = endElement.ToNonNullString();
                 }
                 return (date);
             }

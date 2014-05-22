@@ -11,6 +11,8 @@ using System.Xml.Linq;
 
 #endregion usings
 
+using DDMSense.Extensions;
+
 namespace DDMSense.DDMS.Extensible
 {
     using System.Linq;
@@ -64,7 +66,7 @@ namespace DDMSense.DDMS.Extensible
     ///         Details about the XOM Attribute class can be found at:
     ///         <i>http://www.xom.nu/apidocs/index.html?nu/xom/Attribute.html</i>
     ///     </para>
-    
+
     ///     @since 1.1.0
     /// </summary>
     public sealed class ExtensibleAttributes : AbstractAttributeGroup
@@ -91,7 +93,7 @@ namespace DDMSense.DDMS.Extensible
                 // Skip ddms: attributes.
                 if (element.Name.NamespaceName.Equals(attribute.Name.NamespaceName))
                     continue;
-                
+
                 // Skip reserved ISM attributes on Resource and Category
                 DDMSVersion version = DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName);
                 if (Resource.GetName(version).Equals(element.Name.LocalName) ||
@@ -106,7 +108,7 @@ namespace DDMSense.DDMS.Extensible
                 //Skip Namespace desclarations
                 if (attribute.IsNamespaceDeclaration)
                     continue;
-                
+
                 _attributes.Add(attribute);
             }
             Validate();
@@ -124,7 +126,7 @@ namespace DDMSense.DDMS.Extensible
         {
             if (attributes == null)
                 attributes = new List<XAttribute>();
-            
+
             _attributes = new List<XAttribute>(attributes);
             Validate();
         }
@@ -175,15 +177,15 @@ namespace DDMSense.DDMS.Extensible
             string ntkPrefix = PropertyReader.GetPrefix("ntk");
             foreach (var reservedName in Resource.NON_EXTENSIBLE_NAMES)
                 _reservedResourceNames.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
-            
+
             foreach (var reservedName in SecurityAttributes.NON_EXTENSIBLE_NAMES)
                 _reservedResourceNames.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
 
             if (!version.IsAtLeast("4.0.1")) return;
-            
+
             foreach (var reservedName in NoticeAttributes.NON_EXTENSIBLE_NAMES)
                 _reservedResourceNames.Add(new XmlQualifiedName(version.IsmNamespace, reservedName));
-            
+
             _reservedResourceNames.Add(new XmlQualifiedName(version.NtkNamespace, Resource.DES_VERSION_NAME));
         }
 
@@ -197,8 +199,8 @@ namespace DDMSense.DDMS.Extensible
             foreach (var attribute in Attributes)
             {
                 if (element.Attribute(XName.Get(attribute.Name.LocalName, attribute.Name.NamespaceName)) != null)
-                    throw new InvalidDDMSException("The extensible attribute with the name, " + attribute.Name +" conflicts with a pre-existing attribute on the element.");
-                
+                    throw new InvalidDDMSException("The extensible attribute with the name, " + attribute.Name + " conflicts with a pre-existing attribute on the element.");
+
                 element.Add(attribute);
             }
         }
@@ -215,7 +217,7 @@ namespace DDMSense.DDMS.Extensible
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
         public override string GetOutput(bool isHtml, string prefix)
         {
-            string localPrefix = Util.Util.GetNonNullString(prefix);
+            string localPrefix = prefix.ToNonNullString();
             var text = new StringBuilder();
             foreach (var attribute in Attributes)
             {
@@ -233,7 +235,7 @@ namespace DDMSense.DDMS.Extensible
         {
             if (!(obj is ExtensibleAttributes))
                 return (false);
-            
+
             var test = (ExtensibleAttributes)obj;
             // XOM Attribute has no logical equality. Must compare by hand.
             if (Attributes.Count != test.Attributes.Count)
@@ -253,7 +255,7 @@ namespace DDMSense.DDMS.Extensible
         public override int GetHashCode()
         {
             int result = 0;
-            // Attribute has no logical equality. Must calculate by hand.		
+            // Attribute has no logical equality. Must calculate by hand.
             foreach (var attribute in Attributes)
             {
                 result = 7 * result + attribute.Name.LocalName.GetHashCode();

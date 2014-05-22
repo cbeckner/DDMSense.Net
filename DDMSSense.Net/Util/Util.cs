@@ -689,7 +689,7 @@ namespace DDMSense.Util
         {
             try
             {
-                XmlConvert.VerifyNCName(GetNonNullString(name));
+                XmlConvert.VerifyNCName(name.ToNonNullString());
             }
             catch (XmlException xmlex)
             {
@@ -720,7 +720,7 @@ namespace DDMSense.Util
         /// <exception cref="XmlException"> if the name is not an NMTOKEN. </exception>
         public static void RequireValidNMToken(string name)
         {
-            XmlConvert.VerifyNMTOKEN(GetNonNullString(name));
+            XmlConvert.VerifyNMTOKEN(name.ToNonNullString());
         }
 
         /// <summary>

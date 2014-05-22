@@ -349,7 +349,7 @@ namespace DDMSense
         /// <returns> a String containing the concatenated values </returns>
         public virtual string BuildPrefix(string prefix, string token, string suffix)
         {
-            return (Util.Util.GetNonNullString(prefix) + Util.Util.GetNonNullString(token) + Util.Util.GetNonNullString(suffix));
+            return prefix.ToNonNullString() + token.ToNonNullString() + suffix.ToNonNullString();
         }
 
         /// <summary>
@@ -400,10 +400,10 @@ namespace DDMSense
             Util.Util.RequireValue("name", name);
             string attrValue = null;
 
-            if (Element.Attribute(XName.Get(name, Util.Util.GetNonNullString(namespaceURI))) != null)
-                attrValue = Element.Attribute(XName.Get(name, Util.Util.GetNonNullString(namespaceURI))).Value;
+            if (Element.Attribute(XName.Get(name, namespaceURI.ToNonNullString())) != null)
+                attrValue = Element.Attribute(XName.Get(name, namespaceURI.ToNonNullString())).Value;
 
-            return (Util.Util.GetNonNullString(attrValue));
+            return attrValue.ToNonNullString();
         }
 
         /// <summary>

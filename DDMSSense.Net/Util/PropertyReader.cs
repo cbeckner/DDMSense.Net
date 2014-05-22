@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 
-#endregion
+#endregion usings
+
+using DDMSense.Extensions;
 
 namespace DDMSense.Util
 {
@@ -24,8 +26,7 @@ namespace DDMSense.Util
     ///         Changing a namespace prefix will affect both components created from scratch and components loaded from XML
     ///         files.
     ///     </para>
-    
-    
+
     /// </summary>
     public class PropertyReader
     {
@@ -77,7 +78,7 @@ namespace DDMSense.Util
             string value = ConfigurationManager.AppSettings[name];
             if (value == null)
                 throw new ArgumentException(UNDEFINED_PROPERTY + name);
-            
+
             return (value);
         }
 
@@ -91,8 +92,8 @@ namespace DDMSense.Util
         {
             if (!CUSTOM_PROPERTIES.Contains(name))
                 throw new ArgumentException(name + " is not a configurable property.");
-            
-            ConfigurationManager.AppSettings.Set(name, Util.GetNonNullString(value).Trim());
+
+            ConfigurationManager.AppSettings.Set(name, value.ToNonNullString().Trim());
         }
 
         /// <summary>

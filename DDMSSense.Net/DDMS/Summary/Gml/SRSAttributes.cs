@@ -6,22 +6,24 @@ using System.Text;
 using System.Xml.Linq;
 using DDMSense.Util;
 
-#endregion
+#endregion usings
+
+using DDMSense.Extensions;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
@@ -34,7 +36,7 @@ namespace DDMSense.DDMS.Summary.Gml
 
     using Element = XElement;
 
-    #endregion
+    #endregion usings
 
     /// <summary>
     ///     Attribute group for the four SRS attributes used in the GML profile.
@@ -67,8 +69,7 @@ namespace DDMSense.DDMS.Summary.Gml
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class SRSAttributes : AbstractAttributeGroup
     {
@@ -95,10 +96,11 @@ namespace DDMSense.DDMS.Summary.Gml
         ///     Base constructor
         /// </summary>
         /// <param name="element"> the XOM element which is decorated with these attributes. </param>
-        public SRSAttributes(Element element) : base(element.Name.NamespaceName)
+        public SRSAttributes(Element element)
+            : base(element.Name.NamespaceName)
         {
             _srsName = (string)element.Attribute(XName.Get(SRS_NAME_NAME, NO_NAMESPACE));
-            
+
             string srsDimension = (string)element.Attribute(XName.Get(SRS_DIMENSION_NAME, NO_NAMESPACE));
             if (!String.IsNullOrEmpty(srsDimension))
             {
@@ -150,7 +152,7 @@ namespace DDMSense.DDMS.Summary.Gml
         /// </summary>
         public string SrsName
         {
-            get { return (Util.Util.GetNonNullString(_srsName)); }
+            get { return (_srsName.ToNonNullString()); }
             set { _srsName = value; }
         }
 
@@ -252,7 +254,7 @@ namespace DDMSense.DDMS.Summary.Gml
             {
                 Util.Util.RequireDDMSValidUri(SrsName);
             }
-            if (SrsDimension != null && (int) SrsDimension < 0)
+            if (SrsDimension != null && (int)SrsDimension < 0)
             {
                 throw new InvalidDDMSException("The srsDimension must be a positive integer.");
             }
@@ -272,7 +274,7 @@ namespace DDMSense.DDMS.Summary.Gml
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
         public override string GetOutput(bool isHtml, string prefix)
         {
-            string localPrefix = Util.Util.GetNonNullString(prefix);
+            string localPrefix = prefix.ToNonNullString();
             var text = new StringBuilder();
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + "srsName", SrsName));
             if (SrsDimension != null)
@@ -292,7 +294,7 @@ namespace DDMSense.DDMS.Summary.Gml
             {
                 return (false);
             }
-            var test = (SRSAttributes) obj;
+            var test = (SRSAttributes)obj;
             return (SrsName.Equals(test.SrsName) && Util.Util.NullEquals(SrsDimension, test.SrsDimension) &&
                     Util.Util.ListEquals(AxisLabels, test.AxisLabels) && Util.Util.ListEquals(UomLabels, test.UomLabels));
         }
@@ -301,13 +303,13 @@ namespace DDMSense.DDMS.Summary.Gml
         public override int GetHashCode()
         {
             int result = 0;
-            result = 7*result + SrsName.GetHashCode();
+            result = 7 * result + SrsName.GetHashCode();
             if (SrsDimension != null)
             {
-                result = 7*result + SrsDimension.GetHashCode();
+                result = 7 * result + SrsDimension.GetHashCode();
             }
-            result = 7*result + AxisLabels.GetHashCode();
-            result = 7*result + UomLabels.GetHashCode();
+            result = 7 * result + AxisLabels.GetHashCode();
+            result = 7 * result + UomLabels.GetHashCode();
             return (result);
         }
 
@@ -325,7 +327,6 @@ namespace DDMSense.DDMS.Summary.Gml
         [Serializable]
         public class Builder
         {
-            
             internal List<string> _axisLabels;
             internal int? _srsDimension;
             internal string _srsName;
@@ -372,7 +373,6 @@ namespace DDMSense.DDMS.Summary.Gml
                 set { _srsName = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the srsDimension
             /// </summary>
@@ -381,7 +381,6 @@ namespace DDMSense.DDMS.Summary.Gml
                 get { return _srsDimension; }
                 set { _srsDimension = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the axisLabels
@@ -398,7 +397,6 @@ namespace DDMSense.DDMS.Summary.Gml
                 }
                 set { _axisLabels = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the uomLabels

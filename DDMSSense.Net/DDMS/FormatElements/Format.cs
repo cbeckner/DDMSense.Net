@@ -1,14 +1,14 @@
 #region usings
 
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.Extensions;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 namespace DDMSense.DDMS.FormatElements
 {
@@ -49,8 +49,7 @@ namespace DDMSense.DDMS.FormatElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class Format : AbstractBaseComponent
     {
@@ -76,11 +75,11 @@ namespace DDMSense.DDMS.FormatElements
                     XElement mimeTypeElement = mediaElement.Element(XName.Get(MimeTypeName, Namespace));
                     if (mimeTypeElement != null)
                         _mimeType = mimeTypeElement.Value;
-                    
+
                     XElement extentElement = mediaElement.Element(XName.Get(Extent.GetName(DDMSVersion), Namespace));
                     if (extentElement != null)
                         Extent = new Extent(extentElement);
-                    
+
                     XElement mediumElement = mediaElement.Element(XName.Get(MediumName, Namespace));
                     if (mediumElement != null)
                         _medium = mediumElement.Value;
@@ -167,7 +166,7 @@ namespace DDMSense.DDMS.FormatElements
         /// </summary>
         public string MimeType
         {
-            get { return (Util.Util.GetNonNullString(_mimeType)); }
+            get { return _mimeType.ToNonNullString(); }
             set { _mimeType = value; }
         }
 
@@ -197,7 +196,7 @@ namespace DDMSense.DDMS.FormatElements
         /// </summary>
         public string Medium
         {
-            get { return (Util.Util.GetNonNullString(_medium)); }
+            get { return _medium.ToNonNullString(); }
             set { _medium = value; }
         }
 
@@ -249,7 +248,7 @@ namespace DDMSense.DDMS.FormatElements
             XElement mediaElement = MediaElement;
             if (String.IsNullOrEmpty(Medium) && mediaElement.Elements(XName.Get(MediumName, mediaElement.Name.NamespaceName)).Count() == 1)
                 AddWarning("A ddms:medium element was found with no value.");
-            
+
             base.ValidateWarnings();
         }
 
@@ -259,12 +258,12 @@ namespace DDMSense.DDMS.FormatElements
             string localPrefix = BuildPrefix(prefix, Name, suffix + ".");
             if (!DDMSVersion.IsAtLeast("4.0.1"))
                 localPrefix += MediaName + ".";
-            
+
             var text = new StringBuilder();
             text.Append(BuildOutput(isHtml, localPrefix + MimeTypeName, MimeType));
             if (Extent != null)
                 text.Append(Extent.GetOutput(isHtml, localPrefix, ""));
-            
+
             text.Append(BuildOutput(isHtml, localPrefix + MediumName, Medium));
             return (text.ToString());
         }
@@ -274,8 +273,8 @@ namespace DDMSense.DDMS.FormatElements
         {
             if (!base.Equals(obj) || !(obj is Format))
                 return (false);
-            
-            var test = (Format) obj;
+
+            var test = (Format)obj;
             bool isEqual = MimeType.Equals(test.MimeType) && Medium.Equals(test.Medium);
             return (isEqual);
         }
@@ -284,8 +283,8 @@ namespace DDMSense.DDMS.FormatElements
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + MimeType.GetHashCode();
-            result = 7*result + Medium.GetHashCode();
+            result = 7 * result + MimeType.GetHashCode();
+            result = 7 * result + Medium.GetHashCode();
             return (result);
         }
 
@@ -346,7 +345,7 @@ namespace DDMSense.DDMS.FormatElements
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
-                return (Empty ? null : new Format(MimeType, (Extent) Extent.Commit(), Medium));
+                return (Empty ? null : new Format(MimeType, (Extent)Extent.Commit(), Medium));
             }
 
             /// <see cref="IBuilder#isEmpty()"></see>

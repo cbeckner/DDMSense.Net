@@ -1,27 +1,28 @@
 #region usings
 
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
@@ -34,7 +35,7 @@ namespace DDMSense.DDMS.Summary
 
     using Element = XElement;
 
-    #endregion
+    #endregion usings
 
     /// <summary>
     ///     An immutable implementation of ddms:postalAddress.
@@ -67,8 +68,7 @@ namespace DDMSense.DDMS.Summary
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class PostalAddress : AbstractBaseComponent
     {
@@ -205,7 +205,7 @@ namespace DDMSense.DDMS.Summary
         /// </summary>
         public string City
         {
-            get { return (Util.Util.GetNonNullString(_city)); }
+            get { return _city.ToNonNullString(); }
             set { _city = value; }
         }
 
@@ -214,7 +214,7 @@ namespace DDMSense.DDMS.Summary
         /// </summary>
         public string State
         {
-            get { return (Util.Util.GetNonNullString(_state)); }
+            get { return _state.ToNonNullString(); }
             set { _state = value; }
         }
 
@@ -223,7 +223,7 @@ namespace DDMSense.DDMS.Summary
         /// </summary>
         public string Province
         {
-            get { return (Util.Util.GetNonNullString(_province)); }
+            get { return _province.ToNonNullString(); }
             set { _province = value; }
         }
 
@@ -232,7 +232,7 @@ namespace DDMSense.DDMS.Summary
         /// </summary>
         public string PostalCode
         {
-            get { return (Util.Util.GetNonNullString(_postalCode)); }
+            get { return _postalCode.ToNonNullString(); }
             set { _postalCode = value; }
         }
 
@@ -326,7 +326,7 @@ namespace DDMSense.DDMS.Summary
             {
                 return (false);
             }
-            var test = (PostalAddress) obj;
+            var test = (PostalAddress)obj;
             return (Util.Util.ListEquals(Streets, test.Streets) && City.Equals(test.City) && State.Equals(test.State) &&
                     Province.Equals(test.Province) && PostalCode.Equals(test.PostalCode));
         }
@@ -335,11 +335,11 @@ namespace DDMSense.DDMS.Summary
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + Streets.GetHashCode();
-            result = 7*result + City.GetHashCode();
-            result = 7*result + State.GetHashCode();
-            result = 7*result + Province.GetHashCode();
-            result = 7*result + PostalCode.GetHashCode();
+            result = 7 * result + Streets.GetHashCode();
+            result = 7 * result + City.GetHashCode();
+            result = 7 * result + State.GetHashCode();
+            result = 7 * result + Province.GetHashCode();
+            result = 7 * result + PostalCode.GetHashCode();
             return (result);
         }
 
@@ -363,7 +363,6 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public sealed class Builder : IBuilder
         {
-            
             internal string _city;
             internal CountryCode.Builder _countryCode;
             internal string _postalCode;
@@ -410,7 +409,6 @@ namespace DDMSense.DDMS.Summary
                 set { _streets = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the city
             /// </summary>
@@ -419,7 +417,6 @@ namespace DDMSense.DDMS.Summary
                 get { return _city; }
                 set { _city = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the state
@@ -430,7 +427,6 @@ namespace DDMSense.DDMS.Summary
                 set { _state = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the province
             /// </summary>
@@ -440,7 +436,6 @@ namespace DDMSense.DDMS.Summary
                 set { _province = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the postalCode
             /// </summary>
@@ -449,7 +444,6 @@ namespace DDMSense.DDMS.Summary
                 get { return _postalCode; }
                 set { _postalCode = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the countryCode
@@ -482,7 +476,7 @@ namespace DDMSense.DDMS.Summary
                 bool hasState = !String.IsNullOrEmpty(State);
                 string stateOrProvince = hasState ? State : Province;
                 return
-                    (new PostalAddress(Streets, City, stateOrProvince, PostalCode, (CountryCode) CountryCode.Commit(),
+                    (new PostalAddress(Streets, City, stateOrProvince, PostalCode, (CountryCode)CountryCode.Commit(),
                         hasState));
             }
 

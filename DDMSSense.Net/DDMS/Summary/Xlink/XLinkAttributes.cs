@@ -1,28 +1,29 @@
 #region usings
 
+using DDMSense.DDMS.ResourceElements;
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.DDMS.ResourceElements;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
@@ -35,7 +36,7 @@ namespace DDMSense.DDMS.Summary.Xlink
 
     using Element = XElement;
 
-    #endregion
+    #endregion usings
 
     /// <summary>
     ///     Attribute group for the XLINK attributes.
@@ -98,8 +99,7 @@ namespace DDMSense.DDMS.Summary.Xlink
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class XLinkAttributes : AbstractAttributeGroup
     {
@@ -150,7 +150,8 @@ namespace DDMSense.DDMS.Summary.Xlink
         ///     Base constructor
         /// </summary>
         /// <param name="element"> the XOM element which is decorated with these attributes. </param>
-        public XLinkAttributes(Element element) : base(element.Name.NamespaceName)
+        public XLinkAttributes(Element element)
+            : base(element.Name.NamespaceName)
         {
             string xlinkNamespace = DDMSVersion.XlinkNamespace;
             _type = (string)element.Attribute(XName.Get(TYPE_NAME, xlinkNamespace));
@@ -168,7 +169,8 @@ namespace DDMSense.DDMS.Summary.Xlink
         ///     Constructor which builds from raw data for an unknown type.
         /// </summary>
         /// <exception cref="InvalidDDMSException"> </exception>
-        public XLinkAttributes() : base(DDMSVersion.CurrentVersion.Namespace)
+        public XLinkAttributes()
+            : base(DDMSVersion.CurrentVersion.Namespace)
         {
             Validate();
         }
@@ -237,7 +239,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// </summary>
         public string Type
         {
-            get { return (Util.Util.GetNonNullString(_type)); }
+            get { return _type.ToNonNullString(); }
             set { _type = value; }
         }
 
@@ -246,7 +248,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// </summary>
         public string Href
         {
-            get { return (Util.Util.GetNonNullString(_href)); }
+            get { return _href.ToNonNullString(); }
             set { _href = value; }
         }
 
@@ -255,7 +257,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// </summary>
         public string Role
         {
-            get { return (Util.Util.GetNonNullString(_role)); }
+            get { return _role.ToNonNullString(); }
             set { _role = value; }
         }
 
@@ -264,7 +266,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// </summary>
         public string Title
         {
-            get { return (Util.Util.GetNonNullString(_title)); }
+            get { return _title.ToNonNullString(); }
             set { _title = value; }
         }
 
@@ -273,7 +275,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// </summary>
         public string Label
         {
-            get { return (Util.Util.GetNonNullString(_label)); }
+            get { return _label.ToNonNullString(); }
             set { _label = value; }
         }
 
@@ -282,7 +284,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// </summary>
         public string Arcrole
         {
-            get { return (Util.Util.GetNonNullString(_arcrole)); }
+            get { return _arcrole.ToNonNullString(); }
             set { _arcrole = value; }
         }
 
@@ -291,7 +293,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// </summary>
         public string Show
         {
-            get { return (Util.Util.GetNonNullString(_show)); }
+            get { return _show.ToNonNullString(); }
             set { _show = value; }
         }
 
@@ -300,7 +302,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// </summary>
         public string Actuate
         {
-            get { return (Util.Util.GetNonNullString(_actuate)); }
+            get { return _actuate.ToNonNullString(); }
             set { _actuate = value; }
         }
 
@@ -397,7 +399,7 @@ namespace DDMSense.DDMS.Summary.Xlink
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
         public override string GetOutput(bool isHtml, string prefix)
         {
-            string localPrefix = Util.Util.GetNonNullString(prefix);
+            string localPrefix = prefix.ToNonNullString();
             var text = new StringBuilder();
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + TYPE_NAME, Type));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + HREF_NAME, Href));
@@ -417,7 +419,7 @@ namespace DDMSense.DDMS.Summary.Xlink
             {
                 return (false);
             }
-            var test = (XLinkAttributes) obj;
+            var test = (XLinkAttributes)obj;
             return (Type.Equals(test.Type) && Href.Equals(test.Href) && Role.Equals(test.Role) &&
                     Title.Equals(test.Title) && Label.Equals(test.Label) && Arcrole.Equals(test.Arcrole) &&
                     Show.Equals(test.Show) && Actuate.Equals(test.Actuate));
@@ -427,14 +429,14 @@ namespace DDMSense.DDMS.Summary.Xlink
         public override int GetHashCode()
         {
             int result = 0;
-            result = 7*result + Type.GetHashCode();
-            result = 7*result + Href.GetHashCode();
-            result = 7*result + Role.GetHashCode();
-            result = 7*result + Title.GetHashCode();
-            result = 7*result + Label.GetHashCode();
-            result = 7*result + Arcrole.GetHashCode();
-            result = 7*result + Show.GetHashCode();
-            result = 7*result + Actuate.GetHashCode();
+            result = 7 * result + Type.GetHashCode();
+            result = 7 * result + Href.GetHashCode();
+            result = 7 * result + Role.GetHashCode();
+            result = 7 * result + Title.GetHashCode();
+            result = 7 * result + Label.GetHashCode();
+            result = 7 * result + Arcrole.GetHashCode();
+            result = 7 * result + Show.GetHashCode();
+            result = 7 * result + Actuate.GetHashCode();
             return (result);
         }
 
@@ -452,7 +454,6 @@ namespace DDMSense.DDMS.Summary.Xlink
         [Serializable]
         public class Builder
         {
-            
             internal string _actuate;
             internal string _arcrole;
             internal string _href;
@@ -507,7 +508,6 @@ namespace DDMSense.DDMS.Summary.Xlink
                 set { _type = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the href
             /// </summary>
@@ -516,7 +516,6 @@ namespace DDMSense.DDMS.Summary.Xlink
                 get { return _href; }
                 set { _href = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the role
@@ -527,7 +526,6 @@ namespace DDMSense.DDMS.Summary.Xlink
                 set { _role = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the title
             /// </summary>
@@ -536,7 +534,6 @@ namespace DDMSense.DDMS.Summary.Xlink
                 get { return _title; }
                 set { _title = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the label
@@ -547,7 +544,6 @@ namespace DDMSense.DDMS.Summary.Xlink
                 set { _label = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the arcrole
             /// </summary>
@@ -557,7 +553,6 @@ namespace DDMSense.DDMS.Summary.Xlink
                 set { _arcrole = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the show
             /// </summary>
@@ -566,7 +561,6 @@ namespace DDMSense.DDMS.Summary.Xlink
                 get { return _show; }
                 set { _show = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the actuate

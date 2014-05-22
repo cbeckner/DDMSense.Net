@@ -1,14 +1,14 @@
 #region usings
 
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Xml.Linq;
-using DDMSense.Extensions;
-using DDMSense.Util;
 using System.Xml;
+using System.Xml.Linq;
 
-#endregion
+#endregion usings
 
 namespace DDMSense.DDMS.SecurityElements.Ism
 {
@@ -74,7 +74,6 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         private string _noticeReason;
         private string _unregisteredNoticeType;
 
-
         /// <summary>
         ///     Base constructor
         /// </summary>
@@ -90,24 +89,24 @@ namespace DDMSense.DDMS.SecurityElements.Ism
 
             string icNamespace = DDMSVersion.IsmNamespace;
 
-            _noticeType = (string) element.Attribute(XName.Get(NOTICE_TYPE_NAME, icNamespace));
-            _noticeReason = (string) element.Attribute(XName.Get(NOTICE_REASON_NAME, icNamespace));
-            _unregisteredNoticeType = (string) element.Attribute(XName.Get(UNREGISTERED_NOTICE_TYPE_NAME, icNamespace));
-            string noticeDate = (string) element.Attribute(XName.Get(NOTICE_DATE_NAME, icNamespace));
+            _noticeType = (string)element.Attribute(XName.Get(NOTICE_TYPE_NAME, icNamespace));
+            _noticeReason = (string)element.Attribute(XName.Get(NOTICE_REASON_NAME, icNamespace));
+            _unregisteredNoticeType = (string)element.Attribute(XName.Get(UNREGISTERED_NOTICE_TYPE_NAME, icNamespace));
+            string noticeDate = (string)element.Attribute(XName.Get(NOTICE_DATE_NAME, icNamespace));
             if (!String.IsNullOrEmpty(noticeDate))
                 _noticeDate = DateTime.Parse(noticeDate);
 
-            string external = (string) element.Attribute(XName.Get(EXTERNAL_NOTICE_NAME, icNamespace));
+            string external = (string)element.Attribute(XName.Get(EXTERNAL_NOTICE_NAME, icNamespace));
             if (!String.IsNullOrEmpty(external))
                 _externalNotice = Convert.ToBoolean(external);
-            
+
             Validate();
         }
 
         /// <summary>
         ///     Constructor which builds from raw data.
         /// </summary>
-        /// @deprecated A new constructor was added for DDMS 4.1 to support ism:externalNotice. This constructor is preserved for 
+        /// @deprecated A new constructor was added for DDMS 4.1 to support ism:externalNotice. This constructor is preserved for
         /// backwards compatibility, but may disappear in the next major release.
         /// <param name="noticeType"> the notice type (with a value from the CVE) </param>
         /// <param name="noticeReason"> the reason associated with a notice </param>
@@ -163,7 +162,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         {
             get
             {
-                return (String.IsNullOrEmpty(NoticeType) && String.IsNullOrEmpty(NoticeReason) &&                        String.IsNullOrEmpty(UnregisteredNoticeType) && NoticeDate == null);
+                return (String.IsNullOrEmpty(NoticeType) && String.IsNullOrEmpty(NoticeReason) && String.IsNullOrEmpty(UnregisteredNoticeType) && NoticeDate == null);
             }
         }
 
@@ -172,7 +171,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// </summary>
         public string NoticeType
         {
-            get { return (Util.Util.GetNonNullString(_noticeType)); }
+            get { return _noticeType.ToNonNullString(); }
             set { _noticeDate = DateTime.Parse(value); }
         }
 
@@ -181,7 +180,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// </summary>
         public string NoticeReason
         {
-            get { return (Util.Util.GetNonNullString(_noticeReason)); }
+            get { return _noticeReason.ToNonNullString(); }
             set { _noticeReason = value; }
         }
 
@@ -190,7 +189,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// </summary>
         public string UnregisteredNoticeType
         {
-            get { return (Util.Util.GetNonNullString(_unregisteredNoticeType)); }
+            get { return _unregisteredNoticeType.ToNonNullString(); }
             set { _unregisteredNoticeType = value; }
         }
 
@@ -237,11 +236,10 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             Util.Util.AddAttribute(element, icPrefix, NOTICE_REASON_NAME, icNamespace, NoticeReason);
             if (NoticeDate != null)
                 Util.Util.AddAttribute(element, icPrefix, NOTICE_DATE_NAME, icNamespace, NoticeDate.Value.ToString("yyyy-MM-dd"));
-            
+
             Util.Util.AddAttribute(element, icPrefix, UNREGISTERED_NOTICE_TYPE_NAME, icNamespace, UnregisteredNoticeType);
             if (ExternalReference != null)
                 Util.Util.AddAttribute(element, icPrefix, EXTERNAL_NOTICE_NAME, icNamespace, XmlConvert.ToString(ExternalReference.Value));
-            
         }
 
         /// <summary>
@@ -270,19 +268,19 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             DDMSVersion version = DDMSVersion;
             if (version.IsAtLeast("4.0.1") && !String.IsNullOrEmpty(NoticeType))
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_NOTICE_TYPE, NoticeType);
-            
+
             if (!String.IsNullOrEmpty(NoticeReason) && NoticeReason.Length > MAX_LENGTH)
-                throw new InvalidDDMSException("The noticeReason attribute must be shorter than " + MAX_LENGTH +                                               " characters.");
-            
+                throw new InvalidDDMSException("The noticeReason attribute must be shorter than " + MAX_LENGTH + " characters.");
+
             if (!String.IsNullOrEmpty(UnregisteredNoticeType) && UnregisteredNoticeType.Length > MAX_LENGTH)
-                throw new InvalidDDMSException("The unregisteredNoticeType attribute must be shorter than " + MAX_LENGTH +                                               " characters.");
+                throw new InvalidDDMSException("The unregisteredNoticeType attribute must be shorter than " + MAX_LENGTH + " characters.");
 
             if (NoticeDate != null && !NoticeDate.Value.TimeOfDay.TotalSeconds.Equals(0))
                 throw new InvalidDDMSException("The noticeDate attribute must be in the xs:date format (YYYY-MM-DD).");
-            
+
             if (!version.IsAtLeast("4.0.1") && !Empty)
                 throw new InvalidDDMSException("Notice attributes cannot be used until DDMS 4.0.1 or later.");
-            
+
             // Test for 4.1 externalNotice is implicit, since 4.0.1 and 4.1 have same XML namespace.
             base.Validate();
         }
@@ -290,17 +288,17 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// <see cref="AbstractAttributeGroup#getOutput(boolean, String)"></see>
         public override string GetOutput(bool isHtml, string prefix)
         {
-            string localPrefix = Util.Util.GetNonNullString(prefix);
+            string localPrefix = prefix.ToNonNullString();
             var text = new StringBuilder();
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_TYPE_NAME, NoticeType));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_REASON_NAME, NoticeReason));
             if (NoticeDate != null)
                 text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_DATE_NAME, NoticeDate.Value.ToString("yyyy-MM-dd")));
-            
-            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + UNREGISTERED_NOTICE_TYPE_NAME,                UnregisteredNoticeType));
+
+            text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + UNREGISTERED_NOTICE_TYPE_NAME, UnregisteredNoticeType));
             if (ExternalReference != null)
                 text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + EXTERNAL_NOTICE_NAME, XmlConvert.ToString(ExternalReference.Value)));
-            
+
             return (text.ToString());
         }
 
@@ -309,7 +307,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         {
             if (!(obj is NoticeAttributes))
                 return (false);
-            
+
             var test = (NoticeAttributes)obj;
             return (NoticeType.Equals(test.NoticeType) &&
                     NoticeReason.Equals(test.NoticeReason) &&
@@ -327,10 +325,10 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             result = 7 * result + UnregisteredNoticeType.GetHashCode();
             if (NoticeDate != null)
                 result = 7 * result + NoticeDate.GetHashCode();
-            
+
             if (ExternalReference != null)
                 result = 7 * result + ExternalReference.GetHashCode();
-            
+
             return (result);
         }
 
@@ -346,8 +344,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         [Serializable]
         public class Builder
         {
-           
-                        /// <summary>
+            /// <summary>
             ///     Empty constructor
             /// </summary>
             public Builder()
@@ -365,7 +362,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 NoticeReason = attributes.NoticeReason;
                 if (attributes.NoticeDate != null)
                     NoticeDate = attributes.NoticeDate.Value.ToString("yyyy-MM-dd");
-                
+
                 UnregisteredNoticeType = attributes.UnregisteredNoticeType;
                 ExternalNotice = attributes.ExternalReference;
             }
@@ -381,7 +378,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                     bool isEmpty = true;
                     foreach (var value in StringAttributes.Values)
                         isEmpty = isEmpty && String.IsNullOrEmpty(value);
-                    
+
                     return (isEmpty && ExternalNotice == null);
                 }
             }
@@ -395,7 +392,6 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 set { StringAttributes[NOTICE_TYPE_NAME] = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the noticeReason attribute
             /// </summary>
@@ -404,7 +400,6 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 get { return (StringAttributes.GetValueOrNull(NOTICE_REASON_NAME)); }
                 set { StringAttributes[NOTICE_REASON_NAME] = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the noticeDate attribute
@@ -415,7 +410,6 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 set { StringAttributes[NOTICE_DATE_NAME] = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the unregisteredNoticeType attribute
             /// </summary>
@@ -425,12 +419,10 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 set { StringAttributes[UNREGISTERED_NOTICE_TYPE_NAME] = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the externalNotice attribute
             /// </summary>
             public virtual bool? ExternalNotice { get; set; }
-
 
             /// <summary>
             ///     Accessor for the map of attribute names to string values
@@ -444,7 +436,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
             public virtual NoticeAttributes Commit()
             {
-               return (new NoticeAttributes(NoticeType, NoticeReason, NoticeDate, UnregisteredNoticeType, ExternalNotice));
+                return (new NoticeAttributes(NoticeType, NoticeReason, NoticeDate, UnregisteredNoticeType, ExternalNotice));
             }
         }
     }
