@@ -376,12 +376,12 @@ namespace DDMSense.Test.DDMS.Summary
                 Point.Builder fullBuilder = new Point.Builder();
                 fullBuilder.SrsAttributes = new SRSAttributes.Builder(SRSAttributesTest.Fixture);
                 fullBuilder.Id = TEST_ID;
-                fullBuilder.Position.Coordinates[0].Value = Convert.ToDouble(0);
-                fullBuilder.Position.Coordinates[1].Value = Convert.ToDouble(0);
+                fullBuilder.Position.Coordinates.Add(new Position.DoubleBuilder(0));
+                fullBuilder.Position.Coordinates.Add(new Position.DoubleBuilder(0));
                 builder.Points.Add(emptyBuilder);
                 builder.Points.Add(fullBuilder);
                 builder.Commit();
-                Assert.AreEqual(1, builder.Points.Count());
+                Assert.AreEqual(2, builder.Points.Count());
 
                 // Skip empty Polygons
                 builder = new BoundingGeometry.Builder();
@@ -393,22 +393,22 @@ namespace DDMSense.Test.DDMS.Summary
                 fullPolygonBuilder.Positions.Add(new Position.Builder());
                 fullPolygonBuilder.Positions.Add(new Position.Builder());
                 fullPolygonBuilder.Positions.Add(new Position.Builder());
-                fullPolygonBuilder.Positions[0].Coordinates[0].Value = PositionTest.TEST_COORDS[0];
-                fullPolygonBuilder.Positions[0].Coordinates[1].Value = PositionTest.TEST_COORDS[1];
+                fullPolygonBuilder.Positions[0].Coordinates.Add(new Position.DoubleBuilder(PositionTest.TEST_COORDS[0]));
+                fullPolygonBuilder.Positions[0].Coordinates.Add(new Position.DoubleBuilder(PositionTest.TEST_COORDS[1]));
 
-                fullPolygonBuilder.Positions[1].Coordinates[0].Value = PositionTest.TEST_COORDS_2[0];
-                fullPolygonBuilder.Positions[1].Coordinates[1].Value = PositionTest.TEST_COORDS_2[1];
+                fullPolygonBuilder.Positions[1].Coordinates.Add(new Position.DoubleBuilder(PositionTest.TEST_COORDS_2[0]));
+                fullPolygonBuilder.Positions[1].Coordinates.Add(new Position.DoubleBuilder(PositionTest.TEST_COORDS_2[1]));
 
-                fullPolygonBuilder.Positions[2].Coordinates[0].Value = PositionTest.TEST_COORDS_3[0];
-                fullPolygonBuilder.Positions[2].Coordinates[1].Value = PositionTest.TEST_COORDS_3[1];
+                fullPolygonBuilder.Positions[2].Coordinates.Add(new Position.DoubleBuilder(PositionTest.TEST_COORDS_3[0]));
+                fullPolygonBuilder.Positions[2].Coordinates.Add(new Position.DoubleBuilder(PositionTest.TEST_COORDS_3[1]));
 
-                fullPolygonBuilder.Positions[3].Coordinates[0].Value = PositionTest.TEST_COORDS[0];
-                fullPolygonBuilder.Positions[3].Coordinates[1].Value = PositionTest.TEST_COORDS[1];
+                fullPolygonBuilder.Positions[3].Coordinates.Add(new Position.DoubleBuilder(PositionTest.TEST_COORDS[0]));
+                fullPolygonBuilder.Positions[3].Coordinates.Add(new Position.DoubleBuilder(PositionTest.TEST_COORDS[1]));
 
                 builder.Polygons.Add(emptyPolygonBuilder);
                 builder.Polygons.Add(fullPolygonBuilder);
                 builder.Commit();
-                Assert.AreEqual(1, builder.Polygons.Count());
+                Assert.AreEqual(2, builder.Polygons.Count());
             }
         }
     }
