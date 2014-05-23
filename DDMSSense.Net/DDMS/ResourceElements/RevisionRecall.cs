@@ -1,15 +1,16 @@
 #region usings
 
+using DDMSense.DDMS.SecurityElements.Ism;
+using DDMSense.DDMS.Summary;
+using DDMSense.DDMS.Summary.Xlink;
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.DDMS.SecurityElements.Ism;
-using DDMSense.DDMS.Summary;
-using DDMSense.DDMS.Summary.Xlink;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 namespace DDMSense.DDMS.ResourceElements
 {
@@ -67,7 +68,6 @@ namespace DDMSense.DDMS.ResourceElements
     ///             </td>
     ///         </tr>
     ///     </table>
-    
 
     /// </summary>
     public sealed class RevisionRecall : AbstractBaseComponent
@@ -125,7 +125,7 @@ namespace DDMSense.DDMS.ResourceElements
                 foreach (var detail in details)
                     Details.Add(new Details(detail));
 
-                string revisionID = element.Attribute(XName.Get(REVISION_ID_NAME, Namespace)).Value;
+                string revisionID = element.Attribute(XName.Get(REVISION_ID_NAME, Namespace)).ToNonNullString();
                 if (!String.IsNullOrEmpty(revisionID))
                 {
                     try
@@ -332,13 +332,10 @@ namespace DDMSense.DDMS.ResourceElements
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
 
             bool hasChildText = false;
-            foreach (var child in Element.Descendants())
-                hasChildText = (hasChildText || (!String.IsNullOrEmpty(child.Value.Trim())));
 
-            bool hasNestedElements = (Links.Count > 0 || Details.Count > 0);
-
-            if (hasChildText && hasNestedElements)
-                throw new InvalidDDMSException("A ddms:revisionRecall element cannot have both child text and nested elements.");
+            //Removing this logic.  XElement will not allow XML to exist that has both child elements and a value.
+            //if (!String.IsNullOrEmpty(Element.Value) && Element.HasElements)
+            //    throw new InvalidDDMSException("A ddms:revisionRecall element cannot have both child text and nested elements.");
 
             foreach (var link in Links)
             {
@@ -537,14 +534,14 @@ namespace DDMSense.DDMS.ResourceElements
                     var component = (Link)builder.Commit();
                     if (component != null)
                         links.Add(component);
-                    }
+                }
                 var details = new List<Details>();
                 foreach (IBuilder builder in Details)
                 {
                     var component = (Details)builder.Commit();
                     if (component != null)
                         details.Add(component);
-                    }
+                }
                 return (new RevisionRecall(Value, links, details, RevisionID, RevisionType, Network, OtherNetwork, XLinkAttributes.Commit(), SecurityAttributes.Commit()));
             }
 
