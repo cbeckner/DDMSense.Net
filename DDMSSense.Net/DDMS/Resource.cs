@@ -523,7 +523,7 @@ namespace DDMSense.DDMS
                         throw new InvalidDDMSException("The ISM:createDate attribute is not in a valid date format.");
                     }
                     Util.Util.AddAttribute(element, ismPrefix, CREATE_DATE_NAME, version.IsmNamespace,
-                        CreateDate.Value.ToString("o"));
+                        CreateDate.Value.ToString("yyyy-MM-dd"));
                 }
                 NoticeAttributes = NoticeAttributes.GetNonNullInstance(noticeAttributes);
                 NoticeAttributes.AddTo(element);

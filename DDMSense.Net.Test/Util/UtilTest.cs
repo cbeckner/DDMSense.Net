@@ -696,7 +696,7 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Xml.XmlException), "Name cannot begin with the '1' character")]
+        [ExpectedException(typeof(InvalidDDMSException), "Name cannot begin with the '1' character")]
         public virtual void Util_Util_RequireValidNCNamesInvalid()
         {
             List<string> names = new List<string>();
@@ -712,14 +712,14 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Xml.XmlException), "Name cannot begin with the '1' character")]
+        [ExpectedException(typeof(InvalidDDMSException), "Name cannot begin with the '1' character")]
         public virtual void Util_Util_RequireValidNCNameInvalidName()
         {
             Util.RequireValidNCName("1TEST");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Xml.XmlException), "\"xmlns:TEST\" is not a valid NCName.")]
+        [ExpectedException(typeof(InvalidDDMSException), "\"xmlns:TEST\" is not a valid NCName.")]
         public virtual void Util_Util_RequireValidNCNameInvalidNamespace()
         {
             Util.RequireValidNCName("xmlns:TEST");
