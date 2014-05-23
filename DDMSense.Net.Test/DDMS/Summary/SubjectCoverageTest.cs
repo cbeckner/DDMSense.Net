@@ -159,7 +159,7 @@ namespace DDMSense.Test.DDMS.Summary
             string name = SubjectCoverage.GetName(version);
             if (version.IsAtLeast("4.0.1"))
             {
-                innerElement.Name = XName.Get(name);
+                innerElement.Name = innerElement.Name.Namespace + name;
                 return (innerElement);
             }
             XElement element = Util.BuildDDMSElement(name, null);
