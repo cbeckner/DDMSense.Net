@@ -7,6 +7,7 @@ using DDMSense.Extensions;
 using DDMSense.Util;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
@@ -332,8 +333,8 @@ namespace DDMSense.DDMS.ResourceElements
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
 
             //Removing this logic.  XElement will not allow XML to exist that has both child elements and a value.
-            //if (!String.IsNullOrEmpty(Element.Value) && Element.HasElements)
-            //    throw new InvalidDDMSException("A ddms:revisionRecall element cannot have both child text and nested elements.");
+            if (Element.Nodes().Any(n => n.NodeType == System.Xml.XmlNodeType.Text) && Element.HasElements)
+                throw new InvalidDDMSException("A ddms:revisionRecall element cannot have both child text and nested elements.");
 
             foreach (var link in Links)
             {
