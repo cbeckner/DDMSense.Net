@@ -413,7 +413,7 @@ namespace DDMSense.Test.DDMS.Summary.Xlink
                 // label is not valid NCName
                 if (version.IsAtLeast("4.0.1"))
                 {
-                    GetInstance("\"ddms:prefix& GML\" is not a valid NCName.", null, null, null, "ddms:prefix& GML");
+                    GetInstance("The ':' character, hexadecimal value 0x3A, cannot be included in a name.", null, null, null, "ddms:prefix& GML");
                 }
 
                 // invalid arcrole
