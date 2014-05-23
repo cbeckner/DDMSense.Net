@@ -214,14 +214,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
         /// <returns> an attribute group </returns>
         private static Dictionary<string, string> GetOtherAttributes(string key, string value)
         {
-            //TODO: Not sure what to do here
-            Assert.Fail("TODO: Dictionary<string, string> baseAttributes = new Hashtable(OtherAttributes);");
-            return new Dictionary<string, string>();
-            /*
-            Dictionary<string, string> baseAttributes = new Hashtable(OtherAttributes);
+            Dictionary<string, string> baseAttributes = OtherAttributes;
             baseAttributes[key] = value;
             return (baseAttributes);
-            */
         }
 
         /// <summary>
@@ -255,6 +250,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
             catch (InvalidDDMSException e)
             {
                 CheckConstructorFailure(expectFailure, e);
+                ExpectMessage(e, message);
+            }
+            catch (Exception e)
+            {
                 ExpectMessage(e, message);
             }
             return (attributes);
@@ -343,7 +342,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, icNamespace, TEST_CLASS);
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.GetXsList(TEST_OWNERS));
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.DECLASS_DATE_NAME, icNamespace, "2001");
-                GetInstance("The declassDate must be in the xs:date format", element);
+                GetInstance("String was not recognized as a valid DateTime", element);
 
                 // invalid dateOfExemptedSource
                 element = Util.BuildDDMSElement(Security.GetName(version), null);
@@ -352,7 +351,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.GetXsList(TEST_OWNERS));
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.DECLASS_DATE_NAME, icNamespace, "2001");
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace, "2001");
-                string message = (version.IsAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "The dateOfExemptedSource attribute must be in the xs:date format");
+                string message = (version.IsAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "String was not recognized as a valid DateTime");
                 GetInstance(message, element);
             }
         }
@@ -365,17 +364,17 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
                 // invalid declassDate
-                GetInstance("The declassDate must be in the xs:date format", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "2004"));
+                GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "2004"));
 
                 // nonsensical declassDate
-                GetInstance("The ISM:declassDate attribute is not in a valid date format.", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "notAnXmlDate"));
+                GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "notAnXmlDate"));
 
                 // invalid dateOfExemptedSource
-                string message = (version.IsAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "The dateOfExemptedSource attribute must be in the xs:date format");
+                string message = (version.IsAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "String was not recognized as a valid DateTime");
                 GetInstance(message, TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2004"));
 
                 // nonsensical dateOfExemptedSource
-                GetInstance("The ISM:dateOfExemptedSource attribute is not in a valid date format.", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "notAnXmlDate"));
+                GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "notAnXmlDate"));
             }
         }
 
@@ -760,7 +759,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
             IDictionary<string, string> map = new Dictionary<string, string>();
             map[SecurityAttributes.DECLASS_MANUAL_REVIEW_NAME] = "true";
             SecurityAttributes attributes = new SecurityAttributes(TEST_CLASS, TEST_OWNERS, map);
-            Assert.AreEqual(BuildOutput(true, "classification", "U") + BuildOutput(true, "declassManualReview", "true") + BuildOutput(true, "ownerProducer", "USA"), attributes.GetOutput(true, ""));
+            Assert.AreEqual(BuildOutput(true, "classification", "U") +
+                            BuildOutput(true, "declassManualReview", "true") +
+                            BuildOutput(true, "ownerProducer", "USA"),
+                            attributes.GetOutput(true, ""));
         }
 
         [TestMethod]

@@ -372,9 +372,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 Individual.Builder builder = new Individual.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                //TODO: Not sure what to do here.
-                //builder.IndividualValues[0];
-                Assert.Fail("TODO: builder.IndividualValues[0]");
+                var individualValues = builder.IndividualValues[0];
                 Assert.IsTrue(builder.Empty);
                 builder.IndividualValues[1].Value = "TEST";
                 Assert.IsFalse(builder.Empty);
