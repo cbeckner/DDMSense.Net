@@ -460,9 +460,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 if (version.IsAtLeast("4.0.1"))
                 {
                     Assert.IsTrue(builder.Empty);
-                    //TODO: Not sure what to do here (MAM).
-                    //Original Java: builder.getSubOrganizations().get(0);
-                    var suborgs = builder.SubOrganizations[0];
+                    builder.SubOrganizations.Add(new SubOrganization.Builder());
                     Assert.IsTrue(builder.Empty);
                     builder.SubOrganizations[0].Value = "TEST";
                     Assert.IsFalse(builder.Empty);
