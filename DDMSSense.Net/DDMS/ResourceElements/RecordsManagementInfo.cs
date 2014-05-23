@@ -87,6 +87,7 @@ namespace DDMSense.DDMS.ResourceElements
         {
             ApplicationSoftware = null;
             RecordKeeper = null;
+            vitalRecordIndicator = vitalRecordIndicator.HasValue ? vitalRecordIndicator.Value : false;
             try
             {
                 XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), null);
