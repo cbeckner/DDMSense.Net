@@ -610,12 +610,14 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 RevisionRecall.Builder builder = new RevisionRecall.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                builder.Links[2].SecurityAttributes.Classification = "U";
+                builder.Links.Add(new Link.Builder());
+                builder.Links[0].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
 
                 builder = new RevisionRecall.Builder();
                 Assert.IsTrue(builder.Empty);
-                builder.Details[2].SecurityAttributes.Classification = "U";
+                builder.Details.Add(new Details.Builder());
+                builder.Details[0].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
             }
         }

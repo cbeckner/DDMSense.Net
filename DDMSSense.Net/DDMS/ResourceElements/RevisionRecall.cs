@@ -331,8 +331,6 @@ namespace DDMSense.DDMS.ResourceElements
         {
             Util.Util.RequireDDMSQualifiedName(Element, GetName(DDMSVersion));
 
-            bool hasChildText = false;
-
             //Removing this logic.  XElement will not allow XML to exist that has both child elements and a value.
             //if (!String.IsNullOrEmpty(Element.Value) && Element.HasElements)
             //    throw new InvalidDDMSException("A ddms:revisionRecall element cannot have both child text and nested elements.");
