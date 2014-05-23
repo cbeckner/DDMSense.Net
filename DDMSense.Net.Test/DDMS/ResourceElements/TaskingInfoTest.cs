@@ -430,10 +430,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 TaskingInfo.Builder builder = new TaskingInfo.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                builder.RequesterInfos[1].SecurityAttributes.Classification = "U";
+                builder.RequesterInfos.Add(new RequesterInfo.Builder());
+                builder.RequesterInfos[0].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
                 builder = new TaskingInfo.Builder();
-                builder.Addressees[1].SecurityAttributes.Classification = "U";
+                builder.Addressees.Add(new Addressee.Builder());
+                builder.Addressees[0].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
             }
         }
