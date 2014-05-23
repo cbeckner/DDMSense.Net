@@ -76,7 +76,6 @@ namespace DDMSense.Test.DDMS.Summary
                 {
                     DDMSVersion version = DDMSVersion.CurrentVersion;
                     XElement linkElement = Util.BuildDDMSElement(Link.GetName(version), null);
-                    linkElement.Name = XName.Get(PropertyReader.GetPrefix("ddms"), version.Namespace) + linkElement.Name.LocalName;
                     XLinkAttributesTest.LocatorFixture.AddTo(linkElement);
                     return (linkElement);
                 }
