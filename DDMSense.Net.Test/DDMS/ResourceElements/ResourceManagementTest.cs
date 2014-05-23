@@ -386,9 +386,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 ResourceManagement.Builder builder = new ResourceManagement.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
+                builder.TaskingInfos.Add(new TaskingInfo.Builder());
                 builder.TaskingInfos[0].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
+                builder.TaskingInfos.Add(new TaskingInfo.Builder());
                 builder = new ResourceManagement.Builder();
+                builder.ProcessingInfos.Add(new ProcessingInfo.Builder());
                 builder.ProcessingInfos[0].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
             }

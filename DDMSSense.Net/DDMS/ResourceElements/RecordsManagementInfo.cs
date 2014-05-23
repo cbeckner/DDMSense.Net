@@ -236,7 +236,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 ApplicationSoftware = new ApplicationSoftware.Builder();
                 RecordKeeper = new RecordKeeper.Builder();
-                VitalRecordIndicator = false;
+                //VitalRecordIndicator = false;
             }
 
             /// <summary>
