@@ -392,7 +392,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 Notice.Builder builder = new Notice.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                builder.NoticeTexts[1].Value = "TEST";
+                builder.NoticeTexts.Add(new NoticeText.Builder());
+                builder.NoticeTexts[0].Value = "TEST";
                 Assert.IsFalse(builder.Empty);
             }
         }

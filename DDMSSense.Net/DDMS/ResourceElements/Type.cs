@@ -263,7 +263,6 @@ namespace DDMSense.DDMS.ResourceElements
             /// <see cref="IBuilder#commit()"></see>
             public override IDDMSComponent Commit()
             {
-                SecurityAttributes = new SecurityAttributes.Builder();
                 return (Empty ? null : new Type(Description, Qualifier, Value, SecurityAttributes.Commit()));
             }
         }
