@@ -402,6 +402,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 {
                     ExpectMessage(e, "At least one profile value is required.");
                 }
+                builder.ProfileValues.Add(new ProfileValue.Builder());
                 builder.ProfileValues[0].Qualifier = "test";
                 builder.ProfileValues[0].Value = "test";
                 builder.ProfileValues[0].Vocabulary = "vocab";

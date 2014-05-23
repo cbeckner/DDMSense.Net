@@ -349,6 +349,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             /// </summary>
             public Builder()
             {
+                StringAttributes = new Dictionary<string, string>();
             }
 
             /// <summary>

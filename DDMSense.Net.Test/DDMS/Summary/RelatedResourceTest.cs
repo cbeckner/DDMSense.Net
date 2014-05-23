@@ -555,6 +555,7 @@ namespace DDMSense.Test.DDMS.Summary
                 builder.Relationship = TEST_RELATIONSHIP;
                 builder.Qualifier = TEST_QUALIFIER;
                 builder.Value = TEST_VALUE;
+                builder.Links.Add(new Link.Builder());
                 builder.Links[0].XLinkAttributes.Type = "locator";
                 builder.Links[0].XLinkAttributes.Href = "http://ddmsence.urizone.net/";
                 builder.Links[0].XLinkAttributes.Role = "role";

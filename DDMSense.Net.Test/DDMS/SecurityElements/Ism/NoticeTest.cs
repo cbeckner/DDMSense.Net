@@ -417,6 +417,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 {
                     ExpectMessage(e, "At least one ISM:NoticeText");
                 }
+                builder.NoticeTexts.Add(new NoticeText.Builder());
                 builder.NoticeTexts[0].Value = "TEST";
                 builder.NoticeTexts[0].SecurityAttributes.Classification = "U";
                 builder.NoticeTexts[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
