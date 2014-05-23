@@ -403,6 +403,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 {
                     ExpectMessage(e, "At least one individual value is required.");
                 }
+                builder.IndividualValues.Add(new IndividualValue.Builder());
                 builder.IndividualValues[0].Qualifier = "test";
                 builder.IndividualValues[0].Value = "test";
                 builder.IndividualValues[0].SecurityAttributes.Classification = "U";
