@@ -369,7 +369,8 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 Group.Builder builder = new Group.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                builder.GroupValues[1].Value = "TEST";
+                builder.GroupValues.Add(new GroupValue.Builder());
+                builder.GroupValues[0].Value = "TEST";
                 Assert.IsFalse(builder.Empty);
             }
         }
