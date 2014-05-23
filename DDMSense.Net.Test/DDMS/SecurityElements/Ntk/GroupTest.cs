@@ -398,6 +398,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 {
                     ExpectMessage(e, "At least one group value is required.");
                 }
+                builder.GroupValues.Add(new GroupValue.Builder());
                 builder.GroupValues[0].Qualifier = "test";
                 builder.GroupValues[0].Value = "test";
                 builder.GroupValues[0].SecurityAttributes.Classification = "U";
