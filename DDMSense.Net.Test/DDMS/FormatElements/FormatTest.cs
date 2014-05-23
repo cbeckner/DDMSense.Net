@@ -130,7 +130,7 @@ namespace DDMSense.Test.DDMS.FormatElements
             string name = Format.GetName(version);
             if (version.IsAtLeast("4.0.1"))
             {
-                innerElement.Name = XName.Get(name);
+                innerElement.Name = XName.Get(name, innerElement.Name.NamespaceName);
                 return (innerElement);
             }
             XElement element = Util.BuildDDMSElement(name, null);

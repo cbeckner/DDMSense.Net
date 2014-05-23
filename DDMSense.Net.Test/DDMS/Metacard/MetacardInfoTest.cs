@@ -636,8 +636,7 @@ namespace DDMSense.Test.DDMS.Metacard
                 {
                     ExpectMessage(e, "At least one ddms:identifier");
                 }
-                builder.Identifiers[0].Qualifier = "test";
-                builder.Identifiers[0].Value = "test";
+                builder.Identifiers.Add(new Identifier.Builder(new Identifier("test", "test")));
                 builder.Commit();
             }
         }
