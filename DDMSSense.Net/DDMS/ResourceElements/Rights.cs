@@ -40,6 +40,10 @@ namespace DDMSense.DDMS.ResourceElements
         /// <exception cref="InvalidDDMSException"> if any required information is missing or malformed </exception>
         public Rights(XElement element) : base(element)
         {
+            Util.Util.AddDDMSAttribute(element, PRIVACY_ACT_NAME, XmlConvert.ToString(false));
+            Util.Util.AddDDMSAttribute(element, INTELLECTUAL_PROPERY_NAME, XmlConvert.ToString(false));
+            Util.Util.AddDDMSAttribute(element, COPYRIGHT_NAME, XmlConvert.ToString(false));
+            SetElement(element, true);
         }
 
         /// <summary>
