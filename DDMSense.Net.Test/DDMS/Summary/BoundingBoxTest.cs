@@ -439,8 +439,7 @@ namespace DDMSense.Test.DDMS.Summary
                 BoundingBox.Builder builder = new BoundingBox.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                //TODO - Figure out how to test this
-                //builder.WestBL = TEST_WEST;
+                builder.WestBL = TEST_WEST;
                 Assert.IsFalse(builder.Empty);
             }
         }
@@ -448,27 +447,26 @@ namespace DDMSense.Test.DDMS.Summary
         [TestMethod]
         public virtual void Summary_BoundingBox_BuilderValidation()
         {
-            //TODO - Figure out how to test this
-            //foreach (string sVersion in SupportedVersions)
-            //{
-            //    DDMSVersion.SetCurrentVersion(sVersion);
+            foreach (string sVersion in SupportedVersions)
+            {
+                DDMSVersion.SetCurrentVersion(sVersion);
 
-            //    BoundingBox.Builder builder = new BoundingBox.Builder();
-            //    builder.EastBL = Convert.ToDouble(TEST_EAST);
-            //    try
-            //    {
-            //        builder.Commit();
-            //        Assert.Fail("Builder allowed invalid data.");
-            //    }
-            //    catch (InvalidDDMSException e)
-            //    {
-            //        ExpectMessage(e, "A ddms:boundingBox requires");
-            //    }
-            //    builder.WestBL = Convert.ToDouble(TEST_WEST);
-            //    builder.NorthBL = Convert.ToDouble(TEST_NORTH);
-            //    builder.SouthBL = Convert.ToDouble(TEST_SOUTH);
-            //    builder.Commit();
-            //}
+                BoundingBox.Builder builder = new BoundingBox.Builder();
+                builder.EastBL = Convert.ToDouble(TEST_EAST);
+                try
+                {
+                    builder.Commit();
+                    Assert.Fail("Builder allowed invalid data.");
+                }
+                catch (InvalidDDMSException e)
+                {
+                    ExpectMessage(e, "A ddms:boundingBox requires");
+                }
+                builder.WestBL = Convert.ToDouble(TEST_WEST);
+                builder.NorthBL = Convert.ToDouble(TEST_NORTH);
+                builder.SouthBL = Convert.ToDouble(TEST_SOUTH);
+                builder.Commit();
+            }
         }
     }
 }

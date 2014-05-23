@@ -335,7 +335,7 @@ namespace DDMSense.Test.DDMS.Summary
                 BoundingGeometry.Builder builder = new BoundingGeometry.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                builder.Points[0].Id = TEST_ID;
+                builder.Points.Add(new Point.Builder() { Id = TEST_ID });
                 Assert.IsFalse(builder.Empty);
             }
         }

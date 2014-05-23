@@ -1,26 +1,26 @@
 #region usings
 
+using DDMSense.Util;
 using System;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
@@ -33,7 +33,7 @@ namespace DDMSense.DDMS.Summary
 
     using Element = XElement;
 
-    #endregion
+    #endregion usings
 
     /// <summary>
     ///     An immutable implementation of ddms:boundingBox.
@@ -53,8 +53,7 @@ namespace DDMSense.DDMS.Summary
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class BoundingBox : AbstractBaseComponent
     {
@@ -239,7 +238,7 @@ namespace DDMSense.DDMS.Summary
             {
                 return (false);
             }
-            var test = (BoundingBox) obj;
+            var test = (BoundingBox)obj;
             return (WestBL.Equals(test.WestBL) && EastBL.Equals(test.EastBL) && SouthBL.Equals(test.SouthBL) &&
                     NorthBL.Equals(test.NorthBL));
         }
@@ -248,10 +247,10 @@ namespace DDMSense.DDMS.Summary
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + WestBL.GetHashCode();
-            result = 7*result + EastBL.GetHashCode();
-            result = 7*result + SouthBL.GetHashCode();
-            result = 7*result + NorthBL.GetHashCode();
+            result = 7 * result + WestBL.GetHashCode();
+            result = 7 * result + EastBL.GetHashCode();
+            result = 7 * result + SouthBL.GetHashCode();
+            result = 7 * result + NorthBL.GetHashCode();
             return (result);
         }
 
@@ -275,7 +274,6 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            
             internal double? _eastBL;
             internal double? _northBL;
             internal double? _southBL;
@@ -305,8 +303,8 @@ namespace DDMSense.DDMS.Summary
             public virtual double? WestBL
             {
                 get { return _westBL; }
+                set { _westBL = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the eastbound longitude
@@ -314,8 +312,8 @@ namespace DDMSense.DDMS.Summary
             public virtual double? EastBL
             {
                 get { return _eastBL; }
+                set { _eastBL = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the southbound latitude
@@ -323,8 +321,8 @@ namespace DDMSense.DDMS.Summary
             public virtual double? SouthBL
             {
                 get { return _southBL; }
+                set { _southBL = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the northbound latitude
@@ -332,6 +330,7 @@ namespace DDMSense.DDMS.Summary
             public virtual double? NorthBL
             {
                 get { return _northBL; }
+                set { _northBL = value; }
             }
 
             /// <see cref="IBuilder#commit()"></see>
@@ -346,7 +345,7 @@ namespace DDMSense.DDMS.Summary
                 {
                     throw new InvalidDDMSException("A ddms:boundingBox requires two latitude and two longitude values.");
                 }
-                return (new BoundingBox((double) WestBL, (double) EastBL, (double) SouthBL, (double) NorthBL));
+                return (new BoundingBox((double)WestBL, (double)EastBL, (double)SouthBL, (double)NorthBL));
             }
 
             /// <see cref="IBuilder#isEmpty()"></see>
