@@ -548,12 +548,28 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                     ExpectMessage(e, "srsName is required.");
                 }
                 builder.SrsAttributes.SrsName = "http://metadata.dod.mil/mdr/ns/GSIP/crs/WGS84E_2D";
+
+                builder.Positions.Add(new Position.Builder());
+                builder.Positions[0].Coordinates.Add(new Position.DoubleBuilder());
+                builder.Positions[0].Coordinates.Add(new Position.DoubleBuilder());
                 builder.Positions[0].Coordinates[0].Value = Convert.ToDouble(1);
                 builder.Positions[0].Coordinates[1].Value = Convert.ToDouble(1);
+
+                builder.Positions.Add(new Position.Builder());
+                builder.Positions[1].Coordinates.Add(new Position.DoubleBuilder());
+                builder.Positions[1].Coordinates.Add(new Position.DoubleBuilder());
                 builder.Positions[1].Coordinates[0].Value = Convert.ToDouble(2);
                 builder.Positions[1].Coordinates[1].Value = Convert.ToDouble(2);
+
+                builder.Positions.Add(new Position.Builder());
+                builder.Positions[2].Coordinates.Add(new Position.DoubleBuilder());
+                builder.Positions[2].Coordinates.Add(new Position.DoubleBuilder());
                 builder.Positions[2].Coordinates[0].Value = Convert.ToDouble(3);
                 builder.Positions[2].Coordinates[1].Value = Convert.ToDouble(3);
+
+                builder.Positions.Add(new Position.Builder());
+                builder.Positions[3].Coordinates.Add(new Position.DoubleBuilder());
+                builder.Positions[3].Coordinates.Add(new Position.DoubleBuilder());
                 builder.Positions[3].Coordinates[0].Value = Convert.ToDouble(1);
                 builder.Positions[3].Coordinates[1].Value = Convert.ToDouble(1);
                 builder.Commit();
@@ -563,12 +579,18 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 builder.Id = TEST_ID;
                 Position.Builder emptyBuilder = new Position.Builder();
                 Position.Builder fullBuilder1 = new Position.Builder();
+                fullBuilder1.Coordinates.Add(new Position.DoubleBuilder());
+                fullBuilder1.Coordinates.Add(new Position.DoubleBuilder());
                 fullBuilder1.Coordinates[0].Value = Convert.ToDouble(0);
                 fullBuilder1.Coordinates[1].Value = Convert.ToDouble(0);
                 Position.Builder fullBuilder2 = new Position.Builder();
+                fullBuilder2.Coordinates.Add(new Position.DoubleBuilder());
+                fullBuilder2.Coordinates.Add(new Position.DoubleBuilder());
                 fullBuilder2.Coordinates[0].Value = Convert.ToDouble(0);
                 fullBuilder2.Coordinates[1].Value = Convert.ToDouble(1);
                 Position.Builder fullBuilder3 = new Position.Builder();
+                fullBuilder3.Coordinates.Add(new Position.DoubleBuilder());
+                fullBuilder3.Coordinates.Add(new Position.DoubleBuilder());
                 fullBuilder3.Coordinates[0].Value = Convert.ToDouble(1);
                 fullBuilder3.Coordinates[1].Value = Convert.ToDouble(1);
                 builder.Positions.Add(emptyBuilder);

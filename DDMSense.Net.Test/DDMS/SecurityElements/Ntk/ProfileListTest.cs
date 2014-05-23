@@ -372,7 +372,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 {
                     ExpectMessage(e, "At least one profile is required.");
                 }
+                builder.Profiles.Add(new Profile.Builder());
                 builder.Profiles[0].SystemName.Value = "TEST";
+                builder.Profiles[0].ProfileValues.Add(new ProfileValue.Builder());
                 builder.Profiles[0].ProfileValues[0].Vocabulary = "vocab";
                 builder.Profiles[0].ProfileValues[0].Value = "TEST";
                 builder.Profiles[0].SystemName.SecurityAttributes.Classification = "U";

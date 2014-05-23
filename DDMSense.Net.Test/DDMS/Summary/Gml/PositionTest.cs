@@ -417,6 +417,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 Position.Builder builder = new Position.Builder();
+                builder.Coordinates.Add(new Position.DoubleBuilder());
                 builder.Coordinates[0].Value = Convert.ToDouble(0);
                 try
                 {
@@ -427,12 +428,19 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 {
                     ExpectMessage(e, "A position must be represented by");
                 }
+                builder.Coordinates.Add(new Position.DoubleBuilder());
+                builder.Coordinates.Add(new Position.DoubleBuilder());
                 builder.Coordinates[1].Value = Convert.ToDouble(0);
                 builder.Commit();
 
                 // Skip empty Coordinates
                 builder = new Position.Builder();
                 builder.SrsAttributes = new SRSAttributes.Builder(SRSAttributesTest.Fixture);
+                builder.Coordinates.Add(new Position.DoubleBuilder());
+                builder.Coordinates.Add(new Position.DoubleBuilder());
+                builder.Coordinates.Add(new Position.DoubleBuilder());
+                builder.Coordinates.Add(new Position.DoubleBuilder());
+                builder.Coordinates[0].Value = null;
                 builder.Coordinates[0].Value = null;
                 builder.Coordinates[1].Value = Convert.ToDouble(0);
                 builder.Coordinates[2].Value = Convert.ToDouble(1);

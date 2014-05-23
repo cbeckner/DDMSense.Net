@@ -447,7 +447,9 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 {
                     ExpectMessage(e, "srsName is required.");
                 }
+                builder.Position.Coordinates.Add(new Position.DoubleBuilder());
                 builder.Position.Coordinates[0].Value = new double?(32.1);
+                builder.Position.Coordinates.Add(new Position.DoubleBuilder());
                 builder.Position.Coordinates[1].Value = new double?(42.1);
                 builder.Id = "IDValue";
                 builder.SrsAttributes.SrsName = "http://metadata.dod.mil/mdr/ns/GSIP/crs/WGS84E_2D";
