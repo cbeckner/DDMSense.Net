@@ -279,7 +279,7 @@ namespace DDMSense.DDMS.Summary
             get
             {
                 Element innerElement = InnerElement;
-                string attrValue = innerElement.Attribute(XName.Get(QUALIFIER_NAME, Namespace)).Value;
+                string attrValue = innerElement.Attribute(XName.Get(QUALIFIER_NAME, Namespace)).ToNonNullString();
                 return attrValue.ToNonNullString();
             }
         }
@@ -292,7 +292,7 @@ namespace DDMSense.DDMS.Summary
             get
             {
                 Element innerElement = InnerElement;
-                string attrValue = innerElement.Attribute(XName.Get(VALUE_NAME, Namespace)).Value;
+                string attrValue = innerElement.Attribute(XName.Get(VALUE_NAME, Namespace)).ToNonNullString();
                 return attrValue.ToNonNullString();
             }
         }
