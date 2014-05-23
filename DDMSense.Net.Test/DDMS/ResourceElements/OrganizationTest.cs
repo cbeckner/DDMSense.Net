@@ -296,7 +296,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 {
                     XElement element = Util.BuildDDMSElement(Organization.GetName(version), null);
                     element.Add(Util.BuildDDMSElement("name", TEST_NAMES[0]));
-                    element.Add(new XAttribute(XName.Get("ddms:acronym", version.Namespace), ""));
+                    element.Add(new XAttribute(XName.Get("acronym", version.Namespace), ""));
                     component = GetInstance(SUCCESS, element);
                     Assert.AreEqual(1, component.ValidationWarnings.Count());
                     string text = "A ddms:acronym attribute was found with no value.";
