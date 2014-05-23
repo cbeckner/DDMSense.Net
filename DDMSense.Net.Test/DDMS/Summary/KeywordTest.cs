@@ -339,7 +339,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
 
             DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
-            XAttribute attr = new XAttribute(XName.Get("ddms:value", version.Namespace), "dog");
+            XAttribute attr = new XAttribute(XName.Get("value", version.Namespace), "dog");
 
             // Using ddms:value as the extension (data)
             List<XAttribute> extAttributes = new List<XAttribute>();
@@ -352,7 +352,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
             catch (InvalidDDMSException e)
             {
-                ExpectMessage(e, "The extensible attribute with the name, ddms:value");
+                ExpectMessage(e, "The extensible attribute with the name");
             }
         }
 

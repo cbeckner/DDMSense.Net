@@ -251,7 +251,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 SRSAttributesTest.Fixture.AddTo(element);
                 Util.AddAttribute(element, gmlPrefix, "id", gmlNamespace, "1TEST");
                 element.Add(PositionTest.Fixture.ElementCopy);
-                GetInstance("\"1TEST\" is not a valid NCName.", element);
+                GetInstance("Name cannot begin with the '1' character", element);
 
                 // Missing position
                 element = Util.BuildElement(gmlPrefix, Point.GetName(version), gmlNamespace, null);
@@ -286,7 +286,7 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 GetInstance("id is required.", PositionTest.Fixture, SRSAttributesTest.Fixture, "");
 
                 // ID not NCName
-                GetInstance("\"1TEST\" is not a valid NCName.", PositionTest.Fixture, SRSAttributesTest.Fixture, "1TEST");
+                GetInstance("Name cannot begin with the '1' character", PositionTest.Fixture, SRSAttributesTest.Fixture, "1TEST");
 
                 // Missing position
                 GetInstance("position is required.", null, SRSAttributesTest.Fixture, TEST_ID);
