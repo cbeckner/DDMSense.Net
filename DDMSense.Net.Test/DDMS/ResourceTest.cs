@@ -1652,15 +1652,19 @@ namespace DDMSense.Test.DDMS
             builder.SecurityAttributes.Classification = "U";
             builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 
+            builder.Identifiers.Add(new Identifier.Builder());
             builder.Identifiers[0].Qualifier = "testQualifier";
             builder.Identifiers[0].Value = "testValue";
+            builder.Titles.Add(new Title.Builder());
             builder.Titles[0].Value = "testTitle";
             builder.Titles[0].SecurityAttributes.Classification = "U";
             builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+            builder.Creators.Add(new Creator.Builder());
             builder.Creators[0].EntityType = Organization.GetName(version);
             builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
-            //TODO - Figure out how to implement the assignment below
-            //builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
+            builder.SubjectCoverages.Add(new DDMSense.DDMS.Summary.SubjectCoverage.Builder());
+            builder.SubjectCoverages[0].Keywords.Add(new Keyword.Builder());
+            builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
             builder.Security.SecurityAttributes.Classification = "U";
             builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
             DDMSVersion.SetCurrentVersion("3.0");
@@ -1690,15 +1694,19 @@ namespace DDMSense.Test.DDMS
             builder.SecurityAttributes.Classification = "U";
             builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 
+            builder.Identifiers.Add(new Identifier.Builder());
             builder.Identifiers[0].Qualifier = "testQualifier";
             builder.Identifiers[0].Value = "testValue";
+            builder.Titles.Add(new Title.Builder());
             builder.Titles[0].Value = "testTitle";
             builder.Titles[0].SecurityAttributes.Classification = "U";
             builder.Titles[0].SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
+            builder.Creators.Add(new Creator.Builder());
             builder.Creators[0].EntityType = Organization.GetName(version);
             builder.Creators[0].Organization.Names = Util.GetXsListAsList("testName");
-            //TODO - Figure out how to implement the assignment below
-            //builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
+            builder.SubjectCoverages.Add(new DDMSense.DDMS.Summary.SubjectCoverage.Builder());
+            builder.SubjectCoverages[0].Keywords.Add(new Keyword.Builder());
+            builder.SubjectCoverages[0].Keywords[0].Value = "keyword";
             builder.Security.SecurityAttributes.Classification = "U";
             builder.Security.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
 

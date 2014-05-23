@@ -588,6 +588,7 @@ namespace DDMSense.Test.DDMS.Summary
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
                 SubjectCoverage.Builder builder = new SubjectCoverage.Builder();
+                builder.Categories.Add(new Category.Builder());
                 builder.Categories[0].Code = "TEST";
                 try
                 {
@@ -628,6 +629,7 @@ namespace DDMSense.Test.DDMS.Summary
                     ProductionMetric.Builder fullProductionMetricBuilder = new ProductionMetric.Builder();
                     fullProductionMetricBuilder.Subject = "FOOD";
                     fullProductionMetricBuilder.Coverage = "AFG";
+                    builder.Keywords.Add(new Keyword.Builder());
                     builder.Keywords[0].Value = "test";
                     builder.ProductionMetrics.Add(emptyProductionMetricBuilder);
                     builder.ProductionMetrics.Add(fullProductionMetricBuilder);
@@ -638,6 +640,7 @@ namespace DDMSense.Test.DDMS.Summary
                     NonStateActor.Builder emptyNonStateActorBuilder = new NonStateActor.Builder();
                     NonStateActor.Builder fullNonStateActorBuilder = new NonStateActor.Builder();
                     fullNonStateActorBuilder.Value = "Laotian Monks";
+                    builder.Keywords.Add(new Keyword.Builder());
                     builder.Keywords[0].Value = "test";
                     builder.NonStateActors.Add(emptyNonStateActorBuilder);
                     builder.NonStateActors.Add(fullNonStateActorBuilder);
