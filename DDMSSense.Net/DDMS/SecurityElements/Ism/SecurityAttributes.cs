@@ -730,7 +730,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_EVENT_NAME, DeclassEvent));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_EXCEPTION_NAME, DeclassException));
             if (DeclassManualReview != null)
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_MANUAL_REVIEW_NAME, DeclassManualReview.ToString()));
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_MANUAL_REVIEW_NAME, DeclassManualReview.ToString().ToLowerInvariant()));
 
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DERIVATIVELY_CLASSIFIED_BY_NAME, DerivativelyClassifiedBy));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DERIVED_FROM_NAME, DerivedFrom));
