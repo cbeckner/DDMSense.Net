@@ -1,52 +1,52 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Text;
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
    home page is located at http://ddmsence.urizone.net/
  */
+
 namespace DDMSense.Test.DDMS.Summary.Gml
 {
+    using DDMSense.DDMS;
+    using DDMSense.DDMS.ResourceElements;
     using DDMSense.DDMS.Summary.Gml;
     using System.Xml.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using PropertyReader = DDMSense.Util.PropertyReader;
     using Util = DDMSense.Util.Util;
-    using DDMSense.DDMS;
-    using DDMSense.DDMS.ResourceElements;
 
     /// <summary>
     /// <para> Tests related to the SRS attributes on gml: elements </para>
-    /// 
+    ///
     /// @author Brian Uri!
     /// @since 0.9.b
     /// </summary>
     [TestClass]
     public class SRSAttributesTest : AbstractBaseTestCase
     {
-
         protected internal const string TEST_SRS_NAME = "http://metadata.dod.mil/mdr/ns/GSIP/crs/WGS84E_2D";
         protected internal const int TEST_SRS_DIMENSION = 10;
-        protected internal static readonly List<string> TEST_AXIS_LABELS = new List<string>() {"A","B","C"};
-        protected internal static readonly List<string> TEST_UOM_LABELS = new List<string>() {"Meter","Meter","Meter"};
+        protected internal static readonly List<string> TEST_AXIS_LABELS = new List<string>() { "A", "B", "C" };
+        protected internal static readonly List<string> TEST_UOM_LABELS = new List<string>() { "Meter", "Meter", "Meter" };
 
         /// <summary>
         /// Constructor
@@ -214,14 +214,14 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 newLabels.Add("1TEST");
                 element = Util.BuildDDMSElement(Position.GetName(version), null);
                 AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.GetXsList(newLabels), Util.GetXsList(TEST_UOM_LABELS));
-                GetInstance("\"1TEST\" is not a valid NCName.", element);
+                GetInstance("Name cannot begin with the '1' character", element);
 
                 // Non-NCNames in uomLabels
                 newLabels = new List<string>(TEST_UOM_LABELS);
                 newLabels.Add("TEST:TEST");
                 element = Util.BuildDDMSElement(Position.GetName(version), null);
                 AddAttributes(element, TEST_SRS_NAME, TEST_SRS_DIMENSION, Util.GetXsList(TEST_AXIS_LABELS), Util.GetXsList(newLabels));
-                GetInstance("\"TEST:TEST\" is not a valid NCName.", element);
+                GetInstance("The ':' character, hexadecimal value 0x3A, cannot be included in a name.", element);
 
                 // Dimension is a positive integer
                 element = Util.BuildDDMSElement(Position.GetName(version), null);
@@ -248,12 +248,12 @@ namespace DDMSense.Test.DDMS.Summary.Gml
                 // Non-NCNames in axisLabels
                 List<string> newLabels = new List<string>(TEST_AXIS_LABELS);
                 newLabels.Add("TEST:TEST");
-                GetInstance("\"TEST:TEST\" is not a valid NCName.", TEST_SRS_NAME, TEST_SRS_DIMENSION, newLabels, TEST_UOM_LABELS);
+                GetInstance("The ':' character, hexadecimal value 0x3A, cannot be included in a name.", TEST_SRS_NAME, TEST_SRS_DIMENSION, newLabels, TEST_UOM_LABELS);
 
                 // Non-NCNames in uomLabels
                 newLabels = new List<string>(TEST_UOM_LABELS);
                 newLabels.Add("TEST:TEST");
-                GetInstance("\"TEST:TEST\" is not a valid NCName.", TEST_SRS_NAME, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, newLabels);
+                GetInstance("The ':' character, hexadecimal value 0x3A, cannot be included in a name.", TEST_SRS_NAME, TEST_SRS_DIMENSION, TEST_AXIS_LABELS, newLabels);
 
                 // Dimension is a positive integer
                 GetInstance("The srsDimension must be a positive integer.", TEST_SRS_NAME, Convert.ToInt32(-1), TEST_AXIS_LABELS, TEST_UOM_LABELS);
@@ -456,5 +456,4 @@ namespace DDMSense.Test.DDMS.Summary.Gml
             }
         }
     }
-
 }

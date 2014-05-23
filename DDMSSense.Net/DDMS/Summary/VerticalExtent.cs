@@ -1,27 +1,29 @@
 #region usings
 
+using DDMSense.Extensions;
+using DDMSense.Util;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using DDMSense.Util;
 
-#endregion
+#endregion usings
 
 /* Copyright 2010 - 2013 by Brian Uri!
-   
+
    This file is part of DDMSence.
-   
+
    This library is free software; you can redistribute it and/or modify
-   it under the terms of version 3.0 of the GNU Lesser General Public 
+   it under the terms of version 3.0 of the GNU Lesser General Public
    License as published by the Free Software Foundation.
-   
+
    This library is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU Lesser General Public License for more details.
-   
-   You should have received a copy of the GNU Lesser General Public 
+
+   You should have received a copy of the GNU Lesser General Public
    License along with DDMSence. If not, see <http://www.gnu.org/licenses/>.
 
    You can contact the author at ddmsence@urizone.net. The DDMSence
@@ -34,7 +36,7 @@ namespace DDMSense.DDMS.Summary
 
     using Element = XElement;
 
-    #endregion
+    #endregion usings
 
     /// <summary>
     ///     An immutable implementation of ddms:verticalExtent.
@@ -86,8 +88,7 @@ namespace DDMSense.DDMS.Summary
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public sealed class VerticalExtent : AbstractBaseComponent
     {
@@ -294,8 +295,8 @@ namespace DDMSense.DDMS.Summary
         /// <exception cref="InvalidDDMSException"> </exception>
         private void ValidateInheritedAttributes(Element extentElement)
         {
-            string unitOfMeasure = extentElement.Attribute(XName.Get(UOM_NAME, extentElement.Name.NamespaceName)).Value;
-            string datum = extentElement.Attribute(XName.Get(DATUM_NAME, extentElement.Name.NamespaceName)).Value;
+            string unitOfMeasure = extentElement.Attributes().FirstOrDefault(a => a.Name.LocalName == UOM_NAME).ToNonNullString();
+            string datum = extentElement.Attributes().FirstOrDefault(a => a.Name.LocalName == UOM_NAME).ToNonNullString();
             if (!String.IsNullOrEmpty(unitOfMeasure) && !unitOfMeasure.Equals(UnitOfMeasure))
             {
                 throw new InvalidDDMSException("The unitOfMeasure on the " + extentElement.Name.LocalName +
@@ -327,7 +328,7 @@ namespace DDMSense.DDMS.Summary
             {
                 return (false);
             }
-            var test = (VerticalExtent) obj;
+            var test = (VerticalExtent)obj;
             return (UnitOfMeasure.Equals(test.UnitOfMeasure) && Datum.Equals(test.Datum) &&
                     MinVerticalExtent.Equals(test.MinVerticalExtent) && MaxVerticalExtent.Equals(test.MaxVerticalExtent));
         }
@@ -336,10 +337,10 @@ namespace DDMSense.DDMS.Summary
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7*result + UnitOfMeasure.GetHashCode();
-            result = 7*result + Datum.GetHashCode();
-            result = 7*result + MinVerticalExtent.GetHashCode();
-            result = 7*result + MaxVerticalExtent.GetHashCode();
+            result = 7 * result + UnitOfMeasure.GetHashCode();
+            result = 7 * result + Datum.GetHashCode();
+            result = 7 * result + MinVerticalExtent.GetHashCode();
+            result = 7 * result + MaxVerticalExtent.GetHashCode();
             return (result);
         }
 
@@ -363,7 +364,6 @@ namespace DDMSense.DDMS.Summary
         [Serializable]
         public class Builder : IBuilder
         {
-            
             internal string _datum;
             internal double? _maxVerticalExtent;
             internal double? _minVerticalExtent;
@@ -396,7 +396,6 @@ namespace DDMSense.DDMS.Summary
                 set { _minVerticalExtent = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the maximum extent
             /// </summary>
@@ -406,7 +405,6 @@ namespace DDMSense.DDMS.Summary
                 set { _maxVerticalExtent = value; }
             }
 
-
             /// <summary>
             ///     Builder accessor for the unitOfMeasure attribute
             /// </summary>
@@ -415,7 +413,6 @@ namespace DDMSense.DDMS.Summary
                 get { return _unitOfMeasure; }
                 set { _unitOfMeasure = value; }
             }
-
 
             /// <summary>
             ///     Builder accessor for the vertical datum attribute
@@ -439,7 +436,7 @@ namespace DDMSense.DDMS.Summary
                     throw new InvalidDDMSException("A ddms:verticalExtent requires a minimum and maximum extent value.");
                 }
                 return
-                    (new VerticalExtent((double) MinVerticalExtent, (double) MaxVerticalExtent, UnitOfMeasure, Datum));
+                    (new VerticalExtent((double)MinVerticalExtent, (double)MaxVerticalExtent, UnitOfMeasure, Datum));
             }
 
             /// <see cref="IBuilder#isEmpty()"></see>

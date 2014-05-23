@@ -696,7 +696,7 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Xml.XmlException), "\"1test\" is not a valid NCName.")]
+        [ExpectedException(typeof(System.Xml.XmlException), "Name cannot begin with the '1' character")]
         public virtual void Util_Util_RequireValidNCNamesInvalid()
         {
             List<string> names = new List<string>();
@@ -712,7 +712,7 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Xml.XmlException), "\"1TEST\" is not a valid NCName.")]
+        [ExpectedException(typeof(System.Xml.XmlException), "Name cannot begin with the '1' character")]
         public virtual void Util_Util_RequireValidNCNameInvalidName()
         {
             Util.RequireValidNCName("1TEST");
