@@ -199,7 +199,11 @@ namespace DDMSense.DDMS.Extensible
             foreach (var attribute in Attributes)
             {
                 if (element.Attribute(XName.Get(attribute.Name.LocalName, attribute.Name.NamespaceName)) != null)
-                    throw new InvalidDDMSException("The extensible attribute with the name, " + attribute.Name + " conflicts with a pre-existing attribute on the element.");
+                {
+                    XNamespace ns = attribute.Name.NamespaceName;
+                    string nsPrefix = element.GetPrefixOfNamespace(ns);
+                    throw new InvalidDDMSException("The extensible attribute with the name, " + nsPrefix + ":" + attribute.Name.LocalName + " conflicts with a pre-existing attribute on the element.");
+                }
 
                 element.Add(attribute);
             }

@@ -372,8 +372,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 Individual.Builder builder = new Individual.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                var individualValues = builder.IndividualValues[0];
+                builder.IndividualValues.Add(new IndividualValue.Builder());
                 Assert.IsTrue(builder.Empty);
+                builder.IndividualValues.Add(new IndividualValue.Builder());
                 builder.IndividualValues[1].Value = "TEST";
                 Assert.IsFalse(builder.Empty);
             }

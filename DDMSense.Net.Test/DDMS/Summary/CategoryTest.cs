@@ -26,6 +26,7 @@ using System.Text;
 namespace DDMSense.Test.DDMS.Summary
 {
     using DDMSense.DDMS;
+    using DDMSense.DDMS.Extensible;
     using DDMSense.DDMS.ResourceElements;
     using DDMSense.DDMS.Summary;
     using Microsoft.XmlDiffPatch;
@@ -361,8 +362,14 @@ namespace DDMSense.Test.DDMS.Summary
             DDMSVersion version = DDMSVersion.SetCurrentVersion("3.0");
 
             // Using ddms:qualifier as the extension (data)
+            var element = new XElement("testElement", string.Empty);
+            element.Add(new XAttribute(XNamespace.Xmlns + "ddms", version.Namespace));
+            element.Add(new XAttribute(XName.Get("qualifier", version.Namespace), "dog"));
+
             List<XAttribute> extAttributes = new List<XAttribute>();
-            extAttributes.Add(new XAttribute(XName.Get("ddms:qualifier", version.Namespace), "dog"));
+            extAttributes.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(version.Namespace) + "qualifier").FirstOrDefault());
+
+            //extAttributes.Add(new XAttribute(XName.Get("qualifier", version.Namespace), "dog"));
             attributes = new ExtensibleAttributes(extAttributes);
             try
             {
@@ -375,8 +382,9 @@ namespace DDMSense.Test.DDMS.Summary
             }
 
             // Using ddms:code as the extension (data)
-            extAttributes = new List<XAttribute>();
-            extAttributes.Add(new XAttribute(XName.Get("ddms:code", version.Namespace), "dog"));
+            element.Add(new XAttribute(XName.Get("code", version.Namespace), "dog"));
+            extAttributes = new List<XAttribute>(); 
+            extAttributes.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(version.Namespace) + "code").FirstOrDefault());
             attributes = new ExtensibleAttributes(extAttributes);
             try
             {
@@ -389,8 +397,9 @@ namespace DDMSense.Test.DDMS.Summary
             }
 
             // Using ddms:label as the extension (data)
+            element.Add(new XAttribute(XName.Get("label", version.Namespace), "dog"));
             extAttributes = new List<XAttribute>();
-            extAttributes.Add(new XAttribute(XName.Get("ddms:label", version.Namespace), "dog"));
+            extAttributes.Add(new XAttribute(XName.Get("label", version.Namespace), "dog"));
             attributes = new ExtensibleAttributes(extAttributes);
             try
             {
@@ -403,8 +412,10 @@ namespace DDMSense.Test.DDMS.Summary
             }
 
             // Using icism:classification as the extension (data)
+            element.Add(new XAttribute(XNamespace.Xmlns + "icism", version.IsmNamespace));
+
             extAttributes = new List<XAttribute>();
-            extAttributes.Add(new XAttribute(XName.Get("icism:classification", version.IsmNamespace), "U"));
+            extAttributes.Add(new XAttribute(XName.Get("classification", version.IsmNamespace), "dog"));
             attributes = new ExtensibleAttributes(extAttributes);
             try
             {

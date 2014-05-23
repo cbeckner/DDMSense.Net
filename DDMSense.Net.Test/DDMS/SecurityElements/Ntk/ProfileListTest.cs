@@ -346,8 +346,9 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 ProfileList.Builder builder = new ProfileList.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                var profiles = builder.Profiles;
+                builder.Profiles.Add(new Profile.Builder());
                 Assert.IsTrue(builder.Empty);
+                builder.Profiles.Add(new Profile.Builder());
                 builder.Profiles[1].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
             }

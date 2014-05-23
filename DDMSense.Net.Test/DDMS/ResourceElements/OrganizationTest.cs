@@ -296,7 +296,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 {
                     XElement element = Util.BuildDDMSElement(Organization.GetName(version), null);
                     element.Add(Util.BuildDDMSElement("name", TEST_NAMES[0]));
-                    element.Add(new XAttribute(XName.Get("ddms:acronym", version.Namespace), ""));
+                    element.Add(new XAttribute(XName.Get("acronym", version.Namespace), ""));
                     component = GetInstance(SUCCESS, element);
                     Assert.AreEqual(1, component.ValidationWarnings.Count());
                     string text = "A ddms:acronym attribute was found with no value.";
@@ -460,9 +460,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 if (version.IsAtLeast("4.0.1"))
                 {
                     Assert.IsTrue(builder.Empty);
-                    //TODO: Not sure what to do here (MAM).
-                    //Original Java: builder.getSubOrganizations().get(0);
-                    var suborgs = builder.SubOrganizations[0];
+                    builder.SubOrganizations.Add(new SubOrganization.Builder());
                     Assert.IsTrue(builder.Empty);
                     builder.SubOrganizations[0].Value = "TEST";
                     Assert.IsFalse(builder.Empty);
