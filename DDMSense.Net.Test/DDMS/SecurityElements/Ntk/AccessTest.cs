@@ -412,8 +412,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
             }
         }
 
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in .NET:
-        //ORIGINAL LINE: public void SecurityELements_Ntk_Access_BuilderIsEmpty() throws DDMSense.Net.Test.DDMS.InvalidDDMSException
+        [TestMethod]
         public virtual void SecurityELements_Ntk_Access_BuilderIsEmpty()
         {
             foreach (string sVersion in SupportedVersions)
@@ -423,10 +422,11 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 Access.Builder builder = new Access.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
-                //TODO: Not sure what to do here
-                //builder.Individuals[0];
-                Assert.Fail("TODO: builder.Individuals[0];");
+                builder.Individuals.Add(new Individual.Builder());
                 Assert.IsTrue(builder.Empty);
+                builder.Groups.Add(new Group.Builder());
+                Assert.IsTrue(builder.Empty);
+                builder.Groups.Add(new Group.Builder());
                 builder.Groups[1].SecurityAttributes.Classification = "U";
                 Assert.IsFalse(builder.Empty);
             }
