@@ -308,8 +308,8 @@ namespace DDMSense.DDMS.Summary.Gml
             {
                 result = 7 * result + SrsDimension.GetHashCode();
             }
-            result = 7 * result + AxisLabels.GetHashCode();
-            result = 7 * result + UomLabels.GetHashCode();
+            result = 7 * result + AxisLabels.GetOrderIndependentHashCode();
+            result = 7 * result + UomLabels.GetOrderIndependentHashCode();
             return (result);
         }
 

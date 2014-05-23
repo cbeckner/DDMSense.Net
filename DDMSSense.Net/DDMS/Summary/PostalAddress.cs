@@ -335,7 +335,7 @@ namespace DDMSense.DDMS.Summary
         public override int GetHashCode()
         {
             int result = base.GetHashCode();
-            result = 7 * result + Streets.GetHashCode();
+            result = 7 * result + Streets.GetOrderIndependentHashCode();
             result = 7 * result + City.GetHashCode();
             result = 7 * result + State.GetHashCode();
             result = 7 * result + Province.GetHashCode();
