@@ -296,7 +296,7 @@ namespace DDMSense.DDMS.Summary
         private void ValidateInheritedAttributes(Element extentElement)
         {
             string unitOfMeasure = extentElement.Attributes().FirstOrDefault(a => a.Name.LocalName == UOM_NAME).ToNonNullString();
-            string datum = extentElement.Attributes().FirstOrDefault(a => a.Name.LocalName == UOM_NAME).ToNonNullString();
+            string datum = extentElement.Attributes().FirstOrDefault(a => a.Name.LocalName == DATUM_NAME).ToNonNullString();
             if (!String.IsNullOrEmpty(unitOfMeasure) && !unitOfMeasure.Equals(UnitOfMeasure))
             {
                 throw new InvalidDDMSException("The unitOfMeasure on the " + extentElement.Name.LocalName +

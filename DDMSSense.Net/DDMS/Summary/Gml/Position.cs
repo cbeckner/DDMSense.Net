@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using DDMSense.Util;
+using System.Linq;
 
 #endregion
 
@@ -333,6 +334,8 @@ namespace DDMSense.DDMS.Summary.Gml
                         coordinates.Add(coord);
                     }
                 }
+
+                _coordinates = _coordinates.Where(c => !c.Empty).ToList();
                 return (new Position(coordinates, SrsAttributes.Commit()));
             }
 

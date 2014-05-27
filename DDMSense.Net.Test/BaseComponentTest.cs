@@ -129,22 +129,18 @@ namespace DDMSense.Test
         public virtual void TestBuildOutput()
         {
             Rights rights = new Rights(true, true, true);
-            PrivateObject po = new PrivateObject(rights, new PrivateType(typeof(Rights)));
             List<IDDMSComponent> objectList = new List<IDDMSComponent>();
             objectList.Add(rights);
 
-            Assert.AreEqual("rights.privacyAct: true\nrights.intellectualProperty: true\nrights.copyright: true\n", (string)po.Invoke("BuildOutput", new object[] { false, string.Empty, objectList }));
-            //rights.BuildOutput(false, "", objectList));
+            Assert.AreEqual("rights.privacyAct: true\nrights.intellectualProperty: true\nrights.copyright: true\n",  rights.BuildOutput(false, "", objectList));
 
             List<string> stringList = new List<string>();
             stringList.Add("Text");
-            Assert.AreEqual("name: Text\n", (string)po.Invoke("BuildOutput", new object[] { false, "name", stringList }));
-            //rights.BuildOutput(false, "name", stringList));
+            Assert.AreEqual("name: Text\n", rights.BuildOutput(false, "name", stringList));
 
             List<double?> otherList = new List<double?>();
             otherList.Add(Convert.ToDouble(2.0));
-            Assert.AreEqual("name: 2.0\n", (string)po.Invoke("BuildOutput", new object[] { false, "name", otherList }));
-            //rights.BuildOutput(false, "name", otherList));
+            Assert.AreEqual("name: 2\n", rights.BuildOutput(false, "name", otherList));
         }
 
         [TestMethod()]

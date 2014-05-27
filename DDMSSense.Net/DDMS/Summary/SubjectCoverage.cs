@@ -355,17 +355,18 @@ namespace DDMSense.DDMS.Summary
         protected internal override void ValidateWarnings()
         {
             var uniqueKeywords = new List<Keyword>(Keywords);
-            if (uniqueKeywords.Count != Keywords.Count)
+
+            if (uniqueKeywords.Distinct().Count() != Keywords.Count)
             {
                 AddWarning("1 or more keywords have the same value.");
             }
             var uniqueCategories = new List<Category>(Categories);
-            if (uniqueCategories.Count != Categories.Count)
+            if (uniqueCategories.Distinct().Count() != Categories.Count)
             {
                 AddWarning("1 or more categories have the same value.");
             }
             var uniqueMetrics = new List<ProductionMetric>(ProductionMetrics);
-            if (uniqueMetrics.Count != ProductionMetrics.Count)
+            if (uniqueMetrics.Distinct().Count() != ProductionMetrics.Count)
             {
                 AddWarning("1 or more productionMetrics have the same value.");
             }

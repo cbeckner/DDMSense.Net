@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
+using System.Xml;
 
 #endregion usings
 
@@ -324,7 +325,7 @@ namespace DDMSense
         /// <param name="prefix"> the first part of the name in the name-value pairing (will be escaped in HTML) </param>
         /// <param name="contents"> a list of the values (will be escaped in HTML) </param>
         /// <returns> a string containing the output </returns>
-        protected internal virtual string BuildOutput<T1>(bool isHTML, string prefix, List<T1> contents)
+        public virtual string BuildOutput<T1>(bool isHTML, string prefix, List<T1> contents)
         {
             var values = new StringBuilder();
             for (int i = 0; i < contents.Count; i++)

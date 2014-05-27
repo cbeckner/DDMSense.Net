@@ -345,6 +345,7 @@ namespace DDMSense.DDMS.FormatElements
             /// <see cref="IBuilder#commit()"></see>
             public virtual IDDMSComponent Commit()
             {
+                if (Extent == null) Extent = new Extent.Builder();
                 return (Empty ? null : new Format(MimeType, (Extent)Extent.Commit(), Medium));
             }
 

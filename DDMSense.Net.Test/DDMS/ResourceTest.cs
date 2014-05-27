@@ -32,6 +32,7 @@ namespace DDMSense.Test.DDMS
     using Microsoft.XmlDiffPatch;
     using System.Xml;
     using System.Xml.Linq;
+    using System.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using DescriptionTest = DDMSense.Test.DDMS.Summary.DescriptionTest;
     using ExtensibleAttributes = DDMSense.DDMS.Extensible.ExtensibleAttributes;
@@ -1243,13 +1244,28 @@ namespace DDMSense.Test.DDMS
             DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
             CreateComponents();
 
+            string ddmsenceNs = "http://ddmsence.urizone.net/";
+
+            //Build a wrapper element with the required namespaces so the attributes will inherit the proper prefix
+            XElement element = Util.BuildDDMSElement("TestElement", null);
+            element.Add(new XAttribute(XNamespace.Xmlns + PropertyReader.GetPrefix("ism"), version.IsmNamespace));
+            element.Add(new XAttribute(XNamespace.Xmlns + "ddmsence", ddmsenceNs));
+
             // This can be a parameter or an extensible.
-            XAttribute icAttribute = new XAttribute(XName.Get("ISM:DESVersion", version.IsmNamespace), "2");
+            XAttribute icAttribute = new XAttribute(XNamespace.Get(version.IsmNamespace) + "DESVersion", "2");
+            element.Add(icAttribute);
             // This can be a securityAttribute or an extensible.
-            XAttribute secAttribute = new XAttribute(XName.Get("ISM:classification", version.IsmNamespace), "U");
+            XAttribute secAttribute = new XAttribute(XNamespace.Get(version.IsmNamespace) + "classification", "U");
+            element.Add(secAttribute);
             // This can be an extensible.
-            XAttribute uniqueAttribute = new XAttribute(XName.Get("ddmsence:confidence", "http://ddmsence.urizone.net/"), "95");
+            XAttribute uniqueAttribute = new XAttribute(XNamespace.Get(ddmsenceNs) + "classification", "95");
+            element.Add(uniqueAttribute);
             List<XAttribute> exAttr = new List<XAttribute>();
+
+            //Extract the attributes from the element (they will now carry their prefix)
+            icAttribute = element.Attributes().Where(a => a.Name == XNamespace.Get(version.IsmNamespace) + "DESVersion").FirstOrDefault();
+            secAttribute = element.Attributes().Where(a => a.Name == XNamespace.Get(version.IsmNamespace) + "classification").FirstOrDefault();
+            uniqueAttribute = element.Attributes().Where(a => a.Name == XNamespace.Get(ddmsenceNs) + "classification").FirstOrDefault();
 
             // Base Case
             Resource component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
@@ -1336,11 +1352,17 @@ namespace DDMSense.Test.DDMS
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 CreateComponents();
 
+                //Wrapper element
+                XElement element = Util.BuildDDMSElement("TestElement", null);
+                element.Add(new XAttribute(XNamespace.Xmlns + PropertyReader.GetPrefix("ism"), version.IsmNamespace));
+
                 // IsmDESVersion in parameter AND extensible.
                 try
                 {
+                    element.Add(new XAttribute(XNamespace.Get(version.IsmNamespace) + "DESVersion", "2"));
+
                     List<XAttribute> exAttr = new List<XAttribute>();
-                    exAttr.Add(new XAttribute(XName.Get("ISM:DESVersion", version.IsmNamespace), "2"));
+                    exAttr.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(version.IsmNamespace) + "DESVersion").FirstOrDefault());
                     new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
                     Assert.Fail("Allowed invalid data.");
                 }
@@ -1354,8 +1376,11 @@ namespace DDMSense.Test.DDMS
                 {
                     try
                     {
+                        element.Add(new XAttribute(XNamespace.Xmlns + PropertyReader.GetPrefix("ntk"), version.NtkNamespace));
+                    element.Add(new XAttribute(XNamespace.Get(version.NtkNamespace) + "DESVersion", "2"));
+                        
                         List<XAttribute> exAttr = new List<XAttribute>();
-                        exAttr.Add(new XAttribute(XName.Get("ntk:DESVersion", version.NtkNamespace), "2"));
+                        exAttr.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(version.NtkNamespace) + "DESVersion").FirstOrDefault());
                         new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
                         Assert.Fail("Allowed invalid data.");
                     }
@@ -1368,8 +1393,10 @@ namespace DDMSense.Test.DDMS
                 // classification in securityAttributes AND extensible.
                 try
                 {
+                    element.Add(new XAttribute(XNamespace.Get(version.IsmNamespace) + "classification", version.IsmNamespace), "U");
+
                     List<XAttribute> exAttr = new List<XAttribute>();
-                    exAttr.Add(new XAttribute(XName.Get("ISM:classification", version.IsmNamespace), "U"));
+                    exAttr.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(version.IsmNamespace) + "classification").FirstOrDefault());
                     new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
                     Assert.Fail("Allowed invalid data.");
                 }
@@ -1579,6 +1606,7 @@ namespace DDMSense.Test.DDMS
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
+                
                 Resource.Builder builder = new Resource.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
@@ -1614,6 +1642,7 @@ namespace DDMSense.Test.DDMS
                 builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
                 Assert.IsTrue(builder.Empty);
                 builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
+                builder.ExtensibleElements[0].Xml = "InvalidXml";
                 Assert.IsFalse(builder.Empty);
             }
         }

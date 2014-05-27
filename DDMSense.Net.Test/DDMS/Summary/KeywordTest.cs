@@ -352,7 +352,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
             catch (InvalidDDMSException e)
             {
-                ExpectMessage(e, "The extensible attribute with the name");
+                ExpectMessage(e, "The extensible XAttribute with the name");
             }
         }
 
