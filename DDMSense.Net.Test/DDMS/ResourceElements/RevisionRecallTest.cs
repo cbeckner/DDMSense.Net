@@ -427,16 +427,24 @@ namespace DDMSense.Test.DDMS.ResourceElements
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
+                XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+                XmlDocument expected = new XmlDocument();
+                XmlDocument actual = new XmlDocument();
+
                 // links
                 RevisionRecall elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 RevisionRecall dataComponent = GetInstance(SUCCESS, LinkTest.GetLocatorFixtureList(true), DetailsTest.FixtureList, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.AreEqual(elementComponent, dataComponent);
+                expected.LoadXml(elementComponent.ToXML());
+                actual.LoadXml(dataComponent.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
                 Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
 
                 // text
                 elementComponent = GetInstance(SUCCESS, TextFixtureElement);
                 dataComponent = GetInstance(SUCCESS, TEST_VALUE, TEST_REVISION_ID, TEST_REVISION_TYPE, TEST_NETWORK, TEST_OTHER_NETWORK, XLinkAttributesTest.ResourceFixture);
-                Assert.AreEqual(elementComponent, dataComponent);
+                expected.LoadXml(elementComponent.ToXML());
+                actual.LoadXml(dataComponent.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
                 Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }

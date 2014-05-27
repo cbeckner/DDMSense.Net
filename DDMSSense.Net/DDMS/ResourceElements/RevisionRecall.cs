@@ -103,6 +103,7 @@ namespace DDMSense.DDMS.ResourceElements
             Details = new List<Details>();
             Links = new List<Link>();
             XLinkAttributes = new XLinkAttributes();
+            Value = String.Empty;
         }
 
         /// <summary>
@@ -141,7 +142,15 @@ namespace DDMSense.DDMS.ResourceElements
                 }
                 XLinkAttributes = new XLinkAttributes(element);
                 SecurityAttributes = new SecurityAttributes(element);
-                Value = element.Value.ToNonNullString();
+
+                string value = string.Empty;
+
+                //Only assign Value if the XmlNodeType is Text (it can contain elements).
+                if (element.Nodes().Any(n => n.NodeType == System.Xml.XmlNodeType.Text))
+                    value = element.Value;
+
+                Value = value.ToNonNullString();
+
                 Validate();
             }
             catch (InvalidDDMSException e)
@@ -213,7 +222,7 @@ namespace DDMSense.DDMS.ResourceElements
                 if (details == null)
                     details = new List<Details>();
 
-                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), value);
+                XElement element = Util.Util.BuildDDMSElement(GetName(DDMSVersion.CurrentVersion), value.ToNonNullString());
                 foreach (var link in links)
                     element.Add(link.ElementCopy);
 
@@ -234,6 +243,13 @@ namespace DDMSense.DDMS.ResourceElements
                 XLinkAttributes.AddTo(element);
                 SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
                 SecurityAttributes.AddTo(element);
+
+                //Only assign Value if the XmlNodeType is Text (it can contain elements).
+                if (element.Nodes().Any(n => n.NodeType == System.Xml.XmlNodeType.Text))
+                    value = element.Value;
+
+                Value = value.ToNonNullString();
+
                 SetElement(element, true);
             }
             catch (InvalidDDMSException e)
