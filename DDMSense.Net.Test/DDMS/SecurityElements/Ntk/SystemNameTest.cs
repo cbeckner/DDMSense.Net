@@ -214,7 +214,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 // Missing value
                 XElement element = Util.BuildElement(ntkPrefix, SystemName.GetName(version), version.NtkNamespace, null);
                 SecurityAttributesTest.Fixture.AddTo(element);
-                GetInstance("\"\" is not a valid NMTOKEN.", element);
+                GetInstance("Invalid NmToken value ''.", element);
 
                 // Missing security attributes
                 element = Util.BuildElement(ntkPrefix, SystemName.GetName(version), version.NtkNamespace, TEST_VALUE);
@@ -230,7 +230,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 // Missing value
-                GetInstance("\"\" is not a valid NMTOKEN.", null, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
+                GetInstance("Invalid NmToken value ''.", null, TEST_ID, TEST_ID_REFERENCE, TEST_QUALIFIER);
 
                 // Missing security attributes
                 try
