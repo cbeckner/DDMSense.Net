@@ -99,20 +99,20 @@ namespace DDMSense.DDMS.Summary.Gml
         public SRSAttributes(Element element)
             : base(element.Name.NamespaceName)
         {
-            _srsName = (string)element.Attribute(XName.Get(SRS_NAME_NAME, NO_NAMESPACE));
+            _srsName = element.Attribute(XName.Get(SRS_NAME_NAME, NO_NAMESPACE)).ToNonNullString();
 
-            string srsDimension = (string)element.Attribute(XName.Get(SRS_DIMENSION_NAME, NO_NAMESPACE));
+            string srsDimension = element.Attribute(XName.Get(SRS_DIMENSION_NAME, NO_NAMESPACE)).ToNonNullString();
             if (!String.IsNullOrEmpty(srsDimension))
             {
                 _srsDimension = Convert.ToInt32(srsDimension);
             }
-            string axisLabels = (string)element.Attribute(XName.Get(AXIS_LABELS_NAME, NO_NAMESPACE));
+            string axisLabels = element.Attribute(XName.Get(AXIS_LABELS_NAME, NO_NAMESPACE)).ToNonNullString();
             _axisLabels = new List<string>();
             if (!String.IsNullOrEmpty(axisLabels))
             {
                 _axisLabels.AddRange(Util.Util.GetXsListAsList(axisLabels));
             }
-            string uomLabels = (string)element.Attribute(XName.Get(UOM_LABELS_NAME, NO_NAMESPACE));
+            string uomLabels = element.Attribute(XName.Get(UOM_LABELS_NAME, NO_NAMESPACE)).ToNonNullString();
             _uomLabels = new List<string>();
             if (!String.IsNullOrEmpty(uomLabels))
             {

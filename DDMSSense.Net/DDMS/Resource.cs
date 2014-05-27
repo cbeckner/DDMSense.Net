@@ -209,7 +209,7 @@ namespace DDMSense.DDMS
 
                 CompliesWiths = Util.Util.GetXsListAsList(GetAttributeValue(COMPLIES_WITH_NAME, ismNamespace));
 
-                string ismDESVersion = (string)element.Attribute(XName.Get(DES_VERSION_NAME, ismNamespace));
+                string ismDESVersion = element.Attribute(XName.Get(DES_VERSION_NAME, ismNamespace)).ToNonNullString();
                 if (!String.IsNullOrEmpty(ismDESVersion))
                 {
                     try
@@ -223,7 +223,7 @@ namespace DDMSense.DDMS
                 }
                 if (DDMSVersion.IsAtLeast("4.0.1"))
                 {
-                    string ntkDESVersion = (string)element.Attribute(XName.Get(DES_VERSION_NAME, DDMSVersion.NtkNamespace));
+                    string ntkDESVersion = element.Attribute(XName.Get(DES_VERSION_NAME, DDMSVersion.NtkNamespace)).ToNonNullString();
                     if (!String.IsNullOrEmpty(ntkDESVersion))
                     {
                         try

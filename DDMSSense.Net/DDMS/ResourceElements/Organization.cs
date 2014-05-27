@@ -213,7 +213,7 @@ namespace DDMSense.DDMS.ResourceElements
         {
             if (DDMSVersion.IsAtLeast("4.0.1"))
             {
-                if (String.IsNullOrEmpty(Acronym) && (string)Element.Attribute(XName.Get(ACRONYM_NAME, Namespace)) != null)
+                if (String.IsNullOrEmpty(Acronym) && Element.Attribute(XName.Get(ACRONYM_NAME, Namespace)) != null)
                     AddWarning("A ddms:acronym attribute was found with no value.");
             }
             base.ValidateWarnings();

@@ -82,7 +82,7 @@ namespace DDMSense
                     if (Unknown.GetName(DDMSVersion).Equals(entityType))
                         Entity = new Unknown(entityElement);
                 }
-                string pocTypes = (string)element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace)) ?? string.Empty;
+                string pocTypes = element.Attribute(XName.Get(POC_TYPE_NAME, DDMSVersion.IsmNamespace)).ToNonNullString();
                 PocTypes = Util.Util.GetXsListAsList(pocTypes);
                 SecurityAttributes = new SecurityAttributes(element);
                 Validate();

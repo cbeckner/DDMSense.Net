@@ -89,14 +89,14 @@ namespace DDMSense.DDMS.SecurityElements.Ism
 
             string icNamespace = DDMSVersion.IsmNamespace;
 
-            _noticeType = (string)element.Attribute(XName.Get(NOTICE_TYPE_NAME, icNamespace));
-            _noticeReason = (string)element.Attribute(XName.Get(NOTICE_REASON_NAME, icNamespace));
-            _unregisteredNoticeType = (string)element.Attribute(XName.Get(UNREGISTERED_NOTICE_TYPE_NAME, icNamespace));
-            string noticeDate = (string)element.Attribute(XName.Get(NOTICE_DATE_NAME, icNamespace));
+            _noticeType = element.Attribute(XName.Get(NOTICE_TYPE_NAME, icNamespace)).ToNonNullString();
+            _noticeReason = element.Attribute(XName.Get(NOTICE_REASON_NAME, icNamespace)).ToNonNullString();
+            _unregisteredNoticeType = element.Attribute(XName.Get(UNREGISTERED_NOTICE_TYPE_NAME, icNamespace)).ToNonNullString();
+            string noticeDate = element.Attribute(XName.Get(NOTICE_DATE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(noticeDate))
                 _noticeDate = DateTime.Parse(noticeDate);
 
-            string external = (string)element.Attribute(XName.Get(EXTERNAL_NOTICE_NAME, icNamespace));
+            string external = element.Attribute(XName.Get(EXTERNAL_NOTICE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(external))
                 _externalNotice = Convert.ToBoolean(external);
 
