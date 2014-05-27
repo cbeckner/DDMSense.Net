@@ -1136,7 +1136,7 @@ namespace DDMSense.DDMS
 
             text.Append(BuildOutput(isHtml, "", ExtensibleElements));
 
-            text.Append(BuildOutput(isHtml, "extensible.layer", Convert.ToString(ExtensibleElements.Count > 0)));
+            text.Append(BuildOutput(isHtml, "extensible.layer", XmlConvert.ToString(ExtensibleElements.Count > 0)));
             text.Append(BuildOutput(isHtml, "ddms.generator", "DDMSence " + PropertyReader.GetProperty("version")));
             text.Append(BuildOutput(isHtml, "ddms.version", DDMSVersion.Version));
             return (text.ToString());
