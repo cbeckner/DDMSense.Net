@@ -239,7 +239,7 @@ namespace DDMSense.Test.DDMS.FormatElements
                 component = GetInstance(SUCCESS, element);
                 Assert.AreEqual(1, component.ValidationWarnings.Count());
 
-                string text = "A qualifier has been set without an accompanying value attribute.";
+                string text = "A qualifier has been set without an accompanying value XAttribute.";
                 string locator = "ddms:extent";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 

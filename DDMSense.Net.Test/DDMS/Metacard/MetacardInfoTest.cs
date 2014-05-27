@@ -464,7 +464,7 @@ namespace DDMSense.Test.DDMS.Metacard
                     string locator = "ddms:metacardInfo";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 
-                    text = "The ISM:externalNotice attribute in this DDMS component";
+                    text = "The ISM:externalNotice XAttribute in this DDMS component";
                     locator = "ddms:metacardInfo/ddms:noticeList/ISM:Notice";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[1]);
                 }

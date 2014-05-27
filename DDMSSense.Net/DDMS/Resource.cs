@@ -1070,7 +1070,7 @@ namespace DDMSense.DDMS
             {
                 AddWarnings(NoticeAttributes.ValidationWarnings, true);
                 if (NoticeAttributes.ExternalReference != null)
-                    AddDdms40Warning("ISM:externalNotice attribute");
+                    AddDdms40Warning("ISM:externalNotice XAttribute");
             }
             base.ValidateWarnings();
         }

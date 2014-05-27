@@ -109,7 +109,7 @@ namespace DDMSense.DDMS.ResourceElements
         protected internal override void ValidateWarnings()
         {
             if (!String.IsNullOrEmpty(Qualifier) && String.IsNullOrEmpty(Value))
-                AddWarning("A qualifier has been set without an accompanying value attribute.");
+                AddWarning("A qualifier has been set without an accompanying value XAttribute.");
             
             if (String.IsNullOrEmpty(Qualifier) && String.IsNullOrEmpty(Value))
                 AddWarning("Neither a qualifier nor a value was set on this language.");
