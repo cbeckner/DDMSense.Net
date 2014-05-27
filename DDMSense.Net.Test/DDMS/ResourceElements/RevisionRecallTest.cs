@@ -584,19 +584,28 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_RevisionRecall_BuilderEquality()
         {
+
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
+                XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+                XmlDocument expected = new XmlDocument();
+                XmlDocument actual = new XmlDocument();
+
                 // Equality after Building (links)
                 RevisionRecall component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 RevisionRecall.Builder builder = new RevisionRecall.Builder(component);
-                Assert.AreEqual(component, builder.Commit());
+                expected.LoadXml(component.ToXML());
+                actual.LoadXml(builder.Commit().ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 // Equality after Building (text)
                 component = GetInstance(SUCCESS, TextFixtureElement);
                 builder = new RevisionRecall.Builder(component);
-                Assert.AreEqual(component, builder.Commit());
+                expected.LoadXml(component.ToXML());
+                actual.LoadXml(builder.Commit().ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 

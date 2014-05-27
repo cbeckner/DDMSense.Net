@@ -366,13 +366,20 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_ResourceMaqnagement_BuilderEquality()
         {
+
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
+ 
+                XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+                XmlDocument expected = new XmlDocument();
+                XmlDocument actual = new XmlDocument();
 
                 ResourceManagement component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 ResourceManagement.Builder builder = new ResourceManagement.Builder(component);
-                Assert.AreEqual(component, builder.Commit());
+                expected.LoadXml(component.ToXML());
+                actual.LoadXml(builder.Commit().ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 

@@ -30,7 +30,9 @@ namespace DDMSense.Test.DDMS.Metacard
     using DDMSense.DDMS.ResourceElements;
     using DDMSense.Test.DDMS.ResourceElements;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.XmlDiffPatch;
     using System;
+    using System.Xml;
     using System.Xml.Linq;
     using AccessTest = DDMSense.Test.DDMS.SecurityElements.Ntk.AccessTest;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
@@ -477,13 +479,20 @@ namespace DDMSense.Test.DDMS.Metacard
         [TestMethod]
         public virtual void Metacard_MetacardInfo_ConstructorEquality()
         {
+
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
+                XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+                XmlDocument expected = new XmlDocument();
+                XmlDocument actual = new XmlDocument();
+
                 MetacardInfo elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 MetacardInfo dataComponent = GetInstance(SUCCESS, ChildComponents);
-                Assert.AreEqual(elementComponent, dataComponent);
+                expected.LoadXml(elementComponent.ToXML());
+                actual.LoadXml(dataComponent.ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
                 Assert.AreEqual(elementComponent.GetHashCode(), dataComponent.GetHashCode());
             }
         }
@@ -592,13 +601,19 @@ namespace DDMSense.Test.DDMS.Metacard
         [TestMethod]
         public virtual void Metacard_MetacardInfo_BuilderEquality()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
+
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 MetacardInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
                 MetacardInfo.Builder builder = new MetacardInfo.Builder(component);
-                Assert.AreEqual(component, builder.Commit());
+                expected.LoadXml(component.ToXML());
+                actual.LoadXml(builder.Commit().ToXML());
+                Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
             }
         }
 
