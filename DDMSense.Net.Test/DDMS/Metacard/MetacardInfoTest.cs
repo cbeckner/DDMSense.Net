@@ -480,13 +480,14 @@ namespace DDMSense.Test.DDMS.Metacard
         public virtual void Metacard_MetacardInfo_ConstructorEquality()
         {
 
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
+
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
-                XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
-                XmlDocument expected = new XmlDocument();
-                XmlDocument actual = new XmlDocument();
 
                 MetacardInfo elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
                 MetacardInfo dataComponent = GetInstance(SUCCESS, ChildComponents);

@@ -423,13 +423,12 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_RevisionRecall_ConstructorEquality()
         {
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
-
-                XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
-                XmlDocument expected = new XmlDocument();
-                XmlDocument actual = new XmlDocument();
 
                 // links
                 RevisionRecall elementComponent = GetInstance(SUCCESS, GetValidElement(sVersion));
@@ -552,8 +551,8 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 // links
+                expected.LoadXml(GetExpectedXMLOutput(true));
                 RevisionRecall component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                expected.LoadXml(GetExpectedXMLOutput(false));
                 actual.LoadXml(component.ToXML());
                 Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
@@ -562,6 +561,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
                 // text
+                expected.LoadXml(GetExpectedXMLOutput(false));
                 component = GetInstance(SUCCESS, TextFixtureElement);
                 actual.LoadXml(component.ToXML());
                 Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
@@ -593,13 +593,13 @@ namespace DDMSense.Test.DDMS.ResourceElements
         public virtual void ResourceElements_RevisionRecall_BuilderEquality()
         {
 
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDocument expected = new XmlDocument();
+            XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
-                XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
-                XmlDocument expected = new XmlDocument();
-                XmlDocument actual = new XmlDocument();
 
                 // Equality after Building (links)
                 RevisionRecall component = GetInstance(SUCCESS, GetValidElement(sVersion));
