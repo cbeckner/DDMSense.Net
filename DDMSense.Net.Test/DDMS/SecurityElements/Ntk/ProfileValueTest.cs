@@ -409,10 +409,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 {
                     ExpectMessage(e, "Invalid NmToken value ''.");
                 }
-                catch (Exception ex)
-                {
-                    ExpectMessage(ex, "Invalid NmToken value ''..");
-                }
+
                 builder.Vocabulary = "test";
                 builder.SecurityAttributes.Classification = "U";
                 builder.SecurityAttributes.OwnerProducers = Util.GetXsListAsList("USA");
