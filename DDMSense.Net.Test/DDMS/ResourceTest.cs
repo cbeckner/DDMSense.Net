@@ -1595,6 +1595,7 @@ namespace DDMSense.Test.DDMS
             {
                 DDMSVersion.SetCurrentVersion(sVersion);
 
+                
                 Resource.Builder builder = new Resource.Builder();
                 Assert.IsNull(builder.Commit());
                 Assert.IsTrue(builder.Empty);
@@ -1630,6 +1631,7 @@ namespace DDMSense.Test.DDMS
                 builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
                 Assert.IsTrue(builder.Empty);
                 builder.ExtensibleElements.Add(new ExtensibleElement.Builder());
+                builder.ExtensibleElements[0].Xml = "InvalidXml";
                 Assert.IsFalse(builder.Empty);
             }
         }
