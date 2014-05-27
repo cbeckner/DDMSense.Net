@@ -359,7 +359,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 foreach (var patternString in GetEnumerationPatterns(enumerationKey))
                 {
-                    Match regex = Regex.Match(value, patternString);
+                    Match regex = Regex.Match(value, "^" + patternString + "$");
                     if (regex.Success)
                     {
                         isValidToken = true;
