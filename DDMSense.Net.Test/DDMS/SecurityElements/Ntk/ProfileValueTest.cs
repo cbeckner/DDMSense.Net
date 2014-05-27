@@ -230,7 +230,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 // Missing vocabulary
                 XElement element = Util.BuildElement(ntkPrefix, ProfileValue.GetName(version), version.NtkNamespace, TEST_VALUE);
                 SecurityAttributesTest.Fixture.AddTo(element);
-                GetInstance("\"\" is not a valid NMTOKEN.", element);
+                GetInstance("Invalid NmToken value ''.", element);
 
                 // Missing security attributes
                 element = Util.BuildElement(ntkPrefix, ProfileValue.GetName(version), version.NtkNamespace, TEST_VALUE);
@@ -247,7 +247,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 // Missing vocabulary
-                GetInstance("\"\" is not a valid NMTOKEN.", TEST_VALUE, null, null, null, null);
+                GetInstance("Invalid NmToken value ''.", TEST_VALUE, null, null, null, null);
                 // Missing security attributes
                 try
                 {
@@ -408,6 +408,10 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 catch (InvalidDDMSException e)
                 {
                     ExpectMessage(e, "\"\" is not a valid NMTOKEN.");
+                }
+                catch (Exception ex)
+                {
+                    ExpectMessage(ex, "\"\" is not a valid NMTOKEN.");
                 }
                 builder.Vocabulary = "test";
                 builder.SecurityAttributes.Classification = "U";

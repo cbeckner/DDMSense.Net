@@ -720,7 +720,18 @@ namespace DDMSense.Util
         /// <exception cref="XmlException"> if the name is not an NMTOKEN. </exception>
         public static void RequireValidNMToken(string name)
         {
-            XmlConvert.VerifyNMTOKEN(name.ToNonNullString());
+            try
+            {
+                XmlConvert.VerifyNMTOKEN(name.ToNonNullString());
+            }
+            catch (XmlException e)
+            {
+                throw new InvalidDDMSException(e.Message);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         /// <summary>
