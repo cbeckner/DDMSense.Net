@@ -32,6 +32,7 @@ namespace DDMSense.Test.DDMS
     using Microsoft.XmlDiffPatch;
     using System.Xml;
     using System.Xml.Linq;
+    using System.Linq;
     using DDMSVersion = DDMSense.Util.DDMSVersion;
     using DescriptionTest = DDMSense.Test.DDMS.Summary.DescriptionTest;
     using ExtensibleAttributes = DDMSense.DDMS.Extensible.ExtensibleAttributes;
@@ -1243,13 +1244,28 @@ namespace DDMSense.Test.DDMS
             DDMSVersion version = DDMSVersion.SetCurrentVersion("2.0");
             CreateComponents();
 
+            string ddmsenceNs = "http://ddmsence.urizone.net/";
+
+            //Build a wrapper element with the required namespaces so the attributes will inherit the proper prefix
+            XElement element = Util.BuildDDMSElement("TestElement", null);
+            element.Add(new XAttribute(XNamespace.Xmlns + PropertyReader.GetPrefix("ism"), version.IsmNamespace));
+            element.Add(new XAttribute(XNamespace.Xmlns + "ddmsence", ddmsenceNs));
+
             // This can be a parameter or an extensible.
-            XAttribute icAttribute = new XAttribute(XName.Get("ISM:DESVersion", version.IsmNamespace), "2");
+            XAttribute icAttribute = new XAttribute(XNamespace.Get(version.IsmNamespace) + "DESVersion", "2");
+            element.Add(icAttribute);
             // This can be a securityAttribute or an extensible.
-            XAttribute secAttribute = new XAttribute(XName.Get("ISM:classification", version.IsmNamespace), "U");
+            XAttribute secAttribute = new XAttribute(XNamespace.Get(version.IsmNamespace) + "classification", "U");
+            element.Add(secAttribute);
             // This can be an extensible.
-            XAttribute uniqueAttribute = new XAttribute(XName.Get("ddmsence:confidence", "http://ddmsence.urizone.net/"), "95");
+            XAttribute uniqueAttribute = new XAttribute(XNamespace.Get(ddmsenceNs) + "classification", "95");
+            element.Add(uniqueAttribute);
             List<XAttribute> exAttr = new List<XAttribute>();
+
+            //Extract the attributes from the element (they will now carry their prefix)
+            icAttribute = element.Attributes().Where(a => a.Name == XNamespace.Get(version.IsmNamespace) + "DESVersion").FirstOrDefault();
+            secAttribute = element.Attributes().Where(a => a.Name == XNamespace.Get(version.IsmNamespace) + "classification").FirstOrDefault();
+            uniqueAttribute = element.Attributes().Where(a => a.Name == XNamespace.Get(ddmsenceNs) + "classification").FirstOrDefault();
 
             // Base Case
             Resource component = new Resource(TEST_TOP_LEVEL_COMPONENTS, null);
