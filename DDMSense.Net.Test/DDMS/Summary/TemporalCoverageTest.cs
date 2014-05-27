@@ -534,6 +534,7 @@ namespace DDMSense.Test.DDMS.Summary
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableStart", true));
                     periodElement.Add(ApproximableDateTest.GetFixtureElement("approximableEnd", true));
                     component = GetInstance(SUCCESS, WrapInnerElement(periodElement));
+                    expected.LoadXml(GetExpectedXMLOutput(true));
                     actual.LoadXml(component.ToXML());
                     Assert.IsTrue(diff.Compare(expected.DocumentElement, actual.DocumentElement));
 
