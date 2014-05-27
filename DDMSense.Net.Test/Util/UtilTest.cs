@@ -732,7 +732,7 @@ namespace DDMSense.Test.Util
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Xml.XmlException), "\"null\" is not a valid NMTOKEN.")]
+        [ExpectedException(typeof(InvalidDDMSException), "\"null\" is not a valid NMTOKEN.")]
         public virtual void Util_Util_RequireValidNMTokenNull()
         {
             Util.RequireValidNMToken(null);
@@ -1225,13 +1225,14 @@ namespace DDMSense.Test.Util
         {
             var testFile = File.OpenRead(PropertyReader.GetProperty("test.unit.data") + "3.0/" + "resource.xml");
             string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).ToXML();
-            testFile.Close();
-            testFile = File.OpenRead(PropertyReader.GetProperty("test.unit.data") + "3.0/" + "resource.xml");
+            testFile.Position = 0;
             XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
             XmlDocument actual = new XmlDocument();
             XmlDocument expected = new XmlDocument();
             expected.LoadXml((new DDMSReader()).GetDDMSResource(testFile).ToXML());
+            testFile.Position = 0;
             actual.LoadXml(Util.BuildXmlDocument(testFile).ToString());
+            testFile.Close();
             Assert.IsTrue(diff.Compare(expected, actual));
         }
 
@@ -1255,7 +1256,7 @@ namespace DDMSense.Test.Util
             }
             catch (IOException e)
             {
-                ExpectMessage(e, "Content is not allowed in prolog.");
+                ExpectMessage(e, "Data at the root level is invalid.");
             }
         }
 

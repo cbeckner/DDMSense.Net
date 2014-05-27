@@ -94,7 +94,7 @@ namespace DDMSense.Test.Util
             }
             catch (InvalidDDMSException e)
             {
-                ExpectMessage(e, "nu.xom.ValidityException");
+                ExpectMessage(e, "Invalid XML");
             }
         }
 
@@ -130,20 +130,6 @@ namespace DDMSense.Test.Util
             {
                 ExpectMessage(e, "Unexpected namespace URI and local name encountered");
             }
-        }
-
-        [TestMethod]
-        public virtual void Util_DDMSReaderTest_GetResourceSuccessString()
-        {
-            //LineNumberReader reader = new LineNumberReader(new FileReader(new File(PropertyReader.getProperty("test.unit.data"), "3.0/resource.xml")));
-            //StringBuilder xmlString = new StringBuilder();
-            //string nextLine = reader.readLine();
-            //while (nextLine != null) {
-            //    xmlString.Append(nextLine);
-            //    nextLine = reader.readLine();
-            //}
-            //Reader.GetDDMSResource(xmlString.ToString());
-            Assert.Fail("Not Implemented");
         }
 
         [TestMethod]

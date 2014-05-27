@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Schema;
 
 #endregion usings
 
@@ -22,11 +24,9 @@ namespace DDMSense.Util
     /// </summary>
     public class DDMSReader
     {
-        private const string PROP_XERCES_VALIDATION = "http://xml.org/sax/features/validation";
-        private const string PROP_XERCES_SCHEMA_VALIDATION = "http://apache.org/xml/features/validation/schema";
-        private const string PROP_XERCES_EXTERNAL_LOCATION = "http://apache.org/xml/properties/schema/external-schemaLocation";
-
-        private readonly XmlReader _reader;
+        private string _schemaLocation;
+        private XNamespace xsi = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
+        private Dictionary<DDMSVersion, XmlSchemaSet> schemas = new Dictionary<DDMSVersion, XmlSchemaSet>();
 
         /// <summary>
         ///     Constructor
@@ -35,22 +35,19 @@ namespace DDMSense.Util
         /// </summary>
         public DDMSReader()
         {
-            _reader = null;
-            var schemas = new StringBuilder();
+            var schemaLocation = new StringBuilder();
             var versions = new List<string>(DDMSVersion.SupportedVersions);
             versions.Reverse();
             var processedNamespaces = new List<string>();
             foreach (var versionString in versions)
             {
                 DDMSVersion version = DDMSVersion.GetVersionFor(versionString);
-                LoadSchema(version.Namespace, version.Schema, schemas, processedNamespaces);
-                LoadSchema(version.GmlNamespace, version.GmlSchema, schemas, processedNamespaces);
-                LoadSchema(version.NtkNamespace, version.NtkSchema, schemas, processedNamespaces);
+                schemas.Add(version, new XmlSchemaSet());
+                LoadSchema(version, version.Namespace, version.Schema, schemaLocation, ref processedNamespaces);
+                LoadSchema(version, version.GmlNamespace, version.GmlSchema, schemaLocation, ref processedNamespaces);
+                LoadSchema(version, version.NtkNamespace, version.NtkSchema, schemaLocation, ref processedNamespaces);
             }
-            //TODO: Find alternative for SetFeature and SetProperty
-            //Reader.setFeature(PROP_XERCES_VALIDATION, true);
-            //Reader.setFeature(PROP_XERCES_SCHEMA_VALIDATION, true);
-            //Reader.setProperty(PROP_XERCES_EXTERNAL_LOCATION, schemas.ToString().Trim());
+            _schemaLocation = schemaLocation.ToString();
         }
 
         /// <summary>
@@ -64,40 +61,32 @@ namespace DDMSense.Util
             {
                 try
                 {
-                    return Reader.GetAttribute(PROP_XERCES_EXTERNAL_LOCATION);
+                    return _schemaLocation;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw new XmlException(PROP_XERCES_EXTERNAL_LOCATION +
-                                           " is not supported or recognized for this XMLReader.");
+                    throw new XmlException("Schema locations could not be found");
                 }
             }
-        }
-
-        /// <summary>
-        ///     Accessor for the reader
-        /// </summary>
-        private XmlReader Reader
-        {
-            get { return _reader; }
         }
 
         /// <summary>
         ///     Helper method to load schemas into the property for the XML Reader
         /// </summary>
-        /// <param name="namespace"> the XML namespace </param>
-        /// <param name="schemaLocation"> the schema location </param>
+        /// <param name="ns"> the XML namespace </param>
+        /// <param name="schema"> the schema location </param>
         /// <param name="schemas"> the buffer to add the schema location to </param>
         /// <param name="processedNamespaces"> namespaces which have already been loaded </param>
-        private void LoadSchema(string @namespace, string schemaLocation, StringBuilder schemas, List<string> processedNamespaces)
+        private void LoadSchema(DDMSVersion version, string ns, string schemaLocation, StringBuilder schema, ref List<string> processedNamespaces)
         {
-            if (processedNamespaces.Contains(@namespace)) return;
+            if (processedNamespaces.Contains(ns)) return;
             if (!String.IsNullOrEmpty(schemaLocation))
             {
                 string xsd = GetLocalSchemaLocation(schemaLocation);
-                schemas.Append(@namespace).Append(" ").Append(xsd).Append(" ");
+                schemas[version].Add(null, xsd);
+                schema.Append(ns).Append(" ").Append(xsd).Append(" ");
             }
-            processedNamespaces.Add(@namespace);
+            processedNamespaces.Add(ns);
         }
 
         /// <summary>
@@ -110,7 +99,7 @@ namespace DDMSense.Util
         /// <exception cref="ArgumentException"> if the schema could not be found. </exception>
         private string GetLocalSchemaLocation(string schemaLocation)
         {
-            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), schemaLocation.Substring(1, schemaLocation.Length - 1));
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, schemaLocation);
 
             Uri xsd = new Uri(path);
 
@@ -157,6 +146,9 @@ namespace DDMSense.Util
             try
             {
                 XDocument doc = XDocument.Load(path);
+                //doc.Root.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
+                //doc.Root.Add(new XAttribute(xsi + "schemaLocation", _schemaLocation));
+                //ValidateDDMS(doc);
                 return doc.Root;
             }
             catch (XmlException e)
@@ -174,10 +166,11 @@ namespace DDMSense.Util
         public virtual XElement GetElement(string xml)
         {
             Util.RequireValue("XML string", xml);
-
-            byte[] byteArray = Encoding.UTF8.GetBytes(xml);
-            MemoryStream stream = new MemoryStream(byteArray);
-            return (GetElement(stream));
+            XDocument doc = XDocument.Parse(xml);
+            //doc.Root.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
+            //doc.Root.Add(new XAttribute(xsi + "schemaLocation", _schemaLocation));
+            //ValidateDDMS(doc);
+            return doc.Root;
         }
 
         /// <summary>
@@ -191,6 +184,9 @@ namespace DDMSense.Util
             try
             {
                 XDocument doc = XDocument.Load(reader);
+                //doc.Root.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
+                //doc.Root.Add(new XAttribute(xsi + "schemaLocation", _schemaLocation));
+                //ValidateDDMS(doc);
                 return (doc.Root);
             }
             catch (XmlException e)
@@ -245,6 +241,25 @@ namespace DDMSense.Util
         {
             DDMSVersion.SetCurrentVersion(DDMSVersion.GetVersionForNamespace(element.Name.NamespaceName).Version);
             return (new Resource(element));
+        }
+
+        private void ValidateDDMS(XDocument doc)
+        {
+            bool isValid = true;
+            foreach (XmlSchemaSet schema in schemas.Values)
+            {
+                try
+                {
+                    doc.Validate(schema, (o, e) => { throw new InvalidDDMSException("Invalid XML"); });
+                    break;
+                }
+                catch
+                {
+                    isValid = false;
+                }
+            }
+            if (isValid) return;
+            throw new InvalidDDMSException("Invalid XML");
         }
     }
 }
