@@ -407,11 +407,11 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
                 }
                 catch (InvalidDDMSException e)
                 {
-                    ExpectMessage(e, "\"\" is not a valid NMTOKEN.");
+                    ExpectMessage(e, "Invalid NmToken value ''.");
                 }
                 catch (Exception ex)
                 {
-                    ExpectMessage(ex, "\"\" is not a valid NMTOKEN.");
+                    ExpectMessage(ex, "Invalid NmToken value ''..");
                 }
                 builder.Vocabulary = "test";
                 builder.SecurityAttributes.Classification = "U";
