@@ -298,7 +298,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 otherAttributes = new Dictionary<string, string>();
 
             AtomicEnergyMarkings = Util.Util.GetXsListAsList(otherAttributes.GetValueOrEmpty(ATOMIC_ENERGY_MARKINGS_NAME));
-            Classification = classification;
+            Classification = classification.ToNonNullString();
             ClassificationReason = otherAttributes.GetValueOrEmpty(CLASSIFICATION_REASON_NAME);
             ClassifiedBy = otherAttributes.GetValueOrEmpty(CLASSIFIED_BY_NAME);
             CompilationReason = otherAttributes.GetValueOrEmpty(COMPILATION_REASON_NAME);
