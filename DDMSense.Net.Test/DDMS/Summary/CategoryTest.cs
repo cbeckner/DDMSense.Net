@@ -378,7 +378,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
             catch (InvalidDDMSException e)
             {
-                ExpectMessage(e, "The extensible attribute with the name, ddms:qualifier");
+                ExpectMessage(e, "The extensible XAttribute with the name, ddms:qualifier");
             }
 
             // Using ddms:code as the extension (data)
@@ -393,7 +393,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
             catch (InvalidDDMSException e)
             {
-                ExpectMessage(e, "The extensible attribute with the name, ddms:code");
+                ExpectMessage(e, "The extensible XAttribute with the name, ddms:code");
             }
 
             // Using ddms:label as the extension (data)
@@ -408,7 +408,7 @@ namespace DDMSense.Test.DDMS.Summary
             }
             catch (InvalidDDMSException e)
             {
-                ExpectMessage(e, "The extensible attribute with the name, ddms:label");
+                ExpectMessage(e, "The extensible XAttribute with the name, ddms:label");
             }
 
             // Using icism:classification as the extension (data)

@@ -1352,11 +1352,17 @@ namespace DDMSense.Test.DDMS
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
                 CreateComponents();
 
+                //Wrapper element
+                XElement element = Util.BuildDDMSElement("TestElement", null);
+                element.Add(new XAttribute(XNamespace.Xmlns + PropertyReader.GetPrefix("ism"), version.IsmNamespace));
+
                 // IsmDESVersion in parameter AND extensible.
                 try
                 {
+                    element.Add(new XAttribute(XNamespace.Get(version.IsmNamespace) + "DESVersion", "2"));
+
                     List<XAttribute> exAttr = new List<XAttribute>();
-                    exAttr.Add(new XAttribute(XName.Get("ISM:DESVersion", version.IsmNamespace), "2"));
+                    exAttr.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(version.IsmNamespace) + "DESVersion").FirstOrDefault());
                     new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
                     Assert.Fail("Allowed invalid data.");
                 }
@@ -1370,8 +1376,11 @@ namespace DDMSense.Test.DDMS
                 {
                     try
                     {
+                        element.Add(new XAttribute(XNamespace.Xmlns + PropertyReader.GetPrefix("ntk"), version.NtkNamespace));
+                    element.Add(new XAttribute(XNamespace.Get(version.NtkNamespace) + "DESVersion", "2"));
+                        
                         List<XAttribute> exAttr = new List<XAttribute>();
-                        exAttr.Add(new XAttribute(XName.Get("ntk:DESVersion", version.NtkNamespace), "2"));
+                        exAttr.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(version.NtkNamespace) + "DESVersion").FirstOrDefault());
                         new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, IsmDESVersion, NtkDESVersion, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
                         Assert.Fail("Allowed invalid data.");
                     }
@@ -1384,8 +1393,10 @@ namespace DDMSense.Test.DDMS
                 // classification in securityAttributes AND extensible.
                 try
                 {
+                    element.Add(new XAttribute(XNamespace.Get(version.IsmNamespace) + "classification", version.IsmNamespace), "U");
+
                     List<XAttribute> exAttr = new List<XAttribute>();
-                    exAttr.Add(new XAttribute(XName.Get("ISM:classification", version.IsmNamespace), "U"));
+                    exAttr.Add(element.Attributes().Where(a => a.Name == XNamespace.Get(version.IsmNamespace) + "classification").FirstOrDefault());
                     new Resource(TEST_TOP_LEVEL_COMPONENTS, null, null, null, null, null, SecurityAttributesTest.Fixture, null, new ExtensibleAttributes(exAttr));
                     Assert.Fail("Allowed invalid data.");
                 }
