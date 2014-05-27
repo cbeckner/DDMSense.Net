@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using DDMSense.Util;
+using System.Linq;
 
 #endregion
 
@@ -430,6 +431,10 @@ namespace DDMSense.DDMS.Summary.Gml
                         positions.Add(position);
                     }
                 }
+
+                //Remove empty postitions
+                _positions = _positions.Where(p => !p.Empty).ToList();
+
                 return (new Polygon(positions, SrsAttributes.Commit(), Id));
             }
 
