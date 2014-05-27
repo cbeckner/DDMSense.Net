@@ -1084,7 +1084,7 @@ namespace DDMSense.DDMS
                 text.Append(BuildOutput(isHtml, localPrefix + RESOURCE_ELEMENT_NAME, XmlConvert.ToString(ResourceElement.Value)));
 
             if (CreateDate.HasValue)
-                text.Append(BuildOutput(isHtml, localPrefix + CREATE_DATE_NAME, CreateDate.Value.ToString("o")));
+                text.Append(BuildOutput(isHtml, localPrefix + CREATE_DATE_NAME, CreateDate.Value.ToString("yyyy-MM-dd")));
 
             text.Append(BuildOutput(isHtml, localPrefix + COMPLIES_WITH_NAME, Util.Util.GetXsList(CompliesWiths)));
             if (IsmDESVersion != null)
