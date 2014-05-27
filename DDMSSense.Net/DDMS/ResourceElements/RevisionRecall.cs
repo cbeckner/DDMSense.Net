@@ -141,6 +141,7 @@ namespace DDMSense.DDMS.ResourceElements
                 }
                 XLinkAttributes = new XLinkAttributes(element);
                 SecurityAttributes = new SecurityAttributes(element);
+                Value = element.Value.ToNonNullString();
                 Validate();
             }
             catch (InvalidDDMSException e)
