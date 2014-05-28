@@ -996,7 +996,7 @@ namespace DDMSense.DDMS
                 Util.Util.RequireDDMSValue("ntk:" + DES_VERSION_NAME, NtkDESVersion);
             }
             if (!DDMSVersion.IsAtLeast("3.1") && CompliesWiths.Count > 0)
-                throw new InvalidDDMSException("The compliesWith attribute cannot be used until DDMS 3.1 or later.");
+                throw new InvalidDDMSException("The compliesWith XAttribute cannot be used until DDMS 3.1 or later.");
 
             foreach (var with in CompliesWiths)
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_COMPLIES_WITH, with);
