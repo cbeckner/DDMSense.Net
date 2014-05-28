@@ -821,7 +821,7 @@ namespace DDMSense.DDMS
                 foreach (var child in children)
                 {
                     var copy = new XElement(resource);
-                    copy.RemoveAll();
+                    copy.RemoveNodes();
                     copy.Add(new XElement(child));
                     RelatedResources.Add(new RelatedResource(copy));
                 }
