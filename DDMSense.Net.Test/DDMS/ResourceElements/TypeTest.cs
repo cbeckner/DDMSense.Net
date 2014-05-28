@@ -253,7 +253,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 Util.AddDDMSAttribute(element, "qualifier", TEST_QUALIFIER);
                 component = GetInstance(SUCCESS, element);
                 Assert.AreEqual(1, component.ValidationWarnings.Count());
-                string text = "A qualifier has been set without an accompanying value attribute.";
+                string text = "A qualifier has been set without an accompanying value XAttribute.";
                 string locator = "ddms:type";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
 

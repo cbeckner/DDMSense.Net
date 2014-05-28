@@ -305,7 +305,7 @@ namespace DDMSense.Test.DDMS.FormatElements
                 // Nested warnings
                 component = GetInstance(SUCCESS, TEST_MIME_TYPE, new Extent("sizeBytes", ""), TEST_MEDIUM);
                 Assert.AreEqual(1, component.ValidationWarnings.Count());
-                text = "A qualifier has been set without an accompanying value attribute.";
+                text = "A qualifier has been set without an accompanying value XAttribute.";
                 locator = (version.IsAtLeast("4.0.1")) ? "ddms:format/ddms:extent" : "ddms:format/ddms:Media/ddms:extent";
                 AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
             }

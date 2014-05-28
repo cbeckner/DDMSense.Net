@@ -209,7 +209,7 @@ namespace DDMSense.DDMS
 
                 CompliesWiths = Util.Util.GetXsListAsList(GetAttributeValue(COMPLIES_WITH_NAME, ismNamespace));
 
-                string ismDESVersion = (string)element.Attribute(XName.Get(DES_VERSION_NAME, ismNamespace));
+                string ismDESVersion = element.Attribute(XName.Get(DES_VERSION_NAME, ismNamespace)).ToNonNullString();
                 if (!String.IsNullOrEmpty(ismDESVersion))
                 {
                     try
@@ -223,7 +223,7 @@ namespace DDMSense.DDMS
                 }
                 if (DDMSVersion.IsAtLeast("4.0.1"))
                 {
-                    string ntkDESVersion = (string)element.Attribute(XName.Get(DES_VERSION_NAME, DDMSVersion.NtkNamespace));
+                    string ntkDESVersion = element.Attribute(XName.Get(DES_VERSION_NAME, DDMSVersion.NtkNamespace)).ToNonNullString();
                     if (!String.IsNullOrEmpty(ntkDESVersion))
                     {
                         try
@@ -821,7 +821,7 @@ namespace DDMSense.DDMS
                 foreach (var child in children)
                 {
                     var copy = new XElement(resource);
-                    copy.RemoveAll();
+                    copy.RemoveNodes();
                     copy.Add(new XElement(child));
                     RelatedResources.Add(new RelatedResource(copy));
                 }
@@ -996,7 +996,7 @@ namespace DDMSense.DDMS
                 Util.Util.RequireDDMSValue("ntk:" + DES_VERSION_NAME, NtkDESVersion);
             }
             if (!DDMSVersion.IsAtLeast("3.1") && CompliesWiths.Count > 0)
-                throw new InvalidDDMSException("The compliesWith attribute cannot be used until DDMS 3.1 or later.");
+                throw new InvalidDDMSException("The compliesWith XAttribute cannot be used until DDMS 3.1 or later.");
 
             foreach (var with in CompliesWiths)
                 ISMVocabulary.ValidateEnumeration(ISMVocabulary.CVE_COMPLIES_WITH, with);
@@ -1070,7 +1070,7 @@ namespace DDMSense.DDMS
             {
                 AddWarnings(NoticeAttributes.ValidationWarnings, true);
                 if (NoticeAttributes.ExternalReference != null)
-                    AddDdms40Warning("ISM:externalNotice attribute");
+                    AddDdms40Warning("ISM:externalNotice XAttribute");
             }
             base.ValidateWarnings();
         }
@@ -1084,7 +1084,7 @@ namespace DDMSense.DDMS
                 text.Append(BuildOutput(isHtml, localPrefix + RESOURCE_ELEMENT_NAME, XmlConvert.ToString(ResourceElement.Value)));
 
             if (CreateDate.HasValue)
-                text.Append(BuildOutput(isHtml, localPrefix + CREATE_DATE_NAME, CreateDate.Value.ToString("o")));
+                text.Append(BuildOutput(isHtml, localPrefix + CREATE_DATE_NAME, CreateDate.Value.ToString("yyyy-MM-dd")));
 
             text.Append(BuildOutput(isHtml, localPrefix + COMPLIES_WITH_NAME, Util.Util.GetXsList(CompliesWiths)));
             if (IsmDESVersion != null)
@@ -1136,7 +1136,7 @@ namespace DDMSense.DDMS
 
             text.Append(BuildOutput(isHtml, "", ExtensibleElements));
 
-            text.Append(BuildOutput(isHtml, "extensible.layer", Convert.ToString(ExtensibleElements.Count > 0)));
+            text.Append(BuildOutput(isHtml, "extensible.layer", XmlConvert.ToString(ExtensibleElements.Count > 0)));
             text.Append(BuildOutput(isHtml, "ddms.generator", "DDMSence " + PropertyReader.GetProperty("version")));
             text.Append(BuildOutput(isHtml, "ddms.version", DDMSVersion.Version));
             return (text.ToString());

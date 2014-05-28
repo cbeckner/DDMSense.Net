@@ -335,6 +335,8 @@ namespace DDMSense
                     values.Append(((AbstractBaseComponent)@object).GetOutput(isHTML, prefix, BuildIndex(i, contents.Count)));
                 else if (@object is string)
                     values.Append(BuildOutput(isHTML, prefix + BuildIndex(i, contents.Count), (string)@object));
+                else if (@object is bool)
+                    values.Append(BuildOutput(isHTML, prefix + BuildIndex(i, contents.Count),  XmlConvert.ToString((bool)@object)));
                 else
                     values.Append(BuildOutput(isHTML, prefix + BuildIndex(i, contents.Count), Convert.ToString(@object)));
             }

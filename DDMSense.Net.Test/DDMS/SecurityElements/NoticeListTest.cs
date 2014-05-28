@@ -282,7 +282,7 @@ namespace DDMSense.Test.DDMS.SecurityElements
                 if (version.IsAtLeast("4.1"))
                 {
                     Assert.AreEqual(1, component.ValidationWarnings.Count());
-                    string text = "The ISM:externalNotice attribute in this DDMS component";
+                    string text = "The ISM:externalNotice XAttribute in this DDMS component";
                     string locator = "ddms:noticeList/ISM:Notice";
                     AssertWarningEquality(text, locator, component.ValidationWarnings[0]);
                 }

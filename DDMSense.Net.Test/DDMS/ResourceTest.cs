@@ -1862,9 +1862,11 @@ namespace DDMSense.Test.DDMS
             // Adding 4.0.1-specific fields works
             builder.NtkDESVersion = Convert.ToInt32(7);
             builder.IsmDESVersion = Convert.ToInt32(9);
+            builder.MetacardInfo.Identifiers.Add(new Identifier.Builder());
             builder.MetacardInfo.Identifiers[0].Qualifier = "qualifier";
             builder.MetacardInfo.Identifiers[0].Value = "value";
             builder.MetacardInfo.Dates.Created = "2011-09-25";
+            builder.MetacardInfo.Publishers.Add(new Publisher.Builder());
             builder.MetacardInfo.Publishers[0].EntityType = "organization";
             builder.MetacardInfo.Publishers[0].Organization.Names = Util.GetXsListAsList("DISA");
             builder.Commit();
