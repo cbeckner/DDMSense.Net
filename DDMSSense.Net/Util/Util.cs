@@ -562,12 +562,10 @@ namespace DDMSense.Util
             string[] validFormats = {   "yyyy",
 										"yyyy-MM",
 										"yyyy-MM-dd",
-										"yyyy-MM-ddTHHK",
-										//"yyyy-MM-ddTHH:mmK",
-										"yyyy-MM-ddTHH:mm:ssK",
-										"yyyy-MM-ddTHH:mm:ss.fK",
-										"yyyy-MM-ddTHH:mm:ss.ffK",
-										"yyyy-MM-ddTHH:mm:ss.fffK"
+										"yyyy-MM-ddTHH:mm:ss",
+                                        "yyyy-MM-ddTHH:mm:ss:s",
+                                        "yyyy-MM-ddTHH:mm:ssK",
+                                        "yyyy-MM-ddTHH:mm:ss:sK"
 									};
             try
             {

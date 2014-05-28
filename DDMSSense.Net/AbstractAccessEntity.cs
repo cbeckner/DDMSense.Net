@@ -1,14 +1,14 @@
 #region usings
 
-using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using DDMSense.DDMS;
 using DDMSense.DDMS.SecurityElements.Ism;
 using DDMSense.DDMS.SecurityElements.Ntk;
 using DDMSense.Util;
+using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 
-#endregion
+#endregion usings
 
 namespace DDMSense
 {
@@ -16,7 +16,7 @@ namespace DDMSense
 
     using Element = XElement;
 
-    #endregion
+    #endregion usings
 
     /// <summary>
     ///     Base class for NTK elements which describe system access rules for an individual, group, or profile.
@@ -49,8 +49,7 @@ namespace DDMSense
     ///             </td>
     ///         </tr>
     ///     </table>
-    
-    
+
     /// </summary>
     public abstract class AbstractAccessEntity : AbstractBaseComponent
     {
@@ -65,7 +64,7 @@ namespace DDMSense
             Element systemElement = element.Element(XName.Get(SystemName.GetName(DDMSVersion), Namespace));
             if (systemElement != null)
                 SystemName = new SystemName(systemElement);
-            
+
             SecurityAttributes = new SecurityAttributes(element);
         }
 
@@ -82,7 +81,7 @@ namespace DDMSense
             SetElement(element, false);
             if (systemName != null)
                 element.Add(systemName.ElementCopy);
-            
+
             SystemName = systemName;
             SecurityAttributes = SecurityAttributes.GetNonNullInstance(securityAttributes);
             SecurityAttributes.AddTo(element);
@@ -102,8 +101,8 @@ namespace DDMSense
         /// <summary>
         ///     Accessor for the system name
         /// </summary>
-        public virtual SystemName SystemName {get;set;}
-        
+        public virtual SystemName SystemName { get; set; }
+
         /// <summary>
         ///     Accessor for the Security Attributes. Will always be non-null even if the attributes are not set.
         /// </summary>
@@ -146,7 +145,7 @@ namespace DDMSense
         {
             if (!base.Equals(obj) || !(obj is AbstractAccessEntity))
                 return (false);
-            
+
             return (true);
         }
 
@@ -157,8 +156,6 @@ namespace DDMSense
         [Serializable]
         public abstract class Builder : IBuilder
         {
-            
-
             /// <summary>
             ///     Empty constructor
             /// </summary>
@@ -175,19 +172,19 @@ namespace DDMSense
             {
                 if (group.SystemName != null)
                     SystemName = new SystemName.Builder(group.SystemName);
-                
+
                 SecurityAttributes = new SecurityAttributes.Builder(group.SecurityAttributes);
             }
 
             /// <summary>
             ///     Builder accessor for the systemName
             /// </summary>
-            public virtual SystemName.Builder SystemName {get;set;}
+            public virtual SystemName.Builder SystemName { get; set; }
 
             /// <summary>
             ///     Builder accessor for the securityAttributes
             /// </summary>
-            public virtual SecurityAttributes.Builder SecurityAttributes {get;set;}
+            public virtual SecurityAttributes.Builder SecurityAttributes { get; set; }
 
             public abstract IDDMSComponent Commit();
 
