@@ -44,8 +44,8 @@ namespace DDMSense.Util
                 DDMSVersion version = DDMSVersion.GetVersionFor(versionString);
                 schemas.Add(version, new XmlSchemaSet());
                 LoadSchema(version, version.Namespace, version.Schema, schemaLocation, ref processedNamespaces);
-                LoadSchema(version, version.GmlNamespace, version.GmlSchema, schemaLocation, ref processedNamespaces);
-                LoadSchema(version, version.NtkNamespace, version.NtkSchema, schemaLocation, ref processedNamespaces);
+                //LoadSchema(version, version.GmlNamespace, version.GmlSchema, schemaLocation, ref processedNamespaces);
+                //LoadSchema(version, version.NtkNamespace, version.NtkSchema, schemaLocation, ref processedNamespaces);
             }
             _schemaLocation = schemaLocation.ToString();
         }
