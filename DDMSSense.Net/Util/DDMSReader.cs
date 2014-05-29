@@ -245,20 +245,17 @@ namespace DDMSense.Util
 
         private void ValidateDDMS(XDocument doc)
         {
-            bool isValid = true;
-            foreach (XmlSchemaSet schema in schemas.Values)
+            var version = DDMSVersion.GetVersionForNamespace(doc.Root.Name.Namespace.NamespaceName);
+            var schemaSet = schemas[version];
+            try
             {
-                try
-                {
-                    doc.Validate(schema, null);
-                }
-                catch
-                {
-                    isValid = false;
-                    break;
-                }
+                doc.Validate(schemaSet, null);
+                return;
             }
-            if (isValid) return;
+            catch (Exception ex)
+            {
+                throw;
+            }
             throw new InvalidDDMSException("Invalid XML");
         }
     }
