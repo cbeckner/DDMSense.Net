@@ -1830,7 +1830,7 @@ namespace DDMSense.Test.DDMS
             }
             catch (InvalidDDMSException e)
             {
-                ExpectMessage(e, "nu.xom.ValidityException: cvc-XAttribute.4: The value '2' of XAttribute 'ISM:DESVersion'");
+                ExpectMessage(e, "Invalid XML");
             }
 
             // Adding 3.1-specific fields works
