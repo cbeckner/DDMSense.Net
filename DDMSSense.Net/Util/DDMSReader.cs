@@ -252,11 +252,10 @@ namespace DDMSense.Util
                 doc.Validate(schemaSet, null);
                 return;
             }
-            catch (Exception ex)
+            catch
             {
-                throw;
+                throw new InvalidDDMSException("Invalid XML");
             }
-            throw new InvalidDDMSException("Invalid XML");
         }
     }
 }
