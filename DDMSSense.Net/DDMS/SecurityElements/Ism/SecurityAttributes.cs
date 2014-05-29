@@ -178,6 +178,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         public const string TYPE_OF_EXEMPTED_SOURCE_NAME = "typeOfExemptedSource";
 
         private static readonly List<string> ALL_NAMES = new List<string>();
+        private string[] validDateOfExemptedSourceFormats = { "yyyy-MM-dd" };
 
         /// <summary>
         ///     A set of all SecurityAttribute names which should not be converted into ExtensibleAttributes
@@ -229,7 +230,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             CompilationReason = element.Attribute(XName.Get(COMPILATION_REASON_NAME, icNamespace)).ToNonNullString();
             string dateOfExemptedSource = element.Attribute(XName.Get(DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(dateOfExemptedSource))
-                DateOfExemptedSource = dateOfExemptedSource.ToDDMSNullableDateTime();
+                DateOfExemptedSource = dateOfExemptedSource.ToDDMSNullableDateTime(validDateOfExemptedSourceFormats);
 
             string declassDate = element.Attribute(XName.Get(DECLASS_DATE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(declassDate))
@@ -308,7 +309,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 try
                 {
-                    DateOfExemptedSource = dateOfExemptedSource.ToDDMSNullableDateTime();
+                    DateOfExemptedSource = dateOfExemptedSource.ToDDMSNullableDateTime(validDateOfExemptedSourceFormats);
                 }
                 catch (ArgumentException)
                 {

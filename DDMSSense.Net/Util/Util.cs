@@ -33,6 +33,7 @@ namespace DDMSense.Util
         private static XslCompiledTransform _schematronIncludeTransform;
 
         private static readonly IDictionary<string, XslCompiledTransform> _schematronSvrlTransforms = new Dictionary<string, XslCompiledTransform>();
+        public static readonly List<string> EXTENDED_DATE_TYPES = new List<string>();
 
         static Util()
         {
@@ -41,6 +42,9 @@ namespace DDMSense.Util
             XmlSpecialChars.Add("'", "&apos;");
             XmlSpecialChars.Add("<", "&lt;");
             XmlSpecialChars.Add(">", "&gt;");
+
+            EXTENDED_DATE_TYPES.Add("Not Applicable");
+            EXTENDED_DATE_TYPES.Add("Unknown");
         }
 
         /// <summary>

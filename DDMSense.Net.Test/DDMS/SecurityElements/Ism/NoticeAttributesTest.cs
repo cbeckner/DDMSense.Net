@@ -113,6 +113,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 CheckConstructorFailure(expectFailure, e);
                 ExpectMessage(e, message);
             }
+
             return (attributes);
         }
 
@@ -193,7 +194,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 // invalid noticeDate
                 element = Util.BuildDDMSElement(Resource.GetName(version), null);
                 Util.AddAttribute(element, ismPrefix, NoticeAttributes.NOTICE_DATE_NAME, icNamespace, "2001");
-                GetInstance("The noticeDate attribute must be in the xs:date format", element);
+                GetInstance("String was not recognized as a valid DateTime.", element);
 
                 StringBuilder longString = new StringBuilder();
                 for (int i = 0; i < NoticeAttributes.MAX_LENGTH / 10 + 1; i++)
@@ -221,13 +222,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 DDMSVersion.SetCurrentVersion(sVersion);
 
                 // invalid noticeType
-                GetInstance("Unknown is not a valid enumeration token", "Unknown", TEST_NOTICE_REASON, "2001", TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
+                GetInstance("Unknown is not a valid enumeration token", "Unknown", TEST_NOTICE_REASON, "2001-01-01", TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
 
                 // horribly invalid noticeDate
-                GetInstance("The ISM:noticeDate attribute is not in a valid date format.", TEST_NOTICE_TYPE, TEST_NOTICE_REASON, "baboon", TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
+                GetInstance("String was not recognized as a valid DateTime.", TEST_NOTICE_TYPE, TEST_NOTICE_REASON, "baboon", TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
 
                 // invalid noticeDate
-                GetInstance("The noticeDate attribute must be in the xs:date format", TEST_NOTICE_TYPE, TEST_NOTICE_REASON, "2001", TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
+                GetInstance("String was not recognized as a valid DateTime.", TEST_NOTICE_TYPE, TEST_NOTICE_REASON, "2001", TEST_UNREGISTERED_NOTICE_TYPE, ExternalNotice);
 
                 StringBuilder longString = new StringBuilder();
                 for (int i = 0; i < NoticeAttributes.MAX_LENGTH / 10 + 1; i++)
@@ -456,7 +457,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 }
                 catch (InvalidDDMSException e)
                 {
-                    ExpectMessage(e, "The noticeDate attribute must be in the xs:date format");
+                    ExpectMessage(e, "String was not recognized as a valid DateTime.");
                 }
                 builder.NoticeDate = "2011-01-20";
                 builder.Commit();

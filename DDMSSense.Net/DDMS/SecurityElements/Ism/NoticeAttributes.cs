@@ -69,6 +69,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// </summary>
         public static readonly HashSet<string> NON_EXTENSIBLE_NAMES = ALL_NAMES;
 
+        private string[] validNoticeDateFormats = { "yyyy-MM-dd" };
         private readonly bool? _externalNotice;
         private readonly string _noticeType;
         private DateTime? _noticeDate;
@@ -95,7 +96,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             _unregisteredNoticeType = element.Attribute(XName.Get(UNREGISTERED_NOTICE_TYPE_NAME, icNamespace)).ToNonNullString();
             string noticeDate = element.Attribute(XName.Get(NOTICE_DATE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(noticeDate))
-                _noticeDate = noticeDate.ToDDMSNullableDateTime();
+                _noticeDate = noticeDate.ToDDMSNullableDateTime(validNoticeDateFormats);
 
             string external = element.Attribute(XName.Get(EXTERNAL_NOTICE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(external))
@@ -144,7 +145,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 try
                 {
-                    _noticeDate = noticeDate.ToDDMSNullableDateTime();
+                    _noticeDate = noticeDate.ToDDMSNullableDateTime(validNoticeDateFormats);
                 }
                 catch (ArgumentException)
                 {
@@ -173,7 +174,6 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         public string NoticeType
         {
             get { return _noticeType.ToNonNullString(); }
-            set { _noticeDate = value.ToDDMSNullableDateTime(); }
         }
 
         /// <summary>

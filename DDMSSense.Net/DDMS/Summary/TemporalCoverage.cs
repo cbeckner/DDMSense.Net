@@ -118,7 +118,6 @@ namespace DDMSense.DDMS.Summary
         private const string END_NAME = "end";
         private const string APPROXIMABLE_START_NAME = "approximableStart";
         private const string APPROXIMABLE_END_NAME = "approximableEnd";
-        private static readonly List<string> EXTENDED_DATE_TYPES = new List<string>();
         private ApproximableDate _approximableEnd;
         private ApproximableDate _approximableStart;
         private string _name = DEFAULT_VALUE;
@@ -126,8 +125,6 @@ namespace DDMSense.DDMS.Summary
 
         static TemporalCoverage()
         {
-            EXTENDED_DATE_TYPES.Add("Not Applicable");
-            EXTENDED_DATE_TYPES.Add("Unknown");
         }
 
         /// <summary>
@@ -483,7 +480,7 @@ namespace DDMSense.DDMS.Summary
             if (ApproximableStart == null)
             {
                 Util.Util.RequireDDMSValue("start", StartString);
-                if (!EXTENDED_DATE_TYPES.Contains(StartString))
+                if (!Util.Util.EXTENDED_DATE_TYPES.Contains(StartString))
                 {
                     Util.Util.RequireDDMSDateFormat(StartString, Namespace);
                 }
@@ -491,7 +488,7 @@ namespace DDMSense.DDMS.Summary
             if (ApproximableEnd == null)
             {
                 Util.Util.RequireDDMSValue("end", EndString);
-                if (!EXTENDED_DATE_TYPES.Contains(EndString))
+                if (!Util.Util.EXTENDED_DATE_TYPES.Contains(EndString))
                 {
                     Util.Util.RequireDDMSDateFormat(EndString, Namespace);
                 }
