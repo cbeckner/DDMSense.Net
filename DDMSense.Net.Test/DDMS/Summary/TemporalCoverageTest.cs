@@ -581,8 +581,8 @@ namespace DDMSense.Test.DDMS.Summary
                 Assert.IsNull(component.End);
 
                 component = GetInstance(SUCCESS, "", TEST_START, null, TEST_START, null);
-                Assert.AreEqual(TEST_START, component.Start.GetValueOrDefault().ToString("o"));
-                Assert.AreEqual(TEST_START, component.End.GetValueOrDefault().ToString("o"));
+                Assert.AreEqual(TEST_START, component.Start.Value.ToString("yyyy-MM-dd"));
+                Assert.AreEqual(TEST_START, component.End.Value.ToString("yyyy-MM-dd"));
             }
         }
 

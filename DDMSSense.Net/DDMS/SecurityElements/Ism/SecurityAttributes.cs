@@ -4,6 +4,7 @@ using DDMSense.Extensions;
 using DDMSense.Util;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Xml.Linq;
 
@@ -228,7 +229,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             CompilationReason = element.Attribute(XName.Get(COMPILATION_REASON_NAME, icNamespace)).ToNonNullString();
             string dateOfExemptedSource = element.Attribute(XName.Get(DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(dateOfExemptedSource))
-                DateOfExemptedSource = DateTime.Parse(dateOfExemptedSource);
+                DateOfExemptedSource = dateOfExemptedSource.ToDDMSNullableDateTime();
 
             string declassDate = element.Attribute(XName.Get(DECLASS_DATE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(declassDate))
@@ -307,7 +308,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 try
                 {
-                    DateOfExemptedSource = DateTime.Parse(dateOfExemptedSource);
+                    DateOfExemptedSource = dateOfExemptedSource.ToDDMSNullableDateTime();
                 }
                 catch (ArgumentException)
                 {
@@ -319,7 +320,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 try
                 {
-                    DeclassDate = DateTime.Parse(declassDate);
+                    DeclassDate = declassDate.ToDDMSNullableDateTime();
                 }
                 catch (ArgumentException)
                 {
@@ -527,10 +528,10 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             Util.Util.AddAttribute(element, icPrefix, CLASSIFIED_BY_NAME, icNamespace, ClassifiedBy);
             Util.Util.AddAttribute(element, icPrefix, COMPILATION_REASON_NAME, icNamespace, CompilationReason);
             if (DateOfExemptedSource.HasValue)
-                Util.Util.AddAttribute(element, icPrefix, DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace, DateOfExemptedSource.GetValueOrDefault().ToString("o"));
+                Util.Util.AddAttribute(element, icPrefix, DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace, DateOfExemptedSource.ToDDMSDateTimeString());
 
             if (DeclassDate.HasValue)
-                Util.Util.AddAttribute(element, icPrefix, DECLASS_DATE_NAME, icNamespace, DeclassDate.GetValueOrDefault().ToString("o"));
+                Util.Util.AddAttribute(element, icPrefix, DECLASS_DATE_NAME, icNamespace, DeclassDate.ToDDMSDateTimeString());
 
             Util.Util.AddAttribute(element, icPrefix, DECLASS_EVENT_NAME, icNamespace, DeclassEvent);
             Util.Util.AddAttribute(element, icPrefix, DECLASS_EXCEPTION_NAME, icNamespace, DeclassException);
@@ -722,10 +723,10 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + CLASSIFIED_BY_NAME, ClassifiedBy));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + COMPILATION_REASON_NAME, CompilationReason));
             if (DateOfExemptedSource.HasValue)
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DATE_OF_EXEMPTED_SOURCE_NAME, DateOfExemptedSource.GetValueOrDefault().ToString("o")));
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DATE_OF_EXEMPTED_SOURCE_NAME, DateOfExemptedSource.ToDDMSDateTimeString()));
 
             if (DeclassDate.HasValue)
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_DATE_NAME, DeclassDate.GetValueOrDefault().ToString("o")));
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_DATE_NAME, DeclassDate.ToDDMSDateTimeString()));
 
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_EVENT_NAME, DeclassEvent));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + DECLASS_EXCEPTION_NAME, DeclassException));
@@ -850,10 +851,10 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 ClassifiedBy = attributes.ClassifiedBy;
                 CompilationReason = attributes.CompilationReason;
                 if (attributes.DateOfExemptedSource.HasValue)
-                    DateOfExemptedSource = attributes.DateOfExemptedSource.GetValueOrDefault().ToString("o");
+                    DateOfExemptedSource = attributes.DateOfExemptedSource.ToDDMSDateTimeString();
 
                 if (attributes.DeclassDate.HasValue)
-                    DeclassDate = attributes.DeclassDate.GetValueOrDefault().ToString("o");
+                    DeclassDate = attributes.DeclassDate.ToDDMSDateTimeString();
 
                 DeclassEvent = attributes.DeclassEvent;
                 DeclassException = attributes.DeclassException;

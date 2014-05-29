@@ -44,8 +44,8 @@ namespace DDMSense.Util
                 DDMSVersion version = DDMSVersion.GetVersionFor(versionString);
                 schemas.Add(version, new XmlSchemaSet());
                 LoadSchema(version, version.Namespace, version.Schema, schemaLocation, ref processedNamespaces);
-                LoadSchema(version, version.GmlNamespace, version.GmlSchema, schemaLocation, ref processedNamespaces);
-                LoadSchema(version, version.NtkNamespace, version.NtkSchema, schemaLocation, ref processedNamespaces);
+                //LoadSchema(version, version.GmlNamespace, version.GmlSchema, schemaLocation, ref processedNamespaces);
+                //LoadSchema(version, version.NtkNamespace, version.NtkSchema, schemaLocation, ref processedNamespaces);
             }
             _schemaLocation = schemaLocation.ToString();
         }
@@ -148,7 +148,7 @@ namespace DDMSense.Util
                 XDocument doc = XDocument.Load(path);
                 //doc.Root.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
                 //doc.Root.Add(new XAttribute(xsi + "schemaLocation", _schemaLocation));
-                //ValidateDDMS(doc);
+                ValidateDDMS(doc);
                 return doc.Root;
             }
             catch (XmlException e)
@@ -169,7 +169,7 @@ namespace DDMSense.Util
             XDocument doc = XDocument.Parse(xml);
             //doc.Root.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
             //doc.Root.Add(new XAttribute(xsi + "schemaLocation", _schemaLocation));
-            //ValidateDDMS(doc);
+            ValidateDDMS(doc);
             return doc.Root;
         }
 
@@ -186,7 +186,7 @@ namespace DDMSense.Util
                 XDocument doc = XDocument.Load(reader);
                 //doc.Root.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
                 //doc.Root.Add(new XAttribute(xsi + "schemaLocation", _schemaLocation));
-                //ValidateDDMS(doc);
+                ValidateDDMS(doc);
                 return (doc.Root);
             }
             catch (XmlException e)
@@ -250,10 +250,10 @@ namespace DDMSense.Util
             {
                 try
                 {
-                    doc.Validate(schema, (o, e) => { throw new InvalidDDMSException("Invalid XML"); });
+                    doc.Validate(schema, null);
                     break;
                 }
-                catch
+                catch (Exception ex)
                 {
                     isValid = false;
                 }

@@ -3,9 +3,9 @@
 <ddms:person xmlns:ddms="urn:us:mil:ces:metadata:ddms:4">
   <ddms:name>Brian</ddms:name>
   <ddms:name>BU</ddms:name>
+  <ddms:surname>Uri</ddms:surname>
   <ddms:phone>703-885-1000</ddms:phone>
   <ddms:email>ddms@fgm.com</ddms:email>
-  <ddms:affiliation>DISA</ddms:affiliation>
   <ddms:userID>123</ddms:userID>
-  <ddms:surname>Uri</ddms:surname>
+  <ddms:affiliation>DISA</ddms:affiliation>
 </ddms:person>

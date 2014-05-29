@@ -5,6 +5,8 @@ using System.Text;
 using System.Xml.Linq;
 using DDMSense.DDMS.SecurityElements.Ism;
 using DDMSense.Util;
+using System.Globalization;
+using DDMSense.Extensions;
 
 #endregion
 
@@ -92,7 +94,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 try
                 {
-                    return (DateTime.Parse(DateProcessedString));
+                    return DateProcessedString.ToDDMSNullableDateTime();
                 }
                 catch (ArgumentException)
                 {

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using DDMSense.Util;
+using System.Globalization;
+using DDMSense.Extensions;
 
 #endregion
 
@@ -171,7 +173,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 try
                 {
-                    return (DateTime.Parse(CreatedString));
+                    return CreatedString.ToDDMSNullableDateTime().EnsureKind(); 
                 }
                 catch (ArgumentException)
                 {
@@ -203,7 +205,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 try
                 {
-                    return (DateTime.Parse(PostedString));
+                    return PostedString.ToDDMSNullableDateTime(); 
                 }
                 catch (ArgumentException)
                 {
@@ -235,7 +237,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 try
                 {
-                    return (DateTime.Parse(ValidTilString));
+                    return ValidTilString.ToDDMSNullableDateTime(); 
                 }
                 catch (ArgumentException)
                 {
@@ -267,7 +269,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 try
                 {
-                    return (DateTime.Parse(InfoCutOffString));
+                    return InfoCutOffString.ToDDMSNullableDateTime(); 
                 }
                 catch (ArgumentException)
                 {
@@ -299,7 +301,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 try
                 {
-                    return (DateTime.Parse(ApprovedOnString));
+                    return ApprovedOnString.ToDDMSNullableDateTime(); 
                 }
                 catch (ArgumentException)
                 {
@@ -331,7 +333,7 @@ namespace DDMSense.DDMS.ResourceElements
             {
                 try
                 {
-                    return (DateTime.Parse(ReceivedOnString));
+                    return ReceivedOnString.ToDDMSNullableDateTime(); 
                 }
                 catch (ArgumentException)
                 {

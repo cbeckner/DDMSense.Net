@@ -35,6 +35,7 @@ namespace DDMSense.DDMS.Summary
     #region usings
 
     using Element = XElement;
+    using System.Globalization;
 
     #endregion
 
@@ -348,7 +349,7 @@ namespace DDMSense.DDMS.Summary
             {
                 try
                 {
-                    return (DateTime.Parse(StartString));
+                    return StartString.ToDDMSNullableDateTime();
                 }
                 catch (ArgumentException)
                 {
@@ -395,7 +396,7 @@ namespace DDMSense.DDMS.Summary
             {
                 try
                 {
-                    return (DateTime.Parse(EndString));
+                    return EndString.ToDDMSNullableDateTime();
                 }
                 catch (ArgumentException)
                 {

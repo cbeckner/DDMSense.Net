@@ -293,14 +293,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
                 ProcessingInfo component = GetInstance(SUCCESS, GetValidElement(sVersion));
-                Assert.AreEqual(TEST_DATE_PROCESSED, component.DateProcessed.GetValueOrDefault().ToString("o"));
-
-                // Not compatible with XMLGregorianCalendar
-                if (version.IsAtLeast("4.1"))
-                {
-                    component = new ProcessingInfo(TEST_VALUE, "2012-01-01T01:02Z", SecurityAttributesTest.Fixture);
-                    Assert.IsNull(component.DateProcessed);
-                }
+                Assert.AreEqual(TEST_DATE_PROCESSED, component.DateProcessed.Value.ToString("yyyy-MM-dd"));
             }
         }
 

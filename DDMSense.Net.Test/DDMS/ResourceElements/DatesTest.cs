@@ -366,29 +366,17 @@ namespace DDMSense.Test.DDMS.ResourceElements
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
                 Dates component = new Dates(TEST_CREATED, TEST_POSTED, TEST_VALID, TEST_CUTOFF, ApprovedOn, ReceivedOn);
-                Assert.AreEqual(TEST_CREATED, component.Created.GetValueOrDefault().ToString("o"));
-                Assert.AreEqual(TEST_POSTED, component.Posted.GetValueOrDefault().ToString("o"));
-                Assert.AreEqual(TEST_VALID, component.ValidTil.GetValueOrDefault().ToString("o"));
-                Assert.AreEqual(TEST_CUTOFF, component.InfoCutOff.GetValueOrDefault().ToString("o"));
+                Assert.AreEqual(TEST_CREATED, component.Created.GetValueOrDefault().ToString("yyyy"));
+                Assert.AreEqual(TEST_POSTED, component.Posted.GetValueOrDefault().ToString("yyyy-MM"));
+                Assert.AreEqual(TEST_VALID, component.ValidTil.GetValueOrDefault().ToString("yyyy-MM-dd"));
+                Assert.AreEqual(TEST_CUTOFF, component.InfoCutOff.GetValueOrDefault().ToString("yyyy-MM-ddTHH:mm:ssK"));
                 if (version.IsAtLeast("3.1"))
                 {
-                    Assert.AreEqual(TEST_APPROVED, component.ApprovedOn.GetValueOrDefault().ToString("o"));
+                    Assert.AreEqual(TEST_APPROVED, component.ApprovedOn.GetValueOrDefault().ToString("yyyy-MM-dd"));
                 }
                 if (version.IsAtLeast("4.0.1"))
                 {
-                    Assert.AreEqual(TEST_RECEIVED, component.ReceivedOn.GetValueOrDefault().ToString("o"));
-                }
-
-                // Not compatible with XMLGregorianCalendar
-                if (version.IsAtLeast("4.1"))
-                {
-                    component = new Dates("2012-01-01T01:02Z", "2012-01-01T01:02Z", "2012-01-01T01:02Z", "2012-01-01T01:02Z", "2012-01-01T01:02Z", "2012-01-01T01:02Z");
-                    Assert.IsNull(component.Created);
-                    Assert.IsNull(component.Posted);
-                    Assert.IsNull(component.ValidTil);
-                    Assert.IsNull(component.InfoCutOff);
-                    Assert.IsNull(component.ApprovedOn);
-                    Assert.IsNull(component.ReceivedOn);
+                    Assert.AreEqual(TEST_RECEIVED, component.ReceivedOn.GetValueOrDefault().ToString("yyyy-MM-dd"));
                 }
             }
         }

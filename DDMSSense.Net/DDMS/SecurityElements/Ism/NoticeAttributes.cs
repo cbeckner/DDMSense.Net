@@ -4,6 +4,7 @@ using DDMSense.Extensions;
 using DDMSense.Util;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -94,7 +95,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             _unregisteredNoticeType = element.Attribute(XName.Get(UNREGISTERED_NOTICE_TYPE_NAME, icNamespace)).ToNonNullString();
             string noticeDate = element.Attribute(XName.Get(NOTICE_DATE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(noticeDate))
-                _noticeDate = DateTime.Parse(noticeDate);
+                _noticeDate = noticeDate.ToDDMSNullableDateTime();
 
             string external = element.Attribute(XName.Get(EXTERNAL_NOTICE_NAME, icNamespace)).ToNonNullString();
             if (!String.IsNullOrEmpty(external))
@@ -143,7 +144,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 try
                 {
-                    _noticeDate = DateTime.Parse(noticeDate);
+                    _noticeDate = noticeDate.ToDDMSNullableDateTime();
                 }
                 catch (ArgumentException)
                 {
@@ -172,7 +173,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         public string NoticeType
         {
             get { return _noticeType.ToNonNullString(); }
-            set { _noticeDate = DateTime.Parse(value); }
+            set { _noticeDate = value.ToDDMSNullableDateTime(); }
         }
 
         /// <summary>
@@ -206,7 +207,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
         /// </summary>
         public DateTime? NoticeDate
         {
-            get { return _noticeDate.HasValue ? DateTime.Parse(_noticeDate.Value.ToString("o")) : _noticeDate; }
+            get { return _noticeDate; }
             set { _noticeDate = value; }
         }
 
@@ -235,7 +236,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             Util.Util.AddAttribute(element, icPrefix, NOTICE_TYPE_NAME, icNamespace, NoticeType);
             Util.Util.AddAttribute(element, icPrefix, NOTICE_REASON_NAME, icNamespace, NoticeReason);
             if (NoticeDate != null)
-                Util.Util.AddAttribute(element, icPrefix, NOTICE_DATE_NAME, icNamespace, NoticeDate.Value.ToString("yyyy-MM-dd"));
+                Util.Util.AddAttribute(element, icPrefix, NOTICE_DATE_NAME, icNamespace, NoticeDate.ToDDMSDateTimeString());
 
             Util.Util.AddAttribute(element, icPrefix, UNREGISTERED_NOTICE_TYPE_NAME, icNamespace, UnregisteredNoticeType);
             if (ExternalReference != null)
@@ -293,7 +294,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_TYPE_NAME, NoticeType));
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_REASON_NAME, NoticeReason));
             if (NoticeDate != null)
-                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_DATE_NAME, NoticeDate.Value.ToString("yyyy-MM-dd")));
+                text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + NOTICE_DATE_NAME, NoticeDate.ToDDMSDateTimeString()));
 
             text.Append(AbstractBaseComponent.BuildOutput(isHtml, localPrefix + UNREGISTERED_NOTICE_TYPE_NAME, UnregisteredNoticeType));
             if (ExternalReference != null)
@@ -362,7 +363,7 @@ namespace DDMSense.DDMS.SecurityElements.Ism
                 NoticeType = attributes.NoticeType;
                 NoticeReason = attributes.NoticeReason;
                 if (attributes.NoticeDate != null)
-                    NoticeDate = attributes.NoticeDate.Value.ToString("yyyy-MM-dd");
+                    NoticeDate = attributes.NoticeDate.ToDDMSDateTimeString();
 
                 UnregisteredNoticeType = attributes.UnregisteredNoticeType;
                 ExternalNotice = attributes.ExternalReference;

@@ -34,16 +34,6 @@ namespace DDMSense.Util
 
         private static readonly IDictionary<string, XslCompiledTransform> _schematronSvrlTransforms = new Dictionary<string, XslCompiledTransform>();
 
-        public static string[] ValidDDMSDateFormats = {       
-                                                            "yyyy",
-										                    "yyyy-MM",
-										                    "yyyy-MM-dd",
-										                    "yyyy-MM-ddTHH:mm:ssK",
-										                    "yyyy-MM-ddTHH:mm:ss.fK",
-										                    "yyyy-MM-ddTHH:mm:ss.ffK",
-										                    "yyyy-MM-ddTHH:mm:ss.fffK"
-									                    };
-
         static Util()
         {
             XmlSpecialChars.Add("&", "&amp;");
@@ -582,11 +572,20 @@ namespace DDMSense.Util
             //YYYY-MM-DD
             //YYYY-MM-DDThh:mm.ssTZD
             //YYYY-MM-DDThh:mm:ss.sTZD
+            string[] validFormats = {       
+                                        "yyyy",
+										"yyyy-MM",
+										"yyyy-MM-dd",
+										"yyyy-MM-ddTHH:mm:ssK",
+										"yyyy-MM-ddTHH:mm:ss.fK",
+										"yyyy-MM-ddTHH:mm:ss.ffK",
+										"yyyy-MM-ddTHH:mm:ss.fffK"
+									};
 
             try
             {
                 DateTime calendar;
-                isXsdType = DateTime.TryParseExact(date, ValidDDMSDateFormats, new CultureInfo("en-US"), DateTimeStyles.None, out calendar);
+                isXsdType = DateTime.TryParseExact(date, validFormats, new CultureInfo("en-US"), DateTimeStyles.None, out calendar);
             }
             catch (ArgumentException)
             {
@@ -594,7 +593,7 @@ namespace DDMSense.Util
             }
             if (!isXsdType)
             {
-                string message = "The date datatype must be one of " + string.Join(",", ValidDDMSDateFormats);
+                string message = "The date datatype must be one of " + string.Join(",", validFormats);
                 if (version.IsAtLeast("4.1"))
                     message += " or ddms:DateHourMinType";
                 throw new InvalidDDMSException(message);
