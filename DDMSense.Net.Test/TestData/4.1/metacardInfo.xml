@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--  Represents a single ddms:metacardInfo element, for unit testing -->
-<ddms:metacardInfo xmlns:ddms="urn:us:mil:ces:metadata:ddms:4" xmlns:ISM="urn:us:gov:ic:ism" ISM:classification="U" ISM:ownerProducer="USA" xmlns:xlink="http://www.w3.org/1999/xlink">
+<ddms:metacardInfo xmlns:ddms="urn:us:mil:ces:metadata:ddms:4" xmlns:ISM="urn:us:gov:ic:ism" ISM:classification="U" ISM:ownerProducer="USA">
   <ddms:identifier ddms:qualifier="URI" ddms:value="urn:buri:ddmsence:testIdentifier" />
   <ddms:dates ddms:created="2003" />
   <ddms:publisher>
@@ -26,7 +26,7 @@
   </ddms:pointOfContact>
   <ddms:description ISM:classification="U" ISM:ownerProducer="USA">A transformation service.</ddms:description>
   <ddms:processingInfo ISM:classification="U" ISM:ownerProducer="USA" ddms:dateProcessed="2011-08-19">XSLT Transformation to convert DDMS 2.0 to DDMS 3.1.</ddms:processingInfo>
-  <ddms:revisionRecall ddms:revisionID="1" ddms:revisionType="ADMINISTRATIVE RECALL" network="NIPRNet" otherNetwork="PBS" xlink:type="resource" xlink:role="tank" xlink:title="Tank Page" xlink:label="tank" ISM:classification="U" ISM:ownerProducer="USA">Description of Recall</ddms:revisionRecall>
+  <ddms:revisionRecall xmlns:xlink="http://www.w3.org/1999/xlink" ddms:revisionID="1" ddms:revisionType="ADMINISTRATIVE RECALL" network="NIPRNet" otherNetwork="PBS" xlink:type="resource" xlink:role="tank" xlink:title="Tank Page" xlink:label="tank" ISM:classification="U" ISM:ownerProducer="USA">Description of Recall</ddms:revisionRecall>
   <ddms:recordsManagementInfo ddms:vitalRecordIndicator="true">
     <ddms:recordKeeper>
       <ddms:recordKeeperID>#289-99202.9</ddms:recordKeeperID>
