@@ -94,7 +94,7 @@ namespace DDMSense.Test.Util
             }
             catch (InvalidDDMSException e)
             {
-                ExpectMessage(e, "Invalid XML");
+                ExpectMessage(e, "Valid Namespace is required");
             }
         }
 

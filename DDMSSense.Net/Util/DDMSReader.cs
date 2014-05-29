@@ -245,6 +245,9 @@ namespace DDMSense.Util
 
         private void ValidateDDMS(XDocument doc)
         {
+            if (string.IsNullOrEmpty(doc.Root.Name.Namespace.NamespaceName))
+                throw new InvalidDDMSException("Valid Namespace is required");
+
             var version = DDMSVersion.GetVersionForNamespace(doc.Root.Name.Namespace.NamespaceName);
             var schemaSet = schemas[version];
             try

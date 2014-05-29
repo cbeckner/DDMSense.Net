@@ -374,13 +374,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 DDMSVersion version = DDMSVersion.SetCurrentVersion(sVersion);
 
                 // invalid declassDate
-                GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "2004"));
+                GetInstance("The ISM:declassDate attribute is not in a valid date format.", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "2004"));
 
                 // nonsensical declassDate
-                GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "notAnXmlDate"));
+                GetInstance("String was not recognized as a valid DateTime.", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "notAnXmlDate"));
 
                 // invalid dateOfExemptedSource
-                GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2004"));
+                GetInstance("The ISM:dateOfExemptedSource attribute is not in a valid date format.", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2004"));
 
                 // dateOfExemptedSource invalid for versions >= 3.1
                 if (version.IsAtLeast("3.1"))
@@ -389,7 +389,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 }
 
                 // nonsensical dateOfExemptedSource
-                GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "notAnXmlDate"));
+                GetInstance("String was not recognized as a valid DateTime.", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "notAnXmlDate"));
             }
         }
 

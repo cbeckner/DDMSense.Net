@@ -309,6 +309,8 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 try
                 {
+                    if (dateOfExemptedSource.Length < 10)
+                        throw new ArgumentException("not a valid datetime for ISM");
                     DateOfExemptedSource = dateOfExemptedSource.ToDDMSNullableDateTime(validDateOfExemptedSourceFormats);
                 }
                 catch (ArgumentException)
@@ -321,6 +323,8 @@ namespace DDMSense.DDMS.SecurityElements.Ism
             {
                 try
                 {
+                    if (declassDate.Length < 10)
+                        throw new ArgumentException("not a valid datetime for ISM");
                     DeclassDate = declassDate.ToDDMSNullableDateTime();
                 }
                 catch (ArgumentException)
