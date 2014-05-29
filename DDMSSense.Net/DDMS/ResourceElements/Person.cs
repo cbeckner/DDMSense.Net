@@ -156,14 +156,15 @@ namespace DDMSense.DDMS.ResourceElements
         private void AddExtraElements(string surname, string userID, string affiliation)
         {
             XElement element = Element;
-            element.Elements().Where(e => e.Name.LocalName == "name").Last().AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
+            if (element.Elements().Where(e => e.Name.LocalName == "name").Any())
+                element.Elements().Where(e => e.Name.LocalName == "name").Last().AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
+            
             if (DDMSVersion.IsAtLeast("4.0.1"))
             {
                 if (!String.IsNullOrEmpty(userID))
                     element.Elements().Where(e => e.Name.LocalName == "email").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
                 if (!String.IsNullOrEmpty(affiliation))
                     element.Elements().Where(e => e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
-
             }
             else
             {
