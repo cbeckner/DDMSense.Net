@@ -34,6 +34,16 @@ namespace DDMSense.Util
 
         private static readonly IDictionary<string, XslCompiledTransform> _schematronSvrlTransforms = new Dictionary<string, XslCompiledTransform>();
 
+        public static string[] ValidDDMSDateFormats = {       
+                                                            "yyyy",
+										                    "yyyy-MM",
+										                    "yyyy-MM-dd",
+										                    "yyyy-MM-ddTHH:mm:ssK",
+										                    "yyyy-MM-ddTHH:mm:ss.fK",
+										                    "yyyy-MM-ddTHH:mm:ss.ffK",
+										                    "yyyy-MM-ddTHH:mm:ss.fffK"
+									                    };
+
         static Util()
         {
             XmlSpecialChars.Add("&", "&amp;");
@@ -528,8 +538,9 @@ namespace DDMSense.Util
 
         /// <summary>
         ///     DoD Discovery Metadata Specification
-        ///     * Table C7.T11. dates Category / Element *
+        ///     v4.1+ * Table C7.T11. dates Category / Element *
         ///     Asserts that a date format is one of the 5 types accepted by DDMS.
+        ///     Recommended practice is that date be specified in one of the following formats:
         ///     YYYY
         ///		YYYY-MM
         ///		YYYY-MM-DD
@@ -559,21 +570,23 @@ namespace DDMSense.Util
             /*
              */
             bool isXsdType = false;
-            string[] validFormats = {   "yyyy",
-										"yyyy-MM",
-										"yyyy-MM-dd",
-										"yyyy-MM-ddTHHK",
-										//"yyyy-MM-ddTHH:mmK",
-										"yyyy-MM-ddTHH:mm:ssK",
-										"yyyy-MM-ddTHH:mm:ss.fK",
-										"yyyy-MM-ddTHH:mm:ss.ffK",
-										"yyyy-MM-ddTHH:mm:ss.fffK"
-									};
+
+            //TODO: At this point, we're enforcing the DDMS "recommended practice" for dates
+            //      It's possible that a date is valid but not "recommended". In this case
+            //      we may need to rethink this logic.
+            //
+            //If we're down here then we're validating prior to 4.1
+            // in this case the formats are limited to:
+            //YYYY
+            //YYYY-MM
+            //YYYY-MM-DD
+            //YYYY-MM-DDThh:mm.ssTZD
+            //YYYY-MM-DDThh:mm:ss.sTZD
+
             try
             {
                 DateTime calendar;
-                isXsdType = DateTime.TryParseExact(date, validFormats, new CultureInfo("en-US"), DateTimeStyles.None, out calendar);
-                //TODO: Validate all date formats defined
+                isXsdType = DateTime.TryParseExact(date, ValidDDMSDateFormats, new CultureInfo("en-US"), DateTimeStyles.None, out calendar);
             }
             catch (ArgumentException)
             {
@@ -581,7 +594,7 @@ namespace DDMSense.Util
             }
             if (!isXsdType)
             {
-                string message = "The date datatype must be one of " + string.Join(",", validFormats);
+                string message = "The date datatype must be one of " + string.Join(",", ValidDDMSDateFormats);
                 if (version.IsAtLeast("4.1"))
                     message += " or ddms:DateHourMinType";
                 throw new InvalidDDMSException(message);

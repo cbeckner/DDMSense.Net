@@ -1,6 +1,8 @@
 #region usings
 
+using DDMSense.Util;
 using System;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -42,6 +44,11 @@ namespace DDMSense.Extensions
         {
             if (String.IsNullOrEmpty(str)) return string.Empty;
             return str;
+        }
+
+        public static DateTime? ToDDMSNullableDateTime(this string dateString)
+        {
+            return (DateTime.ParseExact(dateString, Util.Util.ValidDDMSDateFormats, null, DateTimeStyles.RoundtripKind));
         }
     }
 }
