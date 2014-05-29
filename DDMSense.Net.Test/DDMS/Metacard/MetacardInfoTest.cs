@@ -595,7 +595,7 @@ namespace DDMSense.Test.DDMS.Metacard
                 Assert.AreEqual(expected, actual);
 
                 component = GetInstance(SUCCESS, ChildComponents);
-                Assert.AreEqual(GetExpectedXMLOutput(false), component.ToXML(SaveOptions.DisableFormatting));
+                Assert.AreEqual(GetExpectedXMLOutput(true), component.ToXML(SaveOptions.DisableFormatting));
             }
         }
 
