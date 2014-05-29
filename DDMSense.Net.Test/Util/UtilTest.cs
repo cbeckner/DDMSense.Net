@@ -1226,7 +1226,7 @@ namespace DDMSense.Test.Util
             var testFile = File.OpenRead(PropertyReader.GetProperty("test.unit.data") + "3.0/" + "resource.xml");
             string expectedXmlOutput = (new DDMSReader()).GetDDMSResource(testFile).ToXML();
             testFile.Position = 0;
-            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreWhitespace);
             XmlDocument actual = new XmlDocument();
             XmlDocument expected = new XmlDocument();
             expected.LoadXml((new DDMSReader()).GetDDMSResource(testFile).ToXML());

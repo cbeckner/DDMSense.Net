@@ -310,7 +310,7 @@ namespace DDMSense.Test.DDMS.ResourceElements
         [TestMethod]
         public virtual void ResourceElements_RecordKeeper_XMLOutput()
         {
-            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreWhitespace);
             XmlDocument expected = new XmlDocument();
             XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)

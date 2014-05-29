@@ -423,7 +423,7 @@ namespace DDMSense.Test.DDMS.Summary
         [TestMethod]
         public virtual void Summary_SubjectCoverage_XMLOutput()
         {
-            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreWhitespace);
             XmlDocument expected = new XmlDocument();
             XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)

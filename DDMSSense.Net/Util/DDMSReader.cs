@@ -251,11 +251,11 @@ namespace DDMSense.Util
                 try
                 {
                     doc.Validate(schema, null);
-                    break;
                 }
-                catch (Exception ex)
+                catch
                 {
                     isValid = false;
+                    break;
                 }
             }
             if (isValid) return;
