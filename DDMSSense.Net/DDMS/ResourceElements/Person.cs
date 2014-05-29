@@ -156,26 +156,21 @@ namespace DDMSense.DDMS.ResourceElements
         private void AddExtraElements(string surname, string userID, string affiliation)
         {
             XElement element = Element;
+            element.Elements().Where(e => e.Name.LocalName == "name").Last().AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
             if (DDMSVersion.IsAtLeast("4.0.1"))
             {
-                element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
                 if (!String.IsNullOrEmpty(userID))
-                    element.Add(Util.Util.BuildDDMSElement(USERID_NAME, userID));
-
+                    element.Elements().Where(e => e.Name.LocalName == "email").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
                 if (!String.IsNullOrEmpty(affiliation))
-                    element.Add(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
+                    element.Elements().Where(e => e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
+
             }
             else
             {
-                // 	Inserting in reverse order allow the same index to be reused. Later inserts will "push" the early ones
-                // 	forward.
-                if (!String.IsNullOrEmpty(affiliation))
-                    element.Add(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
-
                 if (!String.IsNullOrEmpty(userID))
-                    element.Add(Util.Util.BuildDDMSElement(USERID_NAME, userID));
-
-                element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
+                    element.Elements().Where(e => e.Name.LocalName == "surname").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
+                if (!String.IsNullOrEmpty(affiliation))
+                    element.Elements().Where(e=>e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
             }
         }
 
