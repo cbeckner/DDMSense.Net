@@ -1,5 +1,6 @@
 #region usings
 
+using DDMSense.DDMS;
 using DDMSense.Util;
 using System;
 using System.Globalization;
@@ -69,39 +70,38 @@ namespace DDMSense.Extensions
         /// 	TZD  = time zone designator (Z or +hh:mm or -hh:mm)
         /// </summary>
         /// <param name="dateString"> the date in string format </param>
-        public static DateTime? ToDDMSNullableDateTime(this string dateString)
+        public static DateTime? ToDDMSNullableDateTime(this string dateString, string[] validFormats = null)
         {
+            // If "Unknown" or "Not Applicable", return null
+            if (Util.Util.EXTENDED_DATE_TYPES.Contains(dateString))
+                return null;
+
             try
             {
                 //Valid date formats across all DDMS versions
                 //We'll let other logic ensure proper formats for each version
-                string[] validFormats = {   "yyyy",
-										    "yyyy-MM",
-										    "yyyy-MM-dd",
-										    "yyyy-MM-ddTHHK",
-										    "yyyy-MM-ddTHH:mmK",
-										    "yyyy-MM-ddTHH:mm:ssK",
-										    "yyyy-MM-ddTHH:mm:ss.fK",
-										    "yyyy-MM-ddTHH:mm:ss.ffK",
-										    "yyyy-MM-ddTHH:mm:ss.fffK"
-									    };
+                string[]  defaultValidFormats = {   "yyyy",
+										            "yyyy-MM",
+										            "yyyy-MM-dd",
+										            "yyyy-MM-ddTHHK",
+										            "yyyy-MM-ddTHH:mmK",
+										            "yyyy-MM-ddTHH:mm:ssK",
+										            "yyyy-MM-ddTHH:mm:ss.fK",
+										            "yyyy-MM-ddTHH:mm:ss.ffK",
+										            "yyyy-MM-ddTHH:mm:ss.fffK"
+									            };
+
+                validFormats = validFormats ?? defaultValidFormats;
 
                 //Parse the date
-                var date = DateTime.ParseExact(dateString, validFormats, null, DateTimeStyles.RoundtripKind);
+                DateTime? date = DateTime.ParseExact(dateString, validFormats, null, DateTimeStyles.RoundtripKind);
 
                 //Ensure that we have a DateTimeKind.
-                if(date.Kind.Equals(DateTimeKind.Unspecified))
-                    date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
-
-                return date;
+                return date.EnsureKind();
             }
-            catch (System.FormatException)
+            catch (Exception ex)
             {
-                return null;
-            }
-            catch
-            {
-                throw;
+                throw new InvalidDDMSException(ex.Message);
             }
         }
     }

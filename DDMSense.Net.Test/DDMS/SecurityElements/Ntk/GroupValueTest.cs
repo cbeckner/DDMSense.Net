@@ -343,7 +343,7 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ntk
         [TestMethod]
         public virtual void SecurityELements_Ntk_GroupValue_XMLOutput()
         {
-            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreWhitespace);
             XmlDocument expected = new XmlDocument();
             XmlDocument actual = new XmlDocument();
             foreach (string sVersion in SupportedVersions)

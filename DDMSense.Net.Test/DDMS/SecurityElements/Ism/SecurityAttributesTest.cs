@@ -351,8 +351,18 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.GetXsList(TEST_OWNERS));
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.DECLASS_DATE_NAME, icNamespace, "2001");
                 Util.AddAttribute(element, ismPrefix, SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace, "2001");
-                string message = (version.IsAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "String was not recognized as a valid DateTime");
-                GetInstance(message, element);
+
+                // dateOfExemptedSource invalid for versions >= 3.1
+                if (version.IsAtLeast("3.1"))
+                {
+                    element = Util.BuildDDMSElement(Security.GetName(version), null);
+                    Util.AddAttribute(element, ismPrefix, Security.EXCLUDE_FROM_ROLLUP_NAME, icNamespace, "true");
+                    Util.AddAttribute(element, ismPrefix, SecurityAttributes.CLASSIFICATION_NAME, icNamespace, TEST_CLASS);
+                    Util.AddAttribute(element, ismPrefix, SecurityAttributes.OWNER_PRODUCER_NAME, icNamespace, Util.GetXsList(TEST_OWNERS));
+                    Util.AddAttribute(element, ismPrefix, SecurityAttributes.DECLASS_DATE_NAME, icNamespace, "2001-01-01");
+                    Util.AddAttribute(element, ismPrefix, SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, icNamespace, "2001-01-01");
+                    GetInstance("The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0.", element);
+                }
             }
         }
 
@@ -370,8 +380,13 @@ namespace DDMSense.Test.DDMS.SecurityElements.Ism
                 GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DECLASS_DATE_NAME, "notAnXmlDate"));
 
                 // invalid dateOfExemptedSource
-                string message = (version.IsAtLeast("3.1") ? "The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0." : "String was not recognized as a valid DateTime");
-                GetInstance(message, TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2004"));
+                GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2004"));
+
+                // dateOfExemptedSource invalid for versions >= 3.1
+                if (version.IsAtLeast("3.1"))
+                {
+                    GetInstance("The dateOfExemptedSource attribute can only be used in DDMS 2.0 or 3.0.", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "2004-01-01"));
+                }
 
                 // nonsensical dateOfExemptedSource
                 GetInstance("String was not recognized as a valid DateTime", TEST_CLASS, TEST_OWNERS, GetOtherAttributes(SecurityAttributes.DATE_OF_EXEMPTED_SOURCE_NAME, "notAnXmlDate"));

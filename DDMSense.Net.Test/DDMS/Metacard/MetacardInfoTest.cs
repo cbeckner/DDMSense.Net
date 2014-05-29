@@ -480,7 +480,7 @@ namespace DDMSense.Test.DDMS.Metacard
         public virtual void Metacard_MetacardInfo_ConstructorEquality()
         {
 
-            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreWhitespace);
             XmlDocument expected = new XmlDocument();
             XmlDocument actual = new XmlDocument();
 
@@ -602,7 +602,7 @@ namespace DDMSense.Test.DDMS.Metacard
         [TestMethod]
         public virtual void Metacard_MetacardInfo_BuilderEquality()
         {
-            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreChildOrder | XmlDiffOptions.IgnoreWhitespace);
+            XmlDiff diff = new XmlDiff(XmlDiffOptions.IgnoreWhitespace);
             XmlDocument expected = new XmlDocument();
             XmlDocument actual = new XmlDocument();
 
