@@ -87,13 +87,10 @@ namespace DDMSense.Extensions
 									    };
 
                 //Parse the date
-                var date = DateTime.ParseExact(dateString, validFormats, null, DateTimeStyles.RoundtripKind);
+                DateTime? date = DateTime.ParseExact(dateString, validFormats, null, DateTimeStyles.RoundtripKind);
 
                 //Ensure that we have a DateTimeKind.
-                if(date.Kind.Equals(DateTimeKind.Unspecified))
-                    date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
-
-                return date;
+                return date.EnsureKind();
             }
             catch (System.FormatException)
             {
