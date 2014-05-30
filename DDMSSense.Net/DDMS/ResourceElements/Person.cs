@@ -196,7 +196,10 @@ namespace DDMSense.DDMS.ResourceElements
             var orderedElements = elements.OrderBy(node => node.Name.LocalName);
 
             orderedElements.ToList().ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
-            //element.Elements().OrderBy(node => node.Name.LocalName, comparer).ToList();
+
+            var orderedElements2 = elements.OrderBy(node => node.Name.LocalName, comparer).ToList();
+
+            orderedElements2.ToList().ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
         }
 
         public class SortPersonTypeElements : IComparer<string>
