@@ -155,53 +155,27 @@ namespace DDMSense.DDMS.ResourceElements
         /// <exception cref="InvalidDDMSException"> if the result is an invalid component </exception>
         private void AddExtraElements(string surname, string userID, string affiliation)
         {
-            //XElement element = Element;
-            //if (element.Elements().Where(e => e.Name.LocalName == "name").Any())
-            //{
-            //    element.Elements().Where(e => e.Name.LocalName == "name").Last().AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
-            //}
-            //else
-            //{
-            //    element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
-            //}
-
-            //if (DDMSVersion.IsAtLeast("4.0.1"))
-            //{
-            //    if (!String.IsNullOrEmpty(userID) && element.Elements().Where(e => e.Name.LocalName == "email").Any())
-            //        element.Elements().Where(e => e.Name.LocalName == "email").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
-            //    if (!String.IsNullOrEmpty(affiliation) && element.Elements().Where(e => e.Name.LocalName == "userID").Any())
-            //        element.Elements().Where(e => e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
-            //}
-            //else
-            //{
-            //    if (!String.IsNullOrEmpty(userID) && element.Elements().Where(e => e.Name.LocalName == "surname").Any())
-            //        element.Elements().Where(e => e.Name.LocalName == "surname").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
-            //    if (!String.IsNullOrEmpty(affiliation) && element.Elements().Where(e => e.Name.LocalName == "userID").Any())
-            //        element.Elements().Where(e=>e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
-            //}
-
             XElement element = Element;
-
+            //Add new elements to existing
             element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
             if (!String.IsNullOrEmpty(userID))
                 element.Add(Util.Util.BuildDDMSElement(USERID_NAME, userID));
             if (!String.IsNullOrEmpty(affiliation))
                 element.Add(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
-
+            //Instantiate a new Comparer for sorting elements
             var comparer = new SortPersonTypeElements();
             List<XElement> elements = element.Elements().ToList();
-
-            elements.ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
-
-            var orderedElements = elements.OrderBy(node => node.Name.LocalName);
-
-            orderedElements.ToList().ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
-
-            var orderedElements2 = elements.OrderBy(node => node.Name.LocalName, comparer).ToList();
-
-            orderedElements2.ToList().ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
+            //Order all existing elements
+            var orderedElements = elements.OrderBy(node => node.Name.LocalName, comparer).ToList();
+            //Remove all unsorted nodes
+            Element.RemoveNodes();
+            //Add sorted nodes back
+            Element.Add(orderedElements.ToArray());
         }
 
+        /// <summary>
+        /// Class used for ordering nodes within the Person Object
+        /// </summary>
         public class SortPersonTypeElements : IComparer<string>
         {
             private Dictionary<string, int> NodeMappings = new Dictionary<string, int>();
