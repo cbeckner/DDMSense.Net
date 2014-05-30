@@ -164,7 +164,7 @@ namespace DDMSense.DDMS.ResourceElements
             //{
             //    element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
             //}
-            
+
             //if (DDMSVersion.IsAtLeast("4.0.1"))
             //{
             //    if (!String.IsNullOrEmpty(userID) && element.Elements().Where(e => e.Name.LocalName == "email").Any())
@@ -181,7 +181,7 @@ namespace DDMSense.DDMS.ResourceElements
             //}
 
             XElement element = Element;
-            
+
             element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
             if (!String.IsNullOrEmpty(userID))
                 element.Add(Util.Util.BuildDDMSElement(USERID_NAME, userID));
@@ -193,15 +193,16 @@ namespace DDMSense.DDMS.ResourceElements
 
             elements.ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
 
-            elements.OrderBy(node => node.Name.LocalName);
+            var orderedElements = elements.OrderBy(node => node.Name.LocalName);
 
-            elements.ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
+            orderedElements.ToList().ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
             //element.Elements().OrderBy(node => node.Name.LocalName, comparer).ToList();
         }
 
         public class SortPersonTypeElements : IComparer<string>
         {
             private Dictionary<string, int> NodeMappings = new Dictionary<string, int>();
+
             public SortPersonTypeElements()
             {
                 if (DDMSVersion.CurrentVersion.IsAtLeast("4.0.1"))
@@ -223,14 +224,14 @@ namespace DDMSense.DDMS.ResourceElements
                     NodeMappings.Add("email", 5);
                 }
             }
+
             public int Compare(string node1, string node2)
             {
-
-                if(NodeMappings[node1] > NodeMappings[node2])
+                if (NodeMappings[node1] > NodeMappings[node2])
                 {
                     return 1;
                 }
-                if(NodeMappings[node1] < NodeMappings[node2])
+                if (NodeMappings[node1] < NodeMappings[node2])
                 {
                     return -1;
                 }
@@ -238,7 +239,6 @@ namespace DDMSense.DDMS.ResourceElements
                 {
                     return 0;
                 }
-                
             }
         }
 
