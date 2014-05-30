@@ -155,23 +155,90 @@ namespace DDMSense.DDMS.ResourceElements
         /// <exception cref="InvalidDDMSException"> if the result is an invalid component </exception>
         private void AddExtraElements(string surname, string userID, string affiliation)
         {
-            XElement element = Element;
-            if (element.Elements().Where(e => e.Name.LocalName == "name").Any())
-                element.Elements().Where(e => e.Name.LocalName == "name").Last().AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
+            //XElement element = Element;
+            //if (element.Elements().Where(e => e.Name.LocalName == "name").Any())
+            //{
+            //    element.Elements().Where(e => e.Name.LocalName == "name").Last().AddAfterSelf(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
+            //}
+            //else
+            //{
+            //    element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
+            //}
             
-            if (DDMSVersion.IsAtLeast("4.0.1"))
+            //if (DDMSVersion.IsAtLeast("4.0.1"))
+            //{
+            //    if (!String.IsNullOrEmpty(userID) && element.Elements().Where(e => e.Name.LocalName == "email").Any())
+            //        element.Elements().Where(e => e.Name.LocalName == "email").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
+            //    if (!String.IsNullOrEmpty(affiliation) && element.Elements().Where(e => e.Name.LocalName == "userID").Any())
+            //        element.Elements().Where(e => e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
+            //}
+            //else
+            //{
+            //    if (!String.IsNullOrEmpty(userID) && element.Elements().Where(e => e.Name.LocalName == "surname").Any())
+            //        element.Elements().Where(e => e.Name.LocalName == "surname").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
+            //    if (!String.IsNullOrEmpty(affiliation) && element.Elements().Where(e => e.Name.LocalName == "userID").Any())
+            //        element.Elements().Where(e=>e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
+            //}
+
+            XElement element = Element;
+            
+            element.Add(Util.Util.BuildDDMSElement(SURNAME_NAME, surname));
+            if (!String.IsNullOrEmpty(userID))
+                element.Add(Util.Util.BuildDDMSElement(USERID_NAME, userID));
+            if (!String.IsNullOrEmpty(affiliation))
+                element.Add(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
+
+            var comparer = new SortPersonTypeElements();
+            List<XElement> elements = element.Elements().ToList();
+
+            elements.ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
+
+            elements.OrderBy(node => node.Name.LocalName);
+
+            elements.ForEach(e => System.Diagnostics.Debug.WriteLine(e.Name.LocalName));
+            //element.Elements().OrderBy(node => node.Name.LocalName, comparer).ToList();
+        }
+
+        public class SortPersonTypeElements : IComparer<string>
+        {
+            private Dictionary<string, int> NodeMappings = new Dictionary<string, int>();
+            public SortPersonTypeElements()
             {
-                if (!String.IsNullOrEmpty(userID))
-                    element.Elements().Where(e => e.Name.LocalName == "email").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
-                if (!String.IsNullOrEmpty(affiliation))
-                    element.Elements().Where(e => e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
+                if (DDMSVersion.CurrentVersion.IsAtLeast("4.0.1"))
+                {
+                    NodeMappings.Add("name", 0);
+                    NodeMappings.Add("surname", 1);
+                    NodeMappings.Add("phone", 2);
+                    NodeMappings.Add("email", 3);
+                    NodeMappings.Add("userID", 4);
+                    NodeMappings.Add("affiliation", 5);
+                }
+                else
+                {
+                    NodeMappings.Add("name", 0);
+                    NodeMappings.Add("surname", 1);
+                    NodeMappings.Add("userID", 2);
+                    NodeMappings.Add("affiliation", 3);
+                    NodeMappings.Add("phone", 4);
+                    NodeMappings.Add("email", 5);
+                }
             }
-            else
+            public int Compare(string node1, string node2)
             {
-                if (!String.IsNullOrEmpty(userID))
-                    element.Elements().Where(e => e.Name.LocalName == "surname").First().AddAfterSelf(Util.Util.BuildDDMSElement(USERID_NAME, userID));
-                if (!String.IsNullOrEmpty(affiliation))
-                    element.Elements().Where(e=>e.Name.LocalName == "userID").First().AddAfterSelf(Util.Util.BuildDDMSElement(AFFILIATION_NAME, affiliation));
+
+                if(NodeMappings[node1] > NodeMappings[node2])
+                {
+                    return 1;
+                }
+                if(NodeMappings[node1] < NodeMappings[node2])
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 0;
+                }
+                
             }
         }
 
