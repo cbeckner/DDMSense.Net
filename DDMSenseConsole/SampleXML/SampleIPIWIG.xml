@@ -1,41 +1,55 @@
-﻿<librarycard xmlns:comn="http://www.nato.int/namespace/ipiwg/common/4.0#" xmlns:img="http://www.nato.int/namespace/ipiwg/imagery/4.0#" xmlns:intel="http://www.nato.int/namespace/ipiwg/intel/4.0#" xmlns:libcard="http://www.nato.int/namespace/ipiwg/libcard/4.0#" xmlns="http://www.nato.int/namespace/ipiwg/4.0#" version="4.0">
-  <cardLayer>
-    <libcard:security.authority>USA</libcard:security.authority>
-    <libcard:security.classification>Confidential</libcard:security.classification>
-    <libcard:security.releasability>ASM</libcard:security.releasability>
-    <libcard:id>BICES_USA_8d76f300-f72b-437a-bcff-042caaf76e51.xml</libcard:id>
-    <libcard:domain>BICES</libcard:domain>
-    <libcard:status>Active</libcard:status>
-  </cardLayer>
-  <commonLayer>
-    <comn:title>dfsd</comn:title>
-    <comn:producer>ALA</comn:producer>
-    <comn:category>Surface-to-Air Missiles (SAMs)</comn:category>
-    <comn:summary>fdsf</comn:summary>
-    <comn:publisher>CIMS : 44 1480 84 2817</comn:publisher>
-    <comn:date.posted>2014-05-13T20:49:46.610484Z</comn:date.posted>
-    <comn:date.available>2014-05-13T00:00:00</comn:date.available>
-    <comn:document.type>Briefing</comn:document.type>
-    <comn:security.authority>USA</comn:security.authority>
-    <comn:security.classification>Confidential</comn:security.classification>
-    <comn:security.releasability>ASM</comn:security.releasability>
-    <comn:poc>CIMS : 44 1480 84 2817</comn:poc>
-    <comn:email.address>CIMS</comn:email.address>
-    <comn:files>
-      <comn:file>
-        <comn:identifier>http://products.usa.bices.dcn/usbicesdocs/2014/5/Duplicate Test.txt</comn:identifier>
-        <comn:format>text/plain</comn:format>
-        <comn:filesize units="KB">0</comn:filesize>
-        <comn:language>en</comn:language>
-      </comn:file>
-    </comn:files>
-  </commonLayer>
-  <intelLayer>
-    <intel:country.reference>ASM</intel:country.reference>
-    <intel:intel.type>Target</intel:intel.type>
-    <intel:date.info minmax="Min">2014-05-12T00:00:00</intel:date.info>
-    <intel:date.info minmax="Max">2014-05-12T00:00:00</intel:date.info>
-    <intel:product.periodicity>Bi-annual</intel:product.periodicity>
-    <intel:operation.reference>EUFOR Tchad/RCA</intel:operation.reference>
-  </intelLayer>
-</librarycard>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ddms:resource xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ddms="urn:us:mil:ces:metadata:ddms:4" xmlns:ISM="urn:us:gov:ic:ism" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ntk="urn:us:gov:ic:ntk" xsi:schemaLocation="urn:us:mil:ces:metadata:ddms:4 ../schemas/4.1/DDMS/ddms.xsd" ISM:resourceElement="true" ISM:DESVersion="9" ntk:DESVersion="7" ISM:createDate="2013-07-18T00:00:00" ISM:classification="Unclassified" ISM:ownerProducer="CALL">
+  <ddms:metacardInfo ISM:classification="Unclassified" ISM:ownerProducer="CALL">
+    <ddms:identifier ddms:value="BICES_USA_69a2986d-900a-4e60-af55-46c9779905a2.xml" ddms:qualifier="http://www.nato.int/namespace/ipiwg/libcard/4.0libcard:id"/>
+    <ddms:identifier ddms:value="69a2986d-900a-4e60-af55-46c9779905a2" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#libcard:product.ref"/>
+    <ddms:dates ddms:created="2013-07-18"/>
+    <ddms:publisher>
+      <ddms:organization>
+        <ddms:name>CIMS</ddms:name>
+        <ddms:phone>+44 1480 84 2817</ddms:phone>
+      </ddms:organization>
+    </ddms:publisher>
+  </ddms:metacardInfo>
+  <ddms:identifier ddms:value="BICES_USA_69a2986d-900a-4e60-af55-46c9779905a2.xml" ddms:qualifier="http://www.nato.int/namespace/ipiwg/libcard/4.0#libcard:id"/>
+  <ddms:identifier ddms:value="69a2986d-900a-4e60-af55-46c9779905a2" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#libcard:product.ref"/>
+  <ddms:title ISM:ownerProducer="CALL" ISM:classification="Unclassified">ab consectetur minima dolores </ddms:title>
+  <ddms:description ISM:ownerProducer="CALL" ISM:classification="Unclassified">nesciunt. pariatur? Nemo quo quasi nostrum voluptatem enim pariatur. illum tempor vel </ddms:description>
+  <ddms:language ddms:qualifier="http://purl.org/dc/elements/1.1/language" ddms:value=""/>
+  <ddms:dates ISM:createDate="2013-07-18" ddms:posted="2013-07-18" ddms:approvedOn="2013-07-18"/>
+  <ddms:type ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#document.type" ddms:value="Not listed"/>
+  <ddms:publisher>
+    <ddms:organization>
+      <ddms:name>CIMS</ddms:name>
+      <ddms:phone>+44 1480 84 2817</ddms:phone>
+    </ddms:organization>
+  </ddms:publisher>
+  <ddms:pointOfContact>
+    <ddms:organization>
+      <ddms:name/>
+      <ddms:phone/>
+      <ddms:email>call-admin@usa.bices.org</ddms:email>
+    </ddms:organization>
+  </ddms:pointOfContact>
+  <ddms:format>
+    <ddms:mimeType>text/html</ddms:mimeType>
+    <ddms:extent ddms:qualifier="KB" ddms:value="125"/>
+  </ddms:format>
+  <ddms:subjectCoverage>
+    <ddms:category ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#category" ddms:label="Agreements and Treaties"/>
+  </ddms:subjectCoverage>
+  <ddms:temporalCoverage>
+    <ddms:start>2013-07-18T00:00:00</ddms:start>
+    <ddms:end>Not Applicable</ddms:end>
+  </ddms:temporalCoverage>
+  <ddms:relatedResource ddms:direction="outbound" ddms:relationship="http://staging.usa.bices.org/p/products/4250.aspx" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#comn:identifier" ddms:value="http://staging.usa.bices.org/p/products/4250.aspx">
+    <ddms:link xlink:type="locator" xlink:href="http://staging.usa.bices.org/p/products/4250.aspx"/>
+  </ddms:relatedResource>
+  <ddms:relatedResource ddms:direction="outbound" ddms:relationship="http://products.staging.usa.bices.org/usbicesdocs/2013/7/CALL_69a2986d-900a-4e60-af55-46c9779905a2.xml" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#comn:identifier" ddms:value="http://products.staging.usa.bices.org/usbicesdocs/2013/7/CALL_69a2986d-900a-4e60-af55-46c9779905a2.xml">
+    <ddms:link xlink:type="locator" xlink:href="http://products.staging.usa.bices.org/usbicesdocs/2013/7/CALL_69a2986d-900a-4e60-af55-46c9779905a2.xml"/>
+  </ddms:relatedResource>
+  <ddms:relatedResource ddms:direction="outbound" ddms:relationship="http://products.usa.bices.dcn/calldocs/2013/7/69a2986d-900a-4e60-af55-46c9779905a2.txt" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#comn:identifier" ddms:value="http://products.usa.bices.dcn/calldocs/2013/7/69a2986d-900a-4e60-af55-46c9779905a2.txt">
+    <ddms:link xlink:type="locator" xlink:href="http://products.usa.bices.dcn/calldocs/2013/7/69a2986d-900a-4e60-af55-46c9779905a2.txt"/>
+  </ddms:relatedResource>
+  <ddms:security ISM:excludeFromRollup="true" ISM:ownerProducer="USA" ISM:classification="Unclassified" ISM:releasableTo="NATO USA"/>
+</ddms:resource>

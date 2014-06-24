@@ -345,8 +345,16 @@ namespace DDMSense.DDMS
                     // We use the security component to locate the extensible layer. If it is null, this resource is going
                     // to fail validation anyhow, so we skip the extensible layer.
                     //IEnumerable<XElement> allElements = element.Elements();
+                    
                     //foreach (var el in allElements)
-                    // ExtensibleElements.Add(new ExtensibleElement(el));
+                        //ExtensibleElements.Add(new ExtensibleElement(el));
+                }
+                
+                //Extension Elements
+                List<XElement> extensions = GetChild(Security.GetName(version)).ElementsAfterSelf().ToList();
+                if(extensions.Any())
+                {
+                    extensions.ForEach(el => ExtensibleElements.Add(new ExtensibleElement(el)));
                 }
                 PopulatedOrderedList();
                 Validate();

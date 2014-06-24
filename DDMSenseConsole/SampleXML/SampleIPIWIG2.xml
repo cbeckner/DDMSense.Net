@@ -1,0 +1,66 @@
+﻿<ddms:resource xmlns:ICISM="urn:us:gov:ic:ism:v2" xmlns:ISM="urn:us:gov:ic:ism" xmlns:ddms="urn:us:mil:ces:metadata:ddms:4" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:img="http://www.nato.int/namespace/ipiwg/imagery/4.0#" xmlns:ntk="urn:us:gov:ic:ntk" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:us:mil:ces:metadata:ddms:4" ISM:resourceElement="true" ISM:DESVersion="9" ntk:DESVersion="7" ISM:createDate="2013-10-15" ISM:ownerProducer="USA" ISM:classification="S" ISM:releasableTo="CXR">
+  <ddms:metacardInfo ISM:ownerProducer="USA" ISM:classification="S" ISM:releasableTo="CXR">
+    <ddms:identifier ddms:value="BICES_USA_8a88daa1-6240-497c-9728-dfd9d39ff049.xml" ddms:qualifier="http://www.nato.int/namespace/ipiwg/libcard/4.0#libcard:id"/>
+    <ddms:identifier ddms:value="Unknown" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#libcard:product.ref"/>
+    <ddms:dates ddms:created="2013-10-15T13:08:48Z"/>
+    <ddms:publisher>
+      <ddms:organization>
+        <ddms:name>CIMS</ddms:name>
+        <ddms:phone>+44 1480 84 2817</ddms:phone>
+      </ddms:organization>
+    </ddms:publisher>
+  </ddms:metacardInfo>
+  <ddms:identifier ddms:value="BICES_USA_8a88daa1-6240-497c-9728-dfd9d39ff049.xml" ddms:qualifier="http://www.nato.int/namespace/ipiwg/libcard/4.0#libcard:id"/>
+  <ddms:identifier ddms:value="Unknown" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#libcard:product.ref"/>
+  <ddms:title ISM:ownerProducer="USA" ISM:classification="S" ISM:releasableTo="CXR">Test IPL Product</ddms:title>
+  <ddms:description ISM:ownerProducer="USA" ISM:classification="S" ISM:releasableTo="CXR">Blah Blah</ddms:description>
+  <ddms:dates ddms:created="2013-10-15T13:08:48Z" ddms:posted="2013-10-15T13:08:48Z" ddms:approvedOn="2010-11-25"/>
+  <ddms:type ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#document.type" ddms:value="Imagery"/>
+  <ddms:publisher>
+    <ddms:organization>
+      <ddms:name>CIMS</ddms:name>
+      <ddms:phone>+44 1480 84 2817</ddms:phone>
+    </ddms:organization>
+  </ddms:publisher>
+  <ddms:pointOfContact>
+    <ddms:organization>
+      <ddms:name>CIMS</ddms:name>
+      <ddms:phone>+44 1480 84 2817</ddms:phone>
+      <ddms:email>cims@usa.bices.org</ddms:email>
+    </ddms:organization>
+  </ddms:pointOfContact>
+  <ddms:format>
+    <ddms:mimeType>x-text/rss+xml</ddms:mimeType>
+    <ddms:extent ddms:qualifier="KB" ddms:value="21"/>
+  </ddms:format>
+  <ddms:subjectCoverage>
+    <ddms:category ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#category" ddms:label="Armed Forces"/>
+    <ddms:category ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#category" ddms:label="Land Vehicles and Systems"/>
+    <ddms:category ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#category" ddms:label="Operations"/>
+  </ddms:subjectCoverage>
+  <ddms:temporalCoverage>
+    <ddms:start>2013-10-15</ddms:start>
+    <ddms:end>Not Applicable</ddms:end>
+  </ddms:temporalCoverage>
+  <ddms:relatedResource ddms:direction="outbound" ddms:relationship="http://products.usa.bices.dcn/usbicesdocs/2013/10/IPL3.xml" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#comn:identifier" ddms:value="http://products.usa.bices.dcn/usbicesdocs/2013/10/IPL3.xml">
+    <ddms:link xlink:type="locator" xlink:href="http://products.usa.bices.dcn/usbicesdocs/2013/10/IPL3.xml"/>
+  </ddms:relatedResource>
+  <ddms:relatedResource ddms:direction="outbound" ddms:relationship="http://products.usa.bices.dcn/usbicesdocs/2013/10/IPL3.jpg" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#comn:identifier" ddms:value="http://products.usa.bices.dcn/usbicesdocs/2013/10/IPL3.jpg">
+    <ddms:link xlink:type="locator" xlink:href="http://products.usa.bices.dcn/usbicesdocs/2013/10/IPL3.jpg"/>
+  </ddms:relatedResource>
+  <ddms:relatedResource ddms:direction="outbound" ddms:relationship="http://web.usa.bices.dcn/p/products/42537.aspx" ddms:qualifier="http://www.nato.int/namespace/ipiwg/common/4.0#comn:identifier" ddms:value="http://web.usa.bices.dcn/p/products/42537.aspx">
+    <ddms:link xlink:type="locator" xlink:href="http://web.usa.bices.dcn/p/products/42537.aspx"/>
+  </ddms:relatedResource>
+  <ddms:security ISM:excludeFromRollup="true" ISM:ownerProducer="USA" ISM:classification="S" ISM:releasableTo="CXR"/>
+  <isr:ISRExtension xmlns:isr="http://metadata.dod.mil/mdr/irs/schemas/GEOINT/2008/DiscoveryMetadata/ISRExtensions#">
+    <isr:OperationIdentifier>OUP</isr:OperationIdentifier>
+    <isr:MissionDate>
+      <ddms:start>2010-11-25</ddms:start>
+      <ddms:end>2010-11-25</ddms:end>
+    </isr:MissionDate>
+    <isr:PlatformType ddms:qualifier="http://metadata.ces.mil/dse/ns/mdh/taxonomies/ISR_Platform_Taxonomy_0.1.owl#">Air Unmanned</isr:PlatformType>
+    <isr:SensorType>LOCG</isr:SensorType>
+    <isr:TargetIdentification>BE</isr:TargetIdentification>
+    <isr:QualityRating isr:scaleIdentifier="urn:usmtf:table:niirs" isr:value="5"/>
+  </isr:ISRExtension>
+</ddms:resource>

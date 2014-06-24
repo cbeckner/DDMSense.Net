@@ -634,7 +634,9 @@
     <Content Include="SampleXML\5.0-ddmsenceExample.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleXML\SampleIPIWIG.xml" />
+    <Content Include="SampleXML\SampleIPIWIG2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="schemas\2.0\ISM\CVE\CVEnumISM25X.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
